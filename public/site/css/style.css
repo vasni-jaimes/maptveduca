@@ -76,8 +76,8 @@ table {
 
 @font-face {
     font-family: 'Oswald extra light italic';
-    src: url('assets/fonts/oswald/Oswald-Extra-LightItalic.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-Extra-LightItalic.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-Extra-LightItalic.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-Extra-LightItalic.woff') format('woff');
     font-weight: 300;
     font-style: italic;
     font-display: swap;
@@ -85,8 +85,8 @@ table {
 
 @font-face {
     font-family: 'Oswald regular italic';
-    src: url('assets/fonts/oswald/Oswald-RegularItalic.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-RegularItalic.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-RegularItalic.woff2') format('woff2'),
+        url('site/fonts/oswald/Oswald-RegularItalic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -94,8 +94,8 @@ table {
 
 @font-face {
     font-family: 'Oswald regular';
-    src: url(assets/fonts/oswald/'Oswald-Regular.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-Regular.woff') format('woff');
+    src: url(/site/fonts/oswald/'Oswald-Regular.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -103,8 +103,8 @@ table {
 
 @font-face {
     font-family: 'Oswald medium italic';
-    src: url('assets/fonts/oswald/Oswald-MediumItalic.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-MediumItalic.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-MediumItalic.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-MediumItalic.woff') format('woff');
     font-weight: 500;
     font-style: italic;
     font-display: swap;
@@ -112,8 +112,8 @@ table {
 
 @font-face {
     font-family: 'Oswald demi bold italic';
-    src: url('assets/fonts/oswald/Oswald-Demi-BoldItalic.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-Demi-BoldItalic.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-Demi-BoldItalic.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-Demi-BoldItalic.woff') format('woff');
     font-weight: bold;
     font-style: italic;
     font-display: swap;
@@ -121,8 +121,8 @@ table {
 
 @font-face {
     font-family: 'Oswald light italic';
-    src: url('assets/fonts/oswald/Oswald-LightItalic.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-LightItalic.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-LightItalic.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-LightItalic.woff') format('woff');
     font-weight: 300;
     font-style: italic;
     font-display: swap;
@@ -130,8 +130,8 @@ table {
 
 @font-face {
     font-family: 'Oswald demi bold';
-    src: url('assets/fonts/oswald/Oswald-DemiBold.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-DemiBold.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-DemiBold.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-DemiBold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -139,8 +139,8 @@ table {
 
 @font-face {
     font-family: 'Oswald bold';
-    src: url('assets/fonts/oswald/Oswald-Bold.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-Bold.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-Bold.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -148,8 +148,8 @@ table {
 
 @font-face {
     font-family: 'Oswald bold italic';
-    src: url('assets/fonts/oswald/Oswald-BoldItalic.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-BoldItalic.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-BoldItalic.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-BoldItalic.woff') format('woff');
     font-weight: bold;
     font-style: italic;
     font-display: swap;
@@ -157,8 +157,8 @@ table {
 
 @font-face {
     font-family: 'Oswald extra light';
-    src: url('assets/fonts/oswald/Oswald-ExtraLight.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-ExtraLight.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-ExtraLight.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-ExtraLight.woff') format('woff');
     font-weight: 200;
     font-style: normal;
     font-display: swap;
@@ -166,8 +166,8 @@ table {
 
 @font-face {
     font-family: 'Oswald light';
-    src: url('assets/fonts/oswald/Oswald-Light.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-Light.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-Light.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -175,8 +175,8 @@ table {
 
 @font-face {
     font-family: 'Oswald heavy italic';
-    src: url('assets/fonts/oswald/Oswald-HeavyItalic.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-HeavyItalic.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-HeavyItalic.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-HeavyItalic.woff') format('woff');
     font-weight: 900;
     font-style: italic;
     font-display: swap;
@@ -184,8 +184,8 @@ table {
 
 @font-face {
     font-family: 'Oswald medium';
-    src: url('assets/fonts/oswald/Oswald-Medium.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-Medium.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-Medium.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -193,8 +193,8 @@ table {
 
 @font-face {
     font-family: 'Oswald heavy';
-    src: url('assets/fonts/oswald/Oswald-Heavy.woff2') format('woff2'),
-        url('assets/fonts/oswald/Oswald-Heavy.woff') format('woff');
+    src: url('/site/fonts/oswald/Oswald-Heavy.woff2') format('woff2'),
+        url('/site/fonts/oswald/Oswald-Heavy.woff') format('woff');
     font-weight: 900;
     font-style: normal;
     font-display: swap;
@@ -202,8 +202,8 @@ table {
 
 @font-face {
     font-family: 'Oswald Stencil bold';
-    src: url('assets/fonts/oswald/OswaldStencil-Bold.woff2') format('woff2'),
-        url('assets/fonts/oswald/OswaldStencil-Bold.woff') format('woff');
+    src: url('/site/fonts/oswald/OswaldStencil-Bold.woff2') format('woff2'),
+        url('/site/fonts/oswald/OswaldStencil-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -211,8 +211,8 @@ table {
 
 @font-face {
     font-family: 'Poppins medium italic';
-    src: url('assets/fonts/poppins/Poppins-MediumItalic.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-MediumItalic.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-MediumItalic.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-MediumItalic.woff') format('woff');
     font-weight: 500;
     font-style: italic;
     font-display: swap;
@@ -220,8 +220,8 @@ table {
 
 @font-face {
     font-family: 'Poppins medium';
-    src: url('assets/fonts/poppins/Poppins-Medium.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-Medium.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-Medium.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -229,8 +229,8 @@ table {
 
 @font-face {
     font-family: 'Poppins light italic';
-    src: url('assets/fonts/poppins/Poppins-LightItalic.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-LightItalic.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-LightItalic.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-LightItalic.woff') format('woff');
     font-weight: 300;
     font-style: italic;
     font-display: swap;
@@ -238,8 +238,8 @@ table {
 
 @font-face {
     font-family: 'Poppins extra bold italic';
-    src: url('assets/fonts/poppins/Poppins-ExtraBoldItalic.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-ExtraBoldItalic.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-ExtraBoldItalic.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-ExtraBoldItalic.woff') format('woff');
     font-weight: 800;
     font-style: italic;
     font-display: swap;
@@ -247,8 +247,8 @@ table {
 
 @font-face {
     font-family: 'Poppins italic';
-    src: url('assets/fonts/poppins/Poppins-Italic.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-Italic.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-Italic.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-Italic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -256,8 +256,8 @@ table {
 
 @font-face {
     font-family: 'Poppins black italic';
-    src: url('assets/fonts/poppins/Poppins-BlackItalic.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-BlackItalic.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-BlackItalic.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-BlackItalic.woff') format('woff');
     font-weight: 900;
     font-style: italic;
     font-display: swap;
@@ -265,8 +265,8 @@ table {
 
 @font-face {
     font-family: 'Poppins extra light italic';
-    src: url('assets/fonts/poppins/Poppins-ExtraLightItalic.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-ExtraLightItalic.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-ExtraLightItalic.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-ExtraLightItalic.woff') format('woff');
     font-weight: 200;
     font-style: italic;
     font-display: swap;
@@ -274,8 +274,8 @@ table {
 
 @font-face {
     font-family: 'Poppins bold italic';
-    src: url('assets/fonts/poppins/Poppins-BoldItalic.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-BoldItalic.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-BoldItalic.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-BoldItalic.woff') format('woff');
     font-weight: bold;
     font-style: italic;
     font-display: swap;
@@ -283,8 +283,8 @@ table {
 
 @font-face {
     font-family: 'Poppins black';
-    src: url('assets/fonts/poppins/Poppins-Black.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-Black.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-Black.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-Black.woff') format('woff');
     font-weight: 900;
     font-style: normal;
     font-display: swap;
@@ -292,8 +292,8 @@ table {
 
 @font-face {
     font-family: 'Poppins semibold';
-    src: url('assets/fonts/poppins/Poppins-SemiBold.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-SemiBold.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-SemiBold.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-SemiBold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -301,8 +301,8 @@ table {
 
 @font-face {
     font-family: 'Poppins bold';
-    src: url('assets/fonts/poppins/Poppins-Bold.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-Bold.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-Bold.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -310,8 +310,8 @@ table {
 
 @font-face {
     font-family: 'Poppins light';
-    src: url('assets/fonts/poppins/Poppins-Light.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-Light.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-Light.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -319,8 +319,8 @@ table {
 
 @font-face {
     font-family: 'Poppins extra bold';
-    src: url('assets/fonts/poppins/Poppins-ExtraBold.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-ExtraBold.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-ExtraBold.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-ExtraBold.woff') format('woff');
     font-weight: 800;
     font-style: normal;
     font-display: swap;
@@ -328,8 +328,8 @@ table {
 
 @font-face {
     font-family: 'Poppins regular';
-    src: url('assets/fonts/poppins/Poppins-Regular.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-Regular.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-Regular.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -337,8 +337,8 @@ table {
 
 @font-face {
     font-family: 'Poppins extra light';
-    src: url('assets/fonts/poppins/Poppins-ExtraLight.woff2') format('woff2'),
-        url('assets/fonts/poppins/Poppins-ExtraLight.woff') format('woff');
+    src: url('/site/fonts/poppins/Poppins-ExtraLight.woff2') format('woff2'),
+        url('/site/fonts/poppins/Poppins-ExtraLight.woff') format('woff');
     font-weight: 200;
     font-style: normal;
     font-display: swap;
@@ -538,7 +538,7 @@ header a {
 .banner-inicio {
     margin: 35px 0;
     padding: 10% 15px;
-    background-image: url('assets/img/imagen-generica.jpg');
+    background-image: url('/site/img/imagen-generica.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
@@ -585,11 +585,11 @@ header a {
 }
 
 .slide-black .slide-inicio .slick-prev {
-    background-image: url(assets/img/prev-yellow.png);
+    background-image: url(/site/img/prev-yellow.png);
 }
 
 .slide-yellow .slide-inicio .slick-prev {
-    background-image: url(assets/img/prev-black.png);
+    background-image: url(/site/img/prev-black.png);
 }
 
 .slide-inicio .slick-next {
@@ -612,11 +612,11 @@ header a {
 }
 
 .slide-black .slide-inicio .slick-next {
-    background-image: url(assets/img/next-yellow.png);
+    background-image: url(/site/img/next-yellow.png);
 }
 
 .slide-yellow .slide-inicio .slick-next {
-    background-image: url(assets/img/next-black.png);
+    background-image: url(/site/img/next-black.png);
 }
 
 
@@ -648,7 +648,7 @@ header a {
     transform: translateX(-50%);
     width: 54px;
     height: 50px;
-    background-image: url('assets/img/down.png');
+    background-image: url('/site/img/down.png');
     background-repeat: no-repeat;
     background-size: contain;
     animation: bounce 1s infinite alternate;
@@ -749,7 +749,7 @@ video#myVideo {
     position: relative;
     padding: 10% 5%;
     border-radius: 25px;
-    background-image: url('assets/img/imagen-generica.jpg');
+    background-image: url('/site/img/imagen-generica.jpg');
     background-repeat: no-repeat; 
     background-size: cover;
     background-position: top 30% center;
@@ -847,7 +847,7 @@ video#myVideo {
     transform: translateY(-50%);
     width: 30px;
     height: 55px;
-    background-image: url('assets/img/prev.png');
+    background-image: url('/site/img/prev.png');
     background-repeat: no-repeat;
     background-size: contain;
     z-index: 3;
@@ -878,7 +878,7 @@ video#myVideo {
     transform: translateY(-50%);
     width: 30px;
     height: 55px;
-    background-image: url('assets/img/next.png');
+    background-image: url('/site/img/next.png');
     background-repeat: no-repeat;
     background-size: contain;
     z-index: 3;
@@ -1419,7 +1419,7 @@ video#myVideo {
     padding: 20px;
     width: 100%;
     height: 100%;
-    background-image: url('assets/img/imagen-generica.jpg');
+    background-image: url('/site/img/imagen-generica.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -1580,7 +1580,7 @@ video#myVideo {
 
 .banner-cursos {
     padding: 25% 0 0;
-    background-image: url('assets/img/imagen-generica.jpg');
+    background-image: url('/site/img/imagen-generica.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top 35% center;
@@ -1779,11 +1779,11 @@ video#myVideo {
 }
 
 .row-black .slide-cursos .slick-prev:after {
-    background-image: url(assets/img/prev-yellow.png);
+    background-image: url(/site/img/prev-yellow.png);
 }
 
 .row-yellow .slide-cursos .slick-prev:after {
-    background-image: url(assets/img/prev-black.png);
+    background-image: url(/site/img/prev-black.png);
 }
 
 .slide-cursos .slick-next:after {
@@ -1803,11 +1803,11 @@ video#myVideo {
 }
 
 .row-black .slide-cursos .slick-next:after {
-    background-image: url(assets/img/next-yellow.png);
+    background-image: url(/site/img/next-yellow.png);
 }
 
 .row-yellow .slide-cursos .slick-next:after {
-    background-image: url(assets/img/next-black.png);
+    background-image: url(/site/img/next-black.png);
 }
 
 .row-extra {
@@ -1891,7 +1891,7 @@ video#myVideo {
 .banner-botones {
     margin: 30px 0 0;
     padding: 30px 15px;
-    background-image: url('assets/img/banner-botones.png');
+    background-image: url('/site/img/banner-botones.png');
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
@@ -3319,7 +3319,7 @@ a[href="#page"] {
     
     .video-home {
         padding: 100px 0;
-        background-image: url('assets/img/banner-mobile.png');
+        background-image: url('/site/img/banner-mobile.png');
         background-repeat: no-repeat;
         background-size: cover;
     }
