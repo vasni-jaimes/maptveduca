@@ -1,0 +1,189 @@
+$(document).ready(function(){
+    
+    $('.lista-contenido').slick({
+      arrows: false,
+      dots: true,
+      slidesToShow: 3,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2
+          }
+        },
+        {
+          breakpoint: 700,
+          settings: {
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
+   
+    $('.slide').slick({
+      dots: false,
+      arrows: true,
+      slidesToShow: 3,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            dots: true,
+            arrows: false,
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
+    
+    $('.slide-inicio').slick({
+      dots: false,
+      arrows: true,
+      slidesToShow: 3,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            dots: true,
+            arrows: false,
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
+    
+    $('.slide-cursos').slick({
+      dots: false,
+      arrows: true,
+      slidesToShow: 6,
+      responsive: [
+        {
+          breakpoint: 850,
+          settings: {
+            slidesToShow: 5
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 4
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 3
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            arrows: false,
+            dots: true,
+            slidesToShow: 2
+          }
+        }
+      ]
+    });
+    
+    $('.slide-extra').slick({
+      dots: false,
+      arrows: false,
+      slidesToShow: 7,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            arrows: false,
+            slidesToShow: 6
+          }
+        },
+        {
+          breakpoint: 850,
+          settings: {
+            arrows: false,
+            slidesToShow: 5
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            arrows: false,
+            slidesToShow: 4
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            arrows: false,
+            slidesToShow: 3
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            arrows: false,
+            slidesToShow: 2
+          }
+        }
+      ]
+    });
+    
+    $('.item-slide ul').slick({
+      dots: false,
+      arrows: false,
+      centerPadding: '60px',
+      slidesToShow: 4,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 3
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
+    
+    $('.titulo-faq').click(function(e) {    
+        e.preventDefault();
+        $(this).toggleClass("arrow-tab");   
+        $(this).next('.respuesta-faq').slideToggle(500);
+    });
+
+    $('.wrapper-academica table').stacktable();
+    
+    $('.ico-filtro').on('click', function () {
+		if ( !$(this).hasClass('active') ) {
+			$(this).addClass('active');
+			$('.sidebar-cursos').animate({left: 0});
+		} else {
+			$(this).removeClass('active');
+			$('.sidebar-cursos').animate({left: '-50%'});
+		} //if ( !$(this).hasClass('navbar-toggle-active') ) {
+	}); //$('#navbar-toggle').on('click', function () {
+    
+});

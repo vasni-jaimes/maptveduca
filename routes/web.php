@@ -13,8 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-//Route::get();
+//INDEX
+Route::get('/', 'Site\IndexController@showIndex')->name('show.index');
+
+//LOGIN
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login')->name('send.login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+//HOME
+Route::get('home', 'Site\HomeController@index')->name('home');
+
+//REGISTRO
+Route::get('registro', 'Auth\RegisterController@showRegistrationForm')->name('registro.show');
+Route::post('registro', 'Auth\RegisterController@register')->name('registro');
+
+
+//CURSOS
+Route::get('cursos', 'Site\CursosController@index')->name('cursos');
+
+//VISTAS ESTATICAS
+Route::get('eventos', function() {
+	return view('site.eventos');
+})->name('eventos');
+
+//Auth::routes();
+//Route::get('/home', 'HomeController@index')->name('home');
