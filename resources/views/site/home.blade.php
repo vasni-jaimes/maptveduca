@@ -7,7 +7,7 @@
 @section('contenido')
 
     <section class="inicio">
-        <div class="hoja-1200">
+        <div class="hoja-1000">
             
             <div class="banner-inicio">
                 <h2>¡BIENVENID@!</h2>
@@ -182,7 +182,7 @@
             
             </div> <!-- /wrapper-maptv -->
             
-        </div> <!-- /hoja-1200 -->
+        </div> <!-- /hoja-1000 -->
     </section> <!-- /inicio -->
 
 @stop

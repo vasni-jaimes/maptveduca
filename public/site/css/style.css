@@ -461,6 +461,10 @@ header a {
     justify-content: space-between;
 }
 
+.end {
+    justify-content: flex-end;
+}
+
 .wrap {
     flex-wrap: wrap;
 }
@@ -526,7 +530,7 @@ header a {
 .menu li a {
     color: #fff;
     font-family: 'Poppins semibold';
-    font-size: 17px;
+    font-size: 15px;
     letter-spacing: 0.34px;
 }
 
@@ -537,7 +541,7 @@ header a {
 
 .banner-inicio {
     margin: 35px 0;
-    padding: 10% 15px;
+    padding: 10% 20px;
     background-image: url('/site/img/imagen-generica.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -547,14 +551,14 @@ header a {
 .banner-inicio h2 {
     color: #fff;
     font-family: 'Oswald medium';
-    font-size: 150px;
+    font-size: 116px;
     line-height: normal;
     text-shadow: 3px 3px 7px #000;
 }
 
 .banner-inicio p {
     font-family: 'Oswald medium';
-    font-size: 38px;
+    font-size: 28px;
     color: #ffc314;
     text-shadow: 3px 3px 7px #000;
     line-height: 130%;
@@ -719,7 +723,7 @@ video#myVideo {
     padding: 10px 5%;
     margin: 5% 0 0;
     font-family: 'Poppins semibold';
-    font-size: 15px;
+    font-size: 18px;
     border-radius: 25px;
     background-color: #FFC314;
     text-decoration: none;
@@ -898,7 +902,7 @@ video#myVideo {
 
 .slide .slick-slide li p {
     font-family: 'Poppins medium';
-    font-size: 19px;
+    font-size: 18px;
     text-align: center;
     line-height: 130%;
 }
@@ -1000,14 +1004,14 @@ video#myVideo {
 
 .banner-slide h2 {
     font-family: 'Oswald medium';
-    font-size: 70px;
+    font-size: 52px;
     text-transform: uppercase;
     line-height: normal;
 }
 
 .banner-slide p {
     font-family: 'Oswald regular italic';
-    font-size: 26px;
+    font-size: 19px;
 }
 
 .bg-black {
@@ -1021,7 +1025,7 @@ video#myVideo {
 }
 
 .bg-yellow {
-    padding: 35px 0;
+    padding: 25px 0;
     background-color: #ffc314;
 }
 
@@ -1031,12 +1035,12 @@ video#myVideo {
 }
 
 .banner-title {
-    padding: 60px 15px;
+    padding: 40px 15px;
 }
 
 .banner-title h2 {
     font-family: 'Oswald medium';
-    font-size: 54px;
+    font-size: 40px;
     text-transform: uppercase;
     text-align: center;
     line-height: normal;
@@ -1060,7 +1064,7 @@ video#myVideo {
 }
 
 .row-maptv {
-    padding: 70px 40px;
+    padding: 70px 30px;
     border: 10px solid #000;
     background-color: #fff;
 }
@@ -1092,15 +1096,20 @@ video#myVideo {
 
 .txt-maptv h2 {
     font-family: 'Oswald medium';
-    font-size: 32px;
+    font-size: 24px;
     line-height: 130%;
 }
 
 .txt-maptv p,
 .txt-maptv ul li {
     font-family: 'Poppins light';
-    font-size: 18px;
+    font-size: 16px;
     line-height: 130%;
+}
+
+.txt-maptv ul {
+    padding-left: 10px;
+    margin: 10px 0;
 }
 
 .txt-maptv ul li {
@@ -1109,7 +1118,7 @@ video#myVideo {
 }
 
 .flex-lista {
-    margin: 70px 0;
+    margin: 50px 0;
     flex-wrap: wrap;
     justify-content: space-between;
 }
@@ -1130,7 +1139,7 @@ video#myVideo {
 .flex-lista li h3 {
     margin: 15px 0;
     font-family: 'Oswald medium';
-    font-size: 32px;
+    font-size: 24px;
     text-transform: uppercase;
     line-height: 130%;
     text-align: center;
@@ -1140,22 +1149,27 @@ video#myVideo {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 20px 15px;
     height: 100%;
     border: 1px solid #e6e6e6;
 }
 
 .flex-lista li p {
+    padding: 0 0 15px;
     font-family: 'Poppins light';
-    font-size: 18px;
+    font-size: 16px;
     line-height: 130%;
     text-align: center;
+}
+
+.flex-lista li p:last-of-type {
+    padding: 0;
 }
 
 .row-contenido h2 {
     margin: 0 0 50px;
     font-family: 'Oswald medium';
-    font-size: 32px;
+    font-size: 24px;
     text-align: center;
     line-height: normal;
 }
@@ -1166,7 +1180,7 @@ video#myVideo {
 
 .row-contenido > ul > li {
     display: flex;
-    max-width: 380px; 
+    max-width: 400px; 
     width: 100%;
     margin: 0 10px;
     flex-direction: column;
@@ -1176,7 +1190,7 @@ video#myVideo {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 20px 15px;
     height: 100%;
     border: 1px solid #e6e6e6;
 }
@@ -1184,7 +1198,7 @@ video#myVideo {
 .row-contenido ul li h3 {
     margin: 15px 0;
     font-family: 'Oswald medium';
-    font-size: 32px;
+    font-size: 24px;
     text-transform: uppercase;
     line-height: 130%;
     text-align: center;
@@ -1199,23 +1213,21 @@ video#myVideo {
 
 .row-contenido ul li p {
     padding: 0 0 20px;
-    font-size: 20px;
     font-family: 'Poppins light';
-    font-size: 18px;
+    font-size: 16px;
     line-height: 130%;
     text-align: center;
 }
 
 .row-contenido ul li ul {
-    padding: 0 0 20px;
+    padding: 0 0 20px 15px;
 }
 
 .row-contenido ul li ul li {
     position: relative;
     padding-left: 20px;
-    font-size: 20px;
     font-family: 'Poppins light';
-    font-size: 18px;
+    font-size: 16px;
     line-height: 130%;   
 }
 
@@ -1239,7 +1251,7 @@ video#myVideo {
     padding: 15px;
     background-color: #afafaf;
     font-family: 'Poppins semibold';
-    font-size: 18px;
+    font-size: 16px;
     color: #fff;
     line-height: 130%;
     text-align: center;
@@ -1255,7 +1267,7 @@ video#myVideo {
     padding: 15px;
     background-color: #ffc314;
     font-family: 'Oswald medium';
-    font-size: 21px;
+    font-size: 20px;
     color: #fff;
     line-height: 130%;
     text-align: center;
@@ -1267,19 +1279,19 @@ video#myVideo {
 }
 
 .flex-logos {
-    max-width: 725px;
+    max-width: 525px;
     width: 100%;
     margin: auto;
     align-items: center;
 }
 
 .flex-logos li:first-of-type img {
-    max-height: 90px;
+    max-height: 65px;
 }
 
 .flex-logos li img {
     width: auto;
-    max-height: 125px;
+    max-height: 90px;
 }
 
 
@@ -1338,9 +1350,9 @@ video#myVideo {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 12px;
     font-family: 'Poppins medium';
-    font-size: 13px;
+    font-size: 14px;
     border: 1px solid #e6e6e6;
     vertical-align: middle;
     text-align: left;
@@ -1449,7 +1461,7 @@ video#myVideo {
 
 .wrapper-form > div {
     display: block;
-    max-width: 800px;
+    max-width: 585px;
     width: 100%;
     margin: auto;
 }
@@ -1474,7 +1486,7 @@ video#myVideo {
 .formulario h2 {
     margin: 0 0 50px;
     font-family: 'Poppins bold';
-    font-size: 24px;
+    font-size: 20px;
     line-height: 130%;
 }
 
@@ -1500,36 +1512,37 @@ video#myVideo {
 
 .form input::-webkit-input-placeholder { /* Edge */
     font-family: 'Poppins regular';
-    font-size: 21px;
+    font-size: 15px;
     color: #000;
     line-height: inherit;
 }
 
 .form input:-ms-input-placeholder { /* Internet Explorer 10-11 */
     font-family: 'Poppins regular';
-    font-size: 21px;
+    font-size: 15px;
     color: #000;
     line-height: inherit;
 }
 
 .form input::placeholder {
     font-family: 'Poppins regular';
-    font-size: 21px;
+    font-size: 15px;
     color: #000;
     line-height: inherit;
 }
 
 .form .button {
     display: inline-block;
-    padding: 10px 6%;
+    padding: 5px 8%;
     border: 0;
     margin: 20px 0 0;
     font-family: 'Poppins semibold';
-    font-size: 22px;
+    font-size: 18px;
     border-radius: 25px;
     background-color: #FFC314;
     text-decoration: none;
     color: #000;
+    cursor: pointer;
 }
 
 .formulario ul {
@@ -1545,7 +1558,7 @@ video#myVideo {
 .formulario ul li,
 .formulario ul li a {
     font-family: 'Poppins regular';
-    font-size: 22px;
+    font-size: 16px;
     color: #000;
 }
 
@@ -1571,7 +1584,7 @@ video#myVideo {
 .row-terminos ul li a {
     font-family: 'Poppins regular';
     font-size: 15px;
-    line-height: 130%;
+    line-height: normal;
 }
 
 
@@ -1589,7 +1602,7 @@ video#myVideo {
 .titulo-banner {
     display: block;
     position: relative;
-    max-width: 1200px;
+    max-width: 830px;
     border: 10px solid #000;
     margin: -85px auto 0;
     background-color: #fff;
@@ -1597,9 +1610,9 @@ video#myVideo {
 
 .titulo-banner h1 {
     position: relative;
-    padding: 40px 15px;
+    padding: 30px 15px;
     font-family: 'Oswald medium';
-    font-size: 70px;
+    font-size: 50px;
     color: #000;
     text-transform: uppercase;
     text-align: center;
@@ -1618,7 +1631,7 @@ video#myVideo {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    width: 15%;
+    width: 20%;
     padding: 30px 15px;
     border: 1px solid #666666;
 }
@@ -1639,7 +1652,7 @@ video#myVideo {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    width: 85%;
+    width: 80%;
     padding-left: 15px;
 }
 
@@ -1671,12 +1684,12 @@ video#myVideo {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 30px;
+    padding: 25px;
 }
 
 .titulo-cursos h2 {
     font-family: 'Oswald medium';
-    font-size: 40px;
+    font-size: 28px;
     text-align: center;
     text-transform: uppercase;
 }
@@ -1704,7 +1717,7 @@ video#myVideo {
 
 .slide-cursos {
     position: relative;
-    padding: 0 40px;
+    padding: 0 33px 0 30px;
 }
 
 .slide-cursos .slick-slide {
@@ -1720,7 +1733,7 @@ video#myVideo {
 
 .slide-cursos .slick-prev {
     position: absolute;
-    width: 35px;
+    width: 26px;
     top: 0; 
     left: 0;
     bottom: 3px;
@@ -1734,7 +1747,7 @@ video#myVideo {
 
 .slide-cursos .slick-next {
     position: absolute;
-    width: 35px;
+    width: 26px;
     top: 0; 
     right: 0;
     bottom: 3px;
@@ -1766,12 +1779,12 @@ video#myVideo {
     content: '';
     position: absolute;
     top: 50%;
-    left: 10px;
+    left: 8px;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     transform: translateY(-50%);
-    width: 15px;
-    height: 28px;
+    width: 10px;
+    height: 18px;
     background-repeat: no-repeat;
     background-size: contain;
     z-index: 3;
@@ -1790,12 +1803,12 @@ video#myVideo {
     content: '';
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 8px;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     transform: translateY(-50%);
-    width: 15px;
-    height: 28px;
+    width: 10px;
+    height: 18px;
     background-repeat: no-repeat;
     background-size: contain;
     z-index: 3;
@@ -1899,17 +1912,17 @@ video#myVideo {
 
 .banner-botones h4 {
     font-family: 'Oswald medium';
-    font-size: 38px;
+    font-size: 28px;
     color: #fff;
     line-height: normal;
 }
 
 .banner-botones p {
-    max-width: 600px;
+    max-width: 475px;
     width: 100%;
     margin: auto;
     font-family: 'Oswald medium';
-    font-size: 38px;
+    font-size: 28px;
     color: #fff;
     line-height: 130%;
 }
@@ -2175,7 +2188,7 @@ section.membresia {
 .row-columnas p {
     padding: 0 0 25px;
     font-family: 'Poppins regular';
-    font-size: 20px;
+    font-size: 16px;
     line-height: 130%;
 }
 
@@ -2479,10 +2492,10 @@ section.membresia {
 }
 
 .wrapper-clases h3 {
-    padding: 30px 20px;
+    padding: 30px 15px;
     background-color: #ffc314;
     font-family: 'Oswald medium';
-    font-size: 40px;
+    font-size: 32px;
     text-transform: uppercase;
     text-align: center;
 }
@@ -2537,7 +2550,7 @@ section.membresia {
 }
 
 .row-clases h3 {
-    margin: 0 0 45px;
+    margin: 0 0 35px;
     font-family: 'Oswald medium';
     font-size: 35px;
     text-transform: uppercase;
@@ -2546,7 +2559,7 @@ section.membresia {
 
 .row-clases p {
     font-family: 'Oswald extra light';
-    font-size: 32px;
+    font-size: 26px;
     line-height: 130%;
     text-align: center;
 }
@@ -2633,16 +2646,18 @@ section.membresia {
 /*----------------------------------  EVENTOS  ----------------------------------*/
 
 .eventos .row-clases {
-    margin: 70px auto;
+    margin: 70px auto 30px;
 }
 
 .wrapper-biblioteca {
+    padding: 0 0 20px;
     margin: 0 0 100px;
     border: 1px solid #000;
 }
 
 .wrapper-biblioteca h3 {
     padding: 30px 20px;
+    margin: 0 0 20px;
     color: #ffc314;
     background-color: #000;
     font-family: 'Oswald medium';
@@ -2658,7 +2673,6 @@ section.membresia {
 
 .item-slide {
     position: relative;
-    margin: 20px 0;
     padding: 0 15px 0 110px;
 }
 
@@ -3005,6 +3019,26 @@ section.membresia {
 }
 
 
+/*----------------------------------  CHECKOUT  ----------------------------------*/
+
+.wrapper-checkout > div {
+    max-width: 650px;
+}
+
+.form-checkout .button {
+    display: inline-block;
+    padding: 5px 8%;
+    border: 0;
+    margin: 20px 0 0;
+    font-family: 'Poppins semibold';
+    font-size: 18px;
+    border-radius: 25px;
+    background-color: #FFC314;
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+
 
 /*----------------------------------  FOOTER  ----------------------------------*/
 
@@ -3013,6 +3047,91 @@ footer {
     background-color: #1e1e1e;
 }
 
+.flex-footer ul li a {
+    font-family: 'Poppins regular';
+    color: #afafaf;
+    font-size: 14px;
+}
+
+.flex-footer ul {
+    margin-left: 80px;
+}
+
+.flex-footer > div:first-of-type {
+    padding: 0 0 35px;
+}
+
+.flex-footer > div:last-of-type ul {
+    margin-left: 178px;
+}
+
+.flex-footer ul:first-of-type,
+.flex-footer > div:last-of-type ul:first-of-type {
+    margin-left: 0;
+}
+
+.flex-footer ul li {
+    margin: 0 0 15px;
+}
+
+.flex-footer ul li:last-of-type {
+    margin: 0;
+}
+
+.row-redes {
+    text-align: right;
+}
+
+.flex-redes li img {
+    width: 30px; 
+    height: auto;
+}
+
+.flex-redes li {
+    margin-left: 12px;
+}
+
+.flex-redes li:first-of-type {
+    margin-left: 0;
+}
+
+.btn-footer {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 12px 10%;
+    max-width: 360px;
+    width: 100%;
+    margin: 50px 0 0;
+    font-family: 'Poppins medium';
+    font-size: 14px;
+    color: #1e1e1e;
+    border-radius: 15px;
+    background-color: #afafaf;
+    text-align: left;
+    line-height: 130%;
+}
+
+.row-copyright {
+    margin: 30px 0 0;
+    padding: 30px 0 0;
+    border-top: 1px solid #545454;
+}
+
+.row-copyright p {
+    font-family: 'Poppins light';
+    font-size: 14px;
+    color: #7c7c7c;
+}
+
+.row-copyright ul li,
+.row-copyright ul li a {
+    padding: 0 2px;
+    font-family: 'Poppins light';
+    font-size: 14px;
+    color: #7c7c7c;
+}
 
 
 /*----------------------------------  MENÚ TOGGLE  ----------------------------------*/
@@ -3035,6 +3154,10 @@ a[href="#page"] {
 
 .fa-remove:before, .fa-close:before, .fa-times:before {
     content: "\f00d";
+}
+
+.toggle {
+    display: none;
 }
 
 #navbar-toggle,
@@ -3130,11 +3253,12 @@ a[href="#page"] {
 
 
 @media screen and (max-width: 1100px) {
+    .toggle,
     #navbar-toggle {
         display: block;
     }
     
-    .menu-general ul {
+    .menu-general ul.menu {
         display: none;
     }
 }
@@ -3238,10 +3362,6 @@ a[href="#page"] {
         color: #000;
         padding: 0;
     }
-    
-    .titulo-banner h1 {
-        font-size: 50px;
-    }
 }
 
 @media screen and (max-width: 768px) {
@@ -3258,10 +3378,6 @@ a[href="#page"] {
     }
     
     .row-registro {
-        margin: 50px 0;
-    }
-    
-    .flex-lista {
         margin: 50px 0;
     }
     
@@ -3291,6 +3407,7 @@ a[href="#page"] {
         display: block;
     }
     
+    .menu-general .flex,
     .flex-header {
         display: flex;
     }
@@ -3521,11 +3638,6 @@ a[href="#page"] {
     }
     
     .banner-maptv {
-        padding: 20px 15px;
-    }
-    
-    .flex-lista li > div,
-    .row-contenido ul li > div {
         padding: 20px 15px;
     }
     
