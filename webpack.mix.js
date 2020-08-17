@@ -15,5 +15,5 @@ mix.js('resources/js/site/app.js', 'public/site/js')
     .sass('resources/sass/app.scss', 'public/site/css');
 
 mix.js('resources/js/site/functions.js', 'public/site/js');
-mix.js('resources/js/admin/app.js', 'public/admin/js');
-mix.js('resources/js/admin/functions.js', 'public/admin/js');
+mix.js('resources/js/admin/app.js', 'public/admini/js');
+mix.js('resources/js/admin/functions.js', 'public/admini/js');

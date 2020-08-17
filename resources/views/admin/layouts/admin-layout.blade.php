@@ -4,14 +4,14 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>@yield('titulo')</title>
-		<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
-		<link href="/admin/css/font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="/admini/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/admini/css/font-awesome/css/font-awesome.css" rel="stylesheet">
 
 		
         @yield("css-content")
 
-		<link href="/admin/css/animate.css" rel="stylesheet">
-		<link href="/admin/css/style.css" rel="stylesheet">
+		<link href="/admini/css/animate.css" rel="stylesheet">
+		<link href="/admini/css/style.css" rel="stylesheet">
    	</head>
    	<body>
 	   	<div id="wrapper">
@@ -20,7 +20,7 @@
                     <ul class="nav metismenu" id="side-menu">
                         <li class="nav-header">
                             <div class="dropdown profile-element">
-                                <img alt="image" class="rounded-circle" src="/admin/img/user-photo.png" width="40px" height="40px" />
+                                <img alt="image" class="rounded-circle" src="/admini/img/user-photo.png" width="40px" height="40px" />
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                     <span class="block m-t-xs font-bold"> {{ Auth::guard('admins')->user()->nombre }} </span>
                                     <span class="text-muted text-xs block">Administrador <b class="caret"></b></span>
@@ -36,7 +36,7 @@
                                 </ul>
                             </div>
                             <div class="logo-element">
-                                CF
+                                MTv
                             </div>
                         </li>
                         <li>
@@ -55,8 +55,8 @@
                         <li>
                             <a href="#"><i class="fa fa-tv"></i> <span class="nav-label">Cursos</span> <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
-                                <li> <a href="#"> Lista de Cursos </a></li>
-                                <li> <a href="#"> Agregar Cursos </a></li>
+                                <li> <a href="{{ route('agregar-curso.index') }}"> Lista de Cursos </a></li>
+                                <li> <a href="{{ route('agregar-curso.create') }}"> Agregar Cursos </a></li>
                             </ul>
                         </li>
                         <li>

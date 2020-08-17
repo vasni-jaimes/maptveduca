@@ -25,4 +25,7 @@ Route::post('logout', 'Admin\LoginController@logout')->name('admin.logout');
 Route::get('listado-usuarios', "Admin\UsersController@index")->name('listado-usuarios');
 
 //CURSOS
-Route::get('agregar-curso', 'Admin\CursosController@index')->name('agregar-curso');
+Route::get('agregar-curso', 'Admin\CoursesController@create')->name('agregar-curso.create');
+Route::get('listado-cursos', 'Admin\CoursesController@index')->name('agregar-curso.index');
+Route::post('agregar-curso', 'Admin\CoursesController@store')->name('agregar-curso.store');
+Route::get('editar-curso/{curso_id}', 'Admin\CoursesController@edit')->name('agregar-curso.edit');

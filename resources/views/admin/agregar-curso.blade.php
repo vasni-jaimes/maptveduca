@@ -2,15 +2,15 @@
 @extends('admin.layouts.admin-layout')
 <!-- /HEADER AND FOOTER -->
 
-@section('titulo', 'Agregar Usuario')
+@section('titulo', 'Agregar Curso')
 
 @section('css-content')
     <!-- Chosen -->
-    <link href="/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
-     <link href="/admin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
-    <link href="/admin/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
-    <link href="/admin/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-    <link href="/admin/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
+    <link href="/admini/css/plugins/iCheck/custom.css" rel="stylesheet">
+     <link href="/admini/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="/admini/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+    <link href="/admini/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="/admini/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
 @stop
 
 
@@ -37,7 +37,7 @@
 
 
     @if (session()->has("status.newCurso"))
-        @if (session()->get("status.newUser") == "error")
+        @if (session()->get("status.newCurso") == "error")
             <div class="row justify-content-center">
                 <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
                     Ocurrio un error, intentelo más tarde.
@@ -60,6 +60,17 @@
     @endif
 
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
     <div class="row justify-content-center mt-3">
         <div class="col-lg-10">
             <div class="ibox">
@@ -76,9 +87,8 @@
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>
                     </div>
-                    <form name="frm-agregar_curso" action="#" accept-charset="UTF-8" enctype="multipart/form-data" method="POST">
+                    <form action="{{ route('agregar-curso.store') }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-agregar_curso">
                         @csrf
-                        <div class="hr-line-dashed"></div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Nombre del curso: </label>
                             <div class="col-sm-10">
@@ -87,28 +97,57 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Descripcion: </label>
+                        <div class="form-group row mb-5">
+                            <label class="col-sm-2 col-form-label">Imagen del curso: </label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="dirigido" rows="3">{{ old("dirigido") }}</textarea>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('dirigido') !!} </span>
-                            </div>
+                                <input id="logo" type="file" name="img_curso" class="form-control" accept="image/png, image/jpeg, image/jpg">
+                                <span class='form-text m-b-none errors'> {!! $errors->first('img_curso') !!} </span>
+                            </div> 
                         </div>
 
-                        {{-- <div class="form-group row">
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label"> instructor: </label>
                             <div class="col-sm-10 mb-3">
                                 <select data-placeholder="Instructores" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_instructores[]">
-                                    @foreach($profesores as $profesor)
+                                    {{-- @foreach($profesores as $profesor)
                                         <option value="{{ $profesor->id }}" 
                                             @if(is_array(old('select_instructores')) && in_array($profesor->id, old('select_instructores'))) selected @endif>
                                             {{ $profesor->nombre }}
                                         </option>    
-                                    @endforeach
+                                    @endforeach --}}
+                                    <option value="1">instructor1</option>
+                                    <option value="2">instructor2</option>
+                                    <option value="3">instructor3</option>
+                                    <option value="4">instructor4</option>
+                                    <option value="5">instructor5</option>
+                                    <option value="6">instructor6</option>
                                 </select>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('select_instructores') !!} </span>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_instructores.*') !!} </span>
                             </div>
-                        </div> --}}
+                        </div>
+
+                        <div class="form-group row mb-5">
+                            <label class="col-sm-2 col-form-label">Curso extra: </label>
+                            <div class="i-checks col-sm-10">
+                                <label> <input type="checkbox" value="1" name="curso_extra" @if(old("curso_extra") == 1) checked @endif> <i></i></label>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> Carreras: </label>
+                            <div class="col-sm-10 mb-3">
+                                <select data-placeholder="Carreras" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_carreras[]">
+                                    <option value="1"> Carrera 1 </option>
+                                    <option value="2"> Carrera 2 </option>
+                                    <option value="3"> Carrera 3 </option>
+                                    <option value="4"> Carrera 4 </option>
+                                    <option value="5"> Carrera 5 </option>
+                                    <option value="6"> Carrera 6 </option>
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_carreras') !!} </span>
+                            </div>
+                        </div>
 
 
                         <div class="form-group row">
@@ -127,12 +166,26 @@
                         </div>
 
 
-                        <div class="form-group row mb-5">
-                            <label class="col-sm-2 col-form-label">Material Extra: </label>
-                           	<div class="col-sm-10">
-							    <input id="logo" type="file" name="material_extra[]" multiple class="form-control" accept="application/pdf">
-							    <span class='form-text m-b-none errors'> {!! $errors->first('material_extra'). $errors->first('material_extra.*') !!} </span>
-							</div> 
+                        <div class="hr-line-dashed"></div>
+
+                        <h2> Bienvenida del Curso </h2>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Video de Bienvenida: </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="video_bienvenida" value="{{ old("video_bienvenida") }}">
+                                <span class='form-text m-b-none errors'> {!! $errors->first('video_bienvenida') !!} </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Descripcion: </label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="descripcion" rows="3">{{ old("descripcion") }}</textarea>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('descripcion') !!} </span>
+                            </div>
                         </div>
 
                         <div class="hr-line-dashed"></div>
@@ -163,6 +216,20 @@
 				                                <span class='form-text m-b-none errors'> {!! $errors->first('video_url.'.$i) !!} </span>
 				                            </div>
 				                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Descripcion: </label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control" name="descripcion_curso[]" rows="3">{{ old("descripcion_curso.{$i}") }}</textarea>
+                                                <span class='form-text m-b-none errors'> {!! $errors->first('descripcion_curso.'.$i) !!} </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row mb-5">
+                                            <label class="col-sm-2 col-form-label">Material Extra: </label>
+                                            <div class="col-sm-10">
+                                                <input id="logo" type="file" name="material_extra[{{ $i }}][]" multiple class="form-control">
+                                                <span class='form-text m-b-none errors'> {!! $errors->first('material_extra.'.$i.'.*') !!} </span>
+                                            </div> 
+                                        </div>
 				                    </div>
 				                @endfor
 				            @else
@@ -181,6 +248,20 @@
 			                                <span class='form-text m-b-none errors'> {!! $errors->first('video_url.*') !!} </span>
 			                            </div>
 			                        </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Descripcion: </label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" name="descripcion_curso[]" rows="3">{{ old("descripcion_curso.0") }}</textarea>
+                                            <span class='form-text m-b-none errors'> {!! $errors->first('descripcion_curso.*') !!} </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-5">
+                                        <label class="col-sm-2 col-form-label">Material Extra: </label>
+                                        <div class="col-sm-10">
+                                            <input id="logo" type="file" name="material_extra[0][]" multiple class="form-control">
+                                            <span class='form-text m-b-none errors'> {!! $errors->first('material_extra'). $errors->first('material_extra.0.*') !!} </span>
+                                        </div> 
+                                    </div>
 			                    </div>
 				            @endif
 		                </div>
@@ -189,7 +270,7 @@
                         <div class="form-group row">
                             <div class="col-sm-4 col-sm-offset-2">
                                 <button class="btn btn-white btn-sm" type="submit">Cancel</button>
-                                <button class="btn btn-primary btn-sm btn-save_curso" type="submit">Save changes</button>
+                                <button class="btn btn-primary btn-sm" type="submit">Save changes</button>
                             </div>
                         </div>
                     </form>
@@ -204,24 +285,24 @@
 @section("js-content")
 
     <!-- Mainly scripts -->
-    <script src="/admin/js/jquery-3.1.1.min.js"></script>
-    <script src="/admin/js/popper.min.js"></script>
-    <script src="/admin/js/bootstrap.js"></script>
-    <script src="/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/admini/js/jquery-3.1.1.min.js"></script>
+    <script src="/admini/js/popper.min.js"></script>
+    <script src="/admini/js/bootstrap.js"></script>
+    <script src="/admini/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/admini/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
     <!-- Chosen -->
-    <script src="/admin/js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="/admini/js/plugins/chosen/chosen.jquery.js"></script>
     <!-- Data picker -->
-   <script src="/admin/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+   <script src="/admini/js/plugins/datapicker/bootstrap-datepicker.js"></script>
    <!-- Clock picker -->
-    <script src="/admin/js/plugins/clockpicker/clockpicker.js"></script>
+    <script src="/admini/js/plugins/clockpicker/clockpicker.js"></script>
 
     <!-- Custom and plugin javascript -->
-    <script src="/admin/js/inspinia.js"></script>
-    <script src="/admin/js/plugins/pace/pace.min.js"></script>
+    <script src="/admini/js/inspinia.js"></script>
+    <script src="/admini/js/plugins/pace/pace.min.js"></script>
     <!-- iCheck -->
-    <script src="/admin/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="/admini/js/plugins/iCheck/icheck.min.js"></script>
     <script>
         $(document).ready(function(){
             $('.i-checks').iCheck({
@@ -244,6 +325,6 @@
             });
        });
     </script>
-    <script src="/admin/js/app.js"></script>
+    <script src="/admini/js/app.js"></script>
 
 @stop

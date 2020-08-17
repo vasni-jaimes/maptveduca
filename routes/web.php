@@ -33,6 +33,7 @@ Route::post('registro', 'Auth\RegisterController@register')->name('registro');
 //CURSOS
 Route::get('cursos', 'Site\CursosController@index')->name('cursos');
 
+
 //VISTAS ESTATICAS
 Route::get('eventos', function() {
 	return view('site.eventos');

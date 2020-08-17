@@ -4,10 +4,28 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Decorators\CursosDecorator;
 use App\Category;
+use App\Http\Requests\ValidateAgregarCurso;
+use App\Decorators\CoursesDecorator;
+use Illuminate\Support\Facades\Storage;
+//HELPERS
+use App\Helpers\Helper;
+use App\Course;
 
-class CursosController extends Controller
+class CoursesController extends Controller
 {
+
+    protected $coursesDecorator;
+    protected $helper;
+
+    public function __construct(CoursesDecorator $coursesDecorator, Helper $helper)
+    {
+        $this->coursesDecorator = $coursesDecorator;
+        $this->helper           = $helper;
+        $this->middleware("authadmin:auth");
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +33,10 @@ class CursosController extends Controller
      */
     public function index()
     {
-        $categorias = Category::where('status', 1)->get();
-        return view("admin.agregar-curso", compact("categorias"));
+        $cursos = Course::with("instructor")->get();
+        $helper = $this->helper;
+        //return response()->json($cursos);
+        return view("admin.listado-cursos", compact("cursos", "helper"));
     }
 
     /**
@@ -26,7 +46,8 @@ class CursosController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Category::where('status', 1)->get();
+        return view("admin.agregar-curso", compact("categorias"));
     }
 
     /**
@@ -35,9 +56,13 @@ class CursosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidateAgregarCurso $request)
     {
-        //
+        //return var_dump($request->file('material_extra'));
+        //return response()->json($request);
+        return $this->coursesDecorator->AgregarCursoDecore($request);
+
+
     }
 
     /**
@@ -59,7 +84,7 @@ class CursosController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view("admin.editar-curso");
     }
 
     /**
@@ -71,7 +96,7 @@ class CursosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json($request);
     }
 
     /**

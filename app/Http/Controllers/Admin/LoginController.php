@@ -12,7 +12,7 @@ class LoginController extends Controller
 
 	use AuthenticatesUsers;
 
-	protected $redirectTo = "/administrator/agregar-curso";
+	protected $redirectTo = "/admin/listado-usuarios";
 
     public function __construct()
     {
