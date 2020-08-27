@@ -186,4 +186,42 @@ $(document).ready(function(){
 		} //if ( !$(this).hasClass('navbar-toggle-active') ) {
 	}); //$('#navbar-toggle').on('click', function () {
     
+    $('.item-mensaje a').click(function(){
+        if ( !$(this).hasClass('active') ) {
+			$(this).addClass('active');
+			$(this).prev('.txt-mensaje').css({ "height":'100%'}, "slow"); 
+            $(this).text('Vista reducida');
+		} else {
+            $(this).removeClass('active');
+			$(this).prev('.txt-mensaje').css({ "height":'86px'}, "slow"); 
+            $(this).text('Ver mensaje completo');
+		} //if ( !$(this).hasClass('navbar-toggle-active') ) {
+    });
+    
+    $('.row-tabs ul li').click(function(){
+        
+        $('.row-tabs ul li').removeClass('tab-active');
+       
+        var id = $(this).data('id');
+        
+        $(this).addClass('tab-active');
+        
+        $.when($('.s-tab').hide()).done(function () {
+			$('.tab-' + id).show();
+		});
+        
+    });
+    
+    $('.boton-acordeon').click(function(e) {    
+        e.preventDefault();
+        $(this).toggleClass('active-acordeon');   
+        $(this).next('.wrapper-acordeon').slideToggle(500);
+    });
+    
+    $('.boton-alumno').click(function(e) {    
+        e.preventDefault();
+        $(this).toggleClass('active-acordeon');   
+        $(this).next('.respuesta-alumno').slideToggle(500);
+    });
+    
 });
