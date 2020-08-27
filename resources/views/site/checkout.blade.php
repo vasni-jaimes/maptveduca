@@ -46,7 +46,7 @@
                                     </div>
                                     <div>
                                         <label>CVV</label>
-                                        <input type="text" placeholder="" class="input">
+                                        <input type="text" placeholder="***" class="input">
                                     </div>
                                 </div>
                                 <p>Recuerda que los cargos se realizarán de manera automática. Puedes revisar y editar esta información en tu tablero personal. </p>

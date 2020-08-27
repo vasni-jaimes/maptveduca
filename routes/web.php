@@ -42,6 +42,10 @@ Route::get('aulas', function() {
 	return view('site.aulas');
 })->name('aulas');
 
+Route::get('single-aulas', function() {
+	return view('site.single-aulas');
+})->name('single-aulas');
+
 Route::get('checkout', function() {
 	return view('site.checkout');
 })->name('checkout');

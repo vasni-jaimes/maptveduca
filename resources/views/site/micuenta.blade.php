@@ -6,6 +6,8 @@
 
 @section('contenido')
 
+<div class="banner-small"></div> <!-- /banner-small -->
+
 <section class="micuenta">
 
     <div class="hoja-1200">
@@ -67,18 +69,20 @@
                                             <input type="text" class="input" placeholder="Apellido Paterno">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
-                                        <div class="flex flex-perfil between">
-                                            <div>
-                                                <label>Fecha de nacimiento</label>
-                                                <input type="text" class="input" placeholder="DD/MM/AAAA" class="input">
-                                                <span class="ico-edit"><img src="/site/img/edit.png"></span>
+                                        <fieldset class="columns">
+                                            <div class="flex flex-perfil between">
+                                                <div>
+                                                    <label>Fecha de nacimiento</label>
+                                                    <input type="text" class="input" placeholder="DD/MM/AAAA" class="input">
+                                                    <span class="ico-edit"><img src="/site/img/edit.png"></span>
+                                                </div>
+                                                <div>
+                                                    <label>Contraseña</label>
+                                                    <input type="text" class="input" placeholder="···············" class="input">
+                                                    <span class="ico-edit"><img src="/site/img/edit.png"></span>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <label>Contraseña</label>
-                                                <input type="text" class="input" placeholder="···············" class="input">
-                                                <span class="ico-edit"><img src="/site/img/edit.png"></span>
-                                            </div>
-                                        </div>
+                                        </fieldset>
                                     </form>
                                 </div> <!-- /item-perfil -->
                                 <div class="item-perfil">
@@ -91,6 +95,180 @@
 
                     <div style="margin-bottom: 30px;">
                         <h3>Inbox</h3>
+                        <div class="row-perfil">
+                            <div class="row-tabs">
+                                <ul>
+                                    <li class="tab tab-active" data-id="1">Mensajes</li>
+                                    <li class="tab" data-id="2">Notificaciones</li>
+                                </ul>
+                                
+                                <div class="s-tab tab-1">
+                                    <div class="item-inbox">
+                                        <span>25/Junio/ 2020 18:00 hrs</span>
+                                        <div class="item-mensaje">
+                                            <div class="txt-mensaje">
+                                                <p><strong>De:</strong> MAPtv Educa </p>
+                                                <p><strong>Mensaje:</strong></p>
+                                                <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
+                                                <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
+                                                <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
+                                                <p>¡Bienvenido!</p>
+                                            </div> <!-- /txt-mensaje -->
+                                            <a href="javascript:void(0)">Ver mensaje completo</a>
+                                        </div> <!-- /item-mensaje -->
+                                    </div> <!-- /item-inbox -->
+                                    <div class="item-inbox">
+                                        <span>18/Junio/ 2020 18:00 hrs</span>
+                                        <div class="item-mensaje">
+                                            <div class="txt-mensaje">
+                                                <p><strong>De:</strong> MAPtv Educa </p>
+                                                <p><strong>Mensaje:</strong></p>
+                                                <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
+                                                <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
+                                                <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
+                                                <p>¡Bienvenido!</p>
+                                            </div> <!-- /txt-mensaje -->
+                                            <a href="javascript:void(0)">Ver mensaje completo</a>
+                                        </div> <!-- /item-mensaje -->
+                                    </div> <!-- /item-inbox -->
+                                    <div class="item-inbox">
+                                        <span>17/Junio/ 2020 18:00 hrs</span>
+                                        <div class="item-mensaje">
+                                            <div class="txt-mensaje">
+                                                <p><strong>De:</strong> MAPtv Educa </p>
+                                                <p><strong>Mensaje:</strong></p>
+                                                <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
+                                                <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
+                                                <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
+                                                <p>¡Bienvenido!</p>
+                                            </div> <!-- /txt-mensaje -->
+                                            <a href="javascript:void(0)">Ver mensaje completo</a>
+                                        </div> <!-- /item-mensaje -->
+                                    </div> <!-- /item-inbox -->
+                                </div> <!-- /tab-mensaje -->
+                                
+                                <div class="s-tab tab-2">
+                                    <div class="item-inbox">
+                                        <span>25/Junio/ 2020 18:00 hrs</span>
+                                        <div class="item-mensaje">
+                                            <div class="txt-mensaje">
+                                                <p><strong>De:</strong> MAPtv Educa </p>
+                                                <p><strong>Notificación:</strong></p>
+                                                <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
+                                                <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
+                                                <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
+                                                <p>¡Bienvenido!</p>
+                                            </div> <!-- /txt-mensaje -->
+                                            <a href="javascript:void(0)">Ver mensaje completo</a>
+                                        </div> <!-- /item-mensaje -->
+                                    </div> <!-- /item-inbox -->
+                                    <div class="item-inbox">
+                                        <span>18/Junio/ 2020 18:00 hrs</span>
+                                        <div class="item-mensaje">
+                                            <div class="txt-mensaje">
+                                                <p><strong>De:</strong> MAPtv Educa </p>
+                                                <p><strong>Notificación:</strong></p>
+                                                <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
+                                                <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
+                                                <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
+                                                <p>¡Bienvenido!</p>
+                                            </div> <!-- /txt-mensaje -->
+                                            <a href="javascript:void(0)">Ver mensaje completo</a>
+                                        </div> <!-- /item-mensaje -->
+                                    </div> <!-- /item-inbox -->
+                                    <div class="item-inbox">
+                                        <span>17/Junio/ 2020 18:00 hrs</span>
+                                        <div class="item-mensaje">
+                                            <div class="txt-mensaje">
+                                                <p><strong>De:</strong> MAPtv Educa </p>
+                                                <p><strong>Notificación:</strong></p>
+                                                <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
+                                                <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
+                                                <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
+                                                <p>¡Bienvenido!</p>
+                                            </div> <!-- /txt-mensaje -->
+                                            <a href="javascript:void(0)">Ver mensaje completo</a>
+                                        </div> <!-- /item-mensaje -->
+                                    </div> <!-- /item-inbox -->
+                                </div> <!-- /tab-notificacion -->
+                                
+                            </div> <!-- /row-tabs -->
+                        </div> <!-- /row-perfil -->
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <h3>Pagos</h3>
+                        <div class="row-perfil">
+                            <div class="flex">
+                                <div class="item-perfil">
+                                    <h4>Informarción de pago</h4>
+                                    <form class="form-perfil" action="" method="">
+                                        <fieldset>
+                                            <label>Nombre en la tarjeta</label>
+                                            <input type="text" class="input" placeholder="Nombre y Apellido">
+                                            <span class="ico-edit"><img src="/site/img/edit.png"></span>
+                                        </fieldset>
+                                        <fieldset>
+                                            <label>Número de tarjeta</label>
+                                            <input type="text" class="input" placeholder="**** **** **** 1234">
+                                            <span class="ico-edit"><img src="/site/img/edit.png"></span>
+                                        </fieldset>
+                                        <fieldset class="columns">
+                                            <div class="flex flex-perfil between">
+                                                <div>
+                                                    <label>Vencimiento</label>
+                                                    <input type="text" class="input" placeholder="12/34" class="input">
+                                                    <span class="ico-edit"><img src="/site/img/edit.png"></span>
+                                                </div>
+                                                <div>
+                                                    <label>CVV</label>
+                                                    <input type="text" class="input" placeholder="***" class="input">
+                                                    <span class="ico-edit"><img src="/site/img/edit.png"></span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset>
+                                            <label>Apellido Materno</label>
+                                            <input type="text" class="input" placeholder="Apellido Materno">
+                                            <span class="ico-edit"><img src="/site/img/edit.png"></span>
+                                        </fieldset>
+                                        <fieldset>
+                                            <label>Apellido Paterno</label>
+                                            <input type="text" class="input" placeholder="Apellido Paterno">
+                                            <span class="ico-edit"><img src="/site/img/edit.png"></span>
+                                        </fieldset>
+                                        <fieldset class="f-domicilio columns">
+                                            <label>Domicilio</label>
+                                            <div class="flex flex-domicilio between">
+                                                <input type="text" class="input first" placeholder="Calle">
+                                                <input type="text" class="input" placeholder="Número ext.">
+                                                <input type="text" class="input" placeholder="Número int.">
+                                            </div> <!-- /flex -->
+                                            <div class="flex flex-colonia between">
+                                                <input type="text" class="input" placeholder="Colonia, barrio, fraccionamiento">
+                                                <input type="text" class="input" placeholder="Código postal">
+                                            </div> <!-- /flex -->
+                                            <div class="flex between">
+                                                <input type="text" class="input" placeholder="Ciudad">
+                                                <input type="text" class="input" placeholder="Estado">
+                                                <input type="text" class="input" placeholder="País">
+                                            </div> <!-- /flex -->
+                                        </fieldset>
+                                    </form>
+                                </div> <!-- /item-perfil -->
+                                <div class="item-perfil">
+                                    <h4>Historial de pagos</h4>
+                                    <table class="tabla-perfil">
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Monto</th>
+                                            <th>Descripción</th>
+                                            <th>Forma de pago</th>
+                                        </tr>
+                                    </table>
+                                </div> <!-- /item-perfil -->
+                            </div> <!-- /flex -->
+                        </div> <!-- /row-perfil -->
                     </div>
                     
                 </div> <!-- /wrapper-tablero -->
