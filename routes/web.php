@@ -39,5 +39,17 @@ Route::get('eventos', function() {
 	return view('site.eventos');
 })->name('eventos');
 
+Route::get('aulas', function() {
+	return view('site.aulas');
+})->name('aulas');
+
+Route::get('checkout', function() {
+	return view('site.checkout');
+})->name('checkout');
+
+Route::get('micuenta', function() {
+	return view('site.micuenta');
+})->name('micuenta');
+
 //Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');

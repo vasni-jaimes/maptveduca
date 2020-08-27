@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Decorators\CursosDecorator;
 use App\Category;
+use App\Instructor;
+use App\Career;
 use App\Http\Requests\ValidateAgregarCurso;
+use App\Http\Requests\ValidateUpdateCurso;
 use App\Decorators\CoursesDecorator;
 use Illuminate\Support\Facades\Storage;
-//HELPERS
 use App\Helpers\Helper;
 use App\Course;
 
@@ -46,8 +48,10 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        $categorias = Category::where('status', 1)->get();
-        return view("admin.agregar-curso", compact("categorias"));
+        $categorias   = Category::where('status', 1)->get();
+        $instructors  = Instructor::where('status', 1)->get();
+        $careers      = Career::where('status', 1)->get();
+        return view("admin.agregar-curso", compact("categorias", "instructors", "careers"));
     }
 
     /**
@@ -58,11 +62,7 @@ class CoursesController extends Controller
      */
     public function store(ValidateAgregarCurso $request)
     {
-        //return var_dump($request->file('material_extra'));
-        //return response()->json($request);
         return $this->coursesDecorator->AgregarCursoDecore($request);
-
-
     }
 
     /**
@@ -84,7 +84,8 @@ class CoursesController extends Controller
      */
     public function edit($id)
     {
-        return view("admin.editar-curso");
+        $data = $this->coursesDecorator->edit($id);
+        return view("admin.editar-cursos", $data);
     }
 
     /**
@@ -94,9 +95,10 @@ class CoursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidateUpdateCurso $request, $id)
     {
-        return response()->json($request);
+        $id = $this->helper::base64_decode_url($id);
+        return $this->coursesDecorator->update($request, $id);
     }
 
     /**
@@ -108,5 +110,20 @@ class CoursesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function deleteFile(Request $request)
+    {
+
+        if ($request->has('documento')) {
+            if (Storage::delete($request->documento)) {
+                return response()->json(['message' => 'ok'], 200);
+            }
+            return response()->json(['message' => 'no_delete'], 200);
+        }
+
+        return response()->json(['message' => 'no_parameters'], 200);
+
     }
 }

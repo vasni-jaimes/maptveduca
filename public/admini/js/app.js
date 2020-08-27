@@ -100,8 +100,9 @@ __webpack_require__.r(__webpack_exports__);
  //FORMULARIO PARA AGREGAR UN CURSO Y ACTUALIZAR
 
 var frmAgregarCurso = document.querySelector("form[name='frm-agregar_curso']");
+var frmActualizarCurso = document.querySelector("form[name='frm-actualizar_curso']");
 
-if (frmAgregarCurso) {
+if (frmAgregarCurso || frmActualizarCurso) {
   var bottonAdd = document.querySelector(".add-clone_videos");
 
   if (bottonAdd) {
@@ -121,7 +122,8 @@ if (frmAgregarCurso) {
       var container = document.querySelector('.container-videos_curso');
       container.lastElementChild.remove();
     });
-  }
+  } //CHECK DEL CURSO EXTRA Y ESCONDER SELECT DE CARRERAS
+
 
   var curso_extra = document.querySelector('input[name="curso_extra"]');
 
@@ -133,6 +135,14 @@ if (frmAgregarCurso) {
         $("select[name='select_carreras[]']").parents(".form-group").css("display", "flex");
       }
     });
+  } //ELIMINAR ARCHIVO DE CURSO EXTRA EN UPDATE
+
+
+  if (frmActualizarCurso) {
+    var eliminar_archivo = document.querySelectorAll(".eliminar_archivo");
+    eliminar_archivo.forEach(function (item) {
+      item.addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].elimiarArchivoUpdateCurso);
+    });
   }
 
   if (frmAgregarCurso) {
@@ -140,12 +150,30 @@ if (frmAgregarCurso) {
     frmAgregarCurso.addEventListener('input', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validacionAgregarCurso);
     $(document).change("input", _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validacionAgregarCurso);
     $("select").change(_functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validacionAgregarCurso);
-  } // if (frmActualizarCurso) {
-  // 	frmActualizarCurso.addEventListener('submit', funciones.validacionAgregarCurso);
-  // 	frmActualizarCurso.addEventListener('input', funciones.validacionAgregarCurso);
-  // 	$("select").change(funciones.validacionAgregarCurso);
-  // }
+  }
 
+  if (frmActualizarCurso) {
+    frmActualizarCurso.addEventListener('submit', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validacionAgregarCurso);
+    frmActualizarCurso.addEventListener('input', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validacionAgregarCurso);
+    $("select").change(_functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validacionAgregarCurso);
+  }
+}
+
+var frmAgregarClase = document.querySelector("form[name='frm-agregar_clase']");
+
+if (frmAgregarClase) {
+  var select_sesiones = document.querySelector("select[name='select_sesiones']");
+
+  if (select_sesiones) {
+    select_sesiones.addEventListener('change', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].agregarSessionesClase);
+  }
+
+  if (frmAgregarClase) {
+    frmAgregarClase.addEventListener('submit', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarClase);
+    frmAgregarClase.addEventListener('input', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarClase);
+    $(document).change("input", _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarClase);
+    $("select").change(_functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarClase);
+  }
 }
 
 /***/ }),
@@ -159,10 +187,182 @@ if (frmAgregarCurso) {
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  validarAgregarClase: function validarAgregarClase(e) {
+    e.preventDefault();
+    /* 	PRIMER PASO DEL REGISTRO */
+
+    var nombre_curso = document.querySelector("input[name='nombre_clase']"),
+        img_curso = document.querySelector("input[name='img_clase']"),
+        instructores = document.querySelector("select[name='select_instructores[]']"),
+        categorias = document.querySelector("select[name='select_categorias[]']"),
+        curso_extra = document.querySelector("input[name='curso_extra']"),
+        select_carreras = document.querySelector("select[name='select_carreras[]']"),
+        select_categorias = document.querySelector("select[name='select_categorias[]']"),
+
+    /* BIENVENIDA A LA CLASE */
+    video_bienvenida = document.querySelector("input[name='video_bienvenida']"),
+        descripcion = document.querySelector("textarea[name='descripcion']"),
+        select_sesiones = document.querySelector("select[name='select_sesiones']"),
+
+    /* AGREGAR SESSIONES */
+    url_zoom = document.querySelectorAll("input[name='url_zoom[]']"),
+        id_reunion = document.querySelectorAll("input[name='id_reunion[]']"),
+        codigo_acceso = document.querySelectorAll("input[name='codigo_acceso[]']"),
+        fecha_inicio = document.querySelectorAll("input[name='fecha_inicio[]']"),
+        hora_inicio = document.querySelectorAll("input[name='hora_inicio[]']"),
+
+    /* STATUS */
+    error_videos = false;
+    document.querySelectorAll('.errors').forEach(function (item) {
+      item.innerHTML = '';
+    });
+
+    if (document.querySelector('.has-error')) {
+      document.querySelectorAll('.has-error').forEach(function (item) {
+        item.classList.remove('has-error');
+      });
+    }
+
+    if (nombre_curso.value == '') {
+      nombre_curso.parentNode.classList.add('has-error');
+      nombre_curso.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (e.target.getAttribute('name') == 'frm-agregar_clase') {
+      if (img_curso.value == '') {
+        img_curso.parentNode.classList.add('has-error');
+        img_curso.nextElementSibling.innerHTML = 'El campo es requerido';
+        error_videos = true;
+      }
+    }
+
+    if (instructores.value == '' || instructores.value == null || instructores.value == undefined) {
+      instructores.parentNode.classList.add('has-error');
+      instructores.parentNode.children[1].firstChild.style.borderColor = "red";
+      instructores.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (categorias.value == '' || categorias.value == null || categorias.value == undefined) {
+      categorias.parentNode.classList.add('has-error');
+      categorias.parentNode.children[1].firstChild.style.borderColor = "red";
+      categorias.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (video_bienvenida.value == '') {
+      video_bienvenida.parentNode.classList.add('has-error');
+      video_bienvenida.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (descripcion.value == '') {
+      descripcion.parentNode.classList.add('has-error');
+      descripcion.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (select_sesiones.value == '') {
+      select_sesiones.parentNode.classList.add('has-error');
+      select_sesiones.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    } // SESSIONES ZOOM
+
+
+    url_zoom.forEach(function (item, index) {
+      if (item.value == '') {
+        error_videos = true;
+        item.parentNode.classList.add('has-error');
+        item.nextElementSibling.innerHTML = 'El campo es requerido';
+      }
+    });
+    id_reunion.forEach(function (item, index) {
+      if (item.value == '') {
+        error_videos = true;
+        item.parentNode.classList.add('has-error');
+        item.nextElementSibling.innerHTML = 'El campo es requerido';
+      }
+    });
+    codigo_acceso.forEach(function (item, index) {
+      if (item.value == '') {
+        error_videos = true;
+        item.parentNode.classList.add('has-error');
+        item.nextElementSibling.innerHTML = 'El campo es requerido';
+      }
+    });
+    fecha_inicio.forEach(function (item, index) {
+      if (item.value == '') {
+        error_videos = true;
+        item.parentNode.classList.add('has-error');
+        item.nextElementSibling.innerHTML = 'El campo es requerido';
+      }
+    });
+    hora_inicio.forEach(function (item, index) {
+      if (item.value == '') {
+        error_videos = true;
+        item.parentNode.classList.add('has-error');
+        item.nextElementSibling.innerHTML = 'El campo es requerido';
+      }
+    });
+
+    if (error_videos == true) {
+      if (e.type == 'submit') {
+        window.scrollTo(0, document.querySelectorAll(".has-error")[0].offsetTop);
+      }
+
+      return false;
+    }
+
+    return false;
+  },
+  agregarSessionesClase: function agregarSessionesClase(e) {
+    var numeroSesiones = e.target.value;
+    var htmlSessiones = "";
+    var numeroClones = document.querySelectorAll(".clone-horarios_sesion").length;
+    var conteo = numeroSesiones > numeroClones ? numeroSesiones - numeroClones : numeroClones - numeroSesiones;
+
+    for (var i = 1; i <= conteo; i++) {
+      htmlSessiones += '<div class="clone-horarios_sesion">' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">URL Zoom: </label>' + '<div class="col-sm-10">' + '<input type="text" class="form-control" name="url_zoom[]">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">ID de Reunión: </label>' + '<div class="col-sm-10">' + '<input type="text" class="form-control" name="id_reunion[]">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Codigo de acceso: </label>' + '<div class="col-sm-10">' + '<input type="text" class="form-control" name="codigo_acceso[]">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Fecha de Lanzamiento: </label>' + '<div class="col-sm-2">' + '<input class="form-control datepicker" name="fecha_inicio[]" data-date-format="yyyy-mm-dd">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '<label class="pt-2 font-weight-bold"> : </label>' + '<div class="col-sm-2 clockpicker" data-autoclose="true">' + '<input class="form-control" name="hora_inicio[]">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '</div>' + '<div class="hr-line-dashed"></div>';
+    }
+
+    document.querySelector(".container-horarios_clases").insertAdjacentHTML("beforeend", htmlSessiones);
+  },
+  elimiarArchivoUpdateCurso: function elimiarArchivoUpdateCurso(e) {
+    e.preventDefault();
+    e.target.disabled = true;
+    var token = document.querySelector("input[name='_token']").value,
+        documento = e.target.getAttribute('data-metadata');
+    var opciones = {
+      method: "POST",
+      credentials: "same-origin",
+      body: JSON.stringify({
+        "documento": documento,
+        "_token": token
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    fetch("/admin/eliminar-archivo", opciones).then(function (response) {
+      return response.json();
+    }).then(function (res) {
+      if (res.message == 'ok') {
+        e.target.parentElement.parentElement.remove();
+        alert('Se elimino el archivo correctamente');
+      } else if (res.message == 'no_parameters') {
+        alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
+        e.removeAttribute('disabled');
+      } else if (res.message == 'no_delete') {
+        alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
+        e.removeAttribute('disabled');
+      }
+    });
+  },
   validacionAgregarCurso: function validacionAgregarCurso(e) {
     e.preventDefault();
     e.stopPropagation();
-    /* 	PARARIMER PASO DEL REGISTRO */
+    /* 	PRIMER PASO DEL REGISTRO */
 
     var nombre_curso = document.querySelector("input[name='nombre_curso']"),
         img_curso = document.querySelector("input[name='img_curso']"),
@@ -203,10 +403,12 @@ var funciones = {
       error_videos = true;
     }
 
-    if (img_curso.value == '') {
-      img_curso.parentNode.classList.add('has-error');
-      img_curso.nextElementSibling.innerHTML = 'El campo es requerido';
-      error_videos = true;
+    if (e.target.getAttribute('name') == 'frm-agregar_curso') {
+      if (img_curso.value == '') {
+        img_curso.parentNode.classList.add('has-error');
+        img_curso.nextElementSibling.innerHTML = 'El campo es requerido';
+        error_videos = true;
+      }
     }
 
     if (instructores.value == '' || instructores.value == null || instructores.value == undefined) {
@@ -287,7 +489,13 @@ var funciones = {
     if (e.type == 'submit') {
       e.target.disabled = true;
       document.querySelector('.ibox-content').classList.add('sk-loading');
-      document.querySelector("form[name='frm-agregar_curso']").submit();
+
+      if (e.target.getAttribute('name') == 'frm-agregar_curso') {
+        document.querySelector("form[name='frm-agregar_curso']").submit();
+        return false;
+      }
+
+      document.querySelector("form[name='frm-actualizar_curso']").submit();
     }
   },
   validarEmail: function validarEmail(email) {

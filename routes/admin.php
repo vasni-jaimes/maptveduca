@@ -29,3 +29,10 @@ Route::get('agregar-curso', 'Admin\CoursesController@create')->name('agregar-cur
 Route::get('listado-cursos', 'Admin\CoursesController@index')->name('agregar-curso.index');
 Route::post('agregar-curso', 'Admin\CoursesController@store')->name('agregar-curso.store');
 Route::get('editar-curso/{curso_id}', 'Admin\CoursesController@edit')->name('agregar-curso.edit');
+Route::post('editar-curso/{curso_id}', 'Admin\CoursesController@update')->name('actualizar-curso.update');
+Route::post('eliminar-archivo', 'Admin\CoursesController@deleteFile')->name('eliminar-archivo.delete');
+
+
+
+//CURSOS EN LINEA
+Route::get('agregar-clase', 'Admin\ClasesController@create')->name('agregar-clase.create');

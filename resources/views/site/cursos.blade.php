@@ -14,7 +14,7 @@
             <h1>Cursos</h1>
         </div> <!-- /titulo-banner -->
         
-        <div class="hoja-1400">
+        <div class="hoja-1000">
             
             <div class="wrapper-cursos flex flex-start">
 
@@ -175,7 +175,7 @@
 
             </div> <!-- /flex -->
             
-        </div> <!-- /hoja-1400 -->
+        </div> <!-- /hoja-1000 -->
     </section> <!-- /cursos -->
 
 @stop

@@ -36,8 +36,8 @@
     </div>
 
 
-    @if (session()->has("status.newCurso"))
-        @if (session()->get("status.newCurso") == "error")
+    @if (session()->has("status.updateCurso"))
+        @if (session()->get("status.updateCurso") == "error")
             <div class="row justify-content-center">
                 <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
                     Ocurrio un error, intentelo más tarde.
@@ -47,10 +47,10 @@
                 </div>
             </div>
 
-        @elseif (session()->get("status.newCurso") == "success")
+        @elseif (session()->get("status.updateCurso") == "success")
             <div class="row justify-content-center">
                 <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
-                    Se creo el curso correctamente
+                    Se actualizo el curso correctamente
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -87,12 +87,12 @@
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>
                     </div>
-                    <form action="{{ route('agregar-curso.store') }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-agregar_curso">
+                    <form action="{{ route('actualizar-curso.update', $helper::base64_encode_url($curso->id)) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-actualizar_curso">
                         @csrf
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Nombre del curso: </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nombre_curso" value="{{ old("nombre_curso") }}"> 
+                                <input type="text" class="form-control" name="nombre_curso" value="{{ old("nombre_curso", $curso->nombre) }}"> 
                                 <span class='form-text m-b-none errors'> {!! $errors->first('nombre_curso') !!} </span>
                             </div>
                         </div>
@@ -102,25 +102,24 @@
                             <div class="col-sm-10">
                                 <input id="logo" type="file" name="img_curso" class="form-control" accept="image/png, image/jpeg, image/jpg">
                                 <span class='form-text m-b-none errors'> {!! $errors->first('img_curso') !!} </span>
-                            </div> 
+                            </div>  
+                            <div class="img-admin_editcurso col-sm-10 offset-sm-2 mt-3">
+                                <figure>
+                                    <img src="{{ Storage::url($curso->url_img) }}">
+                                </figure>
+                            </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"> instructor: </label>
                             <div class="col-sm-10 mb-3">
                                 <select data-placeholder="Instructores" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_instructores[]">
-                                    {{-- @foreach($profesores as $profesor)
-                                        <option value="{{ $profesor->id }}" 
-                                            @if(is_array(old('select_instructores')) && in_array($profesor->id, old('select_instructores'))) selected @endif>
-                                            {{ $profesor->nombre }}
+                                    @foreach($instructors as $instructor)
+                                        <option value="{{ $instructor->id }}" 
+                                            @if(in_array($instructor->id, old('select_instructores', $myInstructors))) selected @endif>
+                                            {{ $instructor->nombres }}
                                         </option>    
-                                    @endforeach --}}
-                                    <option value="1">instructor1</option>
-                                    <option value="2">instructor2</option>
-                                    <option value="3">instructor3</option>
-                                    <option value="4">instructor4</option>
-                                    <option value="5">instructor5</option>
-                                    <option value="6">instructor6</option>
+                                    @endforeach
                                 </select>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('select_instructores.*') !!} </span>
                             </div>
@@ -129,7 +128,7 @@
                         <div class="form-group row mb-5">
                             <label class="col-sm-2 col-form-label">Curso extra: </label>
                             <div class="i-checks col-sm-10">
-                                <label> <input type="checkbox" value="1" name="curso_extra" @if(old("curso_extra") == 1) checked @endif> <i></i></label>
+                                <label> <input type="checkbox" value="1" name="curso_extra" @if(old("curso_extra") == 1 || $curso->careers->count() == 0) checked @endif> <i></i></label>
                             </div>
                         </div>
 
@@ -138,12 +137,12 @@
                             <label class="col-sm-2 col-form-label"> Carreras: </label>
                             <div class="col-sm-10 mb-3">
                                 <select data-placeholder="Carreras" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_carreras[]">
-                                    <option value="1"> Carrera 1 </option>
-                                    <option value="2"> Carrera 2 </option>
-                                    <option value="3"> Carrera 3 </option>
-                                    <option value="4"> Carrera 4 </option>
-                                    <option value="5"> Carrera 5 </option>
-                                    <option value="6"> Carrera 6 </option>
+                                    @foreach($careers as $career)
+                                        <option value="{{ $career->id }}"
+                                            @if (in_array($career->id, old('select_carreras', $myCareers))) selected @endif > 
+                                            {{ $career->nombre }} 
+                                        </option>
+                                    @endforeach
                                 </select>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('select_carreras') !!} </span>
                             </div>
@@ -156,7 +155,7 @@
                                 <select data-placeholder="Categorias" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_categorias[]">
                                     @foreach($categorias as $categoria)
                                         <option value="{{ $categoria->id }}" 
-                                            @if(is_array(old('select_categorias')) && in_array($categoria->id, old('select_categorias'))) selected @endif>
+                                            @if(in_array($categoria->id, old('select_categorias', $myCategories))) selected @endif>
                                             {{ $categoria->nombre }}
                                         </option>    
                                     @endforeach
@@ -175,7 +174,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Video de Bienvenida: </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="video_bienvenida" value="{{ old("video_bienvenida") }}">
+                                <input type="text" class="form-control" name="video_bienvenida" value="{{ old("video_bienvenida", $curso->video_bienvenida) }}">
                                 <span class='form-text m-b-none errors'> {!! $errors->first('video_bienvenida') !!} </span>
                             </div>
                         </div>
@@ -183,7 +182,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Descripcion: </label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="descripcion" rows="3">{{ old("descripcion") }}</textarea>
+                                <textarea class="form-control" name="descripcion" rows="3">{{ old("descripcion", $curso->descripcion_bienvenida) }}</textarea>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('descripcion') !!} </span>
                             </div>
                         </div>
@@ -200,6 +199,7 @@
 
                     	<div class="container-videos_curso">
 		                	@if (old("video_url"))
+                                @php $j = 0 @endphp
 	                    		@for($i=0; $i <= count(old("video_url")) - 1; $i++)
 			                    	<div class="clone-videos">
 				                    	<div class="form-group row">
@@ -228,41 +228,74 @@
                                             <div class="col-sm-10">
                                                 <input id="logo" type="file" name="material_extra[{{ $i }}][]" multiple class="form-control">
                                                 <span class='form-text m-b-none errors'> {!! $errors->first('material_extra.'.$i.'.*') !!} </span>
-                                            </div> 
+                                            </div>
+
+                                            <div class="col-sm-10 offset-sm-2">
+                                                <?php $imagenes = $helper->todasImagenesCurso($curso->id, "material_extra", $j); ?>
+                                                @if ($imagenes)
+                                                     @for ($i = 0; $i <= count($imagenes) - 1; $i++)
+                                                        <div>
+                                                            <a target="_blank" href="{{ Storage::url("cursos/".$imagenes[$i]) }}">
+                                                                {{ basename($imagenes[$i]) }}
+                                                            </a>
+                                                            <span><i class="fa fa-times eliminar_archivo" aria-hidden="true" data-metadata="{{ Storage::url("cursos/".$imagenes[$i]) }}" style="color:red;cursor:pointer"></i></span>
+                                                        </div>
+                                                     @endfor
+                                                @endif
+                                            </div>
+
                                         </div>
 				                    </div>
+                                     @php $j++; @endphp
 				                @endfor
 				            @else
-				            	<div class="clone-videos">
-			                    	<div class="form-group row">
-			                            <label class="col-sm-2 col-form-label">Nombre del video: </label>
-			                            <div class="col-sm-10">
-			                                <input type="text" class="form-control" name="nombre_video[]" value="{{ old("nombre_video.0") }}"> 
-			                                <span class='form-text m-b-none errors'> {!! $errors->first('nombre_video.*') !!} </span>
-			                            </div>
-			                        </div>
-			                        <div class="form-group row">
-			                            <label class="col-sm-2 col-form-label">Video url: </label>
-			                            <div class="col-sm-10">
-			                                <input type="text" class="form-control" name="video_url[]" value="{{ old("video_url.0") }}"> 
-			                                <span class='form-text m-b-none errors'> {!! $errors->first('video_url.*') !!} </span>
-			                            </div>
-			                        </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Descripcion: </label>
-                                        <div class="col-sm-10">
-                                            <textarea class="form-control" name="descripcion_curso[]" rows="3">{{ old("descripcion_curso.0") }}</textarea>
-                                            <span class='form-text m-b-none errors'> {!! $errors->first('descripcion_curso.*') !!} </span>
+                                @php $j = 0 @endphp
+                                @foreach($temario as $team)
+    				            	<div class="clone-videos">
+    			                    	<div class="form-group row">
+    			                            <label class="col-sm-2 col-form-label">Nombre del video: </label>
+    			                            <div class="col-sm-10">
+    			                                <input type="text" class="form-control" name="nombre_video[]" value="{{ old("nombre_video.".$j, $team->nombre_video) }}"> 
+    			                                <span class='form-text m-b-none errors'> {!! $errors->first('nombre_video.*') !!} </span>
+    			                            </div>
+    			                        </div>
+    			                        <div class="form-group row">
+    			                            <label class="col-sm-2 col-form-label">Video url: </label>
+    			                            <div class="col-sm-10">
+    			                                <input type="text" class="form-control" name="video_url[]" value="{{ old("video_url.".$j, $team->url_video) }}"> 
+    			                                <span class='form-text m-b-none errors'> {!! $errors->first('video_url.*') !!} </span>
+    			                            </div>
+    			                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Descripcion: </label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control" name="descripcion_curso[]" rows="3">{{ old("descripcion_curso.".$j, $team->descripcion_curso) }}</textarea>
+                                                <span class='form-text m-b-none errors'> {!! $errors->first('descripcion_curso.*') !!} </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row mb-5">
-                                        <label class="col-sm-2 col-form-label">Material Extra: </label>
-                                        <div class="col-sm-10">
-                                            <input id="logo" type="file" name="material_extra[0][]" multiple class="form-control">
-                                            <span class='form-text m-b-none errors'> {!! $errors->first('material_extra'). $errors->first('material_extra.0.*') !!} </span>
-                                        </div> 
-                                    </div>
-			                    </div>
+                                        <div class="form-group row mb-5">
+                                            <label class="col-sm-2 col-form-label">Material Extra: </label>
+                                            <div class="col-sm-10">
+                                                <input id="logo" type="file" name="material_extra[{{ $j }}][]" multiple class="form-control">
+                                                <span class='form-text m-b-none errors'> {!! $errors->first('material_extra'). $errors->first('material_extra.'.$j.'.*') !!} </span>
+                                            </div>
+                                            <div class="col-sm-10 offset-sm-2">
+                                                <?php $imagenes = $helper->todasImagenesCurso($curso->id, "material_extra", $j); ?>
+                                                @if ($imagenes)
+                                                     @for ($i = 0; $i <= count($imagenes) - 1; $i++)
+                                                        <div>
+                                                            <a target="_blank" href="{{ Storage::url("cursos/".$imagenes[$i]) }}">
+                                                                {{ basename($imagenes[$i]) }}
+                                                            </a>
+                                                            <span><i class="fa fa-times eliminar_archivo" aria-hidden="true" data-metadata="{{ "public/cursos/".$imagenes[$i] }}" style="color:red;cursor:pointer"></i></span>
+                                                        </div>
+                                                     @endfor
+                                                @endif
+                                            </div>
+                                        </div>
+    			                    </div>
+                                    @php $j++; @endphp
+                                @endforeach
 				            @endif
 		                </div>
                         <div class="hr-line-dashed"></div>

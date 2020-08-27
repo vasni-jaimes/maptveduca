@@ -63,26 +63,103 @@ class CoursesRepositorie
 	}
 
 
+    public function update($request, $id)
+    {
+        DB::beginTransaction();
+
+        $course                           = Course::findOrFail($id);
+        $course->nombre                   = $request->nombre_curso;
+        $course->video_bienvenida         = $request->video_bienvenida;
+        $course->descripcion_bienvenida   = $request->descripcion;
+
+        if ($course->save()) {
+            //TEMARIO DEL CURSO
+            $course->slug           = $this->helper->createSlug($request->nombre_curso, $course->id, "maptv");
+            $course->temario        = $this->jsonConverteTemarioCurso($request, $course->id);
+            //SUBIR IMAGEN DEL CURSO
+            if ( $request->hasFile('img_curso') ) {
+                $rootImg = $request->file('img_curso')->store('public/cursos/'.$course->id.'/img_principal/');
+                $course->url_img = $rootImg;
+            }
+
+            if ($course->save()) {
+
+                //ACTUALIZAR INSTRUCTOR
+                
+                if (!$this->eliminarInstructor($id)) {
+                    DB::rollback();
+                    return back()->withInput()->with("status.updateCurso", "error");
+                }
+
+                if (!$this->insertInstructor($course->id, $request->select_instructores)) {
+                    DB::rollback();
+                    return back()->withInput()->with("status.updateCurso", "error");
+                }
+
+                //ACTUALIZAR INSTRUCTOR\\
+
+
+                //ACTUALIZAR CATEGORIAS
+                if (!$this->eliminarCategories($id)) {
+                    DB::rollback();
+                    return back()->withInput()->with("status.updateCurso", "error");
+                }
+
+                if (!$this->insertCategories($course->id, $request->select_categorias)) {
+                    DB::rollback();
+                    return back()->withInput()->with("status.updateCurso", "error");
+                }
+                //ACTUALIZAR CATEGORIAS\\
+
+
+                //ACTUALIZAR CARRERAS SI HAY CURSO EXTRA
+                if (!$this->eliminarCareers($id)) {
+                    DB::rollback();
+                    return back()->withInput()->with("status.updateCurso", "error");
+                }
+
+                if (!$request->has("curso_extra")) {
+                    if (!$this->insertCareers($course->id, $request->select_carreras)) {
+                        DB::rollback();
+                        return back()->withInput()->with("status.updateCurso", "error");
+                    }
+                }
+                //ACTUALIZAR CARRERAS SI HAY CURSO EXTRA\\
+                
+                DB::commit();
+                return back()->with("status.updateCurso", "success");
+            }
+
+            DB::rollback();
+            return back()->withInput()->with("status.updateCurso", "error");
+        }
+    }
+
 
 	protected function jsonConverteTemarioCurso($request, $course_id)
 	{
 		//GENERANDO JSON PARA GUARDAR TEMARIO EN BASE DE DATOS
-    	$temario_curso = Array();
+    	$temario_curso  = Array();
     	$material_extra = Array();
-    	for ($i=0; $i <= count($request->nombre_video) - 1; $i++) { 
 
-    		for ($j=0; $j <= count($request->material_extra[$i]) - 1; $j++) { 
-    			$rootMaterial = $request->file('material_extra')[$i][$j]->store('public/cursos/'.$course_id.'/material_extra/'.$i.'/');
-    			$material_extra[$i][$i] = $rootMaterial;
-    		}
+    	for ($i=0; $i <= count($request->nombre_video) - 1; $i++) { 
+            if (isset($request->material_extra[$i])) {
+            
+        		for ($j=0; $j <= count($request->material_extra[$i]) - 1; $j++) { 
+                    $request->file('material_extra')[$i][$j]->store('public/cursos/'.$course_id.'/material_extra/'.$i.'/');
+        			//$rootMaterial = $request->file('material_extra')[$i][$j]->store('public/cursos/'.$course_id.'/material_extra/'.$i.'/');
+        			//$material_extra[$j] = $rootMaterial;
+        		}
+            }
 
     		$temario_curso[$i] = array("nombre_video" => $request->nombre_video[$i], 
     									"url_video" => $request->video_url[$i], 
-    									"descripcion_curso" => $request->descripcion_curso[$i],
-    									"material_extra" => $material_extra);
+    									"descripcion_curso" => $request->descripcion_curso[$i]);
     	}
+
     	return json_encode($temario_curso);
 	}
+
 
     protected function insertCategories($course_id, $categories)
     {
@@ -100,6 +177,15 @@ class CoursesRepositorie
         if (!$insertCategory) {
             return false;
         }
+
+        return true;
+    }
+
+
+    protected function eliminarCategories($course_id)
+    {
+        $eliminarCategory = DB::table('courses_categories')
+                                ->where('course_id', $course_id)->delete();
 
         return true;
     }
@@ -123,7 +209,18 @@ class CoursesRepositorie
         }
 
         return true;
-    } 
+    }
+
+
+    protected function eliminarCareers($course_id)
+    {
+        $eliminarCareers = DB::table('courses_careers')
+                                ->where('course_id', $course_id)->delete();
+
+
+        return true;
+    }
+
 
     protected function insertInstructor($course_id, $instructors)
     {
@@ -141,6 +238,15 @@ class CoursesRepositorie
         if (!$insertInstruct) {
             return false;
         }
+
+        return true;
+    }
+
+
+    protected function eliminarInstructor($course_id)
+    {
+        $eliminarInstructor = DB::table('courses_instructors')
+                                ->where('course_id', $course_id)->delete();
 
         return true;
     }

@@ -11,6 +11,18 @@
   src: url('../fonts/glyphicons-halflings-regular.eot');
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg') format('svg');
 }
+
+.img-admin_editcurso figure {
+  width: 130px;
+  height: auto;
+}
+
+
+.img-admin_editcurso figure img {
+  width: 100%;
+  height: auto;
+}
+
 .glyphicon {
   position: relative;
   top: 1px;

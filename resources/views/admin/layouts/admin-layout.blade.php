@@ -63,7 +63,7 @@
                             <a href="#"><i class="fa fa-university"></i> <span class="nav-label">Clases en linea</span> <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                                 <li> <a href="#"> Lista de clases </a></li>
-                                <li> <a href="#"> Agregar clase </a></li>
+                                <li> <a href="{{ route("agregar-clase.create") }}"> Agregar clase </a></li>
                             </ul>
                         </li>
                         <li>

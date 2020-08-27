@@ -46,6 +46,56 @@
 			</div> <!-- /menu-general -->
 
 			@yield('contenido')
+            
+            <footer>
+				<div class="hoja-1000">
+                    <div class="flex between">
+                        <div class="flex-footer">
+                            <div class="flex">
+                                <ul>
+                                    <li><a href="#">Membresía Básica</a></li>
+                                    <li><a href="#">Membresía Académica</a></li>
+                                    <li><a href="#">Guías de estudio</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Cursos</a></li>
+                                    <li><a href="#">Clases en línea</a></li>
+                                    <li><a href="#">Eventos</a></li>
+                                </ul>
+                            </div>
+                            <div class="flex">
+                                <ul>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Contacto</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Nosotros</a></li>
+                                    <li><a href="#">Colegio MAP</a></li>
+                                </ul>
+                            </div>
+                        </div> <!-- /flex -->
+                        <div class="row-redes">
+                            <ul class="flex flex-redes end">
+                                <li><a href="#"><img src="site/img/facebook.png"></a></li>
+                                <li><a href="#"><img src="site/img/instagram.png"></a></li>
+                                <li><a href="#"><img src="site/img/youtube.png"></a></li>
+                            </ul> <!-- /flex -->
+                            <a class="btn-footer" href="#">Estudia presencialmente con nosotros en Colegio MAP (Puebla, Puebla, México)</a>
+                        </div> <!-- /row-redes -->
+                    </div> <!-- /flex -->
+                    <div class="row-copyright">
+                        <div class="flex between">
+                            <p>2020  MAPtv Educa. Todos los derechos reservados</p>
+                            <ul class="flex">
+                                <li><a href="#">Aviso de Privacidad</a></li>
+                                <li>/</li>
+                                <li><a href="#">Términos y Condiciones</a></li>
+                            </ul> <!-- /flex -->
+                        </div> <!-- /flex -->
+                    </div> <!-- /row-copyright -->
+   				</div> <!-- /hoja-1000 -->
+			</footer>
+            
 		</div> <!-- /page --> 
 
 		<nav id="menu">

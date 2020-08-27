@@ -27,4 +27,25 @@ class Helper
 		$var = preg_replace("/[^A-Za-z0-9 ]/", '',iconv('UTF-8', 'ASCII//TRANSLIT', $string));
 		return $var;
     }
+
+    public function todasImagenesCurso($cursos_id, $categoria, $indice)
+    {
+        $directory= base_path()."/storage/app/public/cursos/".$cursos_id."/".$categoria."/".$indice;
+        if (is_dir($directory)) {
+            $dirint = dir($directory);
+            $todas = Array();
+            while (($archivo = $dirint->read()) !== false)
+            {
+                if (preg_match("{gif}", $archivo) || preg_match("{jpeg}", $archivo) || 
+                    preg_match("{png}", $archivo) || preg_match("{jpg}", $archivo) || 
+                    preg_match("{webp}", $archivo) || preg_match("{pdf}", $archivo) || preg_match("{doc}", $archivo) ){
+                    $todas[] = $cursos_id."/".$categoria."/".$indice."/".$archivo;
+                }
+            }
+            $dirint->close();
+            return $todas;
+        }
+
+        return false;
+    }
 }

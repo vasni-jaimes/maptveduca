@@ -14,7 +14,7 @@
             <h1>Eventos</h1>
         </div> <!-- /titulo-banner -->
         
-        <div class="hoja-1200">
+        <div class="hoja-1000">
 
             <div class="wrapper-columnas">
             
@@ -252,7 +252,7 @@
                 
             </div> <!-- /wrapper-biblioteca -->
 
-        </div> <!-- /hoja-1200 -->
+        </div> <!-- /hoja-1000 -->
         
     </section> <!-- /membresia -->
 

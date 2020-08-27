@@ -109,18 +109,12 @@
                             <label class="col-sm-2 col-form-label"> instructor: </label>
                             <div class="col-sm-10 mb-3">
                                 <select data-placeholder="Instructores" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_instructores[]">
-                                    {{-- @foreach($profesores as $profesor)
-                                        <option value="{{ $profesor->id }}" 
-                                            @if(is_array(old('select_instructores')) && in_array($profesor->id, old('select_instructores'))) selected @endif>
-                                            {{ $profesor->nombre }}
+                                    @foreach($instructors as $instructor)
+                                        <option value="{{ $instructor->id }}" 
+                                            @if(is_array(old('select_instructores')) && in_array($instructor->id, old('select_instructores'))) selected @endif>
+                                            {{ $instructor->nombres." ".$instructor->apellidos }}
                                         </option>    
-                                    @endforeach --}}
-                                    <option value="1">instructor1</option>
-                                    <option value="2">instructor2</option>
-                                    <option value="3">instructor3</option>
-                                    <option value="4">instructor4</option>
-                                    <option value="5">instructor5</option>
-                                    <option value="6">instructor6</option>
+                                    @endforeach
                                 </select>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('select_instructores.*') !!} </span>
                             </div>
@@ -138,12 +132,12 @@
                             <label class="col-sm-2 col-form-label"> Carreras: </label>
                             <div class="col-sm-10 mb-3">
                                 <select data-placeholder="Carreras" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_carreras[]">
-                                    <option value="1"> Carrera 1 </option>
-                                    <option value="2"> Carrera 2 </option>
-                                    <option value="3"> Carrera 3 </option>
-                                    <option value="4"> Carrera 4 </option>
-                                    <option value="5"> Carrera 5 </option>
-                                    <option value="6"> Carrera 6 </option>
+                                    @foreach($careers as $career)
+                                        <option value="{{ $career->id }}"
+                                            @if(is_array(old('select_carreras')) && in_array($career->id, old('select_carreras'))) selected @endif>
+                                            {{ $career->nombre }} 
+                                        </option>
+                                    @endforeach
                                 </select>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('select_carreras') !!} </span>
                             </div>

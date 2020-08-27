@@ -1,3 +1,5 @@
+<span class="ico-filtro"><img src="site/img/filtro.png"></span>
+
 <div class="sidebar-cursos">
     <ul>
         <li>Producción musical (0)</li>
