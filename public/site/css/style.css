@@ -3378,7 +3378,22 @@ span.ico-edit img {
 }
 
 .tabla-perfil {
-    
+    width: 100%;
+}
+
+.tabla-perfil tr th {
+    padding: 8px;
+    font-family: 'Poppins light';
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.tabla-perfil tr td {
+    padding: 8px;
+    font-family: 'Poppins light';
+    font-size: 12px;
+    background-color: #eaeaea;
+    text-align: center;
 }
 
 
