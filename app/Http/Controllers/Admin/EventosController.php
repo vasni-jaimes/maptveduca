@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
+use App\Instructor;
 
-class CursosController extends Controller
+class EventosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,9 @@ class CursosController extends Controller
      */
     public function index()
     {
-        $categorias = Category::where('status', 1)->get();
-        return view("admin.agregar-curso", compact("categorias"));
+        // $eventos = Eventos::with("instructor")->get();
+        // $helper = $this->helper;
+        // return view("admin.listado-eventos", compact("clases", "helper"));
     }
 
     /**
@@ -26,7 +28,9 @@ class CursosController extends Controller
      */
     public function create()
     {
-        //
+        $categorias     = Category::where('status', 1)->get();
+        $instructores   = Instructor::where('status', 1)->get();
+        return view("admin.agregar-evento", compact("categorias", "instructores"));
     }
 
     /**

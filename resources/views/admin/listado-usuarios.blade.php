@@ -7,7 +7,7 @@
 
 @section('css-content')
     <!-- FooTable -->
-    <link href="/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+    <link href="/admini/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
 @stop
 
 
@@ -104,16 +104,16 @@
 @section('js-content')
 
 	<!-- Mainly scripts -->
-    <script src="/admin/js/jquery-3.1.1.min.js"></script>
-    <script src="/admin/js/popper.min.js"></script>
-    <script src="/admin/js/bootstrap.js"></script>
-    <script src="/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="/admin/js/plugins/dataTables/datatables.min.js"></script>
-    <script src="/admin/js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
+    <script src="/admini/js/jquery-3.1.1.min.js"></script>
+    <script src="/admini/js/popper.min.js"></script>
+    <script src="/admini/js/bootstrap.js"></script>
+    <script src="/admini/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/admini/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/admini/js/plugins/dataTables/datatables.min.js"></script>
+    <script src="/admini/js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
     <!-- Custom and plugin javascript -->
-    <script src="/admin/js/inspinia.js"></script>
-    <script src="/admin/js/plugins/pace/pace.min.js"></script>
+    <script src="/admini/js/inspinia.js"></script>
+    <script src="/admini/js/plugins/pace/pace.min.js"></script>
     <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function(){

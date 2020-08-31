@@ -20,18 +20,15 @@
                     <p>Mira todos aquí</p>
                 </div> <!-- /bg-yellow -->
                 <ul class="slide-inicio">
-                    <li>
-                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                    </li>
-                    <li>
-                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                    </li>
-                    <li>
-                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                    </li>
-                    <li>
-                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                    </li>
+                    @forelse($cursos as $curso)
+                        <li>
+                            <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> <!-- /img-slide -->
+                        </li>
+                    @empty
+                        <li>
+                            <div> No se encuentraron resultados </div>
+                        </li>
+                    @endforelse
                 </ul>
             </div> <!-- /banner-slide -->
             

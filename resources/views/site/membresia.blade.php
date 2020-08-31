@@ -1,0 +1,206 @@
+<!-- HEADER AND FOOTER -->
+@extends('site.layouts.layout-online')
+<!-- /HEADER AND FOOTER -->
+
+
+
+@section('contenido')
+
+    <section class="membresia">
+
+        <div class="banner-cursos"></div> <!-- /banner-cursos -->
+        
+        <div class="titulo-banner">
+            <h1>Membresia académica</h1>
+        </div> <!-- /titulo-banner -->
+        
+        <div class="hoja-1200">
+        
+            <div class="wrapper-columnas">
+                
+                <div class="row-columnas">
+                    
+                    <div class="flex between">
+
+                        <div class="col-6">
+                            <p>A través de MAPtv Educa, te damos la posibilidad de certificarte en alguno de nuestros programas académicos más exitosos:</p>
+                            <ul>
+                                <li>Carrera Técnica Profesional en Producción Musical</li>
+                                <li>Carrera Técnica Profesional en Música</li>
+                            </ul>
+                            <p>Estos programas son parte de la oferta académica presencial en M.A.P. Colegio de Música, Audio y Producción (Puebla, México). Hemos trasladado a esta plataforma todo el contenido de ambos programas para que puedas cursarlo de manera virtual, teniendo además la posibilidad de obtener <strong>retroalimentación semanal directamente con el profesor titular de cada curso</strong> y midiendo tu progreso con evaluaciones periódicas.</p>
+                        </div> <!-- /col-6 -->
+
+                        <div class="col-6">
+                            <div class="row-video">
+                                <iframe src="https://www.youtube.com/embed/CBZyA-Pj52U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div> <!-- /row-video -->
+                        </div> <!-- /col-6 -->
+
+                    </div> <!-- /flex -->
+
+                    <div class="text-center">
+                        <p>Al finalizar cualquiera de ambos programas <strong>recibirás un certificado de parte de M.A.P. Colegio de Música, Audio y Producción y la SEP (Secretaría de Educación Pública de México).</strong></p>
+                        <p>Mira cómo funciona cada programa:</p>
+                    </div> <!-- /text-center -->
+                    
+                </div> <!-- /row-columnas -->
+                
+                <div class="flex between row-programas">
+                
+                    <div class="col-6 item-programa">
+                        <img src="/site/img/ico-academica.png">
+                        <h3>Técnico en producción musical</h3>
+                        <span>En línea</span>
+                        <div class="txt-programa">
+                            <p><strong>DURACIÓN: </strong>12 trimestres</p>
+                            <p><strong>PERIODOS DE INICIO: </strong>Octubre y Abril</p>
+                            <p><strong>DIVISIÓN DE TRIMESTRES: </strong></p>
+                            <ul>
+                                <li>Octubre - Diciembre</li>
+                                <li>Enero - Marzo</li>
+                                <li>Abril - Junio</li>
+                                <li>Julio - Septiembre</li>
+                            </ul>
+                            <p><strong>COSTO: </strong>$1234.00 MXN mensuales</p>
+                            <p><strong>CERTIFICACIÓN: </strong></p>
+                            <p>Certificado con validez oficial expedido por la SEP (Secretaría de Educación Pública de México) y M.A.P. Colegio de Música, Audio y Producción</p>
+                        </div> <!-- /txt-programa -->
+                        <a class="btn-amarillo" href="#">Plan de estudios</a>
+                        <a class="btn-amarillo btn-border" href="#">Obtén tu membresía e inscríbete</a>
+                    </div> <!-- /item-programa -->
+                    
+                    <div class="col-6 item-programa">
+                        <img src="/site/img/ico-academica.png">
+                        <h3>Técnico profesional en música</h3>
+                        <span>En línea</span>
+                        <div class="txt-programa">
+                            <p><strong>DURACIÓN: </strong>12 trimestres</p>
+                            <p><strong>PERIODOS DE INICIO: </strong>Octubre y Abril</p>
+                            <p><strong>DIVISIÓN DE TRIMESTRES: </strong></p>
+                            <ul>
+                                <li>Octubre - Diciembre</li>
+                                <li>Enero - Marzo</li>
+                                <li>Abril - Junio</li>
+                                <li>Julio - Septiembre</li>
+                            </ul>
+                            <p><strong>COSTO: </strong>$1234.00 MXN mensuales</p>
+                            <p><strong>CERTIFICACIÓN: </strong></p>
+                            <p>Certificado con validez oficial expedido por la SEP (Secretaría de Educación Pública de México) y M.A.P. Colegio de Música, Audio y Producción</p>
+                        </div> <!-- /txt-programa -->
+                        <a class="btn-amarillo" href="#">Plan de estudios</a>
+                        <a class="btn-amarillo btn-border" href="#">Obtén tu membresía e inscríbete</a>
+                    </div> <!-- /item-programa -->
+                    
+                </div> <!-- /row-programas -->
+                
+                <div class="wrapper-academica">
+                    
+                    <h2>¿Qué obtengo con la membresía académica?</h2>
+
+                    <table style="width: 100%; border-spacing: 10px; border-collapse: separate; table-layout: fixed;">
+                        <tr>
+                            <th>&nbsp</th>
+                            <th>Membresía básica</th>
+                            <th>Membresía académica <span>Estudia una carrera técnica en línea</span></th>
+                        </tr>
+                        <tr>
+                            <td>Acceso a cursos principales</td>
+                            <td><span class="circle"></span></td>
+                            <td><span class="circle"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Acceso a cursos y material extra</td>
+                            <td><span class="circle"></span></td>
+                            <td><span class="circle"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Acceso a clínicas y conciertos/masterclass básicas</td>
+                            <td><span class="circle"></span></td>
+                            <td><span class="circle"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Acceso a carreras técnicas con reconocimiento oficial SEP</td>
+                            <td>&nbsp</td>
+                            <td><span class="circle"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Acceso a aulas virtuales</td>
+                            <td>&nbsp</td>
+                            <td><span class="circle"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Retroalimentación y sesiones en vivo de profesores titulares</td>
+                            <td>&nbsp</td>
+                            <td><span class="circle"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Certificado con validez oficial</td>
+                            <td>&nbsp</td>
+                            <td><span class="circle"></span></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp</td>
+                            <td>$123 MXN mensuales<span>Prueba gratuita por 30 días</span></td>
+                            <td>$1234 MXN mensuales <span>por carrera técnica</span></td>
+                        </tr>
+                    </table>
+                    
+                </div> <!-- /wrapper-academica -->
+                
+                <div class="wrapper-herramienta">
+                    
+                    <h2>¿Qué herramientas tengo para estudiar en línea?</h2>
+                
+                    <div class="row-herramienta flex between">
+                        <div class="col-5 item-titulo">
+                            <img src="/site/img/ico-aulas.png">
+                            <h3>AULAS VIRTUALES</h3>
+                        </div> <!-- /item-titulo -->
+                        <div class="col-7 item-texto">
+                            <p>Al ser miembro académico, tienes acceso a las Aulas Virtuales por curso. Podrás ingresar a través de tu área personal de miembro, o área de control académico.</p>
+                            <p>Este espacio te permite tener <strong>interacción escrita directamente con tu profesor</strong>, quien asignará actividades semanalmente y te compartirá material especial.</p>
+                            <p>Aquí mismo <strong>podrás subir archivos correspondientes a tus entregas semanales e interactuar con estudiantes que también están cursando el programa.</strong></p>
+                        </div> <!-- /item-texto -->
+                    </div> <!-- /row-herramienta -->
+                    
+                    <div class="row-herramienta flex between">
+                        <div class="col-5 item-titulo">
+                            <img src="/site/img/ico-sesiones.png">
+                            <h3>Sesiones en vivo con profesores</h3>
+                        </div> <!-- /item-titulo -->
+                        <div class="col-7 item-texto">
+                            <p>Cada curso se complementa con una sesión en vivo al mes para que puedas hacer preguntas, obtener información de la experiencia directa del profesor.</p>
+                        </div> <!-- /item-texto -->
+                    </div> <!-- /row-herramienta -->
+                    
+                    <div class="row-herramienta flex between">
+                        <div class="col-5 item-titulo">
+                            <img src="/site/img/ico-control.png">
+                            <h3>Área de control académico</h3>
+                        </div> <!-- /item-titulo -->
+                        <div class="col-7 item-texto">
+                            <p>Al adquirir tu membresía académica, automáticamente se añadirá la sección "Control Académico" a tu tablero personal.</p>
+                            <p>Ahí <strong>podrás accesar en cualquier momento a las aulas virtuales por curso y a tu información de alumno (calificaciones y status académico)</strong>, además de conjuntar en un sólo lugar todos cursos del semestre en progreso.</p>
+                        </div> <!-- /item-texto -->
+                    </div> <!-- /row-herramienta -->
+                    
+                    <div class="row-herramienta flex between">
+                        <div class="col-5 item-titulo">
+                            <img src="/site/img/ico-musica.png">
+                            <h3>Cursos principales y extras</h3>
+                        </div> <!-- /item-titulo -->
+                        <div class="col-7 item-texto">
+                            <p>Con tu membresía académica <strong>tienes acceso a todos los cursos de MAPtv Educa, sin importar que no pertenezcan a tu plan de estudios.</strong> Si quieres complementar tus conocimientos o aprender algo nuevo, sólo basta añadir el curso de tu interés a tu tablero personal.</p>
+                        </div> <!-- /item-texto -->
+                    </div> <!-- /row-herramienta -->
+                    
+                </div> <!-- /wrapper-herramienta -->
+                
+            </div> <!-- /wrapper-columnas -->
+            
+        </div> <!-- /hoja-1200 -->
+        
+    </section> <!-- /membresia -->
+
+@stop

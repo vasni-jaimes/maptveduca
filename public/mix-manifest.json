@@ -1,6 +1,6 @@
 {
-    "/admin/js/app.js": "/admin/js/app.js",
-    "/admin/js/functions.js": "/admin/js/functions.js",
+    "/admini/js/app.js": "/admini/js/app.js",
+    "/admini/js/functions.js": "/admini/js/functions.js",
     "/site/js/app.js": "/site/js/app.js",
     "/site/css/app.css": "/site/css/app.css",
     "/site/js/functions.js": "/site/js/functions.js"

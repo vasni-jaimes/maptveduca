@@ -3,14 +3,15 @@ import { funciones } from './functions.js';
 
 //FORMULARIO PARA AGREGAR UN CURSO Y ACTUALIZAR
 const frmAgregarCurso = document.querySelector("form[name='frm-agregar_curso']");
-//const frmActualizarCurso = document.querySelector("form[name='frm-actualizar_curso']");
-if (frmAgregarCurso) {
+const frmActualizarCurso = document.querySelector("form[name='frm-actualizar_curso']");
+if (frmAgregarCurso || frmActualizarCurso) {
 
 	const bottonAdd = document.querySelector(".add-clone_videos");
 	if (bottonAdd) {
 		bottonAdd.addEventListener('click', (e) => {
 			e.preventDefault();
-		    const htmlVideo = funciones.htmlVideoCurso();
+			let contador = document.querySelectorAll('.clone-videos').length - 1;
+		    const htmlVideo = funciones.htmlVideoCurso(contador);
 			document.querySelector('.container-videos_curso').insertAdjacentHTML('beforeend', htmlVideo);
 		});
 	}
@@ -24,61 +25,71 @@ if (frmAgregarCurso) {
 		});
 	}
 
+	//CHECK DEL CURSO EXTRA Y ESCONDER SELECT DE CARRERAS
+	const curso_extra = document.querySelector('input[name="curso_extra"]');
+	if (curso_extra) {
+		$('input').on('ifChanged', function(event) {
+			if ($(this).is(':checked')) {
+				$("select[name='select_carreras[]']")
+					.parents(".form-group").css("display", "none");
+			}
+			else {
+				$("select[name='select_carreras[]']")
+					.parents(".form-group").css("display", "flex");
+			}
+
+		});
+	}
+
+	//ELIMINAR ARCHIVO DE CURSO EXTRA EN UPDATE
+	if (frmActualizarCurso) {
+		const eliminar_archivo = document.querySelectorAll(".eliminar_archivo");
+		eliminar_archivo.forEach( (item) => {
+			item.addEventListener('click', funciones.elimiarArchivoUpdateCurso)	
+		})
+		
+	}
 
 
-	// const eliminarArchivo = document.querySelectorAll(".eliminar_archivo");
-	// if (eliminarArchivo) {
-	// 	eliminarArchivo.forEach((item, index) => {
-	// 		item.addEventListener('click', (e) => {
-	// 			e.preventDefault();
-	// 			e.target.disabled = true;
-
-	// 			let token = document.querySelector("input[name='_token']").value,
-	// 				pdf = e.target.getAttribute('data-metadata');
-	// 	        let opciones = {
-	// 	            method: "POST",
-	// 	            credentials: "same-origin",
-	// 	            body: JSON.stringify({"pdf": pdf, "_token": token}),
-	// 	            headers:{
-	// 	                "Content-Type": "application/json"
-	// 	            }
-	// 	        };
-
-	// 	        fetch("/admin/cursos/eliminarmaterial", opciones)
-	// 	            .then(response => response.json())
-	// 	            .then(res => {
-	// 	            	if (res.message == 'ok') {
-	// 	            		e.target.parentElement.parentElement.remove();
-	// 	            		alert('Se elimino el archivo correctamente');
-	// 	            	}
-	// 	            	else if (res.message == 'no_parameters') {
-	// 	            		alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
-	// 	            		e.removeAttribute('disabled');
-	// 	            	}
-	// 	            	else if (res.message == 'no_integer') {
-	// 	            		alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
-	// 	            		e.removeAttribute('disabled');
-	// 	            	}
-	// 	            	else if (res.message == 'no_delete') {
-	// 	            		alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
-	// 	            		e.removeAttribute('disabled');
-	// 	            	}
-	// 	            })
-	// 		})
-	// 	});
-	// }
+	if (frmAgregarCurso) {
+		frmAgregarCurso.addEventListener('submit', funciones.validacionAgregarCurso);
+		frmAgregarCurso.addEventListener('input', funciones.validacionAgregarCurso);
+		$(document).change("input", funciones.validacionAgregarCurso);
+		$("select").change(funciones.validacionAgregarCurso);
+	}
 
 
-	// if (frmAgregarCurso) {
-	// 	frmAgregarCurso.addEventListener('submit', funciones.validacionAgregarCurso);
-	// 	frmAgregarCurso.addEventListener('input', funciones.validacionAgregarCurso);
-	// 	$(document).change("input", funciones.validacionAgregarCurso);
-	// 	$("select").change(funciones.validacionAgregarCurso);
-	// }
-
-	// if (frmActualizarCurso) {
-	// 	frmActualizarCurso.addEventListener('submit', funciones.validacionAgregarCurso);
-	// 	frmActualizarCurso.addEventListener('input', funciones.validacionAgregarCurso);
-	// 	$("select").change(funciones.validacionAgregarCurso);
-	// }
+	if (frmActualizarCurso) {
+		frmActualizarCurso.addEventListener('submit', funciones.validacionAgregarCurso);
+		frmActualizarCurso.addEventListener('input', funciones.validacionAgregarCurso);
+		$("select").change(funciones.validacionAgregarCurso);
+	}
 }
+
+
+const frmAgregarClase = document.querySelector("form[name='frm-agregar_clase']");
+const frmActualizarClase = document.querySelector("form[name='frm-editar_clase']");
+if (frmAgregarClase || frmActualizarClase) {
+	const select_sesiones = document.querySelector("select[name='select_sesiones']");
+	if (select_sesiones) {
+		select_sesiones.addEventListener('change', funciones.agregarSessionesClase)
+	}
+
+
+	if (frmAgregarClase) {
+		frmAgregarClase.addEventListener('submit', funciones.validarAgregarClase);
+		frmAgregarClase.addEventListener('input', funciones.validarAgregarClase);
+		$(document).change("input", funciones.validarAgregarClase);
+		$("select").change(funciones.validarAgregarClase);
+	}
+
+	if (frmActualizarClase) {
+		frmActualizarClase.addEventListener('submit', funciones.validarAgregarClase);
+		frmActualizarClase.addEventListener('input', funciones.validarAgregarClase);
+		$(document).change("input", funciones.validarAgregarClase);
+		$("select").change(funciones.validarAgregarClase);
+	}
+}
+
+
+

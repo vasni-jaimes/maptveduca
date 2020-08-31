@@ -11,6 +11,18 @@
   src: url('../fonts/glyphicons-halflings-regular.eot');
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg') format('svg');
 }
+
+.img-admin_editcurso figure {
+  width: 130px;
+  height: auto;
+}
+
+
+.img-admin_editcurso figure img {
+  width: 100%;
+  height: auto;
+}
+
 .glyphicon {
   position: relative;
   top: 1px;
@@ -2766,7 +2778,7 @@ select.form-control:not([size]):not([multiple]) {
   width: 250px;
 }
 .i-checks {
-  padding-left: 0;
+  /*padding-left: 0;*/
 }
 .form-control,
 .single-line {
@@ -5635,6 +5647,10 @@ body.mini-navbar.fixed-sidebar .logo-element {
 .contact-box.center-version address {
   margin-bottom: 0;
 }
+.has-error {
+  color: red;
+}
+
 .contact-box .contact-box-footer {
   text-align: center;
   background-color: #ffffff;

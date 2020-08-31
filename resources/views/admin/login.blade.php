@@ -9,9 +9,9 @@
 
         <title>Administrador | MAPtv</title>
 
-        <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/admin/css/animate.css" rel="stylesheet">
-        <link href="/admin/css/style.css" rel="stylesheet">
+        <link href="/admini/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/admini/css/animate.css" rel="stylesheet">
+        <link href="/admini/css/style.css" rel="stylesheet">
 
     </head>
 
