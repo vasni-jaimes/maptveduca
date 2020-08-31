@@ -51,7 +51,6 @@ if (frmAgregarCurso || frmActualizarCurso) {
 	}
 
 
-
 	if (frmAgregarCurso) {
 		frmAgregarCurso.addEventListener('submit', funciones.validacionAgregarCurso);
 		frmAgregarCurso.addEventListener('input', funciones.validacionAgregarCurso);
@@ -69,7 +68,8 @@ if (frmAgregarCurso || frmActualizarCurso) {
 
 
 const frmAgregarClase = document.querySelector("form[name='frm-agregar_clase']");
-if (frmAgregarClase) {
+const frmActualizarClase = document.querySelector("form[name='frm-editar_clase']");
+if (frmAgregarClase || frmActualizarClase) {
 	const select_sesiones = document.querySelector("select[name='select_sesiones']");
 	if (select_sesiones) {
 		select_sesiones.addEventListener('change', funciones.agregarSessionesClase)
@@ -79,6 +79,13 @@ if (frmAgregarClase) {
 	if (frmAgregarClase) {
 		frmAgregarClase.addEventListener('submit', funciones.validarAgregarClase);
 		frmAgregarClase.addEventListener('input', funciones.validarAgregarClase);
+		$(document).change("input", funciones.validarAgregarClase);
+		$("select").change(funciones.validarAgregarClase);
+	}
+
+	if (frmActualizarClase) {
+		frmActualizarClase.addEventListener('submit', funciones.validarAgregarClase);
+		frmActualizarClase.addEventListener('input', funciones.validarAgregarClase);
 		$(document).change("input", funciones.validarAgregarClase);
 		$("select").change(funciones.validarAgregarClase);
 	}

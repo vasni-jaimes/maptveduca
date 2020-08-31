@@ -2,7 +2,7 @@
 @extends('admin.layouts.admin-layout')
 <!-- /HEADER AND FOOTER -->
 
-@section('titulo', 'Agregar Curso')
+@section('titulo', 'Editar Curso')
 
 @section('css-content')
     <!-- Chosen -->

@@ -36,3 +36,10 @@ Route::post('eliminar-archivo', 'Admin\CoursesController@deleteFile')->name('eli
 
 //CURSOS EN LINEA
 Route::get('agregar-clase', 'Admin\ClasesController@create')->name('agregar-clase.create');
+Route::post('agregar-clase', 'Admin\ClasesController@store')->name('agregar-clase.store');
+Route::get('listado-clases', 'Admin\ClasesController@index')->name('listado-clases.index');
+Route::get('editar-clase/{clase_id}', 'Admin\ClasesController@edit')->name('editar-clase.edit');
+Route::post('editar-clase/{clase_id}', 'Admin\ClasesController@update')->name('editar-clase.update');
+
+//EVENTOS EN LINEA
+Route::get('agregar-evento', 'Admin\EventosController@create')->name('agregar-evento.create');

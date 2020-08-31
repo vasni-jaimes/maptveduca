@@ -8,7 +8,7 @@ let funciones = {
 
 		/* 	PRIMER PASO DEL REGISTRO */
 		let nombre_curso = document.querySelector("input[name='nombre_clase']"),
-			img_curso = document.querySelector("input[name='img_clase']"),
+			img_clase = document.querySelector("input[name='img_clase']"),
 			instructores = document.querySelector("select[name='select_instructores[]']"),
 			categorias = document.querySelector("select[name='select_categorias[]']"),
 			curso_extra = document.querySelector("input[name='curso_extra']"),
@@ -30,9 +30,15 @@ let funciones = {
 			/* STATUS */
 			error_videos = false;
 
+			//SE ELIMINAN LOS RASTROS DE ERRORES
 
 			document.querySelectorAll('.errors').forEach(function(item) {
 				item.innerHTML = '';
+			});
+
+
+			document.querySelectorAll('.chosen-choices').forEach((item) => {
+				item.style.borderColor = "#e5e6e7";
 			});
 
 			if (document.querySelector('.has-error')) {
@@ -40,6 +46,8 @@ let funciones = {
 					item.classList.remove('has-error');
 				});
 			}
+
+			//SE ELIMINAN LOS RASTROS DE ERRORES\\
 
 
 			if (nombre_curso.value == '') {
@@ -49,9 +57,9 @@ let funciones = {
 			}
 
 			if (e.target.getAttribute('name') == 'frm-agregar_clase') {
-				if (img_curso.value == '') {
-					img_curso.parentNode.classList.add('has-error');
-					img_curso.nextElementSibling.innerHTML = 'El campo es requerido';
+				if (img_clase.value == '') {
+					img_clase.parentNode.classList.add('has-error');
+					img_clase.nextElementSibling.innerHTML = 'El campo es requerido';
 					error_videos = true;
 				}
 			}
@@ -88,7 +96,6 @@ let funciones = {
 				select_sesiones.nextElementSibling.innerHTML = 'El campo es requerido';
 				error_videos = true;
 			}
-
 
 
 
@@ -147,8 +154,18 @@ let funciones = {
 			}
 
 
+			if (e.type == 'submit') {
+				e.target.disabled = true;
+		        document.querySelector('.ibox-content').classList.add('sk-loading');
+		        //document.querySelector("form[name='frm-agregar_clase']").submit();
 
-			return false;
+		        if (e.target.getAttribute('name') == 'frm-editar_clase') {
+		        	document.querySelector("form[name='frm-editar_clase']").submit();
+		        	return false;
+		        }
+
+		        document.querySelector("form[name='frm-agregar_curso']").submit();
+		    }
 	},
 
 	agregarSessionesClase: function(e) {
@@ -158,49 +175,74 @@ let funciones = {
 		let numeroClones = document.querySelectorAll(".clone-horarios_sesion").length;
 		let conteo = (numeroSesiones > numeroClones) ? numeroSesiones - numeroClones : numeroClones - numeroSesiones;
 
-		for(var i = 1; i <= conteo; i++) {
-			htmlSessiones += '<div class="clone-horarios_sesion">'
-                                +'<div class="form-group row">'
-                                    +'<label class="col-sm-2 col-form-label">URL Zoom: </label>'
-                                    +'<div class="col-sm-10">'
-                                        +'<input type="text" class="form-control" name="url_zoom[]">'
-                                        +'<span class="form-text m-b-none errors"></span>'
-                                    +'</div>'
-                                +'</div>'
+		if (numeroSesiones > numeroClones) {
+			for(var i = 1; i <= conteo; i++) {
+				htmlSessiones += '<div class="clone-horarios_sesion">'
+	                                +'<div class="form-group row">'
+	                                    +'<label class="col-sm-2 col-form-label">URL Zoom: </label>'
+	                                    +'<div class="col-sm-10">'
+	                                        +'<input type="text" class="form-control" name="url_zoom[]">'
+	                                        +'<span class="form-text m-b-none errors"></span>'
+	                                    +'</div>'
+	                                +'</div>'
 
-                                +'<div class="form-group row">'
-                                    +'<label class="col-sm-2 col-form-label">ID de Reunión: </label>'
-                                    +'<div class="col-sm-10">'
-                                        +'<input type="text" class="form-control" name="id_reunion[]">'
-                                        +'<span class="form-text m-b-none errors"></span>'
-                                    +'</div>'
-                                +'</div>'
+	                                +'<div class="form-group row">'
+	                                    +'<label class="col-sm-2 col-form-label">ID de Reunión: </label>'
+	                                    +'<div class="col-sm-10">'
+	                                        +'<input type="text" class="form-control" name="id_reunion[]">'
+	                                        +'<span class="form-text m-b-none errors"></span>'
+	                                    +'</div>'
+	                                +'</div>'
 
-                                +'<div class="form-group row">'
-                                    +'<label class="col-sm-2 col-form-label">Codigo de acceso: </label>'
-                                    +'<div class="col-sm-10">'
-                                        +'<input type="text" class="form-control" name="codigo_acceso[]">'
-                                        +'<span class="form-text m-b-none errors"></span>'
-                                    +'</div>'
-                                +'</div>'
+	                                +'<div class="form-group row">'
+	                                    +'<label class="col-sm-2 col-form-label">Codigo de acceso: </label>'
+	                                    +'<div class="col-sm-10">'
+	                                        +'<input type="text" class="form-control" name="codigo_acceso[]">'
+	                                        +'<span class="form-text m-b-none errors"></span>'
+	                                    +'</div>'
+	                                +'</div>'
 
-                                +'<div class="form-group row">'
-                                    +'<label class="col-sm-2 col-form-label">Fecha de Lanzamiento: </label>'
-                                    +'<div class="col-sm-2">'
-                                        +'<input class="form-control datepicker" name="fecha_inicio[]" data-date-format="yyyy-mm-dd">'
-                                        +'<span class="form-text m-b-none errors"></span>'
-                                    +'</div>'
-                                    +'<label class="pt-2 font-weight-bold"> : </label>'
-                                    +'<div class="col-sm-2 clockpicker" data-autoclose="true">'
-                                        +'<input class="form-control" name="hora_inicio[]">'
-                                        +'<span class="form-text m-b-none errors"></span>'
-                                    +'</div>'
-                               +'</div>'
-                            +'</div>'
-                            +'<div class="hr-line-dashed"></div>';
+	                                +'<div class="form-group row">'
+	                                    +'<label class="col-sm-2 col-form-label">Fecha de Lanzamiento: </label>'
+	                                    +'<div class="col-sm-2">'
+	                                        +'<input class="form-control datepicker" name="fecha_inicio[]" data-date-format="yyyy-mm-dd">'
+	                                        +'<span class="form-text m-b-none errors"></span>'
+	                                    +'</div>'
+	                                    +'<label class="pt-2 font-weight-bold"> : </label>'
+	                                    +'<div class="col-sm-2 clockpicker" data-autoclose="true">'
+	                                        +'<input class="form-control" name="hora_inicio[]">'
+	                                        +'<span class="form-text m-b-none errors"></span>'
+	                                    +'</div>'
+	                               +'</div>'
+	                               +'<div class="hr-line-dashed"></div>'
+	                            +'</div>';
+			}
+
+			document.querySelector(".container-horarios_clases").insertAdjacentHTML("beforeend", htmlSessiones);
+		}
+		else {
+
+			let clonesZoom = document.querySelectorAll(".clone-horarios_sesion");
+			for (var i = 0; i <= numeroClones; i++) {
+
+				if ( i >= numeroSesiones) {
+					clonesZoom[i].remove();
+				}
+			}
+
+			document.querySelector(".container-horarios_clases").insertAdjacentHTML("beforeend", htmlSessiones);
 		}
 
-		document.querySelector(".container-horarios_clases").insertAdjacentHTML("beforeend", htmlSessiones);
+		//INICIALIZAR DATEPICKER Y CLOCKPICKER
+		$('.clockpicker').clockpicker();
+        $('.datepicker').datepicker({
+            todayHighlight: true,
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+
 	},
 
 	elimiarArchivoUpdateCurso: function(e) {

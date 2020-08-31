@@ -4,16 +4,25 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Decorators\ClasesDecorator;
+use App\Http\Requests\ValidarAgregarClase;
+use App\Http\Requests\ValidarActualizarClase;
+use App\Helpers\Helper;
+use Carbon\Carbon;
 use App\Category;
 use App\Instructor;
+use App\Clase;
 
 class ClasesController extends Controller
 {
 
-    public function __construct()
+    protected $coursesDecorator;
+    protected $helper;
+
+    public function __construct(ClasesDecorator $clasesDecorator, Helper $helper)
     {
-        // $this->coursesDecorator = $coursesDecorator;
-        // $this->helper           = $helper;
+        $this->clasesDecorator = $clasesDecorator;
+        $this->helper           = $helper;
         $this->middleware("authadmin:auth");
     }
 
@@ -24,7 +33,9 @@ class ClasesController extends Controller
      */
     public function index()
     {
-        //
+        $clases = Clase::with("instructor")->get();
+        $helper = $this->helper;
+        return view("admin.listado-clases", compact("clases", "helper"));
     }
 
     /**
@@ -45,9 +56,9 @@ class ClasesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidarAgregarClase $request)
     {
-        //
+        return $this->clasesDecorator->store($request);
     }
 
     /**
@@ -69,7 +80,8 @@ class ClasesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = $this->clasesDecorator->edit($id);
+        return view("admin.editar-clase", $data);
     }
 
     /**
@@ -79,9 +91,11 @@ class ClasesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidarActualizarClase $request, $id)
     {
-        //
+        //return response()->json($request);
+        return $this->clasesDecorator->update($request, $id);
+
     }
 
     /**

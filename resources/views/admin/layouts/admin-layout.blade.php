@@ -62,15 +62,15 @@
                         <li>
                             <a href="#"><i class="fa fa-university"></i> <span class="nav-label">Clases en linea</span> <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
-                                <li> <a href="#"> Lista de clases </a></li>
-                                <li> <a href="{{ route("agregar-clase.create") }}"> Agregar clase </a></li>
+                                <li> <a href="{{ route('listado-clases.index') }}"> Lista de clases </a></li>
+                                <li> <a href="{{ route('agregar-clase.create') }}"> Agregar clase </a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Eventos</span> <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                                 <li> <a href="#"> Lista de Eventos </a></li>
-                                <li> <a href="#"> Agregar Evento </a></li>
+                                <li> <a href="{{ route('agregar-evento.create') }}"> Agregar Evento </a></li>
                             </ul>
                         </li>
                     </ul>

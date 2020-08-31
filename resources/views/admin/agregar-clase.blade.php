@@ -36,8 +36,8 @@
     </div>
 
 
-    @if (session()->has("status.newCurso"))
-        @if (session()->get("status.newCurso") == "error")
+    @if (session()->has("status.newClass"))
+        @if (session()->get("status.newClass") == "error")
             <div class="row justify-content-center">
                 <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
                     Ocurrio un error, intentelo más tarde.
@@ -47,10 +47,10 @@
                 </div>
             </div>
 
-        @elseif (session()->get("status.newCurso") == "success")
+        @elseif (session()->get("status.newClass") == "success")
             <div class="row justify-content-center">
                 <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
-                    Se creo el curso correctamente
+                    Se creo la clase correctamente
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -87,7 +87,7 @@
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>
                     </div>
-                    <form action="#" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-agregar_clase">
+                    <form action="{{ route("agregar-clase.store") }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-agregar_clase">
                         @csrf
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Nombre de la clase: </label>
@@ -165,7 +165,7 @@
                                 <select class="form-control m-b" name="select_sesiones">
                                     <option value="">Numero se sesiones</option>
                                     @for($i = 1; $i <= 10; $i++)
-                                        <option value="{{ $i }}"> {{ $i }} </option>
+                                        <option value="{{ $i }}" @if (old('select_sesiones') == $i) selected @endif > {{ $i }} </option>
                                     @endfor
                                 </select>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('select_sede') !!} </span>
@@ -181,48 +181,97 @@
                         <div class="hr-line-dashed"></div>
 
                         <div class="container-horarios_clases">
-                            <div class="clone-horarios_sesion">
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">URL Zoom: </label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="url_zoom[]" value="{{ old("url_zoom.*") }}">
-                                        <span class='form-text m-b-none errors'> {!! $errors->first('url_zoom.0') !!} </span>
+
+                            @if (old("url_zoom"))
+
+                                @for($i = 0; $i <= count(old("url_zoom")) - 1; $i++)
+
+                                    <div class="clone-horarios_sesion">
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">URL Zoom: </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="url_zoom[]" value="{{ old("url_zoom.{$i}") }}">
+                                                <span class='form-text m-b-none errors'> {!! $errors->first('url_zoom.'.$i) !!} </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">ID de Reunión: </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="id_reunion[]" value="{{ old("id_reunion.{$i}") }}">
+                                                <span class='form-text m-b-none errors'> {!! $errors->first('id_reunion.'.$i) !!} </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Codigo de acceso: </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="codigo_acceso[]" value="{{ old("codigo_acceso.{$i}") }}">
+                                                <span class='form-text m-b-none errors'> {!! $errors->first('codigo_acceso.'.$i) !!} </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Fecha de Lanzamiento: </label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control datepicker" name="fecha_inicio[]" data-date-format="yyyy-mm-dd" value="{{ old("fecha_inicio.{$i}") }}">
+                                                <span class='form-text m-b-none errors'> {!! $errors->first('fecha_inicio.'.$i) !!} </span>
+                                            </div>
+                                            <label class="pt-2 font-weight-bold"> : </label>
+                                            <div class="col-sm-2 clockpicker" data-autoclose="true">
+                                                <input class="form-control" name="hora_inicio[]" value="{{ old('hora_inicio.{$i}') }}">
+                                                <span class='form-text m-b-none errors'> {!! $errors->first('hora_inicio.'.$i) !!} </span>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line-dashed"></div>
                                     </div>
+
+                                @endfor
+
+                            @else
+
+                                <div class="clone-horarios_sesion">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">URL Zoom: </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="url_zoom[]" value="{{ old("url_zoom.0") }}">
+                                            <span class='form-text m-b-none errors'> {!! $errors->first('url_zoom.*') !!} </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">ID de Reunión: </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="id_reunion[]" value="{{ old("id_reunion.0") }}">
+                                            <span class='form-text m-b-none errors'> {!! $errors->first('id_reunion.*') !!} </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Codigo de acceso: </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="codigo_acceso[]" value="{{ old("codigo_acceso.0") }}">
+                                            <span class='form-text m-b-none errors'> {!! $errors->first('codigo_acceso.*') !!} </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Fecha de Lanzamiento: </label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control datepicker" name="fecha_inicio[]" data-date-format="yyyy-mm-dd" value="{{ old("fecha_inicio.0") }}">
+                                            <span class='form-text m-b-none errors'> {!! $errors->first('fecha_inicio.*') !!} </span>
+                                        </div>
+                                        <label class="pt-2 font-weight-bold"> : </label>
+                                        <div class="col-sm-2 clockpicker" data-autoclose="true">
+                                            <input class="form-control" name="hora_inicio[]" value="{{ old('hora_inicio.0') }}">
+                                            <span class='form-text m-b-none errors'> {!! $errors->first('hora_inicio.*') !!} </span>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ID de Reunión: </label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="id_reunion[]" value="{{ old("id_reunion.*") }}">
-                                        <span class='form-text m-b-none errors'> {!! $errors->first('id_reunion.0') !!} </span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Codigo de acceso: </label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="codigo_acceso[]" value="{{ old("codigo_acceso.*") }}">
-                                        <span class='form-text m-b-none errors'> {!! $errors->first('codigo_acceso.0') !!} </span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Fecha de Lanzamiento: </label>
-                                    <div class="col-sm-2">
-                                        <input class="form-control datepicker" name="fecha_inicio[]" data-date-format="yyyy-mm-dd" value="{{ old("fecha_inicio.*") }}">
-                                        <span class='form-text m-b-none errors'> {!! $errors->first('fecha_inicio.0') !!} </span>
-                                    </div>
-                                    <label class="pt-2 font-weight-bold"> : </label>
-                                    <div class="col-sm-2 clockpicker" data-autoclose="true">
-                                        <input class="form-control" name="hora_inicio[]" value="{{ old('hora_inicio.*') }}">
-                                        <span class='form-text m-b-none errors'> {!! $errors->first('hora_inicio.0') !!} </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
+                            @endif
                         </div>
-
-                        
 
                         <div class="form-group row">
                             <div class="col-sm-4 col-sm-offset-2">

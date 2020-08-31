@@ -15,6 +15,13 @@ class CreateClasesTable extends Migration
     {
         Schema::create('clases', function (Blueprint $table) {
             $table->id();
+            $table->text('slug')->nullable();
+            $table->string('nombre_clase');
+            $table->text('img')->nullable();
+            $table->text('video_bienvenida');
+            $table->text('descripcion_bienvenida');
+            $table->integer('cuantas_sesiones');
+            $table->boolean("status")->default(1);
             $table->timestamps();
         });
     }
