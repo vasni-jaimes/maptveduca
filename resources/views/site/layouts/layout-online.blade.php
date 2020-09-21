@@ -20,7 +20,7 @@
 			            <ul class="flex between menu">
 			                <li><a href="{{ route("home") }}">Inicio</a></li>
 			                <li><a href="{{ route("cursos") }}">Cursos</a></li>
-			                <li><a href="#">Membresías</a></li>
+			                <li><a href="{{ route("membresias.index") }}">Membresías</a></li>
 			                <li><a href="#">Clases en línea</a></li>
 			                <li><a href="{{ route("eventos") }}">Eventos</a></li>
 			                <li><a href="#">Nosotros</a></li>

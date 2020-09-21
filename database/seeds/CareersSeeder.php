@@ -16,12 +16,14 @@ class CareersSeeder extends Seeder
 
         $career = Career::create([
     		"nombre" => "Tecnico en produccion musical",
-    		"precio" => "1250"
+    		"precio" => "1250",
+            "status" => 1
     	]);
 
     	 $career = Career::create([
     		"nombre" => "Tecnico profesional en musical",
-    		"precio" => "1250"
+    		"precio" => "1250",
+            "status" => 1
     	]);
 
     	$career->save();

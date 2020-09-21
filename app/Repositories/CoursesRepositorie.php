@@ -78,6 +78,7 @@ class CoursesRepositorie
             $course->temario        = $this->jsonConverteTemarioCurso($request, $course->id);
             //SUBIR IMAGEN DEL CURSO
             if ( $request->hasFile('img_curso') ) {
+                $this->eliminarImagen($request->img_curso);
                 $rootImg = $request->file('img_curso')->store('public/cursos/'.$course->id.'/img_principal/');
                 $course->url_img = $rootImg;
             }
@@ -88,11 +89,13 @@ class CoursesRepositorie
                 
                 if (!$this->eliminarInstructor($id)) {
                     DB::rollback();
+                    $this->eliminarImagen($request->img_curso);
                     return back()->withInput()->with("status.updateCurso", "error");
                 }
 
                 if (!$this->insertInstructor($course->id, $request->select_instructores)) {
                     DB::rollback();
+                    $this->eliminarImagen($request->img_curso);
                     return back()->withInput()->with("status.updateCurso", "error");
                 }
 
@@ -102,11 +105,13 @@ class CoursesRepositorie
                 //ACTUALIZAR CATEGORIAS
                 if (!$this->eliminarCategories($id)) {
                     DB::rollback();
+                    $this->eliminarImagen($request->img_curso);
                     return back()->withInput()->with("status.updateCurso", "error");
                 }
 
                 if (!$this->insertCategories($course->id, $request->select_categorias)) {
                     DB::rollback();
+                    $this->eliminarImagen($request->img_curso);
                     return back()->withInput()->with("status.updateCurso", "error");
                 }
                 //ACTUALIZAR CATEGORIAS\\
@@ -115,12 +120,14 @@ class CoursesRepositorie
                 //ACTUALIZAR CARRERAS SI HAY CURSO EXTRA
                 if (!$this->eliminarCareers($id)) {
                     DB::rollback();
+                    $this->eliminarImagen($request->img_curso);
                     return back()->withInput()->with("status.updateCurso", "error");
                 }
 
                 if (!$request->has("curso_extra")) {
                     if (!$this->insertCareers($course->id, $request->select_carreras)) {
                         DB::rollback();
+                        $this->eliminarImagen($request->img_curso);
                         return back()->withInput()->with("status.updateCurso", "error");
                     }
                 }
@@ -249,5 +256,10 @@ class CoursesRepositorie
                                 ->where('course_id', $course_id)->delete();
 
         return true;
+    }
+
+    protected function eliminarImagen($file)
+    {
+        return \Storage::delete($file);
     }
 }

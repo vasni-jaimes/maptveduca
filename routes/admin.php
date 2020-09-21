@@ -43,3 +43,13 @@ Route::post('editar-clase/{clase_id}', 'Admin\ClasesController@update')->name('e
 
 //EVENTOS EN LINEA
 Route::get('agregar-evento', 'Admin\EventosController@create')->name('agregar-evento.create');
+Route::post('agregar-evento', 'Admin\EventosController@store')->name('agregar-evento.store');
+Route::get('editar-evento/{evento_id}', 'Admin\EventosController@edit')->name('editar-evento.edit');
+Route::get('listado-eventos', 'Admin\EventosController@index')->name('listado-eventos.index');
+Route::post('editar-evento/{evento_id}', 'Admin\EventosController@update')->name('editar-evento.update');
+
+//INSTRUCTORES
+Route::get('agregar-instructor', 'Admin\InstructoresController@create')->name('agregar-instructor.create');
+Route::post('agregar-instructores', 'Admin\InstructoresController@store')->name('agregar-instructor.store');
+Route::get('listado-instructores', 'Admin\InstructoresController@index')->name('listado-instructores.index');
+Route::get('editar-instructor/{instructor_id}', 'Admin\InstructoresController@edit')->name('editar-instructor.edit');

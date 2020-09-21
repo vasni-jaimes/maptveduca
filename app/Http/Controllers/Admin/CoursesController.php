@@ -62,6 +62,7 @@ class CoursesController extends Controller
      */
     public function store(ValidateAgregarCurso $request)
     {
+        return response()->json($request);
         return $this->coursesDecorator->AgregarCursoDecore($request);
     }
 

@@ -53,6 +53,13 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Instructores</span> <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li> <a href="{{ route("listado-instructores.index") }}"> Lista de  Instructores </a></li>
+                                <li> <a href="{{ route("agregar-instructor.create") }}"> Agregar Instructor </a></li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-tv"></i> <span class="nav-label">Cursos</span> <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                                 <li> <a href="{{ route('agregar-curso.index') }}"> Lista de Cursos </a></li>
@@ -69,7 +76,7 @@
                         <li>
                             <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Eventos</span> <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
-                                <li> <a href="#"> Lista de Eventos </a></li>
+                                <li> <a href="{{ route("listado-eventos.index") }}"> Lista de Eventos </a></li>
                                 <li> <a href="{{ route('agregar-evento.create') }}"> Agregar Evento </a></li>
                             </ul>
                         </li>

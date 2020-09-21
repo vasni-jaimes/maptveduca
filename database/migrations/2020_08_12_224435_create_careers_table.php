@@ -17,7 +17,7 @@ class CreateCareersTable extends Migration
             $table->id();
             $table->text("nombre");
             $table->string("precio");
-            $table->boolean("status")->default(1);
+            $table->boolean("status")->default(0);
             $table->timestamps();
         });
     }

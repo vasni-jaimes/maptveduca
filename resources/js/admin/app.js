@@ -41,14 +41,26 @@ if (frmAgregarCurso || frmActualizarCurso) {
 		});
 	}
 
-	//ELIMINAR ARCHIVO DE CURSO EXTRA EN UPDATE
-	if (frmActualizarCurso) {
-		const eliminar_archivo = document.querySelectorAll(".eliminar_archivo");
-		eliminar_archivo.forEach( (item) => {
-			item.addEventListener('click', funciones.elimiarArchivoUpdateCurso)	
-		})
-		
-	}
+
+	//EVENTO PARA AGREGAR URL DE VIDEOS
+	$(document).on('click', '.add-url_video', function(e) {
+		e.preventDefault();
+
+		let contador = $(".add-url_video").index($(this));
+		let htmlVideo = funciones.htmlAgregarVideo( contador );
+		let padreVideoUrl = $(this).parent().next().next();
+		padreVideoUrl.append(htmlVideo);
+	});
+
+
+	//EVENTO PARA ELIMINAR URL DE VIDEOS
+	const container_videourl = document.querySelectorAll(".remove-url_video");
+	container_videourl.forEach( (item) => {
+		item.addEventListener('click', function(e) {
+			e.preventDefault();
+			e.target.parentNode.nextElementSibling.nextElementSibling.lastElementChild.remove();
+		});
+	});
 
 
 	if (frmAgregarCurso) {
@@ -63,6 +75,12 @@ if (frmAgregarCurso || frmActualizarCurso) {
 		frmActualizarCurso.addEventListener('submit', funciones.validacionAgregarCurso);
 		frmActualizarCurso.addEventListener('input', funciones.validacionAgregarCurso);
 		$("select").change(funciones.validacionAgregarCurso);
+
+		//ELIMINAR ARCHIVO DE CURSO EXTRA EN UPDATE
+		const eliminar_archivo = document.querySelectorAll(".eliminar_archivo");
+		eliminar_archivo.forEach( (item) => {
+			item.addEventListener('click', funciones.elimiarArchivoUpdateCurso)	
+		})
 	}
 }
 
@@ -74,7 +92,6 @@ if (frmAgregarClase || frmActualizarClase) {
 	if (select_sesiones) {
 		select_sesiones.addEventListener('change', funciones.agregarSessionesClase)
 	}
-
 
 	if (frmAgregarClase) {
 		frmAgregarClase.addEventListener('submit', funciones.validarAgregarClase);
@@ -89,6 +106,46 @@ if (frmAgregarClase || frmActualizarClase) {
 		$(document).change("input", funciones.validarAgregarClase);
 		$("select").change(funciones.validarAgregarClase);
 	}
+}
+
+
+const frmAgregarEvento = document.querySelector("form[name='frm-agregar_evento']");
+const frmEditarEvento = document.querySelector("form[name='frm-editar_evento']");
+if (frmAgregarEvento || frmEditarEvento) {
+
+	if (frmAgregarEvento) {
+		frmAgregarEvento.addEventListener('submit', funciones.validarAgregarEvento);
+		frmAgregarEvento.addEventListener('input', funciones.validarAgregarEvento);
+		$(document).change("input", funciones.validarAgregarEvento);
+		$("select").change(funciones.validarAgregarEvento);
+	}
+
+	if (frmEditarEvento) {
+		frmEditarEvento.addEventListener('submit', funciones.validarAgregarEvento);
+		frmEditarEvento.addEventListener('input', funciones.validarAgregarEvento);
+		$(document).change("input", funciones.validarAgregarEvento);
+		$("select").change(funciones.validarAgregarEvento);
+	}
+}
+
+
+const frmAgregarInstructor = document.querySelector("form[name='frm-agregar_instructor']");
+if (frmAgregarInstructor) {
+
+	if (frmAgregarInstructor) {
+		frmAgregarInstructor.addEventListener('submit', funciones.validarAgregarInstructor);
+		frmAgregarInstructor.addEventListener('input', funciones.validarAgregarInstructor);
+		$(document).change("input", funciones.validarAgregarInstructor);
+		$("select").change(funciones.validarAgregarInstructor);
+	}
+}
+
+
+const btn_activar = document.querySelectorAll("btn-activar");
+if (btn_activar) {
+	btn_activar.forEach( (item) => {
+		item.addEventListener('click', funciones.cambiarStatus)
+	});
 }
 
 

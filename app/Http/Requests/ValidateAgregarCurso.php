@@ -24,7 +24,6 @@ class ValidateAgregarCurso extends FormRequest
     public function rules()
     {
         return [
-            
             "nombre_curso"          => "required|string|min:4|max:255",
             "img_curso"             => "required|mimes:jpeg,png,jpg",
             "select_instructores"   => "required|array",
@@ -40,11 +39,11 @@ class ValidateAgregarCurso extends FormRequest
             "nombre_video"        => "required|array",
             "nombre_video.*"      => "required|string",
             "video_url"           => "required|array",
-            "video_url.*"           => "required|string",
+            "video_url.*"         => "required|array",
+            "video_url.*.*"       => "required|string",
             "descripcion_curso"   => "required|array",
             "descripcion_curso.*"   => "required|string",
             "material_extra"      => "nullable|array",
-
         ];
     }
 }

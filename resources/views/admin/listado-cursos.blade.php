@@ -75,7 +75,11 @@
                                                      	<a href = "#" class="btn-info btn btn-xs mr-3">Ver Curso</a>
                                                      	<a href="{{ route("agregar-curso.edit", $helper::base64_encode_url($curso->id)) }}" class="btn-primary btn btn-xs mr-3">Editar Curso</a>
                                                      	<a href="#" class="btn-danger btn btn-xs mr-3">Eliminar Curso</a>
-                                                     	<a href = "#" class="btn-danger btn btn-xs">Desactivar</a>
+                                                     	@if ($curso->status == 1)
+                                                          <a href = "#" class="btn-danger btn btn-xs btn-desactivar" data-id="{{ $helper::base64_encode_url($curso->id)) }}" data-st="1">Desactivar</a>
+                                                        @else
+                                                            <a href="#" data-id="{{ $helper::base64_encode_url($curso->id)) }}" data-st="1" class="btn-primary btn btn-xs btn-activar">Activar</a>
+                                                        @endif
                                                    </div>
 
                                                 </td>

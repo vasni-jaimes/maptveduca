@@ -17,8 +17,11 @@ class CreateInstructorsTable extends Migration
             $table->id();
             $table->text("nombres");
             $table->text("apellidos");
-            $table->text("img");
-            $table->boolean("status")->default(1);
+            $table->text("email");
+            $table->text("especialidad");
+            $table->text("img")->nullable();
+            $table->text("bibliografia");
+            $table->boolean("status")->default(0);
             $table->timestamps();
         });
     }

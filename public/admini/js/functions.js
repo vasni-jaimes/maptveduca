@@ -95,6 +95,226 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  cambiarStatus: function cambiarStatus(e) {
+    e.preventDefault();
+    e.target.disabled = true;
+    var token = document.querySelector("input[name='_token']").value,
+        status = e.target.getAttribute('data-st');
+    id = e.target.getAttribute('data-id');
+    var opciones = {
+      method: "POST",
+      credentials: "same-origin",
+      body: JSON.stringify({
+        "status": status,
+        "_token": token,
+        "id": id
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    fetch("/admin/eliminar-archivo", opciones).then(function (response) {
+      return response.json();
+    }).then(function (res) {
+      if (res.message == 'ok') {
+        e.target.parentElement.parentElement.remove();
+        alert('Se elimino el archivo correctamente');
+      } else if (res.message == 'no_parameters') {
+        alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
+        e.removeAttribute('disabled');
+      } else if (res.message == 'no_delete') {
+        alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
+        e.removeAttribute('disabled');
+      }
+    });
+  },
+  validarAgregarInstructor: function validarAgregarInstructor(e) {
+    e.preventDefault();
+    var nombre = document.querySelector("input[name='nombre_instructor']");
+    var apellido = document.querySelector("input[name='apellido_instructor']");
+    var email = document.querySelector("input[name='email']");
+    var bibliografia = document.querySelector("textarea[name='bibliografia']");
+    var especialidad = document.querySelector("input[name='especialidad']");
+    var img_instructor = document.querySelector("input[name='avatar']");
+    /* STATUS */
+
+    var error_videos = false; //SE ELIMINAN LOS RASTROS DE ERRORES
+
+    document.querySelectorAll('.errors').forEach(function (item) {
+      item.innerHTML = '';
+    });
+    document.querySelectorAll('.chosen-choices').forEach(function (item) {
+      item.style.borderColor = "#e5e6e7";
+    });
+
+    if (document.querySelector('.has-error')) {
+      document.querySelectorAll('.has-error').forEach(function (item) {
+        item.classList.remove('has-error');
+      });
+    } //SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+
+    if (nombre.value == '') {
+      nombre.parentNode.classList.add('has-error');
+      nombre.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (apellido.value == '') {
+      apellido.parentNode.classList.add('has-error');
+      apellido.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (email.value == '') {
+      email.parentNode.classList.add('has-error');
+      email.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (!funciones.validarEmail(email.value)) {
+      email.parentNode.classList.add('has-error');
+      email.nextElementSibling.innerHTML = 'El email no es valido';
+      error_videos = true;
+    }
+
+    if (especialidad.value == '') {
+      especialidad.parentNode.classList.add('has-error');
+      especialidad.nextElementSibling.innerHTML = 'El email no es valido';
+      error_videos = true;
+    }
+
+    if (bibliografia.value == '') {
+      bibliografia.parentNode.classList.add('has-error');
+      bibliografia.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    console.log(e.target.getAttribute('name'));
+
+    if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
+      if (img_instructor.value == '') {
+        img_instructor.parentNode.classList.add('has-error');
+        img_instructor.nextElementSibling.innerHTML = 'El campo es requerido';
+        error_videos = true;
+      }
+    }
+
+    if (error_videos == true) {
+      if (e.type == 'submit') {
+        var posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+        window.scrollTo(0, posicion);
+      }
+
+      return false;
+    }
+
+    if (e.type == 'submit') {
+      e.target.disabled = true;
+      document.querySelector('.ibox-content').classList.add('sk-loading');
+
+      if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
+        document.querySelector("form[name='frm-agregar_instructor']").submit();
+        return false;
+      } //document.querySelector("form[name='frm-editar_evento']").submit();
+
+    }
+  },
+  validarAgregarEvento: function validarAgregarEvento(e) {
+    e.preventDefault();
+    var nombre_evento = document.querySelector("input[name='nombre_evento']");
+    var img_evento = document.querySelector("input[name='img_evento']");
+    var instructores = document.querySelector("select[name='select_instructores[]']");
+    var categorias = document.querySelector("select[name='select_categorias[]']");
+    var video_bienvenida = document.querySelector("input[name='video_bienvenida']");
+    var descripcion = document.querySelector("textarea[name='descripcion']");
+    var fecha_inicio = document.querySelector("input[name='fecha_inicio']");
+    var hora_inicio = document.querySelector("input[name='hora_inicio']");
+    /* STATUS */
+
+    var error_videos = false; //SE ELIMINAN LOS RASTROS DE ERRORES
+
+    document.querySelectorAll('.errors').forEach(function (item) {
+      item.innerHTML = '';
+    });
+    document.querySelectorAll('.chosen-choices').forEach(function (item) {
+      item.style.borderColor = "#e5e6e7";
+    });
+
+    if (document.querySelector('.has-error')) {
+      document.querySelectorAll('.has-error').forEach(function (item) {
+        item.classList.remove('has-error');
+      });
+    } //SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+
+    if (nombre_evento.value == '') {
+      nombre_evento.parentNode.classList.add('has-error');
+      nombre_evento.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (e.target.getAttribute('name') == 'frm-agregar_evento') {
+      if (img_evento.value == '') {
+        img_evento.parentNode.classList.add('has-error');
+        img_evento.nextElementSibling.innerHTML = 'El campo es requerido';
+        error_videos = true;
+      }
+    }
+
+    if (instructores.value == '' || instructores.value == null || instructores.value == undefined) {
+      instructores.parentNode.classList.add('has-error');
+      instructores.parentNode.children[1].firstChild.style.borderColor = "red";
+      instructores.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (categorias.value == '' || categorias.value == null || categorias.value == undefined) {
+      categorias.parentNode.classList.add('has-error');
+      categorias.parentNode.children[1].firstChild.style.borderColor = "red";
+      categorias.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (video_bienvenida.value == '') {
+      video_bienvenida.parentNode.classList.add('has-error');
+      video_bienvenida.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (descripcion.value == '') {
+      descripcion.parentNode.classList.add('has-error');
+      descripcion.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (fecha_inicio.value == '') {
+      error_videos = true;
+      item.parentNode.classList.add('has-error');
+      item.nextElementSibling.innerHTML = 'El campo es requerido';
+    }
+
+    if (error_videos == true) {
+      if (e.type == 'submit') {
+        var posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+        window.scrollTo(0, posicion);
+      }
+
+      return false;
+    }
+
+    if (e.type == 'submit') {
+      e.target.disabled = true;
+      document.querySelector('.ibox-content').classList.add('sk-loading');
+
+      if (e.target.getAttribute('name') == 'frm-agregar_evento') {
+        document.querySelector("form[name='frm-agregar_evento']").submit();
+        return false;
+      }
+
+      document.querySelector("form[name='frm-editar_evento']").submit();
+    }
+  },
   validarAgregarClase: function validarAgregarClase(e) {
     e.preventDefault();
     /* 	PRIMER PASO DEL REGISTRO */
@@ -221,7 +441,8 @@ var funciones = {
 
     if (error_videos == true) {
       if (e.type == 'submit') {
-        window.scrollTo(0, document.querySelectorAll(".has-error")[0].offsetTop);
+        var posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+        window.scrollTo(0, posicion);
       }
 
       return false;
@@ -236,7 +457,7 @@ var funciones = {
         return false;
       }
 
-      document.querySelector("form[name='frm-agregar_curso']").submit();
+      document.querySelector("form[name='frm-agregar_clase']").submit();
     }
   },
   agregarSessionesClase: function agregarSessionesClase(e) {
@@ -323,7 +544,7 @@ var funciones = {
 
     /* TEMARIO */
     nombres_cursos = document.querySelectorAll("input[name='nombre_video[]']"),
-        videos_url = document.querySelectorAll("input[name='video_url[]']"),
+        videos_url = document.querySelectorAll(".url_videos"),
         descripcion_curso = document.querySelectorAll("textarea[name='descripcion_curso[]']"),
 
     /* STATUS */
@@ -411,7 +632,7 @@ var funciones = {
       if (item.value == '') {
         error_videos = true;
         item.parentNode.classList.add('has-error');
-        item.nextElementSibling.innerHTML = 'El campo es requerido';
+        item.parentNode.nextElementSibling.innerHTML = 'El campo es requerido';
       }
     }); // Validar nombre y videos URL
 
@@ -425,7 +646,8 @@ var funciones = {
 
     if (error_videos == true) {
       if (e.type == 'submit') {
-        window.scrollTo(0, document.querySelectorAll(".has-error")[0].offsetTop);
+        var posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+        window.scrollTo(0, posicion);
       }
 
       return false;
@@ -443,13 +665,29 @@ var funciones = {
       document.querySelector("form[name='frm-actualizar_curso']").submit();
     }
   },
+  getCoords: function getCoords(elem) {
+    // OBTENER LA POSICION RELATIVA DE UN ELENETO DENTTO DE WINDOW
+    var box = elem.getBoundingClientRect();
+    var body = document.body;
+    var docEl = document.documentElement;
+    var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+    var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+    var clientTop = docEl.clientTop || body.clientTop || 0;
+    var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+    var top = box.top + scrollTop - clientTop;
+    var left = box.left + scrollLeft - clientLeft;
+    return Math.round(top) - 200;
+  },
   validarEmail: function validarEmail(email) {
     var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(email) ? true : false;
   },
+  htmlAgregarVideo: function htmlAgregarVideo(contador) {
+    return '<div class="div-container_videourl">' + '<input type="text" class="form-control mt-3 url_videos" name="video_url[' + contador + '][]" placeholder="url video">' + '</div>' + '<span class="form-text m-b-none errors"></span>';
+  },
   htmlVideoCurso: function htmlVideoCurso(contador) {
     contador++;
-    return '<div class="clone-videos">' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Nombre del video: </label>' + '<div class="col-sm-10">' + '<input type="text" class="form-control" name="nombre_video[]">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Video url: </label>' + '<div class="col-sm-10">' + '<input type="text" class="form-control" name="video_url[]">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Descripcion: </label>' + '<div class="col-sm-10">' + '<textarea class="form-control" name="descripcion_curso[]" rows="3"></textarea>' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '<div class="form-group row mb-5">' + '<label class="col-sm-2 col-form-label">Material Extra: </label>' + '<div class="col-sm-10">' + '<input id="logo" type="file" name="material_extra[' + contador + '][]" multiple class="form-control" accept="jpg,jpeg,png">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '</div>';
+    return '<div class="clone-videos">' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Nombre del video: </label>' + '<div class="col-sm-10">' + '<input type="text" class="form-control" name="nombre_video[]">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Video url: </label>' + '<div class="col-sm-10">' + '<div class="d-flex">' + '<input type="text" class="form-control url_videos" name="video_url[' + contador + '][]">' + '<button class="btn btn-success ml-4 add-url_video"> + </button>' + '<button class="btn btn-danger ml-2 remove-url_video"> - </button>' + '</div>' + '<span class="form-text m-b-none errors"></span>' + '<div class="parent_mas-videos"></div>' + '</div>' + '</div>' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Descripcion: </label>' + '<div class="col-sm-10">' + '<textarea class="form-control" name="descripcion_curso[]" rows="3"></textarea>' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '<div class="form-group row mb-5">' + '<label class="col-sm-2 col-form-label">Material Extra: </label>' + '<div class="col-sm-10">' + '<input id="logo" type="file" name="material_extra[' + contador + '][]" multiple class="form-control" accept="jpg,jpeg,png">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '</div>';
   }
 };
 exports.funciones = funciones;
