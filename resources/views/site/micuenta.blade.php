@@ -265,6 +265,18 @@
                                             <th>Descripción</th>
                                             <th>Forma de pago</th>
                                         </tr>
+                                        <tr>
+                                            <td>20/06/2020</td>
+                                            <td>$500.00</td>
+                                            <td>Membresía básica</td>
+                                            <td>Tarjeta de crédito</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20/07/2020</td>
+                                            <td>$200.00</td>
+                                            <td>Clase en línea</td>
+                                            <td>Tarjeta de crédito</td>
+                                        </tr>
                                     </table>
                                 </div> <!-- /item-perfil -->
                             </div> <!-- /flex -->
