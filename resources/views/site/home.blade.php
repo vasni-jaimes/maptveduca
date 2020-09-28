@@ -37,18 +37,15 @@
                     <p>Mira más clases aquí</p>
                 </div> <!-- /bg-black -->
                 <ul class="slide-inicio">
-                    <li>
-                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                    </li>
-                    <li>
-                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                    </li>
-                    <li>
-                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                    </li>
-                    <li>
-                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                    </li>
+                    @forelse($clases as $clase)
+                        <li>
+                            <div class="img-slide" style="background-image: url({{Storage::url($clase->img) }});"></div> <!-- /img-slide -->
+                        </li>
+                    @empty
+                        <li>
+                            <h2> No se encuentraron resultados </h2>
+                        </li>
+                    @endforelse
                 </ul>
             </div> <!-- /banner-slide -->
             
@@ -58,18 +55,15 @@
                     <p>Mira todos aquí</p>
                 </div> <!-- /bg-yellow -->
                 <ul class="slide-inicio">
-                    <li>
-                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                    </li>
-                    <li>
-                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                    </li>
-                    <li>
-                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                    </li>
-                    <li>
-                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                    </li>
+                    @forelse($eventos as $evento)
+                        <li>
+                            <div class="img-slide" style="background-image: url({{Storage::url($evento->img_evento) }});"></div> <!-- /img-slide -->
+                        </li>
+                    @empty
+                        <li>
+                            <h2> No se encuentraron resultados </h2>
+                        </li>
+                    @endforelse
                 </ul>
             </div> <!-- /banner-slide -->
             

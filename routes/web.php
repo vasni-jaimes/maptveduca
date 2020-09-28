@@ -33,6 +33,9 @@ Route::post('registro', 'Auth\RegisterController@register')->name('registro');
 //CURSOS
 Route::get('cursos', 'Site\CursosController@index')->name('cursos');
 
+//MEMBRESIAS
+Route::get('membresias', 'Site\MembresiasController@index')->name('membresias.index');
+
 
 //VISTAS ESTATICAS
 Route::get('eventos', function() {
@@ -73,9 +76,9 @@ Route::get('membresia-basica', function() {
 	return view('site.membresia-basica');
 })->name('membresia-basica');
 
-Route::get('membresia', function() {
-	return view('site.membresia');
-})->name('membresia');
+// Route::get('membresia', function() {
+// 	return view('site.membresia');
+// })->name('membresia');
 
 
 Route::get('single-eventos', function() {

@@ -27,7 +27,7 @@ class ClasesRepositorie
     	$clase->cuantas_sesiones 		= $request->select_sesiones;
 
     	if ($clase->save()) {
-    		//TEMARIO DEL CURSO
+    		//SLUG DE LA CLASE
             $clase->slug           = $this->helper->createSlug($request->nombre_clase, $clase->id, "maptvc");
 			//SUBIR IMAGEN DEL CURSO
 			$rootImg = $request->file('img_clase')->store('public/clases/'.$clase->id.'/img_principal/');
@@ -78,6 +78,7 @@ class ClasesRepositorie
 
             //SUBIR IMAGEN DE LA CLASE
             if ( $request->hasFile('img_clase') ) {
+                $this->eliminarImagen($request->img_clase);
                 $rootImg = $request->file('img_clase')->store('public/clases/'.$clase->id.'/img_principal/');
                 $clase->img = $rootImg;
             }
@@ -87,6 +88,7 @@ class ClasesRepositorie
                 /* ACTUALIZAR INSTRUCTOR */
                 if (!$this->eliminarInstructor($id)) {
                     DB::rollback();
+                    $this->eliminarImagen($request->img_clase);
                     return back()->withInput()->with("status.updateClass", "error");
                 }
 
@@ -100,11 +102,13 @@ class ClasesRepositorie
                 /* ACTUALIZAR CATEGORIAS */
                 if (!$this->eliminarCategories($id)) {
                     DB::rollback();
+                    $this->eliminarImagen($request->img_clase);
                     return back()->withInput()->with("status.updateClass", "error");
                 }
 
                 if (!$this->insertCategories($clase->id, $request->select_categorias)) {
                     DB::rollback();
+                    $this->eliminarImagen($request->img_clase);
                     return back()->withInput()->with("status.updateClass", "error");
                 }
                 /* ACTUALIZAR CATEGORIAS \\ */
@@ -113,11 +117,13 @@ class ClasesRepositorie
                 /* ACTUALIZAR SESSIONES */
                 if (!$this->eliminarSessiones($id)) {
                     DB::rollback();
+                    $this->eliminarImagen($request->img_clase);
                     return back()->withInput()->with("status.updateClass", "error");
                 }
 
                 if (!$this->insertSessiones($clase->id, $request)) {
                     DB::rollback();
+                    $this->eliminarImagen($request->img_clase);
                     return back()->withInput()->with("status.updateClass", "error");
                 }
                 /* ACTUALIZAR SESSIONES \\  */
@@ -227,5 +233,10 @@ class ClasesRepositorie
                                 ->where('clas_id', $clas_id)->delete();
 
         return true;
+    }
+
+    protected function eliminarImagen($file)
+    {
+        return \Storage::delete($file);
     }
 }

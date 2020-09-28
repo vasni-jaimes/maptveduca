@@ -3,6 +3,245 @@
 
 let funciones = {
 
+	cambiarStatus: function(e) {
+		e.preventDefault();
+
+		e.target.disabled = true;
+
+		let token = document.querySelector("input[name='_token']").value,
+			status = e.target.getAttribute('data-st');
+			id = e.target.getAttribute('data-id');
+
+        let opciones = {
+            method: "POST",
+            credentials: "same-origin",
+            body: JSON.stringify({"status": status, "_token": token, "id": id}),
+            headers:{
+                "Content-Type": "application/json"
+            }
+        };
+
+        fetch("/admin/eliminar-archivo", opciones)
+            .then(response => response.json())
+            .then(res => {
+            	if (res.message == 'ok') {
+            		e.target.parentElement.parentElement.remove();
+            		alert('Se elimino el archivo correctamente');
+            	}
+            	else if (res.message == 'no_parameters') {
+            		alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
+            		e.removeAttribute('disabled');
+            	}
+            	else if (res.message == 'no_delete') {
+            		alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
+            		e.removeAttribute('disabled');
+            	}
+            })
+	},
+
+	validarAgregarInstructor: function(e) {
+		e.preventDefault();
+
+		let nombre = document.querySelector("input[name='nombre_instructor']");
+		let apellido = document.querySelector("input[name='apellido_instructor']");
+		let email = document.querySelector("input[name='email']");
+		let bibliografia = document.querySelector("textarea[name='bibliografia']");
+		let especialidad = document.querySelector("input[name='especialidad']");
+		let img_instructor = document.querySelector("input[name='avatar']");
+
+		/* STATUS */
+		let error_videos = false;
+
+		//SE ELIMINAN LOS RASTROS DE ERRORES
+		document.querySelectorAll('.errors').forEach(function(item) {
+			item.innerHTML = '';
+		});
+
+		document.querySelectorAll('.chosen-choices').forEach((item) => {
+			item.style.borderColor = "#e5e6e7";
+		});
+
+		if (document.querySelector('.has-error')) {
+			document.querySelectorAll('.has-error').forEach((item) => {
+				item.classList.remove('has-error');
+			});
+		}
+		//SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+		if (nombre.value == '') {
+			nombre.parentNode.classList.add('has-error');
+			nombre.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		if (apellido.value == '') {
+			apellido.parentNode.classList.add('has-error');
+			apellido.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		if (email.value == '') {
+			email.parentNode.classList.add('has-error');
+			email.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		if (!funciones.validarEmail(email.value)) {
+			email.parentNode.classList.add('has-error');
+			email.nextElementSibling.innerHTML = 'El email no es valido';
+			error_videos = true;
+		}
+
+		if (especialidad.value == '') {
+			especialidad.parentNode.classList.add('has-error');
+			especialidad.nextElementSibling.innerHTML = 'El email no es valido';
+			error_videos = true;
+		}
+
+		if (bibliografia.value == '') {
+			bibliografia.parentNode.classList.add('has-error');
+			bibliografia.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		console.log(e.target.getAttribute('name'));
+		if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
+			if (img_instructor.value == '') {
+				img_instructor.parentNode.classList.add('has-error');
+				img_instructor.nextElementSibling.innerHTML = 'El campo es requerido';
+				error_videos = true;
+			}
+		}
+
+		if (error_videos == true) {
+			if (e.type == 'submit') {
+				let posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+				window.scrollTo(0, posicion);
+			}
+
+			return false;
+		}
+
+		if (e.type == 'submit') {
+			e.target.disabled = true;
+	        document.querySelector('.ibox-content').classList.add('sk-loading');
+
+	        if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
+	        	document.querySelector("form[name='frm-agregar_instructor']").submit();
+	        	return false;
+	        }
+
+	        //document.querySelector("form[name='frm-editar_evento']").submit();
+	    }
+	},
+
+	validarAgregarEvento: function(e) {
+		e.preventDefault();
+
+		let nombre_evento = document.querySelector("input[name='nombre_evento']");
+		let img_evento = document.querySelector("input[name='img_evento']");
+		let instructores = document.querySelector("select[name='select_instructores[]']");
+		let categorias = document.querySelector("select[name='select_categorias[]']");
+		let video_bienvenida = document.querySelector("input[name='video_bienvenida']");
+		let descripcion = document.querySelector("textarea[name='descripcion']");
+		let fecha_inicio = document.querySelector("input[name='fecha_inicio']");
+		let hora_inicio = document.querySelector("input[name='hora_inicio']");
+
+
+		/* STATUS */
+		let error_videos = false;
+
+		//SE ELIMINAN LOS RASTROS DE ERRORES
+		document.querySelectorAll('.errors').forEach(function(item) {
+			item.innerHTML = '';
+		});
+
+		document.querySelectorAll('.chosen-choices').forEach((item) => {
+			item.style.borderColor = "#e5e6e7";
+		});
+
+		if (document.querySelector('.has-error')) {
+			document.querySelectorAll('.has-error').forEach((item) => {
+				item.classList.remove('has-error');
+			});
+		}
+		//SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+
+		if (nombre_evento.value == '') {
+			nombre_evento.parentNode.classList.add('has-error');
+			nombre_evento.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		if (e.target.getAttribute('name') == 'frm-agregar_evento') {
+			if (img_evento.value == '') {
+				img_evento.parentNode.classList.add('has-error');
+				img_evento.nextElementSibling.innerHTML = 'El campo es requerido';
+				error_videos = true;
+			}
+		}
+
+		if (instructores.value == '' || instructores.value == null || instructores.value == undefined) {
+			instructores.parentNode.classList.add('has-error');
+			instructores.parentNode.children[1].firstChild.style.borderColor = "red";
+			instructores.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		if (categorias.value == '' || categorias.value == null || categorias.value == undefined) {
+			categorias.parentNode.classList.add('has-error');
+			categorias.parentNode.children[1].firstChild.style.borderColor = "red";
+			categorias.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+
+		if (video_bienvenida.value == '')  {
+			video_bienvenida.parentNode.classList.add('has-error');
+			video_bienvenida.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		if (descripcion.value == '') {
+			descripcion.parentNode.classList.add('has-error');
+			descripcion.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+
+		if (fecha_inicio.value == '') {
+			error_videos = true;
+			item.parentNode.classList.add('has-error');
+			item.nextElementSibling.innerHTML = 'El campo es requerido';
+		}
+
+
+		if (error_videos == true) {
+			if (e.type == 'submit') {
+				let posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+				window.scrollTo(0, posicion);
+			}
+
+			return false;
+		}
+
+
+		if (e.type == 'submit') {
+			e.target.disabled = true;
+	        document.querySelector('.ibox-content').classList.add('sk-loading');
+
+	        if (e.target.getAttribute('name') == 'frm-agregar_evento') {
+	        	document.querySelector("form[name='frm-agregar_evento']").submit();
+	        	return false;
+	        }
+
+	        document.querySelector("form[name='frm-editar_evento']").submit();
+	    }
+
+
+	},
+
 	validarAgregarClase: function(e) {
 		e.preventDefault();
 
@@ -147,7 +386,8 @@ let funciones = {
 
 			if (error_videos == true) {
 				if (e.type == 'submit') {
-					window.scrollTo(0, document.querySelectorAll(".has-error")[0].offsetTop);
+					let posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+					window.scrollTo(0, posicion);
 				}
 
 				return false;
@@ -164,7 +404,7 @@ let funciones = {
 		        	return false;
 		        }
 
-		        document.querySelector("form[name='frm-agregar_curso']").submit();
+		        document.querySelector("form[name='frm-agregar_clase']").submit();
 		    }
 	},
 
@@ -298,7 +538,7 @@ let funciones = {
 
 			/* TEMARIO */
 			nombres_cursos = document.querySelectorAll("input[name='nombre_video[]']"),
-			videos_url = document.querySelectorAll("input[name='video_url[]']"),
+			videos_url = document.querySelectorAll(".url_videos"),
 			descripcion_curso = document.querySelectorAll("textarea[name='descripcion_curso[]']"),
 
 			/* STATUS */
@@ -390,7 +630,7 @@ let funciones = {
 			if (item.value == '') {
 				error_videos = true;
 				item.parentNode.classList.add('has-error');
-				item.nextElementSibling.innerHTML = 'El campo es requerido';
+				item.parentNode.nextElementSibling.innerHTML = 'El campo es requerido';
 			}
 		});
 
@@ -407,7 +647,8 @@ let funciones = {
 
 		if (error_videos == true) {
 			if (e.type == 'submit') {
-				window.scrollTo(0, document.querySelectorAll(".has-error")[0].offsetTop);
+				let posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+				window.scrollTo(0, posicion);
 			}
 
 			return false;
@@ -427,9 +668,34 @@ let funciones = {
 	    }
 	},
 
+	getCoords: function(elem) { // OBTENER LA POSICION RELATIVA DE UN ELENETO DENTTO DE WINDOW
+		var box = elem.getBoundingClientRect();
+
+		var body = document.body;
+		var docEl = document.documentElement;
+
+		var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+		var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+		var clientTop = docEl.clientTop || body.clientTop || 0;
+		var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+		var top  = box.top +  scrollTop - clientTop;
+		var left = box.left + scrollLeft - clientLeft;
+
+		return Math.round(top) - 200;
+	},
+
 	validarEmail: function(email) {
 		var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     	return regex.test(email) ? true : false;
+	},
+
+	htmlAgregarVideo: function(contador) {
+		return '<div class="div-container_videourl">'
+					+'<input type="text" class="form-control mt-3 url_videos" name="video_url['+contador+'][]" placeholder="url video">'
+				+'</div>'
+				+'<span class="form-text m-b-none errors"></span>';
 	},
 
 	htmlVideoCurso: function(contador) {
@@ -445,8 +711,13 @@ let funciones = {
                     +'<div class="form-group row">'
                         +'<label class="col-sm-2 col-form-label">Video url: </label>'
                         +'<div class="col-sm-10">'
-                            +'<input type="text" class="form-control" name="video_url[]">' 
+                        	+'<div class="d-flex">'
+                            	+'<input type="text" class="form-control url_videos" name="video_url['+contador+'][]">'
+                            	+'<button class="btn btn-success ml-4 add-url_video"> + </button>'
+                                +'<button class="btn btn-danger ml-2 remove-url_video"> - </button>'
+                            +'</div>'
                             +'<span class="form-text m-b-none errors"></span>'
+                            +'<div class="parent_mas-videos"></div>'
                         +'</div>'
                     +'</div>'
                     +'<div class="form-group row">'

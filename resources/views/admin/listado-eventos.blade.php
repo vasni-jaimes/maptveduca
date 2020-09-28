@@ -47,7 +47,7 @@
                     </div>
                     <div class="ibox-content">
                         <div class="table-responsive">
-                            @if (!$cursos->isEmpty())
+                            @if (!$eventos->isEmpty())
                                 <table class="table table-striped table-bordered table-hover dataTables-example">
                                     <thead>
                                         <tr>
@@ -59,23 +59,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($cursos as $curso)
+                                        @foreach($eventos as $evento)
                                             <tr class="gradeX">
-                                                <td> {{ $curso->nombre }} </td>
-                                                <td> <img src="{{ Storage::url($curso->url_img) }}" style="width: 100px"> </td>
+                                                <td> {{ $evento->nombre }} </td>
+                                                <td> <img src="{{ Storage::url($evento->img_evento) }}" style="width: 100px"> </td>
                                                 <td> 
-                                                	@foreach($curso->instructor as $instructor)
+                                                	@foreach($evento->instructor as $instructor)
                                                 		<p style="background: #d8c4cd"> {{ $instructor->nombres. " ". $instructor->apellidos }} </p>
                                                 	@endforeach
                                                 </td>
-                                                <td class="center"> {!! $curso->status == 1 ? "<span class='float-center label label-primary'>Activo</span>" : "<span class='float-center label label-danger'>Inactivo</span>" !!} </td>
+                                                <td class="center"> {!! $evento->status == 1 ? "<span class='float-center label label-primary'>Activo</span>" : "<span class='float-center label label-danger'>Inactivo</span>" !!} </td>
                                                 <td class="center">
                                                     
                                                     <div class="btn-group">
                                                      	<a href = "#" class="btn-info btn btn-xs mr-3">Ver Curso</a>
-                                                     	<a href="{{ route("agregar-curso.edit", $helper::base64_encode_url($curso->id)) }}" class="btn-primary btn btn-xs mr-3">Editar Curso</a>
-                                                     	<a href="#" class="btn-danger btn btn-xs mr-3">Eliminar Curso</a>
-                                                     	<a href = "#" class="btn-danger btn btn-xs">Desactivar</a>
+                                                     	<a href="{{ route("editar-evento.edit", $helper::base64_encode_url($evento->id)) }}" class="btn-primary btn btn-xs mr-3">Editar Evneto</a>
+                                                     	<a href="#" class="btn-danger btn btn-xs mr-3">Eliminar Evento</a>
+                                                     	@if ($evento->status == 1)
+                                                          <a href = "#" class="btn-danger btn btn-xs">Desactivar</a>
+                                                        @else
+                                                            <a href="#" class="btn-primary btn btn-xs">Activar</a>
+                                                        @endif
                                                    </div>
 
                                                 </td>

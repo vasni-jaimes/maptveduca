@@ -210,12 +210,38 @@
 				                            </div>
 				                        </div>
 				                        <div class="form-group row">
-				                            <label class="col-sm-2 col-form-label">Video url: </label>
-				                            <div class="col-sm-10">
-				                                <input type="text" class="form-control" name="video_url[]" value="{{ old("video_url.{$i}") }}">
-				                                <span class='form-text m-b-none errors'> {!! $errors->first('video_url.'.$i) !!} </span>
-				                            </div>
-				                        </div>
+                                            <label class="col-sm-2 col-form-label">Video url: </label>
+                                            <div class="col-sm-10">
+                                                @if (old("video_url.{$i}"))
+                                                    @for ($l=0; $l <= count(old("video_url.{$i}")) - 1; $l++)
+                                                        @if ($l == 0)
+                                                            <div class="d-flex">
+                                                                <input type="text" class="form-control url_videos" name="video_url[{{ $i }}][{{ $l }}]" value="{{ old("video_url.{$i}.{$l}") }}">
+                                                                <button class="btn btn-success ml-4 add-url_video"> + </button>
+                                                                <button class="btn btn-danger ml-2 remove-url_video"> - </button>
+                                                            </div>
+                                                            <span class='form-text m-b-none errors'> {!! $errors->first('video_url.'.$i.'.'.$l) !!} </span>
+
+                                                            <div class="parent_mas-videos">
+                                                        @else
+                                                            <div class="div-container_videourl">
+                                                                <input type="text" class="form-control mt-3 url_videos" name="video_url[{{ $i }}][{{ $l }}]" value="{{ old("video_url.{$i}.{$l}") }}">
+                                                            </div>
+                                                            <span class='form-text m-b-none errors'> {!! $errors->first('video_url.'.$i.'.'.$l) !!} </span>
+                                                        @endif
+                                                    @endfor
+                                                    </div>
+                                                @else
+                                                    <div class="d-flex">
+                                                        <input type="text" class="form-control url_videos" name="video_url[{{ $i }}][]" value="{{ old("video_url.{$i}") }}">
+                                                        <button class="btn btn-success ml-4 add-url_video"> + </button>
+                                                        <button class="btn btn-danger ml-2 remove-url_video"> - </button>
+                                                    </div>
+                                                    <span class='form-text m-b-none errors'> {!! $errors->first('video_url.'.$i) !!} </span>
+                                                    <div class="parent_mas-videos"></div>
+                                                @endif
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Descripcion: </label>
                                             <div class="col-sm-10">
@@ -259,11 +285,28 @@
     			                                <span class='form-text m-b-none errors'> {!! $errors->first('nombre_video.*') !!} </span>
     			                            </div>
     			                        </div>
+
     			                        <div class="form-group row">
     			                            <label class="col-sm-2 col-form-label">Video url: </label>
     			                            <div class="col-sm-10">
-    			                                <input type="text" class="form-control" name="video_url[]" value="{{ old("video_url.".$j, $team->url_video) }}"> 
-    			                                <span class='form-text m-b-none errors'> {!! $errors->first('video_url.*') !!} </span>
+                                                @for($a = 0; $a <= count($team->url_video) - 1; $a++)
+                                                    @if ($a == 0)
+                                                        <div class="d-flex">
+                                                            <input type="text" class="form-control url_videos" name="video_url[{{ $j }}][{{ $a }}]" value="{{ $team->url_video[$a] }}">
+                                                            <button class="btn btn-success ml-4 add-url_video"> + </button>
+                                                            <button class="btn btn-danger ml-2 remove-url_video"> - </button>
+                                                        </div>
+                                                        <span class='form-text m-b-none errors'> {!! $errors->first('video_url.'.$j.'.'.$a) !!} </span>
+
+                                                        <div class="parent_mas-videos">
+                                                    @else
+                                                        <div class="div-container_videourl">
+                                                            <input type="text" class="form-control mt-3 url_videos" name="video_url[{{ $j }}][{{ $a }}]" value="{{ $team->url_video[$a] }}">
+                                                        </div>
+                                                        <span class='form-text m-b-none errors'> {!! $errors->first('video_url.'.$j.'.'.$a) !!} </span>
+                                                    @endif
+                                                @endfor
+                                                </div>
     			                            </div>
     			                        </div>
                                         <div class="form-group row">

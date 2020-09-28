@@ -36,8 +36,8 @@
     </div>
 
 
-    @if (session()->has("status.newClass"))
-        @if (session()->get("status.newClass") == "error")
+    @if (session()->has("status.newEvento"))
+        @if (session()->get("status.newEvento") == "error")
             <div class="row justify-content-center">
                 <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
                     Ocurrio un error, intentelo más tarde.
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-        @elseif (session()->get("status.newClass") == "success")
+        @elseif (session()->get("status.newEvento") == "success")
             <div class="row justify-content-center">
                 <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
                     Se creo la clase correctamente
@@ -75,7 +75,7 @@
         <div class="col-lg-10">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>Formulario - Clase Nueva</h5>
+                    <h5>Formulario - Evento Nuevo</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -87,21 +87,21 @@
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>
                     </div>
-                    <form action="#" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-agregar_evento">
+                    <form action="{{ route("agregar-evento.store") }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-agregar_evento">
                         @csrf
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Nombre del evento: </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nombre_clase" value="{{ old("nombre_clase") }}"> 
-                                <span class='form-text m-b-none errors'> {!! $errors->first('nombre_clase') !!} </span>
+                                <input type="text" class="form-control" name="nombre_evento" value="{{ old("nombre_evento") }}"> 
+                                <span class='form-text m-b-none errors'> {!! $errors->first('nombre_evento') !!} </span>
                             </div>
                         </div>
 
                         <div class="form-group row mb-5">
                             <label class="col-sm-2 col-form-label">Imagen de evento: </label>
                             <div class="col-sm-10">
-                                <input id="logo" type="file" name="img_clase" class="form-control" accept="image/png, image/jpeg, image/jpg">
-                                <span class='form-text m-b-none errors'> {!! $errors->first('img_clase') !!} </span>
+                                <input id="logo" type="file" name="img_evento" class="form-control" accept="image/png, image/jpeg, image/jpg">
+                                <span class='form-text m-b-none errors'> {!! $errors->first('img_evento') !!} </span>
                             </div> 
                         </div>
 
