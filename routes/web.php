@@ -91,6 +91,10 @@ Route::get('single-clases', function() {
 	return view('site.single-clases');
 })->name('single-clases');
 
+Route::get('guia-estudio', function() {
+	return view('site.guia-estudio');
+})->name('guia-estudio');
+
 Route::get('faqs', function() {
 	return view('site.faqs');
 })->name('faqs');

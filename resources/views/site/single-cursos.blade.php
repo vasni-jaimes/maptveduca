@@ -8,7 +8,7 @@
 
     <section class="single-curso">
 
-        <div class="hoja-1400">
+        <div class="hoja-1000">
             
             <ul class="flex breadcrumb-curso">
                 <li><a href="#">Cursos</a></li>
@@ -72,7 +72,16 @@
                     </div> <!-- /single-contenido -->
                     
                     <div class="sidebar-registro">
-                        <span><a href="#">Empezar curso</a></span>
+                        <div class="txt-sidebar">
+                            <span><a href="#">Empezar curso</a></span>
+                            <p>Obtén tu membresía para comenzar este curso</p>
+                            <p>Membresía básica $500.00 MXN mensuales*</p>
+                            <p><small>* Pruébala por 30 días</small></p>
+                            <a href="#">Obtener</a>
+                            <p>Membresía académica</p>
+                            <p><small>$2,000.00 MXN mensuales*</small></p>
+                            <p><small>Este curso pertenece al plan de estudios del programa: Técnico en Producción Musical</small></p>
+                        </div> <!-- /txt-sidebar -->
                         <div class="favorito">
                             <p>Marca este curso como favorito</p>
                         </div> <!-- /favorito -->
@@ -81,7 +90,7 @@
                 </div> <!-- /flex -->
             </div> <!-- /wrapper-curso -->
             
-        </div> <!-- /hoja-1400 -->
+        </div> <!-- /hoja-1000 -->
 
     </section> <!-- /single-curso -->
 

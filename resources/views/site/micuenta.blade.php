@@ -283,6 +283,17 @@
                         </div> <!-- /row-perfil -->
                     </div>
                     
+                    <div style="margin-bottom: 30px;">
+                        <h3>Favoritos</h3>
+                        <div class="row-favoritos">
+                            <h3>Cursos</h3>
+                            <div class="row-slide">
+                                <p>¡Aún no tienes cursos favoritos! Ve a la sección CURSOS y márca cuantos quieras como favoritos.</p>
+                                <p>Los encontrarás aquí cuando vuelvas.</p>
+                            </div> <!-- /row-slide -->
+                        </div> <!-- /row-favoritos -->
+                    </div>
+                    
                 </div> <!-- /wrapper-tablero -->
                 
             </div> <!-- /flex -->
