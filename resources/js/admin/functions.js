@@ -3,40 +3,125 @@
 
 let funciones = {
 
-	cambiarStatus: function(e) {
+	obtenerSubmenus: function(e) {
 		e.preventDefault();
 
-		e.target.disabled = true;
+		let select_catego = e.target.value;
+		let token = document.querySelector("input[name='_token']").value;
 
-		let token = document.querySelector("input[name='_token']").value,
-			status = e.target.getAttribute('data-st');
-			id = e.target.getAttribute('data-id');
-
-        let opciones = {
+		let opciones = {
             method: "POST",
             credentials: "same-origin",
-            body: JSON.stringify({"status": status, "_token": token, "id": id}),
+            body: JSON.stringify({"categoria": select_catego, "_token": token}),
             headers:{
                 "Content-Type": "application/json"
             }
         };
 
-        fetch("/admin/eliminar-archivo", opciones)
+
+        fetch('/admin/obtenerSubcategorias', opciones)
             .then(response => response.json())
             .then(res => {
             	if (res.message == 'ok') {
-            		e.target.parentElement.parentElement.remove();
-            		alert('Se elimino el archivo correctamente');
+            		let options = '<select data-placeholder="Subcategorias" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_subcategorias[]">';
+            		res.main.forEach( function(item) { 
+            				options += "<option value="+item.id+">"+item.nombre+"</option>";
+            		});
+            		options += '</select>';
+            		//$(".div-subcate").html(options);
+            		document.querySelector(".div-subcate").innerHTML = options;
+
+            		$('.chosen-select').chosen({width: "100%"});
+			        $('.custom-file-input').on('change', function() {
+			            let fileName = $(this).val().split('\\').pop();
+			            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+			        });
+
+
+			        document.querySelector("div.div-subcate select").parentNode.children[1].firstChild.style.borderColor = "red";
+
             	}
-            	else if (res.message == 'no_parameters') {
-            		alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
-            		e.removeAttribute('disabled');
+            	else {
+            		swal("Error", "Ocurrio un error, intentalo más tarde", "error");
             	}
-            	else if (res.message == 'no_delete') {
-            		alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
-            		e.removeAttribute('disabled');
-            	}
-            })
+            });
+
+	},
+	cambiarStatus: function(url, e) {
+		//e.preventDefault();
+
+		swal({
+		  title: "¿Estas seguro?",
+		  text: "¿Quieres cambiar el estatus del curso?",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (!willDelete) {
+		  		return false;
+		  	}
+		  	else {
+		  		e.target.disabled = true;
+
+				let token = document.querySelector("input[name='_token']").value,
+					status = e.target.getAttribute('data-st');
+					id = e.target.getAttribute('data-id');
+
+		        let opciones = {
+		            method: "POST",
+		            credentials: "same-origin",
+		            body: JSON.stringify({"status": status, "_token": token, "id": id}),
+		            headers:{
+		                "Content-Type": "application/json"
+		            }
+		        };
+
+		        fetch(url, opciones)
+		            .then(response => response.json())
+		            .then(res => {
+		            	if (res.message == 'ok') {
+		            		let span = (status == 1) ? "<span class='float-center label label-primary'>Activo</span>" : "<span style='cursor:pointer' class='float-center label label-danger'>Inactivo</span>";
+		            		let btn = (status == 0) ? '<a href="#" data-id="'+id+'" data-st="1" class="btn-primary btn btn-xs btn-activar">Activar</a>' : '<a href = "#" class="btn-danger btn btn-xs btn-desactivar" data-id="'+id+'" data-st="0">Desactivar</a>';
+		            		let td = e.target.parentElement;
+
+		            		// ELIMINAR SPAN DE STATUS EN EL LISTADO Y AGREGAR EL NUEVO
+		            		td.parentElement.previousElementSibling.firstElementChild.remove();
+		            		td.parentElement.previousElementSibling.insertAdjacentHTML('afterbegin', span);
+
+		            		//ELIMINAR BOTON AL QUE SE LE HIZO CLICK Y AGREGAR EL NUEVO
+		            		e.target.remove();
+		            		td.insertAdjacentHTML('beforeend', btn);
+
+		            		//VOLVER ACTIVAR LOS EVENTOS
+		            		document.querySelectorAll(".btn-activar").forEach( (item) => {
+								item.addEventListener('click', function(e) {
+									e.preventDefault()
+									funciones.cambiarStatus(url, e);
+								})
+							});
+
+							document.querySelectorAll(".btn-desactivar").forEach( (item) => {
+								item.addEventListener('click', function(e) {
+									e.preventDefault()
+									funciones.cambiarStatus(url, e);
+								});
+							});
+
+							//ALERT
+		            		swal("Muy bien", "Se cambio el status correctamente", "success");
+		            	}
+		            	else if (res.message == 'error_input') {
+		            		swal("Algo salio mal", "Ocurrio un problema, intentalo más tarde", "error");
+		            		e.removeAttribute('disabled');
+		            	}
+		            	else if (res.message == 'error') {
+		            		swal("Algo salio mal", "Ocurrio un problema, intentalo más tarde", "error");
+		            		e.removeAttribute('disabled');
+		            	}
+		            });
+		  	}
+		});
 	},
 
 	validarAgregarInstructor: function(e) {
@@ -141,7 +226,7 @@ let funciones = {
 		let nombre_evento = document.querySelector("input[name='nombre_evento']");
 		let img_evento = document.querySelector("input[name='img_evento']");
 		let instructores = document.querySelector("select[name='select_instructores[]']");
-		let categorias = document.querySelector("select[name='select_categorias[]']");
+		let select_tipo = document.querySelector("select[name='select_tipo']");
 		let video_bienvenida = document.querySelector("input[name='video_bienvenida']");
 		let descripcion = document.querySelector("textarea[name='descripcion']");
 		let fecha_inicio = document.querySelector("input[name='fecha_inicio']");
@@ -189,10 +274,10 @@ let funciones = {
 			error_videos = true;
 		}
 
-		if (categorias.value == '' || categorias.value == null || categorias.value == undefined) {
-			categorias.parentNode.classList.add('has-error');
-			categorias.parentNode.children[1].firstChild.style.borderColor = "red";
-			categorias.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+		if (select_tipo.value == '' || select_tipo.value == null || select_tipo.value == undefined) {
+			select_tipo.parentNode.classList.add('has-error');
+			//select_tipo.parentNode.children[1].firstChild.style.borderColor = "red";
+			select_tipo.nextElementSibling.innerHTML = 'El campo es requerido';
 			error_videos = true;
 		}
 
@@ -212,8 +297,14 @@ let funciones = {
 
 		if (fecha_inicio.value == '') {
 			error_videos = true;
-			item.parentNode.classList.add('has-error');
-			item.nextElementSibling.innerHTML = 'El campo es requerido';
+			fecha_inicio.parentNode.classList.add('has-error');
+			fecha_inicio.nextElementSibling.innerHTML = 'El campo es requerido';
+		}
+
+		if (hora_inicio.value == '') {
+			error_videos = true;
+			hora_inicio.parentNode.classList.add('has-error');
+			hora_inicio.nextElementSibling.innerHTML = 'El campo es requerido';
 		}
 
 
@@ -238,8 +329,6 @@ let funciones = {
 
 	        document.querySelector("form[name='frm-editar_evento']").submit();
 	    }
-
-
 	},
 
 	validarAgregarClase: function(e) {
@@ -249,10 +338,7 @@ let funciones = {
 		let nombre_curso = document.querySelector("input[name='nombre_clase']"),
 			img_clase = document.querySelector("input[name='img_clase']"),
 			instructores = document.querySelector("select[name='select_instructores[]']"),
-			categorias = document.querySelector("select[name='select_categorias[]']"),
-			curso_extra = document.querySelector("input[name='curso_extra']"),
-			select_carreras = document.querySelector("select[name='select_carreras[]']"),
-			select_categorias = document.querySelector("select[name='select_categorias[]']"),
+			categorias = document.querySelector("select[name='select_categorias']"),
 
 			/* BIENVENIDA A LA CLASE */
 			video_bienvenida = document.querySelector("input[name='video_bienvenida']"),
@@ -270,7 +356,6 @@ let funciones = {
 			error_videos = false;
 
 			//SE ELIMINAN LOS RASTROS DE ERRORES
-
 			document.querySelectorAll('.errors').forEach(function(item) {
 				item.innerHTML = '';
 			});
@@ -287,7 +372,6 @@ let funciones = {
 			}
 
 			//SE ELIMINAN LOS RASTROS DE ERRORES\\
-
 
 			if (nombre_curso.value == '') {
 				nombre_curso.parentNode.classList.add('has-error');
@@ -312,8 +396,8 @@ let funciones = {
 
 			if (categorias.value == '' || categorias.value == null || categorias.value == undefined) {
 				categorias.parentNode.classList.add('has-error');
-				categorias.parentNode.children[1].firstChild.style.borderColor = "red";
-				categorias.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+				//categorias.parentNode.children[1].firstChild.style.borderColor = "red";
+				categorias.nextElementSibling.innerHTML = 'El campo es requerido';
 				error_videos = true;
 			}
 
@@ -506,14 +590,14 @@ let funciones = {
             .then(res => {
             	if (res.message == 'ok') {
             		e.target.parentElement.parentElement.remove();
-            		alert('Se elimino el archivo correctamente');
+            		swal("Muy bien", "Se elimino el archivo correctamente", "success");
             	}
             	else if (res.message == 'no_parameters') {
-            		alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
+            		swal("Algo salio mal", "Ocurrio un problema, intentalo más tarde", "error");
             		e.removeAttribute('disabled');
             	}
             	else if (res.message == 'no_delete') {
-            		alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
+            		swal("Algo salio mal", "Ocurrio un problema, intentalo más tarde", "error");
             		e.removeAttribute('disabled');
             	}
             })
@@ -527,10 +611,10 @@ let funciones = {
 		let nombre_curso = document.querySelector("input[name='nombre_curso']"),
 			img_curso = document.querySelector("input[name='img_curso']"),
 			instructores = document.querySelector("select[name='select_instructores[]']"),
-			categorias = document.querySelector("select[name='select_categorias[]']"),
+			categorias = document.querySelector("select[name='select_categorias']"),
 			curso_extra = document.querySelector("input[name='curso_extra']"),
 			select_carreras = document.querySelector("select[name='select_carreras[]']"),
-			select_categorias = document.querySelector("select[name='select_categorias[]']"),
+			select_subcategorias = document.querySelector("select[name='select_subcategorias[]']"),
 
 			/* BIENVENIDA AL CURSO */
 			video_bienvenida = document.querySelector("input[name='video_bienvenida']"),
@@ -581,8 +665,14 @@ let funciones = {
 
 		if (categorias.value == '' || categorias.value == null || categorias.value == undefined) {
 			categorias.parentNode.classList.add('has-error');
-			categorias.parentNode.children[1].firstChild.style.borderColor = "red";
-			categorias.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+			categorias.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		if (select_subcategorias.value == '' || select_subcategorias.value == null || select_subcategorias.value == undefined) {
+			select_subcategorias.parentNode.parentNode.classList.add('has-error');
+			select_subcategorias.parentNode.children[1].firstChild.style.borderColor = "red";
+			select_subcategorias.parentNode.nextElementSibling.innerHTML = 'El campo es requerido';
 			error_videos = true;
 		}
 
@@ -595,11 +685,11 @@ let funciones = {
 			}
 		}
 
-		if (select_categorias.value == '') {
-			select_categorias.parentNode.classList.add('has-error');
-			select_categorias.parentNode.children[1].firstChild.style.borderColor = "red";
-			select_categorias.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
-			error_videos = true;
+		if (select_carreras.value == '') {
+				select_carreras.parentNode.classList.add('has-error');
+				select_carreras.parentNode.children[1].firstChild.style.borderColor = "red";
+				select_carreras.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+				error_videos = true;
 		}
 
 

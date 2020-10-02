@@ -152,7 +152,16 @@ if (frmAgregarCurso || frmActualizarCurso) {
       e.preventDefault();
       e.target.parentNode.nextElementSibling.nextElementSibling.lastElementChild.remove();
     });
-  });
+  }); //EVENTO PARA OBTENER LAS SUBCATEGORIAS DEPENDIENDO DE LA CATEGORIA
+
+  var select_categorias = document.querySelector("select[name=select_categorias]");
+
+  if (select_categorias) {
+    select_categorias.addEventListener('change', function (e) {
+      e.preventDefault();
+      _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].obtenerSubmenus(e);
+    });
+  }
 
   if (frmAgregarCurso) {
     frmAgregarCurso.addEventListener('submit', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validacionAgregarCurso);
@@ -226,14 +235,114 @@ if (frmAgregarInstructor) {
     $(document).change("input", _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarInstructor);
     $("select").change(_functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarInstructor);
   }
-}
+} //Cambiar status curso
 
-var btn_activar = document.querySelectorAll("btn-activar");
 
-if (btn_activar) {
-  btn_activar.forEach(function (item) {
-    item.addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].cambiarStatus);
-  });
+var tabla_cursos = document.querySelector("table.tabla-cursos");
+
+if (tabla_cursos) {
+  var btn_activar = document.querySelectorAll(".btn-activar");
+
+  if (btn_activar) {
+    btn_activar.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].cambiarStatus("/admin/cambiar-status", e);
+      });
+    });
+  }
+
+  var btn_desactivar = document.querySelectorAll(".btn-desactivar");
+
+  if (btn_desactivar) {
+    btn_desactivar.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].cambiarStatus("/admin/cambiar-status", e);
+      });
+    });
+  }
+} //Cambiar status clase
+
+
+var tabla_clases = document.querySelector("table.tabla-clases");
+
+if (tabla_clases) {
+  var _btn_activar = document.querySelectorAll(".btn-activar");
+
+  if (_btn_activar) {
+    _btn_activar.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].cambiarStatus("/admin/cambiar-status-clase", e);
+      });
+    });
+  }
+
+  var _btn_desactivar = document.querySelectorAll(".btn-desactivar");
+
+  if (_btn_desactivar) {
+    _btn_desactivar.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].cambiarStatus("/admin/cambiar-status-clase", e);
+      });
+    });
+  }
+} //Cambiar status eventos
+
+
+var tabla_eventos = document.querySelector("table.tabla-eventos");
+
+if (tabla_eventos) {
+  var _btn_activar2 = document.querySelectorAll(".btn-activar");
+
+  if (_btn_activar2) {
+    _btn_activar2.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].cambiarStatus("/admin/cambiar-status-evento", e);
+      });
+    });
+  }
+
+  var _btn_desactivar2 = document.querySelectorAll(".btn-desactivar");
+
+  if (_btn_desactivar2) {
+    _btn_desactivar2.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].cambiarStatus("/admin/cambiar-status-evento", e);
+      });
+    });
+  }
+} //Cambiar status instructores
+
+
+var tabla_instructores = document.querySelector("table.tabla-instructores");
+
+if (tabla_instructores) {
+  var _btn_activar3 = document.querySelectorAll(".btn-activar");
+
+  if (_btn_activar3) {
+    _btn_activar3.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].cambiarStatus("/admin/cambiar-status-instructor", e);
+      });
+    });
+  }
+
+  var _btn_desactivar3 = document.querySelectorAll(".btn-desactivar");
+
+  if (_btn_desactivar3) {
+    _btn_desactivar3.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].cambiarStatus("/admin/cambiar-status-instructor", e);
+      });
+    });
+  }
 }
 
 /***/ }),
@@ -247,36 +356,109 @@ if (btn_activar) {
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
-  cambiarStatus: function cambiarStatus(e) {
+  obtenerSubmenus: function obtenerSubmenus(e) {
     e.preventDefault();
-    e.target.disabled = true;
-    var token = document.querySelector("input[name='_token']").value,
-        status = e.target.getAttribute('data-st');
-    id = e.target.getAttribute('data-id');
+    var select_catego = e.target.value;
+    var token = document.querySelector("input[name='_token']").value;
     var opciones = {
       method: "POST",
       credentials: "same-origin",
       body: JSON.stringify({
-        "status": status,
-        "_token": token,
-        "id": id
+        "categoria": select_catego,
+        "_token": token
       }),
       headers: {
         "Content-Type": "application/json"
       }
     };
-    fetch("/admin/eliminar-archivo", opciones).then(function (response) {
+    fetch('/admin/obtenerSubcategorias', opciones).then(function (response) {
       return response.json();
     }).then(function (res) {
       if (res.message == 'ok') {
-        e.target.parentElement.parentElement.remove();
-        alert('Se elimino el archivo correctamente');
-      } else if (res.message == 'no_parameters') {
-        alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
-        e.removeAttribute('disabled');
-      } else if (res.message == 'no_delete') {
-        alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
-        e.removeAttribute('disabled');
+        var options = '<select data-placeholder="Subcategorias" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_subcategorias[]">';
+        res.main.forEach(function (item) {
+          options += "<option value=" + item.id + ">" + item.nombre + "</option>";
+        });
+        options += '</select>'; //$(".div-subcate").html(options);
+
+        document.querySelector(".div-subcate").innerHTML = options;
+        $('.chosen-select').chosen({
+          width: "100%"
+        });
+        $('.custom-file-input').on('change', function () {
+          var fileName = $(this).val().split('\\').pop();
+          $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        });
+        document.querySelector("div.div-subcate select").parentNode.children[1].firstChild.style.borderColor = "red";
+      } else {
+        swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+      }
+    });
+  },
+  cambiarStatus: function cambiarStatus(url, e) {
+    //e.preventDefault();
+    swal({
+      title: "¿Estas seguro?",
+      text: "¿Quieres cambiar el estatus del curso?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(function (willDelete) {
+      if (!willDelete) {
+        return false;
+      } else {
+        e.target.disabled = true;
+        var token = document.querySelector("input[name='_token']").value,
+            status = e.target.getAttribute('data-st');
+        id = e.target.getAttribute('data-id');
+        var opciones = {
+          method: "POST",
+          credentials: "same-origin",
+          body: JSON.stringify({
+            "status": status,
+            "_token": token,
+            "id": id
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        };
+        fetch(url, opciones).then(function (response) {
+          return response.json();
+        }).then(function (res) {
+          if (res.message == 'ok') {
+            var span = status == 1 ? "<span class='float-center label label-primary'>Activo</span>" : "<span style='cursor:pointer' class='float-center label label-danger'>Inactivo</span>";
+            var btn = status == 0 ? '<a href="#" data-id="' + id + '" data-st="1" class="btn-primary btn btn-xs btn-activar">Activar</a>' : '<a href = "#" class="btn-danger btn btn-xs btn-desactivar" data-id="' + id + '" data-st="0">Desactivar</a>';
+            var td = e.target.parentElement; // ELIMINAR SPAN DE STATUS EN EL LISTADO Y AGREGAR EL NUEVO
+
+            td.parentElement.previousElementSibling.firstElementChild.remove();
+            td.parentElement.previousElementSibling.insertAdjacentHTML('afterbegin', span); //ELIMINAR BOTON AL QUE SE LE HIZO CLICK Y AGREGAR EL NUEVO
+
+            e.target.remove();
+            td.insertAdjacentHTML('beforeend', btn); //VOLVER ACTIVAR LOS EVENTOS
+
+            document.querySelectorAll(".btn-activar").forEach(function (item) {
+              item.addEventListener('click', function (e) {
+                e.preventDefault();
+                funciones.cambiarStatus(url, e);
+              });
+            });
+            document.querySelectorAll(".btn-desactivar").forEach(function (item) {
+              item.addEventListener('click', function (e) {
+                e.preventDefault();
+                funciones.cambiarStatus(url, e);
+              });
+            }); //ALERT
+
+            swal("Muy bien", "Se cambio el status correctamente", "success");
+          } else if (res.message == 'error_input') {
+            swal("Algo salio mal", "Ocurrio un problema, intentalo más tarde", "error");
+            e.removeAttribute('disabled');
+          } else if (res.message == 'error') {
+            swal("Algo salio mal", "Ocurrio un problema, intentalo más tarde", "error");
+            e.removeAttribute('disabled');
+          }
+        });
       }
     });
   },
@@ -377,7 +559,7 @@ var funciones = {
     var nombre_evento = document.querySelector("input[name='nombre_evento']");
     var img_evento = document.querySelector("input[name='img_evento']");
     var instructores = document.querySelector("select[name='select_instructores[]']");
-    var categorias = document.querySelector("select[name='select_categorias[]']");
+    var select_tipo = document.querySelector("select[name='select_tipo']");
     var video_bienvenida = document.querySelector("input[name='video_bienvenida']");
     var descripcion = document.querySelector("textarea[name='descripcion']");
     var fecha_inicio = document.querySelector("input[name='fecha_inicio']");
@@ -421,10 +603,10 @@ var funciones = {
       error_videos = true;
     }
 
-    if (categorias.value == '' || categorias.value == null || categorias.value == undefined) {
-      categorias.parentNode.classList.add('has-error');
-      categorias.parentNode.children[1].firstChild.style.borderColor = "red";
-      categorias.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+    if (select_tipo.value == '' || select_tipo.value == null || select_tipo.value == undefined) {
+      select_tipo.parentNode.classList.add('has-error'); //select_tipo.parentNode.children[1].firstChild.style.borderColor = "red";
+
+      select_tipo.nextElementSibling.innerHTML = 'El campo es requerido';
       error_videos = true;
     }
 
@@ -442,8 +624,14 @@ var funciones = {
 
     if (fecha_inicio.value == '') {
       error_videos = true;
-      item.parentNode.classList.add('has-error');
-      item.nextElementSibling.innerHTML = 'El campo es requerido';
+      fecha_inicio.parentNode.classList.add('has-error');
+      fecha_inicio.nextElementSibling.innerHTML = 'El campo es requerido';
+    }
+
+    if (hora_inicio.value == '') {
+      error_videos = true;
+      hora_inicio.parentNode.classList.add('has-error');
+      hora_inicio.nextElementSibling.innerHTML = 'El campo es requerido';
     }
 
     if (error_videos == true) {
@@ -474,10 +662,7 @@ var funciones = {
     var nombre_curso = document.querySelector("input[name='nombre_clase']"),
         img_clase = document.querySelector("input[name='img_clase']"),
         instructores = document.querySelector("select[name='select_instructores[]']"),
-        categorias = document.querySelector("select[name='select_categorias[]']"),
-        curso_extra = document.querySelector("input[name='curso_extra']"),
-        select_carreras = document.querySelector("select[name='select_carreras[]']"),
-        select_categorias = document.querySelector("select[name='select_categorias[]']"),
+        categorias = document.querySelector("select[name='select_categorias']"),
 
     /* BIENVENIDA A LA CLASE */
     video_bienvenida = document.querySelector("input[name='video_bienvenida']"),
@@ -530,9 +715,9 @@ var funciones = {
     }
 
     if (categorias.value == '' || categorias.value == null || categorias.value == undefined) {
-      categorias.parentNode.classList.add('has-error');
-      categorias.parentNode.children[1].firstChild.style.borderColor = "red";
-      categorias.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+      categorias.parentNode.classList.add('has-error'); //categorias.parentNode.children[1].firstChild.style.borderColor = "red";
+
+      categorias.nextElementSibling.innerHTML = 'El campo es requerido';
       error_videos = true;
     }
 
@@ -667,12 +852,12 @@ var funciones = {
     }).then(function (res) {
       if (res.message == 'ok') {
         e.target.parentElement.parentElement.remove();
-        alert('Se elimino el archivo correctamente');
+        swal("Muy bien", "Se elimino el archivo correctamente", "success");
       } else if (res.message == 'no_parameters') {
-        alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
+        swal("Algo salio mal", "Ocurrio un problema, intentalo más tarde", "error");
         e.removeAttribute('disabled');
       } else if (res.message == 'no_delete') {
-        alert('Ocurrio un problema al intentar borrar el archivo, intentelo más tarde');
+        swal("Algo salio mal", "Ocurrio un problema, intentalo más tarde", "error");
         e.removeAttribute('disabled');
       }
     });
@@ -685,10 +870,10 @@ var funciones = {
     var nombre_curso = document.querySelector("input[name='nombre_curso']"),
         img_curso = document.querySelector("input[name='img_curso']"),
         instructores = document.querySelector("select[name='select_instructores[]']"),
-        categorias = document.querySelector("select[name='select_categorias[]']"),
+        categorias = document.querySelector("select[name='select_categorias']"),
         curso_extra = document.querySelector("input[name='curso_extra']"),
         select_carreras = document.querySelector("select[name='select_carreras[]']"),
-        select_categorias = document.querySelector("select[name='select_categorias[]']"),
+        select_subcategorias = document.querySelector("select[name='select_subcategorias[]']"),
 
     /* BIENVENIDA AL CURSO */
     video_bienvenida = document.querySelector("input[name='video_bienvenida']"),
@@ -738,8 +923,14 @@ var funciones = {
 
     if (categorias.value == '' || categorias.value == null || categorias.value == undefined) {
       categorias.parentNode.classList.add('has-error');
-      categorias.parentNode.children[1].firstChild.style.borderColor = "red";
-      categorias.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+      categorias.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (select_subcategorias.value == '' || select_subcategorias.value == null || select_subcategorias.value == undefined) {
+      select_subcategorias.parentNode.parentNode.classList.add('has-error');
+      select_subcategorias.parentNode.children[1].firstChild.style.borderColor = "red";
+      select_subcategorias.parentNode.nextElementSibling.innerHTML = 'El campo es requerido';
       error_videos = true;
     }
 
@@ -752,10 +943,10 @@ var funciones = {
       }
     }
 
-    if (select_categorias.value == '') {
-      select_categorias.parentNode.classList.add('has-error');
-      select_categorias.parentNode.children[1].firstChild.style.borderColor = "red";
-      select_categorias.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+    if (select_carreras.value == '') {
+      select_carreras.parentNode.classList.add('has-error');
+      select_carreras.parentNode.children[1].firstChild.style.borderColor = "red";
+      select_carreras.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
       error_videos = true;
     }
 

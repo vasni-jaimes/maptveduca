@@ -14,6 +14,9 @@ use App\Decorators\CoursesDecorator;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\Helper;
 use App\Course;
+use App\Subcategoria;
+use Illuminate\Support\Facades\Validator;
+use DB;
 
 class CoursesController extends Controller
 {
@@ -48,9 +51,9 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        $categorias   = Category::where('status', 1)->get();
-        $instructors  = Instructor::where('status', 1)->get();
-        $careers      = Career::where('status', 1)->get();
+        $categorias     = Category::where('status', 1)->get();
+        $instructors    = Instructor::where('status', 1)->get();
+        $careers        = Career::where('status', 1)->get();
         return view("admin.agregar-curso", compact("categorias", "instructors", "careers"));
     }
 
@@ -62,7 +65,7 @@ class CoursesController extends Controller
      */
     public function store(ValidateAgregarCurso $request)
     {
-        return response()->json($request);
+        //return response()->json($request);
         return $this->coursesDecorator->AgregarCursoDecore($request);
     }
 
@@ -116,7 +119,6 @@ class CoursesController extends Controller
 
     public function deleteFile(Request $request)
     {
-
         if ($request->has('documento')) {
             if (Storage::delete($request->documento)) {
                 return response()->json(['message' => 'ok'], 200);
@@ -126,5 +128,50 @@ class CoursesController extends Controller
 
         return response()->json(['message' => 'no_parameters'], 200);
 
+    }
+
+
+    public function cambiarStatus(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            "id"     => "required|string",
+            "status" => "required|numeric"
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                "message" => 'error_input',
+                "inputs" => $validator->errors(),
+            ], 201);
+        }
+
+        $id     = $this->helper::base64_decode_url($request->id);
+        $status = $request->status;
+
+
+        DB::beginTransaction(); 
+        $curso          = Course::findOrFail($id);
+        $curso->id      = $id;
+        $curso->status = $status;
+
+        if ($curso->save()) {
+            DB::commit();
+            return response()->json(["message" => "ok"]);
+        }
+
+        DB::rollback();
+        return response()->json(["message" => "error"]);
+    }
+
+
+    public function obtenerSubcategorias(Request $request)
+    {
+        if ($request->has("categoria")) {
+            $subcategoria = Subcategoria::where("status", 1)->where("categoria_id", $request->categoria)->get();
+            return response()->json(["message" => "ok", "main" => $subcategoria]);
+        }
+
+        return response()->json(["message" => "error"]);
     }
 }

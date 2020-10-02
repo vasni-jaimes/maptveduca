@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEventosCategoriesTable extends Migration
+class CreateTipoEventosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateEventosCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('eventos_categories', function (Blueprint $table) {
+        Schema::create('tipo_eventos', function (Blueprint $table) {
             $table->id();
-            $table->integer("evento_id");
-            $table->integer("category_id");
+            $table->string("nombre");
+            $table->boolean("status")->default(1);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateEventosCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('eventos_categories');
+        Schema::dropIfExists('tipo_eventos');
     }
 }

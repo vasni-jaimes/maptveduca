@@ -48,7 +48,7 @@
                     <div class="ibox-content">
                         <div class="table-responsive">
                             @if (!$clases->isEmpty())
-                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <table class="table table-striped table-bordered table-hover dataTables-example tabla-clases">
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
@@ -61,7 +61,7 @@
                                     <tbody>
                                         @foreach($clases as $clase)
                                             <tr class="gradeX">
-                                                <td> {{ $clase->nombre }} </td>
+                                                <td> {{ $clase->nombre_clase }} </td>
                                                 <td> <img src="{{ Storage::url($clase->img) }}" style="width: 100px"> </td>
                                                 <td> 
                                                 	@foreach($clase->instructor as $instructor)
@@ -76,9 +76,9 @@
                                                      	<a href="{{ route("editar-clase.edit", $helper::base64_encode_url($clase->id)) }}" class="btn-primary btn btn-xs mr-3">Editar Curso</a>
                                                      	<a href="#" class="btn-danger btn btn-xs mr-3">Eliminar Curso</a>
                                                      	@if ($clase->status == 1)
-                                                          <a href = "#" class="btn-danger btn btn-xs">Desactivar</a>
+                                                          <a href = "#" class="btn-danger btn btn-xs btn-desactivar" data-id="{{ $helper::base64_encode_url($clase->id) }}" data-st="0">Desactivar</a>
                                                         @else
-                                                            <a href="#" class="btn-primary btn btn-xs">Activar</a>
+                                                            <a href="#" data-id="{{ $helper::base64_encode_url($clase->id) }}" data-st="1" class="btn-primary btn btn-xs btn-activar">Activar</a>
                                                         @endif
                                                    </div>
 
@@ -151,8 +151,9 @@
          
              });
          
-         });
-         
-      </script>
+         });     
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/admini/js/app.js"></script>
 
 @stop

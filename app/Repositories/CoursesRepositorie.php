@@ -25,6 +25,7 @@ class CoursesRepositorie
 		$course->nombre 				  = $request->nombre_curso;
 		$course->video_bienvenida 	      = $request->video_bienvenida;
 		$course->descripcion_bienvenida   = $request->descripcion;
+        $course->categoria_id             = $request->select_categorias;
 
 		if ($course->save()) {
             //TEMARIO DEL CURSO
@@ -41,7 +42,7 @@ class CoursesRepositorie
                     return back()->withInput()->with("status.newCurso", "error");
                 }
 
-                if (!$this->insertCategories($course->id, $request->select_categorias)) {
+                if (!$this->insertSubCategories($course->id, $request->select_subcategorias)) {
                     DB::rollback();
                     return back()->withInput()->with("status.newCurso", "error");
                 }
@@ -71,6 +72,7 @@ class CoursesRepositorie
         $course->nombre                   = $request->nombre_curso;
         $course->video_bienvenida         = $request->video_bienvenida;
         $course->descripcion_bienvenida   = $request->descripcion;
+        $course->categoria_id             = $request->select_categorias;
 
         if ($course->save()) {
             //TEMARIO DEL CURSO
@@ -103,13 +105,13 @@ class CoursesRepositorie
 
 
                 //ACTUALIZAR CATEGORIAS
-                if (!$this->eliminarCategories($id)) {
+                if (!$this->eliminarSubCategories($id)) {
                     DB::rollback();
                     $this->eliminarImagen($request->img_curso);
                     return back()->withInput()->with("status.updateCurso", "error");
                 }
 
-                if (!$this->insertCategories($course->id, $request->select_categorias)) {
+                if (!$this->insertSubCategories($course->id, $request->select_subcategorias)) {
                     DB::rollback();
                     $this->eliminarImagen($request->img_curso);
                     return back()->withInput()->with("status.updateCurso", "error");
@@ -168,12 +170,12 @@ class CoursesRepositorie
 	}
 
 
-    protected function insertCategories($course_id, $categories)
+    protected function insertSubCategories($course_id, $subcategories)
     {
-        foreach ($categories as $category) {
-            $insertCategory = DB::table('courses_categories')->insert(
+        foreach ($subcategories as $category) {
+            $insertCategory = DB::table('courses_subcategorias')->insert(
                 ["course_id" => $course_id,
-                "category_id" => $category]
+                "subcategoria_id" => $category]
             );
 
             if (!$insertCategory) {
@@ -189,9 +191,9 @@ class CoursesRepositorie
     }
 
 
-    protected function eliminarCategories($course_id)
+    protected function eliminarSubCategories($course_id)
     {
-        $eliminarCategory = DB::table('courses_categories')
+        $eliminarCategory = DB::table('courses_subcategorias')
                                 ->where('course_id', $course_id)->delete();
 
         return true;

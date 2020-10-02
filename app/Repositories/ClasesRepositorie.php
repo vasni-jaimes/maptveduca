@@ -25,6 +25,7 @@ class ClasesRepositorie
     	$clase->video_bienvenida 		= $request->video_bienvenida;
     	$clase->descripcion_bienvenida 	= $request->descripcion;
     	$clase->cuantas_sesiones 		= $request->select_sesiones;
+        $clase->category_id             = $request->select_categorias;
 
     	if ($clase->save()) {
     		//SLUG DE LA CLASE
@@ -36,11 +37,6 @@ class ClasesRepositorie
             if ($clase->save()) {
 
             	if (!$this->insertInstructor($clase->id, $request->select_instructores)) {
-                    DB::rollback();
-                    return back()->withInput()->with("status.newClass", "error");
-                }
-
-                if (!$this->insertCategories($clase->id, $request->select_categorias)) {
                     DB::rollback();
                     return back()->withInput()->with("status.newClass", "error");
                 }
@@ -71,6 +67,7 @@ class ClasesRepositorie
         $clase->video_bienvenida        = $request->video_bienvenida;
         $clase->descripcion_bienvenida  = $request->descripcion;
         $clase->cuantas_sesiones        = $request->select_sesiones;
+        $clase->category_id             = $request->select_categorias;
 
         if ($clase->save()) {
             //TEMARIO DEL CURSO
@@ -97,22 +94,6 @@ class ClasesRepositorie
                     return back()->withInput()->with("status.updateClass", "error");
                 }
                 /* ACTUALIZAR INSTRUCTOR \\ */
-
-
-                /* ACTUALIZAR CATEGORIAS */
-                if (!$this->eliminarCategories($id)) {
-                    DB::rollback();
-                    $this->eliminarImagen($request->img_clase);
-                    return back()->withInput()->with("status.updateClass", "error");
-                }
-
-                if (!$this->insertCategories($clase->id, $request->select_categorias)) {
-                    DB::rollback();
-                    $this->eliminarImagen($request->img_clase);
-                    return back()->withInput()->with("status.updateClass", "error");
-                }
-                /* ACTUALIZAR CATEGORIAS \\ */
-
 
                 /* ACTUALIZAR SESSIONES */
                 if (!$this->eliminarSessiones($id)) {
@@ -170,36 +151,6 @@ class ClasesRepositorie
     protected function eliminarSessiones($clas_id)
     {
         $eliminarSessiones = DB::table('clases_sessiones')
-                                ->where('clas_id', $clas_id)->delete();
-
-        return true;
-    }
-
-
-    protected function insertCategories($clas_id, $categories)
-    {
-        foreach ($categories as $category) {
-            $insertCategory = DB::table('clases_categories')->insert(
-                ["clas_id" => $clas_id,
-                "category_id" => $category]
-            );
-
-            if (!$insertCategory) {
-                return false;
-            }
-        }
-
-        if (!$insertCategory) {
-            return false;
-        }
-
-        return true;
-    }
-
-
-    protected function eliminarCategories($clas_id)
-    {
-        $eliminarCategory = DB::table('clases_categories')
                                 ->where('clas_id', $clas_id)->delete();
 
         return true;

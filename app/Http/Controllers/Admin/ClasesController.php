@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use App\Category;
 use App\Instructor;
 use App\Clase;
+use Illuminate\Support\Facades\Validator;
+use DB;
 
 class ClasesController extends Controller
 {
@@ -107,5 +109,39 @@ class ClasesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function cambiarStatus(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            "id"     => "required|string",
+            "status" => "required|numeric"
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                "message" => 'error_input',
+                "inputs" => $validator->errors(),
+            ], 201);
+        }
+
+        $id     = $this->helper::base64_decode_url($request->id);
+        $status = $request->status;
+
+
+        DB::beginTransaction(); 
+        $clase          = Clase::findOrFail($id);
+        $clase->id      = $id;
+        $clase->status = $status;
+
+        if ($clase->save()) {
+            DB::commit();
+            return response()->json(["message" => "ok"]);
+        }
+
+        DB::rollback();
+        return response()->json(["message" => "error"]);
     }
 }

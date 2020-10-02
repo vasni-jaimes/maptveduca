@@ -12,9 +12,4 @@ class Evento extends Model
     {
     	return $this->belongsToMany('App\Instructor', 'eventos_instructors', 'evento_id');
     }
-
-    public function category()
-    {
-    	return $this->belongsToMany('App\Category', 'eventos_categories', 'evento_id');
-    }
 }

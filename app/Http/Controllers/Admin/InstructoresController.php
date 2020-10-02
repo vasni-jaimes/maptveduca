@@ -8,7 +8,9 @@ use App\Decorators\InstructoresDecorator;
 use App\Helpers\Helper;
 use App\Http\Requests\ValidarAgregarInstructor;
 use App\Http\Requests\ValidarEditarInstructor;
+use Illuminate\Support\Facades\Validator;
 use App\Instructor;
+use DB;
 
 class InstructoresController extends Controller
 {
@@ -102,5 +104,39 @@ class InstructoresController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function cambiarStatus(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            "id"     => "required|string",
+            "status" => "required|numeric"
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                "message" => 'error_input',
+                "inputs" => $validator->errors(),
+            ], 201);
+        }
+
+        $id     = $this->helper::base64_decode_url($request->id);
+        $status = $request->status;
+
+
+        DB::beginTransaction(); 
+        $instructor          = Instructor::findOrFail($id);
+        $instructor->id      = $id;
+        $instructor->status  = $status;
+
+        if ($instructor->save()) {
+            DB::commit();
+            return response()->json(["message" => "ok"]);
+        }
+
+        DB::rollback();
+        return response()->json(["message" => "error"]);
     }
 }

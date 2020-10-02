@@ -3,11 +3,12 @@
 
 namespace App\Decorators;
 use App\Repositories\CoursesRepositorie;
-use App\Category;
+use App\Subcategoria;
 use App\Helpers\Helper;
 use App\Course;
 use App\Instructor;
 use App\Career;
+use App\Category;
 use Illuminate\Support\Collection;
 
 Class CoursesDecorator
@@ -26,25 +27,29 @@ Class CoursesDecorator
 
 	public function edit($id)
 	{
-		$categorias  	= Category::where('status', 1)->get();
-		$instructors 	= Instructor::where('status', 1)->get();
-		$careers 		= Career::where('status', 1)->get();
-        $id 		 	= $this->helper::base64_decode_url($id);
-       	$curso 		 	= Course::with(['category', 'careers', 'instructor'])->findOrFail($id);
-       	$myInstructors 	= collect($curso->instructor)->pluck('id')->toArray();
-       	$myCareers		= collect($curso->careers)->pluck('id')->toArray();
-       	$myCategories 	= collect($curso->category)->pluck('id')->toArray();
-       	$temario 		= json_decode($curso->temario);
-       	$helper 		= $this->helper;
+		$categorias  		= Category::where('status', 1)->get();
+		$instructors 		= Instructor::where('status', 1)->get();
+		$careers 			= Career::where('status', 1)->get();
+        $id 		 		= $this->helper::base64_decode_url($id);
+       	$curso 		 		= Course::with(['subcategorias', 'careers', 'instructor'])->findOrFail($id);
+       	$subcategorias 		= Subcategoria::where("status", 1)->where("categoria_id", $curso->categoria_id)->get();
 
 
-       	return array("categorias" => $categorias,
+       	$myInstructors 		= collect($curso->instructor)->pluck('id')->toArray();
+       	$myCareers			= collect($curso->careers)->pluck('id')->toArray();
+       	$mySubcategorias 	= collect($curso->subcategorias)->pluck('id')->toArray();
+       	$temario 			= json_decode($curso->temario);
+       	$helper 			= $this->helper;
+
+
+       	return array("subcategorias" => $subcategorias,
+       				 "categorias" => $categorias,
        				 "id" => $id,
        				 "instructors" => $instructors,
        				 "curso" => $curso,
        				 "careers" => $careers, 
        				 "myInstructors" => $myInstructors,
-       				 "myCategories" => $myCategories,
+       				 "mySubcategorias" => $mySubcategorias,
        				 "temario" => $temario,
        				 "helper" => $helper,
        				 "myCareers" => $myCareers);

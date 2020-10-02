@@ -41,7 +41,6 @@ if (frmAgregarCurso || frmActualizarCurso) {
 		});
 	}
 
-
 	//EVENTO PARA AGREGAR URL DE VIDEOS
 	$(document).on('click', '.add-url_video', function(e) {
 		e.preventDefault();
@@ -61,6 +60,15 @@ if (frmAgregarCurso || frmActualizarCurso) {
 			e.target.parentNode.nextElementSibling.nextElementSibling.lastElementChild.remove();
 		});
 	});
+
+	//EVENTO PARA OBTENER LAS SUBCATEGORIAS DEPENDIENDO DE LA CATEGORIA
+	let select_categorias = document.querySelector("select[name=select_categorias]");
+	if (select_categorias) {
+		select_categorias.addEventListener('change', function(e) {
+			e.preventDefault();
+			funciones.obtenerSubmenus(e);
+		});
+	}
 
 
 	if (frmAgregarCurso) {
@@ -141,12 +149,105 @@ if (frmAgregarInstructor) {
 }
 
 
-const btn_activar = document.querySelectorAll("btn-activar");
-if (btn_activar) {
-	btn_activar.forEach( (item) => {
-		item.addEventListener('click', funciones.cambiarStatus)
-	});
+//Cambiar status curso
+let tabla_cursos = document.querySelector("table.tabla-cursos");
+if (tabla_cursos) {
+	let btn_activar = document.querySelectorAll(".btn-activar");
+	if (btn_activar) {
+		btn_activar.forEach( (item) => {
+			item.addEventListener('click', function(e) {
+				e.preventDefault();
+				funciones.cambiarStatus("/admin/cambiar-status", e);
+			})
+		});
+	}
+
+	let btn_desactivar = document.querySelectorAll(".btn-desactivar");
+	if (btn_desactivar) {
+		btn_desactivar.forEach( (item) => {
+			item.addEventListener('click', function(e) {
+				e.preventDefault();
+				funciones.cambiarStatus("/admin/cambiar-status", e);
+			});
+		});
+	}
 }
 
 
+
+//Cambiar status clase
+let tabla_clases = document.querySelector("table.tabla-clases");
+if (tabla_clases) {
+	let btn_activar = document.querySelectorAll(".btn-activar");
+	if (btn_activar) {
+		btn_activar.forEach( (item) => {
+			item.addEventListener('click', function(e) {
+				e.preventDefault();
+				funciones.cambiarStatus("/admin/cambiar-status-clase", e);
+			});
+		});
+	}
+
+	let btn_desactivar = document.querySelectorAll(".btn-desactivar");
+	if (btn_desactivar) {
+		btn_desactivar.forEach( (item) => {
+			item.addEventListener('click', function(e) {
+				e.preventDefault();
+				funciones.cambiarStatus("/admin/cambiar-status-clase", e);
+			});
+		});
+	}
+}
+
+
+
+//Cambiar status eventos
+let tabla_eventos = document.querySelector("table.tabla-eventos");
+if (tabla_eventos) {
+	let btn_activar = document.querySelectorAll(".btn-activar");
+	if (btn_activar) {
+		btn_activar.forEach( (item) => {
+			item.addEventListener('click', function(e) {
+				e.preventDefault();
+				funciones.cambiarStatus("/admin/cambiar-status-evento", e);
+			});
+		});
+	}
+
+	let btn_desactivar = document.querySelectorAll(".btn-desactivar");
+	if (btn_desactivar) {
+		btn_desactivar.forEach( (item) => {
+			item.addEventListener('click', function(e) {
+				e.preventDefault();
+				funciones.cambiarStatus("/admin/cambiar-status-evento", e);
+			});
+		});
+	}
+}
+
+
+
+//Cambiar status instructores
+let tabla_instructores = document.querySelector("table.tabla-instructores");
+if (tabla_instructores) {
+	let btn_activar = document.querySelectorAll(".btn-activar");
+	if (btn_activar) {
+		btn_activar.forEach( (item) => {
+			item.addEventListener('click', function(e) {
+				e.preventDefault();
+				funciones.cambiarStatus("/admin/cambiar-status-instructor", e);
+			});
+		});
+	}
+
+	let btn_desactivar = document.querySelectorAll(".btn-desactivar");
+	if (btn_desactivar) {
+		btn_desactivar.forEach( (item) => {
+			item.addEventListener('click', function(e) {
+				e.preventDefault();
+				funciones.cambiarStatus("/admin/cambiar-status-instructor", e);
+			});
+		});
+	}
+}
 

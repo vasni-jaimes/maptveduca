@@ -31,15 +31,17 @@ Route::post('agregar-curso', 'Admin\CoursesController@store')->name('agregar-cur
 Route::get('editar-curso/{curso_id}', 'Admin\CoursesController@edit')->name('agregar-curso.edit');
 Route::post('editar-curso/{curso_id}', 'Admin\CoursesController@update')->name('actualizar-curso.update');
 Route::post('eliminar-archivo', 'Admin\CoursesController@deleteFile')->name('eliminar-archivo.delete');
+Route::post('cambiar-status', 'Admin\CoursesController@cambiarStatus')->name('cambiar-status');
+Route::post('obtenerSubcategorias', 'Admin\CoursesController@obtenerSubcategorias');
 
 
-
-//CURSOS EN LINEA
+//CLASES EN LINEA
 Route::get('agregar-clase', 'Admin\ClasesController@create')->name('agregar-clase.create');
 Route::post('agregar-clase', 'Admin\ClasesController@store')->name('agregar-clase.store');
 Route::get('listado-clases', 'Admin\ClasesController@index')->name('listado-clases.index');
 Route::get('editar-clase/{clase_id}', 'Admin\ClasesController@edit')->name('editar-clase.edit');
 Route::post('editar-clase/{clase_id}', 'Admin\ClasesController@update')->name('editar-clase.update');
+Route::post('cambiar-status-clase', 'Admin\ClasesController@cambiarStatus')->name('cambiar-status-clase');
 
 //EVENTOS EN LINEA
 Route::get('agregar-evento', 'Admin\EventosController@create')->name('agregar-evento.create');
@@ -47,9 +49,11 @@ Route::post('agregar-evento', 'Admin\EventosController@store')->name('agregar-ev
 Route::get('editar-evento/{evento_id}', 'Admin\EventosController@edit')->name('editar-evento.edit');
 Route::get('listado-eventos', 'Admin\EventosController@index')->name('listado-eventos.index');
 Route::post('editar-evento/{evento_id}', 'Admin\EventosController@update')->name('editar-evento.update');
+Route::post('cambiar-status-evento', 'Admin\EventosController@cambiarStatus')->name('cambiar-status-evento');
 
 //INSTRUCTORES
 Route::get('agregar-instructor', 'Admin\InstructoresController@create')->name('agregar-instructor.create');
 Route::post('agregar-instructores', 'Admin\InstructoresController@store')->name('agregar-instructor.store');
 Route::get('listado-instructores', 'Admin\InstructoresController@index')->name('listado-instructores.index');
 Route::get('editar-instructor/{instructor_id}', 'Admin\InstructoresController@edit')->name('editar-instructor.edit');
+Route::post('cambiar-status-instructor', 'Admin\InstructoresController@cambiarStatus')->name('cambiar-status-instructor');

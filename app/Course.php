@@ -18,6 +18,11 @@ class Course extends Model
     	return $this->belongsToMany('App\Category', 'courses_categories');
     }
 
+    public function subcategorias()
+    {
+        return $this->belongsToMany('App\Subcategoria', 'courses_subcategorias');
+    }
+
     public function careers()
     {
     	return $this->belongsToMany('App\Career', 'courses_careers');

@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Decorators\EventosDecorator;
+use App\Http\Requests\ValidarAgregarEvento;
+use App\Http\Requests\ValidarUpdateEvento;
 use App\Helpers\Helper;
-use App\Category;
 use App\Instructor;
 use App\Evento;
+use App\TipoEventos;
+use Illuminate\Support\Facades\Validator;
+use DB;
 
 class EventosController extends Controller
 {
@@ -42,9 +46,9 @@ class EventosController extends Controller
      */
     public function create()
     {
-        $categorias     = Category::where('status', 1)->get();
         $instructores   = Instructor::where('status', 1)->get();
-        return view("admin.agregar-evento", compact("categorias", "instructores"));
+        $tipoeventos    = TipoEventos::where('status', 1)->get();
+        return view("admin.agregar-evento", compact("instructores", "tipoeventos"));
     }
 
     /**
@@ -53,7 +57,7 @@ class EventosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidarAgregarEvento $request)
     {
         //return response()->json($request);
         return $this->eventosDecorator->store($request);
@@ -89,7 +93,7 @@ class EventosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidarUpdateEvento $request, $id)
     {
         return $this->eventosDecorator->update($request, $id);
     }
@@ -103,5 +107,39 @@ class EventosController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function cambiarStatus(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            "id"     => "required|string",
+            "status" => "required|numeric"
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                "message" => 'error_input',
+                "inputs" => $validator->errors(),
+            ], 201);
+        }
+
+        $id     = $this->helper::base64_decode_url($request->id);
+        $status = $request->status;
+
+
+        DB::beginTransaction(); 
+        $evento          = Evento::findOrFail($id);
+        $evento->id      = $id;
+        $evento->status = $status;
+
+        if ($evento->save()) {
+            DB::commit();
+            return response()->json(["message" => "ok"]);
+        }
+
+        DB::rollback();
+        return response()->json(["message" => "error"]);
     }
 }

@@ -144,17 +144,28 @@
                         </div>
 
 
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> Categorias: </label>
-                            <div class="col-sm-10 mb-3">
-                                <select data-placeholder="Categorias" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_categorias[]">
-                                    @foreach($categorias as $categoria)
-                                        <option value="{{ $categoria->id }}" 
-                                            @if(is_array(old('select_categorias')) && in_array($categoria->id, old('select_categorias'))) selected @endif>
-                                            {{ $categoria->nombre }}
-                                        </option>    
-                                    @endforeach
+                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Categoria: </label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="select_categorias">
+                                    <option value="">Categorias</option>
+                                    @forelse($categorias as $categoria)
+                                        <option value="{{ $categoria->id }}" @if (old('select_categorias') == $categoria->id) selected @endif> {{ $categoria->nombre }} </option>
+                                    @empty
+                                        <option value=""> No se encontraron resultados </option>
+                                    @endforelse
                                 </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_categorias') !!} </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> Subcategorias: </label>
+                            <div class="col-sm-10 mb-3">
+                                <div class="div-subcate">
+                                    <select data-placeholder="Subcategorias" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_subcategorias[]">
+                                    </select>
+                                </div>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('select_categorias') !!} </span>
                             </div>
                         </div>
