@@ -224,4 +224,10 @@ $(document).ready(function(){
         $(this).next('.respuesta-alumno').slideToggle(500);
     });
     
+    $('.item-programa a').click(function(e) {    
+        e.preventDefault();
+        $(this).toggleClass('active-plan');   
+        $(this).next('.row-planes').slideToggle(500);
+    });
+    
 });

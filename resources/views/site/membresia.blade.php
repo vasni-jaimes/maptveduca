@@ -3,7 +3,6 @@
 <!-- /HEADER AND FOOTER -->
 
 
-
 @section('contenido')
 
     <section class="membresia">
@@ -14,7 +13,7 @@
             <h1>Membresia académica</h1>
         </div> <!-- /titulo-banner -->
         
-        <div class="hoja-1200">
+        <div class="hoja-1000">
         
             <div class="wrapper-columnas">
                 
@@ -39,7 +38,7 @@
 
                     </div> <!-- /flex -->
 
-                    <div class="text-center">
+                    <div class="txt-columna text-center">
                         <p>Al finalizar cualquiera de ambos programas <strong>recibirás un certificado de parte de M.A.P. Colegio de Música, Audio y Producción y la SEP (Secretaría de Educación Pública de México).</strong></p>
                         <p>Mira cómo funciona cada programa:</p>
                     </div> <!-- /text-center -->
@@ -67,6 +66,99 @@
                             <p>Certificado con validez oficial expedido por la SEP (Secretaría de Educación Pública de México) y M.A.P. Colegio de Música, Audio y Producción</p>
                         </div> <!-- /txt-programa -->
                         <a class="btn-amarillo" href="#">Plan de estudios</a>
+                        <div class="row-planes">
+                            <div class="flex wrap">
+                                <div class="item-plan">
+                                    <h4>1er Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                <div class="item-plan">
+                                    <h4>2do Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                
+                                <div class="item-plan">
+                                    <h4>3er Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                <div class="item-plan">
+                                    <h4>4to Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                
+                                <div class="item-plan">
+                                    <h4>5to Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                <div class="item-plan">
+                                    <h4>6to Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                
+                                <div class="item-plan">
+                                    <h4>7mo Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                <div class="item-plan">
+                                    <h4>8vo Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                
+                                <div class="item-plan">
+                                    <h4>9no Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                <div class="item-plan">
+                                    <h4>10mo Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                
+                                <div class="item-plan">
+                                    <h4>11vo Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                <div class="item-plan">
+                                    <h4>12vo Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                            </div> <!-- /flex -->
+                        </div> <!-- /row-planes -->
                         <a class="btn-amarillo btn-border" href="#">Obtén tu membresía e inscríbete</a>
                     </div> <!-- /item-programa -->
                     
@@ -89,6 +181,99 @@
                             <p>Certificado con validez oficial expedido por la SEP (Secretaría de Educación Pública de México) y M.A.P. Colegio de Música, Audio y Producción</p>
                         </div> <!-- /txt-programa -->
                         <a class="btn-amarillo" href="#">Plan de estudios</a>
+                        <div class="row-planes">
+                            <div class="flex wrap">
+                                <div class="item-plan">
+                                    <h4>1er Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                <div class="item-plan">
+                                    <h4>2do Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                
+                                <div class="item-plan">
+                                    <h4>3er Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                <div class="item-plan">
+                                    <h4>4to Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                
+                                <div class="item-plan">
+                                    <h4>5to Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                <div class="item-plan">
+                                    <h4>6to Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                
+                                <div class="item-plan">
+                                    <h4>7mo Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                <div class="item-plan">
+                                    <h4>8vo Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                
+                                <div class="item-plan">
+                                    <h4>9no Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                <div class="item-plan">
+                                    <h4>10mo Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                
+                                <div class="item-plan">
+                                    <h4>11vo Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                                <div class="item-plan">
+                                    <h4>12vo Trimestre</h4>
+                                    <p>Grabación I</p>
+                                    <p>Producción Musical I</p>
+                                    <p>ProTools I</p>
+                                    <p>Logic I</p>
+                                </div> <!-- /item-plan -->
+                            </div> <!-- /flex -->
+                        </div> <!-- /row-planes -->
                         <a class="btn-amarillo btn-border" href="#">Obtén tu membresía e inscríbete</a>
                     </div> <!-- /item-programa -->
                     
@@ -199,7 +384,7 @@
                 
             </div> <!-- /wrapper-columnas -->
             
-        </div> <!-- /hoja-1200 -->
+        </div> <!-- /hoja-1000 -->
         
     </section> <!-- /membresia -->
 

@@ -3,7 +3,6 @@
 <!-- /HEADER AND FOOTER -->
 
 
-
 @section('contenido')
 
     <section class="inicio">
@@ -26,7 +25,7 @@
                         </li>
                     @empty
                         <li>
-                            <div> No se encuentraron resultados </div>
+                            <p>No se encontraron resultados</p>
                         </li>
                     @endforelse
                 </ul>

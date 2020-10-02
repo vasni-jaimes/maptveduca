@@ -14,7 +14,7 @@
             <h1>Membresia básica</h1>
         </div> <!-- /titulo-banner -->
         
-        <div class="hoja-1200">
+        <div class="hoja-1000">
         
             <div class="wrapper-columnas">
                 
@@ -88,7 +88,7 @@
 
                         <table style="width: 100%; border-spacing: 10px; border-collapse: separate; table-layout: fixed;">
                             <tr>
-                                <th><img src="assets/img/ico-basica.png"></th>
+                                <th><img src="/site/img/ico-basica.png"></th>
                                 <th>Membresía básica</th>
                             </tr>
                             <tr>
@@ -100,7 +100,7 @@
                                 <td><span class="circle"></span></td>
                             </tr>
                             <tr>
-                                <td>Acceso a clínicas y conciertos/masterclass básicas</td>
+                                <td>Acceso a clínicas y conciertos / masterclass básicas</td>
                                 <td><span class="circle"></span></td>
                             </tr>
                             <tr>
@@ -117,7 +117,8 @@
                 
             </div> <!-- /wrapper-columnas -->
             
-        </div> <!-- /hoja-1200 -->
+        </div> <!-- /hoja-1000 -->
+        
     </section> <!-- /membresia -->
 
 @stop

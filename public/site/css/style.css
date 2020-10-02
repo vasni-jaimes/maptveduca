@@ -1299,7 +1299,7 @@ video#myVideo {
 /*----------------------------------  CONTENIDO Funciona  ----------------------------------*/
 
 .wrapper-academica {
-    padding: 80px 0 0;
+    padding: 70px 0 0;
 }
 
 .wrapper-academica h2 {
@@ -1307,6 +1307,7 @@ video#myVideo {
     font-family: 'Oswald medium';
     font-size: 40px;
     text-align: center;
+    text-transform: uppercase;
     line-height: 130%;
 }
 
@@ -1330,7 +1331,7 @@ video#myVideo {
 }
 
 .wrapper-academica table tr th {
-    padding: 28px 15px; 
+    padding: 20px 15px; 
     font-family: 'Poppins medium';
     font-size: 16px;
     background-color: #ffc314;
@@ -1504,6 +1505,7 @@ video#myVideo {
     padding: 12px 10px;
     margin: 0 0 30px;
     border-bottom: 1px solid #000;
+    font-size: 15px;
 }
 
 .form div .input {
@@ -1620,7 +1622,7 @@ video#myVideo {
 }
 
 .wrapper-cursos {
-    padding: 50px 0;
+    padding: 70px 0 100px;
 }
 
 .ico-filtro {
@@ -1684,7 +1686,7 @@ video#myVideo {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 25px;
+    padding: 25px 15px;
 }
 
 .titulo-cursos h2 {
@@ -1902,7 +1904,7 @@ video#myVideo {
 }
 
 .banner-botones {
-    margin: 30px 0 0;
+    margin: 25px 0 0;
     padding: 30px 15px;
     background-image: url('/site/img/banner-botones.png');
     background-repeat: no-repeat;
@@ -1981,7 +1983,7 @@ video#myVideo {
 
 .sidebar-single {
     position: relative;
-    width: 15%;
+    width: 18%;
 }
 
 .sidebar-single h3 {
@@ -2039,8 +2041,8 @@ video#myVideo {
 
 .perfil-profesor .img-profesor {
     display: inline-block;
-    width: 175px; 
-    height: 175px;
+    width: 100%; 
+    padding: 100% 0 0;
     border-radius: 50%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -2067,12 +2069,12 @@ video#myVideo {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    width: 70%;
+    width: 64%;
     padding: 0 15px;
 }
 
 .sidebar-registro {
-    width: 15%;
+    width: 18%;
 }
 
 .sidebar-registro > p,
@@ -2115,7 +2117,6 @@ video#myVideo {
 .row-video {
 	position: relative;
 	padding-bottom: 56.25%; /*panorámico*/
-	padding-top: 25px;
 	height: 0;
 }
 
@@ -2183,11 +2184,11 @@ section.membresia {
 }
 
 .wrapper-columnas {
-    margin: 70px 0 100px;
+    margin: 50px 0 100px;
 }
 
 .row-columnas p {
-    padding: 0 0 25px;
+    padding: 0 0 20px;
     font-family: 'Poppins regular';
     font-size: 16px;
     line-height: 130%;
@@ -2205,20 +2206,24 @@ section.membresia {
 .row-columnas ul li {
     position: relative;
     padding-left: 15px;
-    font-family: 'Oswald medium';
-    font-size: 21px;
+    font-family: 'Poppins bold';
+    font-size: 16px;
     line-height: 130%;
 }
 
 .row-columnas ul li:before {
     content: ''; 
     position: absolute;
-    top: 10px;
+    top: 6px;
     left: 0;
     width: 6px;
     height: 6px;
     border-radius: 50%;
     background-color: #000;
+}
+
+.txt-columna {
+    padding: 20px 0;
 }
 
 .item-programa img {
@@ -2231,7 +2236,7 @@ section.membresia {
 .item-programa h3 {
     padding: 20px;
     font-family: 'Oswald medium';
-    font-size: 29px;
+    font-size: 19px;
     background-color: #ffc314;
     text-align: center;
     text-transform: uppercase;
@@ -2258,8 +2263,7 @@ section.membresia {
 .txt-programa p {
     padding: 0 0 20px;
     font-family: 'Poppins regular';
-    font-size: 21px;
-    line-height: 130%;
+    font-size: 16px;
     text-align: center;
     line-height: 130%;
 }
@@ -2278,8 +2282,7 @@ section.membresia {
 
 .txt-programa ul li {
     font-family: 'Poppins regular';
-    font-size: 21px;
-    line-height: 130%;
+    font-size: 16px;
     text-align: center;
     line-height: 130%;
 }
@@ -2302,14 +2305,40 @@ section.membresia {
     color: #000;
 }
 
+.row-planes {
+    display: none;
+}
+
+.item-plan {
+    width: 50%;
+}
+
+.item-plan h4 {
+    padding: 10px;
+    font-family: 'Oswald medium';
+    font-size: 17px;
+    color: #fff;
+    background-color: #6d6d6d;
+    text-align: center;
+    letter-spacing: 0.4;
+}
+
+.item-plan p {
+    padding: 12px;
+    font-family: 'Poppins regular';
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #ffc314;
+}
+
 .wrapper-herramienta {
-    margin: 100px 0;
+    margin: 70px 0;
 }
 
 .wrapper-herramienta h2 {
-    margin: 0 0 70px;
+    margin: 0 0 50px;
     font-family: 'Oswald medium';
-    font-size: 46px;
+    font-size: 40px;
     text-align: center;
     text-transform: uppercase;
     line-height: 130%;
@@ -2324,10 +2353,7 @@ section.membresia {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     display: flex;
-    padding: 35px 5%;
-    font-family: 'Oswald medium';
-    font-size: 31px;
-    color: #fff;
+    padding: 25px 4%;
     text-transform: uppercase;
     background-color: #ffc314;
     align-items: center;
@@ -2339,6 +2365,9 @@ section.membresia {
 
 .item-titulo h3 {
     padding-left: 35px;
+    font-family: 'Oswald medium';
+    font-size: 26px;
+    color: #fff;
     line-height: 130%;
 }
 
@@ -2353,7 +2382,7 @@ section.membresia {
 .item-texto p {
     padding: 0 0 20px;
     font-family: 'Poppins regular';
-    font-size: 20px;
+    font-size: 16px;
     line-height: 130%;
 }
 
@@ -2383,9 +2412,9 @@ section.membresia {
 }
 
 .wrapper-basica table tr th {
-    padding: 28px 20px;
+    padding: 20px 15;
     font-family: 'Poppins medium';
-    font-size: 23px;
+    font-size: 16px;
     background-color: #ffc314;
     text-align: center;
     line-height: normal;
@@ -2404,7 +2433,7 @@ section.membresia {
 .wrapper-basica table tr td {
     padding: 20px;
     font-family: 'Poppins medium';
-    font-size: 19px;
+    font-size: 14px;
     border: 1px solid #e6e6e6;
     line-height: normal;
     vertical-align: middle;
@@ -2412,8 +2441,8 @@ section.membresia {
 
 .wrapper-basica table tr td span.circle {
     display: block;
-    width: 25px;
-    height: 25px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
     background-color: #92e8af;
     margin: auto;
@@ -2474,14 +2503,15 @@ section.membresia {
 .btn-grande {
     display: block;
     margin: 15px 0;
-    padding: 40px 20px;
+    padding: 30px 20px;
     font-family: 'Oswald medium';
-    font-size: 34px;
+    font-size: 28px;
     color: #000;
     letter-spacing: 1px;
     text-transform: uppercase;
     text-align: center;
     background-color: #ffc314;
+    line-height: 130%;
 }
 
 
@@ -2544,10 +2574,8 @@ section.membresia {
 }
 
 .row-clases {
-    max-width: 900px; 
-    width: 100%;
     text-align: center;
-    margin: auto;
+    margin: 50px 0 0;
 }
 
 .row-clases h3 {
@@ -3381,6 +3409,10 @@ span.ico-edit img {
     width: 100%;
 }
 
+.tabla-perfil tr {
+    border-bottom: 5px solid #fff;
+}
+
 .tabla-perfil tr th {
     padding: 8px;
     font-family: 'Poppins light';
@@ -3394,6 +3426,11 @@ span.ico-edit img {
     font-size: 12px;
     background-color: #eaeaea;
     text-align: center;
+}
+
+.row-favoritos {
+    padding: 15px;
+    border: 1px solid #666;
 }
 
 
@@ -3501,6 +3538,10 @@ span.ico-edit img {
 .btn-archivo,
 .btn-archivo ul {
     width: 100%;
+}
+
+.btn-archivo ul {
+    margin-left: 10px;
 }
 
 .btn-archivo ul li {
@@ -3997,8 +4038,7 @@ a[href="#page"] {
     }
     
     .wrapper-contenido,
-    .wrapper-profesores,
-    .wrapper-academica {
+    .wrapper-profesores {
         padding: 50px 0;
     }
     
@@ -4048,7 +4088,7 @@ a[href="#page"] {
     .col-9,
     .col-10,
     .col-11,
-    .col-12 {width: 100%;}
+    .col-12 { width: 100%; }
     
     .slide .slick-prev, 
     .slide .slick-next {
@@ -4074,13 +4114,19 @@ a[href="#page"] {
         transform: translateY(0);
     }
     
+    .wrapper-herramienta {
+        margin: 50px 0;
+    }
+    
+    .wrapper-academica,
     .lista-contenido {
         padding: 50px 0 0;
     }
     
     .wrapper-contenido h2,
     .wrapper-profesores h2,
-    .wrapper-academica h2 {
+    .wrapper-academica h2,
+    .wrapper-herramienta h2 {
         margin: 0 0 30px;
     }
     
@@ -4090,18 +4136,6 @@ a[href="#page"] {
     
     .form div .input {
         width: 100%;
-    }
-    
-    .form input::-webkit-input-placeholder { /* Edge */
-        font-size: 18px;
-    }
-
-    .form input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-        font-size: 18px;
-    }
-
-    .form input::placeholder {
-        font-size: 18px;
     }
     
     .banner-slide h2 {
@@ -4160,6 +4194,14 @@ a[href="#page"] {
         width: 100%;
         padding-left: 0;
     }
+    
+    .item-plan {
+        width: 100%;
+    }
+    
+    .row-membresia span.num {
+        margin: auto;
+    }
 }
 
 @media screen and (max-width: 665px) {
@@ -4195,9 +4237,12 @@ a[href="#page"] {
 }
 
 @media screen and (max-width: 480px) {
+    .wrapper-herramienta {
+        margin: 30px 0;
+    }
+    
     .wrapper-contenido,
     .wrapper-profesores,
-    .wrapper-academica,
     .banner-title,
     .wrapper-cursos {
         padding: 35px 0;
@@ -4207,11 +4252,16 @@ a[href="#page"] {
         max-width: 185px;
     }
     
+    .banner-slide h2,
+    .banner-title h2,
+    .titulo-banner h1,
     .txt-video h1,
     .banner-contenido h3,
     .wrapper-profesores h2,
-    .wrapper-academica h2 {
-        font-size: 32px;
+    .wrapper-academica h2,
+    .wrapper-herramienta h2,
+    .wrapper-basica h2 {
+        font-size: 30px;
     }
     
     header a,
@@ -4220,6 +4270,7 @@ a[href="#page"] {
         font-size: 17px;
     }
     
+    .wrapper-academica,
     .lista-contenido {
         padding: 35px 0 0;
     }
@@ -4227,17 +4278,6 @@ a[href="#page"] {
     .wrapper-academica p {
         margin: 0 0 20px;
         font-size: 26px;
-    }
-    
-    .formulario ul li,
-    .formulario ul li a {
-        font-size: 20px;
-    }
-    
-    .banner-slide h2,
-    .banner-title h2,
-    .titulo-banner h1 {
-        font-size: 32px;
     }
     
     .banner-inicio p span {
