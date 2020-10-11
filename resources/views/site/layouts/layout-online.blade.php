@@ -74,8 +74,8 @@
                                 </ul>
                             </div>
                         </div> <!-- /flex -->
-                        <div class="row-redes">
-                            <ul class="flex flex-redes end">
+                        <div class="row-redes flex flex-column">
+                            <ul class="flex-redes end">
                                 <li><a href="#"><img src="site/img/facebook.png"></a></li>
                                 <li><a href="#"><img src="site/img/instagram.png"></a></li>
                                 <li><a href="#"><img src="site/img/youtube.png"></a></li>

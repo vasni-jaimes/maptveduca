@@ -1,9 +1,11 @@
-<span class="ico-filtro"><img src="site/img/filtro.png"></span>
+<div class="text-right">
+    <span class="ico-filtro"><img src="site/img/filtro.png"></span>
+</div> <!-- /text-right -->
 
 <div class="sidebar-cursos">
+    <span class="close">X</span>
     <ul>
-        <li>Producción musical (0)</li>
-        <li>Música (0)</li>
+        <li><strong>Producción musical (0)</strong></li>
     </ul>
     <ul>
         <li>Nuevo (0)</li>
@@ -21,6 +23,26 @@
         <li>Grabación (0)</li>
         <li>Mezcla (0)</li>
         <li>DAW’s (0)</li>
+    </ul>
+    <ul>
+        <li>Guía de estudio (0)</li>
+    </ul>
+    <ul>
+        <li><strong>Música (0)</strong></li>
+    </ul>
+    <ul>
+        <li>Nuevo (0)</li>
+    </ul>
+    <ul>
+        <li>Cursos base (0)</li>
+        <li>Cursos extra (0)</li>
+    </ul>
+    <ul>
+        <li>Principiante (0)</li>
+        <li>Intermedio (0)</li>
+        <li>Avanzado (0)</li>
+    </ul>
+    <ul>
         <li>Teoría musical (0)</li>
         <li>Solfeo (0)</li>
         <li>Composición (0)</li>
@@ -35,7 +57,10 @@
         <li>Batería (0)</li>
     </ul>
     <ul>
-        <li>Music Business (0)</li>
+        <li>Guía de estudio (0)</li>
+    </ul>
+    <ul>
+        <li><strong>Profesor (0)</strong></li>
     </ul>
     <ul>
         <li>Profesor 1 (0)</li>
