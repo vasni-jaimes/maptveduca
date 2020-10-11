@@ -11,8 +11,9 @@
         <div class="hoja-1000">
             
             <ul class="flex breadcrumb-curso">
-                <li><a href="#">Clases en línea</a></li>
-                <li><span>Aprende a mezclar con ProTools</span></li>
+                <li><a href="#">Evento</a></li>
+                <li><a href="#"> {{ ($evento->tipo_evento_id == 1) ? "Clínica" : "Concierto - Masterclass básico" }} </a></li>
+                <li><span>{{ $evento->nombre }}</span></li>
             </ul> <!-- /breadcrumb-curso -->
             
             <div class="wrapper-curso">
@@ -22,12 +23,12 @@
                         
                         <div class="perfil-profesor">
                         
-                            <div class="img-profesor" style="background-image: url('/site/img/fulano.jpg');"></div>
+                            <div class="img-profesor" style="background-image: url({{ Storage::url($evento->instructor[0]->img) }});"></div>
                             
                             <div class="bio-profesor">
-                                <p>José Antonio Cordero</p>
-                                <p>Productor e ingeniero de sonido especializado en mezcla.</p>
-                                <p>Cuenta con una trayectoria acumulada de más de 8 años en la industria musical de la región centro de México.</p>
+                                <p>{{ $evento->instructor[0]->nombres. " ".$evento->instructor[0]->apellidos }}</p>
+                                <p>{{ $evento->instructor[0]->especialidad }}</p>
+                                <p>{{ $evento->instructor[0]->bibliografia }}</p>
                             </div> <!-- /bio-profesor -->
                             
                         </div> <!-- /row-perfil -->
@@ -40,9 +41,12 @@
                             
                             <div class="col-5">
                                 <div class="row-ponente">
-                                    <h3>Ponente 1</h3>
-                                    <p>Concierto - Masterclass básico</p>
-                                    <p>Archivado</p>
+                                    <h3>{{ $evento->nombre }}</h3>
+                                    @if ($evento->tipo_evento_id == 1)
+                                        <p>Clínica</p>
+                                    @else
+                                        <p>Concierto - Masterclass básico</p>
+                                    @endif
                                 </div> <!-- /row-ponente -->
                             </div> <!-- /col-5 -->
                         
@@ -56,7 +60,7 @@
                         
                         <div class="txt-single">
                             <div class="descripcion-single">
-                                <p>En este video, tu profesor titular, José Antonio Cordero (Josean) te explica los temas que se abarcarán a lo largo de las sesiones de esta clase en línea.</p>
+                                <p>{{ $evento->descripcion }}</p>
                             </div> <!-- /descripcion-single -->
                         </div> <!-- /txt-single -->
                     
@@ -67,7 +71,7 @@
                             <p><span class="txt-yellow">LUNES · A PARTIR DEL 00 DE JUNIO AL 00 DE JULIO, 2020 · 18:00 HRS (Hora Cd. de México) | 4 sesiones de 90 minutos</span></p>
                             
                             <div class="row-video">
-                                <iframe src="https://www.youtube.com/embed/CBZyA-Pj52U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe src="{{ $evento->video_bienvenida }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div> <!-- /row-video -->
 
                         </div> <!-- /row-evento -->

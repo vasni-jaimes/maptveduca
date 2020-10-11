@@ -41,153 +41,80 @@
                 
             </div> <!-- /wrapper-columnas -->
             
-            <div class="wrapper-clases">
-            
-                <h3>Producción musical</h3>
+            @if ( $clases->where("category_id", 1)->count() )
+                <div class="wrapper-clases">
                 
-                <ul class="flex between wrap">
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
+                    <h3>Producción musical</h3>
                     
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                </ul> <!-- /flex -->
-                
-            </div> <!-- /wrapper-clases -->
-            
-            <div class="wrapper-clases">
-            
-                <h3>Música</h3>
-                
-                <ul class="flex between wrap">
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
+                    <ul class="flex between wrap">
+
+                        @foreach($clases as $clase)
+                            @if ($clase->category_id == 1)
+                                <li class="col-3">
+                                    <a href="{{ route("clases-single.show", $clase->slug) }}">
+                                        <img src="{{Storage::url($clase->img) }}">
+                                        <div class="txt-clase">
+                                            <h4>{{ $clase->nombre_clase }}</h4>
+                                            <p>
+                                                @foreach($clase->instructor as $instructor)
+                                                    {{ $instructor->nombres." ".$instructor->apellidos }} <br>
+                                                @endforeach 
+                                            </p>
+                                            <span> 
+                                                {{ $clase->FormatoLetras( $clase->sesiones[0]->fecha_inicio, 1 ) . " AL ". 
+                                                    $clase->FormatoLetras( $clase->sesiones[ $clase->sesiones->count() - 1 ]->fecha_inicio, 2 ). " ".
+                                                    $clase->FormatoTiempo( $clase->sesiones[0]->fecha_inicio ). "HRS" }} 
+                                            </span>
+                                            {{-- <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span> --}}
+                                        </div> <!-- /txt-clase -->
+                                    </a>
+                                </li>
+                            @endif
+                        @endforeach
+
+                    </ul> <!-- /flex -->
                     
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                    <li class="col-3">
-                        <img src="/site/img/fulano.jpg">
-                        <div class="txt-clase">
-                            <h4>TEMA DE LA CLASE</h4>
-                            <p>PROFESOR</p>
-                            <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span>
-                        </div> <!-- /txt-clase -->
-                    </li>
-                </ul> <!-- /flex -->
+                </div> <!-- /wrapper-clases -->
+            @endif
+
+
+            @if ( $clases->where("category_id", 2)->count() )
+            
+                <div class="wrapper-clases">
                 
-            </div> <!-- /wrapper-clases -->
+                    <h3>Música</h3>
+                    
+                    <ul class="flex between wrap">
+                        
+                        @foreach($clases as $clase)
+                            @if ($clase->category_id == 2)
+                                <li class="col-3">
+                                    <a href="{{ route("clases-single.show", $clase->slug) }}">
+                                        <img src="{{Storage::url($clase->img) }}">
+                                        <div class="txt-clase">
+                                            <h4>{{ $clase->nombre_clase }}</h4>
+                                            <p>
+                                                @foreach($clase->instructor as $instructor)
+                                                    {{ $instructor->nombres." ".$instructor->apellidos }} <br>
+                                                @endforeach 
+                                            </p>
+                                            <span> 
+                                                {{ $clase->FormatoLetras( $clase->sesiones[0]->fecha_inicio, 1 ) . " AL ". 
+                                                    $clase->FormatoLetras( $clase->sesiones[ $clase->sesiones->count() - 1 ]->fecha_inicio, 2 ). " ".
+                                                    $clase->FormatoTiempo( $clase->sesiones[0]->fecha_inicio ). "HRS" }} 
+                                            </span>
+                                            {{-- <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span> --}}
+                                        </div> <!-- /txt-clase -->
+                                    </a>
+                                </li>
+                            @endif
+                        @endforeach                        
+
+                    </ul> <!-- /flex -->
+                    
+                </div> <!-- /wrapper-clases -->
+
+            @endif
             
             <div class="row-clases">
             

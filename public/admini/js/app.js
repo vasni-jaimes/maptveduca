@@ -180,7 +180,8 @@ if (frmAgregarCurso || frmActualizarCurso) {
       item.addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].elimiarArchivoUpdateCurso);
     });
   }
-}
+} //FORMULARIO  CLASES
+
 
 var frmAgregarClase = document.querySelector("form[name='frm-agregar_clase']");
 var frmActualizarClase = document.querySelector("form[name='frm-editar_clase']");
@@ -205,7 +206,8 @@ if (frmAgregarClase || frmActualizarClase) {
     $(document).change("input", _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarClase);
     $("select").change(_functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarClase);
   }
-}
+} //FORMULARIO EVENTOS
+
 
 var frmAgregarEvento = document.querySelector("form[name='frm-agregar_evento']");
 var frmEditarEvento = document.querySelector("form[name='frm-editar_evento']");
@@ -224,7 +226,8 @@ if (frmAgregarEvento || frmEditarEvento) {
     $(document).change("input", _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarEvento);
     $("select").change(_functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarEvento);
   }
-}
+} //FORMULARIO INSTRUCTORES
+
 
 var frmAgregarInstructor = document.querySelector("form[name='frm-agregar_instructor']");
 

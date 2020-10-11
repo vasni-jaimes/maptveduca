@@ -24,7 +24,7 @@
 
                     <div class="sidebar-perfil">
                         <img src="/site/img/ico-user.png">
-                        <h2>Usuario Apellido</h2>
+                        <h2>{{ auth()->user()->nombre. " ".auth()->user()->amaterno. " ".auth()->user()->apaterno }}</h2>
                     </div> <!-- /row-tablero -->
 
                     <ul>
@@ -51,29 +51,29 @@
                                     <form class="form-perfil" action="" method="">
                                         <fieldset>
                                             <label>Correo electrónico</label>
-                                            <input type="text" class="input" placeholder="usuario@gmail.com">
+                                            <input type="text" class="input" placeholder="usuario@gmail.com" value="{{ auth()->user()->email }}">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset>
                                             <label>Nombre</label>
-                                            <input type="text" class="input" placeholder="Usuario">
+                                            <input type="text" class="input" placeholder="Usuario" value="{{ auth()->user()->nombre }}">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset>
                                             <label>Apellido Materno</label>
-                                            <input type="text" class="input" placeholder="Apellido Materno">
+                                            <input type="text" class="input" placeholder="Apellido Materno" value="{{ auth()->user()->amaterno }}">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset>
                                             <label>Apellido Paterno</label>
-                                            <input type="text" class="input" placeholder="Apellido Paterno">
+                                            <input type="text" class="input" placeholder="Apellido Paterno" value="{{ auth()->user()->apaterno }}">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset class="columns">
                                             <div class="flex flex-perfil between">
                                                 <div>
                                                     <label>Fecha de nacimiento</label>
-                                                    <input type="text" class="input" placeholder="DD/MM/AAAA" class="input">
+                                                    <input type="text" class="input" placeholder="DD/MM/AAAA" class="input" value="{{ auth()->user()->fecha_nacimiento }}">
                                                     <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                                 </div>
                                                 <div>

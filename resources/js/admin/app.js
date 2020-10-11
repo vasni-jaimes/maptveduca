@@ -92,7 +92,7 @@ if (frmAgregarCurso || frmActualizarCurso) {
 	}
 }
 
-
+//FORMULARIO  CLASES
 const frmAgregarClase = document.querySelector("form[name='frm-agregar_clase']");
 const frmActualizarClase = document.querySelector("form[name='frm-editar_clase']");
 if (frmAgregarClase || frmActualizarClase) {
@@ -116,7 +116,7 @@ if (frmAgregarClase || frmActualizarClase) {
 	}
 }
 
-
+//FORMULARIO EVENTOS
 const frmAgregarEvento = document.querySelector("form[name='frm-agregar_evento']");
 const frmEditarEvento = document.querySelector("form[name='frm-editar_evento']");
 if (frmAgregarEvento || frmEditarEvento) {
@@ -136,7 +136,7 @@ if (frmAgregarEvento || frmEditarEvento) {
 	}
 }
 
-
+//FORMULARIO INSTRUCTORES
 const frmAgregarInstructor = document.querySelector("form[name='frm-agregar_instructor']");
 if (frmAgregarInstructor) {
 
@@ -250,4 +250,5 @@ if (tabla_instructores) {
 		});
 	}
 }
+
 

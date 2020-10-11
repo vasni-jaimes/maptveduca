@@ -85,8 +85,19 @@
                 </div> <!-- /bg-black -->
                 
                 <div class="wrapper-maptv">
-                    
-                    <ul class="flex flex-nosotros between wrap">
+                    <ul class="flex between wrap">
+                        @foreach($instructores as $instructor)
+
+                            <li>
+                                <div class="img-equipo" style="background-image: url({{ Storage::url($instructor->img) }});"></div> <!-- /img-equipo -->
+                                <div class="txt-equipo">
+                                    <h3>{{ $instructor->nombres. " ".$instructor->apellidos }}</h3>
+                                    <p>{{ $instructor->especialidad }}</p>
+                                </div> <!-- /txt-equipo -->
+                            </li>
+
+                        @endforeach
+                    {{--<ul class="flex flex-nosotros between wrap">
                         <li>
                             <div class="img-equipo" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-equipo -->
                             <div class="txt-equipo">
@@ -131,7 +142,7 @@
                                 <h3>Profesor 1</h3>
                                 <p>Especialidad</p>
                             </div> <!-- /txt-equipo -->
-                        </li>
+                        </li> --}}
                     </ul>
                     
                 </div> <!-- /wrapper-maptv -->
