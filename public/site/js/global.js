@@ -143,7 +143,7 @@ $(document).ready(function(){
     
     $('.item-slide ul').slick({
       dots: false,
-      arrows: false,
+      arrows: true,
       centerPadding: '60px',
       slidesToShow: 4,
       responsive: [
@@ -177,14 +177,16 @@ $(document).ready(function(){
     $('.wrapper-academica table').stacktable();
     
     $('.ico-filtro').on('click', function () {
-		if ( !$(this).hasClass('active') ) {
-			$(this).addClass('active');
-			$('.sidebar-cursos').animate({left: 0});
-		} else {
-			$(this).removeClass('active');
-			$('.sidebar-cursos').animate({left: '-50%'});
-		} //if ( !$(this).hasClass('navbar-toggle-active') ) {
+		$(this).addClass('active');
+        $('body').css('overflow', 'hidden');
+        $('.sidebar-cursos').animate({left: 0});
 	}); //$('#navbar-toggle').on('click', function () {
+    
+    $('.close').on('click', function () {
+        $('.ico-filtro').removeClass('active');
+        $('body').css('overflow', 'auto');
+		$('.sidebar-cursos').animate({left: '-55%'});
+    });
     
     $('.item-mensaje a').click(function(){
         if ( !$(this).hasClass('active') ) {

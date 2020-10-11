@@ -14,7 +14,7 @@
             <h1>Nosotros</h1>
         </div> <!-- /titulo-banner -->
         
-        <div class="hoja-1200">
+        <div class="hoja-1000">
             
             <div class="wrapper-nosotros">
             
@@ -85,7 +85,6 @@
                 </div> <!-- /bg-black -->
                 
                 <div class="wrapper-maptv">
-                    
                     <ul class="flex between wrap">
                         @foreach($instructores as $instructor)
 
@@ -98,12 +97,16 @@
                             </li>
 
                         @endforeach
-                        {{-- <li>
+                    {{--<ul class="flex flex-nosotros between wrap">
+                        <li>
                             <div class="img-equipo" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-equipo -->
                             <div class="txt-equipo">
                                 <h3>Profesor 1</h3>
                                 <p>Especialidad</p>
                             </div> <!-- /txt-equipo -->
+                            <div class="txt-bio">
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor </p>
+                            </div> <!-- /txt-bio -->
                         </li>
                         <li>
                             <div class="img-equipo" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-equipo -->
@@ -146,7 +149,7 @@
                 
             </div> <!-- /wrapper-equipo -->
             
-        </div> <!-- /hoja-1200 -->
+        </div> <!-- /hoja-1000 -->
         
     </section> <!-- /inicio -->
 

@@ -74,6 +74,7 @@
                                 </ul>
                             </div>
                         </div> <!-- /flex -->
+
                         <div class="row-redes">
                             <ul class="flex flex-redes end">
                                 <li><a href="#"><img src="/site/img/facebook.png"></a></li>
