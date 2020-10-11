@@ -21,146 +21,124 @@
                 @include("site.layouts.layout-sidebar")
                 
                 <div class="row-cursos interior-curso">
-            
-                    <div class="row-yellow">
+
+
+                    @foreach($instructores as $instructor)
+                        @if ($instructor->cursos->count() > 0)
+                            <div class="row-yellow {{ md5($instructor->id) }}">
+                                <div class="div-item {{ md5($instructor->id) }}">
+                                    <h3> {{ $instructor->nombres. " ".$instructor->apellidos }} </h3>
+
+                                    <div class="row-slide">
+                                        <ul class="slide-cursos">
+                                            @foreach($instructor->cursos as $curso)
+                                                <li>
+                                                    <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
+                                                </li>
+                                            @endforeach
+                                        </ul>
+
+                                        @if ($instructor->cursos->where("extra", 1)->count() > 0)
+                                            <div class="row-extra flex between">
+                                                <span>Cursos <br> extra ></span>
+                                                
+                                                <ul class="slide-extra">
+                                                    @foreach($instructor->cursos as $curso)
+                                                        <li>
+                                                           <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
+                                                        </li>
+                                                    @endforeach
+                                                </ul> <!-- /slide-extra -->
+                                                
+                                            </div> <!-- /row-extra -->
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
                     
-                        <div class="titulo-cursos">
-                            <h2>Producción musical</h2>
-                        </div> <!-- /titulo-cursos -->
+                    @foreach($categorias as $categoria)
 
-                        <h3>Nivel 1</h3>
-                        
-                        <div class="row-slide">
+                        @if ($categoria->obtenerConteoCat($categoria->id) > 0)
+                            <div class="row-yellow {{ $categoria->quitarAcentos($categoria->nombre) }}">
+                                <div class="titulo-cursos">
+                                    <h2> {{ $categoria->nombre }} </h2>
+                                </div> <!-- /titulo-cursos -->
 
-                            <ul class="slide-cursos">
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                            </ul> <!-- /slide-cursos -->
+                                <!-- LO NUEVO DE LAS CATEGORIAS -->
+                                @foreach($categoria->cursos as $curso)
 
-                            <div class="row-extra flex between">
-                                <span>Cursos <br> extra ></span>
-                                
-                                <ul class="slide-extra">
-                                    <li>
-                                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                    </li>
-                                </ul> <!-- /slide-extra -->
-                                
-                            </div> <!-- /row-extra -->
+                                    <div class="div-item {{ $categoria->quitarAcentos($categoria->nombre). " nuevo" }}">
+                                        <h3> Nuevo </h3>
 
-                        </div> <!-- /row-slide -->
-                        
-                        <h3>Nivel 2</h3>
-                        
-                        <div class="row-slide">
+                                        <div class="row-slide">
+                                            <ul class="slide-cursos">
+                                                <li>
+                                                    <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
+                                                </li>
+                                            </ul>
 
-                            <ul class="slide-cursos">
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                            </ul> <!-- /slide-cursos -->
+                                            @if ($categoria->cursos->where("extra", 1)->count() > 0)
+                                                <div class="row-extra flex between">
+                                                    <span>Cursos <br> extra ></span>
+                                                    
+                                                    <ul class="slide-extra">
+                                                        <li>
+                                                           <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
+                                                        </li>
+                                                    </ul> <!-- /slide-extra -->
+                                                    
+                                                </div> <!-- /row-extra -->
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                                <!-- /LO NUEVO DE LAS CATEGORIAS -->
 
-                            <div class="row-extra flex between">
-                                <span>Cursos <br> extra ></span>
-                                
-                                <ul class="slide-extra">
-                                    <li>
-                                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                    </li>
-                                </ul> <!-- /slide-extra -->
-                                
-                            </div> <!-- /row-extra -->
+                                <!-- SUBCATEGORIAS -->
+                                @foreach($categoria->subcategorias as $subcategoria)
+                                    
+                                    @php $cursos = $categoria->ObtenerCursos($subcategoria->id); @endphp
+                                    @if ($cursos->count() > 0)
 
-                        </div> <!-- /row-slide -->
-                        
-                        <h3>Nivel 3</h3>
-                        
-                        <div class="row-slide">
+                                        <div class="div-item {{ $categoria->quitarAcentos($subcategoria->nombre). " ".$categoria->quitarAcentos($categoria->nombre) }}">
+                                            <h3> {{ $subcategoria->nombre }} </h3>
 
-                            <ul class="slide-cursos">
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                                <li>
-                                    <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                </li>
-                            </ul> <!-- /slide-cursos -->
+                                            <div class="row-slide">
+                                                <ul class="slide-cursos">
+                                                    @foreach($cursos as $curso)
+                                                        @if ($curso->extra == 0)
+                                                            <li>
+                                                                <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul> <!-- /slide-cursos -->
 
-                            <div class="row-extra flex between">
-                                <span>Cursos <br> extra ></span>
-                                
-                                <ul class="slide-extra">
-                                    <li>
-                                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                                    </li>
-                                </ul> <!-- /slide-extra -->
-                                
-                            </div> <!-- /row-extra -->
+                                                @if ($cursos->where("extra", 1)->count() > 0)
+                                                    <div class="row-extra flex between">
+                                                        <span>Cursos <br> extra ></span>
+                                                        
+                                                        <ul class="slide-extra">
+                                                            @foreach($cursos as $curso)
+                                                                <li>
+                                                                   <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
+                                                                </li>
+                                                            @endforeach
+                                                        </ul> <!-- /slide-extra -->
+                                                        
+                                                    </div> <!-- /row-extra -->
+                                                @endif
+                                            </div> <!-- /row-slide -->
+                                        </div>
 
-                        </div> <!-- /row-slide -->
-                        
-                    </div> <!-- /bg-yellow -->
+                                    @endif
+                                @endforeach
+                                <!-- /SUBCATEGORIAS -->
+                            </div>
+                        @endif
+                    @endforeach
                     
                     <div class="row-botones">
                         
@@ -178,4 +156,8 @@
         </div> <!-- /hoja-1000 -->
     </section> <!-- /cursos -->
 
+@stop
+
+@section('js-content')
+    <script type="text/javascript" src="/site/js/app.js"></script>
 @stop

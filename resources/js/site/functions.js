@@ -3,6 +3,37 @@
 
 let funciones = {
 
+	filtrosCursos: function(e) {
+		e.preventDefault();
+
+		let cat = document.querySelectorAll(".row-yellow");
+		let div = document.querySelectorAll(".div-item");
+
+		cat.forEach( (item) => {
+			item.style.display = "none";
+		});
+
+		div.forEach( (item) => {
+			item.style.display = "none";
+		});
+
+		let categoria = e.target.getAttribute('data-cat');
+		let subcategoria = e.target.getAttribute('class');
+
+		console.log(categoria);
+		document.querySelector(".row-yellow."+categoria).style.display = "block";
+
+		if (categoria == subcategoria) {
+			document.querySelectorAll("div."+categoria).forEach( (item) => {
+				item.style.display = "block";
+			});
+			
+			return false;
+		}
+
+		document.querySelector("div."+subcategoria+"."+categoria).style.display = "block";
+	},
+
 	validarRegistro: function(e) {
 		e.preventDefault();
 

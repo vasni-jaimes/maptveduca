@@ -12,7 +12,7 @@
             
             <ul class="flex breadcrumb-curso">
                 <li><a href="#">Cursos</a></li>
-                <li><span>Grabación</span></li>
+                <li><span>{{ $curso->nombre }}</span></li>
             </ul> <!-- /breadcrumb-curso -->
             
             <div class="wrapper-curso">
@@ -23,8 +23,10 @@
                         
                         <ul class="row-leccion">
                             <li class="active">Bienvenida</li>
-                            <li>Lección 1</li>
-                            <li>Lección 2</li>
+                            @foreach($temario as $ctemario)
+                                <li>{{ $ctemario->nombre_video }}</li>
+                            @endforeach
+{{--                             <li>Lección 2</li>
                             <li>Lección 3</li>
                             <li>Lección 4</li>
                             <li>Lección 5</li>
@@ -32,17 +34,17 @@
                             <li>Lección 7</li>
                             <li>Lección 8</li>
                             <li>Lección 9</li>
-                            <li>Lección 10</li>
+                            <li>Lección 10</li> --}}
                         </ul> <!-- /row-leccion -->
                         
                         <div class="perfil-profesor">
                         
-                            <div class="img-profesor" style="background-image: url('/site/img/fulano.jpg');"></div>
+                            <div class="img-profesor" style="background-image: url({{Storage::url($curso->instructor[0]->img) }});"></div>
                             
                             <div class="bio-profesor">
-                                <p>José Antonio Cordero</p>
-                                <p>Productor e ingeniero de sonido especializado en mezcla.</p>
-                                <p>Cuenta con una trayectoria acumulada de más de 8 años en la industria musical de la región centro de México.</p>
+                                <p>{{ $curso->instructor[0]->nombres. " ".$curso->instructor[0]->apellidos }}</p>
+                                <p>{{ $curso->instructor[0]->especialidad }}.</p>
+                                <p>{{ $curso->instructor[0]->bibliografia }}</p>
                             </div> <!-- /bio-profesor -->
                             
                         </div> <!-- /row-perfil -->

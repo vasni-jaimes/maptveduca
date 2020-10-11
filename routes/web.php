@@ -32,15 +32,31 @@ Route::post('registro', 'Auth\RegisterController@register')->name('registro');
 
 //CURSOS
 Route::get('cursos', 'Site\CursosController@index')->name('cursos');
+Route::get('single-cursos/{curso_id}', 'Site\CursosController@show')->name('single-cursos.show');
+
+//CLASES
+Route::get('clases-linea', 'Site\ClasesController@index')->name('clases-linea.index');
+Route::get('single-clase/{clase_id}', 'Site\ClasesController@show')->name('clases-single.show');
+
+
+//EVENTOS
+Route::get('eventos', 'Site\EventosControllers@index')->name('eventos.index');
+Route::get('evento/{evento_id}', 'Site\EventosControllers@show')->name('evento.show');
+
 
 //MEMBRESIAS
 Route::get('membresias', 'Site\MembresiasController@index')->name('membresias.index');
 
+//NOSOTROS
+Route::get('nosotros', 'Site\NosotrosControllers@index')->name('nosotros.index');
+
+//MICUENTA
+Route::get('micuenta', 'Site\UsersController@index')->name('micuenta.index');
 
 //VISTAS ESTATICAS
-Route::get('eventos', function() {
-	return view('site.eventos');
-})->name('eventos');
+// Route::get('eventos', function() {
+// 	return view('site.eventos');
+// })->name('eventos');
 
 Route::get('aulas', function() {
 	return view('site.aulas');
@@ -54,19 +70,23 @@ Route::get('checkout', function() {
 	return view('site.checkout');
 })->name('checkout');
 
-Route::get('micuenta', function() {
-	return view('site.micuenta');
-})->name('micuenta');
+// Route::get('micuenta', function() {
+// 	return view('site.micuenta');
+// })->name('micuenta');
 
 //new
-Route::get('clases-linea', function() {
-	return view('site.clases-linea');
-})->name('clases-linea');
+// Route::get('clases-linea', function() {
+// 	return view('site.clases-linea');
+// })->name('clases-linea');
 
 //
-Route::get('clases-sessiones', function() {
-	return view('site.clases-sessiones');
-})->name('clases-sessiones');
+// Route::get('clases-sessiones', function() {
+// 	return view('site.clases-sessiones');
+// })->name('clases-sessiones');
+
+// Route::get('single-clases', function() {
+// 	return view('site.single-clases');
+// })->name('single-clases');
 
 Route::get('evento-archivado', function() {
 	return view('site.evento-archivado');
@@ -81,18 +101,16 @@ Route::get('membresia-basica', function() {
 // })->name('membresia');
 
 
-Route::get('single-eventos', function() {
-	return view('site.single-eventos');
-})->name('single-eventos');
+// Route::get('single-eventos', function() {
+// 	return view('site.single-eventos');
+// })->name('single-eventos');
 
 
-Route::get('single-cursos', function() {
-	return view('site.single-cursos');
-})->name('single-cursos');
+// Route::get('single-cursos', function() {
+// 	return view('site.single-cursos');
+// })->name('single-cursos');
 
-Route::get('single-clases', function() {
-	return view('site.single-clases');
-})->name('single-clases');
+
 
 Route::get('guia-estudio', function() {
 	return view('site.guia-estudio');
@@ -102,9 +120,9 @@ Route::get('faqs', function() {
 	return view('site.faqs');
 })->name('faqs');
 
-Route::get('nosotros', function() {
-	return view('site.nosotros');
-})->name('nosotros');
+// Route::get('nosotros', function() {
+// 	return view('site.nosotros');
+// })->name('nosotros');
 
 
 

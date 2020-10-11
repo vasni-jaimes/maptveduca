@@ -26,6 +26,10 @@ class CoursesRepositorie
 		$course->video_bienvenida 	      = $request->video_bienvenida;
 		$course->descripcion_bienvenida   = $request->descripcion;
         $course->categoria_id             = $request->select_categorias;
+        if ($request->has("curso_extra")) {
+            $course->extra = 1;
+        }
+        
 
 		if ($course->save()) {
             //TEMARIO DEL CURSO
@@ -73,6 +77,9 @@ class CoursesRepositorie
         $course->video_bienvenida         = $request->video_bienvenida;
         $course->descripcion_bienvenida   = $request->descripcion;
         $course->categoria_id             = $request->select_categorias;
+        if ($request->has("curso_extra")) {
+            $course->extra = 1;
+        }
 
         if ($course->save()) {
             //TEMARIO DEL CURSO

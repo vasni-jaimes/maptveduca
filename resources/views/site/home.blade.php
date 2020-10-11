@@ -16,7 +16,7 @@
             <div class="banner-slide slide-yellow">
                 <div class="bg-yellow">
                     <h2>Lo más nuevo</h2>
-                    <p>Mira todos aquí</p>
+                    <p><a href="{{ route("cursos") }}">Mira todos aquí</a></p>
                 </div> <!-- /bg-yellow -->
                 <ul class="slide-inicio">
                     @forelse($cursos as $curso)
@@ -34,7 +34,7 @@
             <div class="banner-slide slide-black">
                 <div class="bg-black">
                     <h2>Clases en línea</h2>
-                    <p>Mira más clases aquí</p>
+                    <p><a href="{{ route("clases-linea.index") }}">Mira más clases aquí</a></p>
                 </div> <!-- /bg-black -->
                 <ul class="slide-inicio">
                     @forelse($clases as $clase)
@@ -52,7 +52,7 @@
             <div class="banner-slide slide-yellow">
                 <div class="bg-yellow">
                     <h2>Eventos</h2>
-                    <p>Mira todos aquí</p>
+                    <p><a href="{{ route("eventos.index") }}">Mira todos aquí</a></p>
                 </div> <!-- /bg-yellow -->
                 <ul class="slide-inicio">
                     @forelse($eventos as $evento)

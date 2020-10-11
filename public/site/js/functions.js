@@ -95,6 +95,30 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  filtrosCursos: function filtrosCursos(e) {
+    e.preventDefault();
+    var cat = document.querySelectorAll(".row-yellow");
+    var div = document.querySelectorAll(".div-item");
+    cat.forEach(function (item) {
+      item.style.display = "none";
+    });
+    div.forEach(function (item) {
+      item.style.display = "none";
+    });
+    var categoria = e.target.getAttribute('data-cat');
+    var subcategoria = e.target.getAttribute('class');
+    console.log(categoria);
+    document.querySelector(".row-yellow." + categoria).style.display = "block";
+
+    if (categoria == subcategoria) {
+      document.querySelectorAll("div." + categoria).forEach(function (item) {
+        item.style.display = "block";
+      });
+      return false;
+    }
+
+    document.querySelector("div." + subcategoria + "." + categoria).style.display = "block";
+  },
   validarRegistro: function validarRegistro(e) {
     e.preventDefault();
     var nombre = document.querySelector("input[name='nombre']"),

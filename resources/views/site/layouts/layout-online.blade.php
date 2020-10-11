@@ -21,10 +21,10 @@
 			                <li><a href="{{ route("home") }}">Inicio</a></li>
 			                <li><a href="{{ route("cursos") }}">Cursos</a></li>
 			                <li><a href="{{ route("membresias.index") }}">Membresías</a></li>
-			                <li><a href="#">Clases en línea</a></li>
-			                <li><a href="{{ route("eventos") }}">Eventos</a></li>
-			                <li><a href="#">Nosotros</a></li>
-			                <li><a href="#">FAQ/Contacto</a></li>
+			                <li><a href="{{ route("clases-linea.index") }}">Clases en línea</a></li>
+			                <li><a href="{{ route("eventos.index") }}">Eventos</a></li>
+			                <li><a href="{{ route("nosotros.index") }}">Nosotros</a></li>
+			                <li><a href="{{ route("faqs") }}">FAQ/Contacto</a></li>
 			            </ul>
 			            <div class="toggle">
 			                <a class="menu-open" href="#menu" id="navbar-toggle">
@@ -76,9 +76,9 @@
                         </div> <!-- /flex -->
                         <div class="row-redes">
                             <ul class="flex flex-redes end">
-                                <li><a href="#"><img src="site/img/facebook.png"></a></li>
-                                <li><a href="#"><img src="site/img/instagram.png"></a></li>
-                                <li><a href="#"><img src="site/img/youtube.png"></a></li>
+                                <li><a href="#"><img src="/site/img/facebook.png"></a></li>
+                                <li><a href="#"><img src="/site/img/instagram.png"></a></li>
+                                <li><a href="#"><img src="/site/img/youtube.png"></a></li>
                             </ul> <!-- /flex -->
                             <a class="btn-footer" href="#">Estudia presencialmente con nosotros en Colegio MAP (Puebla, Puebla, México)</a>
                         </div> <!-- /row-redes -->

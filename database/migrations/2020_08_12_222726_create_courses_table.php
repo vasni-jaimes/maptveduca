@@ -23,6 +23,7 @@ class CreateCoursesTable extends Migration
             $table->text('descripcion_bienvenida');
             $table->json('temario')->nullable();
             $table->boolean("status")->default(0);
+            $table->boolean("extra")->default(0);
             $table->timestamps();
         });
     }
