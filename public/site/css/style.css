@@ -2131,6 +2131,7 @@ video#myVideo {
     text-decoration: none;
     color: #000;
     text-align: center;
+    line-height: 130%;
 }
 
 .txt-sidebar > div {
@@ -2880,7 +2881,7 @@ section.membresia {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 15px 10px;
     height: 100%;
     border: 1px solid #000;
 }
@@ -2888,7 +2889,7 @@ section.membresia {
 .row-ponente h3 {
     margin: 0 0 15px;
     font-family: 'Oswald medium';
-    font-size: 40px;
+    font-size: 28px;
     text-transform: uppercase;
 }
 
