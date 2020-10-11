@@ -126,18 +126,19 @@
                             </div>
                         </div>
 
+
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> Categorias: </label>
-                            <div class="col-sm-10 mb-3">
-                                <select data-placeholder="Categorias" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_categorias[]">
-                                    @foreach($categorias as $categoria)
-                                        <option value="{{ $categoria->id }}" 
-                                            @if(in_array($categoria->id, old('select_categorias', $myCategories))) selected @endif>
-                                            {{ $categoria->nombre }}
-                                        </option>    
-                                    @endforeach
+                            <label class="col-sm-2 col-form-label">Tipo de Evento: </label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="select_tipo">
+                                    <option value="">Tipos</option>
+                                    @forelse($tipoeventos as $tipoevento)
+                                        <option value="{{ $tipoevento->id }}" @if ($tipoevento->id == $evento->tipo_evento_id) selected @endif > {{ $tipoevento->nombre }} </option>
+                                    @empty
+                                        <option value=""> No se encontraron resultados </option>
+                                    @endforelse
                                 </select>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('select_categorias') !!} </span>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_tipo') !!} </span>
                             </div>
                         </div>
 
@@ -168,12 +169,12 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Fecha de Lanzamiento: </label>
                             <div class="col-sm-2">
-                                <input class="form-control datepicker" name="fecha_inicio" data-date-format="yyyy-mm-dd" value="{{ old("fecha_inicio", Carbon::parse($evento->fehca_lanzamiento)->format("Y-m-d")) }}">
+                                <input class="form-control datepicker" name="fecha_inicio" data-date-format="yyyy-mm-dd" value="{{ old("fecha_inicio", Carbon::parse($evento->fecha_lanzamiento)->format("Y-m-d")) }}">
                                 <span class='form-text m-b-none errors'> {!! $errors->first('fecha_inicio') !!} </span>
                             </div>
                             <label class="pt-2 font-weight-bold"> : </label>
                             <div class="col-sm-2 clockpicker" data-autoclose="true">
-                                <input class="form-control" name="hora_inicio" value="{{ old('hora_inicio', Carbon::parse($evento->fehca_lanzamiento)->format("H:i")) }}">
+                                <input class="form-control" name="hora_inicio" value="{{ old('hora_inicio', Carbon::parse($evento->fecha_lanzamiento)->format("H:i")) }}">
                                 <span class='form-text m-b-none errors'> {!! $errors->first('hora_inicio') !!} </span>
                             </div>
                         </div>

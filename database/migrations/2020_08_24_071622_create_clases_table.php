@@ -15,6 +15,7 @@ class CreateClasesTable extends Migration
     {
         Schema::create('clases', function (Blueprint $table) {
             $table->id();
+            $table->integer("category_id");
             $table->text('slug')->nullable();
             $table->text('nombre_clase');
             $table->text('img')->nullable();

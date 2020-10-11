@@ -23,7 +23,8 @@ class EventosRepositorie
         $evento->nombre             = $request->nombre_evento;
         $evento->video_bienvenida   = $request->video_bienvenida;
         $evento->descripcion        = $request->descripcion;
-        $evento->fehca_lanzamiento  = $request->fecha_inicio." ".$request->hora_inicio;
+        $evento->fecha_lanzamiento  = $request->fecha_inicio." ".$request->hora_inicio;
+        $evento->tipo_evento_id     = $request->select_tipo;
 
         if ($evento->save()) {
             $evento->slug           = $this->helper->createSlug($request->nombre_evento, $evento->id, "maptve");
@@ -36,12 +37,6 @@ class EventosRepositorie
                     DB::rollback();
                     return back()->withInput()->with("status.newEvento", "error");
                 }
-
-                if (!$this->insertCategories($evento->id, $request->select_categorias)) {
-                    DB::rollback();
-                    return back()->withInput()->with("status.newEvento", "error");
-                }
-
 
                 DB::commit();
                 return back()->with("status.newEvento", "success");
@@ -63,7 +58,8 @@ class EventosRepositorie
         $evento->nombre             = $request->nombre_evento;
         $evento->video_bienvenida   = $request->video_bienvenida;
         $evento->descripcion        = $request->descripcion;
-        $evento->fehca_lanzamiento  = $request->fecha_inicio." ".$request->hora_inicio;
+        $evento->fecha_lanzamiento  = $request->fecha_inicio." ".$request->hora_inicio;
+        $evento->tipo_evento_id     = $request->select_tipo;
 
         if ($evento->save()) {
             //SLUG DE EVENTO
@@ -93,20 +89,6 @@ class EventosRepositorie
                 /* ACTUALIZAR INSTRUCTOR \\ */
 
 
-                /* ACTUALIZAR CATEGORIAS */
-                if (!$this->eliminarCategories($id)) {
-                    DB::rollback();
-                    $this->eliminarImagen($evento->img_evento);
-                    return back()->withInput()->with("status.updateEvento", "error");
-                }
-
-                if (!$this->insertCategories($evento->id, $request->select_categorias)) {
-                    DB::rollback();
-                    $this->eliminarImagen($evento->img_evento);
-                    return back()->withInput()->with("status.updateEvento", "error");
-                }
-                /* ACTUALIZAR CATEGORIAS \\ */
-
                 DB::commit();
                 return back()->with("status.updateEvento", "success");
             }
@@ -117,35 +99,6 @@ class EventosRepositorie
 
         DB::rollback();
         return back()->withInput()->with("status.updateEvento", "error");
-    }
-
-
-    protected function insertCategories($evento_id, $categories)
-    {
-        foreach ($categories as $category) {
-            $insertCategory = DB::table('eventos_categories')->insert(
-                ["evento_id" => $evento_id,
-                "category_id" => $category]
-            );
-
-            if (!$insertCategory) {
-                return false;
-            }
-        }
-
-        if (!$insertCategory) {
-            return false;
-        }
-
-        return true;
-    }
-
-
-    protected function eliminarCategories($evento_id)
-    {
-        $eliminarCategory = DB::table('eventos_categories')
-                                ->where('evento_id', $evento_id)->delete();
-        return true;
     }
 
 

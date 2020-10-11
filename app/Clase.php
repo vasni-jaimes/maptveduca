@@ -12,9 +12,4 @@ class Clase extends Model
     {
     	return $this->belongsToMany('App\Instructor', 'clases_instructors', 'clas_id');
     }
-
-    public function category()
-    {
-    	return $this->belongsToMany('App\Category', 'clases_categories', 'clas_id');
-    }
 }

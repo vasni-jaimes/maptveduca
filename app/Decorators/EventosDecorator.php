@@ -2,10 +2,10 @@
 
 namespace App\Decorators;
 use App\Repositories\EventosRepositorie;
-use App\Category;
 use App\Helpers\Helper;
 use App\Instructor;
 use App\Evento;
+use App\TipoEventos;
 use Illuminate\Support\Collection;
 use DB;
 
@@ -29,21 +29,19 @@ Class EventosDecorator
 
 	public function edit($id)
 	{
-		$categorias  	= Category::where('status', 1)->get();
 		$instructors 	= Instructor::where('status', 1)->get();
         $id 		 	= $this->helper::base64_decode_url($id);
-       	$evento 		= Evento::with(['category', 'instructor'])->findOrFail($id);
+       	$evento 		= Evento::with(['instructor'])->findOrFail($id);
        	$myInstructors 	= collect($evento->instructor)->pluck('id')->toArray();
-       	$myCategories 	= collect($evento->category)->pluck('id')->toArray();
+       	$tipoeventos    = TipoEventos::where('status', 1)->get();
        	$helper 		= $this->helper;
 
 
-       	return array("categorias" => $categorias,
-       				 "id" => $id,
+       	return array("id" => $id,
        				 "instructors" => $instructors,
        				 "evento" => $evento,
        				 "myInstructors" => $myInstructors,
-       				 "myCategories" => $myCategories,
+       				 "tipoeventos" => $tipoeventos,
        				 "helper" => $helper);
 	}
 

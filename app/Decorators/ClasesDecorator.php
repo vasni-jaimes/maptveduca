@@ -30,11 +30,10 @@ Class ClasesDecorator
 	public function edit($id)
 	{
 		$id 			= $this->helper::base64_decode_url($id);
-		$clase 			= Clase::with(["instructor", "category"])->findOrFail($id);
+		$clase 			= Clase::with(["instructor"])->findOrFail($id);
 		$categorias     = Category::where('status', 1)->get();
         $instructores   = Instructor::where('status', 1)->get();
         $myInstructores = collect($clase->instructor)->pluck('id')->toArray();
-        $myCategories 	= collect($clase->category)->pluck('id')->toArray();
         $helper 		= $this->helper;
         $sesiones 		= DB::table("clases_sessiones")->where("clas_id", $id)->get();
 
@@ -43,7 +42,6 @@ Class ClasesDecorator
 						"categorias" => $categorias, 
 						"instructores" => $instructores,
 						"myInstructores" => $myInstructores,
-						"myCategories" => $myCategories,
 						"sesiones" => $sesiones,
 						"helper" => $helper );
 

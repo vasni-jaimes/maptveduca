@@ -48,7 +48,7 @@
                     <div class="ibox-content">
                         <div class="table-responsive">
                             @if (!$eventos->isEmpty())
-                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <table class="table table-striped table-bordered table-hover dataTables-example tabla-eventos">
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
@@ -68,7 +68,7 @@
                                                 		<p style="background: #d8c4cd"> {{ $instructor->nombres. " ". $instructor->apellidos }} </p>
                                                 	@endforeach
                                                 </td>
-                                                <td class="center"> {!! $evento->status == 1 ? "<span class='float-center label label-primary'>Activo</span>" : "<span class='float-center label label-danger'>Inactivo</span>" !!} </td>
+                                                <td class="center"> {!! $evento->status == 1 ? "<span class='float-center label label-primary'>Activo</span>" : "<span style='cursor:pointer' class='float-center label label-danger'>Inactivo</span>" !!} </td>
                                                 <td class="center">
                                                     
                                                     <div class="btn-group">
@@ -76,9 +76,9 @@
                                                      	<a href="{{ route("editar-evento.edit", $helper::base64_encode_url($evento->id)) }}" class="btn-primary btn btn-xs mr-3">Editar Evneto</a>
                                                      	<a href="#" class="btn-danger btn btn-xs mr-3">Eliminar Evento</a>
                                                      	@if ($evento->status == 1)
-                                                          <a href = "#" class="btn-danger btn btn-xs">Desactivar</a>
+                                                           <a href = "#" class="btn-danger btn btn-xs btn-desactivar" data-id="{{ $helper::base64_encode_url($evento->id) }}" data-st="0">Desactivar</a>
                                                         @else
-                                                            <a href="#" class="btn-primary btn btn-xs">Activar</a>
+                                                            <a href="#" data-id="{{ $helper::base64_encode_url($evento->id) }}" data-st="1" class="btn-primary btn btn-xs btn-activar">Activar</a>
                                                         @endif
                                                    </div>
 
@@ -153,6 +153,8 @@
          
          });
          
-      </script>
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/admini/js/app.js"></script>
 
 @stop

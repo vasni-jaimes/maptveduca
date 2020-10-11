@@ -3,7 +3,7 @@
 <!-- /HEADER AND FOOTER -->
 
 
-@section('titulo', 'Lista de Eventos')
+@section('titulo', 'Lista de Instructores')
 
 @section('css-content')
     <!-- FooTable -->
@@ -16,16 +16,16 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Lista de Eventos</h2>
+            <h2>Lista de Instructores</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="index.html">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a>Eventos</a>
+                    <a>Instructores</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <strong>Lista de Eventos</strong>
+                    <strong>Lista de Instructores</strong>
                 </li>
             </ol>
         </div>
@@ -48,7 +48,7 @@
                     <div class="ibox-content">
                         <div class="table-responsive">
                             @if (!$instructores->isEmpty())
-                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <table class="table table-striped table-bordered table-hover dataTables-example tabla-instructores">
                                     <thead>
                                         <tr>
                                             <th>Nombres</th>
@@ -78,9 +78,9 @@
                                                      	<a href="{{ route("editar-instructor.edit", $helper::base64_encode_url($instructor->id)) }}" class="btn-primary btn btn-xs mr-3">Editar Instructor</a>
                                                      	<a href="#" class="btn-danger btn btn-xs mr-3">Eliminar Instructor</a>
                                                         @if ($instructor->status == 1)
-                                                     	  <a href = "#" class="btn-danger btn btn-xs">Desactivar</a>
+                                                          <a href = "#" class="btn-danger btn btn-xs btn-desactivar" data-id="{{ $helper::base64_encode_url($instructor->id) }}" data-st="0">Desactivar</a>
                                                         @else
-                                                            <a href="#" class="btn-primary btn btn-xs">Activar</a>
+                                                            <a href="#" data-id="{{ $helper::base64_encode_url($instructor->id) }}" data-st="1" class="btn-primary btn btn-xs btn-activar">Activar</a>
                                                         @endif
                                                    </div>
 
@@ -156,6 +156,8 @@
          
          });
          
-      </script>
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/admini/js/app.js"></script>
 
 @stop

@@ -61,31 +61,23 @@
 	    <div class="hoja-1000">
 	        <h2>¿Qué profesores están en MAPtv Educa?</h2>
 	        <ul class="slide">
-	            <li>
-	                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
+
+	        	@foreach($instructores as $instructor)
+
+	        		<li>
+		                <div class="img-slide" style="background-image: url({{Storage::url($instructor->img) }});"></div> <!-- /img-slide -->
+		                <p> {{ $instructor->nombres." ".$instructor->apellidos }} </p>
+		                <p>{{ $instructor->especialidad }}</p>
+		            </li>
+
+	        	@endforeach
+
+	            {{-- <li>
+	                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> /img-slide
 	                <p>Profr. Fulano</p>
 	                <p>Especialidad</p>
-	            </li>
-	            <li>
-	                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-	                <p>Profr. Fulano</p>
-	                <p>Especialidad</p>
-	            </li>
-	            <li>
-	                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-	                <p>Profr. Fulano</p>
-	                <p>Especialidad</p>
-	            </li>
-	            <li>
-	                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-	                <p>Profr. Fulano</p>
-	                <p>Especialidad</p>
-	            </li>
-	            <li>
-	                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-	                <p>Profr. Fulano</p>
-	                <p>Especialidad</p>
-	            </li>
+	            </li> --}}
+	        
 	        </ul>
 	    </div> <!-- /hoja-1200 -->
 	    

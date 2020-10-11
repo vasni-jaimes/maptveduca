@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Instructor;
 
 class IndexController extends Controller
 {
@@ -15,6 +16,7 @@ class IndexController extends Controller
 	
     public function showIndex()
     {
-    	return view("site.index");
+    	$instructores   = Instructor::where("status", 1)->get();
+    	return view("site.index", compact("instructores"));
     }
 }

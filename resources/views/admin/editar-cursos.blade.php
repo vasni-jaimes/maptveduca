@@ -128,7 +128,7 @@
                         <div class="form-group row mb-5">
                             <label class="col-sm-2 col-form-label">Curso extra: </label>
                             <div class="i-checks col-sm-10">
-                                <label> <input type="checkbox" value="1" name="curso_extra" @if(old("curso_extra") == 1 || $curso->careers->count() == 0) checked @endif> <i></i></label>
+                                <label> <input type="checkbox" value="1" name="curso_extra" @if(old("curso_extra") == 1 || $curso->extra == 1) checked @endif> <i></i></label>
                             </div>
                         </div>
 
@@ -150,16 +150,34 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> Categorias: </label>
-                            <div class="col-sm-10 mb-3">
-                                <select data-placeholder="Categorias" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_categorias[]">
-                                    @foreach($categorias as $categoria)
-                                        <option value="{{ $categoria->id }}" 
-                                            @if(in_array($categoria->id, old('select_categorias', $myCategories))) selected @endif>
-                                            {{ $categoria->nombre }}
-                                        </option>    
-                                    @endforeach
+                            <label class="col-sm-2 col-form-label">Categoria: </label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="select_categorias">
+                                    <option value="">Categorias</option>
+                                    @forelse($categorias as $categoria)
+                                        <option value="{{ $categoria->id }}" @if (old('select_categorias', $curso->categoria_id) == $categoria->id) selected @endif> {{ $categoria->nombre }} </option>
+                                    @empty
+                                        <option value=""> No se encontraron resultados </option>
+                                    @endforelse
                                 </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_categorias') !!} </span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> Subcategorias: </label>
+                            <div class="col-sm-10 mb-3">
+                                <div class="div-subcate">
+                                    <select data-placeholder="Subcategorias" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_subcategorias[]">
+                                        @foreach($subcategorias as $subcategoria)
+                                            <option value="{{ $career->id }}"
+                                                @if (in_array($subcategoria->id, old('select_carreras', $mySubcategorias))) selected @endif > 
+                                                {{ $subcategoria->nombre }} 
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('select_categorias') !!} </span>
                             </div>
                         </div>
