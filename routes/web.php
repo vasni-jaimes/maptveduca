@@ -53,6 +53,16 @@ Route::get('nosotros', 'Site\NosotrosControllers@index')->name('nosotros.index')
 //MICUENTA
 Route::get('micuenta', 'Site\UsersController@index')->name('micuenta.index');
 
+
+//CHECKOUT
+Route::get('checkout/{slug_membresia}', 'Site\CheckoutController@index')->name('checkout');
+Route::get('pago/{slug_membresia}', 'Site\CheckoutController@PayWithPaypal')->name('paago-membresia');
+Route::get('pago/{slug_membresia}/status', 'Site\CheckoutController@PaypalStatus')->name('pago-status');
+
+
+
+
+
 //VISTAS ESTATICAS
 // Route::get('eventos', function() {
 // 	return view('site.eventos');
@@ -66,9 +76,9 @@ Route::get('single-aulas', function() {
 	return view('site.single-aulas');
 })->name('single-aulas');
 
-Route::get('checkout', function() {
-	return view('site.checkout');
-})->name('checkout');
+// Route::get('checkout', function() {
+// 	return view('site.checkout');
+// })->name('checkout');
 
 // Route::get('micuenta', function() {
 // 	return view('site.micuenta');

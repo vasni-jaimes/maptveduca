@@ -23,7 +23,6 @@ class TipoEventoSeeder extends Seeder
     		"nombre" => "Conciertos / Masterclass",
     	]);
 
-
     	$tipoEventos->save();
 
     }

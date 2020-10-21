@@ -134,6 +134,10 @@ if (frmAgregarEvento || frmEditarEvento) {
 		$(document).change("input", funciones.validarAgregarEvento);
 		$("select").change(funciones.validarAgregarEvento);
 	}
+
+	//EVENTO PARA EL TIPO DE EVENTOS
+	const select_tipo = document.querySelector("select[name='select_tipo']");
+	select_tipo.addEventListener('change', funciones.cambiarTipoEvento);
 }
 
 //FORMULARIO INSTRUCTORES

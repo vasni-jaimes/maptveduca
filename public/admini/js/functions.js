@@ -95,6 +95,22 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  cambiarTipoEvento: function cambiarTipoEvento(e) {
+    e.preventDefault();
+    var tipo_event = e.target.value;
+
+    if (tipo_event == 1) {
+      document.querySelector(".eventos_one").style.display = "block";
+      document.querySelector(".eventos_two").style.display = "none";
+      return false;
+    }
+
+    if (tipo_event == 2) {
+      document.querySelector(".eventos_one").style.display = "none";
+      document.querySelector(".eventos_two").style.display = "block";
+      return false;
+    }
+  },
   obtenerSubmenus: function obtenerSubmenus(e) {
     e.preventDefault();
     var select_catego = e.target.value;

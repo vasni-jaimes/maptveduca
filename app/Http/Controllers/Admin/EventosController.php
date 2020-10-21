@@ -59,7 +59,7 @@ class EventosController extends Controller
      */
     public function store(ValidarAgregarEvento $request)
     {
-        //return response()->json($request);
+        return response()->json($request);
         return $this->eventosDecorator->store($request);
     }
 
