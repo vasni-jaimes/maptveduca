@@ -43,7 +43,7 @@
                         </li>
                     @empty
                         <li>
-                            <h2> No se encuentraron resultados </h2>
+                            <p>No se encontraron resultados</p>
                         </li>
                     @endforelse
                 </ul>
@@ -61,7 +61,7 @@
                         </li>
                     @empty
                         <li>
-                            <h2> No se encuentraron resultados </h2>
+                            <p>No se encontraron resultados</p>
                         </li>
                     @endforelse
                 </ul>
