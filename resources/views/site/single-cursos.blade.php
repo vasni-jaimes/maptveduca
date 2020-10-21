@@ -90,6 +90,20 @@
                                 <p><small>* Recuerda que esta membresía también te da  acceso a todos los cursos que no pertenecen a tu plan de estudios.</small></p>
                             </div>
                         </div> <!-- /txt-sidebar -->
+                        
+                        <br>
+                        
+                        <div class="txt-sidebar">
+                            <span><a href="#">Empezar curso</a></span>
+                            <div>
+                                <p>¡Estás listo para comenzar!</p>
+                                <p>Ahora podrás encontrar este curso en tu tablero personal para que puedas acceder rápidamente a él.</p>
+                                <p>¿Quieres saber cómo aprovechar mejor este curso?</p>
+                                <p>Echa un vistazo rápido a las recomendaciones para tomar este curso por tu cuenta:</p>
+                                <a href="#">Camino de aprendizaje</a>
+                            </div>
+                        </div> <!-- /txt-sidebar -->
+                        
                         <div class="favorito">
                             <p>Marca este curso como favorito</p>
                         </div> <!-- /favorito -->

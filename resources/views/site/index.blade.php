@@ -85,7 +85,7 @@
 	    
 	<section class="wrapper-academica">
 	    
-	    <div class="hoja-800">
+	    <div class="hoja-1000">
 	        <h2>¿Cómo funciona?</h2>
 	        <p>MAPtv Educa es una plataforma de apoyo a profesores de latinoamérica, quienes imparten su conocimiento a través de nosotros. Cuidamos la calidad de contenido que merecen nuestros usuarios y lo mantenemos actualizado para brindar la mejor experiencia.</p>
 	        <p>Es por esto que, con tu ayuda, podemos seguir manteniendo activa esta plataforma y brindándote la experiencia de grandes exponentes de la industria musical latina.</p>
@@ -140,9 +140,10 @@
 	        
 	        <div class="row-registro">
 	            <p>¿Quieres conocer el sitio antes de decidir?</p>
-	            <a class="btn-amarillo" href="#">Regístrate gratis</a>
+	            <a class="btn-amarillo" href="{{ route("registro.show") }}">Regístrate gratis</a>
 	        </div> <!-- /row-registro -->
-	    </div> <!-- /hoja-1200 -->
+            
+	    </div> <!-- /hoja-1000 -->
 	    
 	</section> <!-- /wrapper-academica -->
 

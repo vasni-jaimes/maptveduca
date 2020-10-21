@@ -548,7 +548,7 @@ header a {
 }
 
 .banner-inicio {
-    margin: 35px 0;
+    margin: 50px 0;
     padding: 10% 20px;
     background-image: url('/site/img/imagen-generica.jpg');
     background-repeat: no-repeat;
@@ -744,12 +744,12 @@ video#myVideo {
 
 .wrapper-contenido {
     position: relative;
-    padding: 80px 0;
+    padding: 50px 0;
     background-color: #000;
 }
 
 .wrapper-contenido h2 {
-    margin: 0 0 60px;
+    margin: 0 0 50px;
     color: #FFC314;
     font-family: 'Oswald medium';
     font-size: 40px;
@@ -817,12 +817,12 @@ video#myVideo {
 /*----------------------------------  CONTENIDO ¿Que hay?  ----------------------------------*/
 
 .wrapper-profesores {
-    padding: 80px 0;
+    padding: 50px 0;
     background-color: #ffc314;
 }
 
 .wrapper-profesores h2 {
-    margin: 0 0 60px;
+    margin: 0 0 50px;
     color: #fff;
     font-family: 'Oswald medium';
     font-size: 40px;
@@ -975,13 +975,24 @@ video#myVideo {
 
 .banner-slide {
     position: relative;
-    margin: 0 0 35px;
+    margin: 0 0 50px;
     text-align: center;
 }
 
 .banner-slide .slide-inicio {
     position: relative;
     padding: 0 50px;
+}
+
+.banner-slide.slide-yellow a {
+    color: #000;
+    line-height: 130%;
+}
+
+.banner-slide.slide-black a,
+.banner-slide.slide-black p {
+    color: #ffc314;
+    line-height: 130%;
 }
 
 .slide-black .slide-inicio:before {
@@ -1020,6 +1031,7 @@ video#myVideo {
 .banner-slide p {
     font-family: 'Oswald regular italic';
     font-size: 19px;
+    line-height: 130%;
 }
 
 .bg-black {
@@ -1033,7 +1045,7 @@ video#myVideo {
 }
 
 .bg-yellow {
-    padding: 25px 0;
+    padding: 35px 0;
     background-color: #ffc314;
 }
 
@@ -1043,7 +1055,7 @@ video#myVideo {
 }
 
 .banner-title {
-    padding: 40px 15px;
+    padding: 35px 15px;
 }
 
 .banner-title h2 {
@@ -1072,7 +1084,7 @@ video#myVideo {
 }
 
 .row-maptv {
-    padding: 40px 30px;
+    padding: 35px 30px;
     border: 10px solid #000;
     background-color: #fff;
 }
@@ -1233,7 +1245,7 @@ video#myVideo {
 
 .row-contenido ul li ul li {
     position: relative;
-    padding-left: 20px;
+    padding-left: 15px;
     font-family: 'Poppins light';
     font-size: 16px;
     line-height: 130%;   
@@ -1242,7 +1254,7 @@ video#myVideo {
 .row-contenido ul li ul li:before {
     content: ''; 
     position: absolute;
-    top: 8px;
+    top: 6px;
     left: 0;
     width: 6px;
     height: 6px;
@@ -1307,11 +1319,11 @@ video#myVideo {
 /*----------------------------------  CONTENIDO Funciona  ----------------------------------*/
 
 .wrapper-academica {
-    padding: 70px 0 0;
+    padding: 50px 0 0;
 }
 
 .wrapper-academica h2 {
-    margin: 0 0 40px;
+    margin: 0 0 50px;
     font-family: 'Oswald medium';
     font-size: 40px;
     text-align: center;
@@ -1320,9 +1332,9 @@ video#myVideo {
 }
 
 .wrapper-academica p {
-    margin: 0 0 38px;
-    font-family: 'Oswald extra light';
-    font-size: 23px;
+    margin: 0 0 30px;
+    font-family: 'Oswald light';
+    font-size: 24px;
     line-height: 130%;
     text-align: center;
 }
@@ -1361,7 +1373,7 @@ video#myVideo {
     box-sizing: border-box;
     padding: 12px;
     font-family: 'Poppins medium';
-    font-size: 14px;
+    font-size: 15px;
     border: 1px solid #e6e6e6;
     vertical-align: middle;
     text-align: left;
@@ -1411,7 +1423,7 @@ video#myVideo {
 }
 
 .row-registro {
-    margin: 100px 0;
+    margin: 50px 0;
     text-align: center;
 }
 
@@ -1423,7 +1435,7 @@ video#myVideo {
     display: inline-block;
     padding: 10px 5%;
     font-family: 'Poppins semibold';
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 25px;
     background-color: #FFC314;
     text-decoration: none;
@@ -1484,7 +1496,7 @@ video#myVideo {
 
 .formulario {
     position: relative;
-    padding: 40px 5%;
+    padding: 35px 5%;
     background-color: #fff;
     border: 1px solid #cdd5e1;
     border-radius: 5px;
@@ -1517,7 +1529,7 @@ video#myVideo {
 }
 
 .form div .input {
-    width: 49%;
+    width: 48%;
 }
 
 .form input::-webkit-input-placeholder { /* Edge */
@@ -1588,6 +1600,7 @@ video#myVideo {
 
 .row-terminos ul li {
     padding: 0 5px;
+    line-height: 130%;
 }
 
 .row-terminos ul li,
@@ -1630,7 +1643,7 @@ video#myVideo {
 }
 
 .wrapper-cursos {
-    padding: 70px 0 100px;
+    padding: 50px 0;
 }
 
 .ico-filtro {
@@ -1662,8 +1675,16 @@ video#myVideo {
     font-family: 'Poppins bold';
 }
 
-.close {
+.close-sidebar {
     display: none;
+    margin: 0 0 15px;
+}
+
+.close-sidebar span {
+    display: inline-block;
+    font-family: 'Poppins semibold';
+    font-size: 18px;
+    color: #000;
 }
 
 .row-cursos {
@@ -1683,7 +1704,7 @@ video#myVideo {
 }
 
 .interior-curso h3 {
-    padding: 30px 20px 15px;
+    padding: 35px 15px 15px;
     font-family: 'Oswald medium';
     font-size: 33px;
     color: #000;
@@ -2131,6 +2152,7 @@ video#myVideo {
     text-decoration: none;
     color: #000;
     text-align: center;
+    line-height: 130%;
 }
 
 .txt-sidebar > div {
@@ -2246,7 +2268,7 @@ section.membresia {
 }
 
 .wrapper-columnas {
-    margin: 50px 0 100px;
+    margin: 50px 0;
 }
 
 .row-columnas p {
@@ -2310,7 +2332,7 @@ section.membresia {
     padding: 10px;
     color: #fff;
     font-family: 'Oswald medium';
-    font-size: 14px;
+    font-size: 15px;
     text-align: center;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -2394,7 +2416,7 @@ section.membresia {
 }
 
 .wrapper-herramienta {
-    margin: 70px 0;
+    margin: 50px 0;
 }
 
 .wrapper-herramienta h2 {
@@ -2465,9 +2487,9 @@ section.membresia {
 }
 
 .wrapper-basica h2 {
-    margin: 0 0 70px;
+    margin: 0 0 50px;
     font-family: 'Oswald medium';
-    font-size: 46px;
+    font-size: 40px;
     text-align: center;
     text-transform: uppercase;
     line-height: 130%;
@@ -2493,7 +2515,7 @@ section.membresia {
 }
 
 .wrapper-basica table tr td {
-    padding: 20px;
+    padding: 12px;
     font-family: 'Poppins medium';
     font-size: 14px;
     border: 1px solid #e6e6e6;
@@ -2564,7 +2586,6 @@ section.membresia {
 
 .btn-grande {
     display: block;
-    margin: 15px 0;
     padding: 30px 20px;
     font-family: 'Oswald medium';
     font-size: 28px;
@@ -2737,12 +2758,12 @@ section.membresia {
 /*----------------------------------  EVENTOS  ----------------------------------*/
 
 .eventos .row-clases {
-    margin: 70px auto 30px;
+    margin: 0 auto 50px;
 }
 
 .wrapper-biblioteca {
     padding: 0 0 20px;
-    margin: 0 0 100px;
+    margin: 0 0 50px;
     border: 1px solid #000;
 }
 
@@ -2764,12 +2785,12 @@ section.membresia {
 
 .item-slide {
     position: relative;
-    padding: 0 15px 0 110px;
+    padding: 0 15px 0 85px;
 }
 
 .item-slide p.titulo {
     position: absolute;
-    width: 100px;
+    width: 75px;
     left: 0;
     height: 100%;
     background-color: #000;
@@ -2880,7 +2901,7 @@ section.membresia {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 15px 10px;
     height: 100%;
     border: 1px solid #000;
 }
@@ -2888,7 +2909,7 @@ section.membresia {
 .row-ponente h3 {
     margin: 0 0 15px;
     font-family: 'Oswald medium';
-    font-size: 40px;
+    font-size: 28px;
     text-transform: uppercase;
 }
 
@@ -2925,7 +2946,7 @@ section.membresia {
 /*----------------------------------  NOSOTROS  ----------------------------------*/
 
 .wrapper-nosotros {
-    margin: 80px 0 0;
+    margin: 50px 0 0;
 }
 
 .wrapper-nosotros .banner-title h2 {
@@ -2986,7 +3007,7 @@ section.membresia {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 20px;
-    margin: 30px 0 0;
+    margin: 30px 0;
     background-color: #f2f2f2;
 }
 
@@ -2997,7 +3018,7 @@ section.membresia {
 .wrapper-equipo ul li {
     position: relative;
     width: 30%;
-    margin: 0 0 50px;
+    margin: 0 0 35px;
     border: 10px solid #000;
     overflow: hidden;
 }
@@ -3057,11 +3078,12 @@ section.membresia {
 /*----------------------------------  GUÍA DE ESTUDIOS  ----------------------------------*/
 
 .row-guia h3 {
-    padding: 30px 20px 15px;
+    padding: 35px 15px 15px;
     font-family: 'Oswald medium';
     font-size: 33px;
     color: #000;
     text-transform: uppercase;
+    line-height: 130%;
 }
 
 
@@ -4154,11 +4176,6 @@ a[href="#page"] {
         text-align: left;
     }
     
-    .wrapper-academica table tr th,
-    .wrapper-academica table tr td span {
-        font-size: 18px;
-    }
-    
     .wrapper-academica table tr.last-tr th,
     .wrapper-academica table tr:first-of-type th {
         display: none;
@@ -4202,15 +4219,6 @@ a[href="#page"] {
         max-width: 525px;
         width: 100%;
         font-size: 42px;
-    }
-    
-    .wrapper-contenido,
-    .wrapper-profesores {
-        padding: 50px 0;
-    }
-    
-    .row-registro {
-        margin: 50px 0;
     }
     
     .wrapper-maptv {
@@ -4288,19 +4296,19 @@ a[href="#page"] {
     }
     
     .wrapper-herramienta {
-        margin: 50px 0;
+        margin: 35px 0;
     }
     
     .wrapper-academica,
     .lista-contenido {
-        padding: 50px 0 0;
+        padding: 35px 0 0;
     }
     
     .wrapper-contenido h2,
     .wrapper-profesores h2,
     .wrapper-academica h2,
     .wrapper-herramienta h2 {
-        margin: 0 0 30px;
+        margin: 0 0 35px;
     }
     
     .form div {
@@ -4316,7 +4324,7 @@ a[href="#page"] {
     }
     
     .row-maptv {
-        padding: 50px 20px;
+        padding: 25px 20px;
     }
     
     .banner-maptv {
@@ -4344,12 +4352,15 @@ a[href="#page"] {
     
     .ico-filtro {
         display: inline-block;
-        margin: 0 0 15px;
     }
     
     .ico-filtro img {
         width: 30px; 
         height: auto;
+    }
+    
+    .close-sidebar {
+        display: block;
     }
     
     .sidebar-cursos {
@@ -4379,6 +4390,10 @@ a[href="#page"] {
         padding-left: 0;
     }
     
+    .row-clases p {
+        font-size: 22px;
+    }
+    
     .item-plan {
         width: 100%;
     }
@@ -4388,7 +4403,7 @@ a[href="#page"] {
     }
     
     .wrapper-nosotros {
-        margin: 50px 0 0;
+        margin: 35px 0 0;
     }
     
     .flex-marcas li {
@@ -4496,8 +4511,15 @@ a[href="#page"] {
 }
 
 @media screen and (max-width: 480px) {
-    .wrapper-herramienta {
-        margin: 30px 0;
+    .banner-inicio,
+    .wrapper-herramienta,
+    .wrapper-columnas,
+    .flex-lista {
+        margin: 35px 0;
+    }
+    
+    .banner-slide {
+        margin: 0 0 35px;
     }
     
     .wrapper-contenido,
@@ -4523,6 +4545,14 @@ a[href="#page"] {
         font-size: 30px;
     }
     
+    .titulo-banner {
+        border: 5px solid #000;
+    }
+    
+    .titulo-banner h1 {
+        padding: 20px 15px;
+    }
+    
     header a,
     .txt-video a.btn-amarillo,
     .row-registro .btn-amarillo {
@@ -4536,7 +4566,7 @@ a[href="#page"] {
     
     .wrapper-academica p {
         margin: 0 0 20px;
-        font-size: 26px;
+        font-size: 20px;
     }
     
     .banner-inicio p span {
@@ -4590,9 +4620,7 @@ a[href="#page"] {
         font-size: 20px;
     }
     
-    .flex-marcas li:first-of-type .img-marcas,
-    .flex-marcas li:nth-child(2) .img-marcas,
-    .flex-marcas li:nth-child(3) .img-marcas {
+    .flex-marcas li:first-of-type .img-marcas {
         height: auto;
     }
 }

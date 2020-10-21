@@ -324,10 +324,10 @@
                             <td>&nbsp</td>
                             <td><span class="circle"></span></td>
                         </tr>
-                        <tr>
-                            <td>&nbsp</td>
-                            <td>$123 MXN mensuales<span>Prueba gratuita por 30 días</span></td>
-                            <td>$1234 MXN mensuales <span>por carrera técnica</span></td>
+                        <tr class="last-tr">
+                            <td class="last-td">&nbsp</td>
+                            <td class="last-td"><span>$123 MXN mensuales</span><a href="#" class="bg-amarillo">Prueba gratuita por 30 días</a></td>
+                            <td class="last-td"><span>$1234 MXN mensuales <small>por carrera técnica</small></span></td>
                         </tr>
                     </table>
                     

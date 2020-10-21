@@ -1,8 +1,9 @@
-<div class="text-right">
+<div>
     <span class="ico-filtro"><img src="site/img/filtro.png"></span>
 </div> <!-- /text-right -->
 
 <div class="sidebar-cursos">
+    <div class="close-sidebar"><span>X</span></div>
     @foreach($categorias as $categoria)
         <ul>
             <li style="cursor: pointer; font-weight: bold" class="{{ $categoria->quitarAcentos($categoria->nombre) }}" data-cat="{{ $categoria->quitarAcentos($categoria->nombre) }}"> 

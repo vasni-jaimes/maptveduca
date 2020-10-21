@@ -144,15 +144,12 @@ $(document).ready(function(){
     $('.item-slide ul').slick({
       dots: false,
       arrows: true,
-      centerPadding: '60px',
       slidesToShow: 4,
       responsive: [
         {
           breakpoint: 768,
           settings: {
             arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
             slidesToShow: 3
           }
         },
@@ -160,8 +157,6 @@ $(document).ready(function(){
           breakpoint: 480,
           settings: {
             arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
             slidesToShow: 1
           }
         }
@@ -182,7 +177,7 @@ $(document).ready(function(){
         $('.sidebar-cursos').animate({left: 0});
 	}); //$('#navbar-toggle').on('click', function () {
     
-    $('.close').on('click', function () {
+    $('.close-sidebar').on('click', function () {
         $('.ico-filtro').removeClass('active');
         $('body').css('overflow', 'auto');
 		$('.sidebar-cursos').animate({left: '-55%'});

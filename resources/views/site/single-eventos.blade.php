@@ -8,7 +8,7 @@
 
     <section class="single-curso">
 
-        <div class="hoja-1400">
+        <div class="hoja-1000">
             
             <ul class="flex breadcrumb-curso">
                 <li><a href="#">Evento</a></li>
@@ -88,7 +88,8 @@
                 </div> <!-- /flex -->
             </div> <!-- /wrapper-curso -->
             
-        </div> <!-- /hoja-1400 -->
+        </div> <!-- /hoja-1000 -->
+        
     </section> <!-- /single-curso -->
 
 @stop
