@@ -5,15 +5,19 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Collection;
 use PayPal\Api\Amount;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
+use PayPal\Api\PaymentExecution;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 use App\Membresia;
 use App\Career;
+use Carbon\Carbon;
+use DB;
 
 class CheckoutController extends Controller
 {
@@ -35,7 +39,7 @@ class CheckoutController extends Controller
 
     public function index($slug_membresia)
     {
-    	$membresia = Membresia::where('slug', $slug_membresia)->first();
+    	$membresia = Membresia::with("carreras")->where('slug', $slug_membresia)->first();
         return view("site.checkout", compact("membresia"));
     }
 
@@ -43,8 +47,33 @@ class CheckoutController extends Controller
     public function PayWithPaypal(Request $request, $slug_membresia)
     {
 
+    	if ($this->validarMembresiaUsuario()){
+            return back()->withInput()->with("error", "El usuario ya cuenta con una suscripcion activa");
+    	} 
+
+
     	//OBTENER MEMBRESIA A PAGAR
     	$membresia = Membresia::where('slug', $slug_membresia)->first();
+
+    	//SI LA MEMBRESIA ES ACADEMICA, VALIDAMOS PARAMETROS
+    	if ($membresia->id == 2) {
+    		$career = Career::where('id', $request->carrera)->first();
+
+	     	if (!$request->has('carrera') && $membresia->id == 2) {
+                return back()->withInput()->with("error", "No esta el parametro necesario");
+	    	}
+
+	    	if (!is_numeric($request->carrera)) {
+                return back()->withInput()->with("error", "El parametro no es valido");	
+	    	}
+
+	    	if (collect($career)->isEmpty()) {
+                return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
+	    	}
+    	}
+
+
+
 
     	$payer = new Payer();
         $payer->setPaymentMethod('paypal');
@@ -60,8 +89,8 @@ class CheckoutController extends Controller
         $callbackUrl = route("pago-status", $slug_membresia);
 
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl($callbackUrl)
-            ->setCancelUrl($callbackUrl);
+        $redirectUrls->setReturnUrl($callbackUrl."?carrera=".$request->carrera)
+            ->setCancelUrl($callbackUrl."?carrera=".$request->carrera);
 
         $payment = new Payment();
         $payment->setIntent('sale')
@@ -85,8 +114,7 @@ class CheckoutController extends Controller
         $token = $request->input('token');
 
         if (!$paymentId || !$payerId || !$token) {
-            $status = 'Lo sentimos! El pago a través de PayPal no se pudo realizar.';
-            return redirect('/paypal/failed')->with(compact('status'));
+            return redirect()->route("checkout", $slug_membresia)->with("error", "Lo sentimos! El pago a través de PayPal no se pudo realizar.");
         }
 
         $payment = Payment::get($paymentId, $this->apiContext);
@@ -98,11 +126,50 @@ class CheckoutController extends Controller
         $result = $payment->execute($execution, $this->apiContext);
 
         if ($result->getState() === 'approved') {
-            $status = 'Gracias! El pago a través de PayPal se ha ralizado correctamente.';
-            return redirect('/results')->with(compact('status'));
-        }
 
-        $status = 'Lo sentimos! El pago a través de PayPal no se pudo realizar.';
-        return redirect('/results')->with(compact('status'));
+        	//OBTENER MEMBRESIA A PAGAR
+        	$membresia 		= Membresia::where('slug', $slug_membresia)->first();
+        	$carrera 		= $request->has("carrera") ? $request->carrera : null;
+        	$fecha_inicio 	= Carbon::now()->format('Y-m-d');
+        	$fecha_final	= Carbon::now()->addMonth()->format('Y-m-d');
+
+        	//CREAR REGISTRO
+            DB::beginTransaction();
+        	$user_membresia = DB::table('usuarios_membresia')->insert([
+        		"user_id" 		=> auth()->user()->id,
+        		"membresia_id" 	=> $membresia->id,
+        		"carrera_id" 	=> $carrera,
+        		"fehca_inicio" 	=> $fecha_inicio,
+        		"fecha_fin" 	=> $fecha_final,
+        	]);
+
+
+        	if ($user_membresia) {
+                DB::commit();
+                return redirect()->route("home")->with("success", "Gracias! El pago a través de PayPal se ha ralizado correctamente.");
+        	}
+        }
+        
+        DB::rollback();
+        return redirect()->route("checkout", $slug_membresia)->with("error", "Lo sentimos! El pago a través de PayPal no se pudo realizar.");
+    }
+
+
+    public function validarMembresiaUsuario()
+    {
+    	$fecha 	= Carbon::now()->format('Y-m-d');
+
+    	$results = DB::table('usuarios_membresia')
+	    			->where("user_id", auth()->user()->id)
+	    			->where('fehca_inicio', '<=', $fecha)
+	    			->where('fecha_fin', '>', $fecha)
+	    			->first();
+
+
+	    if (collect($results)->isEmpty()) {
+	    	return false;
+	    }
+
+	    return true;
     }
 }

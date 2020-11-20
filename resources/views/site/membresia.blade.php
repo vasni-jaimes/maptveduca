@@ -326,8 +326,8 @@
                         </tr>
                         <tr class="last-tr">
                             <td class="last-td">&nbsp</td>
-                            <td class="last-td"><span>$123 MXN mensuales</span><a href="#" class="bg-amarillo">Prueba gratuita por 30 días</a></td>
-                            <td class="last-td"><span>$1234 MXN mensuales <small>por carrera técnica</small></span></td>
+                            <td class="last-td"><span>$123 MXN mensuales</span><a href="{{ route("checkout", "membresia-basica") }}" class="bg-amarillo">Prueba gratuita por 30 días</a></td>
+                            <td class="last-td"><span>$1234 MXN mensuales <a href="{{ route("checkout", "membresia-academica") }}"> <small>por carrera técnica</small> </a> </span></td>
                         </tr>
                     </table>
                     

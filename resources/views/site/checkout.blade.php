@@ -6,7 +6,9 @@
 
 @section('contenido')
 
+
     <div class="shadowbox" id="registro">
+
 	    <div class="wrapper-form wrapper-checkout">
 	        <div>
 	            <img class="logo" src="/site/img/logo.png">
@@ -78,17 +80,20 @@
                             <input type="submit" class="button" value="Enviar">
     	                </form> --}} <!-- /form -->
 
-
-                        <form>
+                        <form action="{{ route('paago-membresia', $membresia->slug) }}" class="form-checkout" method="GET">
+                            @csrf
                             <div>
                                 <label>Programa de estudios</label><br>
-                                <select class="input">
+                                <select class="input" name="carrera">
                                    <option value=""> Carreras </option>
+                                   @foreach($membresia->carreras as $carreras)
+                                        <option value="{{ $carreras->id }}"> {{ $carreras->nombre }} </option>
+                                   @endforeach
                                 </select>
-                            </div>
-                            <a href="{{ route('paago-membresia', $membresia->slug) }}">
+                            </div><br>
+                            <button>
                                 <img src="https://www.paypalobjects.com/marketing/web/mx/logos-buttons/Paga-con-yellow_227x44.png" alt="Check out with PayPal" />
-                            </a>
+                            </button>
 
                         </form>
                         
@@ -104,7 +109,7 @@
 
     	                <h2>Te damos la bienvenida a la familia MAPtv Educa.</h2>
                         
-    	                <form action="" class="form-checkout basica" method="POST" name="">
+    	                {{-- <form action="" class="form-checkout basica" method="POST" name="">
     	                	
                             <div class="flex between">
                                 <fieldset class="columna">
@@ -152,9 +157,14 @@
                                 </fieldset>
                             </div>
                             
-                            <input type="submit" class="button" value="Enviar">
-    	                    
-    	                </form> <!-- /form -->
+                            <input type="submit" class="button" value="Enviar">    
+    	                </form> <!-- /form --> --}}
+
+                        <form action="{{ route('paago-membresia', $membresia->slug) }}" class="form-checkout basica" method="GET" name="">
+                            <button>
+                                <img src="https://www.paypalobjects.com/marketing/web/mx/logos-buttons/Paga-con-yellow_227x44.png" alt="Check out with PayPal" />
+                            </button>
+                        </form>
                         
     	                <div class="row-terminos">
     	                    <p>Al registrarte estás aceptando lo estipulado en nuestros</p>
@@ -166,10 +176,15 @@
                 @endif
 	        </div>
 	    </div> <!-- /wrapper-form -->
+
+
+
+        @if (session()->has("error"))
+            <div class="error">
+                {{ session()->get("error") }}
+            </div>
+        @endif
+
 	</div> <!-- /shadowbox -->
-
-
-    <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
-    <script>paypal.Buttons().render('body');</script>
 
 @stop

@@ -15,7 +15,7 @@ class CreateMembresiasCarrerasTable extends Migration
     {
         Schema::create('membresias_carreras', function (Blueprint $table) {
             $table->id();
-            $table->integer('mebmresia_id');
+            $table->integer('membresia_id');
             $table->integer('carrera_id');
             $table->timestamps();
         });

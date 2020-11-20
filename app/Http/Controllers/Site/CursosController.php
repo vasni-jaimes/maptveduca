@@ -13,7 +13,7 @@ class CursosController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
 
@@ -29,6 +29,7 @@ class CursosController extends Controller
 
     public function show($curso_id)
     {
+
     	$curso = Course::with(["instructor"])->where("status", 1)->where("slug", $curso_id)->first();
         $temario = json_decode($curso->temario);
         //return response()->json($temario);
