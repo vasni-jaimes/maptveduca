@@ -20,13 +20,20 @@
 
                     <div class="sidebar-single">
                         <h3>Contenido del curso</h3>
-                        
+                       {{--  auth()->user()->suscripcion[0] --}}
                         <ul class="row-leccion">
                             <li class="active">Bienvenida</li>
-                            @foreach($temario as $ctemario)
-                                <li>{{ $ctemario->nombre_video }}</li>
-                            @endforeach
-{{--                             <li>Lección 2</li>
+
+                            @if ( auth()->user()->suscripcion->count() > 0 )
+                                @foreach($temario as $ctemario)
+                                    <li class="active">{{ $ctemario->nombre_video }}</li>
+                                @endforeach
+                            @else
+                                @foreach($temario as $ctemario)
+                                    <li>{{ $ctemario->nombre_video }}</li>
+                                @endforeach
+                            @endif
+{{--                         <li>Lección 2</li>
                             <li>Lección 3</li>
                             <li>Lección 4</li>
                             <li>Lección 5</li>
@@ -54,15 +61,14 @@
                     <div class="single-contenido">
                         
                         <div class="row-video">
-                            <iframe src="https://www.youtube.com/embed/CBZyA-Pj52U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="{{ $curso->video_bienvenida }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div> <!-- /row-video -->
                         
                         <div class="txt-single">
                             <h3>Grabación 1</h3>
-                            <p>Producción musical / Curso base / Profesor titular: José Antonio Cordero</p>
+                            <p>Producción musical / {{ $curso->extra ? "CURSO EXTRA" : "CURSO BASE" }} / Profesor titular: {{ $curso->instructor[0]->nombres. " ".$curso->instructor[0]->apellidos }} </p>
                             <div class="descripcion-single">
-                                <p>Te damos la bienvenida al curso “Grabación 1”. En este video, tu profesor titular, José Antonio Cordero (Josean) te explica de qué se trata este curso y qué habrás aprendido al concluirlo...</p>
-                                <p>Texto que describe los puntos que se tocan en el video de bienvenida...</p>
+                                <p> {{ $curso->descripcion_bienvenida }} </p>
                             </div> <!-- /descripcion-single -->
                         </div> <!-- /txt-single -->
                     
