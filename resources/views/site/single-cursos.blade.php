@@ -10,7 +10,7 @@
 
         <div class="hoja-1000">
             
-            <ul class="flex breadcrumb-curso">
+            <ul class="breadcrumb-curso">
                 <li><a href="#">Cursos</a></li>
                 <li><span>{{ $curso->nombre }}</span></li>
             </ul> <!-- /breadcrumb-curso -->
@@ -97,6 +97,11 @@
                             </div>
                         </div> <!-- /txt-sidebar -->
                         
+                        <div class="flex flex-center favorito">
+                            <img src="/site/img/estrella.png">
+                            <p>Marca este curso como favorito</p>
+                        </div> <!-- /favorito -->
+                        
                         <br>
                         
                         <div class="txt-sidebar">
@@ -110,9 +115,62 @@
                             </div>
                         </div> <!-- /txt-sidebar -->
                         
-                        <div class="favorito">
+                        <div class="flex flex-center favorito">
+                            <img src="/site/img/estrella.png">
                             <p>Marca este curso como favorito</p>
                         </div> <!-- /favorito -->
+                        
+                        <div class="flex flex-center favorito">
+                            <img src="/site/img/descarga.png">
+                            <p>Descarga el material de esta lección</p>
+                        </div> <!-- /favorito -->
+                        
+                        <br>
+                        
+                        <div class="txt-sidebar">
+                            <span><a href="#">Empezar curso</a></span>
+                            <div>
+                                <p>¡Estás listo para comenzar!</p>
+                                <p>Ahora podrás encontrar este curso en tu tablero personal para acceder rápidamente a él.</p>
+                                <p>¿Qué sigue?</p>
+                                <p>Recuerda ingresar al Aula Virtual de este curso cada semana para subir tus tareas y recibir retroalimentación de tu profesor.</p>
+                                <p>Revisa tus calificaciones en el área de status del alumno.</p>
+                            </div>
+                        </div> <!-- /txt-sidebar -->
+                        
+                        <div class="flex flex-center favorito">
+                            <img src="/site/img/estrella.png">
+                            <p>Marca este curso como favorito</p>
+                        </div> <!-- /favorito -->
+                        
+                        <div class="flex flex-center favorito">
+                            <img src="/site/img/descarga.png">
+                            <p>Descarga el material de esta lección</p>
+                        </div> <!-- /favorito -->
+                        
+                        <br>
+                        
+                        <div class="txt-sidebar">
+                            <span><a href="#">Este curso pertenece a tu plan de estudios</a></span>
+                            <div>
+                                <p>¡Estás listo para comenzar!</p>
+                                <p>Ahora podrás encontrar este curso en tu tablero personal para acceder rápidamente a él.</p>
+                                <p>¿Qué sigue?</p>
+                                <p>Recuerda ingresar al Aula Virtual de este curso cada semana para subir tus tareas y recibir retroalimentación de tu profesor.</p>
+                                <p>Revisa tus calificaciones en el área de status del alumno.</p>
+                            </div>
+                        </div> <!-- /txt-sidebar -->
+                        
+                       <div class="flex flex-center favorito">
+                            <img src="/site/img/estrella.png">
+                            <p>Marca este curso como favorito</p>
+                        </div> <!-- /favorito -->
+                        
+                        <div class="flex flex-center favorito">
+                            <img src="/site/img/descarga.png">
+                            <p>Descarga el material de esta lección</p>
+                        </div> <!-- /favorito -->
+                        
                     </div> <!-- /sidebar-registro -->
 
                 </div> <!-- /flex -->

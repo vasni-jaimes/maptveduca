@@ -171,17 +171,23 @@ $(document).ready(function(){
 
     $('.wrapper-academica table').stacktable();
     
-    $('.ico-filtro').on('click', function () {
+    $('#ico-filtro').on('click', function () {
 		$(this).addClass('active');
         $('body').css('overflow', 'hidden');
         $('.sidebar-cursos').animate({left: 0});
 	}); //$('#navbar-toggle').on('click', function () {
     
     $('.close-sidebar').on('click', function () {
-        $('.ico-filtro').removeClass('active');
+        $('#ico-filtro').removeClass('active');
         $('body').css('overflow', 'auto');
 		$('.sidebar-cursos').animate({left: '-55%'});
     });
+    
+    $('#ico-tablero').on('click', function () {
+		$(this).addClass('active');
+        $('body').css('overflow', 'hidden');
+        $('.sidebar-tablero').animate({left: 0});
+	}); //$('#navbar-toggle').on('click', function () {
     
     $('.item-mensaje a').click(function(){
         if ( !$(this).hasClass('active') ) {
@@ -225,6 +231,18 @@ $(document).ready(function(){
         e.preventDefault();
         $(this).toggleClass('active-plan');   
         $(this).next('.row-planes').slideToggle(500);
+    });
+    
+    $('.delete').click(function(){
+        $('#shadow-favorito').fadeIn(300); 
+    });
+    
+    $('#edit-membresia').click(function(){
+        $('#shadow-membresia').fadeIn(300); 
+    });
+    
+    $('.close-shadow').click(function(){
+        $('.shadow-favorito').fadeOut(300); 
     });
     
 });

@@ -396,7 +396,7 @@ body {
     max-width: 1430px;
     width: 100%;
     margin: auto;
-    padding: 0 15px;
+    padding: 0 10px;
 }
 
 .hoja-1000 {
@@ -407,7 +407,7 @@ body {
     max-width: 1030px;
     width: 100%;
     margin: auto;
-    padding: 0 15px;
+    padding: 0 10px;
 }
 
 .hoja-1200 {
@@ -418,7 +418,7 @@ body {
     max-width: 1230px;
     width: 100%;
     margin: auto;
-    padding: 0 15px;
+    padding: 0 10px;
 }
 
 .hoja-800 {
@@ -429,7 +429,7 @@ body {
     max-width: 830px;
     width: 100%;
     margin: auto;
-    padding: 0 15px;
+    padding: 0 10px;
 }
 
 header {
@@ -1978,6 +1978,7 @@ video#myVideo {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    display: flex;
     padding: 15px;
     background-color: #d8d8d8;
 }
@@ -2015,7 +2016,7 @@ video#myVideo {
 }
 
 .wrapper-curso {
-    margin: 15px 0 100px;
+    margin: 15px 0 50px;
 }
 
 .sidebar-single {
@@ -2041,8 +2042,8 @@ video#myVideo {
 .sidebar-single ul.row-leccion:before {
     content: ''; 
     position: absolute;
-    left: 20px;
-    top: 10px;
+    left: 15px;
+    top: 12px;
     bottom: 10px;
     width: 4px;
     background-color: #ffc314;
@@ -2051,10 +2052,11 @@ video#myVideo {
 
 .sidebar-single ul.row-leccion li {
     position: relative;
-    padding: 10px 15px 10px 40px;
+    padding: 10px 10px 10px 30px;
     font-family: 'Poppins light';
     font-size: 12px;
     background-color: #d8d8d8;
+    line-height: normal;
 }
 
 .sidebar-single ul.row-leccion li.active {
@@ -2064,8 +2066,8 @@ video#myVideo {
 .sidebar-single ul.row-leccion li.active:before {
     content: ''; 
     position: absolute;
-    top: 8px;
-    left: 15px;
+    top: 12px;
+    left: 10px;
     width: 14px;
     height: 14px;
     border-radius: 50%;
@@ -2079,11 +2081,13 @@ video#myVideo {
 .perfil-profesor .img-profesor {
     display: inline-block;
     width: 100%; 
+    max-width: 180px;
     padding: 100% 0 0;
     border-radius: 50%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    margin: auto;
 }
 
 .bio-profesor {
@@ -2119,7 +2123,7 @@ video#myVideo {
 }
 
 .txt-sidebar {
-    padding: 15px;
+    padding: 10px;
     background-color: #ffc314;
 }
 
@@ -2138,7 +2142,7 @@ video#myVideo {
 
 .txt-sidebar span {
     display: block;
-    margin: 0 0 12px;
+    margin: 0 0 10px;
 }
 
 .txt-sidebar a {
@@ -2156,7 +2160,7 @@ video#myVideo {
 }
 
 .txt-sidebar > div {
-    padding: 12px;
+    padding: 10px;
     background-color: #fff;
     border-radius: 5px;
 }
@@ -2164,13 +2168,14 @@ video#myVideo {
 .sidebar-registro > p span,
 .sidebar-registro span a {
     display: block;
-    padding: 12px;
+    padding: 8px;
     font-family: 'Poppins bold';
-    font-size: 16px;
+    font-size: 15px;
     color: #000;
     background-color: #fff;
     border-radius: 5px;
     text-align: center;
+    line-height: 130%;
 }
 
 .sidebar-registro > p span {
@@ -2179,7 +2184,7 @@ video#myVideo {
 
 .sidebar-registro .favorito {
     margin: 15px 0 0;
-    padding: 25px;
+    padding: 15px;
     background-color: #000;
 }
 
@@ -2189,6 +2194,12 @@ video#myVideo {
     font-size: 13px;
     text-transform: uppercase;
     line-height: 130%;
+}
+
+.sidebar-registro .favorito img {
+    margin: 0 10px 0 0;
+    width: 25px;
+    height: auto;
 }
 
 .b-bottom {
@@ -2218,7 +2229,7 @@ video#myVideo {
 
 .txt-single h3 {
     font-family: 'Oswald medium';
-    font-size: 40px;
+    font-size: 28px;
     color: #000;
     line-height: 130%;
     text-transform: uppercase;
@@ -2230,6 +2241,7 @@ video#myVideo {
     font-size: 12px;
     line-height: 130%;
     text-transform: uppercase;
+    line-height: normal;
 }
 
 span.txt-yellow {
@@ -2253,9 +2265,9 @@ span.txt-yellow {
 }
 
 .descripcion-single p {
-    margin: 0 0 25px;
+    padding: 0 0 20px;
     font-family: 'Poppins regular';
-    font-size: 13px;
+    font-size: 14px;
     line-height: 150%;
 }
 
@@ -3364,6 +3376,7 @@ section.membresia {
     font-family: 'Poppins medium';
     font-size: 15px; 
     text-align: center;
+    line-height: 130%;
 }
 
 .sidebar-tablero ul li {
@@ -3507,6 +3520,37 @@ span.ico-edit img {
     margin: 0;
 }
 
+span.ico-edit p {
+    display: none;
+    position: absolute;
+    right: 0;
+    padding: 12px 20px;
+    color: #fff;
+    border-radius: 18px;
+    background-color: #666666;
+    line-height: 130%;
+    cursor: default;
+}
+
+span.ico-edit p:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #666666;
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    transform: rotate(15deg);
+}
+
+span.ico-edit:hover p {
+    display: block;
+}
+
 .item-perfil a {
     display: block;
     position: relative;
@@ -3519,6 +3563,50 @@ span.ico-edit img {
 
 .item-perfil a span.ico-edit {
     bottom: 0;
+}
+
+.s-membresia {
+    position: relative;
+    max-width: 320px;
+    width: 100%;
+    padding: 3% 4%;
+    border-radius: 18px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.s-membresia p {
+    padding: 0 0 20px;
+    font-family: 'Poppins semibold';
+}
+
+.s-membresia a {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 0 0 20px;
+    color: #fff;
+    font-family: 'Poppins semibold';
+    font-size: 14px;
+    border-radius: 25px;
+    background-color: #b7b7b7;
+    text-align: center;
+    line-height: 130%;
+}
+
+.s-membresia small {
+    display: block;
+    margin: 0 0 20px;
+    font-family: 'Poppins light';
+    font-size: 12px;
+    line-height: 130%;
+}
+
+.s-membresia small:last-of-type {
+    margin: 0;
 }
 
 .row-tabs ul li {
@@ -3606,6 +3694,8 @@ span.ico-edit img {
     font-family: 'Poppins light';
     font-size: 14px;
     text-transform: uppercase;
+    vertical-align: middle;
+    line-height: 130%;
 }
 
 .tabla-perfil tr td {
@@ -3614,11 +3704,175 @@ span.ico-edit img {
     font-size: 12px;
     background-color: #eaeaea;
     text-align: center;
+    vertical-align: middle;
+    line-height: 130%;
 }
 
 .row-favoritos {
-    padding: 15px;
+    position: relative;
+    padding: 20px;
     border: 1px solid #666;
+}
+
+.row-favoritos p {
+    padding: 0 0 10px;
+    font-family: 'Poppins light';
+    font-size: 14px;
+    line-height: 130%;
+}
+
+.row-favoritos h3 {
+    margin: 0 0 20px;
+}
+
+.row-favoritos p:last-of-type {
+    padding: 0;
+}
+
+.row-favoritos .flex-cursos {
+    margin: 20px 0 0;
+    padding: 15px 0 0;
+    border-top: 1px solid #666;
+}
+
+.row-favoritos .flex-cursos ul li {
+    margin: 15px 0;
+}
+
+.row-favoritos .flex-cursos ul li img {
+    display: block;
+    width: 100%;
+}
+
+.row-favoritos .flex-cursos ul li .txt-clase {
+    background-color: #d8d8d8;
+}
+
+.row-favoritos .flex-cursos ul li .txt-clase p {
+    color: #000;
+}
+
+.row-favoritos .flex-cursos ul li .txt-clase a {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 15px 0 0;
+    padding: 8px 16px;
+    color: #000;
+    font-family: 'Poppins semibold';
+    font-size: 14px;
+    border-radius: 25px;
+    background-color: #ffc314;
+    text-align: center;
+}
+
+.item-favoritos {
+    margin: 0 0 20px;
+}
+
+.item-favoritos:last-of-type {
+    margin: 0;
+}
+
+.item-favoritos .slide-cursos li {
+    position: relative;
+}
+
+.item-favoritos .slide-cursos li span {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    background-image: url(/site/img/close.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.item-favoritos .slide-cursos li:hover span {
+    opacity: 1;
+}
+
+.shadow-favorito {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,2,3,0.8);
+    z-index: 2;
+}
+
+.f-shadow {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.s-favorito {
+    position: relative;
+    padding: 3% 4%;
+    border-radius: 18px;
+    background-color: #fff;
+}
+
+.s-favorito p {
+    max-width: 220px;
+    width: 100%;
+    margin: 0 0 20px;
+    font-family: 'Poppins medium';
+    font-size: 16px;
+    text-align: center;
+    line-height: 150%;
+}
+
+.s-favorito ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.s-favorito ul li {
+    width: 48%;
+}
+
+.s-favorito ul li a {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+    padding: 8px;
+    color: #000;
+    font-family: 'Poppins semibold';
+    font-size: 14px;
+    border-radius: 25px;
+    background-color: #b7b7b7;
+    text-align: center;
+}
+
+.s-favorito ul li:last-of-type a {
+    background-color: #ffc314;
+}
+
+.close-shadow {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    background-image: url(/site/img/close.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    cursor: pointer;
 }
 
 
@@ -4363,12 +4617,13 @@ a[href="#page"] {
         display: block;
     }
     
-    .sidebar-cursos {
+    .sidebar-cursos,
+    .sidebar-tablero {
         position: fixed;
         left: -55%;
         top: 0;
         bottom: 0;
-        width: 50%;
+        width: 50%!important;
         background-color: #fff;
         z-index: 4;
         border: 0;
@@ -4427,6 +4682,52 @@ a[href="#page"] {
     .row-form {
         padding: 30px 0;
         border: 0;
+    }
+    
+    .perfil-profesor .img-profesor {
+        display: block;
+        padding: 52% 0 0;
+    }
+    
+    .sidebar-single,
+    .single-contenido {
+        width: 100%;
+    }
+    
+    .single-contenido {
+        padding: 0;
+    }
+    
+    .sidebar-registro {
+        width: 100%;
+        padding: 20px 0 0;
+        margin: 20px 0 0;
+        border-top: 1px solid #f2f2f2;
+    }
+    
+    .banner-small {
+        padding: 20% 0 0;
+    }
+    
+    .wrapper-tablero {
+        width: 100%;
+        padding: 0;
+    }
+    
+    .row-perfil {
+        padding: 20px 15px;
+    }
+    
+    .flex-perfil div {
+        width: 100%;
+    }
+    
+    .item-perfil {
+        margin-left: 0;
+    }
+    
+    .form-perfil .f-domicilio .input {
+        margin: 0 0 10px;
     }
     
     footer {
@@ -4622,5 +4923,9 @@ a[href="#page"] {
     
     .flex-marcas li:first-of-type .img-marcas {
         height: auto;
+    }
+    
+    .banner-small {
+        padding: 25% 0 0;
     }
 }
