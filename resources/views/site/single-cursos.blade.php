@@ -24,7 +24,7 @@
                         <ul class="row-leccion">
                             <li class="active">Bienvenida</li>
 
-                            @if ( auth()->user()->suscripcion->count() > 0 )
+                            @if ( auth()->user()->tieneSuscripcion()  )
                                 @foreach($temario as $ctemario)
                                     <li class="active">{{ $ctemario->nombre_video }}</li>
                                 @endforeach

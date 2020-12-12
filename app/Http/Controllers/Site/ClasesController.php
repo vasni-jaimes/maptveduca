@@ -26,7 +26,7 @@ class ClasesController extends Controller
 
         //OBTENER CLASES FUTURAS
         $sesiones 		= ClaseSesion::where("fecha_inicio", "<", $hoy)->get();
-        $arraySesines 	= collect($sesiones)->pluck('id')->toArray();
+        $arraySesines 	= collect($sesiones)->pluck('clas_id')->toArray();
         $clases 		= Clase::with(["sesiones", "instructor"])->whereNotIn("id", $arraySesines)->where("status", 1)->get();
         //\OBTENER CLASES FUTURAS
 
@@ -41,7 +41,5 @@ class ClasesController extends Controller
     				->where("status", 1)->first();
 
     	return view('site.clases-sessiones', compact("clase"));
-
-        //return view('site.single-clases', compact("clase"));
     }
 }

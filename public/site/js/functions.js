@@ -97,6 +97,9 @@
 var funciones = {
   filtrosCursos: function filtrosCursos(e) {
     e.preventDefault();
+    e.stopPropagation(); //Recargar el Slider
+
+    $('.slide-cursos, .slide-extra').slick("refresh");
     var cat = document.querySelectorAll(".row-yellow");
     var div = document.querySelectorAll(".div-item");
     cat.forEach(function (item) {
@@ -107,7 +110,6 @@ var funciones = {
     });
     var categoria = e.target.getAttribute('data-cat');
     var subcategoria = e.target.getAttribute('class');
-    console.log(categoria);
     document.querySelector(".row-yellow." + categoria).style.display = "block";
 
     if (categoria == subcategoria) {
@@ -121,6 +123,7 @@ var funciones = {
   },
   validarRegistro: function validarRegistro(e) {
     e.preventDefault();
+    e.stopPropagation();
     var nombre = document.querySelector("input[name='nombre']"),
         apaterno = document.querySelector("input[name='apaterno']"),
         amaterno = document.querySelector("input[name='amaterno']"),
@@ -187,6 +190,7 @@ var funciones = {
   },
   validarLogin: function validarLogin(e) {
     e.preventDefault();
+    e.stopPropagation();
     var email = document.querySelector("input[name='email']"),
         password = document.querySelector("input[name='password']"),
         validate = true;

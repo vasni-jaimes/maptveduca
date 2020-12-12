@@ -964,14 +964,13 @@ var funciones = {
         select_carreras.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
         error_videos = true;
       }
-    }
+    } // if (select_carreras.value == '') {
+    // 		select_carreras.parentNode.classList.add('has-error');
+    // 		select_carreras.parentNode.children[1].firstChild.style.borderColor = "red";
+    // 		select_carreras.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+    // 		error_videos = true;
+    // }
 
-    if (select_carreras.value == '') {
-      select_carreras.parentNode.classList.add('has-error');
-      select_carreras.parentNode.children[1].firstChild.style.borderColor = "red";
-      select_carreras.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
-      error_videos = true;
-    }
 
     if (video_bienvenida.value == '') {
       video_bienvenida.parentNode.classList.add('has-error');

@@ -5,6 +5,10 @@ let funciones = {
 
 	filtrosCursos: function(e) {
 		e.preventDefault();
+		e.stopPropagation();
+
+		//Recargar el Slider
+		$('.slide-cursos, .slide-extra').slick("refresh");
 
 		let cat = document.querySelectorAll(".row-yellow");
 		let div = document.querySelectorAll(".div-item");
@@ -20,7 +24,6 @@ let funciones = {
 		let categoria = e.target.getAttribute('data-cat');
 		let subcategoria = e.target.getAttribute('class');
 
-		console.log(categoria);
 		document.querySelector(".row-yellow."+categoria).style.display = "block";
 
 		if (categoria == subcategoria) {
@@ -36,6 +39,7 @@ let funciones = {
 
 	validarRegistro: function(e) {
 		e.preventDefault();
+		e.stopPropagation();
 
 		let nombre = document.querySelector("input[name='nombre']"),
 			apaterno = document.querySelector("input[name='apaterno']"),
@@ -105,6 +109,7 @@ let funciones = {
 
 	validarLogin: function(e) {
 		e.preventDefault();
+		e.stopPropagation();
 
 		let email = document.querySelector("input[name='email']"),
 			password = document.querySelector("input[name='password']"),

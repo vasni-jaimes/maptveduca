@@ -31,41 +31,47 @@
                 </ul>
             </div> <!-- /banner-slide -->
             
-            <div class="banner-slide slide-black">
-                <div class="bg-black">
-                    <h2>Clases en línea</h2>
-                    <p><a href="{{ route("clases-linea.index") }}">Mira más clases aquí</a></p>
-                </div> <!-- /bg-black -->
-                <ul class="slide-inicio">
-                    @forelse($clases as $clase)
-                        <li>
-                            <div class="img-slide" style="background-image: url({{Storage::url($clase->img) }});"></div> <!-- /img-slide -->
-                        </li>
-                    @empty
-                        <li>
-                            <p>No se encontraron resultados</p>
-                        </li>
-                    @endforelse
-                </ul>
-            </div> <!-- /banner-slide -->
+            @if ( $clases->count() > 0 )
+                <div class="banner-slide slide-black">
+                    <div class="bg-black">
+                        <h2>Clases en línea</h2>
+                        <p><a href="{{ route("clases-linea.index") }}">Mira más clases aquí</a></p>
+                    </div> <!-- /bg-black -->
+                    <ul class="slide-inicio">
+                        @forelse($clases as $clase)
+                            <li>
+                                <div class="img-slide" style="background-image: url({{Storage::url($clase->img) }});"></div> <!-- /img-slide -->
+                            </li>
+                        @empty
+                            <li>
+                                <p>No se encontraron resultados</p>
+                            </li>
+                        @endforelse
+                    </ul>
+                </div> <!-- /banner-slide -->
+            @endif
             
-            <div class="banner-slide slide-yellow">
-                <div class="bg-yellow">
-                    <h2>Eventos</h2>
-                    <p><a href="{{ route("eventos.index") }}">Mira todos aquí</a></p>
-                </div> <!-- /bg-yellow -->
-                <ul class="slide-inicio">
-                    @forelse($eventos as $evento)
-                        <li>
-                            <div class="img-slide" style="background-image: url({{Storage::url($evento->img_evento) }});"></div> <!-- /img-slide -->
-                        </li>
-                    @empty
-                        <li>
-                            <p>No se encontraron resultados</p>
-                        </li>
-                    @endforelse
-                </ul>
-            </div> <!-- /banner-slide -->
+
+            @if ( $eventos->count() > 0 )
+                <div class="banner-slide slide-yellow">
+                    <div class="bg-yellow">
+                        <h2>Eventos</h2>
+                        <p><a href="{{ route("eventos.index") }}">Mira todos aquí</a></p>
+                    </div> <!-- /bg-yellow -->
+                    <ul class="slide-inicio">
+                        @forelse($eventos as $evento)
+                            <li>
+                                <div class="img-slide" style="background-image: url({{Storage::url($evento->img_evento) }});"></div> <!-- /img-slide -->
+                            </li>
+                        @empty
+                            <li>
+                                <p>No se encontraron resultados</p>
+                            </li>
+                        @endforelse
+                    </ul>
+                </div> <!-- /banner-slide -->
+            @endif
+            
             
             <div class="banner-title bg-black">
                 <h2>¿Cómo funciona maptv educa?</h2>

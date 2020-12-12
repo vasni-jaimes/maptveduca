@@ -30,7 +30,7 @@ class Category extends Model
  					->where("subcategoria_id", $subcategoria_id)->get();
 
  		$cursos = collect($cursos)->pluck('course_id')->toArray();
- 		return Course::whereIn('id', $cursos)->get();
+ 		return Course::whereIn('id', $cursos)->where('status', 1)->get();
     }
 
 

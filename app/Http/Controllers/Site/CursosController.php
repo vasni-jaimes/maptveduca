@@ -21,15 +21,12 @@ class CursosController extends Controller
     {
         $categorias     = Category::with(["subcategorias"])->where("status", 1)->get();
         $instructores   = Instructor::with("Cursos")->where("status", 1)->get();
-
-
-        //return response()->json($instructores);
+        
     	return view("site.cursos", compact("categorias", "instructores"));
     }
 
     public function show($curso_id)
     {
-
     	$curso = Course::with(["instructor"])->where("status", 1)->where("slug", $curso_id)->first();
         $temario = json_decode($curso->temario);
         //return response()->json($temario);
