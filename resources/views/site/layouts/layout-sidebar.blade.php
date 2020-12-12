@@ -1,5 +1,5 @@
 <div>
-    <span class="ico-filtro"><img src="site/img/filtro.png"></span>
+    <span class="ico-filtro" id="ico-filtro"><img src="site/img/filtro.png"></span>
 </div> <!-- /text-right -->
 
 <div class="sidebar-cursos">
