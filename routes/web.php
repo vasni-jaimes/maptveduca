@@ -32,7 +32,7 @@ Route::post('registro', 'Auth\RegisterController@register')->name('registro');
 
 //CURSOS
 Route::get('cursos', 'Site\CursosController@index')->name('cursos');
-Route::get('single-cursos/{curso_id}', 'Site\CursosController@show')->name('single-cursos.show');
+Route::get('single-cursos/{curso_id}/{clase_id?}', 'Site\CursosController@show')->name('single-cursos.show');
 
 //CLASES
 Route::get('clases-linea', 'Site\ClasesController@index')->name('clases-linea.index');
@@ -58,6 +58,10 @@ Route::get('micuenta', 'Site\UsersController@index')->name('micuenta.index');
 Route::get('checkout/{slug_membresia}', 'Site\CheckoutController@index')->name('checkout');
 Route::get('pago/{slug_membresia}', 'Site\CheckoutController@PayWithPaypal')->name('paago-membresia');
 Route::get('pago/{slug_membresia}/status', 'Site\CheckoutController@PaypalStatus')->name('pago-status');
+
+
+//FAVORITOS
+Route::post('usuario/favorito', 'Site\FavoritosController@create')->name('user.favorito');
 
 
 

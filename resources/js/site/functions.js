@@ -3,6 +3,56 @@
 
 let funciones = {
 
+
+	micuentaActive: function(e) {
+		e.preventDefault();
+
+		let seccion = e.target.parentNode.getAttribute('data-seccion');
+		$('.wrapper-tablero div.section').removeClass('active');
+		$('.wrapper-tablero div.section[data-seccion='+seccion+']').addClass('active');
+		
+		if (seccion == 'favoritos') {
+			$('.slide-cursos').slick("refresh");
+		}
+
+		//ul li
+		$('.li-micuenta li').removeClass('active');
+		e.target.parentNode.classList.add('active');
+	},
+
+	guardarFavoritos: function(e) {
+		e.preventDefault();
+
+		let data_crs = e.target.parentNode.getAttribute('data-crs');
+		if (data_crs) {
+			let token = document.querySelector("input[name='_token']").value;
+
+			let opciones = {
+	            method: "POST",
+	            credentials: "same-origin",
+	            body: JSON.stringify({"curso": data_crs, "_token": token}),
+	            headers:{
+	                "Content-Type": "application/json"
+	            }
+	        };
+
+
+	        fetch('/usuario/favorito', opciones)
+	            .then(response => response.json())
+	            .then(res => {
+	            	if (res.message == 'ok') {
+	            		swal("OK", "Se agrego el curso a favoritos", "success");
+	            		//alert('ok');
+	            		document.querySelector('.favorito').remove();
+	            	}
+	            	else {
+	            		//alert('no');
+	            		swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+	            	}
+	            });
+		}
+	},
+
 	filtrosCursos: function(e) {
 		e.preventDefault();
 		e.stopPropagation();

@@ -159,18 +159,22 @@ class CoursesRepositorie
     	$material_extra = Array();
 
     	for ($i=0; $i <= count($request->nombre_video) - 1; $i++) { 
+            $material_extra = Array();
             if (isset($request->material_extra[$i])) {
             
         		for ($j=0; $j <= count($request->material_extra[$i]) - 1; $j++) { 
                     $request->file('material_extra')[$i][$j]->store('public/cursos/'.$course_id.'/material_extra/'.$i.'/');
-        			//$rootMaterial = $request->file('material_extra')[$i][$j]->store('public/cursos/'.$course_id.'/material_extra/'.$i.'/');
-        			//$material_extra[$j] = $rootMaterial;
+        			$rootMaterial = $request->file('material_extra')[$i][$j]->store('public/cursos/'.$course_id.'/material_extra/'.$i.'/');
+        			$material_extra[$j] = $rootMaterial;
         		}
             }
 
+
     		$temario_curso[$i] = array("nombre_video" => $request->nombre_video[$i], 
+                                        "slug" => $this->helper->createSlug($request->nombre_video[$i], $i, "maptv"),
     									"url_video" => $request->video_url[$i], 
-    									"descripcion_curso" => $request->descripcion_curso[$i]);
+                                        "material_extra" => $material_extra,
+    									"descripcion_curso" => $request->descripcion_curso[$i] );
     	}
 
     	return json_encode($temario_curso);

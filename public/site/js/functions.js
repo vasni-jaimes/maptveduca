@@ -95,6 +95,51 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  micuentaActive: function micuentaActive(e) {
+    e.preventDefault();
+    var seccion = e.target.parentNode.getAttribute('data-seccion');
+    $('.wrapper-tablero div.section').removeClass('active');
+    $('.wrapper-tablero div.section[data-seccion=' + seccion + ']').addClass('active');
+
+    if (seccion == 'favoritos') {
+      $('.slide-cursos').slick("refresh");
+    } //ul li
+
+
+    $('.li-micuenta li').removeClass('active');
+    e.target.parentNode.classList.add('active');
+  },
+  guardarFavoritos: function guardarFavoritos(e) {
+    e.preventDefault();
+    var data_crs = e.target.parentNode.getAttribute('data-crs');
+
+    if (data_crs) {
+      var token = document.querySelector("input[name='_token']").value;
+      var opciones = {
+        method: "POST",
+        credentials: "same-origin",
+        body: JSON.stringify({
+          "curso": data_crs,
+          "_token": token
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      fetch('/usuario/favorito', opciones).then(function (response) {
+        return response.json();
+      }).then(function (res) {
+        if (res.message == 'ok') {
+          swal("OK", "Se agrego el curso a favoritos", "success"); //alert('ok');
+
+          document.querySelector('.favorito').remove();
+        } else {
+          //alert('no');
+          swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+        }
+      });
+    }
+  },
   filtrosCursos: function filtrosCursos(e) {
     e.preventDefault();
     e.stopPropagation(); //Recargar el Slider

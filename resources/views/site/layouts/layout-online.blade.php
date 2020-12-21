@@ -2,7 +2,8 @@
 <html>
 	<head>
 		<title>@yield('titulo', 'Maptveduca')</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		@csrf
 		<link rel="stylesheet" href="/site/css/style.css">
 		<link rel="stylesheet" type="text/css" href="/site/js/slick/slick.css"/>
 		<link rel="stylesheet" type="text/css" href="/site/js/stacktable/stacktable.css"/> 

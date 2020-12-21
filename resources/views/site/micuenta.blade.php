@@ -29,22 +29,25 @@
                         <h2>{{ auth()->user()->nombre. " ".auth()->user()->amaterno. " ".auth()->user()->apaterno }}</h2>
                     </div> <!-- /row-tablero -->
 
-                    <ul>
-                        <li class="active"><a href="#">Perfil</a></li>
-                        <li><a href="#">Inbox</a></li>
-                        <li><a href="#">Pagos</a></li>
-                        <li><a href="#">Favoritos</a></li>
-                        <li><a href="#">Cursos</a></li>
-                        <li><a href="#">Eventos</a></li>
-                        <li><a href="#">Clases en línea</a></li>
-                        <li><a href="#">Control Académico</a></li>
+                    <ul class="li-micuenta">
+                        <li class="active" data-seccion="perfil"><a href="">Perfil</a></li>
+                        <li data-seccion="inbox"><a href="">Inbox</a></li>
+                        <li data-seccion="pagos"><a href="">Pagos</a></li>
+                        <li data-seccion="favoritos"><a href="">Favoritos</a></li>
+                        @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 1)
+                            <li data-seccion="cursos"><a href="">Cursos</a></li>
+                            <li data-seccion="eventos"><a href="">Eventos</a></li>
+                            <li data-seccion="clases"><a href="">Clases en línea</a></li>
+                        @elseif (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 2)
+                        <li data-seccion="academico"><a href="">Control Académico</a></li>
+                        @endif
                     </ul>
 
                 </div> <!-- /sidebar-single -->
                 
                 <div class="wrapper-tablero">
 
-                    <div style="margin-bottom: 30px;">
+                    <div style="margin-bottom: 30px;" data-seccion="perfil" class="section active">
                         <h3>Perfil</h3>
                         <div class="row-perfil">
                             <div class="flex">
@@ -89,12 +92,23 @@
                                 </div> <!-- /item-perfil -->
                                 <div class="item-perfil">
                                     <h4>Membresía</h4>
-                                    <a href="#">Membresía Académica
-                                        <span class="ico-edit" id="edit-membresia">
-                                            <img src="/site/img/edit.png">
-                                            <p>Modificar membresía</p>
-                                        </span>
-                                    </a>
+                                    @for ($i = 0; $i <= count(auth()->user()->suscripcion) - 1; $i++)
+                                        @if (auth()->user()->suscripcion[$i]->id == 1)
+                                            <a href="#">Membresía Basica
+                                                <span class="ico-edit" id="edit-membresia">
+                                                    <img src="/site/img/edit.png">
+                                                    <p>Modificar membresía</p>
+                                                </span>
+                                            </a>
+                                        @elseif (auth()->user()->suscripcion[$i]->id == 2)
+                                             <a href="#">Membresía Académica
+                                                <span class="ico-edit" id="edit-membresia">
+                                                    <img src="/site/img/edit.png">
+                                                    <p>Modificar membresía</p>
+                                                </span>
+                                            </a>
+                                        @endif
+                                    @endfor
                                 </div> <!-- /item-perfil -->
                             </div> <!-- /flex -->
                         </div> <!-- /row-perfil -->
@@ -118,10 +132,9 @@
                                 </div> <!-- /s-membresia -->
                             </div> <!-- /f-favorito -->
                         </div> <!-- /shadow-favorito -->
-                        
                     </div>
 
-                    <div style="margin-bottom: 30px;">
+                    <div style="margin-bottom: 30px;" data-seccion="inbox" class="section">
                         <h3>Inbox</h3>
                         <div class="row-perfil">
                             <div class="row-tabs">
@@ -224,7 +237,7 @@
                         </div> <!-- /row-perfil -->
                     </div>
                     
-                    <div style="margin-bottom: 30px;">
+                    <div style="margin-bottom: 30px;" data-seccion="pagos" class="section">
                         <h3>Pagos</h3>
                         <div class="row-perfil">
                             <div class="flex">
@@ -311,117 +324,67 @@
                         </div> <!-- /row-perfil -->
                     </div>
                     
-                    <div style="margin-bottom: 30px;">
+                    <div style="margin-bottom: 30px;" data-seccion="favoritos" class="section">
                         <h3>Favoritos</h3>
                         <div class="row-favoritos">
-                            <div class="item-favoritos">
-                                <h3>Cursos</h3>
-                                <p>¡Aún no tienes cursos favoritos! Ve a la sección CURSOS y márca cuantos quieras como favoritos.</p>
-                                <p>Los encontrarás aquí cuando vuelvas.</p>
-                            </div>
-                            <div class="item-favoritos">
-                                <h3>Eventos</h3>
-                                <p>¡Aún no tienes eventos favoritos! Ve a la sección EVENTOS y márca cuantos quieras como favoritos.</p>
-                                <p>Los encontrarás aquí cuando vuelvas.</p>
-                            </div>
-                            <div class="item-favoritos">
-                                <h3>Clases en línea</h3>
-                                <p>¡Aún no tienes clases en línea favoritos! Ve a la sección CLASES EN LÍNEA y márca cuantos quieras como favoritos.</p>
-                                <p>Los encontrarás aquí cuando vuelvas.</p>
-                            </div>
-                        </div> <!-- /row-favoritos -->
-                    </div>
-                    
-                    <div style="margin-bottom: 30px;">
-                        <h3>Favoritos</h3>
-                        <div class="row-favoritos">
-                            <div class="row-black item-favoritos">
-                                <h3>Cursos</h3>
-                                <ul class="slide-cursos">
-                                    <li>
-                                        <span class="delete"></span>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <span class="delete"></span>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <span class="delete"></span>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <span class="delete"></span>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <span class="delete"></span>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <span class="delete"></span>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <span class="delete"></span>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                </ul>
-                            </div>
-                        
-                            <div class="row-black item-favoritos">
-                                <h3>Eventos</h3>
-                                <ul class="slide-cursos">
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                </ul>
-                            </div>
+                            @if ($favoritosCursos->count() > 0)
+                                <div class="row-black item-favoritos">
+                                    <h3>Cursos</h3>
+                                    <ul class="slide-cursos">
+                                        @foreach($favoritosCursos as $curso)
+                                            <li>
+                                                <span class="delete"></span>
+                                                <a href="#"> <div class="img-slide" style="background-image: url({{ Storage::url($curso->cursos->url_img) }});"></div> </a> <!-- /img-slide -->
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @else
+                                <div class="item-favoritos">
+                                    <h3>Cursos</h3>
+                                    <p>¡Aún no tienes cursos favoritos! Ve a la sección CURSOS y márca cuantos quieras como favoritos.</p>
+                                    <p>Los encontrarás aquí cuando vuelvas.</p>
+                                </div>
+                            @endif
                             
-                            <div class="row-black item-favoritos">
-                                <h3>Clases en línea</h3>
-                                <ul class="slide-cursos">
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                    <li>
-                                        <a href="#"> <div class="img-slide" style="background-image: url(/storage/cursos/1/img_principal//iUwPuHqFOiYv0fnsPAYdqlqy9wElhmvIsmn8UDPI.png);"></div> </a> <!-- /img-slide -->
-                                    </li>
-                                </ul>
-                            </div>
+
+                            @if ($favoritosEventos->count() > 0)
+                                <div class="row-black item-favoritos">
+                                    <h3>Eventos</h3>
+                                    <ul class="slide-cursos">
+                                        @foreach($favoritosEventos as $evento)
+                                            <li>
+                                                <a href="#"> <div class="img-slide" style="background-image: url({{ Storage::url($evento->eventos->img_evento) }});"></div> </a> <!-- /img-slide -->
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @else
+                                <div class="item-favoritos">
+                                    <h3>Eventos</h3>
+                                    <p>¡Aún no tienes eventos favoritos! Ve a la sección EVENTOS y márca cuantos quieras como favoritos.</p>
+                                    <p>Los encontrarás aquí cuando vuelvas.</p>
+                                </div>
+                            @endif
+                            
+                            @if ($favoritosClases->count() > 0)
+                                <div class="row-black item-favoritos">
+                                    <h3>Clases en línea</h3>
+                                    <ul class="slide-cursos">
+                                        <li>
+                                            @foreach($favoritosClases as $clase)
+                                                <a href="#"> <div class="img-slide" style="background-image: url({{ Storage::url($clase->clases->img) }});"></div> </a> <!-- /img-slide -->
+                                            @endforeach
+                                        </li>
+                                    </ul>
+                                </div>
+                            @else
+                                <div class="item-favoritos">
+                                    <h3>Clases en línea</h3>
+                                    <p>¡Aún no tienes clases en línea favoritos! Ve a la sección CLASES EN LÍNEA y márca cuantos quieras como favoritos.</p>
+                                    <p>Los encontrarás aquí cuando vuelvas.</p>
+                                </div>
+                            @endif
                             
                             <div class="shadow-favorito" id="shadow-favorito">
                                 <div class="f-shadow">
@@ -438,318 +401,324 @@
                             
                         </div> <!-- /row-favoritos -->
                     </div>
+
+
+                    @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 1)
                     
-                    <div style="margin-bottom: 30px;">
-                        <h3>Mis cursos</h3>
-                        <div class="row-favoritos">
-                            <p>AQUÍ ENCONTRARÁS TUS CURSOS EN PROGRESO.</p>
-                            <div class="flex-cursos">
-                                <ul class="flex between wrap">
-                                    <li class="col-3">
-                                        <a href="#">
+                        <div style="margin-bottom: 30px;" data-seccion="cursos" class="section">
+                            <h3>Mis cursos</h3>
+                            <div class="row-favoritos">
+                                <p>AQUÍ ENCONTRARÁS TUS CURSOS EN PROGRESO.</p>
+                                <div class="flex-cursos">
+                                    <ul class="flex between wrap">
+                                        <li class="col-3">
+                                            <a href="#">
+                                                <img src="/site/img/fulano.jpg">
+                                                <div class="txt-clase">
+                                                    <p>Nombre del curso</p>
+                                                </div> <!-- /txt-clase -->
+                                            </a>
+                                        </li>
+                                        <li class="col-3">
+                                            <a href="#">
+                                                <img src="/site/img/fulano.jpg">
+                                                <div class="txt-clase">
+                                                    <p>Nombre del curso</p>
+                                                </div> <!-- /txt-clase -->
+                                            </a>
+                                        </li>
+                                        <li class="col-3">
+                                            <a href="#">
+                                                <img src="/site/img/fulano.jpg">
+                                                <div class="txt-clase">
+                                                    <p>Nombre del curso</p>
+                                                </div> <!-- /txt-clase -->
+                                            </a>
+                                        </li>
+                                        <li class="col-3">
+                                            <a href="#">
+                                                <img src="/site/img/fulano.jpg">
+                                                <div class="txt-clase">
+                                                    <p>Nombre del curso</p>
+                                                </div> <!-- /txt-clase -->
+                                            </a>
+                                        </li>
+                                        <li class="col-3">
+                                            <a href="#">
+                                                <img src="/site/img/fulano.jpg">
+                                                <div class="txt-clase">
+                                                    <p>Nombre del curso</p>
+                                                </div> <!-- /txt-clase -->
+                                            </a>
+                                        </li>
+                                        <li class="col-3">
+                                            <a href="#">
+                                                <img src="/site/img/fulano.jpg">
+                                                <div class="txt-clase">
+                                                    <p>Nombre del curso</p>
+                                                </div> <!-- /txt-clase -->
+                                            </a>
+                                        </li>
+                                        <li class="col-3">
+                                            <a href="#">
+                                                <img src="/site/img/fulano.jpg">
+                                                <div class="txt-clase">
+                                                    <p>Nombre del curso</p>
+                                                </div> <!-- /txt-clase -->
+                                            </a>
+                                        </li>
+                                        <li class="col-3">
+                                            <a href="#">
+                                                <img src="/site/img/fulano.jpg">
+                                                <div class="txt-clase">
+                                                    <p>Nombre del curso</p>
+                                                </div> <!-- /txt-clase -->
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> <!-- /row-favoritos -->
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;" data-seccion="eventos" class="section">
+                            <h3>Mis eventos</h3>
+                            <div class="row-favoritos">
+                                <p>AQUÍ ENCONTRARÁS TUS EVENTOS PRÓXIMOS Y ADQUIRIDOS</p>
+                                <div class="flex-cursos">
+                                    <p>PRÓXIMOS</p>
+                                    <ul class="flex between wrap">
+                                        <li class="col-3">
                                             <img src="/site/img/fulano.jpg">
                                             <div class="txt-clase">
                                                 <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir al evento</a>
                                             </div> <!-- /txt-clase -->
-                                        </a>
-                                    </li>
-                                    <li class="col-3">
-                                        <a href="#">
+                                        </li>
+                                        <li class="col-3">
                                             <img src="/site/img/fulano.jpg">
                                             <div class="txt-clase">
                                                 <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir al evento</a>
                                             </div> <!-- /txt-clase -->
-                                        </a>
-                                    </li>
-                                    <li class="col-3">
-                                        <a href="#">
+                                        </li>
+                                        <li class="col-3">
                                             <img src="/site/img/fulano.jpg">
                                             <div class="txt-clase">
                                                 <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir al evento</a>
                                             </div> <!-- /txt-clase -->
-                                        </a>
-                                    </li>
-                                    <li class="col-3">
-                                        <a href="#">
+                                        </li>
+                                        <li class="col-3">
                                             <img src="/site/img/fulano.jpg">
                                             <div class="txt-clase">
                                                 <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir al evento</a>
                                             </div> <!-- /txt-clase -->
-                                        </a>
-                                    </li>
-                                    <li class="col-3">
-                                        <a href="#">
+                                        </li>
+                                    </ul>
+                                    <p>ARCHIVADOS</p>
+                                    <ul class="flex between wrap">
+                                        <li class="col-3">
                                             <img src="/site/img/fulano.jpg">
                                             <div class="txt-clase">
                                                 <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir al evento</a>
                                             </div> <!-- /txt-clase -->
-                                        </a>
-                                    </li>
-                                    <li class="col-3">
-                                        <a href="#">
+                                        </li>
+                                        <li class="col-3">
                                             <img src="/site/img/fulano.jpg">
                                             <div class="txt-clase">
                                                 <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir al evento</a>
                                             </div> <!-- /txt-clase -->
-                                        </a>
-                                    </li>
-                                    <li class="col-3">
-                                        <a href="#">
+                                        </li>
+                                        <li class="col-3">
                                             <img src="/site/img/fulano.jpg">
                                             <div class="txt-clase">
                                                 <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir al evento</a>
                                             </div> <!-- /txt-clase -->
-                                        </a>
-                                    </li>
-                                    <li class="col-3">
-                                        <a href="#">
+                                        </li>
+                                        <li class="col-3">
                                             <img src="/site/img/fulano.jpg">
                                             <div class="txt-clase">
                                                 <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir al evento</a>
                                             </div> <!-- /txt-clase -->
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> <!-- /row-favoritos -->
-                    </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> <!-- /row-favoritos -->
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;" data-seccion="clases" class="section">
+                            <h3>Mis clases en línea</h3>
+                            <div class="row-favoritos">
+                                <p>AQUÍ ENCONTRARÁS TUS CLASES EN LÍNEA PRÓXIMAS Y ADQUIRIDAS</p>
+                                <div class="flex-cursos">
+                                    <p>PRÓXIMAS</p>
+                                    <ul class="flex between wrap">
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir a la clase</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir a la clase</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir a la clase</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir a la clase</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                    </ul>
+                                    <p>EN CURSO</p>
+                                    <ul class="flex between wrap">
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir a la clase</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir a la clase</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir a la clase</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir a la clase</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                    </ul>
+                                    <p>CONCLUIDAS</p>
+                                    <ul class="flex between wrap">
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir a la clase</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir a la clase</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir a la clase</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir a la clase</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> <!-- /row-favoritos -->
+                        </div>
+
+                    @elseif (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 2)
                     
-                    <div style="margin-bottom: 30px;">
-                        <h3>Mis eventos</h3>
-                        <div class="row-favoritos">
-                            <p>AQUÍ ENCONTRARÁS TUS EVENTOS PRÓXIMOS Y ADQUIRIDOS</p>
-                            <div class="flex-cursos">
-                                <p>PRÓXIMOS</p>
-                                <ul class="flex between wrap">
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir al evento</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir al evento</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir al evento</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir al evento</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                </ul>
-                                <p>ARCHIVADOS</p>
-                                <ul class="flex between wrap">
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir al evento</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir al evento</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir al evento</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir al evento</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> <!-- /row-favoritos -->
-                    </div>
-                    
-                    <div style="margin-bottom: 30px;">
-                        <h3>Mis clases en línea</h3>
-                        <div class="row-favoritos">
-                            <p>AQUÍ ENCONTRARÁS TUS CLASES EN LÍNEA PRÓXIMAS Y ADQUIRIDAS</p>
-                            <div class="flex-cursos">
-                                <p>PRÓXIMAS</p>
-                                <ul class="flex between wrap">
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                </ul>
-                                <p>EN CURSO</p>
-                                <ul class="flex between wrap">
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                </ul>
-                                <p>CONCLUIDAS</p>
-                                <ul class="flex between wrap">
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> <!-- /row-favoritos -->
-                    </div>
-                    
-                    <div style="margin-bottom: 30px;">
-                        <h3>Mis materias</h3>
-                        <div class="row-favoritos">
-                            <p>AQUÍ ENCONTRARÁS TODOS LOS CURSOS CORRESPONDIENTES A TU PROGRAMA ACADÉMICO, ORDENADOS POR TRIMESTRE EN PROGRESO</p>
-                            <div class="flex-cursos">
-                                <p>1er Trimestre</p>
-                                <ul class="flex between wrap">
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir al curso</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir al curso</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir al curso</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir al curso</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> <!-- /row-favoritos -->
-                    </div>
+                        <div style="margin-bottom: 30px;" data-seccion="academico" class="section">
+                            <h3>Mis materias</h3>
+                            <div class="row-favoritos">
+                                <p>AQUÍ ENCONTRARÁS TODOS LOS CURSOS CORRESPONDIENTES A TU PROGRAMA ACADÉMICO, ORDENADOS POR TRIMESTRE EN PROGRESO</p>
+                                <div class="flex-cursos">
+                                    <p>1er Trimestre</p>
+                                    <ul class="flex between wrap">
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir al curso</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir al curso</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir al curso</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                        <li class="col-3">
+                                            <img src="/site/img/fulano.jpg">
+                                            <div class="txt-clase">
+                                                <p>Nombre del curso</p>
+                                                <p>00/00/000</p>
+                                                <a href="#">Ir al curso</a>
+                                            </div> <!-- /txt-clase -->
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> <!-- /row-favoritos -->
+                        </div>
+                    @endif
                     
                 </div> <!-- /wrapper-tablero -->
                 
@@ -761,4 +730,9 @@
     
 </section> <!-- /micuenta -->
 
+@stop
+
+@section('js-content')
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="/site/js/app.js"></script>
 @stop
