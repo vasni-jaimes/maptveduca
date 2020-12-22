@@ -8,7 +8,7 @@
 
     <section class="single-curso sesiones">
 
-        <div class="hoja-1400">
+        <div class="hoja-1000">
             
             <ul class="flex breadcrumb-curso">
                 <li><a href="{{ route("clases-linea.index") }}">Clases en línea</a></li>

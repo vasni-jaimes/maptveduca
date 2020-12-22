@@ -14,7 +14,7 @@
             <h1>Clases en línea</h1>
         </div> <!-- /titulo-banner -->
         
-        <div class="hoja-1200">
+        <div class="hoja-1000">
 
             <div class="wrapper-columnas">
             
@@ -117,13 +117,17 @@
             @endif
             
             <div class="row-clases">
-            
-                <h3>¿Cómo se imparten las clases en línea?</h3>
                 
-                <p>Las clases en línea se imparten a través de la plataforma Zoom.</p>
-                <p>Una vez que te registres a una clase recibirás en tu correo la información para accesar en la fecha y hora indicadas.</p>
-                <a class="btn-zoom" href="#">Haz tu cuenta en Zoom y descarga la aplicación </a>
-                <p><small>Siempre verifica que tus descargas y cuentas se realicen desde sitios oficiales de Zoom.</small></p>
+                <div class="hoja-700">
+            
+                    <h3>¿Cómo se imparten las clases en línea?</h3>
+
+                    <p>Las clases en línea se imparten a través de la plataforma Zoom.</p>
+                    <p>Una vez que te registres a una clase recibirás en tu correo la información para accesar en la fecha y hora indicadas.</p>
+                    <a class="btn-zoom" href="#">Haz tu cuenta en Zoom y descarga la aplicación </a>
+                    <p><small>Siempre verifica que tus descargas y cuentas se realicen desde sitios oficiales de Zoom.</small></p>
+                    
+                </div>
                 
             </div> <!-- /row-clases -->
 

@@ -8,7 +8,7 @@
 
     <section class="single-curso">
 
-        <div class="hoja-1400">
+        <div class="hoja-1000">
             
             <ul class="flex breadcrumb-curso">
                 <li><a href="#">Clases en línea</a></li>
@@ -70,7 +70,7 @@
                             
                             <h3>Explora más eventos:</h3>
                             
-                            <div class="item-slide">
+                            <div class="item-evento">
                                 <p class="titulo"><span>Conciertos/Masterclass</span></p>
                                 <ul>
                                     <li class="col-3">
@@ -126,10 +126,17 @@
                     </div> <!-- /single-contenido -->
                     
                     <div class="sidebar-registro">
-                        <span><a href="#">Regístrate</a></span>
-                        <div class="favorito">
+                        <div class="txt-sidebar">
+                            <span><a href="/micuenta">Regístrate</a></span>
+                            <div>
+                                <p>¡Estás listo para comenzar!</p>
+                                <p>Ahora podrás encontrar este evento en tu <a href="">tablero personal</a> para acceder rápidamente a él.</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-center favorito">
+                            <img src="/site/img/estrella.png">
                             <p>Marca este curso como favorito</p>
-                        </div> <!-- /favorito -->
+                        </div>
                     </div> <!-- /sidebar-registro -->
 
                 </div> <!-- /flex -->
