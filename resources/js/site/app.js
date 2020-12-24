@@ -21,3 +21,29 @@ if (sidebar_cursos) {
 		}
 	}
 }
+
+//REDIRECCION DE CLASES - CURSOS
+let sidebar_single = document.querySelectorAll('.sidebar-single ul li.active');
+if (sidebar_single) {
+	for (var i = 0; i <= sidebar_single.length - 1; i++) {
+		sidebar_single[i].addEventListener('click', function(e) {
+			//alert('');
+			let url = e.target.getAttribute('data-url');
+			window.location.href = url;
+		});
+	}
+}
+
+//AGREGAR FAVORITOS EN MIS CURSOS
+let favorito = document.querySelector('.favorito');
+if (favorito) {
+	favorito.addEventListener('click', funciones.guardarFavoritos);
+}
+
+//ANIMACION EN MICUENTA DE PASAR POR SECCIONES
+let li_micuenta = document.querySelectorAll('.li-micuenta');
+if (li_micuenta) {
+	for(var i = 0; i <= li_micuenta.length - 1; i++) {
+		li_micuenta[i].addEventListener("click", funciones.micuentaActive)
+	}
+}

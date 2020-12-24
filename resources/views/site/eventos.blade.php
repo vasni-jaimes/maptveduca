@@ -251,7 +251,7 @@
                     @if ($archivados->where("tipo_evento_id", 2)->count() > 0)
                         <div class="bloque-slide">
                             <div class="item-slide">
-                                <p class="titulo"><span>Conciertos/Masterclass</span></p>
+                                <p class="titulo"><span>Archivados</span></p>
                                 <ul>
                                     @foreach($archivados as $archivado)
                                         <li class="col-3">

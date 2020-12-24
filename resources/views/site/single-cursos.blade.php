@@ -22,26 +22,18 @@
                         <h3>Contenido del curso</h3>
                        {{--  auth()->user()->suscripcion[0] --}}
                         <ul class="row-leccion">
-                            <li class="active">Bienvenida</li>
+                            <li class="active {{ $clase_id == null ? "active-leccion" : "" }}" data-url="/single-cursos/{{ $curso->slug }}">Bienvenida</li>
 
                             @if ( auth()->user()->tieneSuscripcion()  )
                                 @foreach($temario as $ctemario)
-                                    <li class="active">{{ $ctemario->nombre_video }}</li>
+                                    <li class="active {{ $ctemario->slug ==  $clase['slug'] ? "active-leccion" : "" }}" data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug }}">{{ $ctemario->nombre_video }}</li>
                                 @endforeach
                             @else
                                 @foreach($temario as $ctemario)
                                     <li>{{ $ctemario->nombre_video }}</li>
                                 @endforeach
                             @endif
-{{--                         <li>Lección 2</li>
-                            <li>Lección 3</li>
-                            <li>Lección 4</li>
-                            <li>Lección 5</li>
-                            <li>Lección 6</li>
-                            <li>Lección 7</li>
-                            <li>Lección 8</li>
-                            <li>Lección 9</li>
-                            <li>Lección 10</li> --}}
+
                         </ul> <!-- /row-leccion -->
                         
                         <div class="perfil-profesor">
@@ -61,14 +53,14 @@
                     <div class="single-contenido">
                         
                         <div class="row-video">
-                            <iframe src="{{ $curso->video_bienvenida }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="{{ $clase['url_video'][0] }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div> <!-- /row-video -->
                         
                         <div class="txt-single">
-                            <h3>Grabación 1</h3>
+                            <h3>{{ $clase['nombre_video'] }}</h3>
                             <p>Producción musical / {{ $curso->extra ? "CURSO EXTRA" : "CURSO BASE" }} / Profesor titular: {{ $curso->instructor[0]->nombres. " ".$curso->instructor[0]->apellidos }} </p>
                             <div class="descripcion-single">
-                                <p> {{ $curso->descripcion_bienvenida }} </p>
+                                <p> {{ $clase['descripcion'] }} </p>
                             </div> <!-- /descripcion-single -->
                         </div> <!-- /txt-single -->
                     
@@ -80,96 +72,118 @@
                     </div> <!-- /single-contenido -->
                     
                     <div class="sidebar-registro">
-                        <div class="txt-sidebar">
-                            <span><a href="#">Empezar curso</a></span>
-                            <div>
-                                <p>Obtén tu membresía para comenzar este curso</p>
-                                <hr class="b-bottom">
-                                <p>Membresía básica $500.00 MXN mensuales*</p>
-                                <p><small>* Pruébala por 30 días</small></p>
-                                <a href="#">Obtener</a>
-                                <hr class="b-bottom">
-                                <p>Membresía académica</p>
-                                <p><small>$2,000.00 MXN mensuales*</small></p>
-                                <p><small>Este curso pertenece al plan de estudios del programa: Técnico en Producción Musical</small></p>
-                                <a href="#">Obtener</a>
-                                <p><small>* Recuerda que esta membresía también te da  acceso a todos los cursos que no pertenecen a tu plan de estudios.</small></p>
-                            </div>
-                        </div> <!-- /txt-sidebar -->
+
+                        @if ( !auth()->user()->tieneSuscripcion() )
+                            <div class="txt-sidebar">
+                                <span><a href="#">Empezar curso</a></span>
+                                <div>
+                                    <p>Obtén tu membresía para comenzar este curso</p>
+                                    <hr class="b-bottom">
+                                    <p>Membresía básica $500.00 MXN mensuales*</p>
+                                    <p><small>* Pruébala por 30 días</small></p>
+                                    <a href="#">Obtener</a>
+                                    <hr class="b-bottom">
+                                    <p>Membresía académica</p>
+                                    <p><small>$2,000.00 MXN mensuales*</small></p>
+                                    <p><small>Este curso pertenece al plan de estudios del programa: Técnico en Producción Musical</small></p>
+                                    <a href="#">Obtener</a>
+                                    <p><small>* Recuerda que esta membresía también te da  acceso a todos los cursos que no pertenecen a tu plan de estudios.</small></p>
+                                </div>
+                            </div> <!-- /txt-sidebar -->
+
+                            @if (!$favorito)
+                                <div class="flex flex-center favorito" data-crs="{{ $curso->slug }}">
+                                    <img src="/site/img/estrella.png">
+                                    <p>Marca este curso como favorito</p>
+                                </div> <!-- /favorito -->
+                            @endif
+
+                        <br>
                         
-                        <div class="flex flex-center favorito">
-                            <img src="/site/img/estrella.png">
-                            <p>Marca este curso como favorito</p>
-                        </div> <!-- /favorito -->
+                        @elseif ( auth()->user()->tieneSuscripcion() == true 
+                                 && auth()->user()->suscripcion[0]->id == 1 )
+
+                            <div class="txt-sidebar">
+                                <span><a href="#">Empezar curso</a></span>
+                                <div>
+                                    <p>¡Estás listo para comenzar!</p>
+                                    <p>Ahora podrás encontrar este curso en tu tablero personal para que puedas acceder rápidamente a él.</p>
+                                    <p>¿Quieres saber cómo aprovechar mejor este curso?</p>
+                                    <p>Echa un vistazo rápido a las recomendaciones para tomar este curso por tu cuenta:</p>
+                                    <a href="#">Camino de aprendizaje</a>
+                                </div>
+                            </div> <!-- /txt-sidebar -->
+                            
+                            @if (!$favorito)
+                                <div class="flex flex-center favorito" data-crs="{{ $curso->slug }}">
+                                    <img src="/site/img/estrella.png">
+                                    <p>Marca este curso como favorito</p>
+                                </div> <!-- /favorito -->
+                            @endif
+                            
+                            <div class="flex flex-center material" data-slg="{{ $clase['slug'] }}">
+                                <img src="/site/img/descarga.png">
+                                <p>Descarga el material de esta lección</p>
+                            </div> <!-- /favorito -->
+                        
+                        <br>
+
+                        @elseif ( auth()->user()->tieneSuscripcion() == true 
+                                 && auth()->user()->suscripcion[0]->id == 2 )
+                        
+                            <div class="txt-sidebar">
+                                <span><a href="#">Empezar curso</a></span>
+                                <div>
+                                    <p>¡Estás listo para comenzar!</p>
+                                    <p>Ahora podrás encontrar este curso en tu tablero personal para acceder rápidamente a él.</p>
+                                    <p>¿Qué sigue?</p>
+                                    <p>Recuerda ingresar al Aula Virtual de este curso cada semana para subir tus tareas y recibir retroalimentación de tu profesor.</p>
+                                    <p>Revisa tus calificaciones en el área de status del alumno.</p>
+                                </div>
+                            </div> <!-- /txt-sidebar -->
+                            
+                            @if (!$favorito)
+                                <div class="flex flex-center favorito" data-crs="{{ $curso->slug }}">
+                                    <img src="/site/img/estrella.png">
+                                    <p>Marca este curso como favorito</p>
+                                </div> <!-- /favorito -->
+                            @endif
+                            
+                            <div class="flex flex-center favorito" data-slg="{{ $clase['slug'] }}">
+                                <img src="/site/img/descarga.png">
+                                <p>Descarga el material de esta lección</p>
+                            </div> <!-- /favorito -->
                         
                         <br>
                         
-                        <div class="txt-sidebar">
-                            <span><a href="#">Empezar curso</a></span>
-                            <div>
-                                <p>¡Estás listo para comenzar!</p>
-                                <p>Ahora podrás encontrar este curso en tu tablero personal para que puedas acceder rápidamente a él.</p>
-                                <p>¿Quieres saber cómo aprovechar mejor este curso?</p>
-                                <p>Echa un vistazo rápido a las recomendaciones para tomar este curso por tu cuenta:</p>
-                                <a href="#">Camino de aprendizaje</a>
-                            </div>
-                        </div> <!-- /txt-sidebar -->
+
+                        @elseif ( auth()->user()->tieneSuscripcion() == true 
+                                 && auth()->user()->suscripcion[0]->id == 3 )
+
+                            <div class="txt-sidebar">
+                                <span><a href="#">Este curso pertenece a tu plan de estudios</a></span>
+                                <div>
+                                    <p>¡Estás listo para comenzar!</p>
+                                    <p>Ahora podrás encontrar este curso en tu tablero personal para acceder rápidamente a él.</p>
+                                    <p>¿Qué sigue?</p>
+                                    <p>Recuerda ingresar al Aula Virtual de este curso cada semana para subir tus tareas y recibir retroalimentación de tu profesor.</p>
+                                    <p>Revisa tus calificaciones en el área de status del alumno.</p>
+                                </div>
+                            </div> <!-- /txt-sidebar -->
                         
-                        <div class="flex flex-center favorito">
-                            <img src="/site/img/estrella.png">
-                            <p>Marca este curso como favorito</p>
-                        </div> <!-- /favorito -->
-                        
-                        <div class="flex flex-center favorito">
-                            <img src="/site/img/descarga.png">
-                            <p>Descarga el material de esta lección</p>
-                        </div> <!-- /favorito -->
-                        
-                        <br>
-                        
-                        <div class="txt-sidebar">
-                            <span><a href="#">Empezar curso</a></span>
-                            <div>
-                                <p>¡Estás listo para comenzar!</p>
-                                <p>Ahora podrás encontrar este curso en tu tablero personal para acceder rápidamente a él.</p>
-                                <p>¿Qué sigue?</p>
-                                <p>Recuerda ingresar al Aula Virtual de este curso cada semana para subir tus tareas y recibir retroalimentación de tu profesor.</p>
-                                <p>Revisa tus calificaciones en el área de status del alumno.</p>
-                            </div>
-                        </div> <!-- /txt-sidebar -->
-                        
-                        <div class="flex flex-center favorito">
-                            <img src="/site/img/estrella.png">
-                            <p>Marca este curso como favorito</p>
-                        </div> <!-- /favorito -->
-                        
-                        <div class="flex flex-center favorito">
-                            <img src="/site/img/descarga.png">
-                            <p>Descarga el material de esta lección</p>
-                        </div> <!-- /favorito -->
-                        
-                        <br>
-                        
-                        <div class="txt-sidebar">
-                            <span><a href="#">Este curso pertenece a tu plan de estudios</a></span>
-                            <div>
-                                <p>¡Estás listo para comenzar!</p>
-                                <p>Ahora podrás encontrar este curso en tu tablero personal para acceder rápidamente a él.</p>
-                                <p>¿Qué sigue?</p>
-                                <p>Recuerda ingresar al Aula Virtual de este curso cada semana para subir tus tareas y recibir retroalimentación de tu profesor.</p>
-                                <p>Revisa tus calificaciones en el área de status del alumno.</p>
-                            </div>
-                        </div> <!-- /txt-sidebar -->
-                        
-                       <div class="flex flex-center favorito">
-                            <img src="/site/img/estrella.png">
-                            <p>Marca este curso como favorito</p>
-                        </div> <!-- /favorito -->
-                        
-                        <div class="flex flex-center favorito">
-                            <img src="/site/img/descarga.png">
-                            <p>Descarga el material de esta lección</p>
-                        </div> <!-- /favorito -->
+                            @if (!$favorito)
+                                <div class="flex flex-center favorito" data-crs="{{ $curso->slug }}">
+                                    <img src="/site/img/estrella.png">
+                                    <p>Marca este curso como favorito</p>
+                                </div> <!-- /favorito -->
+                            @endif
+                            
+                            <div class="flex flex-center favorito" data-slg="{{ $clase['slug'] }}">
+                                <img src="/site/img/descarga.png">
+                                <p>Descarga el material de esta lección</p>
+                            </div> <!-- /favorito -->
+
+                        @endif
                         
                     </div> <!-- /sidebar-registro -->
 
@@ -180,4 +194,9 @@
 
     </section> <!-- /single-curso -->
 
+@stop
+
+@section('js-content')
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="/site/js/app.js"></script>
 @stop

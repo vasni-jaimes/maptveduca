@@ -1633,6 +1633,11 @@ video#myVideo {
     background-position: top 35% center;
 }
 
+.active-leccion {
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .titulo-banner {
     display: block;
     position: relative;
@@ -2068,6 +2073,7 @@ video#myVideo {
     font-size: 12px;
     background-color: #d8d8d8;
     line-height: normal;
+    cursor: pointer;
 }
 
 .sidebar-single ul.row-leccion li.active {
@@ -2202,12 +2208,15 @@ video#myVideo {
     text-transform: uppercase;
 }
 
+.sidebar-registro .material,
 .sidebar-registro .favorito {
     margin: 15px 0 0;
     padding: 15px;
     background-color: #000;
+    cursor: pointer;
 }
 
+.sidebar-registro .material p,
 .sidebar-registro .favorito p {
     color: #fff;
     font-family: 'Poppins semibold';
@@ -2216,6 +2225,7 @@ video#myVideo {
     line-height: 130%;
 }
 
+.sidebar-registro .material img,
 .sidebar-registro .favorito img {
     margin: 0 10px 0 0;
     width: 25px;
@@ -3376,6 +3386,14 @@ section.membresia {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top 35% center;
+}
+
+.wrapper-tablero div.active {
+    display: block !important;
+}
+
+.wrapper-tablero div.section {
+    display: none;
 }
 
 .micuenta {
