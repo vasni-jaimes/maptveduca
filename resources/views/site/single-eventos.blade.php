@@ -79,10 +79,59 @@
                     </div> <!-- /single-contenido -->
                     
                     <div class="sidebar-registro">
-                        <span><a href="#">Regístrate</a></span>
-                        <div class="favorito">
+                        <div class="txt-sidebar">
+                            <span><a href="#">Regístrate</a></span>
+                            <div>
+                                <p>Obtén tu membresía para registrarte a esta clase</p>
+                                <hr class="b-bottom">
+                                <p>Membresía básica $500.00 MXN mensuales*</p>
+                                <p><small>* Pruébala por 30 días</small></p>
+                                <a href="#">Obtener</a>
+                                <hr class="b-bottom">
+                                <p>Membresía académica</p>
+                                <p><small>$2,000.00 MXN mensuales*</small></p>
+                                <p><small>Este curso pertenece al plan de estudios del programa: Técnico en Producción Musical</small></p>
+                                <a href="#">Obtener</a>
+                                <p><small>* Recuerda que esta membresía también te da  acceso a todos los cursos que no pertenecen a tu plan de estudios.</small></p>
+                            </div>
+                        </div>
+                        <div class="flex flex-center favorito">
+                            <img src="/site/img/estrella.png">
                             <p>Marca este curso como favorito</p>
-                        </div> <!-- /favorito -->
+                        </div>
+                        
+                        <br>
+                        
+                        <div class="txt-sidebar">
+                            <span><a href="#">Regístrate</a></span>
+                            <div>
+                                <p>Este es un evento especial, por lo que tiene un costo adicional a las membresías</p>
+                                <hr class="b-bottom">
+                                <p>$50.00 MXN (único pago)</p>
+                                <a href="#">Pagar</a>
+                            </div>
+                        </div>
+                        <div class="flex flex-center favorito">
+                            <img src="/site/img/estrella.png">
+                            <p>Marca este curso como favorito</p>
+                        </div>
+                        
+                        <br>
+                        
+                        <div class="txt-sidebar">
+                            <span><a href="#">Regístrate</a></span>
+                            <div>
+                                <p>¡Estás listo para comenzar!</p>
+                                <p>Ahora podrás encontrar este evento en tu tablero personal para acceder rápidamente a él.</p>
+                                <p>¿Qué sigue?</p>
+                                <p>Vuelve a esta página en la fecha y hora indicada para ver en vivo.</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-center favorito">
+                            <img src="/site/img/estrella.png">
+                            <p>Marca este curso como favorito</p>
+                        </div>
+                        
                     </div> <!-- /sidebar-registro -->
 
                 </div> <!-- /flex -->

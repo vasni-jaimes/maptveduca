@@ -163,6 +163,21 @@ $(document).ready(function(){
       ]
     });
     
+    $('.item-evento ul').slick({
+      dots: false,
+      arrows: true,
+      slidesToShow: 2,
+      responsive: [
+        {
+          breakpoint: 480,
+          settings: {
+            arrows: false,
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
+    
     $('.titulo-faq').click(function(e) {    
         e.preventDefault();
         $(this).toggleClass("arrow-tab");   
