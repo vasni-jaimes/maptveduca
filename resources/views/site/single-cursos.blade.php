@@ -126,10 +126,10 @@
                                 </div> <!-- /favorito -->
                             @endif
                             
-                            <div class="flex flex-center material" data-slg="{{ $clase['slug'] }}">
+                             <a class="flex flex-center favorito" href="{{ route("download.material-curso", [$curso->slug, $clase['slug']] ) }}">
                                 <img src="/site/img/descarga.png">
                                 <p>Descarga el material de esta lección</p>
-                            </div> <!-- /favorito -->
+                            </a> <!-- /favorito -->
                         
                         <br>
 
@@ -154,10 +154,10 @@
                                 </div> <!-- /favorito -->
                             @endif
                             
-                            <div class="flex flex-center favorito" data-slg="{{ $clase['slug'] }}">
+                             <a class="flex flex-center favorito" href="{{ route("download.material-curso", [$curso->slug, $clase['slug']] ) }}">
                                 <img src="/site/img/descarga.png">
                                 <p>Descarga el material de esta lección</p>
-                            </div> <!-- /favorito -->
+                            </a> <!-- /favorito -->
                         
                         <br>
                         
@@ -183,10 +183,10 @@
                                 </div> <!-- /favorito -->
                             @endif
                             
-                            <div class="flex flex-center favorito" data-slg="{{ $clase['slug'] }}">
+                            <a class="flex flex-center favorito" href="{{ route("download.material-curso", [$curso->slug, $clase['slug']] ) }}">
                                 <img src="/site/img/descarga.png">
                                 <p>Descarga el material de esta lección</p>
-                            </div> <!-- /favorito -->
+                            </a> <!-- /favorito -->
 
                         @endif
                         

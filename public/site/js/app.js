@@ -123,7 +123,7 @@ if (sidebar_cursos) {
 } //REDIRECCION DE CLASES - CURSOS
 
 
-var sidebar_single = document.querySelectorAll('.sidebar-single ul li.active');
+var sidebar_single = document.querySelectorAll('.single-curso .sidebar-single ul li.active');
 
 if (sidebar_single) {
   for (var i = 0; i <= sidebar_single.length - 1; i++) {

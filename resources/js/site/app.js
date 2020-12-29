@@ -23,7 +23,7 @@ if (sidebar_cursos) {
 }
 
 //REDIRECCION DE CLASES - CURSOS
-let sidebar_single = document.querySelectorAll('.sidebar-single ul li.active');
+let sidebar_single = document.querySelectorAll('.single-curso .sidebar-single ul li.active');
 if (sidebar_single) {
 	for (var i = 0; i <= sidebar_single.length - 1; i++) {
 		sidebar_single[i].addEventListener('click', function(e) {

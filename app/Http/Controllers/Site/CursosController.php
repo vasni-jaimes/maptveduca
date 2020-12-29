@@ -53,6 +53,32 @@ class CursosController extends Controller
     	return view("site.single-cursos", compact("curso", "temario", "clase", "clase_id", "favorito"));
     }
 
+    public function download($slug_curso, $slug_sesion)
+    {
+        if ( isset($slug_curso) && isset($slug_sesion) ) {
+            $curso   = Course::where('slug', $slug_curso)->first();
+            $temario = json_decode($curso->temario);
+            $clase   = $this->obtenerClase($slug_sesion, $temario);
+
+            $zip = new \ZipArchive();
+            $zip->open(public_path().'font_files.zip', \ZipArchive::CREATE);
+            $zip->addFile(public_path()."robots.txt",'robots.txt');
+
+            echo "s";
+              
+            // $zip->addFile('fonts/Monoton/Monoton-Regular.ttf', 'Monoton-Regular.ttf');
+            // $zip->addFile('fonts/Monoton/OFL.txt', 'license.txt');
+              
+            $zip->close();
+
+            // if (!empty($clase['material_extra'])) {
+            //     for ($i=0; $i <= count($clase['material_extra']) - 1; $i++) {
+            //         return response()->download(storage_path("app/".$clase['material_extra'][$i]));
+            //     }
+            // }
+        }
+    }
+
 
     protected function obtenerClase($clase_id, $temario)
     {

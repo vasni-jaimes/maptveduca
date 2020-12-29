@@ -34,12 +34,13 @@
                         <li data-seccion="inbox"><a href="">Inbox</a></li>
                         <li data-seccion="pagos"><a href="">Pagos</a></li>
                         <li data-seccion="favoritos"><a href="">Favoritos</a></li>
-                        @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 1)
+                        @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->suscripcion[0]->id == 1 || auth()->user()->suscripcion[0]->id == 2))
                             <li data-seccion="cursos"><a href="">Cursos</a></li>
                             <li data-seccion="eventos"><a href="">Eventos</a></li>
                             <li data-seccion="clases"><a href="">Clases en línea</a></li>
-                        @elseif (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 2)
-                        <li data-seccion="academico"><a href="">Control Académico</a></li>
+                        @endif
+                        @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 2)
+                            <li data-seccion="academico"><a href="">Control Académico</a></li>
                         @endif
                     </ul>
 
@@ -334,7 +335,7 @@
                                         @foreach($favoritosCursos as $curso)
                                             <li>
                                                 <span class="delete"></span>
-                                                <a href="#"> <div class="img-slide" style="background-image: url({{ Storage::url($curso->cursos->url_img) }});"></div> </a> <!-- /img-slide -->
+                                                <a href="{{ route("single-cursos.show", $curso->cursos->slug) }}"> <div class="img-slide" style="background-image: url({{ Storage::url($curso->cursos->url_img) }});"></div> </a> <!-- /img-slide -->
                                             </li>
                                         @endforeach
                                     </ul>
@@ -403,7 +404,7 @@
                     </div>
 
 
-                    @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 1)
+                    @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->suscripcion[0]->id == 1 || auth()->user()->suscripcion[0]->id == 2))
                     
                         <div style="margin-bottom: 30px;" data-seccion="cursos" class="section">
                             <h3>Mis cursos</h3>
@@ -673,7 +674,9 @@
                             </div> <!-- /row-favoritos -->
                         </div>
 
-                    @elseif (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 2)
+                    @endif
+
+                    @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 2)
                     
                         <div style="margin-bottom: 30px;" data-seccion="academico" class="section">
                             <h3>Mis materias</h3>
