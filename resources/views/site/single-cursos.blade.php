@@ -52,6 +52,11 @@
                     
                     <div class="single-contenido">
                         
+                        <div class="txt-single">
+                            <h3>{{ $clase['nombre_video'] }}</h3>
+                            <p>Producción musical / {{ $curso->extra ? "CURSO EXTRA" : "CURSO BASE" }} / Profesor titular: {{ $curso->instructor[0]->nombres. " ".$curso->instructor[0]->apellidos }} </p>
+                        </div> <!-- /txt-single -->
+                        
                         <div class="row-video">
                             <iframe src="{{ $clase['url_video'][0] }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div> <!-- /row-video -->
@@ -65,8 +70,8 @@
                         </div> <!-- /txt-single -->
                     
                         <div class="banner-botones">
-                            <h4>¿ESTUDIANDO POR TU CUENTA?</h4>
-                            <p>Te damos algunas recomendaciones para que aproveches al máximo este curso</p>
+                            <h4>¿PRIMERA VEZ ESTUDIANDO EN LÍNEA?</h4>
+                            <p>Te damos algunas recomendaciones para que aproveches al máximo esta experiencia.</p>
                         </div> <!-- /banner-botones -->
                         
                     </div> <!-- /single-contenido -->

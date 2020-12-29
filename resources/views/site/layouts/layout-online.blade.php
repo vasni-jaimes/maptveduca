@@ -54,9 +54,9 @@
                         <div class="flex-footer">
                             <div class="flex">
                                 <ul>
-                                    <li><a href="#">Membresía Básica</a></li>
+                                    <!--<li><a href="#">Membresía Básica</a></li>-->
                                     <li><a href="#">Membresía Académica</a></li>
-                                    <li><a href="#">Guías de estudio</a></li>
+                                    <!--<li><a href="#">Guías de estudio</a></li>-->
                                 </ul>
                                 <ul>
                                     <li><a href="#">Cursos</a></li>
