@@ -26,7 +26,13 @@
 
                     <div class="row-maptv text-center">
 
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor </p>
+                        <p>Somos una nueva plataforma de educación virtual en materia de producción musical y música.</p>
+                        <p>MAPtv EDUCA cuenta con el respaldo de su creador: M.A.P. Colegio de Música, Audio y Producción (Puebla, México), una institución con más de 14 años de experiencia en educación media-superior orientada a Producción Musical y Música.</p>
+                        <p>A lo largo de los años Colegio MAP ha logrado convertirse en un semillero de nuevos artistas y profesionistas de la música, lo que a su vez ha generado un fortalecimiento importante de la escena musical local y regional.</p>
+                        <p>A raíz del impacto social ocasionado por la propagación del COVID19, Colegio MAP decidió crear MAPtv EDUCA, un espacio virtual accesible para todas las personas de habla hispana en el mundo, y así seguir formando profesionales que comparten nuestra misma pasión: la música.</p>
+                        <p>A través de MAPtv EDUCA traemos para ti todo el conocimiento y experiencia de nuestros propios profesores y de colaboradores pertenecientes a la industria musical nacional mexicana y latinoamericana.</p>
+                        <p>¡No te pierdas la oportunidad de ser parte de nuestra gran comunidad!
+                        <p>#EstudiaLoQueAmas</p>
 
                     </div> <!-- /row-maptv -->
 

@@ -85,15 +85,16 @@
                             </div> <!-- /row-sesiones -->
 
                             <div class="sidebar-registro">
-                                <p><span href="#">En curso</span></p>
-                                <div class="txt-curso">
+                                <div class="txt-sidebar">
+                                    <span><a href="#">En curso</a></span>
                                     <div>
                                         <p><strong>¡Estás listo para comenzar!</strong></p>
                                         <p>Ahora podrás encontrar esta clase en tu tablero personal para acceder rápidamente a ella.</p>
                                         <p><strong>¿Qué sigue?</strong></p>
                                         <p>Revisa tu correo electrónico y guarda los datos de acceso a las sesiones.</p>
                                     </div>
-                                </div> <!-- /txt-curso -->
+                                </div>
+                                
                             </div> <!-- /sidebar-registro -->
                             
                         </div> <!-- /flex -->

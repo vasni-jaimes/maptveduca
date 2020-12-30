@@ -148,8 +148,8 @@
                     <div class="row-botones">
                         
                         <div class="banner-botones">
-                            <h4>¿ESTUDIANDO POR TU CUENTA?</h4>
-                            <p>Te damos algunas recomendaciones para que aproveches al máximo este curso</p>
+                            <h4>¿PRIMERA VEZ ESTUDIANDO EN LÍNEA?</h4>
+                            <p>Te damos algunas recomendaciones para que aproveches al máximo esta experiencia.</p>
                         </div> <!-- /banner-botones -->
                         
                     </div> <!-- /row-botones -->

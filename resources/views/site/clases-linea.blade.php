@@ -8,7 +8,7 @@
 
     <section class="membresia">
 
-        <div class="banner-cursos"></div> <!-- /banner-cursos -->
+        <div class="banner-clases"></div> <!-- /banner-cursos -->
         
         <div class="titulo-banner">
             <h1>Clases en línea</h1>

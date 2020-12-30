@@ -34,23 +34,23 @@
 	        
 	        <h2>¿Qué hay en MAPtv Educa?</h2>
 	        <div class="banner-contenido">
-	            <h3>Carreras de producción musical y música en línea</h3>
+	            <h3>Carrera técnica en producción musical</h3>
 	        </div> <!-- /banner-contenido -->
 	        <div class="lista-contenido">
 	            <div class="item-lista">
-	                <div class="img-lista" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-lista -->
+	                <div class="img-lista" style="background-image: url('/site/img/sitio/guitarra.jpg');"></div> <!-- /img-lista -->
 	                <p>Cursos de producción</p>
 	                <p>musical y música</p>
 	            </div> <!-- /item-lista -->
 	            <div class="item-lista">
-	                <div class="img-lista" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-lista -->
+	                <div class="img-lista" style="background-image: url('/site/img/sitio/clases-en-linea.jpg');"></div> <!-- /img-lista -->
 	                <p>Clases en vivo de producción</p>
 	                <p>musical y música</p>
 	            </div> <!-- /item-lista -->
 	            <div class="item-lista">
-	                <div class="img-lista" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-lista -->
+	                <div class="img-lista" style="background-image: url('/site/img/sitio/masterclasses.jpg');"></div> <!-- /img-lista -->
 	                <p>Clínicas, conciertos </p>
-	                <p>musical y música</p>
+	                <p>y masterclasses</p>
 	            </div> <!-- /item-lista -->
 	        </div> <!-- /lista-contenido -->
 	    </div> <!-- /hoja-1200 -->
@@ -85,55 +85,60 @@
 	    
 	<section class="wrapper-academica">
 	    
-	    <div class="hoja-1000">
+	    <div class="hoja-800">
 	        <h2>¿Cómo funciona?</h2>
-	        <p>MAPtv Educa es una plataforma de apoyo a profesores de latinoamérica, quienes imparten su conocimiento a través de nosotros. Cuidamos la calidad de contenido que merecen nuestros usuarios y lo mantenemos actualizado para brindar la mejor experiencia.</p>
+	        <p>MAPtv Educa es una plataforma de apoyo a los estudiantes y profesores de latinoamérica que quieren hacer una diferencia en la industria musical. Cuidamos la calidad de contenido que merecen nuestros usuarios y lo mantenemos actualizado para brindar la mejor experiencia.</p>
 	        <p>Es por esto que, con tu ayuda, podemos seguir manteniendo activa esta plataforma y brindándote la experiencia de grandes exponentes de la industria musical latina.</p>
-	        <p>Conoce las formas en las que nos ayudas a funcionar:</p>
+	        <!--<p>Conoce las formas en las que nos ayudas a funcionar:</p>-->
 	        <table>
 	            <tr>
 	                <th>&nbsp</th>
-	                <th>Membresía básica</th>
+	                <!--<th>Membresía básica</th>-->
 	                <th>Membresía académica <span>Estudia una carrera técnica en línea</span></th>
 	            </tr>
 	            <tr>
-	                <td>Acceso a cursos principales</td>
-	                <td><span class="circle"></span></td>
+	                <td>Material audiovisual de estudio</td>
+	                <!--<td><span class="circle"></span></td>-->
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr>
-	                <td>Acceso a cursos y material extra</td>
-	                <td><span class="circle"></span></td>
+	                <td>Acceso a eventos virtuales básicos</td>
+	                <!--<td><span class="circle"></span></td>-->
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr>
 	                <td>Acceso a clínicas y conciertos/masterclass básicas</td>
-	                <td><span class="circle"></span></td>
+	                <!--<td><span class="circle"></span></td>-->
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr>
-	                <td>Acceso a carreras técnicas con reconocimiento oficial SEP</td>
-	                <td>&nbsp</td>
+	                <td>Carrera técnica con reconocimiento oficial SEP</td>
+	                <!--<td>&nbsp</td>-->
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr>
 	                <td>Acceso a aulas virtuales</td>
-	                <td>&nbsp</td>
+	                <!--<td>&nbsp</td>-->
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr>
 	                <td>Retroalimentación y sesiones en vivo de profesores titulares</td>
-	                <td>&nbsp</td>
+	                <!--<td>&nbsp</td>-->
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr>
 	                <td>Certificado con validez oficial</td>
-	                <td>&nbsp</td>
+	                <!--<td>&nbsp</td>-->
+	                <td><span class="circle"></span></td>
+	            </tr>
+                <tr>
+	                <td>Modalidad trimestral de estudio</td>
+	                <!--<td>&nbsp</td>-->
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr class="last-tr">
 	                <td class="last-td">&nbsp</td>
-	                <td class="last-td"><span>$123 MXN mensuales</span><a href="#" class="bg-amarillo">Prueba gratuita por 30 días</a></td>
+	                <!--<td class="last-td"><span>$123 MXN mensuales</span><a href="#" class="bg-amarillo">Prueba gratuita por 30 días</a></td>-->
 	                <td class="last-td"><span>$1234 MXN mensuales <small>por carrera técnica</small></span></td>
 	            </tr>
 	        </table>
