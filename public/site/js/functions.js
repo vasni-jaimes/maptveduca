@@ -95,6 +95,159 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  editarPerfil: function editarPerfil(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var nombre = document.querySelector("input[name='nombre']"),
+        apaterno = document.querySelector("input[name='apaterno']"),
+        amaterno = document.querySelector("input[name='amaterno']"),
+        fecha_nacimiento = document.querySelector("input[name='fecha_nacimiento']"),
+        email = document.querySelector("input[name='email']"),
+        password = document.querySelector("input[name='password']"),
+        validate = true;
+
+    if (document.querySelectorAll(".campo-requerido")) {
+      document.querySelectorAll('.campo-requerido').forEach(function (item) {
+        item.classList.remove('campo-requerido');
+      });
+    }
+
+    if (email.value == '') {
+      email.classList.add('campo-requerido');
+      validate = false;
+    }
+
+    if (!funciones.validarEmail(email.value)) {
+      email.classList.add('campo-requerido');
+      validate = false;
+    }
+
+    if (nombre.value == '') {
+      nombre.classList.add('campo-requerido');
+      validate = false;
+    }
+
+    if (amaterno.value == '') {
+      amaterno.classList.add('campo-requerido');
+      validate = false;
+    }
+
+    if (apaterno.value == '') {
+      apaterno.classList.add('campo-requerido');
+      validate = false;
+    }
+
+    if (password.value != '') {
+      if (password.value.length < 8) {
+        password.classList.add('campo-requerido');
+        validate = false;
+      }
+    }
+
+    if (validate == false) {
+      alert('k');
+      return false;
+    }
+
+    if (e.type == 'click') {
+      e.target.disabled = true;
+      document.querySelector("form[name='form_editar']").submit();
+      return false;
+    }
+  },
+  eliminarCursoFav: function eliminarCursoFav(e, section) {
+    e.preventDefault();
+    var slug = e.target.getAttribute('data-slg');
+
+    if (slug) {
+      var token = document.querySelector("input[name='_token']").value;
+      var opciones = {
+        method: "POST",
+        credentials: "same-origin",
+        body: JSON.stringify({
+          "slug": slug,
+          "_token": token,
+          "seccion": section
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      fetch('/usuario/eliminarFavoritos', opciones).then(function (response) {
+        return response.json();
+      }).then(function (res) {
+        if (res.message == 'ok') {
+          swal("OK", "Se elimino de favoritos correctamente", "success");
+          e.target.parentNode.remove();
+        } else {
+          //alert('no');
+          swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+        }
+      });
+    }
+  },
+  registroEvento: function registroEvento(e) {
+    e.preventDefault();
+    var slug = e.target.getAttribute('data-crs');
+
+    if (slug) {
+      var token = document.querySelector("input[name='_token']").value;
+      var opciones = {
+        method: "POST",
+        credentials: "same-origin",
+        body: JSON.stringify({
+          "slug": slug,
+          "_token": token
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      fetch('/usuario/registrarEvento', opciones).then(function (response) {
+        return response.json();
+      }).then(function (res) {
+        if (res.message == 'ok') {
+          swal("OK", "Se agrego a tu tablero correctamente", "success"); //alert('ok');
+
+          location.reload();
+        } else {
+          //alert('no');
+          swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+        }
+      });
+    }
+  },
+  empezarCurso: function empezarCurso(e) {
+    e.preventDefault();
+    var slug = e.target.getAttribute('data-crs');
+
+    if (slug) {
+      var token = document.querySelector("input[name='_token']").value;
+      var opciones = {
+        method: "POST",
+        credentials: "same-origin",
+        body: JSON.stringify({
+          "slug": slug,
+          "_token": token
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      fetch('/usuario/empezarCurso', opciones).then(function (response) {
+        return response.json();
+      }).then(function (res) {
+        if (res.message == 'ok') {
+          swal("OK", "Se agrego a tu tablero correctamente", "success"); //alert('ok');
+
+          location.reload();
+        } else {
+          //alert('no');
+          swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+        }
+      });
+    }
+  },
   micuentaActive: function micuentaActive(e) {
     e.preventDefault();
     var seccion = e.target.parentNode.getAttribute('data-seccion');
@@ -109,9 +262,10 @@ var funciones = {
     $('.li-micuenta li').removeClass('active');
     e.target.parentNode.classList.add('active');
   },
-  guardarFavoritos: function guardarFavoritos(e) {
+  guardarFavoritos: function guardarFavoritos(e, section) {
     e.preventDefault();
     var data_crs = e.target.parentNode.getAttribute('data-crs');
+    var seccion = section;
 
     if (data_crs) {
       var token = document.querySelector("input[name='_token']").value;
@@ -120,7 +274,8 @@ var funciones = {
         credentials: "same-origin",
         body: JSON.stringify({
           "curso": data_crs,
-          "_token": token
+          "_token": token,
+          "seccion": seccion
         }),
         headers: {
           "Content-Type": "application/json"
@@ -130,7 +285,7 @@ var funciones = {
         return response.json();
       }).then(function (res) {
         if (res.message == 'ok') {
-          swal("OK", "Se agrego el curso a favoritos", "success"); //alert('ok');
+          swal("OK", "Se agrego el " + seccion + " a favoritos", "success"); //alert('ok');
 
           document.querySelector('.favorito').remove();
         } else {

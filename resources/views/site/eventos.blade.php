@@ -185,9 +185,9 @@
                     @if ($archivados->where("tipo_evento_id", 1)->count() > 0)
                         <div class="bloque-slide">
                             <div class="item-slide">
-                                <p class="titulo"><span>Clínicas</span></p>
+                                <p class="titulo"><span>CLÍNICAS</span></p>
                                 <ul>
-                                    @foreach($archivados as $archivado)
+                                    @foreach($archivados->where("tipo_evento_id", 1) as $archivado)
                                         <li class="col-3">
                                             <img src="{{ Storage::url($archivado->img_evento) }}">
                                             <div class="txt-clase">
@@ -198,51 +198,6 @@
                                             </div> <!-- /txt-clase -->
                                         </li>
                                     @endforeach
-                                    {{-- <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <h4>CONCIERTO / MASTERCLASS</h4>
-                                            <p>PONENTE</p>
-                                            <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                            <span>CLÍNICA BÁSICA</span>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <h4>CONCIERTO / MASTERCLASS</h4>
-                                            <p>PONENTE</p>
-                                            <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                            <span>CLÍNICA BÁSICA</span>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <h4>CONCIERTO / MASTERCLASS</h4>
-                                            <p>PONENTE</p>
-                                            <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                            <span>CLÍNICA BÁSICA</span>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <h4>CONCIERTO / MASTERCLASS</h4>
-                                            <p>PONENTE</p>
-                                            <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                            <span>CLÍNICA BÁSICA</span>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <h4>CONCIERTO / MASTERCLASS</h4>
-                                            <p>PONENTE</p>
-                                            <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                            <span>CLÍNICA BÁSICA</span>
-                                        </div> <!-- /txt-clase -->
-                                    </li> --}}
                                 </ul>
                             </div> <!-- /item-slide -->
                         </div> <!-- /bloque-slide -->
@@ -251,9 +206,9 @@
                     @if ($archivados->where("tipo_evento_id", 2)->count() > 0)
                         <div class="bloque-slide">
                             <div class="item-slide">
-                                <p class="titulo"><span>Archivados</span></p>
+                                <p class="titulo"><span>CONCIERTOS/M.CLASS</span></p>
                                 <ul>
-                                    @foreach($archivados as $archivado)
+                                    @foreach($archivados->where("tipo_evento_id", 2) as $archivado)
                                         <li class="col-3">
                                             <img src="{{ Storage::url($archivado->img_evento) }}">
                                             <div class="txt-clase">

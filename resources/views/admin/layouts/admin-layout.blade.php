@@ -80,6 +80,19 @@
                                 <li> <a href="{{ route('agregar-evento.create') }}"> Agregar Evento </a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Recomendaciones</span> <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li> <a href="{{ route("lista-recomendaciones.index") }}"> Lista de recomendaciones </a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Mensajes</span> <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li> <a href="#"> Lista de mensajes </a></li>
+                                <li> <a href="#"> Crear Mensaje </a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </nav>

@@ -32,7 +32,8 @@ class ValidarUpdateEvento extends FormRequest
             "video_bienvenida"      => "required|string|url",
             "descripcion"           => "required|string",
             "fecha_inicio"          => "required|date",
-            "hora_inicio"           => "required|date_format:H:i"
+            "hora_inicio"           => "required|date_format:H:i",
+            "url_video"             => "required|string",
         ];
     }
 }

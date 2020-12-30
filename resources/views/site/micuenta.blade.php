@@ -34,12 +34,12 @@
                         <li data-seccion="inbox"><a href="">Inbox</a></li>
                         <li data-seccion="pagos"><a href="">Pagos</a></li>
                         <li data-seccion="favoritos"><a href="">Favoritos</a></li>
-                        @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->suscripcion[0]->id == 1 || auth()->user()->suscripcion[0]->id == 2))
+                        @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->ultimaSuscripcion()->id == 1 || auth()->user()->ultimaSuscripcion()->id == 2))
                             <li data-seccion="cursos"><a href="">Cursos</a></li>
                             <li data-seccion="eventos"><a href="">Eventos</a></li>
                             <li data-seccion="clases"><a href="">Clases en línea</a></li>
                         @endif
-                        @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 2)
+                        @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimaSuscripcion()->id == 2)
                             <li data-seccion="academico"><a href="">Control Académico</a></li>
                         @endif
                     </ul>
@@ -54,41 +54,43 @@
                             <div class="flex">
                                 <div class="item-perfil">
                                     <h4>Informarción personal</h4>
-                                    <form class="form-perfil" action="" method="">
+                                    <form class="form-perfil" action="{{ route('usuario.editar') }}" method="POST" name="form_editar">
+                                        @csrf
                                         <fieldset>
                                             <label>Correo electrónico</label>
-                                            <input type="text" class="input" placeholder="usuario@gmail.com" value="{{ auth()->user()->email }}">
+                                            <input type="text" name="email" class="input" placeholder="usuario@gmail.com" value="{{ auth()->user()->email }}">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset>
                                             <label>Nombre</label>
-                                            <input type="text" class="input" placeholder="Usuario" value="{{ auth()->user()->nombre }}">
+                                            <input type="text" name="nombre" class="input" placeholder="Usuario" value="{{ auth()->user()->nombre }}">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset>
                                             <label>Apellido Materno</label>
-                                            <input type="text" class="input" placeholder="Apellido Materno" value="{{ auth()->user()->amaterno }}">
+                                            <input type="text" name="amaterno" class="input" placeholder="Apellido Materno" value="{{ auth()->user()->amaterno }}">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset>
                                             <label>Apellido Paterno</label>
-                                            <input type="text" class="input" placeholder="Apellido Paterno" value="{{ auth()->user()->apaterno }}">
+                                            <input type="text" name="apaterno" class="input" placeholder="Apellido Paterno" value="{{ auth()->user()->apaterno }}">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset class="columns">
                                             <div class="flex flex-perfil between">
                                                 <div>
                                                     <label>Fecha de nacimiento</label>
-                                                    <input type="text" class="input" placeholder="DD/MM/AAAA" class="input" value="{{ auth()->user()->fecha_nacimiento }}">
+                                                    <input type="text" name="fecha_nacimiento" class="input" placeholder="DD/MM/AAAA" class="input" value="{{ auth()->user()->fecha_nacimiento }}">
                                                     <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                                 </div>
                                                 <div>
                                                     <label>Contraseña</label>
-                                                    <input type="text" class="input" placeholder="···············" class="input">
+                                                    <input type="text" name="password" class="input" placeholder="···············" class="input">
                                                     <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                                 </div>
                                             </div>
                                         </fieldset>
+                                        <input type="submit" class="btn_perfil" value="Enviar" />
                                     </form>
                                 </div> <!-- /item-perfil -->
                                 <div class="item-perfil">
@@ -334,7 +336,7 @@
                                     <ul class="slide-cursos">
                                         @foreach($favoritosCursos as $curso)
                                             <li>
-                                                <span class="delete"></span>
+                                                <span class="delete delete_curso-fav" data-slg="{{ $curso->cursos->slug }}"></span>
                                                 <a href="{{ route("single-cursos.show", $curso->cursos->slug) }}"> <div class="img-slide" style="background-image: url({{ Storage::url($curso->cursos->url_img) }});"></div> </a> <!-- /img-slide -->
                                             </li>
                                         @endforeach
@@ -355,7 +357,8 @@
                                     <ul class="slide-cursos">
                                         @foreach($favoritosEventos as $evento)
                                             <li>
-                                                <a href="#"> <div class="img-slide" style="background-image: url({{ Storage::url($evento->eventos->img_evento) }});"></div> </a> <!-- /img-slide -->
+                                                <span class="delete delete_evento-fav" data-slg="{{ $evento->eventos->slug }}"></span>
+                                                <a href="{{ route("evento.show", $evento->eventos->slug) }}"> <div class="img-slide" style="background-image: url({{ Storage::url($evento->eventos->img_evento) }});"></div> </a> <!-- /img-slide -->
                                             </li>
                                         @endforeach
                                     </ul>
@@ -404,79 +407,40 @@
                     </div>
 
 
-                    @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->suscripcion[0]->id == 1 || auth()->user()->suscripcion[0]->id == 2))
+                    @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->ultimaSuscripcion()->id == 1 || auth()->user()->ultimaSuscripcion()->id == 2))
                     
                         <div style="margin-bottom: 30px;" data-seccion="cursos" class="section">
                             <h3>Mis cursos</h3>
                             <div class="row-favoritos">
                                 <p>AQUÍ ENCONTRARÁS TUS CURSOS EN PROGRESO.</p>
                                 <div class="flex-cursos">
-                                    <ul class="flex between wrap">
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    @if ($tableroCursos->count() > 0 || $materias->count() > 0)
+                                        <ul class="flex between wrap">
+                                            @foreach($materias as $materia)
+                                                <li class="col-3">
+                                                    <a href="{{ route('single-cursos.show', $materia->cursos->slug) }}">
+                                                        <img src="{{ Storage::url($materia->cursos->url_img) }}">
+                                                        <div class="txt-clase">
+                                                            <p>{{ $materia->cursos->nombre }}</p>
+                                                        </div> <!-- /txt-clase -->
+                                                    </a>
+                                                </li>
+                                            @endforeach
+
+                                            @foreach($tableroCursos as $curso)
+                                                <li class="col-3">
+                                                    <a href="{{ route('single-cursos.show', $curso->slug) }}">
+                                                        <img src="{{ Storage::url($curso->url_img) }}">
+                                                        <div class="txt-clase">
+                                                            <p>{{ $curso->nombre }}</p>
+                                                        </div> <!-- /txt-clase -->
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <p> Aún no tienes cursos. </p>
+                                    @endif
                                 </div>
                             </div> <!-- /row-favoritos -->
                         </div>
@@ -486,76 +450,39 @@
                             <div class="row-favoritos">
                                 <p>AQUÍ ENCONTRARÁS TUS EVENTOS PRÓXIMOS Y ADQUIRIDOS</p>
                                 <div class="flex-cursos">
-                                    <p>PRÓXIMOS</p>
-                                    <ul class="flex between wrap">
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                    </ul>
-                                    <p>ARCHIVADOS</p>
-                                    <ul class="flex between wrap">
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                    </ul>
+                                    @if ($tableroEventos->count() > 0)
+                                        <p>PRÓXIMOS</p>
+                                        <ul class="flex between wrap">
+                                            @foreach($tableroEventos as $eventos)
+                                                <li class="col-3">
+                                                    <img src="{{ Storage::url($eventos->img_evento) }}">
+                                                    <div class="txt-clase">
+                                                        <p>{{ $eventos->nombre }}</p>
+                                                        <p>{{ $eventos->fecha_lanzamiento }}</p>
+                                                        <a href="{{ route('evento.show', $eventos->slug) }}">Ir al evento</a>
+                                                    </div> <!-- /txt-clase -->
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                    @if ($eventosOld->count() > 0)
+                                        <p>ARCHIVADOS</p>
+                                        <ul class="flex between wrap">
+                                            @foreach($eventosOld as $eventoOld)
+                                                <li class="col-3">
+                                                    <img src="{{ Storage::url($eventoOld->img_evento) }}">
+                                                    <div class="txt-clase">
+                                                        <p>{{ $eventoOld->nombre }}</p>
+                                                        <p>{{ $eventoOld->fecha_lanzamiento }}</p>
+                                                        <a href="{{ route('evento.show', $eventoOld->slug) }}">Ir al evento</a>
+                                                    </div> <!-- /txt-clase -->
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                    @if ($tableroEventos->count() <= 0 && $eventosOld->count() <= 0)
+                                        <p> Aún no tienes eventos. </p>
+                                    @endif
                                 </div>
                             </div> <!-- /row-favoritos -->
                         </div>
@@ -676,48 +603,29 @@
 
                     @endif
 
-                    @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 2)
+                    @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimaSuscripcion()->id == 2)
                     
                         <div style="margin-bottom: 30px;" data-seccion="academico" class="section">
                             <h3>Mis materias</h3>
                             <div class="row-favoritos">
                                 <p>AQUÍ ENCONTRARÁS TODOS LOS CURSOS CORRESPONDIENTES A TU PROGRAMA ACADÉMICO, ORDENADOS POR TRIMESTRE EN PROGRESO</p>
                                 <div class="flex-cursos">
-                                    <p>1er Trimestre</p>
-                                    <ul class="flex between wrap">
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al curso</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al curso</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al curso</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al curso</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                    </ul>
+                                    @if ($materias->count() > 0)
+                                        <p>{{ $tituloTrimestre }}</p>
+                                        <ul class="flex between wrap">
+                                            @foreach($materias as $materia)
+                                                <li class="col-3">
+                                                    <img src="{{ Storage::url($materia->cursos->url_img) }}">
+                                                    <div class="txt-clase">
+                                                        <p>{{ $materia->cursos->nombre }}</p>
+                                                        <a href="{{ route('single-cursos.show', $materia->cursos->slug) }}">Ir al curso</a>
+                                                    </div> <!-- /txt-clase -->
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <p> Aún no hay cursos. </p>
+                                    @endif
                                 </div>
                             </div> <!-- /row-favoritos -->
                         </div>

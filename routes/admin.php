@@ -56,4 +56,16 @@ Route::get('agregar-instructor', 'Admin\InstructoresController@create')->name('a
 Route::post('agregar-instructores', 'Admin\InstructoresController@store')->name('agregar-instructor.store');
 Route::get('listado-instructores', 'Admin\InstructoresController@index')->name('listado-instructores.index');
 Route::get('editar-instructor/{instructor_id}', 'Admin\InstructoresController@edit')->name('editar-instructor.edit');
+Route::post('editar-instructor/{instructor_id}', 'Admin\InstructoresController@update')->name('editar-instructor.update');
 Route::post('cambiar-status-instructor', 'Admin\InstructoresController@cambiarStatus')->name('cambiar-status-instructor');
+
+
+//RECOMENDACIONES
+Route::get('lista-recomendaciones', 'Admin\RecomendacionesController@index')->name('lista-recomendaciones.index');
+Route::get('agregar-recomendaciones/{recom_id}', 'Admin\RecomendacionesController@edit')->name('lista-recomendaciones.edit');
+Route::post('editar-recomendaciones/{recom_id}', 'Admin\RecomendacionesController@update')->name('lista-recomendaciones.update');
+
+
+
+//MENSAJES
+Route::get('agregar-mensaje', 'Admin\MensajesController@mandarMensaje')->name('mandarMensaje');

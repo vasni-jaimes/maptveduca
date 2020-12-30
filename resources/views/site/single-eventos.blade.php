@@ -52,7 +52,7 @@
                         
                             <div class="col-7">
                                 <div class="row-video">
-                                    <iframe src="https://www.youtube.com/embed/CBZyA-Pj52U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe src="{{ $evento->video_bienvenida }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                                 </div> <!-- /row-video -->
                             </div> <!-- /col-7 -->
                             
@@ -65,72 +65,105 @@
                         </div> <!-- /txt-single -->
                     
                         <div class="row-evento">
-            
-                            <h3>Mira el evento aquí:</h3>
                             
-                            <p><span class="txt-yellow">LUNES · A PARTIR DEL 00 DE JUNIO AL 00 DE JULIO, 2020 · 18:00 HRS (Hora Cd. de México) | 4 sesiones de 90 minutos</span></p>
-                            
-                            <div class="row-video">
-                                <iframe src="{{ $evento->video_bienvenida }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div> <!-- /row-video -->
+                            @if ( auth()->user()->tieneSuscripcion() && $evento->especial == 0 && $evento->isArchivado() == true)
+                                <h3>Mira el evento aquí:</h3>
+                            @endif
+
+                            @if ( !$evento->isArchivado() )
+                                <p><span class="txt-yellow"> {{ $evento->FormatoLetras($evento->fecha_lanzamiento, 3) }} </span></p>
+                            @endif
+
+
+                            @if ( auth()->user()->tieneSuscripcion() && $evento->especial == 0 && $evento->isArchivado() == true)
+                                <div class="row-video">
+                                    <iframe src="{{ $evento->video_evento }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div> <!-- /row-video -->
+                            @endif
+
+
+                            @if ( auth()->user()->tieneSuscripcion() && $evento->especial == 1 && $evento->isArchivado() == true && $eventoPagado == true )
+                                <h3>Mira el evento aquí:</h3>
+                            @endif
+
+                            @if ( auth()->user()->tieneSuscripcion() && $evento->especial == 1 && $evento->isArchivado() == true && $eventoPagado == true )
+                                <div class="row-video">
+                                    <iframe src="{{ $evento->video_evento }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div> <!-- /row-video -->
+                            @endif
 
                         </div> <!-- /row-evento -->
 
                     </div> <!-- /single-contenido -->
                     
                     <div class="sidebar-registro">
-                        <div class="txt-sidebar">
-                            <span><a href="#">Regístrate</a></span>
-                            <div>
-                                <p>Obtén tu membresía para registrarte a esta clase</p>
-                                <hr class="b-bottom">
-                                <p>Membresía básica $500.00 MXN mensuales*</p>
-                                <p><small>* Pruébala por 30 días</small></p>
-                                <a href="#">Obtener</a>
-                                <hr class="b-bottom">
-                                <p>Membresía académica</p>
-                                <p><small>$2,000.00 MXN mensuales*</small></p>
-                                <p><small>Este curso pertenece al plan de estudios del programa: Técnico en Producción Musical</small></p>
-                                <a href="#">Obtener</a>
-                                <p><small>* Recuerda que esta membresía también te da  acceso a todos los cursos que no pertenecen a tu plan de estudios.</small></p>
+                        @if ( !auth()->user()->tieneSuscripcion() )
+                            <div class="txt-sidebar">
+                                {{-- <span><a href="#">Regístrate</a></span> --}}
+                                <div>
+                                    <p>Obtén tu membresía para registrarte a esta clase</p>
+                                    <hr class="b-bottom">
+                                    <p>Membresía básica $500.00 MXN mensuales*</p>
+                                    <p><small>* Pruébala por 30 días</small></p>
+                                    <a href="#">Obtener</a>
+                                    <hr class="b-bottom">
+                                    <p>Membresía académica</p>
+                                    <p><small>$2,000.00 MXN mensuales*</small></p>
+                                    <p><small>Este curso pertenece al plan de estudios del programa: Técnico en Producción Musical</small></p>
+                                    <a href="#">Obtener</a>
+                                    <p><small>* Recuerda que esta membresía también te da  acceso a todos los cursos que no pertenecen a tu plan de estudios.</small></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex flex-center favorito">
-                            <img src="/site/img/estrella.png">
-                            <p>Marca este curso como favorito</p>
-                        </div>
+                            @if (!$favorito)
+                                <div class="flex flex-center favorito favevento" data-crs="{{ $evento->slug }}" data-seccion="evento">
+                                    <img src="/site/img/estrella.png">
+                                    <p>Marca este evento como favorito</p>
+                                </div>
+                            @endif
                         
                         <br>
+
+                        @elseif ( auth()->user()->tieneSuscripcion() && $evento->especial == 1 )
                         
-                        <div class="txt-sidebar">
-                            <span><a href="#">Regístrate</a></span>
-                            <div>
-                                <p>Este es un evento especial, por lo que tiene un costo adicional a las membresías</p>
-                                <hr class="b-bottom">
-                                <p>$50.00 MXN (único pago)</p>
-                                <a href="#">Pagar</a>
+                            <div class="txt-sidebar">
+                                <span><a href="#">Regístrate</a></span>
+                                <div>
+                                    <p>Este es un evento especial, por lo que tiene un costo adicional a las membresías</p>
+                                    <hr class="b-bottom">
+                                    <p>$50.00 MXN (único pago)</p>
+                                    <a href="#">Pagar</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex flex-center favorito">
-                            <img src="/site/img/estrella.png">
-                            <p>Marca este curso como favorito</p>
-                        </div>
+                            @if (!$favorito)
+                                <div class="flex flex-center favorito favevento" data-crs="{{ $evento->slug }}" data-seccion="evento">
+                                    <img src="/site/img/estrella.png">
+                                    <p>Marca este evento como favorito</p>
+                                </div>
+                            @endif
                         
-                        <br>
-                        
-                        <div class="txt-sidebar">
-                            <span><a href="#">Regístrate</a></span>
-                            <div>
-                                <p>¡Estás listo para comenzar!</p>
-                                <p>Ahora podrás encontrar este evento en tu tablero personal para acceder rápidamente a él.</p>
-                                <p>¿Qué sigue?</p>
-                                <p>Vuelve a esta página en la fecha y hora indicada para ver en vivo.</p>
+                            <br>
+
+                        @else
+                            <div class="txt-sidebar">
+                                @if (!$estaEnMiTablero)
+                                    <span><a href="#" class="registrarte_evento" data-crs="{{ $evento->slug }}">Regístrate</a></span>
+                                @else
+                                    <div>
+                                        <p>¡Estás listo para comenzar!</p>
+                                        <p>Ahora podrás encontrar este evento en tu tablero personal para acceder rápidamente a él.</p>
+                                        <p>¿Qué sigue?</p>
+                                        <p>Vuelve a esta página en la fecha y hora indicada para ver en vivo.</p>
+                                    </div>
+                                @endif
                             </div>
-                        </div>
-                        <div class="flex flex-center favorito">
-                            <img src="/site/img/estrella.png">
-                            <p>Marca este curso como favorito</p>
-                        </div>
+                            @if (!$favorito)
+                                <div class="flex flex-center favorito favevento" data-crs="{{ $evento->slug }}" data-seccion="evento">
+                                    <img src="/site/img/estrella.png">
+                                    <p>Marca este evento como favorito</p>
+                                </div>
+                            @endif
+
+                        @endif
                         
                     </div> <!-- /sidebar-registro -->
 
@@ -141,4 +174,9 @@
         
     </section> <!-- /single-curso -->
 
+@stop
+
+@section('js-content')
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="/site/js/app.js"></script>
 @stop

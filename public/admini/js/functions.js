@@ -319,6 +319,7 @@ var funciones = {
     var descripcion = document.querySelector("textarea[name='descripcion']");
     var fecha_inicio = document.querySelector("input[name='fecha_inicio']");
     var hora_inicio = document.querySelector("input[name='hora_inicio']");
+    var url_video = document.querySelector("input[name='url_video']");
     /* STATUS */
 
     var error_videos = false; //SE ELIMINAN LOS RASTROS DE ERRORES
@@ -387,6 +388,12 @@ var funciones = {
       error_videos = true;
       hora_inicio.parentNode.classList.add('has-error');
       hora_inicio.nextElementSibling.innerHTML = 'El campo es requerido';
+    }
+
+    if (url_video.value == '') {
+      error_videos = true;
+      url_video.parentNode.classList.add('has-error');
+      url_video.nextElementSibling.innerHTML = 'El campo es requerido';
     }
 
     if (error_videos == true) {

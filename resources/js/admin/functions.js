@@ -248,6 +248,7 @@ let funciones = {
 		let descripcion = document.querySelector("textarea[name='descripcion']");
 		let fecha_inicio = document.querySelector("input[name='fecha_inicio']");
 		let hora_inicio = document.querySelector("input[name='hora_inicio']");
+		let url_video = document.querySelector("input[name='url_video']");
 
 
 		/* STATUS */
@@ -322,6 +323,12 @@ let funciones = {
 			error_videos = true;
 			hora_inicio.parentNode.classList.add('has-error');
 			hora_inicio.nextElementSibling.innerHTML = 'El campo es requerido';
+		}
+
+		if (url_video.value == '') {
+			error_videos = true;
+			url_video.parentNode.classList.add('has-error');
+			url_video.nextElementSibling.innerHTML = 'El campo es requerido';
 		}
 
 

@@ -128,6 +128,7 @@ class CheckoutController extends Controller
         if ($result->getState() === 'approved') {
 
         	//OBTENER MEMBRESIA A PAGAR
+            date_default_timezone_set('America/Mexico_City');
         	$membresia 		= Membresia::where('slug', $slug_membresia)->first();
         	$carrera 		= $request->has("carrera") ? $request->carrera : null;
         	$fecha_inicio 	= Carbon::now()->format('Y-m-d');

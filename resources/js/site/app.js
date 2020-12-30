@@ -34,11 +34,23 @@ if (sidebar_single) {
 	}
 }
 
-//AGREGAR FAVORITOS EN MIS CURSOS
-let favorito = document.querySelector('.favorito');
+//AGREGAR FAVORITOS EN MIS CURSOS Y EVENTOS
+let favorito = document.querySelector('.favcurso');
 if (favorito) {
-	favorito.addEventListener('click', funciones.guardarFavoritos);
+	favorito.addEventListener('click', function(e) {
+		funciones.guardarFavoritos(e, "curso");
+	});
 }
+
+//AGREGAR FAVORITOS EN MIS CURSOS Y EVENTOS
+let favoritoEvent = document.querySelector('.favevento');
+if (favoritoEvent) {
+	favoritoEvent.addEventListener('click', function(e) {
+		funciones.guardarFavoritos(e, "evento");
+	});
+}
+
+
 
 //ANIMACION EN MICUENTA DE PASAR POR SECCIONES
 let li_micuenta = document.querySelectorAll('.li-micuenta');
@@ -47,3 +59,48 @@ if (li_micuenta) {
 		li_micuenta[i].addEventListener("click", funciones.micuentaActive)
 	}
 }
+
+
+//EMPEZAR CURSO
+let empezar_curso = document.querySelector('.empezar_curso');
+if (empezar_curso) {
+	empezar_curso.addEventListener('click', funciones.empezarCurso);
+}
+
+
+//REGISTRARSE AL EVENTO
+let registro_evento = document.querySelector('.registrarte_evento');
+if (registro_evento) {
+	registro_evento.addEventListener('click', funciones.registroEvento);
+}
+
+
+//ELIMINAR DE FAVORITOS
+let delete_fav = document.querySelectorAll('.delete_curso-fav');
+if (delete_fav) {
+	for (var i = 0; i <= delete_fav.length - 1; i++) {
+		delete_fav[i].addEventListener('click', function(e) {
+			funciones.eliminarCursoFav(e, "curso");
+		});
+	}
+}
+
+let delete_faveve = document.querySelectorAll('.delete_evento-fav');
+if (delete_faveve) {
+	for (var i = 0; i <= delete_faveve.length - 1; i++) {
+		delete_faveve[i].addEventListener('click', function(e) {
+			funciones.eliminarCursoFav(e, "evento");
+		});
+	}
+}
+
+
+//EDITAR DATOS DEL PERFIL DE USUARIO
+let btn_perfil = document.querySelector('.btn_perfil');
+if (btn_perfil) {
+	btn_perfil.addEventListener('click', funciones.editarPerfil);
+}
+
+
+
+
