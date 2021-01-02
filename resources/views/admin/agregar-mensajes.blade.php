@@ -19,16 +19,16 @@
     
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Crear nuevo Evento</h2>
+            <h2>Crear nuevo Mensaje</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="index.html">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a>Eventos</a>
+                    <a>Mensajes</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <strong>Crear nuevo evento</strong>
+                    <strong>Crear nuevo mensaje</strong>
                 </li>
             </ol>
         </div>
@@ -36,8 +36,8 @@
     </div>
 
 
-    @if (session()->has("status.newEvento"))
-        @if (session()->get("status.newEvento") == "error")
+    @if (session()->has("status.newMensaje"))
+        @if (session()->get("status.newMensaje") == "error")
             <div class="row justify-content-center">
                 <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
                     Ocurrio un error, intentelo más tarde.
@@ -47,10 +47,10 @@
                 </div>
             </div>
 
-        @elseif (session()->get("status.newEvento") == "success")
+        @elseif (session()->get("status.newMensaje") == "success")
             <div class="row justify-content-center">
                 <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
-                    Se creo la clase correctamente
+                    Se mando el mensaje correctamente
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -87,17 +87,19 @@
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>
                     </div>
-                    <form action="#" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-agregar_mensaje">
+                    <form action="{{ route('sendMensaje') }}" method="POST" accept-charset="UTF-8" name="frm-agregar_mensaje">
                         @csrf
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"> Usuarios: </label>
                             <div class="col-sm-10 mb-3">
-                                <select data-placeholder="Usuarios" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_instructores[]">
+                                <select data-placeholder="Usuarios" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_usuarios[]">
                                     @foreach($usuarios as $usuario)
-                                        <option value="{{ $usuario->id }}">
-                                            {{ $usuario->nombre }}
-                                        </option>    
+                                        @if ($usuario->tieneSuscripcion())
+                                            <option value="{{ $usuario->id }}">
+                                                {{ $usuario->nombre }}
+                                            </option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('select_instructores.*') !!} </span>
@@ -109,8 +111,8 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Mensaje: </label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="descripcion" rows="3">{{ old("descripcion") }}</textarea>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('descripcion') !!} </span>
+                                <textarea class="form-control" name="mensaje" rows="3">{{ old("mensaje") }}</textarea>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('mensaje') !!} </span>
                             </div>
                         </div>
 

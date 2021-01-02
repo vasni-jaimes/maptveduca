@@ -50,7 +50,7 @@
         @elseif (session()->get("status.updateEvento") == "success")
             <div class="row justify-content-center">
                 <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
-                    Se creo el evento correctamente
+                    Se actualizo el evento correctamente
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -153,7 +153,7 @@
 
                         <div class="hr-line-dashed"></div>
 
-                        <h2> Bienvenida a la Clase</h2>
+                        <h2> Bienvenida al evento</h2>
 
                         <div class="hr-line-dashed"></div>
 

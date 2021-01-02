@@ -142,11 +142,19 @@ if (frmAgregarEvento || frmEditarEvento) {
 
 //FORMULARIO INSTRUCTORES
 const frmAgregarInstructor = document.querySelector("form[name='frm-agregar_instructor']");
-if (frmAgregarInstructor) {
+const frmActualizarInstructor = document.querySelector("form[name='frm-editar_instructor']");
+if (frmAgregarInstructor || frmActualizarInstructor) {
 
 	if (frmAgregarInstructor) {
 		frmAgregarInstructor.addEventListener('submit', funciones.validarAgregarInstructor);
 		frmAgregarInstructor.addEventListener('input', funciones.validarAgregarInstructor);
+		$(document).change("input", funciones.validarAgregarInstructor);
+		$("select").change(funciones.validarAgregarInstructor);
+	}
+
+	if (frmActualizarInstructor) {
+		frmActualizarInstructor.addEventListener('submit', funciones.validarAgregarInstructor);
+		frmActualizarInstructor.addEventListener('input', funciones.validarAgregarInstructor);
 		$(document).change("input", funciones.validarAgregarInstructor);
 		$("select").change(funciones.validarAgregarInstructor);
 	}

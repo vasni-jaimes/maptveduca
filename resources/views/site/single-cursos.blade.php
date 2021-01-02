@@ -183,13 +183,17 @@
                         @elseif ( $validarSide == "sb#4" )
 
                             <div class="txt-sidebar">
-                                <div>
-                                    <p>¡Estás listo para comenzar!</p>
-                                    <p>Ahora podrás encontrar este curso en tu tablero personal para acceder rápidamente a él.</p>
-                                    <p>¿Qué sigue?</p>
-                                    <p>Recuerda ingresar al Aula Virtual de este curso cada semana para subir tus tareas y recibir retroalimentación de tu profesor.</p>
-                                    <p>Revisa tus calificaciones en el área de status del alumno.</p>
-                                </div>
+                                @if (!$miTablero)
+                                    <span><a href="#" class="empezar_curso" data-crs="{{ $curso->slug }}">Empezar curso</a></span>
+                                @else
+                                    <div>
+                                        <p>¡Estás listo para comenzar!</p>
+                                        <p>Ahora podrás encontrar este curso en tu tablero personal para acceder rápidamente a él.</p>
+                                        <p>¿Qué sigue?</p>
+                                        <p>Recuerda ingresar al Aula Virtual de este curso cada semana para subir tus tareas y recibir retroalimentación de tu profesor.</p>
+                                        <p>Revisa tus calificaciones en el área de status del alumno.</p>
+                                    </div>
+                                @endif
                             </div> <!-- /txt-sidebar -->
                         
                             @if (!$favorito)

@@ -42,8 +42,8 @@
                         <li>
                             <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Administradores</span> <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
-                                <li> <a href="#"> Lista de Administradores </a></li>
-                                <li> <a href="#"> Agregar Administrador </a></li>
+                                <li> <a href=""> Lista de Administradores </a></li>
+                                <li> <a href="{{ route('agregar-administrador.create') }}"> Agregar Administrador </a></li>
                             </ul>
                         </li>
                         <li>
@@ -90,7 +90,7 @@
                             <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Mensajes</span> <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                                 <li> <a href="#"> Lista de mensajes </a></li>
-                                <li> <a href="#"> Crear Mensaje </a></li>
+                                <li> <a href="{{ route('mandarMensaje') }}"> Crear Mensaje </a></li>
                             </ul>
                         </li>
                     </ul>

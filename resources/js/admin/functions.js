@@ -69,7 +69,7 @@ let funciones = {
 
 		swal({
 		  title: "¿Estas seguro?",
-		  text: "¿Quieres cambiar el estatus del curso?",
+		  text: "¿Quieres cambiar el estatus?",
 		  icon: "warning",
 		  buttons: true,
 		  dangerMode: true,
@@ -149,6 +149,8 @@ let funciones = {
 		let email = document.querySelector("input[name='email']");
 		let bibliografia = document.querySelector("textarea[name='bibliografia']");
 		let especialidad = document.querySelector("input[name='especialidad']");
+		let password = document.querySelector("input[name='password']");
+		let password_confirm = document.querySelector("input[name='password_confirmation']");
 		let img_instructor = document.querySelector("input[name='avatar']");
 
 		/* STATUS */
@@ -204,6 +206,23 @@ let funciones = {
 			bibliografia.parentNode.classList.add('has-error');
 			bibliografia.nextElementSibling.innerHTML = 'El campo es requerido';
 			error_videos = true;
+		}
+
+		if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
+
+			if (password.value == '') {
+				password.classList.add('campo-requerido');
+				validate = false;
+			}
+
+			if (password.value.length < 8) {
+				password.classList.add('campo-requerido');
+				validate = false;			
+			}
+
+			if (password.value !== password_confirm.value) {
+				password.classList.add('campo-requerido')
+			}
 		}
 
 		console.log(e.target.getAttribute('name'));

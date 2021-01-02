@@ -50,7 +50,7 @@
         @elseif (session()->get("status.updateClass") == "success")
             <div class="row justify-content-center">
                 <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
-                    Se creo la clase correctamente
+                    Se actualizo la clase correctamente
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

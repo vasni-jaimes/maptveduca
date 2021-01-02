@@ -21,6 +21,10 @@ Route::post('login', 'Admin\LoginController@login')->name('send.admin.login');
 Route::post('logout', 'Admin\LoginController@logout')->name('admin.logout');
 
 
+//ADMINISTRADORES
+Route::get('agregar-administrador', 'Admin\AministardoresController@create')->name('agregar-administrador.create');
+
+
 //USUARIOS
 Route::get('listado-usuarios', "Admin\UsersController@index")->name('listado-usuarios');
 
@@ -69,3 +73,4 @@ Route::post('editar-recomendaciones/{recom_id}', 'Admin\RecomendacionesControlle
 
 //MENSAJES
 Route::get('agregar-mensaje', 'Admin\MensajesController@mandarMensaje')->name('mandarMensaje');
+Route::post('agregar-mensaje', 'Admin\MensajesController@sendMensaje')->name('sendMensaje');

@@ -10,6 +10,7 @@ use App\Http\Requests\ValidarAgregarInstructor;
 use App\Http\Requests\ValidarEditarInstructor;
 use Illuminate\Support\Facades\Validator;
 use App\Instructor;
+use App\Administrator;
 use DB;
 
 class InstructoresController extends Controller
@@ -132,8 +133,23 @@ class InstructoresController extends Controller
         $instructor->status  = $status;
 
         if ($instructor->save()) {
-            DB::commit();
-            return response()->json(["message" => "ok"]);
+
+            $admin = Administrator::where('instructor_id', $instructor->id)->first();
+            if ($admin) {
+                $admin->status = $status;
+
+                if ($admin->save()) {
+                    DB::commit();
+                    return response()->json(["message" => "ok"]);
+                }
+
+                DB::rollback();
+                return response()->json(["message" => "error"]);
+            }
+            
+            DB::rollback();
+            return response()->json(["message" => "error"]);
+            
         }
 
         DB::rollback();

@@ -12,6 +12,7 @@ use App\Recomendacion;
 use App\TableroCursos;
 use App\TableroEventos;
 use App\User;
+use App\Mensaje;
 use Carbon\Carbon;
 use DB;
 
@@ -94,7 +95,9 @@ class UsersController extends Controller
                             ->where('fecha_lanzamiento', '<=', $hoy)
                             ->get();
 
-    	return view('site.micuenta', compact("favoritosCursos", "favoritosEventos", "favoritosClases", "materias", "tableroCursos", "tableroEventos", "eventosOld", "tituloTrimestre"));
+        $mensajes = Mensaje::where('user_id', auth()->user()->id)->get();
+
+    	return view('site.micuenta', compact("favoritosCursos", "favoritosEventos", "favoritosClases", "materias", "tableroCursos", "tableroEventos", "eventosOld", "tituloTrimestre", "mensajes"));
     }
 
 

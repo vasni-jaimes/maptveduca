@@ -147,6 +147,22 @@
                                 </ul>
                                 
                                 <div class="s-tab tab-1">
+                                    @forelse($mensajes as $mensaje)
+                                        <div class="item-inbox">
+                                            <span>25/Junio/ 2020 18:00 hrs</span>
+                                            <div class="item-mensaje">
+                                                <div class="txt-mensaje">
+                                                    <p><strong>De:</strong> MAPtv Educa </p>
+                                                    <p><strong>Mensaje:</strong></p>
+                                                    <p>{{ $mensaje->mensaje }}</p>
+                                                    <p>¡Bienvenido!</p>
+                                                </div> <!-- /txt-mensaje -->
+                                                <a href="javascript:void(0)">Ver mensaje completo</a>
+                                            </div> <!-- /item-mensaje -->
+                                        </div> <!-- /item-inbox -->
+                                    @empty
+                                        <p> No hay mensajes </p>
+                                    @endforelse
                                     <div class="item-inbox">
                                         <span>25/Junio/ 2020 18:00 hrs</span>
                                         <div class="item-mensaje">
@@ -414,9 +430,9 @@
                             <div class="row-favoritos">
                                 <p>AQUÍ ENCONTRARÁS TUS CURSOS EN PROGRESO.</p>
                                 <div class="flex-cursos">
-                                    @if ($tableroCursos->count() > 0 || $materias->count() > 0)
+                                    @if ($tableroCursos->count() > 0)
                                         <ul class="flex between wrap">
-                                            @foreach($materias as $materia)
+                                            {{-- @foreach($materias as $materia)
                                                 <li class="col-3">
                                                     <a href="{{ route('single-cursos.show', $materia->cursos->slug) }}">
                                                         <img src="{{ Storage::url($materia->cursos->url_img) }}">
@@ -425,7 +441,7 @@
                                                         </div> <!-- /txt-clase -->
                                                     </a>
                                                 </li>
-                                            @endforeach
+                                            @endforeach --}}
 
                                             @foreach($tableroCursos as $curso)
                                                 <li class="col-3">

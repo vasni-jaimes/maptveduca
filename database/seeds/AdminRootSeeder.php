@@ -20,6 +20,7 @@ class AdminRootSeeder extends Seeder
     		"amaterno" => "Lopez",
             "fecha_nacimiento" => "18-07-1992",
     		"email" => "baster07mi@gmail.com",
+            "rol_id" => 1,
     		"password" => bcrypt("slaner506"),
     	]);
 

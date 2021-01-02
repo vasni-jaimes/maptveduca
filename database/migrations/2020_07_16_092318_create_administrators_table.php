@@ -19,9 +19,11 @@ class CreateAdministratorsTable extends Migration
             $table->string('email')->unique();
             $table->string('amaterno');
             $table->string('apaterno');
-            $table->string('fecha_nacimiento');
+            $table->string('fecha_nacimiento')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('rol_id');
+            $table->integer('instructor_id')->nullable();
             $table->boolean("status")->default(1);
             $table->rememberToken();
             $table->timestamps();

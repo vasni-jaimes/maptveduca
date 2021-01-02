@@ -38,6 +38,7 @@ class ValidarEditarInstructor extends FormRequest
             "email"                 => "required|string|min:4|max:255|email|unique:instructors,email,".$this->helper::base64_decode_url(request('instructor_id')).",id",
             "especialidad"          => "required|string|min:4|max:255",
             "bibliografia"          => "required|string|min:6",
+            "password"              => "nullable|string|min:8|confirmed",
             "avatar"                => "nullable|mimes:jpeg,png,jpg",
         ];
     }
