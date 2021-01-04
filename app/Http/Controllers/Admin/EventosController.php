@@ -11,6 +11,7 @@ use App\Helpers\Helper;
 use App\Instructor;
 use App\Evento;
 use App\TipoEventos;
+use App\Notificacion;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -135,11 +136,20 @@ class EventosController extends Controller
         $evento->status = $status;
 
         if ($evento->save()) {
+            $this->sendNotificaciones($evento);
             DB::commit();
             return response()->json(["message" => "ok"]);
         }
 
         DB::rollback();
         return response()->json(["message" => "error"]);
+    }
+
+    protected function sendNotificaciones($evento)
+    {
+        $notificacion = new Notificacion();
+        $notificacion->user_id = 0;
+        $notificacion->mensaje = "Se Creeo contenido nuevo, <br> Actualmente se genero un curso nuevo y para verlo solo hay que darle click: <a href='".route("single-cursos.show", $evento->slug)."' target='_blank'>".$evento->nombre."</a>";
+        $notificacion->save();
     }
 }

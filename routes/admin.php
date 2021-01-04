@@ -74,3 +74,4 @@ Route::post('editar-recomendaciones/{recom_id}', 'Admin\RecomendacionesControlle
 //MENSAJES
 Route::get('agregar-mensaje', 'Admin\MensajesController@mandarMensaje')->name('mandarMensaje');
 Route::post('agregar-mensaje', 'Admin\MensajesController@sendMensaje')->name('sendMensaje');
+Route::post('buscar-alumnos', 'Admin\MensajesController@searchAlumnos')->name('searchAlumnos');

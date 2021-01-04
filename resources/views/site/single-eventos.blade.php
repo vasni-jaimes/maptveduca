@@ -130,7 +130,7 @@
                                 <div>
                                     <p>Este es un evento especial, por lo que tiene un costo adicional a las membresías</p>
                                     <hr class="b-bottom">
-                                    <p>$50.00 MXN (único pago)</p>
+                                    <p>${{ $evento->FormatPrecio($evento->precio) }} MXN (único pago)</p>
                                     <a href="#">Pagar</a>
                                 </div>
                             </div>

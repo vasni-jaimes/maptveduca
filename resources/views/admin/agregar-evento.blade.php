@@ -112,7 +112,7 @@
                                     @foreach($instructores as $instructor)
                                         <option value="{{ $instructor->id }}" 
                                             @if(is_array(old('select_instructores')) && in_array($instructor->id, old('select_instructores'))) selected @endif>
-                                            {{ $instructor->nombres }}
+                                            {{ $instructor->nombres." ".$instructor->apellidos }}
                                         </option>    
                                     @endforeach
                                 </select>
@@ -139,6 +139,14 @@
                             <label class="col-sm-2 col-form-label">Evento especial: </label>
                             <div class="i-checks col-sm-10">
                                 <label> <input type="checkbox" value="1" name="evento_especial" @if(old("evento_especial") == 1) checked @endif> <i></i></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" style="display: none;">
+                            <label class="col-sm-2 col-form-label">Precio: </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="precio" value="{{ old("precio") }}">
+                                <span class='form-text m-b-none errors'> {!! $errors->first('precio') !!} </span>
                             </div>
                         </div>
 
@@ -181,34 +189,6 @@
 
 
                         <div class="hr-line-dashed"></div>
-
-                        {{-- <div class="eventos_one">
-
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">URL Zoom: </label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="url_zoom" value="{{ old("url_zoom") }}">
-                                    <span class='form-text m-b-none errors'> {!! $errors->first('url_zoom') !!} </span>
-                                </div>
-                            </div>
-
-
-                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">ID de Reunión: </label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="id_reunion" value="{{ old("id_reunion") }}">
-                                    <span class='form-text m-b-none errors'> {!! $errors->first('id_reunion') !!} </span>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Codigo de acceso: </label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="codigo_acceso" value="{{ old("codigo_acceso") }}">
-                                    <span class='form-text m-b-none errors'> {!! $errors->first('codigo_acceso') !!} </span>
-                                </div>
-                            </div>
-                        </div> --}}
 
                         <div class="eventos_two">
 
@@ -266,6 +246,17 @@
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
             });
+
+            $(".i-checks input").on('ifChanged', function (e) {
+                if (e.target.checked == true) {
+                    $('input[name="precio"]').parent().parent().css('display', 'flex');
+                }
+                else {
+                    $('input[name="precio"]').parent().parent().css('display', 'none');
+                }
+            });
+
+
             $('.chosen-select').chosen({width: "100%"});
             $('.custom-file-input').on('change', function() {
                 let fileName = $(this).val().split('\\').pop();

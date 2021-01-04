@@ -13,6 +13,8 @@ use App\TableroCursos;
 use App\TableroEventos;
 use App\User;
 use App\Mensaje;
+use App\UsuarioMembresia;
+use App\Notificacion;
 use Carbon\Carbon;
 use DB;
 
@@ -61,10 +63,11 @@ class UsersController extends Controller
     							->where('user_id', auth()->user()->id)
     							->where('clase_id', '!=', null)->get();
 
+        /* RECIMENDACIONES */
         $materias        = $this->cursosPorTrimestre();
         $tituloTrimestre = $this->tituloPorTrimestre();
 
-        /* CURSOS */
+        /* TABLERO CURSOS */
 
         $tableroCursos = DB::table('tablero_cursos')
                             ->join('courses', 'tablero_cursos.curso_id', 'courses.id')
@@ -73,7 +76,7 @@ class UsersController extends Controller
                             ->where('tablero_cursos.user_id', auth()->user()->id)
                             ->get();
 
-        /* EVENTOS */
+        /* TABLERO EVENTOS */
 
             //FECHA DE HOY
             date_default_timezone_set('America/Mexico_City');
@@ -95,9 +98,16 @@ class UsersController extends Controller
                             ->where('fecha_lanzamiento', '<=', $hoy)
                             ->get();
 
-        $mensajes = Mensaje::where('user_id', auth()->user()->id)->get();
+        /* MENSAJES */
+        $mensajes = Mensaje::with(['admin'])->where('user_id', auth()->user()->id)->get();
 
-    	return view('site.micuenta', compact("favoritosCursos", "favoritosEventos", "favoritosClases", "materias", "tableroCursos", "tableroEventos", "eventosOld", "tituloTrimestre", "mensajes"));
+        /* HISTORIAL DE PAGOS */
+        $pagos = UsuarioMembresia::with(['membresia', 'evento', 'curso'])->get();
+
+        /* NOTIFICACIONES */
+        $notificaciones = Notificacion::where('user_id', auth()->user()->id)->where('user_id', 0)->get();
+
+    	return view('site.micuenta', compact("favoritosCursos", "favoritosEventos", "favoritosClases", "materias", "tableroCursos", "tableroEventos", "eventosOld", "tituloTrimestre", "mensajes", "pagos", "notificaciones"));
     }
 
 

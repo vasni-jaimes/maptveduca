@@ -18,7 +18,7 @@ class AdminRootSeeder extends Seeder
     		"nombre" => "Vasni",
             "apaterno" => "Jaimes",
     		"amaterno" => "Lopez",
-            "fecha_nacimiento" => "18-07-1992",
+            "fecha_nacimiento" => "1992-07-18",
     		"email" => "baster07mi@gmail.com",
             "rol_id" => 1,
     		"password" => bcrypt("slaner506"),

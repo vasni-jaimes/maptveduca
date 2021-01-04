@@ -263,4 +263,27 @@ if (tabla_instructores) {
 	}
 }
 
+//VALIDAR QUE EL PRECIO SOLO TENGA NUMEROS
+const precio = document.querySelector('input[name="precio"]');
+if (precio) {
+    precio.addEventListener('input', function(e) {
+    	e.target.value = funciones.format(e.target.value);
+    });
+}
+
+//CAMBIAR LOS ALUMNOS POR CURSO
+const curso = document.querySelector('select[name="select_cursos"]');
+if (curso) {
+	curso.addEventListener('change', funciones.obtenerAlumnosxCurso);
+}
+
+//VALIDAR AL MOMENTO DE ENVIAR UN MENSAJE
+const formSendMensajes = document.querySelector('form[name="frm-agregar_mensaje"]');
+if (formSendMensajes) {
+	formSendMensajes.addEventListener('submit', funciones.validarMensajes);
+	formSendMensajes.addEventListener('input', funciones.validarMensajes);
+	$(document).change("input", funciones.validarMensajes);
+	$("select").change(funciones.validarMensajes);
+}
+
 

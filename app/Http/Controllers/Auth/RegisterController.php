@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Mensaje;
 
 class RegisterController extends Controller
 {
@@ -73,13 +74,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'nombre' => $data['nombre'],
-            'email' => $data['email'],
-            'apaterno' => $data['apaterno'],
-            'amaterno' => $data['amaterno'],
-            'fecha_nacimiento' => $data['fecha_nacimiento'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $usr = User::create([
+                    'nombre' => $data['nombre'],
+                    'email' => $data['email'],
+                    'apaterno' => $data['apaterno'],
+                    'amaterno' => $data['amaterno'],
+                    'fecha_nacimiento' => $data['fecha_nacimiento'],
+                    'password' => Hash::make($data['password']),
+                ]);
+
+        if ($usr) {
+            $this->sendMensajeBienvenida($usr);
+            return true;
+        }
+
+        return false;
+    }
+
+
+    protected function sendMensajeBienvenida($usr)
+    {
+        $mensaje = new Mensaje();
+        $mensaje->admin_id = 1
+        $mensaje->user_id = $usr->id;
+        $mensaje->mensaje = "<strong>Hola ".$usr->nombre." ".$usr->apaterno."</strong>";
+        $mensaje->mensaje .= "<br> Bienvenid@ a nuesta plataforma, esperemos que te agrade y puedas obtener una suscripcion pronto.";
+        $mensaje->save();
     }
 }

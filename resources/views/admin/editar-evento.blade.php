@@ -118,7 +118,7 @@
                                     @foreach($instructors as $instructor)
                                         <option value="{{ $instructor->id }}" 
                                             @if(in_array($instructor->id, old('select_instructores', $myInstructors))) selected @endif>
-                                            {{ $instructor->nombres }}
+                                            {{ $instructor->nombres." ".$instructor->apellidos }}
                                         </option>    
                                     @endforeach
                                 </select>
@@ -147,6 +147,14 @@
                             <label class="col-sm-2 col-form-label">Evento especial: </label>
                             <div class="i-checks col-sm-10">
                                 <label> <input type="checkbox" value="1" name="evento_especial" @if(old("evento_especial", $evento->especial) == 1) checked @endif> <i></i></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Precio: </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="precio" value="{{ old("precio") }}">
+                                <span class='form-text m-b-none errors'> {!! $errors->first('precio') !!} </span>
                             </div>
                         </div>
 
@@ -190,36 +198,15 @@
 
                         <div class="hr-line-dashed"></div>
 
-
-                        {{-- <div class="eventos_one" style="{{ ( $evento->tipo_evento_id == 1 ) ? "display: block" : "display: none" }}">
-
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">URL Zoom: </label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="url_zoom" value="{{ old("url_zoom", $evento->url_zoom) }}">
-                                    <span class='form-text m-b-none errors'> {!! $errors->first('url_zoom') !!} </span>
-                                </div>
-                            </div>
-
-
-                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">ID de Reunión: </label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="id_reunion" value="{{ old("id_reunion", $evento->id_reunion) }}">
-                                    <span class='form-text m-b-none errors'> {!! $errors->first('id_reunion') !!} </span>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Codigo de acceso: </label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="codigo_acceso" value="{{ old("codigo_acceso", $evento->codigo_acceso) }}">
-                                    <span class='form-text m-b-none errors'> {!! $errors->first('codigo_acceso') !!} </span>
-                                </div>
-                            </div>
-                        </div> --}}
-
                         <div class="eventos_two">
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Precio: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="precio" value="{{ old("precio") }}">
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('precio') !!} </span>
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">URL video: </label>

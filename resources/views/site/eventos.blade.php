@@ -56,7 +56,6 @@
                     <h3>Clínicas</h3>
                     
                     <ul class="flex between wrap">
-
                         @foreach($eventos as $evento)
                             @if ($evento->tipo_evento_id == 1)
                                 <li class="col-3">
@@ -64,7 +63,7 @@
                                         <img src="{{ Storage::url($evento->img_evento) }}">
                                         <div class="txt-clase">
                                             <h4>{{ $evento->nombre }}</h4>
-                                            <p>PONENTE</p>
+                                            <p>{{ $evento->instructor[0]->nombres.' '.$evento->instructor[0]->apellidos }}</p>
                                             <span> {{ $evento->FormatoLetras($evento->fecha_lanzamiento, 1) }} </span>
                                             <span>CLÍNICA BÁSICA</span>
                                         </div> <!-- /txt-clase -->
@@ -72,43 +71,6 @@
                                 </li>
                             @endif
                         @endforeach
-
-                        {{-- <li class="col-3">
-                            <img src="/site/img/fulano.jpg">
-                            <div class="txt-clase">
-                                <h4>CLÍNICA 1</h4>
-                                <p>PONENTE</p>
-                                <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                <span>CLÍNICA BÁSICA</span>
-                            </div> <!-- /txt-clase -->
-                        </li>
-                        <li class="col-3">
-                            <img src="/site/img/fulano.jpg">
-                            <div class="txt-clase">
-                                <h4>CLÍNICA 1</h4>
-                                <p>PONENTE</p>
-                                <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                <span>CLÍNICA BÁSICA</span>
-                            </div> <!-- /txt-clase -->
-                        </li>
-                        <li class="col-3">
-                            <img src="/site/img/fulano.jpg">
-                            <div class="txt-clase">
-                                <h4>CLÍNICA 1</h4>
-                                <p>PONENTE</p>
-                                <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                <span>CLÍNICA BÁSICA</span>
-                            </div> <!-- /txt-clase -->
-                        </li>
-                        <li class="col-3">
-                            <img src="/site/img/fulano.jpg">
-                            <div class="txt-clase">
-                                <h4>CLÍNICA 1</h4>
-                                <p>PONENTE</p>
-                                <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                <span>CLÍNICA BÁSICA</span>
-                            </div> <!-- /txt-clase -->
-                        </li> --}}
                     </ul> <!-- /flex -->
                 </div> <!-- /wrapper-clases -->
             @endif
@@ -119,7 +81,6 @@
                     <h3>Conciertos/Masterclass</h3>
                     
                     <ul class="flex between wrap">
-
                         @foreach($eventos as $evento)
                             @if ($evento->tipo_evento_id == 2)
                                 <li class="col-3">
@@ -127,7 +88,7 @@
                                         <img src="{{ Storage::url($evento->img_evento) }}">
                                         <div class="txt-clase">
                                             <h4>{{ $evento->nombre }}</h4>
-                                            <p>PONENTE</p>
+                                            <p>{{ $evento->instructor[0]->nombres.' '.$evento->instructor[0]->apellidos }}</p>
                                             <span> {{ $evento->FormatoLetras($evento->fecha_lanzamiento, 1) }} </span>
                                             <span>CLÍNICA BÁSICA</span>
                                         </div> <!-- /txt-clase -->
@@ -135,43 +96,6 @@
                                 </li>
                             @endif
                         @endforeach
-
-                        {{-- <li class="col-3">
-                            <img src="/site/img/fulano.jpg">
-                            <div class="txt-clase">
-                                <h4>CONCIERTO / MASTERCLASS</h4>
-                                <p>PONENTE</p>
-                                <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                <span>CLÍNICA BÁSICA</span>
-                            </div> <!-- /txt-clase -->
-                        </li>
-                        <li class="col-3">
-                            <img src="/site/img/fulano.jpg">
-                            <div class="txt-clase">
-                                <h4>CONCIERTO / MASTERCLASS</h4>
-                                <p>PONENTE</p>
-                                <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                <span>CLÍNICA BÁSICA</span>
-                            </div> <!-- /txt-clase -->
-                        </li>
-                        <li class="col-3">
-                            <img src="/site/img/fulano.jpg">
-                            <div class="txt-clase">
-                                <h4>CONCIERTO / MASTERCLASS</h4>
-                                <p>PONENTE</p>
-                                <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                <span>CLÍNICA BÁSICA</span>
-                            </div> <!-- /txt-clase -->
-                        </li>
-                        <li class="col-3">
-                            <img src="/site/img/fulano.jpg">
-                            <div class="txt-clase">
-                                <h4>CONCIERTO / MASTERCLASS</h4>
-                                <p>PONENTE</p>
-                                <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                <span>CLÍNICA BÁSICA</span>
-                            </div> <!-- /txt-clase -->
-                        </li> --}}
                     </ul> <!-- /flex -->
                 </div> <!-- /wrapper-clases -->
             @endif
@@ -192,8 +116,8 @@
                                             <img src="{{ Storage::url($archivado->img_evento) }}">
                                             <div class="txt-clase">
                                                 <h4>{{ $archivado->nombre }}</h4>
-                                                <p>PONENTE</p>
-                                                <span> {{ $archivado->FormatoLetras($archivado->fecha_lanzamiento, 1) }} </span>
+                                                <p>{{ $archivado->instructor[0]->nombres.' '.$archivado->instructor[0]->apellidos }}</p>
+                                                <span> {{ $archivado->FormatoLetras($archivado->fecha_lanzamiento, 0) }} </span>
                                                 <span>CLÍNICA BÁSICA</span>
                                             </div> <!-- /txt-clase -->
                                         </li>
@@ -213,57 +137,12 @@
                                             <img src="{{ Storage::url($archivado->img_evento) }}">
                                             <div class="txt-clase">
                                                 <h4>{{ $archivado->nombre }}</h4>
-                                                <p>PONENTE</p>
-                                                <span> {{ $archivado->FormatoLetras($archivado->fecha_lanzamiento, 1) }} </span>
+                                                <p>{{ $archivado->instructor[0]->nombres.' '.$archivado->instructor[0]->apellidos }}</p>
+                                                <span> {{ $archivado->FormatoLetras($archivado->fecha_lanzamiento, 0) }} </span>
                                                 <span>CLÍNICA BÁSICA</span>
                                             </div> <!-- /txt-clase -->
                                         </li>
                                     @endforeach
-                                    {{-- <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <h4>CONCIERTO / MASTERCLASS</h4>
-                                            <p>PONENTE</p>
-                                            <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                            <span>CLÍNICA BÁSICA</span>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <h4>CONCIERTO / MASTERCLASS</h4>
-                                            <p>PONENTE</p>
-                                            <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                            <span>CLÍNICA BÁSICA</span>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <h4>CONCIERTO / MASTERCLASS</h4>
-                                            <p>PONENTE</p>
-                                            <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                            <span>CLÍNICA BÁSICA</span>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <h4>CONCIERTO / MASTERCLASS</h4>
-                                            <p>PONENTE</p>
-                                            <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                            <span>CLÍNICA BÁSICA</span>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <h4>CONCIERTO / MASTERCLASS</h4>
-                                            <p>PONENTE</p>
-                                            <span>LUNES · 00 JUNIO  · 18:00 HRS</span>
-                                            <span>CLÍNICA BÁSICA</span>
-                                        </div> <!-- /txt-clase -->
-                                    </li> --}}
                                 </ul>
                             </div> <!-- /item-slide -->
                         </div> <!-- /bloque-slide -->

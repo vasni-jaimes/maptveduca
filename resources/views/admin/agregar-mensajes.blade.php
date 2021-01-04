@@ -90,19 +90,39 @@
                     <form action="{{ route('sendMensaje') }}" method="POST" accept-charset="UTF-8" name="frm-agregar_mensaje">
                         @csrf
 
+
+                        @if ($cursos)
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Cursos: </label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" name="select_cursos">
+                                        <option value="">Cursos</option>
+                                        @forelse($cursos as $curso)
+                                            <option value="{{ $curso->id }}"> {{ $curso->nombre }} </option>
+                                        @empty
+                                            <option value=""> No se encontraron resultados </option>
+                                        @endforelse
+                                    </select>
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('select_cursos') !!} </span>
+                                </div>
+                            </div>
+
+                        @endif
+
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"> Usuarios: </label>
-                            <div class="col-sm-10 mb-3">
+                            <div class="col-sm-10 mb-3 sub-usuarios">
                                 <select data-placeholder="Usuarios" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_usuarios[]">
                                     @foreach($usuarios as $usuario)
                                         @if ($usuario->tieneSuscripcion())
                                             <option value="{{ $usuario->id }}">
-                                                {{ $usuario->nombre }}
+                                                {{ $usuario->nombre.' '. $usuario->apaterno.' '.$usuario->amaterno }}
                                             </option>
                                         @endif
                                     @endforeach
                                 </select>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('select_instructores.*') !!} </span>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_usuarios.*') !!} </span>
                             </div>
                         </div>
 

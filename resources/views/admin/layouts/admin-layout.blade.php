@@ -23,7 +23,11 @@
                                 <img alt="image" class="rounded-circle" src="/admini/img/user-photo.png" width="40px" height="40px" />
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                     <span class="block m-t-xs font-bold"> {{ Auth::guard('admins')->user()->nombre }} </span>
-                                    <span class="text-muted text-xs block">Administrador <b class="caret"></b></span>
+                                    @if (Auth::guard('admins')->user()->id == 1)
+                                        <span class="text-muted text-xs block">Administrador <b class="caret"></b></span>
+                                    @else
+                                        <span class="text-muted text-xs block">Maestr@ <b class="caret"></b></span>
+                                    @endif
                                 </a>
                                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                     <li><a class="dropdown-item" href="profile.html">Perfil</a></li>
@@ -39,53 +43,55 @@
                                 MTv
                             </div>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Administradores</span> <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li> <a href=""> Lista de Administradores </a></li>
-                                <li> <a href="{{ route('agregar-administrador.create') }}"> Agregar Administrador </a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Usuarios</span> <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li> <a href="{{ route("listado-usuarios") }}"> Lista de Usuarios </a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Instructores</span> <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li> <a href="{{ route("listado-instructores.index") }}"> Lista de  Instructores </a></li>
-                                <li> <a href="{{ route("agregar-instructor.create") }}"> Agregar Instructor </a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-tv"></i> <span class="nav-label">Cursos</span> <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li> <a href="{{ route('agregar-curso.index') }}"> Lista de Cursos </a></li>
-                                <li> <a href="{{ route('agregar-curso.create') }}"> Agregar Cursos </a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-university"></i> <span class="nav-label">Clases en linea</span> <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li> <a href="{{ route('listado-clases.index') }}"> Lista de clases </a></li>
-                                <li> <a href="{{ route('agregar-clase.create') }}"> Agregar clase </a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Eventos</span> <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li> <a href="{{ route("listado-eventos.index") }}"> Lista de Eventos </a></li>
-                                <li> <a href="{{ route('agregar-evento.create') }}"> Agregar Evento </a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Recomendaciones</span> <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li> <a href="{{ route("lista-recomendaciones.index") }}"> Lista de recomendaciones </a></li>
-                            </ul>
-                        </li>
+                        @if (Auth::guard('admins')->user()->id == 1)
+                            <li>
+                                <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Administradores</span> <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href=""> Lista de Administradores </a></li>
+                                    <li> <a href="{{ route('agregar-administrador.create') }}"> Agregar Administrador </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Usuarios</span> <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="{{ route("listado-usuarios") }}"> Lista de Usuarios </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Instructores</span> <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="{{ route("listado-instructores.index") }}"> Lista de  Instructores </a></li>
+                                    <li> <a href="{{ route("agregar-instructor.create") }}"> Agregar Instructor </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-tv"></i> <span class="nav-label">Cursos</span> <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="{{ route('agregar-curso.index') }}"> Lista de Cursos </a></li>
+                                    <li> <a href="{{ route('agregar-curso.create') }}"> Agregar Cursos </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-university"></i> <span class="nav-label">Clases en linea</span> <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="{{ route('listado-clases.index') }}"> Lista de clases </a></li>
+                                    <li> <a href="{{ route('agregar-clase.create') }}"> Agregar clase </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Eventos</span> <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="{{ route("listado-eventos.index") }}"> Lista de Eventos </a></li>
+                                    <li> <a href="{{ route('agregar-evento.create') }}"> Agregar Evento </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Recomendaciones</span> <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="{{ route("lista-recomendaciones.index") }}"> Lista de recomendaciones </a></li>
+                                </ul>
+                            </li>
+                        @endif
                         <li>
                             <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Mensajes</span> <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">

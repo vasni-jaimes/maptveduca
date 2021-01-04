@@ -3,6 +3,117 @@
 
 let funciones = {
 
+	validarMensajes: function(e) {
+		e.preventDefault();
+		mensaje = document.querySelector('textarea[name="mensaje"]');
+
+		/* STATUS */
+		let error_videos = false;
+
+		//SE ELIMINAN LOS RASTROS DE ERRORES
+		document.querySelectorAll('.errors').forEach(function(item) {
+			item.innerHTML = '';
+		});
+
+		if (document.querySelector('.has-error')) {
+			document.querySelectorAll('.has-error').forEach((item) => {
+				item.classList.remove('has-error');
+			});
+		}
+		//SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+
+		if (mensaje.value == '') {
+			mensaje.parentNode.classList.add('has-error');
+			mensaje.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+
+		if (error_videos == true) {
+			if (e.type == 'submit') {
+				let posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+				window.scrollTo(0, posicion);
+			}
+
+			return false;
+		}
+
+		if (e.type == 'submit') {
+			e.target.disabled = true;
+	        document.querySelector('.ibox-content').classList.add('sk-loading');
+        	document.querySelector("form[name='frm-agregar_mensaje']").submit();
+        	return false;
+	    }
+	},
+
+	obtenerAlumnosxCurso: function(e) {
+		e.preventDefault();
+
+
+		let curso_id = e.target.value;
+		let token = document.querySelector("input[name='_token']").value;
+
+		if (curso_id) {
+
+			let opciones = {
+	            method: "POST",
+	            credentials: "same-origin",
+	            body: JSON.stringify({"curso_id": curso_id, "_token": token}),
+	            headers:{
+	                "Content-Type": "application/json"
+	            }
+	        };
+
+
+	        fetch('/admin/buscar-alumnos', opciones)
+	            .then(response => response.json())
+	            .then(res => {
+	            	if (res.message == 'ok') {
+	            		let options = '<select data-placeholder="Usuarios" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_usuarios[]">';
+	            		res.items.forEach( function(item) { 
+	            			options += "<option value="+item.id+">"+item.nombre+' '+item.apaterno+' '+item.amaterno+"</option>";
+	            		});
+
+	            		options += "</select>";
+
+	            		document.querySelector('.sub-usuarios').innerHTML = options;
+	            		$('.chosen-select').chosen({width: "100%"});
+				        $('.custom-file-input').on('change', function() {
+				            let fileName = $(this).val().split('\\').pop();
+				            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+				        });
+	            	}
+	            	else {
+	            		swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+	            	}
+	            });
+		}
+
+	},
+
+	format: function(num) {
+
+	    var str = num.toString().replace("$", ""), parts = false, output = [], i = 1, formatted = null;
+	    if(str.indexOf(".") > 0) {
+	        parts = str.split(".");
+	        str = parts[0];
+	    }
+	    str = str.split("").reverse();
+	    for(var j = 0, len = str.length; j < len; j++) {
+	        if(str[j] != ",") {
+	            output.push(str[j]);
+	            if(i%3 == 0 && j < (len - 1)) {
+	                output.push(",");
+	            }
+	            i++;
+	        }
+	    }
+	    formatted = output.reverse().join("");
+	    return(formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
+	    //return("$" + formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
+	},
+
 	cambiarTipoEvento: function(e) {
 		e.preventDefault();
 
@@ -267,6 +378,8 @@ let funciones = {
 		let descripcion = document.querySelector("textarea[name='descripcion']");
 		let fecha_inicio = document.querySelector("input[name='fecha_inicio']");
 		let hora_inicio = document.querySelector("input[name='hora_inicio']");
+		let evento_especial = document.querySelector("input[name='evento_especial']");
+		let precio = document.querySelector("input[name='precio']");
 		let url_video = document.querySelector("input[name='url_video']");
 
 
@@ -342,6 +455,14 @@ let funciones = {
 			error_videos = true;
 			hora_inicio.parentNode.classList.add('has-error');
 			hora_inicio.nextElementSibling.innerHTML = 'El campo es requerido';
+		}
+
+		if (evento_especial.checked == true) {
+			if (precio.value == '') {
+				error_videos = true;
+				precio.parentNode.classList.add('has-error');
+				precio.nextElementSibling.innerHTML = 'El campo es requerido';
+			}
 		}
 
 		if (url_video.value == '') {

@@ -24,10 +24,7 @@ class CreateEventosTable extends Migration
             $table->text("descripcion");
             $table->dateTime("fecha_lanzamiento");
             $table->text("video_evento")->nullable();
-
-            $table->text("url_zoom")->nullable();
-            $table->text("id_reunion")->nullable();
-            $table->text("codigo_acceso")->nullable();
+            $table->double('precio', 12, 2)->nullable();
 
             $table->boolean("status")->default(0);
             $table->timestamps();

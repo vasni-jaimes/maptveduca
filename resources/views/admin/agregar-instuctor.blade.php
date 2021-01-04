@@ -133,7 +133,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Password: </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="password"> 
+                                <input type="password" class="form-control" name="password"> 
                                 <span class='form-text m-b-none errors'> {!! $errors->first('password') !!} </span>
                             </div>
                         </div>
@@ -141,7 +141,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Confirmar Password: </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="password_confirmation"> 
+                                <input type="password" class="form-control" name="password_confirmation"> 
                                 <span class='form-text m-b-none errors'> {!! $errors->first('password_confirmation') !!} </span>
                             </div>
                         </div>

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\Category;
 use App\Instructor;
 use App\Clase;
+use App\Notificacion;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -137,11 +138,20 @@ class ClasesController extends Controller
         $clase->status = $status;
 
         if ($clase->save()) {
+            $this->sendNotificaciones($clase);
             DB::commit();
             return response()->json(["message" => "ok"]);
         }
 
         DB::rollback();
         return response()->json(["message" => "error"]);
+    }
+
+    protected function sendNotificaciones($clase)
+    {
+        $notificacion = new Notificacion();
+        $notificacion->user_id = 0;
+        $notificacion->mensaje = "Se Creeo contenido nuevo, <br> Actualmente se genero un curso nuevo y para verlo solo hay que darle click: <a href='".route("single-cursos.show", $clase->slug)."' target='_blank'>".$clase->nombre."</a>";
+        $notificacion->save();
     }
 }

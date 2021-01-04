@@ -24,9 +24,10 @@ class ValidarMensajes extends FormRequest
     public function rules()
     {
         return [
-            "select_usuarios" => "required|array",
-            "select_usuarios.*" => "required|integer",
-            "mensaje" => "required",
+            "select_cursos"     => "nullable|integer",
+            "select_usuarios"   => "nullable|array",
+            "select_usuarios.*" => "nullable|integer",
+            "mensaje"           => "required",
         ];
     }
 }

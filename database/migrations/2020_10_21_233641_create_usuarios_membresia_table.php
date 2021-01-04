@@ -16,10 +16,12 @@ class CreateUsuariosMembresiaTable extends Migration
         Schema::create('usuarios_membresia', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('membresia_id');
+            $table->integer('membresia_id')->nullable();
             $table->integer('carrera_id')->nullable();
+            $table->integer('evento_id')->nullable();
+            $table->integer('clase_id')->nullable();
             $table->date('fehca_inicio');
-            $table->date('fecha_fin');
+            $table->date('fecha_fin')->nullable();
             $table->timestamps();
         });
     }

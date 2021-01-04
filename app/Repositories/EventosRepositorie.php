@@ -27,19 +27,9 @@ class EventosRepositorie
         $evento->tipo_evento_id     = $request->select_tipo;
         $evento->video_evento       = $request->url_video;
 
-        // if ( $request->select_tipo == 2 ) {
-        //     $evento->video_evento    = $request->url_video;
-        // }
-
-        // if ( $request->select_tipo == 1 ) {
-        //     $evento->url_zoom        = $request->url_zoom;
-        //     $evento->id_reunion      = $request->id_reunion;
-        //     $evento->codigo_acceso   = $request->codigo_acceso;   
-        // }
-
-
         if ($request->has("evento_especial")) {
             $evento->especial = 1;
+            $evento->precio = str_replace(",", "", $request->precio);
         }
 
         if ($evento->save()) {
@@ -78,23 +68,9 @@ class EventosRepositorie
         $evento->tipo_evento_id     = $request->select_tipo;
         $evento->video_evento       = $request->url_video;
 
-        // if ( $request->select_tipo == 2 ) {
-        //     $evento->video_evento    = $request->url_video;
-        //     $evento->url_zoom        = null;
-        //     $evento->id_reunion      = null;
-        //     $evento->codigo_acceso   = null;
-        // }
-
-        // if ( $request->select_tipo == 1 ) {
-        //     $evento->url_zoom        = $request->url_zoom;
-        //     $evento->id_reunion      = $request->id_reunion;
-        //     $evento->codigo_acceso   = $request->codigo_acceso;
-        //     $evento->video_evento    = null;  
-        // }
-
-
         if ($request->has("evento_especial")) {
             $evento->especial = 1;
+            $evento->precio = str_replace(",", "", $request->precio);
         }
         else {
             $evento->especial = 0;

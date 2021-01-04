@@ -25,6 +25,8 @@ class EventosControllers extends Controller
     	$eventos = Evento::with(["instructor"])->where("status", 1)->where("fecha_lanzamiento", ">", $hoy)->get();
     	$archivados = Evento::with(["instructor"])->where("status", 1)->where("fecha_lanzamiento", "<", $hoy)->get();
 
+        //return $eventos;
+
     	return view("site.eventos", compact("eventos", "archivados"));
     }
 
