@@ -257,7 +257,7 @@
                                         <div class="form-group row mb-5">
                                             <label class="col-sm-2 col-form-label">Material Extra: </label>
                                             <div class="col-sm-10">
-                                                <input id="logo" type="file" name="material_extra[{{ $i }}][]" multiple class="form-control">
+                                                <input id="logo" type="file" name="material_extra[{{ $i }}][]" class="form-control">
                                                 <span class='form-text m-b-none errors'> {!! $errors->first('material_extra.'.$i.'.*') !!} </span>
                                             </div> 
                                         </div>
@@ -294,7 +294,7 @@
                                     <div class="form-group row mb-5">
                                         <label class="col-sm-2 col-form-label">Material Extra: </label>
                                         <div class="col-sm-10">
-                                            <input id="logo" type="file" name="material_extra[0][]" multiple class="form-control">
+                                            <input id="logo" type="file" name="material_extra[0][]" class="form-control">
                                             <span class='form-text m-b-none errors'> {!! $errors->first('material_extra'). $errors->first('material_extra.0.*') !!} </span>
                                         </div> 
                                     </div>

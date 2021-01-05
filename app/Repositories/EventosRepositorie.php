@@ -25,6 +25,12 @@ class EventosRepositorie
         $evento->descripcion        = $request->descripcion;
         $evento->fecha_lanzamiento  = $request->fecha_inicio." ".$request->hora_inicio;
         $evento->tipo_evento_id     = $request->select_tipo;
+        $evento->video_evento       = $request->url_video;
+
+        if ($request->has("evento_especial")) {
+            $evento->especial = 1;
+            $evento->precio = str_replace(",", "", $request->precio);
+        }
 
         if ($evento->save()) {
             $evento->slug           = $this->helper->createSlug($request->nombre_evento, $evento->id, "maptve");
@@ -60,6 +66,15 @@ class EventosRepositorie
         $evento->descripcion        = $request->descripcion;
         $evento->fecha_lanzamiento  = $request->fecha_inicio." ".$request->hora_inicio;
         $evento->tipo_evento_id     = $request->select_tipo;
+        $evento->video_evento       = $request->url_video;
+
+        if ($request->has("evento_especial")) {
+            $evento->especial = 1;
+            $evento->precio = str_replace(",", "", $request->precio);
+        }
+        else {
+            $evento->especial = 0;
+        }
 
         if ($evento->save()) {
             //SLUG DE EVENTO

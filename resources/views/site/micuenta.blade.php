@@ -2,6 +2,11 @@
 @extends('site.layouts.layout-online')
 <!-- /HEADER AND FOOTER -->
 
+@section('css-content')
+    <!-- Chosen -->
+    <link href="/admini/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+@stop
+
 @section('contenido')
 
 <div class="banner-small"></div> <!-- /banner-small -->
@@ -26,7 +31,7 @@
 
                     <div class="sidebar-perfil">
                         <img src="/site/img/ico-user.png">
-                        <h2>{{ auth()->user()->nombre. " ".auth()->user()->amaterno. " ".auth()->user()->apaterno }}</h2>
+                        <h2>{{ auth()->user()->nombre. " ".auth()->user()->apaterno. " ".auth()->user()->amaterno }}</h2>
                     </div> <!-- /row-tablero -->
 
                     <ul class="li-micuenta">
@@ -34,12 +39,12 @@
                         <li data-seccion="inbox"><a href="">Inbox</a></li>
                         <li data-seccion="pagos"><a href="">Pagos</a></li>
                         <li data-seccion="favoritos"><a href="">Favoritos</a></li>
-                        @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->suscripcion[0]->id == 1 || auth()->user()->suscripcion[0]->id == 2))
+                        @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->ultimaSuscripcion()->id == 1 || auth()->user()->ultimaSuscripcion()->id == 2))
                             <li data-seccion="cursos"><a href="">Cursos</a></li>
                             <li data-seccion="eventos"><a href="">Eventos</a></li>
                             <li data-seccion="clases"><a href="">Clases en línea</a></li>
                         @endif
-                        @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 2)
+                        @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimaSuscripcion()->id == 2)
                             <li data-seccion="academico"><a href="">Control Académico</a></li>
                         @endif
                     </ul>
@@ -54,62 +59,68 @@
                             <div class="flex">
                                 <div class="item-perfil">
                                     <h4>Informarción personal</h4>
-                                    <form class="form-perfil" action="" method="">
+                                    <form class="form-perfil" action="{{ route('usuario.editar') }}" method="POST" name="form_editar">
+                                        @csrf
                                         <fieldset>
                                             <label>Correo electrónico</label>
-                                            <input type="text" class="input" placeholder="usuario@gmail.com" value="{{ auth()->user()->email }}">
+                                            <input type="text" name="email" class="input" placeholder="usuario@gmail.com" value="{{ auth()->user()->email }}">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset>
                                             <label>Nombre</label>
-                                            <input type="text" class="input" placeholder="Usuario" value="{{ auth()->user()->nombre }}">
+                                            <input type="text" name="nombre" class="input" placeholder="Usuario" value="{{ auth()->user()->nombre }}">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset>
                                             <label>Apellido Materno</label>
-                                            <input type="text" class="input" placeholder="Apellido Materno" value="{{ auth()->user()->amaterno }}">
+                                            <input type="text" name="amaterno" class="input" placeholder="Apellido Materno" value="{{ auth()->user()->amaterno }}">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset>
                                             <label>Apellido Paterno</label>
-                                            <input type="text" class="input" placeholder="Apellido Paterno" value="{{ auth()->user()->apaterno }}">
+                                            <input type="text" name="apaterno" class="input" placeholder="Apellido Paterno" value="{{ auth()->user()->apaterno }}">
                                             <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset class="columns">
                                             <div class="flex flex-perfil between">
                                                 <div>
                                                     <label>Fecha de nacimiento</label>
-                                                    <input type="text" class="input" placeholder="DD/MM/AAAA" class="input" value="{{ auth()->user()->fecha_nacimiento }}">
+                                                    <input type="text" name="fecha_nacimiento" class="input datepicker" data-date-format="yyyy-mm-dd" placeholder="DD/MM/AAAA" value="{{ auth()->user()->fecha_nacimiento }}">
                                                     <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                                 </div>
                                                 <div>
                                                     <label>Contraseña</label>
-                                                    <input type="text" class="input" placeholder="···············" class="input">
+                                                    <input type="text" name="password" class="input" placeholder="···············" class="input">
                                                     <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                                 </div>
                                             </div>
                                         </fieldset>
+                                        <input type="submit" class="btn_perfil" value="Enviar" />
                                     </form>
                                 </div> <!-- /item-perfil -->
                                 <div class="item-perfil">
                                     <h4>Membresía</h4>
-                                    @for ($i = 0; $i <= count(auth()->user()->suscripcion) - 1; $i++)
-                                        @if (auth()->user()->suscripcion[$i]->id == 1)
-                                            <a href="#">Membresía Basica
-                                                <span class="ico-edit" id="edit-membresia">
-                                                    <img src="/site/img/edit.png">
-                                                    <p>Modificar membresía</p>
-                                                </span>
-                                            </a>
-                                        @elseif (auth()->user()->suscripcion[$i]->id == 2)
-                                             <a href="#">Membresía Académica
-                                                <span class="ico-edit" id="edit-membresia">
-                                                    <img src="/site/img/edit.png">
-                                                    <p>Modificar membresía</p>
-                                                </span>
-                                            </a>
-                                        @endif
-                                    @endfor
+                                    @if (count(auth()->user()->suscripcion) > 0)
+                                        @for ($i = 0; $i <= count(auth()->user()->suscripcion) - 1; $i++)
+                                            @if (auth()->user()->suscripcion[$i]->id == 1)
+                                                <a href="#">Membresía Basica
+                                                    <span class="ico-edit" id="edit-membresia">
+                                                        <img src="/site/img/edit.png">
+                                                        <p>Modificar membresía</p>
+                                                    </span>
+                                                </a>
+                                            @elseif (auth()->user()->suscripcion[$i]->id == 2)
+                                                 <a href="#">Membresía Académica
+                                                    <span class="ico-edit" id="edit-membresia">
+                                                        <img src="/site/img/edit.png">
+                                                        <p>Modificar membresía</p>
+                                                    </span>
+                                                </a>
+                                            @endif
+                                        @endfor
+                                    @else
+                                        <p> No tienes ninguna suscripcion activa </p>
+                                    @endif
                                 </div> <!-- /item-perfil -->
                             </div> <!-- /flex -->
                         </div> <!-- /row-perfil -->
@@ -145,40 +156,36 @@
                                 </ul>
                                 
                                 <div class="s-tab tab-1">
-                                    <div class="item-inbox">
-                                        <span>25/Junio/ 2020 18:00 hrs</span>
-                                        <div class="item-mensaje">
-                                            <div class="txt-mensaje">
-                                                <p><strong>De:</strong> MAPtv Educa </p>
-                                                <p><strong>Mensaje:</strong></p>
-                                                <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
-                                                <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
-                                                <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
-                                                <p>¡Bienvenido!</p>
-                                            </div> <!-- /txt-mensaje -->
-                                            <a href="javascript:void(0)">Ver mensaje completo</a>
-                                        </div> <!-- /item-mensaje -->
-                                    </div> <!-- /item-inbox -->
-                                    <div class="item-inbox">
-                                        <span>18/Junio/ 2020 18:00 hrs</span>
-                                        <div class="item-mensaje">
-                                            <div class="txt-mensaje">
-                                                <p><strong>De:</strong> MAPtv Educa </p>
-                                                <p><strong>Mensaje:</strong></p>
-                                                <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
-                                                <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
-                                                <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
-                                                <p>¡Bienvenido!</p>
-                                            </div> <!-- /txt-mensaje -->
-                                            <a href="javascript:void(0)">Ver mensaje completo</a>
-                                        </div> <!-- /item-mensaje -->
-                                    </div> <!-- /item-inbox -->
-                                    <div class="item-inbox">
+                                    @forelse($mensajes as $mensaje)
+                                        <div class="item-inbox">
+                                            <span> {{ $mensaje->FormatoLetras($mensaje->created_at) }}</span>
+                                            <div class="item-mensaje">
+                                                <div class="txt-mensaje">
+                                                    @if ($mensaje->admin->id == 1)
+                                                        <p><strong>De:</strong> MAPtv Educa </p>
+                                                    @else
+                                                        <p>
+                                                            <strong>De:</strong> 
+                                                            {{ $mensaje->admin->nombre." ".$mensaje->admin->amaterno }} 
+                                                        </p>
+                                                    @endif
+                                                    <p><strong>Mensaje:</strong></p>
+                                                    <p>{{ $mensaje->mensaje }}</p>
+                                                </div> <!-- /txt-mensaje -->
+                                                <a href="javascript:void(0)">Ver mensaje completo</a>
+                                            </div> <!-- /item-mensaje -->
+                                        </div> <!-- /item-inbox -->
+                                    @empty
+                                        <div class="item-inbox" style="margin-top: 10px;">
+                                            <span> No hay mensajes </span>
+                                        </div>
+                                    @endforelse
+                                    {{-- <div class="item-inbox">
                                         <span>17/Junio/ 2020 18:00 hrs</span>
                                         <div class="item-mensaje">
                                             <div class="txt-mensaje">
                                                 <p><strong>De:</strong> MAPtv Educa </p>
-                                                <p><strong>Mensaje:</strong></p>
+                                                <p><strong>Notificación:</strong></p>
                                                 <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
                                                 <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
                                                 <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
@@ -186,39 +193,29 @@
                                             </div> <!-- /txt-mensaje -->
                                             <a href="javascript:void(0)">Ver mensaje completo</a>
                                         </div> <!-- /item-mensaje -->
-                                    </div> <!-- /item-inbox -->
+                                    </div> <!-- /item-inbox --> --}}
                                 </div> <!-- /tab-mensaje -->
-                                
+
+
                                 <div class="s-tab tab-2">
-                                    <div class="item-inbox">
-                                        <span>25/Junio/ 2020 18:00 hrs</span>
-                                        <div class="item-mensaje">
-                                            <div class="txt-mensaje">
-                                                <p><strong>De:</strong> MAPtv Educa </p>
-                                                <p><strong>Notificación:</strong></p>
-                                                <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
-                                                <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
-                                                <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
-                                                <p>¡Bienvenido!</p>
-                                            </div> <!-- /txt-mensaje -->
-                                            <a href="javascript:void(0)">Ver mensaje completo</a>
-                                        </div> <!-- /item-mensaje -->
-                                    </div> <!-- /item-inbox -->
-                                    <div class="item-inbox">
-                                        <span>18/Junio/ 2020 18:00 hrs</span>
-                                        <div class="item-mensaje">
-                                            <div class="txt-mensaje">
-                                                <p><strong>De:</strong> MAPtv Educa </p>
-                                                <p><strong>Notificación:</strong></p>
-                                                <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
-                                                <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
-                                                <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
-                                                <p>¡Bienvenido!</p>
-                                            </div> <!-- /txt-mensaje -->
-                                            <a href="javascript:void(0)">Ver mensaje completo</a>
-                                        </div> <!-- /item-mensaje -->
-                                    </div> <!-- /item-inbox -->
-                                    <div class="item-inbox">
+                                    @forelse($notificaciones as $notificacion)
+                                        <div class="item-inbox">
+                                            <span> {{ $notificacion->FormatoLetras($notificacion->created_at) }} </span>
+                                            <div class="item-mensaje">
+                                                <div class="txt-mensaje">
+                                                    <p><strong>De:</strong> MAPtv Educa </p>
+                                                    <p><strong>Notificación:</strong></p>
+                                                    <p> {{ $notificacion->mensaje }} </p>
+                                                </div> <!-- /txt-mensaje -->
+                                                <a href="javascript:void(0)">Ver mensaje completo</a>
+                                            </div> <!-- /item-mensaje -->
+                                        </div> <!-- /item-inbox -->
+                                    @empty
+                                        <div class="item-inbox" style="margin-top: 10px;">
+                                            <span> No hay notificaciones </span>
+                                        </div>
+                                    @endforelse
+                                    {{-- <div class="item-inbox">
                                         <span>17/Junio/ 2020 18:00 hrs</span>
                                         <div class="item-mensaje">
                                             <div class="txt-mensaje">
@@ -231,7 +228,7 @@
                                             </div> <!-- /txt-mensaje -->
                                             <a href="javascript:void(0)">Ver mensaje completo</a>
                                         </div> <!-- /item-mensaje -->
-                                    </div> <!-- /item-inbox -->
+                                    </div> <!-- /item-inbox --> --}}
                                 </div> <!-- /tab-notificacion -->
                                 
                             </div> <!-- /row-tabs -->
@@ -243,83 +240,34 @@
                         <div class="row-perfil">
                             <div class="flex">
                                 <div class="item-perfil">
-                                    <h4>Informarción de pago</h4>
-                                    <form class="form-perfil" action="" method="">
-                                        <fieldset>
-                                            <label>Nombre en la tarjeta</label>
-                                            <input type="text" class="input" placeholder="Nombre y Apellido">
-                                            <span class="ico-edit"><img src="/site/img/edit.png"></span>
-                                        </fieldset>
-                                        <fieldset>
-                                            <label>Número de tarjeta</label>
-                                            <input type="text" class="input" placeholder="**** **** **** 1234">
-                                            <span class="ico-edit"><img src="/site/img/edit.png"></span>
-                                        </fieldset>
-                                        <fieldset class="columns">
-                                            <div class="flex flex-perfil between">
-                                                <div>
-                                                    <label>Vencimiento</label>
-                                                    <input type="text" class="input" placeholder="12/34" class="input">
-                                                    <span class="ico-edit"><img src="/site/img/edit.png"></span>
-                                                </div>
-                                                <div>
-                                                    <label>CVV</label>
-                                                    <input type="text" class="input" placeholder="***" class="input">
-                                                    <span class="ico-edit"><img src="/site/img/edit.png"></span>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset>
-                                            <label>Apellido Materno</label>
-                                            <input type="text" class="input" placeholder="Apellido Materno">
-                                            <span class="ico-edit"><img src="/site/img/edit.png"></span>
-                                        </fieldset>
-                                        <fieldset>
-                                            <label>Apellido Paterno</label>
-                                            <input type="text" class="input" placeholder="Apellido Paterno">
-                                            <span class="ico-edit"><img src="/site/img/edit.png"></span>
-                                        </fieldset>
-                                        <fieldset class="f-domicilio columns">
-                                            <label>Domicilio</label>
-                                            <div class="flex flex-domicilio between">
-                                                <input type="text" class="input first" placeholder="Calle">
-                                                <input type="text" class="input" placeholder="Número ext.">
-                                                <input type="text" class="input" placeholder="Número int.">
-                                            </div> <!-- /flex -->
-                                            <div class="flex flex-colonia between">
-                                                <input type="text" class="input" placeholder="Colonia, barrio, fraccionamiento">
-                                                <input type="text" class="input" placeholder="Código postal">
-                                            </div> <!-- /flex -->
-                                            <div class="flex between">
-                                                <input type="text" class="input" placeholder="Ciudad">
-                                                <input type="text" class="input" placeholder="Estado">
-                                                <input type="text" class="input" placeholder="País">
-                                            </div> <!-- /flex -->
-                                        </fieldset>
-                                    </form>
-                                </div> <!-- /item-perfil -->
-                                <div class="item-perfil">
                                     <h4>Historial de pagos</h4>
-                                    <table class="tabla-perfil">
-                                        <tr>
-                                            <th>Fecha</th>
-                                            <th>Monto</th>
-                                            <th>Descripción</th>
-                                            <th>Forma de pago</th>
-                                        </tr>
-                                        <tr>
-                                            <td>20/06/2020</td>
-                                            <td>$500.00</td>
-                                            <td>Membresía básica</td>
-                                            <td>Tarjeta de crédito</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20/07/2020</td>
-                                            <td>$200.00</td>
-                                            <td>Clase en línea</td>
-                                            <td>Tarjeta de crédito</td>
-                                        </tr>
-                                    </table>
+                                    @if ($pagos->count() > 0)
+                                        <table class="tabla-perfil">
+                                            <tr>
+                                                <th>Fecha</th>
+                                                <th>Monto</th>
+                                                <th>Descripción</th>
+                                                <th>Forma de pago</th>
+                                            </tr>
+                                            @foreach($pagos as $pago)
+                                                <tr>
+                                                    <td>{{ $pago->FormatoLetras($pago->fehca_inicio) }}</td>
+
+                                                    @if ($pago->membresia_id != null)
+                                                        <td>${{ $pago->FormatPrecio($pago->membresia->precio) }}</td>
+                                                        <td>{{ $pago->membresia->nombre }}</td>
+                                                    @elseif ($pago->evento_id != null)
+                                                        <td>${{ $pago->FormatPrecio($pago->evento->precio) }}</td>
+                                                        <td> Evento especial </td>
+                                                    @endif
+
+                                                    <td> Paypal </td>
+                                                </tr>
+                                            @endforeach
+                                        </table>
+                                    @else
+                                        <p> Aún no hay </p>
+                                    @endif
                                 </div> <!-- /item-perfil -->
                             </div> <!-- /flex -->
                         </div> <!-- /row-perfil -->
@@ -334,7 +282,7 @@
                                     <ul class="slide-cursos">
                                         @foreach($favoritosCursos as $curso)
                                             <li>
-                                                <span class="delete"></span>
+                                                <span class="delete delete_curso-fav" data-slg="{{ $curso->cursos->slug }}"></span>
                                                 <a href="{{ route("single-cursos.show", $curso->cursos->slug) }}"> <div class="img-slide" style="background-image: url({{ Storage::url($curso->cursos->url_img) }});"></div> </a> <!-- /img-slide -->
                                             </li>
                                         @endforeach
@@ -355,7 +303,8 @@
                                     <ul class="slide-cursos">
                                         @foreach($favoritosEventos as $evento)
                                             <li>
-                                                <a href="#"> <div class="img-slide" style="background-image: url({{ Storage::url($evento->eventos->img_evento) }});"></div> </a> <!-- /img-slide -->
+                                                <span class="delete delete_evento-fav" data-slg="{{ $evento->eventos->slug }}"></span>
+                                                <a href="{{ route("evento.show", $evento->eventos->slug) }}"> <div class="img-slide" style="background-image: url({{ Storage::url($evento->eventos->img_evento) }});"></div> </a> <!-- /img-slide -->
                                             </li>
                                         @endforeach
                                     </ul>
@@ -404,79 +353,40 @@
                     </div>
 
 
-                    @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->suscripcion[0]->id == 1 || auth()->user()->suscripcion[0]->id == 2))
+                    @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->ultimaSuscripcion()->id == 1 || auth()->user()->ultimaSuscripcion()->id == 2))
                     
                         <div style="margin-bottom: 30px;" data-seccion="cursos" class="section">
                             <h3>Mis cursos</h3>
                             <div class="row-favoritos">
                                 <p>AQUÍ ENCONTRARÁS TUS CURSOS EN PROGRESO.</p>
                                 <div class="flex-cursos">
-                                    <ul class="flex between wrap">
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                        <li class="col-3">
-                                            <a href="#">
-                                                <img src="/site/img/fulano.jpg">
-                                                <div class="txt-clase">
-                                                    <p>Nombre del curso</p>
-                                                </div> <!-- /txt-clase -->
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    @if ($tableroCursos->count() > 0)
+                                        <ul class="flex between wrap">
+                                            {{-- @foreach($materias as $materia)
+                                                <li class="col-3">
+                                                    <a href="{{ route('single-cursos.show', $materia->cursos->slug) }}">
+                                                        <img src="{{ Storage::url($materia->cursos->url_img) }}">
+                                                        <div class="txt-clase">
+                                                            <p>{{ $materia->cursos->nombre }}</p>
+                                                        </div> <!-- /txt-clase -->
+                                                    </a>
+                                                </li>
+                                            @endforeach --}}
+
+                                            @foreach($tableroCursos as $curso)
+                                                <li class="col-3">
+                                                    <a href="{{ route('single-cursos.show', $curso->slug) }}">
+                                                        <img src="{{ Storage::url($curso->url_img) }}">
+                                                        <div class="txt-clase">
+                                                            <p>{{ $curso->nombre }}</p>
+                                                        </div> <!-- /txt-clase -->
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <p> Aún no tienes cursos. </p>
+                                    @endif
                                 </div>
                             </div> <!-- /row-favoritos -->
                         </div>
@@ -486,76 +396,39 @@
                             <div class="row-favoritos">
                                 <p>AQUÍ ENCONTRARÁS TUS EVENTOS PRÓXIMOS Y ADQUIRIDOS</p>
                                 <div class="flex-cursos">
-                                    <p>PRÓXIMOS</p>
-                                    <ul class="flex between wrap">
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                    </ul>
-                                    <p>ARCHIVADOS</p>
-                                    <ul class="flex between wrap">
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al evento</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                    </ul>
+                                    @if ($tableroEventos->count() > 0)
+                                        <p>PRÓXIMOS</p>
+                                        <ul class="flex between wrap">
+                                            @foreach($tableroEventos as $eventos)
+                                                <li class="col-3">
+                                                    <img src="{{ Storage::url($eventos->img_evento) }}">
+                                                    <div class="txt-clase">
+                                                        <p>{{ $eventos->nombre }}</p>
+                                                        <p>{{ $eventos->fecha_lanzamiento }}</p>
+                                                        <a href="{{ route('evento.show', $eventos->slug) }}">Ir al evento</a>
+                                                    </div> <!-- /txt-clase -->
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                    @if ($eventosOld->count() > 0)
+                                        <p>ARCHIVADOS</p>
+                                        <ul class="flex between wrap">
+                                            @foreach($eventosOld as $eventoOld)
+                                                <li class="col-3">
+                                                    <img src="{{ Storage::url($eventoOld->img_evento) }}">
+                                                    <div class="txt-clase">
+                                                        <p>{{ $eventoOld->nombre }}</p>
+                                                        <p>{{ $eventoOld->fecha_lanzamiento }}</p>
+                                                        <a href="{{ route('evento.show', $eventoOld->slug) }}">Ir al evento</a>
+                                                    </div> <!-- /txt-clase -->
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                    @if ($tableroEventos->count() <= 0 && $eventosOld->count() <= 0)
+                                        <p> Aún no tienes eventos. </p>
+                                    @endif
                                 </div>
                             </div> <!-- /row-favoritos -->
                         </div>
@@ -676,48 +549,29 @@
 
                     @endif
 
-                    @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->suscripcion[0]->id == 2)
+                    @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimaSuscripcion()->id == 2)
                     
                         <div style="margin-bottom: 30px;" data-seccion="academico" class="section">
                             <h3>Mis materias</h3>
                             <div class="row-favoritos">
                                 <p>AQUÍ ENCONTRARÁS TODOS LOS CURSOS CORRESPONDIENTES A TU PROGRAMA ACADÉMICO, ORDENADOS POR TRIMESTRE EN PROGRESO</p>
                                 <div class="flex-cursos">
-                                    <p>1er Trimestre</p>
-                                    <ul class="flex between wrap">
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al curso</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al curso</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al curso</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir al curso</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                    </ul>
+                                    @if ($materias->count() > 0)
+                                        <p>{{ $tituloTrimestre }}</p>
+                                        <ul class="flex between wrap">
+                                            @foreach($materias as $materia)
+                                                <li class="col-3">
+                                                    <img src="{{ Storage::url($materia->cursos->url_img) }}">
+                                                    <div class="txt-clase">
+                                                        <p>{{ $materia->cursos->nombre }}</p>
+                                                        <a href="{{ route('single-cursos.show', $materia->cursos->slug) }}">Ir al curso</a>
+                                                    </div> <!-- /txt-clase -->
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <p> Aún no hay cursos. </p>
+                                    @endif
                                 </div>
                             </div> <!-- /row-favoritos -->
                         </div>
@@ -736,6 +590,19 @@
 @stop
 
 @section('js-content')
+    <!-- Data picker -->
+    <script src="/admini/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        
+        var mem = $('.datepicker').datepicker({
+                todayHighlight: true,
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+    </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="/site/js/app.js"></script>
 @stop

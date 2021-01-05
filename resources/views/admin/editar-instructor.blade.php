@@ -87,7 +87,7 @@
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>
                     </div>
-                    <form action="#" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-editar_instructor">
+                    <form action="{{ route('editar-instructor.update', $helper::base64_encode_url($id)) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-editar_instructor">
                         @csrf
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Nombre del instructor: </label>
@@ -128,6 +128,15 @@
                                 <span class='form-text m-b-none errors'> {!! $errors->first('bibliografia') !!} </span>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Password: </label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" name="password"> 
+                                <span class='form-text m-b-none errors'> {!! $errors->first('password') !!} </span>
+                            </div>
+                        </div>
+                        
 
                         <div class="form-group row mb-5">
                             <label class="col-sm-2 col-form-label">Avatar instructor: </label>

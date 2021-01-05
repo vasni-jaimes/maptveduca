@@ -112,7 +112,7 @@
                                     @foreach($instructores as $instructor)
                                         <option value="{{ $instructor->id }}" 
                                             @if(is_array(old('select_instructores')) && in_array($instructor->id, old('select_instructores'))) selected @endif>
-                                            {{ $instructor->nombres }}
+                                            {{ $instructor->nombres." ".$instructor->apellidos }}
                                         </option>    
                                     @endforeach
                                 </select>

@@ -21,7 +21,7 @@ class CreateCoursesTable extends Migration
             $table->text('url_img')->nullable();
             $table->text('video_bienvenida');
             $table->text('descripcion_bienvenida');
-            $table->json('temario')->nullable();
+            $table->text('temario')->nullable();
             $table->boolean("status")->default(0);
             $table->boolean("extra")->default(0);
             $table->timestamps();

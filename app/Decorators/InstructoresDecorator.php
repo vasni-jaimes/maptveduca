@@ -28,7 +28,7 @@ Class InstructoresDecorator
 	public function update($request, $id)
 	{
 		$id = $this->helper::base64_decode_url($id);
-		$this->instructorRepositorie->actualizarInstructor($request, $id);
+		return $this->instructorRepositorie->actualizarInstructor($request, $id);
 	}
 
 }

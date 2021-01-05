@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Helpers\Helper;
 use App\Course;
 use App\Subcategoria;
+use App\Notificacion;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -156,6 +157,7 @@ class CoursesController extends Controller
         $curso->status = $status;
 
         if ($curso->save()) {
+            $this->sendNotificaciones($curso);
             DB::commit();
             return response()->json(["message" => "ok"]);
         }
@@ -173,5 +175,14 @@ class CoursesController extends Controller
         }
 
         return response()->json(["message" => "error"]);
+    }
+
+
+    protected function sendNotificaciones($curso)
+    {
+        $notificacion = new Notificacion();
+        $notificacion->user_id = 0;
+        $notificacion->mensaje = "Se Creeo contenido nuevo, <br> Actualmente se genero un curso nuevo y para verlo solo hay que darle click: <a href='".route("single-cursos.show", $curso->slug)."' target='_blank'>".$curso->nombre."</a>";
+        $notificacion->save();
     }
 }

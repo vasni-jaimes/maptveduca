@@ -2,6 +2,10 @@
 @extends('site.layouts.layout-offline')
 <!-- /HEADER AND FOOTER -->
 
+@section('css-content')
+    <!-- Chosen -->
+    <link href="/admini/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+@stop
 
 
 @section('contenido')
@@ -31,7 +35,7 @@
 	                    </div>
 	                    <div>
 	                        <input class="input" type="text" name="amaterno" placeholder="Apellido materno" value="{{ old("amaterno") }}">
-	                        <input class="input" type="text" name="fecha_nacimiento" placeholder="Fecha de nacimiento" value="{{ old("fecha_nacimiento") }}">
+	                        <input class="input datepicker" type="text" name="fecha_nacimiento" data-date-format="yyyy-mm-dd" placeholder="Fecha de nacimiento" value="{{ old("fecha_nacimiento") }}">
 	                    </div>
 	                    <input class="input" type="text" name="email" placeholder="Correo electrónico" value="{{ old("email") }}">
 	                    <div>
@@ -59,5 +63,18 @@
 
 
 @section('js-content')
+	<!-- Data picker -->
+   	<script src="/admini/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+	<script type="text/javascript">
+		
+		var mem = $('.datepicker').datepicker({
+                todayHighlight: true,
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+	</script>
 	<script type="text/javascript" src="/site/js/app.js"></script>
 @stop

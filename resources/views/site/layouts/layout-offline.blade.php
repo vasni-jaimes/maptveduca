@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="/site/js/slick/slick.css"/>
 		<link rel="stylesheet" type="text/css" href="/site/js/stacktable/stacktable.css"/> 
 		<link rel="stylesheet" type="text/css" href="/site/js/mmenu/mmenu.css"/>
+		@yield("css-content")
 		<link rel="icon" href="/site/img/favicon.png" type="image/gif" sizes="64x64">
 	    
 	</head>

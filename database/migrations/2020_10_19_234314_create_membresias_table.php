@@ -17,7 +17,7 @@ class CreateMembresiasTable extends Migration
             $table->id();
             $table->string("nombre");
             $table->string('slug',)->unique();
-            $table->double('precio', 5, 2);
+            $table->double('precio', 12, 2);
             $table->timestamps();
         });
     }

@@ -9,12 +9,15 @@ use App\Instructor;
 use App\Course;
 use App\Category;
 use App\Favorito;
+use App\Recomendacion;
+use DB;
 
 class CursosController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('checkMembresiaCurso', ["only" => ["show", "download"]]);
     }
 
 
@@ -26,31 +29,28 @@ class CursosController extends Controller
     	return view("site.cursos", compact("categorias", "instructores"));
     }
 
-    public function show($curso_id, $clase_id = null)
+    public function show($curso_id, $clase_id = null, $subclase_id = 0)
     {
-        if (auth()->user()->tieneSuscripcion() == false && $clase_id != null) {
-            return redirect()->route('single-cursos.show', $curso_id);
-        }
-    
         if ($clase_id == null) {
-            $curso = Course::with(["instructor"])->where("status", 1)->where("slug", $curso_id)->first();
+            $curso   = Course::with(["instructor"])->where("status", 1)->where("slug", $curso_id)->first();
             $temario = json_decode($curso->temario);
-            $clase = array("slug" => $curso->slug, "url_video" => [$curso->video_bienvenida], 
+            $clase   = array("slug" => $curso->slug, "url_video" => $curso->video_bienvenida, 
                                 "nombre_video" => "Bienvenida", "material_extra" => [], "descripcion" => $curso->descripcion_bienvenida);
         }
     	else {
-            $curso = Course::with(["instructor"])->where("status", 1)->where("slug", $curso_id)->first();
+            $curso   = Course::with(["instructor"])->where("status", 1)->where("slug", $curso_id)->first();
             $temario = json_decode($curso->temario);
-            $clase = $this->obtenerClase($clase_id, $temario);
+            $clase   = $this->obtenerClase($clase_id, $temario, $subclase_id);
 
             if (!$clase) {
                 return redirect()->route('single-cursos.show', $curso_id);
             }
         }
 
-        $favorito = Favorito::where('user_id', auth()->user()->id)->where('curso_id', $curso->id)->first();
-
-    	return view("site.single-cursos", compact("curso", "temario", "clase", "clase_id", "favorito"));
+        $validarSide = $this->validacionSidebar($curso->id);
+        $miTablero   = $this->estaEnMiTablero($curso->id);
+        $favorito    = Favorito::where('user_id', auth()->user()->id)->where('curso_id', $curso->id)->first();
+    	return view("site.single-cursos", compact("curso", "temario", "clase", "clase_id", "favorito", "validarSide", "miTablero"));
     }
 
     public function download($slug_curso, $slug_sesion)
@@ -60,38 +60,138 @@ class CursosController extends Controller
             $temario = json_decode($curso->temario);
             $clase   = $this->obtenerClase($slug_sesion, $temario);
 
-            $zip = new \ZipArchive();
-            $zip->open(public_path().'font_files.zip', \ZipArchive::CREATE);
-            $zip->addFile(public_path()."robots.txt",'robots.txt');
-
-            echo "s";
-              
-            // $zip->addFile('fonts/Monoton/Monoton-Regular.ttf', 'Monoton-Regular.ttf');
-            // $zip->addFile('fonts/Monoton/OFL.txt', 'license.txt');
-              
-            $zip->close();
-
-            // if (!empty($clase['material_extra'])) {
-            //     for ($i=0; $i <= count($clase['material_extra']) - 1; $i++) {
-            //         return response()->download(storage_path("app/".$clase['material_extra'][$i]));
-            //     }
-            // }
+            if (!empty($clase['material_extra'])) {
+                for ($i=0; $i <= count($clase['material_extra']) - 1; $i++) {
+                    return response()->download(storage_path("app/".$clase['material_extra'][$i]));
+                }
+            }
         }
     }
 
 
-    protected function obtenerClase($clase_id, $temario)
+    public function agregarTablero(Request $request)
+    {
+        if (!auth()->user()->tieneSuscripcion()) {
+            return response()->json(["message" => "not_membresia"]);
+        }
+
+        if ( $request->has('slug') && $request->has('slug')) {
+            $curso = Course::where('slug', $request->slug)->where('status', 1)->first();
+            if ($curso) {
+
+                $cursoTablero = DB::table('tablero_cursos')
+                                    ->where('curso_id', $curso->id)
+                                    ->where('user_id', auth()->user()->id)
+                                    ->first();
+
+                if (!$cursoTablero) {
+                    $tablero = DB::table('tablero_cursos')->insert([
+                                "user_id" => auth()->user()->id,
+                                "curso_id" => $curso->id,
+                                "progreso" => 0
+                            ]);
+
+                    if ($tablero) {
+                        return response()->json(["message" => "ok"]);
+                    }
+
+                    return response()->json(["message" => "error_save"]);
+                }
+
+                return response()->json(["message" => "ok"]);
+            }
+
+            return response()->json(["message" => "not_curso"]);
+        }
+
+        return response()->json(["message" => "not_parameter"]);
+    }
+
+
+    protected function obtenerClase($clase_id, $temario, $subclase = 0)
     {
         $clase = false;
         foreach ($temario as $team) {
             if ($team->slug == $clase_id) {
-                $clase = array("slug" => $team->slug, "url_video" => $team->url_video, 
+                $clase = array("slug" => $team->slug, "url_video" => $team->url_video[$subclase], 
                                 "nombre_video" => $team->nombre_video, "material_extra" => $team->material_extra, 
                                 "descripcion" => $team->descripcion_curso);
             }
         }
 
         return $clase;
+    }
+
+
+    protected function validacionSidebar($curso_id)
+    {
+        if ( auth()->user()->tieneSuscripcion() && auth()->user()->ultimaSuscripcion()->id == 1 ) {
+            return "sb#2";
+        }
+        if ( auth()->user()->tieneSuscripcion() && auth()->user()->ultimaSuscripcion()->id == 2 ) {
+            //validar si este curso esta destro de la carrera
+            $cursoCarrera = $this->validarPorTrimestre($curso_id);
+            if (!$cursoCarrera) {
+               return "sb#2";
+            }
+            else {
+                return "sb#4";
+            }
+        }
+        if ( auth()->user()->tieneSuscripcion() && auth()->user()->ultimaSuscripcion()->id == 2 ) {
+            return "sb#3";
+        }
+
+        return false;
+    }
+
+    protected function validarPorTrimestre($curso_id)
+    {
+        $pagos = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->get();
+
+        if (count($pagos) <= 3) {
+           return Recomendacion::where('carrera_id', auth()->user()->obtenerCarrera())
+                                    ->where('curso_id', $curso_id)
+                                    ->where('trimestre', 1)
+                                    ->count();
+        }
+        else if (count($pagos) > 3 && count($pagos) <= 6) {
+            return Recomendacion::where('carrera_id', auth()->user()->obtenerCarrera())
+                                    ->where('curso_id', $curso_id)
+                                    ->where('trimestre', 2)
+                                    ->count();
+        }
+        else if (count($pagos) > 6 && count($pagos) <= 9) {
+            return Recomendacion::where('carrera_id', auth()->user()->obtenerCarrera())
+                                    ->where('curso_id', $curso_id)
+                                    ->where('trimestre', 3)
+                                    ->count();
+        }
+        else if (count($pagos) > 9 && count($pagos) <= 12) {
+            return Recomendacion::where('carrera_id', auth()->user()->obtenerCarrera())
+                                    ->where('curso_id', $curso_id)
+                                    ->where('trimestre', 4)
+                                    ->count();
+        }
+    }
+
+
+    protected function estaEnMiTablero($curso_id)
+    {
+        if (!auth()->user()->tieneSuscripcion()) {
+            return false;
+        }
+
+        $cursoTablero = DB::table('tablero_cursos')
+                                    ->where('curso_id', $curso_id)
+                                    ->where('user_id', auth()->user()->id)
+                                    ->first();
+
+        if ($cursoTablero) {
+            return true;
+        }
+
+        return false;
     }
 
 }

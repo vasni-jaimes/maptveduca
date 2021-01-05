@@ -29,6 +29,7 @@ class ValidarAgregarInstructor extends FormRequest
             "email"                 => "required|string|min:4|max:255|email|unique:instructors",
             "especialidad"          => "required|string|min:4|max:255",
             "bibliografia"          => "required|string|min:6",
+            "password"              => "required|string|min:8|confirmed",
             "avatar"                => "required|mimes:jpeg,png,jpg",
         ];
     }

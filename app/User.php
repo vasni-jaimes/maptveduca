@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon;
 use DB;
 
 class User extends Authenticatable
@@ -19,15 +20,41 @@ class User extends Authenticatable
     }
 
 
+    public function ultimaSuscripcion()
+    {
+        return auth()->user()->suscripcion[count(auth()->user()->suscripcion) - 1];
+    }
+
+
     public function tieneSuscripcion()
     {
         //FECHA DE HOY
         date_default_timezone_set('America/Mexico_City');
-        $hoy          = date('Y-m-d');
+        $hoy = Carbon::now()->format('Y-m-d');
 
-        $suscripcion2 = DB::table('usuarios_membresia')->where('fecha_fin', '>', $hoy)->where('fehca_inicio', '<=', $hoy)->where('user_id', $this->id)->count();
+        $suscripcion2 = DB::table('usuarios_membresia')
+                            ->where('fecha_fin', '>', $hoy)->where('fehca_inicio', '<=', $hoy)->where('user_id', $this->id)
+                            ->count();
 
         return $suscripcion2;
+    }
+
+
+    public function obtenerCarrera()
+    {
+        //FECHA DE HOY
+        date_default_timezone_set('America/Mexico_City');
+        $hoy = Carbon::now()->format('Y-m-d');
+
+
+        $suscripcion2 = DB::table('usuarios_membresia')
+                            ->where('fecha_fin', '>', $hoy)->where('fehca_inicio', '<=', $hoy)->where('user_id', $this->id)->first();
+
+        if ($suscripcion2) {
+            return $suscripcion2->carrera_id;
+        }
+
+        return false;
     }
 
 

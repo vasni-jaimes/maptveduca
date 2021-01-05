@@ -15,6 +15,7 @@ use PayPal\Api\PaymentExecution;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 use App\Membresia;
+use App\Mensaje;
 use App\Career;
 use Carbon\Carbon;
 use DB;
@@ -128,6 +129,7 @@ class CheckoutController extends Controller
         if ($result->getState() === 'approved') {
 
         	//OBTENER MEMBRESIA A PAGAR
+            date_default_timezone_set('America/Mexico_City');
         	$membresia 		= Membresia::where('slug', $slug_membresia)->first();
         	$carrera 		= $request->has("carrera") ? $request->carrera : null;
         	$fecha_inicio 	= Carbon::now()->format('Y-m-d');
@@ -145,6 +147,7 @@ class CheckoutController extends Controller
 
 
         	if ($user_membresia) {
+                $this->MensajeBienvenidaSuscripcion();
                 DB::commit();
                 return redirect()->route("home")->with("success", "Gracias! El pago a través de PayPal se ha ralizado correctamente.");
         	}
@@ -171,5 +174,15 @@ class CheckoutController extends Controller
 	    }
 
 	    return true;
+    }
+
+    protected function MensajeBienvenidaSuscripcion()
+    {
+        $mensaje = new Mensaje();
+        $mensaje->admin_id = 1
+        $mensaje->user_id = auth()->user()->id;
+        $mensaje->mensaje = "<strong>Hola ".auth()->user()->nombre." ".auth()->user()->apaterno."</strong>";
+        $mensaje->mensaje .= "<br> En hora buena, ahora podras disfrutar de nuestro contenido libremente.";
+        $mensaje->save();
     }
 }

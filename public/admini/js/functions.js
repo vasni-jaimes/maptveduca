@@ -95,6 +95,115 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  validarMensajes: function validarMensajes(e) {
+    e.preventDefault();
+    mensaje = document.querySelector('textarea[name="mensaje"]');
+    /* STATUS */
+
+    var error_videos = false; //SE ELIMINAN LOS RASTROS DE ERRORES
+
+    document.querySelectorAll('.errors').forEach(function (item) {
+      item.innerHTML = '';
+    });
+
+    if (document.querySelector('.has-error')) {
+      document.querySelectorAll('.has-error').forEach(function (item) {
+        item.classList.remove('has-error');
+      });
+    } //SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+
+    if (mensaje.value == '') {
+      mensaje.parentNode.classList.add('has-error');
+      mensaje.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (error_videos == true) {
+      if (e.type == 'submit') {
+        var posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+        window.scrollTo(0, posicion);
+      }
+
+      return false;
+    }
+
+    if (e.type == 'submit') {
+      e.target.disabled = true;
+      document.querySelector('.ibox-content').classList.add('sk-loading');
+      document.querySelector("form[name='frm-agregar_mensaje']").submit();
+      return false;
+    }
+  },
+  obtenerAlumnosxCurso: function obtenerAlumnosxCurso(e) {
+    e.preventDefault();
+    var curso_id = e.target.value;
+    var token = document.querySelector("input[name='_token']").value;
+
+    if (curso_id) {
+      var opciones = {
+        method: "POST",
+        credentials: "same-origin",
+        body: JSON.stringify({
+          "curso_id": curso_id,
+          "_token": token
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      fetch('/admin/buscar-alumnos', opciones).then(function (response) {
+        return response.json();
+      }).then(function (res) {
+        if (res.message == 'ok') {
+          var options = '<select data-placeholder="Usuarios" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_usuarios[]">';
+          res.items.forEach(function (item) {
+            options += "<option value=" + item.id + ">" + item.nombre + ' ' + item.apaterno + ' ' + item.amaterno + "</option>";
+          });
+          options += "</select>";
+          document.querySelector('.sub-usuarios').innerHTML = options;
+          $('.chosen-select').chosen({
+            width: "100%"
+          });
+          $('.custom-file-input').on('change', function () {
+            var fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+          });
+        } else {
+          swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+        }
+      });
+    }
+  },
+  format: function format(num) {
+    var str = num.toString().replace("$", ""),
+        parts = false,
+        output = [],
+        i = 1,
+        formatted = null;
+
+    if (str.indexOf(".") > 0) {
+      parts = str.split(".");
+      str = parts[0];
+    }
+
+    str = str.split("").reverse();
+
+    for (var j = 0, len = str.length; j < len; j++) {
+      if (str[j] != ",") {
+        output.push(str[j]);
+
+        if (i % 3 == 0 && j < len - 1) {
+          output.push(",");
+        }
+
+        i++;
+      }
+    }
+
+    formatted = output.reverse().join("");
+    return formatted + (parts ? "." + parts[1].substr(0, 2) : ""); //return("$" + formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
+  },
   cambiarTipoEvento: function cambiarTipoEvento(e) {
     e.preventDefault();
     var tipo_event = e.target.value;
@@ -154,7 +263,7 @@ var funciones = {
     //e.preventDefault();
     swal({
       title: "¿Estas seguro?",
-      text: "¿Quieres cambiar el estatus del curso?",
+      text: "¿Quieres cambiar el estatus?",
       icon: "warning",
       buttons: true,
       dangerMode: true
@@ -224,6 +333,8 @@ var funciones = {
     var email = document.querySelector("input[name='email']");
     var bibliografia = document.querySelector("textarea[name='bibliografia']");
     var especialidad = document.querySelector("input[name='especialidad']");
+    var password = document.querySelector("input[name='password']");
+    var password_confirm = document.querySelector("input[name='password_confirmation']");
     var img_instructor = document.querySelector("input[name='avatar']");
     /* STATUS */
 
@@ -279,6 +390,22 @@ var funciones = {
       error_videos = true;
     }
 
+    if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
+      if (password.value == '') {
+        password.classList.add('campo-requerido');
+        validate = false;
+      }
+
+      if (password.value.length < 8) {
+        password.classList.add('campo-requerido');
+        validate = false;
+      }
+
+      if (password.value !== password_confirm.value) {
+        password.classList.add('campo-requerido');
+      }
+    }
+
     console.log(e.target.getAttribute('name'));
 
     if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
@@ -319,6 +446,9 @@ var funciones = {
     var descripcion = document.querySelector("textarea[name='descripcion']");
     var fecha_inicio = document.querySelector("input[name='fecha_inicio']");
     var hora_inicio = document.querySelector("input[name='hora_inicio']");
+    var evento_especial = document.querySelector("input[name='evento_especial']");
+    var precio = document.querySelector("input[name='precio']");
+    var url_video = document.querySelector("input[name='url_video']");
     /* STATUS */
 
     var error_videos = false; //SE ELIMINAN LOS RASTROS DE ERRORES
@@ -387,6 +517,20 @@ var funciones = {
       error_videos = true;
       hora_inicio.parentNode.classList.add('has-error');
       hora_inicio.nextElementSibling.innerHTML = 'El campo es requerido';
+    }
+
+    if (evento_especial.checked == true) {
+      if (precio.value == '') {
+        error_videos = true;
+        precio.parentNode.classList.add('has-error');
+        precio.nextElementSibling.innerHTML = 'El campo es requerido';
+      }
+    }
+
+    if (url_video.value == '') {
+      error_videos = true;
+      url_video.parentNode.classList.add('has-error');
+      url_video.nextElementSibling.innerHTML = 'El campo es requerido';
     }
 
     if (error_videos == true) {

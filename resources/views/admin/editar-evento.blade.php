@@ -50,7 +50,7 @@
         @elseif (session()->get("status.updateEvento") == "success")
             <div class="row justify-content-center">
                 <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
-                    Se creo el evento correctamente
+                    Se actualizo el evento correctamente
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -118,7 +118,7 @@
                                     @foreach($instructors as $instructor)
                                         <option value="{{ $instructor->id }}" 
                                             @if(in_array($instructor->id, old('select_instructores', $myInstructors))) selected @endif>
-                                            {{ $instructor->nombres }}
+                                            {{ $instructor->nombres." ".$instructor->apellidos }}
                                         </option>    
                                     @endforeach
                                 </select>
@@ -143,9 +143,25 @@
                         </div>
 
 
+                        <div class="form-group row mb-5">
+                            <label class="col-sm-2 col-form-label">Evento especial: </label>
+                            <div class="i-checks col-sm-10">
+                                <label> <input type="checkbox" value="1" name="evento_especial" @if(old("evento_especial", $evento->especial) == 1) checked @endif> <i></i></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Precio: </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="precio" value="{{ old("precio") }}">
+                                <span class='form-text m-b-none errors'> {!! $errors->first('precio') !!} </span>
+                            </div>
+                        </div>
+
+
                         <div class="hr-line-dashed"></div>
 
-                        <h2> Bienvenida a la Clase</h2>
+                        <h2> Bienvenida al evento</h2>
 
                         <div class="hr-line-dashed"></div>
 
@@ -177,6 +193,29 @@
                                 <input class="form-control" name="hora_inicio" value="{{ old('hora_inicio', Carbon::parse($evento->fecha_lanzamiento)->format("H:i")) }}">
                                 <span class='form-text m-b-none errors'> {!! $errors->first('hora_inicio') !!} </span>
                             </div>
+                        </div>
+
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="eventos_two">
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Precio: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="precio" value="{{ old("precio") }}">
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('precio') !!} </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">URL video: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="url_video" value="{{ old("url_video", $evento->video_evento) }}">
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('url_video') !!} </span>
+                                </div>
+                            </div>
+
                         </div>
 
 

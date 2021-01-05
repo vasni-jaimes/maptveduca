@@ -13,23 +13,32 @@
                 <p>¿No sabes por dónde empezar? <a href="#">Mira aquí</a></p>
             </div> <!-- /banner-inicio -->
             
-            <div class="banner-slide slide-yellow">
-                <div class="bg-yellow">
-                    <h2>Lo más nuevo</h2>
-                    <p><a href="{{ route("cursos") }}">Mira más cursos aquí</a></p>
-                </div> <!-- /bg-yellow -->
-                <ul class="slide-inicio">
-                    @forelse($cursos as $curso)
-                        <li>
-                            <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> <!-- /img-slide -->
-                        </li>
-                    @empty
-                        <li>
-                            <p>No se encontraron resultados</p>
-                        </li>
-                    @endforelse
-                </ul>
-            </div> <!-- /banner-slide -->
+            @if ($cursos->count() > 0)
+                <div class="banner-slide slide-yellow">
+                    <div class="bg-yellow">
+                        <h2>Lo más nuevo</h2>
+                        <p><a href="{{ route("cursos") }}">Mira más cursos aquí</a></p>
+                    </div> <!-- /bg-yellow -->
+                    <ul class="slide-inicio">
+                        @forelse($cursos as $curso)
+                            <li>
+                                <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> <!-- /img-slide -->
+                            </li>
+                        @empty
+                            <li>
+                                <p>No se encontraron resultados</p>
+                            </li>
+                        @endforelse
+                    </ul>
+                </div> <!-- /banner-slide -->
+            @else
+                <div class="banner-slide slide-yellow">
+                    <div class="bg-yellow">
+                        <h2>Lo más nuevo</h2>
+                        <p>PRÓXIMAMENTE</p>
+                    </div> <!-- /bg-yellow -->
+                </div> <!-- /banner-slide -->
+            @endif
             
             @if ( $clases->count() > 0 )
                 <div class="banner-slide slide-black">

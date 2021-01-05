@@ -32,7 +32,7 @@ Route::post('registro', 'Auth\RegisterController@register')->name('registro');
 
 //CURSOS
 Route::get('cursos', 'Site\CursosController@index')->name('cursos');
-Route::get('single-cursos/{curso_id}/{clase_id?}', 'Site\CursosController@show')->name('single-cursos.show');
+Route::get('single-cursos/{curso_id}/{clase_id?}/{subclase_id?}', 'Site\CursosController@show')->name('single-cursos.show');
 Route::get('download/material/{slug_curso}/{slug_sesion}', 'Site\CursosController@download')->name('download.material-curso');
 
 //CLASES
@@ -53,6 +53,7 @@ Route::get('nosotros', 'Site\NosotrosControllers@index')->name('nosotros.index')
 
 //MICUENTA
 Route::get('micuenta', 'Site\UsersController@index')->name('micuenta.index');
+Route::post('usuario/editar', 'Site\UsersController@editar')->name('usuario.editar');
 
 
 //CHECKOUT
@@ -63,6 +64,13 @@ Route::get('pago/{slug_membresia}/status', 'Site\CheckoutController@PaypalStatus
 
 //FAVORITOS
 Route::post('usuario/favorito', 'Site\FavoritosController@create')->name('user.favorito');
+Route::post('usuario/eliminarFavoritos', 'Site\FavoritosController@delete')->name('user.favorito-delete');
+
+//TABLERO CURSOS
+Route::post('usuario/empezarCurso', 'Site\CursosController@agregarTablero')->name('user.agregarTablero');
+
+//TABLERO EVENTOS
+Route::post('usuario/registrarEvento', 'Site\EventosControllers@agregarTablero')->name('user.agregarTableroEvento');
 
 
 

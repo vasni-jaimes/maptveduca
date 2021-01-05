@@ -136,17 +136,25 @@ if (frmAgregarEvento || frmEditarEvento) {
 	}
 
 	//EVENTO PARA EL TIPO DE EVENTOS
-	const select_tipo = document.querySelector("select[name='select_tipo']");
-	select_tipo.addEventListener('change', funciones.cambiarTipoEvento);
+	// const select_tipo = document.querySelector("select[name='select_tipo']");
+	// select_tipo.addEventListener('change', funciones.cambiarTipoEvento);
 }
 
 //FORMULARIO INSTRUCTORES
 const frmAgregarInstructor = document.querySelector("form[name='frm-agregar_instructor']");
-if (frmAgregarInstructor) {
+const frmActualizarInstructor = document.querySelector("form[name='frm-editar_instructor']");
+if (frmAgregarInstructor || frmActualizarInstructor) {
 
 	if (frmAgregarInstructor) {
 		frmAgregarInstructor.addEventListener('submit', funciones.validarAgregarInstructor);
 		frmAgregarInstructor.addEventListener('input', funciones.validarAgregarInstructor);
+		$(document).change("input", funciones.validarAgregarInstructor);
+		$("select").change(funciones.validarAgregarInstructor);
+	}
+
+	if (frmActualizarInstructor) {
+		frmActualizarInstructor.addEventListener('submit', funciones.validarAgregarInstructor);
+		frmActualizarInstructor.addEventListener('input', funciones.validarAgregarInstructor);
 		$(document).change("input", funciones.validarAgregarInstructor);
 		$("select").change(funciones.validarAgregarInstructor);
 	}
@@ -253,6 +261,29 @@ if (tabla_instructores) {
 			});
 		});
 	}
+}
+
+//VALIDAR QUE EL PRECIO SOLO TENGA NUMEROS
+const precio = document.querySelector('input[name="precio"]');
+if (precio) {
+    precio.addEventListener('input', function(e) {
+    	e.target.value = funciones.format(e.target.value);
+    });
+}
+
+//CAMBIAR LOS ALUMNOS POR CURSO
+const curso = document.querySelector('select[name="select_cursos"]');
+if (curso) {
+	curso.addEventListener('change', funciones.obtenerAlumnosxCurso);
+}
+
+//VALIDAR AL MOMENTO DE ENVIAR UN MENSAJE
+const formSendMensajes = document.querySelector('form[name="frm-agregar_mensaje"]');
+if (formSendMensajes) {
+	formSendMensajes.addEventListener('submit', funciones.validarMensajes);
+	formSendMensajes.addEventListener('input', funciones.validarMensajes);
+	$(document).change("input", funciones.validarMensajes);
+	$("select").change(funciones.validarMensajes);
 }
 
 

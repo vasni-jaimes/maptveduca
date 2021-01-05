@@ -117,7 +117,7 @@
                                     @foreach($instructors as $instructor)
                                         <option value="{{ $instructor->id }}" 
                                             @if(in_array($instructor->id, old('select_instructores', $myInstructors))) selected @endif>
-                                            {{ $instructor->nombres }}
+                                            {{ $instructor->nombres." ".$instructor->apellidos }}
                                         </option>    
                                     @endforeach
                                 </select>
@@ -171,8 +171,8 @@
                                 <div class="div-subcate">
                                     <select data-placeholder="Subcategorias" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_subcategorias[]">
                                         @foreach($subcategorias as $subcategoria)
-                                            <option value="{{ $career->id }}"
-                                                @if (in_array($subcategoria->id, old('select_carreras', $mySubcategorias))) selected @endif > 
+                                            <option value="{{ $subcategoria->id }}"
+                                                @if (in_array($subcategoria->id, old('select_subcategorias', $mySubcategorias))) selected @endif > 
                                                 {{ $subcategoria->nombre }} 
                                             </option>
                                         @endforeach
@@ -270,7 +270,7 @@
                                         <div class="form-group row mb-5">
                                             <label class="col-sm-2 col-form-label">Material Extra: </label>
                                             <div class="col-sm-10">
-                                                <input id="logo" type="file" name="material_extra[{{ $i }}][]" multiple class="form-control">
+                                                <input id="logo" type="file" name="material_extra[{{ $i }}][]" class="form-control">
                                                 <span class='form-text m-b-none errors'> {!! $errors->first('material_extra.'.$i.'.*') !!} </span>
                                             </div>
 
@@ -337,7 +337,7 @@
                                         <div class="form-group row mb-5">
                                             <label class="col-sm-2 col-form-label">Material Extra: </label>
                                             <div class="col-sm-10">
-                                                <input id="logo" type="file" name="material_extra[{{ $j }}][]" multiple class="form-control">
+                                                <input id="logo" type="file" name="material_extra[{{ $j }}][]" class="form-control">
                                                 <span class='form-text m-b-none errors'> {!! $errors->first('material_extra'). $errors->first('material_extra.'.$j.'.*') !!} </span>
                                             </div>
                                             <div class="col-sm-10 offset-sm-2">
