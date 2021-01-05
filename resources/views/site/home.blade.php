@@ -10,7 +10,7 @@
             
             <div class="banner-inicio">
                 <h2>¡BIENVENID@!</h2>
-                <p>¿No sabes por dónde empezar? Mira aquí</p>
+                <p>¿No sabes por dónde empezar? <a href="#">Mira aquí</a></p>
             </div> <!-- /banner-inicio -->
             
             <div class="banner-slide slide-yellow">

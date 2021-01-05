@@ -32,7 +32,7 @@
 	                </form> <!-- /form -->
 	                <ul class="flex">
 	                    <li>¿Aún no eres miembro?</li>
-	                    <li><a href="{{ route("registro.show") }}">Registrate gratis aquí</a></li>
+	                    <li><a href="{{ route("registro.show") }}">Regístrate gratis aquí</a></li>
 	                </ul> <!-- /flex -->
 	            </div> <!-- /formulario -->
 	        </div>

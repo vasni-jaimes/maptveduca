@@ -588,6 +588,10 @@ header a {
     line-height: 130%;
 }
 
+.banner-inicio p a {
+    color: #ffc314;
+}
+
 .slide-inicio .slick-slide {
     margin: 0 10px;
     outline: none;
@@ -1598,15 +1602,19 @@ video#myVideo {
 }
 
 .formulario ul li {
-    padding: 0 10px;
+    padding: 0 4px;
     line-height: 130%;
 }
 
 .formulario ul li,
 .formulario ul li a {
     font-family: 'Poppins regular';
-    font-size: 16px;
+    font-size: 14px;
     color: #000;
+}
+
+.formulario ul li a {
+    text-decoration: underline;
 }
 
 .row-terminos {
