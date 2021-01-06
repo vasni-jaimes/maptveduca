@@ -43,7 +43,7 @@
                                 MTv
                             </div>
                         </li>
-                        @if (Auth::guard('admins')->user()->id == 1)
+                        @if (Auth::guard('admins')->user()->rol_id == 1)
                             <li>
                                 <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Administradores</span> <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
@@ -99,7 +99,7 @@
                                 <li> <a href="{{ route('mandarMensaje') }}"> Crear Mensaje </a></li>
                             </ul>
                         </li>
-                        @if (Auth::guard('admins')->user()->id == 2)
+                        @if (Auth::guard('admins')->user()->rol_id == 2)
                             <li>
                                 <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Aulas virtuales</span> <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
