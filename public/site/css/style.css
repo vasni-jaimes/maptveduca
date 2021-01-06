@@ -3735,7 +3735,7 @@ span.ico-edit:hover p {
     background-color: #d8d8d8;
 }
 
-.item-mensaje a {
+.item-mensaje > a {
     position: absolute;
     font-family: 'Poppins regular';
     font-size: 12px;

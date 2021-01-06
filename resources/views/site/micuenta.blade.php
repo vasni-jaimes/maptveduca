@@ -45,7 +45,10 @@
                             <li data-seccion="clases"><a href="">Clases en línea</a></li>
                         @endif
                         @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimaSuscripcion()->id == 2)
-                            <li data-seccion="academico"><a href="">Control Académico</a></li>
+                            <li><a href="#">Control Académico</a></li>
+                                <li data-seccion="meterias"><a href="">Materias</a></li>
+                                <li><a href="{{ route('aulas-virtuales.show') }}">Aulas Virtuales</a></li>
+                                <li data-seccion="status"><a href="">Status académico</a></li>
                         @endif
                     </ul>
 
@@ -170,7 +173,7 @@
                                                         </p>
                                                     @endif
                                                     <p><strong>Mensaje:</strong></p>
-                                                    <p>{{ $mensaje->mensaje }}</p>
+                                                    <p>{!! $mensaje->mensaje !!}</p>
                                                 </div> <!-- /txt-mensaje -->
                                                 <a href="javascript:void(0)">Ver mensaje completo</a>
                                             </div> <!-- /item-mensaje -->
@@ -205,7 +208,7 @@
                                                 <div class="txt-mensaje">
                                                     <p><strong>De:</strong> MAPtv Educa </p>
                                                     <p><strong>Notificación:</strong></p>
-                                                    <p> {{ $notificacion->mensaje }} </p>
+                                                    <p> {!! $notificacion->mensaje !!} </p>
                                                 </div> <!-- /txt-mensaje -->
                                                 <a href="javascript:void(0)">Ver mensaje completo</a>
                                             </div> <!-- /item-mensaje -->
@@ -551,7 +554,7 @@
 
                     @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimaSuscripcion()->id == 2)
                     
-                        <div style="margin-bottom: 30px;" data-seccion="academico" class="section">
+                        <div style="margin-bottom: 30px;" data-seccion="meterias" class="section">
                             <h3>Mis materias</h3>
                             <div class="row-favoritos">
                                 <p>AQUÍ ENCONTRARÁS TODOS LOS CURSOS CORRESPONDIENTES A TU PROGRAMA ACADÉMICO, ORDENADOS POR TRIMESTRE EN PROGRESO</p>
@@ -575,6 +578,7 @@
                                 </div>
                             </div> <!-- /row-favoritos -->
                         </div>
+
                     @endif
                     
                 </div> <!-- /wrapper-tablero -->

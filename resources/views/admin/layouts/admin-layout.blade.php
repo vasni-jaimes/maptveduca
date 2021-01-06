@@ -99,6 +99,14 @@
                                 <li> <a href="{{ route('mandarMensaje') }}"> Crear Mensaje </a></li>
                             </ul>
                         </li>
+                        @if (Auth::guard('admins')->user()->id == 2)
+                            <li>
+                                <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Aulas virtuales</span> <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="{{ route('listado-materias.index') }}"> Lista de Materias </a></li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </nav>

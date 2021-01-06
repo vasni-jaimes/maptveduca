@@ -99,13 +99,15 @@ class UsersController extends Controller
                             ->get();
 
         /* MENSAJES */
-        $mensajes = Mensaje::with(['admin'])->where('user_id', auth()->user()->id)->get();
+        $mensajes = Mensaje::with(['admin'])
+                        ->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
         /* HISTORIAL DE PAGOS */
         $pagos = UsuarioMembresia::with(['membresia', 'evento', 'curso'])->get();
 
         /* NOTIFICACIONES */
-        $notificaciones = Notificacion::where('user_id', auth()->user()->id)->where('user_id', 0)->get();
+        $notificaciones = Notificacion::where('user_id', auth()->user()->id)
+                            ->orWhere('user_id', 0)->orderBy('created_at', 'desc')->get();
 
     	return view('site.micuenta', compact("favoritosCursos", "favoritosEventos", "favoritosClases", "materias", "tableroCursos", "tableroEventos", "eventosOld", "tituloTrimestre", "mensajes", "pagos", "notificaciones"));
     }
@@ -126,6 +128,18 @@ class UsersController extends Controller
         else if (count($pagos) > 9 && count($pagos) <= 12) {
             return "4to Trimestre";
         }
+        else if (count($pagos) > 12 && count($pagos) <= 15) {
+            return "5to Trimestre";
+        }
+        else if (count($pagos) > 15 && count($pagos) <= 18) {
+            return "6to Trimestre";
+        }
+        else if (count($pagos) > 18 && count($pagos) <= 21) {
+            return "7mo Trimestre";
+        }
+        else if (count($pagos) > 21 && count($pagos) <= 24) {
+            return "8vo Trimestre";
+        }
     }
 
     protected function cursosPorTrimestre()
@@ -141,7 +155,6 @@ class UsersController extends Controller
                         ->where('trimestre', 1)
                         ->get();
         }
-
         else if (count($pagos) > 3 && count($pagos) <= 6) {
             return Recomendacion::with(['cursos' => function($query){
                             $query->where('status', 1);
@@ -150,7 +163,6 @@ class UsersController extends Controller
                         ->where('trimestre', 2)
                         ->get();
         }
-
         else if (count($pagos) > 6 && count($pagos) <= 9) {
             return Recomendacion::with(['cursos' => function($query){
                             $query->where('status', 1);
@@ -159,13 +171,44 @@ class UsersController extends Controller
                         ->where('trimestre', 3)
                         ->get();
         }
-
         else if (count($pagos) > 9 && count($pagos) <= 12) {
             return Recomendacion::with(['cursos' => function($query){
                             $query->where('status', 1);
                         }])
                         ->where('carrera_id', auth()->user()->obtenerCarrera())
                         ->where('trimestre', 4)
+                        ->get();
+        }
+        else if (count($pagos) > 12 && count($pagos) <= 15) {
+            return Recomendacion::with(['cursos' => function($query){
+                            $query->where('status', 1);
+                        }])
+                        ->where('carrera_id', auth()->user()->obtenerCarrera())
+                        ->where('trimestre', 5)
+                        ->get();
+        }
+        else if (count($pagos) > 15 && count($pagos) <= 18) {
+            return Recomendacion::with(['cursos' => function($query){
+                            $query->where('status', 1);
+                        }])
+                        ->where('carrera_id', auth()->user()->obtenerCarrera())
+                        ->where('trimestre', 6)
+                        ->get();
+        }
+        else if (count($pagos) > 18 && count($pagos) <= 21) {
+            return Recomendacion::with(['cursos' => function($query){
+                            $query->where('status', 1);
+                        }])
+                        ->where('carrera_id', auth()->user()->obtenerCarrera())
+                        ->where('trimestre', 7)
+                        ->get();
+        }
+        else if (count($pagos) > 21 && count($pagos) <= 24) {
+            return Recomendacion::with(['cursos' => function($query){
+                            $query->where('status', 1);
+                        }])
+                        ->where('carrera_id', auth()->user()->obtenerCarrera())
+                        ->where('trimestre', 8)
                         ->get();
         }
     }

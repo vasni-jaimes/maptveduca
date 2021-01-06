@@ -2,6 +2,7 @@
 
 
 namespace App\Helpers;
+use DB;
 
 class Helper
 {
@@ -47,5 +48,11 @@ class Helper
         }
 
         return false;
+    }
+
+
+    public function contarAlumnos($curso_id)
+    {
+        return DB::table('tablero_cursos')->where('curso_id', $curso_id)->count();
     }
 }

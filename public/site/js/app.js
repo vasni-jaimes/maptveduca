@@ -371,6 +371,15 @@ var funciones = {
   micuentaActive: function micuentaActive(e) {
     e.preventDefault();
     var seccion = e.target.parentNode.getAttribute('data-seccion');
+
+    if (seccion == null) {
+      if (e.target.getAttribute('href') != '#') {
+        window.location.href = e.target.getAttribute('href');
+      }
+
+      return false;
+    }
+
     $('.wrapper-tablero div.section').removeClass('active');
     $('.wrapper-tablero div.section[data-seccion=' + seccion + ']').addClass('active');
 

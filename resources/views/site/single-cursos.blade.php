@@ -62,7 +62,7 @@
                     <div class="single-contenido">
                         
                         <div class="txt-single">
-                            <h3>{{ $clase['nombre_video'] }}</h3>
+                            <h3>{{ $curso->nombre }}</h3>
                             <p>Producción musical / {{ $curso->extra ? "CURSO EXTRA" : "CURSO BASE" }} / Profesor titular: {{ $curso->instructor[0]->nombres. " ".$curso->instructor[0]->apellidos }} </p>
                         </div> <!-- /txt-single -->
                         
