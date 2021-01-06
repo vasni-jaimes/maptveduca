@@ -10,7 +10,7 @@
             
             <div class="banner-inicio">
                 <h2>¡BIENVENID@!</h2>
-                <p>¿No sabes por dónde empezar? <a href="#">Mira aquí</a></p>
+                <p>¿No sabes por dónde empezar? <a href="{{ route("guia-estudio") }}">Mira aquí</a></p>
             </div> <!-- /banner-inicio -->
             
             @if ($cursos->count() > 0)
@@ -152,7 +152,7 @@
                                 <img src="/site/img/ico-clasica.png">
                                 <h3>Membresía Básica</h3>
                                 <div>
-                                    <p>¡PRÓXIMAMENTE!</p>
+                                    <p><strong>¡PRÓXIMAMENTE!</strong></p>
                                     <p>Esta membresía te permite tomar los cursos que quieras, a tu ritmo.</p>
                                     <p>También te da acceso a los eventos básicos, que incluyen clínicas y conciertos/masterclass.</p>
                                     <p>Te da acceso a una guía de estudio para que sepas cómo aprovechar al máximo nuestro contenido.</p>
@@ -176,7 +176,7 @@
                                     </ul>
                                     <p>Esta membresía también te da acceso todos los cursos de MAPtv Educa, aunque no pertenezcan a tu plan de estudios, además de a los eventos básicos, que incluyen clínicas y conciertos/masterclass.</p>
                                     <p>Inicio de cursos: Enero 2021</p>
-                                    <a class="btn-amarillo" href="#">¡Me interesa!</a>
+                                    <a class="btn-amarillo" href="{{ route("membresias.index") }}">¡Me interesa!</a>
                                 </div>
                             </li>
                         </ul>
@@ -195,9 +195,9 @@
                 <div class="row-maptv">
                     
                     <ul class="flex between flex-logos">
-                        <li><img src="/site/img/logo-map.png"></li>
-                        <li><img src="/site/img/logo-recording.png"></li>
-                        <li><img src="/site/img/logo-maptv.png"></li>
+                        <li><a href="{{ route("nosotros.index") }}"><img src="/site/img/logo-map.png"></a></li>
+                        <li><a href="{{ route("nosotros.index") }}"><img src="/site/img/logo-recording.png"></a></li>
+                        <li><a href="{{ route("nosotros.index") }}"><img src="/site/img/logo-maptv.png"></a></li>
                     </ul> <!-- /flex -->
                     
                 </div> <!-- /row-maptv -->

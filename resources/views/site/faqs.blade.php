@@ -8,7 +8,7 @@
 
     <section class="nosotros">
     
-        <div class="banner-cursos"></div> <!-- /banner-cursos -->
+        <div class="banner-faqs"></div> <!-- /banner-cursos -->
         
         <div class="titulo-banner">
             <h1>Faq / Contacto</h1>
@@ -27,15 +27,71 @@
                     <div class="row-faqs">
 
                         <div class="titulo-faq">
-                            <p>¿Pregunta 1?</p>
+                            <p>¿De dónde surge maptv educa?</p>
                         </div> <!-- /titulo-faq -->
                         
                         <div class="respuesta-faq">
                             <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
                         </div> <!-- /respuesta-faq -->
                         
-                         <div class="titulo-faq">
-                            <p>¿Pregunta 2?</p>
+                        <div class="titulo-faq">
+                            <p>Quiero estudiar mi carrera técnica ¿Cómo me inscribo?</p>
+                        </div> <!-- /titulo-faq -->
+                        
+                        <div class="respuesta-faq">
+                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                        </div> <!-- /respuesta-faq -->
+                        
+                        <div class="titulo-faq">
+                            <p>¿Qué ventajas me da maptv educa para estudiar?</p>
+                        </div> <!-- /titulo-faq -->
+                        
+                        <div class="respuesta-faq">
+                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                        </div> <!-- /respuesta-faq -->
+                        
+                        <div class="titulo-faq">
+                            <p>¿Qué herramientas tengo como estudiante?</p>
+                        </div> <!-- /titulo-faq -->
+                        
+                        <div class="respuesta-faq">
+                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                        </div> <!-- /respuesta-faq -->
+                        
+                        <div class="titulo-faq">
+                            <p>¿Puedo estudiar música en maptv educa?</p>
+                        </div> <!-- /titulo-faq -->
+                        
+                        <div class="respuesta-faq">
+                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                        </div> <!-- /respuesta-faq -->
+                        
+                        <div class="titulo-faq">
+                            <p>¿Maptv educa tiene instalaciones presenciales?</p>
+                        </div> <!-- /titulo-faq -->
+                        
+                        <div class="respuesta-faq">
+                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                        </div> <!-- /respuesta-faq -->
+                        
+                        <div class="titulo-faq">
+                            <p>¿Qué hago si no cuento con el material para estudiar?</p>
+                        </div> <!-- /titulo-faq -->
+                        
+                        <div class="respuesta-faq">
+                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                        </div> <!-- /respuesta-faq -->
+                        
+                        <div class="titulo-faq">
+                            <p>¿Qué hago si tengo un problema con la plataforma?</p>
+                        </div> <!-- /titulo-faq -->
+                        
+                        <div class="respuesta-faq">
+                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                        </div> <!-- /respuesta-faq -->
+                        
+                        <div class="titulo-faq">
+                            <p>¿Cómo funcionan los pagos?</p>
                         </div> <!-- /titulo-faq -->
                         
                         <div class="respuesta-faq">

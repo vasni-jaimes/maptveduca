@@ -67,31 +67,23 @@ $(document).ready(function(){
     $('.slide-cursos').slick({
       dots: false,
       arrows: true,
-      slidesToShow: 6,
+      slidesToShow: 5,
       responsive: [
         {
           breakpoint: 850,
-          settings: {
-            slidesToShow: 5
-          }
-        },
-        {
-          breakpoint: 768,
           settings: {
             slidesToShow: 4
           }
         },
         {
-          breakpoint: 600,
+          breakpoint: 768,
           settings: {
             slidesToShow: 3
           }
         },
         {
-          breakpoint: 480,
+          breakpoint: 600,
           settings: {
-            arrows: false,
-            dots: true,
             slidesToShow: 2
           }
         }
