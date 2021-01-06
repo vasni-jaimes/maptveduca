@@ -95,7 +95,7 @@ class RegisterController extends Controller
     protected function sendMensajeBienvenida($usr)
     {
         $mensaje = new Mensaje();
-        $mensaje->admin_id = 1
+        $mensaje->admin_id = 1;
         $mensaje->user_id = $usr->id;
         $mensaje->mensaje = "<strong>Hola ".$usr->nombre." ".$usr->apaterno."</strong>";
         $mensaje->mensaje .= "<br> Bienvenid@ a nuesta plataforma, esperemos que te agrade y puedas obtener una suscripcion pronto.";
