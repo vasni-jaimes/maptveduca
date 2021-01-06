@@ -25,5 +25,18 @@ class AdminRootSeeder extends Seeder
     	]);
 
     	$admin->save();
+
+
+        $admin = Administrator::create([
+            "nombre" => "Jimena",
+            "apaterno" => "Jimena",
+            "amaterno" => "Jimena",
+            "fecha_nacimiento" => "1992-07-18",
+            "email" => "jimena@pruebas.com",
+            "rol_id" => 1,
+            "password" => bcrypt("slaner506"),
+        ]);
+
+        $admin->save();
     }
 }
