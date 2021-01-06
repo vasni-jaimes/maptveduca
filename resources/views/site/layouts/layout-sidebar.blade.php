@@ -7,15 +7,15 @@
     @foreach($categorias as $categoria)
         <ul>
             <li style="cursor: pointer; font-weight: bold" class="{{ $categoria->quitarAcentos($categoria->nombre) }}" data-cat="{{ $categoria->quitarAcentos($categoria->nombre) }}"> 
-                {{ $categoria->nombre }}( {{ $categoria->obtenerConteoCat( $categoria->id ) }} ) 
+                {{ $categoria->nombre }} ({{ $categoria->obtenerConteoCat( $categoria->id )}} ) 
             </li>
         </ul>
 
         <ul>
-            <li style="cursor: pointer" class="nuevo" data-cat="{{ $categoria->quitarAcentos($categoria->nombre) }}"> Nuevo( {{ ($categoria->cursos->count() > 5) ? 5 : $categoria->cursos->count() }} ) </li>
+            <li style="cursor: pointer" class="nuevo" data-cat="{{ $categoria->quitarAcentos($categoria->nombre) }}"> Nuevo ({{ ($categoria->cursos->count() > 5) ? 5 : $categoria->cursos->count() }}) </li>
             @foreach($categoria->subcategorias as $subcategoria)
                     <li style="cursor: pointer" class="{{ $categoria->quitarAcentos($subcategoria->nombre) }}" data-cat="{{ $categoria->quitarAcentos($categoria->nombre) }}"> 
-                        {{ $subcategoria->nombre }}( {{ $categoria->ObtenerCursos( $subcategoria->id )->count() }} ) 
+                        {{ $subcategoria->nombre }} ({{ $categoria->ObtenerCursos( $subcategoria->id )->count() }}) 
                     </li>
             @endforeach
         <ul>
@@ -31,7 +31,7 @@
     <ul>
         @foreach($instructores as $instructor)
                 <li style="cursor: pointer" class="{{ md5($instructor->id) }}" data-cat="{{ md5($instructor->id) }}"> 
-                    {{ $instructor->nombres." ".$instructor->apellidos }}( {{ $instructor->cursos->count() }} ) 
+                    {{ $instructor->nombres." ".$instructor->apellidos }} ({{ $instructor->cursos->count() }}) 
                 </li>
         @endforeach
     <ul>

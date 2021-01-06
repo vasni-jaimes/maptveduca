@@ -147,10 +147,10 @@
                     
                     <div class="row-botones">
                         
-                        <div class="banner-botones">
+                        <a href="{{ route("guia-estudio") }}" class="banner-botones">
                             <h4>¿PRIMERA VEZ ESTUDIANDO EN LÍNEA?</h4>
                             <p>Te damos algunas recomendaciones para que aproveches al máximo esta experiencia.</p>
-                        </div> <!-- /banner-botones -->
+                        </a> <!-- /banner-botones -->
                         
                     </div> <!-- /row-botones -->
 

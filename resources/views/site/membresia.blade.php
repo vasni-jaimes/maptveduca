@@ -27,7 +27,7 @@
                                 <li>Carrera Técnica en Producción Musical</li>
                                 <!--<li>Carrera Técnica en Música</li>-->
                             </ul>
-                            <p>Este programa es parte de la oferta académica presencial en M.A.P. Colegio de Música, Audio y Producción (Puebla, México). Hemos trasladado a esta plataforma el contenido de este programa para que puedas cursarlo de manera virtual, teniendo además la posibilidad de obtener retroalimentación semanal directamente con el profesor titular de cada curso y medir tu progreso con evaluaciones periódicas.</p>
+                            <p>Este programa es parte de la oferta académica presencial en M.A.P. Colegio de Música, Audio y Producción (Puebla, México). Hemos trasladado a esta plataforma el contenido de este programa para que puedas cursarlo de manera virtual, teniendo además la posibilidad de obtener <strong>retroalimentación semanal directamente con el profesor titular de cada curso</strong> y medir tu progreso con evaluaciones periódicas.</p>
                         </div> <!-- /col-6 -->
 
                         <div class="col-6">
@@ -39,8 +39,8 @@
                     </div> <!-- /flex -->
 
                     <div class="txt-columna text-center">
-                        <p>Al finalizar tu carrera técnica recibirás un certificado de parte de M.A.P. Colegio de Música, Audio y Producción (Incorporado a SEP)</p>
-                        <p>Mira cómo funciona cada programa:</p>
+                        <p>Al finalizar tu carrera técnica recibirás un certificado de parte de M.A.P. Colegio de Música, Audio y Producción <br>(Incorporado a SEP)</p>
+                        <p>Mira cómo funciona la carrera técnica:</p>
                     </div> <!-- /text-center -->
                     
                 </div> <!-- /row-columnas -->
@@ -63,7 +63,7 @@
                             </ul>
                             <p><strong>COSTO: </strong>$2,000.00 MXN mensuales</p>
                             <p><strong>CERTIFICACIÓN: </strong></p>
-                            <p>Certificado con validez oficial expedido por M.A.P. Colegio de Música, Audio y Producción (Incorporado a SEP)</p>
+                            <p>Certificado con validez oficial expedido por M.A.P. Colegio de Música, Audio y Producción <br>(Incorporado a SEP)</p>
                         </div> <!-- /txt-programa -->
                         <a class="btn-amarillo" href="#">Plan de estudios</a>
                         <div class="row-planes">
@@ -259,16 +259,16 @@
                 </div> <!-- /row-programas -->
                 
                 <div class="wrapper-academica">
+
+                    <h2>¿Qué obtengo con la membresía académica?</h2>
                     
-                    <div class="hoja-800">
-                    
-                        <h2>¿Qué obtengo con la membresía académica?</h2>
+                    <div class="hoja-700">
 
                         <table style="width: 100%; border-spacing: 10px; border-collapse: separate; table-layout: fixed;">
                             <tr>
                                 <th>&nbsp</th>
                                 <!--<th>Membresía básica</th>-->
-                                <th>Membresía académica <span>Estudia una carrera técnica en línea</span></th>
+                                <th>Membresía académica <span>Carrera técnica en producción musical</span></th>
                             </tr>
                             <tr>
                                 <td>Acceso a cursos base</td>

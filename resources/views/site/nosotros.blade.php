@@ -8,7 +8,7 @@
 
     <section class="nosotros">
     
-        <div class="banner-cursos"></div> <!-- /banner-cursos -->
+        <div class="banner-nosotros"></div> <!-- /banner-cursos -->
         
         <div class="titulo-banner">
             <h1>Nosotros</h1>

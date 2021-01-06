@@ -542,6 +542,8 @@ header a {
 }
 
 .menu {
+    width: 100%;
+    padding: 0 5%;
     margin: 5px 0 0;
 }
 
@@ -586,6 +588,10 @@ header a {
     color: #ffc314;
     text-shadow: 3px 3px 7px #000;
     line-height: 130%;
+}
+
+.banner-inicio p a {
+    color: #ffc314;
 }
 
 .slide-inicio .slick-slide {
@@ -1041,6 +1047,7 @@ video#myVideo {
     padding: 140% 0 0;
     border: 0;
     margin: 0;
+    box-shadow: none;
 }
 
 .banner-slide h2 {
@@ -1264,6 +1271,10 @@ video#myVideo {
     text-align: center;
 }
 
+.row-contenido ul li p strong {
+    font-family: 'Poppins semibold';
+}
+
 .row-contenido ul li ul {
     padding: 0 0 20px 15px;
 }
@@ -1271,7 +1282,7 @@ video#myVideo {
 .row-contenido ul li ul li {
     position: relative;
     padding-left: 15px;
-    font-family: 'Poppins light';
+    font-family: 'Poppins semibold';
     font-size: 16px;
     line-height: 130%;   
 }
@@ -1344,7 +1355,7 @@ video#myVideo {
 /*----------------------------------  CONTENIDO Funciona  ----------------------------------*/
 
 .wrapper-academica {
-    padding: 50px 0 0;
+    padding: 50px 0;
 }
 
 .wrapper-academica h2 {
@@ -1422,8 +1433,9 @@ video#myVideo {
 
 .wrapper-academica table tr.last-tr td {
     padding: 0;
+    border: 1px solid #000;
     color: #fff;
-    background-color: #afafaf;
+    background-color: #000;
     text-align: center;
 }
 
@@ -1598,15 +1610,19 @@ video#myVideo {
 }
 
 .formulario ul li {
-    padding: 0 10px;
+    padding: 0 4px;
     line-height: 130%;
 }
 
 .formulario ul li,
 .formulario ul li a {
     font-family: 'Poppins regular';
-    font-size: 16px;
+    font-size: 14px;
     color: #000;
+}
+
+.formulario ul li a {
+    text-decoration: underline;
 }
 
 .row-terminos {
@@ -1668,6 +1684,22 @@ video#myVideo {
     background-image: url('/site/img/sitio/filming.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: bottom center;
+}
+
+.banner-nosotros {
+    padding: 25% 0 0;
+    background-image: url('/site/img/sitio/consola3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-faqs {
+    padding: 25% 0 0;
+    background-image: url('/site/img/sitio/consola1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     background-position: center;
 }
 
@@ -1709,7 +1741,7 @@ video#myVideo {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     width: 20%;
-    padding: 30px 15px;
+    padding: 30px 10px;
     border: 1px solid #666666;
 }
 
@@ -1811,6 +1843,11 @@ video#myVideo {
 .slide-cursos {
     position: relative;
     padding: 0 33px 0 30px;
+}
+
+.slide-cursos .slick-track {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .slide-cursos .slick-slide {
@@ -1995,6 +2032,7 @@ video#myVideo {
 }
 
 .banner-botones {
+    display: block;
     margin: 25px 0 0;
     padding: 30px 15px;
     background-image: url('/site/img/banner-botones.png');
@@ -2297,7 +2335,12 @@ video#myVideo {
     margin: 20px 0 0;
 }
 
+.txt-single:first-of-type {
+    margin: 0;
+}
+
 .txt-single h3 {
+    margin: 0 0 10px;
     font-family: 'Oswald medium';
     font-size: 28px;
     color: #000;
@@ -2340,6 +2383,10 @@ span.txt-yellow {
     font-size: 14px;
     line-height: 150%;
 }
+
+.descripcion-single p:last-of-type {
+    padding: 0;
+} 
 
 
 
@@ -2447,6 +2494,7 @@ section.membresia {
 } 
 
 .txt-programa ul li {
+    margin: 0 0 5px;
     font-family: 'Poppins regular';
     font-size: 16px;
     text-align: center;
@@ -2477,6 +2525,9 @@ section.membresia {
 
 .item-plan {
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .item-plan h4 {
@@ -2490,12 +2541,23 @@ section.membresia {
 }
 
 .item-plan p {
-    padding: 12px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: flex;
+    min-height: 56px;
+    padding: 8px 12px;
     font-family: 'Poppins regular';
-    font-size: 16px;
+    font-size: 15px;
     text-align: center;
     border: 1px solid #ffc314;
     line-height: 130%;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+
 }
 
 .wrapper-herramienta {
@@ -2776,7 +2838,7 @@ section.membresia {
     margin: 50px 0 0;
     padding: 15px 4%;
     font-family: 'Poppins semibold';
-    font-size: 22px;
+    font-size: 18px;
     border-radius: 54px;
     background-color: #FFC314;
     text-decoration: none;
