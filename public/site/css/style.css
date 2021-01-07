@@ -415,6 +415,7 @@ body {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     display: block;
+    position: relative;
     max-width: 1230px;
     width: 100%;
     margin: auto;
@@ -532,36 +533,158 @@ header a {
 /*----------------------------------  HEADER  ----------------------------------*/
 
 .menu-general {
-    padding: 10px 0;
+    position: relative;
     background-color: #000;
+    z-index: 1;
 }
 
 .menu-general img {
     max-width: 247px;
     width: 100%;
+    padding: 10px 0;
 }
 
 .menu {
     width: 100%;
     padding: 0 5%;
-    margin: 5px 0 0;
 }
 
-.menu li {
+.menu > li {
+    display: flex;
+    position: static;
+    height: 100%;
     margin: 0 8px;
+    align-items: center;
+}
+
+.menu-child {
+    display: none;
+    position: absolute;
+    top: 94px;
+    padding: 25px;
+    background-color: #000;
+}
+
+.menu-child > ul > li {
+    margin: 0 0 0 25px;
+}
+
+.menu-child > ul > li:first-of-type {
+    margin: 0;
+}
+
+.menu-child > ul > li > span {
+    display: block;
+    margin: 20px 0 15px;
+    color: #ffb514;
+    font-family: 'Oswald demi bold';
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.menu-child > ul > li > span:first-of-type {
+    margin: 0 0 15px;
+}
+
+.menu-child ul li a {
+    color: #fff;
+    font-size: 12px;
+    font-family: 'Poppins medium';
+}
+
+.item-child li a {
+    margin: 0 0 10px;
+}
+
+.item-child li span {
+    display: block;
+    margin: 20px 0 10px;
+    color: #ffb514;
+    font-family: 'Oswald demi bold';
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.item-child li:first-of-type span {
+    margin: 0 0 10px;
+}
+
+.parent:hover .menu-child {
+    display: block;
 }
 
 .mm-navbar__title,
-.menu li a {
+.menu > li > a {
     color: #fff;
     font-family: 'Poppins semibold';
     font-size: 15px;
     letter-spacing: 0.34px;
 }
 
+.menu > li > a:hover {
+    color: #ffb514;
+}
+
+.ico-login {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.ico-login {
+    position: static;
+}
+
 .ico-login img {
     width: 40px;
     height: auto;
+}
+
+.menu-user {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: none;
+    position: absolute;
+    top: 74px;
+    right: 0;
+    padding: 10px;
+    background-color: #FFB515;
+    border-radius: 8px;
+}
+
+.menu-user p {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 12px;
+    font-family: 'Poppins regular';
+    text-align: center;
+    line-height: 130%;
+}
+
+.menu-user ul {
+    margin: 15px 0 10px;
+}
+
+.menu-user ul li {
+    margin: 0 0 6px;
+}
+
+.menu-user ul li:last-of-type {
+    margin: 0;
+}
+
+.menu-user ul li a {
+    display: block;
+    font-size: 10px;
+    font-family: 'Poppins medium';
+    color: #000;
+    text-align: center;
+}
+
+.ico-login:hover .menu-user {
+    display: block;
 }
 
 .banner-inicio {

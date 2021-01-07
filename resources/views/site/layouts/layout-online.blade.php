@@ -17,12 +17,76 @@
 		<div class="page">
 			<div class="menu-general">
 			    <div class="hoja-1200">
-			        <div class="flex flex-center between">
+			        <div class="flex between">
 			            <img src="/site/img/logo-amarillo.png">
-			            <ul class="flex between menu">
+			            <ul class="flex flex-center between menu">
 			                <li><a href="{{ route("home") }}">Inicio</a></li>
-			                <li><a href="{{ route("cursos") }}">Cursos</a></li>
-			                <li><a href="{{ route("membresias.index") }}">Membresías</a></li>
+			                <li class="parent">
+                                <a href="{{ route("cursos") }}">Cursos</a>
+                                <div class="menu-child">
+                                    <ul class="flex">
+                                        <li>
+                                            <span>Producción musical</span>
+                                            <ul class="item-child">
+                                                <li><span>Guía de estudio</span></li>
+                                                <li><a href="#">Cursos base</a></li>
+                                                <li><a href="#">Cursos extra</a></li>
+                                                <li><span>Área</span></li>
+                                                <li><a href="#">Grabación</a></li>
+                                                <li><a href="#">Mezcla</a></li>
+                                                <li><a href="#">DAW'S</a></li>
+                                                <li><span>Nivel</span></li>
+                                                <li><a href="#">Principiante</a></li>
+                                                <li><a href="#">Intermedio</a></li>
+                                                <li><a href="#">Avanzado</a></li>
+                                                <li><span>Profesor</span></li>
+                                                <li><a href="#">Profesor 1</a></li>
+                                                <li><a href="#">Profesor 2</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <span>Música</span>
+                                            <ul class="item-child">
+                                                <li><a href="#">Cursos base</a></li>
+                                                <li><a href="#">Cursos extra</a></li>
+                                                <li><span>Área</span></li>
+                                                <li><a href="#">Teoría</a></li>
+                                                <li><a href="#">Solfeo</a></li>
+                                                <li><a href="#">Composición</a></li>
+                                                <li><a href="#">Análisis</a></li>
+                                                <li><a href="#">Ensamble</a></li>
+                                                <li><span>Instrumento</span></li>
+                                                <li><a href="#">Canto</a></li>
+                                                <li><a href="#">Piano</a></li>
+                                                <li><a href="#">Guitarra</a></li>
+                                                <li><a href="#">Bajo</a></li>
+                                                <li><a href="#">Batería</a></li>
+                                                <li><span>Profesor</span></li>
+                                                <li><a href="#">Profesor 1</a></li>
+                                                <li><a href="#">Profesor 2</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <span>Nuevo</span>
+                                            <ul class="item-child">
+                                                <li><a href="#">Últimos agregados</a></li>
+                                            </ul>
+                                            <span>Music business</span>
+                                            <ul class="item-child">
+                                                <li><a href="#">Últimos agregados</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div> <!-- /menu-child -->
+                            </li>
+			                <li class="parent">
+                                <a href="{{ route("membresias.index") }}">Membresías</a>
+                                <div class="menu-child">
+                                    <ul class="flex">
+                                        <li><a href="#">Membresía académica</a></li>
+                                    </ul>
+                                </div>
+                            </li>
 			                <li><a href="{{ route("clases-linea.index") }}">Clases en línea</a></li>
 			                <li><a href="{{ route("eventos.index") }}">Eventos</a></li>
 			                <li><a href="{{ route("nosotros.index") }}">Nosotros</a></li>
@@ -42,7 +106,16 @@
 			                    <span class="icon-bar hamburger-bun bun-btm"></span>
 			                </a>
 			            </div> <!-- /toggle -->
-			            <a class="ico-login" href="#"><img src="/site/img/ico-user.png"></a>
+                        <div class="ico-login">
+                            <a href="#"><img src="/site/img/ico-user.png"></a>
+                            <div class="menu-user">
+                                <p>Hola, Usuario</p>
+                                <ul>
+                                    <li><a href="#">Tablero</a></li>
+                                    <li><a href="#">Cerrar sesión</a></li>
+                                </ul>
+                            </div> <!-- /menu-user -->
+                        </div> <!-- /ico-login -->
 			        </div> <!-- /flex -->
 			    </div> <!-- /hoja-1200 -->
 			</div> <!-- /menu-general -->
