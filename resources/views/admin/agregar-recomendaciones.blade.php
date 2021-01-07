@@ -172,6 +172,75 @@
                         </div>
 
 
+                        <h2> Quinto Trimestre </h2><br>
+                        
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> cursos: </label>
+                            <div class="col-sm-10 mb-3">
+                                <select data-placeholder="Cursos" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_cursos_quinto[]">
+                                    @foreach($cursos as $curso)
+                                        <option value="{{ $curso->id }}" @if(in_array($curso->id, old('select_cursos_quinto', $tri5))) selected @endif>
+                                            {{ $curso->nombre }}
+                                        </option>    
+                                    @endforeach
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_cursos_quinto.*') !!} </span>
+                            </div>
+                        </div>
+
+
+
+                        <h2> Sexto Trimestre </h2><br>
+                        
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> cursos: </label>
+                            <div class="col-sm-10 mb-3">
+                                <select data-placeholder="Cursos" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_cursos_sexto[]">
+                                    @foreach($cursos as $curso)
+                                        <option value="{{ $curso->id }}" @if(in_array($curso->id, old('select_cursos_sexto', $tri6))) selected @endif>
+                                            {{ $curso->nombre }}
+                                        </option>    
+                                    @endforeach
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_cursos_sexto.*') !!} </span>
+                            </div>
+                        </div>
+
+
+                        <h2> Septimo Trimestre </h2><br>
+                        
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> cursos: </label>
+                            <div class="col-sm-10 mb-3">
+                                <select data-placeholder="Cursos" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_cursos_septimo[]">
+                                    @foreach($cursos as $curso)
+                                        <option value="{{ $curso->id }}" @if(in_array($curso->id, old('select_cursos_septimo', $tri7))) selected @endif>
+                                            {{ $curso->nombre }}
+                                        </option>    
+                                    @endforeach
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_cursos_septimo.*') !!} </span>
+                            </div>
+                        </div>
+
+
+                        <h2> Octavo Trimestre </h2><br>
+                        
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> cursos: </label>
+                            <div class="col-sm-10 mb-3">
+                                <select data-placeholder="Cursos" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_cursos_octavo[]">
+                                    @foreach($cursos as $curso)
+                                        <option value="{{ $curso->id }}" @if(in_array($curso->id, old('select_cursos_octavo', $tri8))) selected @endif>
+                                            {{ $curso->nombre }}
+                                        </option>    
+                                    @endforeach
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_cursos_octavo.*') !!} </span>
+                            </div>
+                        </div>
+
+
                         <div class="hr-line-dashed"></div>
 
                         <div class="form-group row">

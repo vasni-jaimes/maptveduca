@@ -179,7 +179,7 @@ class CheckoutController extends Controller
     protected function MensajeBienvenidaSuscripcion()
     {
         $mensaje = new Mensaje();
-        $mensaje->admin_id = 1
+        $mensaje->admin_id = 1;
         $mensaje->user_id = auth()->user()->id;
         $mensaje->mensaje = "<strong>Hola ".auth()->user()->nombre." ".auth()->user()->apaterno."</strong>";
         $mensaje->mensaje .= "<br> En hora buena, ahora podras disfrutar de nuestro contenido libremente.";

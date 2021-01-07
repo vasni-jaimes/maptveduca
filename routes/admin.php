@@ -75,3 +75,10 @@ Route::post('editar-recomendaciones/{recom_id}', 'Admin\RecomendacionesControlle
 Route::get('agregar-mensaje', 'Admin\MensajesController@mandarMensaje')->name('mandarMensaje');
 Route::post('agregar-mensaje', 'Admin\MensajesController@sendMensaje')->name('sendMensaje');
 Route::post('buscar-alumnos', 'Admin\MensajesController@searchAlumnos')->name('searchAlumnos');
+
+
+//AULAS VIRTUALES
+Route::get('listado-materias', 'Admin\AulasVirtualesController@index')->name('listado-materias.index');
+Route::get('aula-virtual/{slug}', 'Admin\AulasVirtualesController@create')->name('aula-virtual.create');
+Route::post('aula-virtual/{curso_id}/{sesion_id}', 'Admin\AulasVirtualesController@store')->name('aula-virtual.store');
+Route::post('aula-virtual-respuesta/{publicacion_id}', 'Admin\AulasVirtualesController@respuestaStore')->name('aula-virtual-respuesta.store');

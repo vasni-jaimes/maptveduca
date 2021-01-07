@@ -27,4 +27,5 @@ class Course extends Model
     {
     	return $this->belongsToMany('App\Career', 'courses_careers');
     }
+
 }

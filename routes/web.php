@@ -72,6 +72,11 @@ Route::post('usuario/empezarCurso', 'Site\CursosController@agregarTablero')->nam
 //TABLERO EVENTOS
 Route::post('usuario/registrarEvento', 'Site\EventosControllers@agregarTablero')->name('user.agregarTableroEvento');
 
+//AULAS VIRTUALES
+Route::get('aulas-virtuales', 'Site\AulasVirtualesController@showAulas')->name('aulas-virtuales.show');
+Route::get('aula-virtual/{user_id}', 'Site\AulasVirtualesController@showAula')->name('aula-virtual.show');
+Route::post('aula-virtual-respuesta/{publicacion_id}', 'Site\AulasVirtualesController@respuestaStore')->name('aula-virtual-web.store');
+
 
 
 
