@@ -175,6 +175,12 @@ $(document).ready(function(){
         $(this).toggleClass("arrow-tab");   
         $(this).next('.respuesta-faq').slideToggle(500);
     });
+    
+    $('.item-itinerario h4').click(function(e) {    
+        e.preventDefault();
+        $(this).toggleClass("active");   
+        $(this).next('.item-itinerario ul').slideToggle(500);
+    });
 
     $('.wrapper-academica table').stacktable();
     

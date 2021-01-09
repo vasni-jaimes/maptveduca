@@ -126,7 +126,7 @@
                                             @endif
                                         @endfor
                                     @else
-                                        <p> No tienes ninguna suscripcion activa </p>
+                                        <p>No tienes ninguna suscripcion activa</p>
                                     @endif
                                 </div> <!-- /item-perfil -->
                             </div> <!-- /flex -->
@@ -165,7 +165,7 @@
                                 <div class="s-tab tab-1">
                                     @forelse($mensajes as $mensaje)
                                         <div class="item-inbox">
-                                            <span> {{ $mensaje->FormatoLetras($mensaje->created_at) }}</span>
+                                            <p><small class="notificacion"></small><span>{{ $mensaje->FormatoLetras($mensaje->created_at) }}</span></p>
                                             <div class="item-mensaje">
                                                 <div class="txt-mensaje">
                                                     @if ($mensaje->admin->id == 1)
@@ -207,7 +207,7 @@
                                 <div class="s-tab tab-2">
                                     @forelse($notificaciones as $notificacion)
                                         <div class="item-inbox">
-                                            <span> {{ $notificacion->FormatoLetras($notificacion->created_at) }} </span>
+                                            <p><small class="notificacion"></small><span>{{ $notificacion->FormatoLetras($notificacion->created_at) }}</span></p>
                                             <div class="item-mensaje">
                                                 <div class="txt-mensaje">
                                                     <p><strong>De:</strong> MAPtv Educa </p>
@@ -246,6 +246,11 @@
                         <h3>Pagos</h3>
                         <div class="row-perfil">
                             <div class="flex">
+                                <div class="item-perfil">
+                                    <h4>Información de pago</h4>
+                                    <p>Actualiza tu información de pago en PayPal</p>
+                                    <a href="{{ route("checkout", "membresia-academica") }}"><img src="site/img/paypal.png"></a>
+                                </div> <!-- /item-perfil -->
                                 <div class="item-perfil">
                                     <h4>Historial de pagos</h4>
                                     @if ($pagos->count() > 0)
@@ -581,6 +586,32 @@
                                     @endif
                                 </div>
                             </div> <!-- /row-favoritos -->
+                            
+                            <div class="row-itinerario">
+                                <p>Itinerario de sesiones en Zoom</p>
+                                <div class="item-itinerario">
+                                    <h4>Materia 1</h4>
+                                    <ul>
+                                        <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
+                                        <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
+                                        <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
+                                        <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
+                                    </ul>
+                                </div> <!-- /item-itinerario -->
+                                <div class="item-itinerario">
+                                    <h4>Materia 2</h4>
+                                </div> <!-- /item-itinerario -->
+                                <div class="item-itinerario">
+                                    <h4>Materia 3</h4>
+                                </div> <!-- /item-itinerario -->
+                                <div class="item-itinerario">
+                                    <h4>Materia 4</h4>
+                                </div> <!-- /item-itinerario -->
+                                <div class="item-itinerario">
+                                    <h4>Materia 5</h4>
+                                </div> <!-- /item-itinerario -->
+                            </div> <!-- /row-itinerario -->
+                            
                         </div>
 
                     @endif
