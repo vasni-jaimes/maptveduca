@@ -83,7 +83,7 @@
                         <form action="{{ route('paago-membresia', $membresia->slug) }}" class="form-checkout" method="GET">
                             @csrf
                             <div>
-                                <label>Programa de estudios</label><br>
+                                <label>Selecciona el programa que deseas cursar</label><br>
                                 <select class="input" name="carrera">
                                    <option value=""> Carreras </option>
                                    @foreach($membresia->carreras as $carreras)
