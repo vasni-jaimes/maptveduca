@@ -19,7 +19,7 @@ class CreateAulasRespuestasTable extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('publicacion_id');
             $table->text('respuesta');
-            $table->text('archivo')->nullable();
+            $table->text('archivos')->nullable();
             $table->timestamps();
         });
     }

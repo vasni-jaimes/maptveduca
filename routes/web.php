@@ -76,6 +76,7 @@ Route::post('usuario/registrarEvento', 'Site\EventosControllers@agregarTablero')
 Route::get('aulas-virtuales', 'Site\AulasVirtualesController@showAulas')->name('aulas-virtuales.show');
 Route::get('aula-virtual/{user_id}', 'Site\AulasVirtualesController@showAula')->name('aula-virtual.show');
 Route::post('aula-virtual-respuesta/{publicacion_id}', 'Site\AulasVirtualesController@respuestaStore')->name('aula-virtual-web.store');
+Route::get('downloadFile/{slug_id}/{publicacion_id}/{respuesta_id}/{positionFile}', 'Site\AulasVirtualesController@downloadFile')->name('down.publicacion.web');
 
 
 
@@ -86,13 +87,13 @@ Route::post('aula-virtual-respuesta/{publicacion_id}', 'Site\AulasVirtualesContr
 // 	return view('site.eventos');
 // })->name('eventos');
 
-Route::get('aulas', function() {
-	return view('site.aulas');
-})->name('aulas');
+// Route::get('aulas', function() {
+// 	return view('site.aulas');
+// })->name('aulas');
 
-Route::get('single-aulas', function() {
-	return view('site.single-aulas');
-})->name('single-aulas');
+// Route::get('single-aulas', function() {
+// 	return view('site.single-aulas');
+// })->name('single-aulas');
 
 // Route::get('checkout', function() {
 // 	return view('site.checkout');

@@ -80,5 +80,7 @@ Route::post('buscar-alumnos', 'Admin\MensajesController@searchAlumnos')->name('s
 //AULAS VIRTUALES
 Route::get('listado-materias', 'Admin\AulasVirtualesController@index')->name('listado-materias.index');
 Route::get('aula-virtual/{slug}', 'Admin\AulasVirtualesController@create')->name('aula-virtual.create');
-Route::post('aula-virtual/{curso_id}/{sesion_id}', 'Admin\AulasVirtualesController@store')->name('aula-virtual.store');
+Route::post('aula-virtual/{curso_id}', 'Admin\AulasVirtualesController@store')->name('aula-virtual.store');
 Route::post('aula-virtual-respuesta/{publicacion_id}', 'Admin\AulasVirtualesController@respuestaStore')->name('aula-virtual-respuesta.store');
+Route::get('downloadFile/{slug_id}/{publicacion_id}/{positionFile}', 'Admin\AulasVirtualesController@downloadFile')->name('down.publicacion');
+Route::get('downloadFileResp/{slug_id}/{publicacion_id}/{respuesta_id}/{positionFile}', 'Admin\AulasVirtualesController@downloadFileResp')->name('down.downloadFileResp');

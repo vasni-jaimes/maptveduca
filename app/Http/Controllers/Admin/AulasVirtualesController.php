@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Helpers\Helper;
 use App\Course;
 use App\Publicacion;
@@ -38,12 +39,11 @@ class AulasVirtualesController extends Controller
     public function create($slug)
     {
     	$curso         = Course::where('slug', $slug)->where('status', 1)->first();
-        $temario       = json_decode($curso->temario);
         $publicaciones = Publicacion::with(['instructor'])  
-                            ->where('curso_id', $curso->id)->get();
+                            ->where('curso_id', $curso->id)->orderBy('id', 'desc')->get();
         $respuestas    = Respuesta::with(['usuario', 'instructor'])->get();
 
-        return view('admin.aula-virtual', compact("curso", "temario", "publicaciones", "respuestas"));
+        return view('admin.aula-virtual', compact("curso", "publicaciones", "respuestas"));
     }
 
 
@@ -60,10 +60,17 @@ class AulasVirtualesController extends Controller
         $respuesta->respuesta = $request->publicaciontxt;
 
         if ($respuesta->save()) {
-            if ( $request->hasFile('archivo_aula') ) {
+            if ( $request->hasFile('archivos_aula') ) {
                 //SUBIR ARCHIVO DE AULA
-                $rootFile = $request->file('archivo_aula')->store('public/aulas/'.$curso->id.'/'.$sesion_id.'/respuestas/');
-                $respuesta->archivo = $rootFile;
+                $archivos = array();
+                for ($i=0; $i <= count($request->archivos_aula) - 1; $i++) { 
+                    $rootFile = $request->file('archivos_aula')[$i]
+                                    ->store('public/aulas/'.$curso->id.'/'.$sesion_id.'/respuestas/'.$respuesta->id);
+                    $archivos[] = $rootFile;
+                }
+                
+                $objArchivos = json_encode($archivos);
+                $respuesta->archivos = $objArchivos;
                 if ($respuesta->save()) {
                     DB::commit();
                     return back()->with("status.newRespuesta", "success");
@@ -79,9 +86,9 @@ class AulasVirtualesController extends Controller
     }
 
 
-    public function store(Request $request, $slug_curso, $sesion_id)
+    public function store(Request $request, $slug_curso)
     {
-        if (!$request->has("publicaciontxt") && !isset($request->publicaciontxt)) {
+        if (!$request->has("publicaciontxt") && !isset($request->publicaciontxt) && !$request->has("titulo")) {
             return back()->with("status.newAula", "error");
         }
 
@@ -90,15 +97,21 @@ class AulasVirtualesController extends Controller
             DB::beginTransaction();
             $publicacion                = new Publicacion();
             $publicacion->curso_id      = $curso->id;
-            $publicacion->session_id    = $sesion_id;
             $publicacion->instructor_id = Auth::guard('admins')->user()->instructor_id;
             $publicacion->publicacion   = $request->publicaciontxt;
+            $publicacion->nombre        = $request->titulo;
 
             if ($publicacion->save()) {
-                if ( $request->hasFile('archivo_aula') ) {
+                if ( $request->hasFile('archivos_aula') ) {
                     //SUBIR ARCHIVO DE AULA
-                    $rootFile = $request->file('archivo_aula')->store('public/aulas/'.$curso->id.'/'.$sesion_id.'/publicacion/');
-                    $publicacion->archivo = $rootFile;
+                    $archivos = array();
+                    for ($i=0; $i <= count($request->archivos_aula) - 1; $i++) { 
+                        $rootFile = $request->file('archivos_aula')[$i]->store('public/aulas/'.$curso->id.'/'.$publicacion->id.'/publicacion/');
+                        $archivos[] = $rootFile;
+                    }
+
+                    $objArchivos = json_encode($archivos);
+                    $publicacion->archivos = $objArchivos;
                     if ($publicacion->save()) {
                         DB::commit();
                         return back()->with("status.newAula", "success");
@@ -114,5 +127,64 @@ class AulasVirtualesController extends Controller
         }
         DB::rollback();
         return back()->with("status.newAula", "error");
+    }
+
+
+    public function downloadFile($slug_curso, $publicacion_id, $positionFile)
+    {
+        $curso = Course::where('slug', $slug_curso)->where('status', 1)->first();
+        if ($curso) {
+            $publicacion = Publicacion::where('curso_id', $curso->id)
+                            ->where('id', $publicacion_id)->first();
+
+            if ($publicacion) {
+                $archivos = json_decode($publicacion->archivos);
+                for ($i=0; $i <= count($archivos) - 1; $i++) { 
+                    if ($positionFile == $i) {
+                        if (isset($archivos[$i])) {
+                            echo "<script> window.close() </script>";
+                            return response()->download(storage_path("app/".$archivos[$i]));
+                        }
+                    }
+                }
+            }
+
+            echo "<script> window.close() </script>";
+        }
+
+        echo "<script> window.close() </script>";
+    }
+
+
+    public function downloadFileResp($slug_curso, $publicacion_id, $respuesta_id, $positionFile)
+    {
+        $curso = Course::where('slug', $slug_curso)->where('status', 1)->first();
+        if ($curso) {
+            $publicacion = Publicacion::where('curso_id', $curso->id)
+                            ->where('id', $publicacion_id)->first();
+
+            if ($publicacion) {
+
+                $respuesta = Respuesta::where('publicacion_id', $publicacion_id)
+                                ->where('id', $respuesta_id)->first();
+
+                if ($respuesta) {
+                    $archivos = json_decode($respuesta->archivos);
+                    for ($i=0; $i <= count($archivos) - 1; $i++) { 
+                        if ($positionFile == $i) {
+                            if (isset($archivos[$i])) {
+                                echo "<script> window.close() </script>";
+                                return response()->download(storage_path("app/".$archivos[$i]));
+                            }
+                        }
+                    }
+                }
+                echo "<script> window.close() </script>";
+            }
+
+            echo "<script> window.close() </script>";
+        }
+
+        echo "<script> window.close() </script>";
     }
 }
