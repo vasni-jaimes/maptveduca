@@ -19,100 +19,96 @@
         <div class="wrapper-aulas">
             <h1>{{ $curso->nombre }}</h1>
             <ul class="acordeon-materias">
-                @php $i = 0; @endphp
-                @foreach($temario as $tema)
 
-                    @if ($publicaciones->where('session_id', $i)->count() > 0)
-                        <li>
-                            <div class="boton-acordeon flex between">
-                                <p>Lección: {{  $tema->nombre_video }}</p>
-                                @foreach($publicaciones as $publicacion)
-                                    @if( $publicacion->session_id == $i )
-                                        <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $publicacion->created_at }}</span></p>
-                                    @endif
-                                @endforeach
-                            </div> <!-- /flex -->
-                            <div class="wrapper-acordeon">
-                                @foreach($publicaciones as $publicacion)
-                                    @if( $publicacion->session_id == $i )
-                                        <div class="row-acordeon">
-                                            <p>Profr. {{ $publicacion->instructor->nombres." ".$publicacion->instructor->apellidos }}</p>
-                                            <p>{!! $publicacion->publicacion !!}</p>
-                                        </div> <!-- /row-acordeon -->
-                                        <div class="btn-archivo flex flex-center between">
-                                            <ul>
-                                                <li>Archivo 1</li>
-                                                <li>Archivo 2</li>
-                                                <li>Archivo 3</li>
-                                            </ul>
-                                            <div class="ver-mas">
-                                                <img src="/site/img/plus.png">
-                                            </div> <!-- /ver-mas -->
-                                        </div> <!-- /btn-archivo -->
-                                    @endif
-                                @endforeach
+                @foreach($publicaciones as $publicacion)
 
-                                <div class="wrapper-respuesta">
-                                    <p>Respondiendo a Lección: {{  $tema->nombre_video }}</p>
-                                    <div class="row-forma">
-                                        <form action="{{ route('aula-virtual-web.store', $publicaciones->where('session_id', $i)[0]->id) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
-                                            @csrf
-                                            <textarea id="mytextarea" name="publicaciontxt"></textarea>
-                                        
-                                            <div class="flex between">
-                                                <div class="btn-archivo flex flex-center">
-                                                    <input type="file" name="upload" id="upload" class="cargar-cv">
-                                                    <label for="upload"><span>Adjuntar archivos</span></label>
-                                                    <ul>
-                                                        <li>Archivo 1</li>
-                                                    </ul>
-                                                </div> <!-- /flex -->
-                                                <button class="btn-publicar">Publicar</button>
+                    <li>
+                        <div class="boton-acordeon flex between">
+                            <p>Lección: {{  $publicacion->nombre }}</p>
+                            <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $publicacion->created_at }}</span></p>
+                        </div> <!-- /flex -->
+                        <div class="wrapper-acordeon">
+
+                            <div class="row-acordeon">
+                                <p>Profr. {{ $publicacion->instructor->nombres." ".$publicacion->instructor->apellidos }}</p>
+                                <p>{!! $publicacion->publicacion !!}</p>
+                            </div> <!-- /row-acordeon -->
+
+                            @if ($publicacion->archivos != null)
+                                <div class="btn-archivo flex flex-center between">
+                                    <ul>
+                                        @php  
+                                            $archivos = json_decode($publicacion->archivos);
+                                        @endphp
+
+                                        @for($i = 0; $i <= count($archivos) - 1; $i++)
+                                            <li> <a href="{{ route('down.publicacion', [$curso->slug,$publicacion->id,$i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a> </li>
+                                        @endfor
+                                    </ul>
+                                    <div class="ver-mas">
+                                        <img src="/site/img/plus.png">
+                                    </div> <!-- /ver-mas -->
+                                </div> <!-- /btn-archivo -->
+                            @endif
+
+                            <div class="wrapper-respuesta">
+                                <p>Respondiendo a Lección: {{  $publicacion->nombre }}</p>
+                                <div class="row-forma">
+                                    <form action="{{ route('aula-virtual-web.store', $publicacion->id) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                                        @csrf
+                                        <textarea class="mytextarea" name="publicaciontxt"></textarea>
+                                        <div class="flex between">
+                                            <div class="btn-archivo flex flex-center">
+                                                <input type="file" name="upload[]" id="upload" multiple="" class="cargar-cv">
+                                                <label for="upload"><span>Adjuntar archivos</span></label>
+                                                <ul>
+                                                    <li class="conteo-archivos">Archivo 1</li>
+                                                </ul>
                                             </div> <!-- /flex -->
-                                        </form>
-                                    </div> <!-- /row-forma -->
-                                </div> <!-- /wrapper-respuesta -->
+                                            <button class="btn-publicar">Publicar</button>
+                                        </div> <!-- /flex -->
+                                    </form>
+                                </div> <!-- /row-forma -->
+                            </div> <!-- /wrapper-respuesta -->
 
-                                <div class="row-respuesta">
-                                    @if ($publicaciones->where('session_id', $i)->count() > 0)
-                                        @if ( $respuestas->where('publicacion_id', $publicaciones->where('session_id', $i)[0]->id)->count() > 0 )
-                                            @foreach($respuestas->where('publicacion_id', $publicaciones->where('session_id', $i)[0]->id) as $respuesta)
+                            <div class="row-respuesta">
+                                @if ($respuestas->where('publicacion_id', $publicacion->id)->count() > 0)
+                                    @foreach($respuestas->where('publicacion_id', $publicacion->id) as $respuesta)
 
-                                                <div class="boton-alumno flex between">
-                                                    @if ($respuesta->instructor_id != null)
-                                                        <p> Profr. {{ $respuesta->instructor->nombres." ".$respuesta->instructor->apellidos }}</p>
-                                                    @else
-                                                        <p> {{ $respuesta->usuario->nombre." ".$respuesta->usuario->apaterno }} </p>
-                                                    @endif
-                                                    <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $respuesta->created_at }}</span></p>
-                                                </div> <!-- /flex -->
-                                                <div class="respuesta-alumno">
-                                                    <div class="row-acordeon">
-                                                        <p>{!! $respuesta->respuesta !!}</p>
-                                                    </div> <!-- /row-acordeon -->
-                                                    <div class="btn-archivo flex flex-center between">
-                                                        <ul>
-                                                            <li>Archivo 1</li>
-                                                        </ul>
-                                                    </div> <!-- /btn-archivo -->
-                                                </div> <!-- /respuesta-alumno -->
+                                        <div class="boton-alumno flex between">
+                                            @if ($respuesta->instructor_id != null)
+                                                <p> Profr. {{ $respuesta->instructor->nombres." ".$respuesta->instructor->apellidos }}</p>
+                                            @else
+                                                <p> {{ $respuesta->usuario->nombre." ".$respuesta->usuario->apaterno }} </p>
+                                            @endif
+                                            <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $respuesta->created_at }}</span></p>
+                                        </div> <!-- /flex -->
+                                        <div class="respuesta-alumno">
+                                            <div class="row-acordeon">
+                                                <p>{!! $respuesta->respuesta !!}</p>
+                                            </div> <!-- /row-acordeon -->
+                                            @if ($respuesta->archivos != null)
+                                                <div class="btn-archivo flex flex-center between">
+                                                    <ul>
+                                                        @php  
+                                                            $archivos = json_decode($respuesta->archivos);
+                                                        @endphp
 
-                                            @endforeach
-                                        @endif
-                                    @endif
+                                                        @for($i = 0; $i <= count($archivos) - 1; $i++)
+                                                            <li> <a href="{{ route('down.publicacion.web', [$curso->slug, $publicacion->id,$respuesta->id, $i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a> </li>
+                                                        @endfor
+                                                    </ul>
+                                                </div> <!-- /btn-archivo -->
+                                            @endif
+                                        </div> <!-- /respuesta-alumno -->
 
-                                </div> <!-- /row-respuesta -->
-                            </div> <!-- /wrapper-acordeon -->
-                        </li>
-                    @else
-                        <li>
-                            <div class="boton-acordeon flex between">
-                                <p>Lección: {{  $tema->nombre_video }}</p>
-                            </div> <!-- /flex -->
-                        </li>
-                    @endif
+                                    @endforeach
+                                @endif
 
-                    @php $i++; @endphp
+                            </div> <!-- /row-respuesta -->
+                        </div> <!-- /wrapper-acordeon -->
+                    </li>
+
                 @endforeach
                 {{-- <li>
                     <div class="boton-acordeon flex between">
@@ -187,7 +183,7 @@
 <script>
 
     tinymce.init({
-        selector: '#mytextarea'
+        selector: '.mytextarea'
     });
 
 </script>

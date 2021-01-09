@@ -34,12 +34,11 @@ class AulasVirtualesController extends Controller
     public function showAula($slug)
     {
     	$curso         = Course::where('slug', $slug)->where('status', 1)->first();
-        $temario       = json_decode($curso->temario);
         $publicaciones = Publicacion::with(['instructor'])  
                             ->where('curso_id', $curso->id)->get();
         $respuestas    = Respuesta::with(['usuario', 'instructor'])->get();
 
-    	return view('site.single-aulas', compact("curso", "temario", "publicaciones", "respuestas"));
+    	return view('site.single-aulas', compact("curso", "publicaciones", "respuestas"));
     }
 
 
@@ -58,8 +57,21 @@ class AulasVirtualesController extends Controller
         if ($respuesta->save()) {
             if ( $request->hasFile('upload') ) {
                 //SUBIR ARCHIVO DE AULA
-                $rootFile = $request->file('upload')->store('public/aulas/'.$curso->id.'/'.$sesion_id.'/respuestas/');
-                $respuesta->archivo = $rootFile;
+                $curso = Publicacion::where('id', $publicacion_id)->first();
+                if (!$curso) {
+                    DB::rollback();
+                    return back()->with("status.newRespuesta", "error");
+                }
+
+                $archivos = array();
+                for ($i=0; $i <= count($request->upload) - 1; $i++) {
+                    $rootFile = $request->file('upload')[$i]
+                                    ->store('public/aulas/'.$curso->curso_id.'/'.$publicacion_id.'/respuestas/'.$respuesta->id);
+                    $archivos[] = $rootFile;
+                }
+                
+                $objArchivos = json_encode($archivos);
+                $respuesta->archivos = $objArchivos;
                 if ($respuesta->save()) {
                     DB::commit();
                     return back()->with("status.newRespuesta", "success");
@@ -72,5 +84,38 @@ class AulasVirtualesController extends Controller
         }
         DB::rollback();
         return back()->with("status.newRespuesta", "error");
+    }
+
+
+    public function downloadFile($slug_curso, $publicacion_id, $respuesta_id, $positionFile)
+    {
+        $curso = Course::where('slug', $slug_curso)->where('status', 1)->first();
+        if ($curso) {
+            $publicacion = Publicacion::where('curso_id', $curso->id)
+                            ->where('id', $publicacion_id)->first();
+
+            if ($publicacion) {
+
+                $respuesta = Respuesta::where('publicacion_id', $publicacion_id)
+                                ->where('id', $respuesta_id)->first();
+
+                if ($respuesta) {
+                    $archivos = json_decode($respuesta->archivos);
+                    for ($i=0; $i <= count($archivos) - 1; $i++) { 
+                        if ($positionFile == $i) {
+                            if (isset($archivos[$i])) {
+                                echo "<script> window.close() </script>";
+                                return response()->download(storage_path("app/".$archivos[$i]));
+                            }
+                        }
+                    }
+                }
+                echo "<script> window.close() </script>";
+            }
+
+            echo "<script> window.close() </script>";
+        }
+
+        echo "<script> window.close() </script>";
     }
 }
