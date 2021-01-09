@@ -45,10 +45,14 @@
                             <li data-seccion="clases"><a href="">Clases en línea</a></li>
                         @endif
                         @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimaSuscripcion()->id == 2)
-                            <li><a href="#">Control Académico</a></li>
-                                <li data-seccion="meterias"><a href="">Materias</a></li>
-                                <li><a href="{{ route('aulas-virtuales.show') }}">Aulas Virtuales</a></li>
-                                <li data-seccion="status"><a href="">Status académico</a></li>
+                            <li class="item-control">
+                                <a href="#">Control Académico</a>
+                                <ul>
+                                    <li class="active" data-seccion="meterias"><a href="">Materias</a></li>
+                                    <li><a href="{{ route('aulas-virtuales.show') }}">Aulas Virtuales</a></li>
+                                    <li data-seccion="status"><a href="">Status académico</a></li>
+                                </ul>
+                            </li>
                         @endif
                     </ul>
 
@@ -61,7 +65,7 @@
                         <div class="row-perfil">
                             <div class="flex">
                                 <div class="item-perfil">
-                                    <h4>Informarción personal</h4>
+                                    <h4>Información personal</h4>
                                     <form class="form-perfil" action="{{ route('usuario.editar') }}" method="POST" name="form_editar">
                                         @csrf
                                         <fieldset>
@@ -98,7 +102,7 @@
                                                 </div>
                                             </div>
                                         </fieldset>
-                                        <input type="submit" class="btn_perfil" value="Enviar" />
+                                        <input type="submit" class="btn_perfil" value="Guardar" />
                                     </form>
                                 </div> <!-- /item-perfil -->
                                 <div class="item-perfil">
@@ -580,7 +584,72 @@
                         </div>
 
                     @endif
-                    
+                        
+                    <div style="margin-bottom: 30px;" data-seccion="meterias">
+                        <h3>Status académico</h3>
+                        <div class="row-perfil row-status">
+                            <div class="flex">
+                                <div class="item-perfil">
+                                    <h4>Información del alumno</h4>
+                                    <p>ALUMNO: {{ auth()->user()->nombre. " ".auth()->user()->apaterno. " ".auth()->user()->amaterno }}</p>
+                                    <ul>
+                                        <li>Programa académico: Técnico Profesional en Producción Musical</li>
+                                        <li>Inscrito desde: Octubre 2020 (cuarto trimestre 2020)</li>
+                                        <li>Activo desde: Junio 2020</li>
+                                    </ul>
+                                </div> <!-- /item-perfil -->
+                                <div class="item-perfil">
+                                    <h4>Kardex del alumno</h4>
+                                    <table class="tabla-perfil">
+                                        <tr>
+                                            <th>Trimestre</th>
+                                            <th>Materia</th>
+                                            <th>Calificación general</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Oct - Dic 2020</td>
+                                            <td>Materia</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="vacio">&nbps;</td>
+                                            <td>Materia</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="vacio">&nbps;</td>
+                                            <td>Materia</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ene - Mar 2021</td>
+                                            <td>Materia</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="vacio">&nbps;</td>
+                                            <td>Materia</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="vacio">&nbps;</td>
+                                            <td>Materia</td>
+                                            <td>100</td>
+                                        </tr>
+                                    </table>
+                                    <div class="text-right">
+                                        <a class="descarga">
+                                            <div class="flex flex-center">
+                                                <img src="/site/img/descarga.png">
+                                                <p>Descargar en pdf</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div> <!-- /item-perfil -->
+                            </div> <!-- /flex -->
+                        </div> <!-- /row-perfil -->
+                    </div>
+
                 </div> <!-- /wrapper-tablero -->
                 
             </div> <!-- /flex -->

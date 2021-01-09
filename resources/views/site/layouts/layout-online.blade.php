@@ -115,6 +115,7 @@
                                     <li><a href="#">Cerrar sesión</a></li>
                                 </ul>
                             </div> <!-- /menu-user -->
+                            <span class="notificacion">2</span>
                         </div> <!-- /ico-login -->
 			        </div> <!-- /flex -->
 			    </div> <!-- /hoja-1200 -->
