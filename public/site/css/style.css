@@ -3754,6 +3754,11 @@ section.membresia {
     font-size: 12px;
 }
 
+.item-perfil img {
+    max-width: 200px;
+    width: 100%;
+}
+
 .form-perfil fieldset {
     position: relative;
     padding: 0 40px 0 0;
@@ -3956,13 +3961,27 @@ span.ico-edit:hover p {
     background-color: #666;
 }
 
-.item-inbox span {
-    display: block;
+.item-inbox > p {
     padding: 10px;
+    background-color: #efefef;
+}
+
+.item-inbox span {
+    display: inline-block;
     color: #666;
     font-family: 'Poppins semibold';
     font-size: 12px;
-    background-color: #efefef;
+    vertical-align: middle;
+}
+
+.item-inbox small {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 10px;
+    background-color: #ff0000;
+    border-radius: 50%;
+    vertical-align: middle;
 }
 
 .item-mensaje {
@@ -4203,6 +4222,52 @@ span.ico-edit:hover p {
     cursor: pointer;
 }
 
+.row-itinerario {
+    margin: 30px 0 0;
+}
+
+.row-itinerario p {
+    margin: 0 0 15px;
+    font-family: 'Poppins medium';
+    font-size: 16px;
+    color: #666;
+}
+
+.item-itinerario {
+    margin: 0 0 12px;
+}
+
+.item-itinerario h4 {
+    display: block;
+    padding: 15px 30px;
+    font-family: 'Poppins medium';
+    font-size: 15px;
+    color: #000;
+    background-color: #d8d8d8;
+    text-transform: uppercase;
+}
+
+.item-itinerario ul {
+    display: none;
+    padding: 15px;
+    background-color: #ededed;
+}
+
+.item-itinerario ul li {
+    margin: 0 0 8px;
+    font-family: 'Poppins medium';
+    font-size: 12px;
+    line-height: 130%;
+}
+
+.item-itinerario ul li:last-of-type {
+    margin: 0;
+}
+
+.item-itinerario ul li a {
+    color: #000;
+}
+
 .row-status .item-perfil ul {
     margin: 20px 0 0;
     padding: 20px 0 0;
@@ -4258,6 +4323,11 @@ span.ico-edit:hover p {
     font-family: 'Poppins semibold';
     font-size: 19px;
     text-transform: uppercase;
+}
+
+.wrapper-aulas p {
+    font-family: 'Poppins light';
+    font-size: 14px;
 }
 
 .lista-materias li a {

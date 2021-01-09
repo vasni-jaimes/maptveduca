@@ -25,7 +25,7 @@
                     @endforeach
                 </ul> <!-- /lista-materias -->
             @else
-                <p> No tienes Cursos para Aula Virtual </p>
+                <p>No tienes cursos para aula virtual</p>
             @endif
         </div> <!-- /wrapper-aulas -->
 
