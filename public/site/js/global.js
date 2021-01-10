@@ -179,7 +179,7 @@ $(document).ready(function(){
     $('.item-itinerario h4').click(function(e) {    
         e.preventDefault();
         $(this).toggleClass("active");   
-        $(this).next('.item-itinerario ul').slideToggle(500);
+        $(this).next('.lista-itinerario').slideToggle(500);
     });
 
     $('.wrapper-academica table').stacktable();

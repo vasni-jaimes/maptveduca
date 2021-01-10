@@ -591,12 +591,14 @@
                                 <p>Itinerario de sesiones en Zoom</p>
                                 <div class="item-itinerario">
                                     <h4>Materia 1</h4>
-                                    <ul>
-                                        <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
-                                        <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
-                                        <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
-                                        <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
-                                    </ul>
+                                    <div class="lista-itinerario">
+                                        <ul>
+                                            <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
+                                            <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
+                                            <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
+                                            <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
+                                        </ul>
+                                    </div>
                                 </div> <!-- /item-itinerario -->
                                 <div class="item-itinerario">
                                     <h4>Materia 2</h4>

@@ -4233,6 +4233,10 @@ span.ico-edit:hover p {
     color: #666;
 }
 
+.lista-itinerario {
+    display: none;
+}
+
 .item-itinerario {
     margin: 0 0 12px;
 }
@@ -4245,10 +4249,10 @@ span.ico-edit:hover p {
     color: #000;
     background-color: #d8d8d8;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 .item-itinerario ul {
-    display: none;
     padding: 15px;
     background-color: #ededed;
 }
