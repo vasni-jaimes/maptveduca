@@ -97,7 +97,7 @@
                                     <a href="#">Obtener</a>
                                     <hr class="b-bottom">-->
                                     <p>Membresía académica</p>
-                                    <p><small>$2,000.00 MXN mensuales*</small></p>
+                                    <p>$2,000.00 MXN mensuales*</p>
                                     <p><small>Este curso pertenece al plan de estudios del programa: Técnico en Producción Musical</small></p>
                                     <a href="#">Obtener</a>
                                     <p><small>* Recuerda que esta membresía también te da  acceso a todos los cursos que no pertenecen a tu plan de estudios.</small></p>
