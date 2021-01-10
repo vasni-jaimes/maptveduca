@@ -28,7 +28,7 @@
                             <div class="bio-profesor">
                                 <p>{{ $evento->instructor[0]->nombres. " ".$evento->instructor[0]->apellidos }}</p>
                                 <p>{{ $evento->instructor[0]->especialidad }}</p>
-                                <p>{{ $evento->instructor[0]->bibliografia }}</p>
+                                <p>{!! $evento->instructor[0]->bibliografia !!}</p>
                             </div> <!-- /bio-profesor -->
                             
                         </div> <!-- /row-perfil -->

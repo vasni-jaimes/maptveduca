@@ -124,7 +124,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Bibliografia: </label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="bibliografia" rows="3">{{ old("bibliografia", $instructor->bibliografia) }}</textarea>
+                                <textarea class="form-control" name="bibliografia" rows="3">{{ old("bibliografia", str_replace('<br />',PHP_EOL, $instructor->bibliografia)) }}</textarea>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('bibliografia') !!} </span>
                             </div>
                         </div>

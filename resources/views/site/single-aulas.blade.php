@@ -25,7 +25,9 @@
                     <li>
                         <div class="boton-acordeon flex between">
                             <p>Lección: {{  $publicacion->nombre }}</p>
-                            <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $publicacion->created_at }}</span></p>
+                            @if ($publicacion->archivos != null)
+                                <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $publicacion->created_at }}</span></p>
+                            @endif
                         </div> <!-- /flex -->
                         <div class="wrapper-acordeon">
 
@@ -81,7 +83,10 @@
                                             @else
                                                 <p> {{ $respuesta->usuario->nombre." ".$respuesta->usuario->apaterno }} </p>
                                             @endif
-                                            <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $respuesta->created_at }}</span></p>
+
+                                            @if ($respuesta->archivos != null)
+                                                <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $respuesta->created_at }}</span></p>
+                                            @endif
                                         </div> <!-- /flex -->
                                         <div class="respuesta-alumno">
                                             <div class="row-acordeon">

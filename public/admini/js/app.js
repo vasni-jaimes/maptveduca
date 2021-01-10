@@ -733,8 +733,10 @@ var funciones = {
       if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
         document.querySelector("form[name='frm-agregar_instructor']").submit();
         return false;
-      } //document.querySelector("form[name='frm-editar_evento']").submit();
+      }
 
+      document.querySelector("form[name='frm-editar_instructor']").submit();
+      return false; //document.querySelector("form[name='frm-editar_evento']").submit();
     }
   },
   validarAgregarEvento: function validarAgregarEvento(e) {

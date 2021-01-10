@@ -109,10 +109,17 @@
                         <div class="ico-login">
                             <a href="#"><img src="/site/img/ico-user.png"></a>
                             <div class="menu-user">
-                                <p>Hola, Usuario</p>
+                                <p>Hola, {{ auth()->user()->nombre." ".auth()->user()->apaterno." ".auth()->user()->amaterno }}</p>
                                 <ul>
-                                    <li><a href="#">Tablero</a></li>
-                                    <li><a href="#">Cerrar sesión</a></li>
+                                    <li><a href="{{ route('micuenta.index') }}">Tablero</a></li>
+                                    
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST" name="frm_logout_web">
+                                            @csrf
+                                            <button>Cerrar sesión</button>
+                                        </form>
+                                    </li>
+                                
                                 </ul>
                             </div> <!-- /menu-user -->
                             <span class="notificacion">2</span>
