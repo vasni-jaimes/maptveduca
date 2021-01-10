@@ -42,7 +42,7 @@
                         
                         <div class="txt-single">
                             <h3>Aprende a mezclar con ProTools</h3>
-                            <p>Producción musical / Curso base / Profesor titular: José Antonio Cordero</p>
+                            <p>Producción musical / Clase en línea / Profesor titular: José Antonio Cordero</p>
                             <p><span class="txt-yellow">LUNES · A PARTIR DEL 00 DE JUNIO AL 00 DE JULIO, 2020 · 18:00 HRS (Hora Cd. de México) | 4 sesiones de 90 minutos</span></p>
                             <div class="descripcion-single">
                                 <p>En este video, tu profesor titular, José Antonio Cordero (Josean) te explica los temas que se abarcarán a lo largo de las sesiones de esta clase en línea.</p>

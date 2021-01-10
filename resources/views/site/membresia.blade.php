@@ -65,7 +65,7 @@
                             <p><strong>CERTIFICACIÓN: </strong></p>
                             <p>Certificado con validez oficial expedido por M.A.P. Colegio de Música, Audio y Producción <br>(Incorporado a SEP)</p>
                         </div> <!-- /txt-programa -->
-                        <a class="btn-amarillo" href="#">Plan de estudios</a>
+                        <a class="btn-amarillo" href="javascript:void(0)">Plan de estudios</a>
                         <div class="row-planes">
                             <div class="flex wrap">
                                 <div class="item-plan">
@@ -138,7 +138,7 @@
                                 </div> <!-- /item-plan -->
                             </div> <!-- /flex -->
                         </div> <!-- /row-planes -->
-                        <a class="btn-amarillo btn-border" href="#">Obtén tu membresía e inscríbete</a>
+                        <a class="btn-amarillo btn-border" href="{{ route("checkout", "membresia-academica") }}">Obtén tu membresía e inscríbete</a>
                     </div> <!-- /item-programa -->
                     
                     <!--<div class="col-6 item-programa">
@@ -308,7 +308,7 @@
                             <tr class="last-tr">
                                 <td class="last-td">&nbsp</td>
                                 <!--<td class="last-td"><span>$123 MXN mensuales</span><a href="{{ route("checkout", "membresia-basica") }}" class="bg-amarillo">Prueba gratuita por 30 días</a></td>-->
-                                <td class="last-td"><span>Desde $2,000 MXN mensuales</span><a href="{{ route("checkout", "membresia-academica") }}" class="bg-amarillo">OBTÉN TU MEMBRESÍA E INSCRÍBETE</a></td>
+                                <td class="last-td"><span>$2,000 MXN mensuales<br>en modalidad trimestral</span><a href="{{ route("checkout", "membresia-academica") }}" class="bg-amarillo">OBTÉN TU MEMBRESÍA E INSCRÍBETE</a></td>
                             </tr>
                         </table>
                         

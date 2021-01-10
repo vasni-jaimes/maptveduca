@@ -39,8 +39,8 @@
                         
                         <div class="txt-single">
                             <h3> {{ $clase->nombre_clase }} </h3>
-                            {{-- <p>Producción musical / Curso base / Profesor titular: José Antonio Cordero</p> --}}
-                            <p> {{ $clase->category_id == 1 ? "Produccion musical" : "Música" }} / Curso base / Profesor titular: {{ $clase->instructor[0]->nombres. " ". $clase->instructor[0]->apellidos }}</p>
+                            {{-- <p>Producción musical / Clase en línea / Profesor titular: José Antonio Cordero</p> --}}
+                            <p> {{ $clase->category_id == 1 ? "Produccion musical" : "Música" }} / Clase en línea / Profesor titular: {{ $clase->instructor[0]->nombres. " ". $clase->instructor[0]->apellidos }}</p>
                         </div> <!-- /txt-single -->
                         
                         <div class="flex">

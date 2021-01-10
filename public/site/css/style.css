@@ -1265,7 +1265,7 @@ video#myVideo {
 
 .banner-maptv {
     display: flex;
-    padding: 25px;
+    padding: 20px;
     border: 1px solid #e6e6e6;
     align-items: center;
 }
@@ -1293,7 +1293,7 @@ video#myVideo {
 .txt-maptv p,
 .txt-maptv ul li {
     font-family: 'Poppins light';
-    font-size: 16px;
+    font-size: 13px;
     line-height: 130%;
 }
 
@@ -1347,7 +1347,7 @@ video#myVideo {
 .flex-lista li p {
     padding: 0 0 15px;
     font-family: 'Poppins light';
-    font-size: 16px;
+    font-size: 13px;
     line-height: 130%;
     text-align: center;
 }
@@ -1404,7 +1404,7 @@ video#myVideo {
 .row-contenido ul li p {
     padding: 0 0 15px;
     font-family: 'Poppins light';
-    font-size: 16px;
+    font-size: 13px;
     line-height: 130%;
     text-align: center;
 }
@@ -1421,7 +1421,7 @@ video#myVideo {
     position: relative;
     padding-left: 15px;
     font-family: 'Poppins semibold';
-    font-size: 16px;
+    font-size: 13px;
     line-height: 130%;   
 }
 
@@ -1445,7 +1445,7 @@ video#myVideo {
     padding: 15px;
     background-color: #afafaf;
     font-family: 'Poppins semibold';
-    font-size: 16px;
+    font-size: 14px;
     color: #fff;
     line-height: 130%;
     text-align: center;
@@ -1595,6 +1595,12 @@ video#myVideo {
 
 .wrapper-academica table tr td .bg-amarillo {
     background-color: #FFC314;
+    font-family: 'Oswald medium';
+    font-size: 18px;
+}
+
+.wrapper-academica table tr td.last-td a.bg-amarillo {
+    color: #000;
 }
 
 .row-registro {
@@ -2284,7 +2290,7 @@ video#myVideo {
     position: relative;
     padding: 10px 10px 10px 30px;
     font-family: 'Poppins light';
-    font-size: 12px;
+    font-size: 11px;
     background-color: #d8d8d8;
     line-height: normal;
     cursor: pointer;
@@ -2292,6 +2298,7 @@ video#myVideo {
 
 .sidebar-single ul.row-leccion li.active {
     background-color: #fff;
+    font-size: 12px;
 }
 
 .sidebar-single ul.row-leccion li.active:before {
@@ -2329,7 +2336,7 @@ video#myVideo {
 
 .bio-profesor p {
     font-family: 'Poppins regular';
-    font-size: 12px;
+    font-size: 11px;
     line-height: 150%;
 }
 
@@ -2360,7 +2367,7 @@ video#myVideo {
 
 .txt-sidebar p {
     margin: 0 0 10px;
-    font-size: 12px;
+    font-size: 10px;
     font-family: 'Poppins regular';
     line-height: 130%;
 }
@@ -2434,7 +2441,7 @@ video#myVideo {
 .sidebar-registro .favorito p {
     color: #fff;
     font-family: 'Poppins semibold';
-    font-size: 13px;
+    font-size: 11px;
     text-transform: uppercase;
     line-height: 130%;
 }
@@ -2470,7 +2477,7 @@ video#myVideo {
 
 .txt-single {
     position: relative;
-    margin: 20px 0 0;
+    margin: 15px 0 0;
 }
 
 .txt-single:first-of-type {
@@ -2497,8 +2504,8 @@ video#myVideo {
 
 span.txt-yellow {
     display: block;
-    padding: 15px 20px;
-    margin: 0 0 20px;
+    padding: 15px 20px 15px;
+    margin: 0 0 15px;
     font-family: 'Poppins medium';
     font-size: 12px;
     line-height: 130%;
@@ -2518,7 +2525,7 @@ span.txt-yellow {
 .descripcion-single p {
     padding: 0 0 20px;
     font-family: 'Poppins regular';
-    font-size: 14px;
+    font-size: 12px;
     line-height: 150%;
 }
 
