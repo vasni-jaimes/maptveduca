@@ -26,7 +26,7 @@ class InstructoresRepositorie
 		$instructor->apellidos 		= $request->apellido_instructor;
 		$instructor->email 			= $request->email;
 		$instructor->especialidad 	= $request->especialidad;
-		$instructor->bibliografia 	= $request->bibliografia;
+		$instructor->bibliografia 	= str_replace(PHP_EOL, '<br />', $request->bibliografia);
 
 		if ($instructor->save()) {
 			$rootImg                = $request->file('avatar')->store('public/instructores/'.$instructor->id.'/');
@@ -72,7 +72,7 @@ class InstructoresRepositorie
 		$instructor->apellidos 		= $request->apellido_instructor;
 		$instructor->email 			= $request->email;
 		$instructor->especialidad 	= $request->especialidad;
-		$instructor->bibliografia 	= $request->bibliografia;
+		$instructor->bibliografia 	= str_replace(PHP_EOL, '<br />', $request->bibliografia);
 
 		if ($instructor->save()) {
 

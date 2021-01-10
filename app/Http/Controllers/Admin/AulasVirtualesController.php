@@ -130,6 +130,44 @@ class AulasVirtualesController extends Controller
     }
 
 
+    public function eliminarRespuesta($respuesta_id)
+    {
+        if (isset($respuesta_id)) {
+            
+            $respuesta = Respuesta::where('id', $respuesta_id)->where('user_id', auth()->user()->id)->first();
+            if ($respuesta) {
+
+                $archivos = json_decode($respuestas->archivos);
+                for ($i=0; $i <= count($archivos) - 1; $i++) { 
+                    $this->eliminarImagen($archivos[$i]);
+                }
+
+                DB::beginTransaction();
+
+                if ($respuestas->delete()) {
+                    DB::commit();
+                    return back()->with("status.deleteRespuesta", "success");
+                }
+
+                DB::rollback();
+                return back()->with("status.deleteRespuesta", "error");
+            }
+
+            DB::rollback();
+            return back()->with("status.deleteRespuesta", "error");
+        }
+
+        DB::rollback();
+        return back()->with("status.deleteRespuesta", "error");
+    }
+
+
+    public function updateRespuesta(Request $request, $publicacion_id, $respuesta_id)
+    {
+        return $request;
+    }
+
+
     public function downloadFile($slug_curso, $publicacion_id, $positionFile)
     {
         $curso = Course::where('slug', $slug_curso)->where('status', 1)->first();
@@ -186,5 +224,11 @@ class AulasVirtualesController extends Controller
         }
 
         echo "<script> window.close() </script>";
+    }
+
+
+    protected function eliminarImagen($file)
+    {
+        return \Storage::delete($file);
     }
 }

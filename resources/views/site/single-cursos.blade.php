@@ -52,7 +52,7 @@
                             <div class="bio-profesor">
                                 <p>{{ $curso->instructor[0]->nombres. " ".$curso->instructor[0]->apellidos }}</p>
                                 <p>{{ $curso->instructor[0]->especialidad }}.</p>
-                                <p>{{ $curso->instructor[0]->bibliografia }}</p>
+                                <p>{!! $curso->instructor[0]->bibliografia !!}</p>
                             </div> <!-- /bio-profesor -->
                             
                         </div> <!-- /row-perfil -->
