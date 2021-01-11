@@ -95,6 +95,23 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  ocultarEditarRespuesta: function ocultarEditarRespuesta(e) {
+    e.preventDefault();
+    var resp = e.target.getAttribute('data-resp');
+    document.querySelector('.edit-respuesta[data-resp="' + resp + '"]').style.display = "none";
+    return false;
+  },
+  mostrarFormEditarResp: function mostrarFormEditarResp(e) {
+    e.preventDefault();
+    var resp = e.target.getAttribute('data-resp');
+    document.querySelector('.edit-respuesta[data-resp="' + resp + '"]').style.display = "block";
+    return false;
+  },
+  eliminarRespuesta: function eliminarRespuesta(e) {
+    e.preventDefault(); //generar evento submit
+
+    e.target.parentElement.submit();
+  },
   editarPerfil: function editarPerfil(e) {
     e.preventDefault();
     e.stopPropagation();

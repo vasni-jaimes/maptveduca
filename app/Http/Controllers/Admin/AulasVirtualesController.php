@@ -49,7 +49,17 @@ class AulasVirtualesController extends Controller
 
     public function respuestaStore(Request $request, $publicacion_id)
     {
+        if (!isset($publicacion_id)) {
+            return back()->with("status.newRespuesta", "error");
+        }
+
         if (!$request->has("publicaciontxt") && !isset($request->publicaciontxt)) {
+            return back()->with("status.newRespuesta", "error");
+        }
+
+        //OBTENER PUBLICACION CON CURSO
+        $publicacion = Publicacion::where('id', $publicacion_id)->first();
+        if (!$publicacion) {
             return back()->with("status.newRespuesta", "error");
         }
 
@@ -65,7 +75,7 @@ class AulasVirtualesController extends Controller
                 $archivos = array();
                 for ($i=0; $i <= count($request->archivos_aula) - 1; $i++) { 
                     $rootFile = $request->file('archivos_aula')[$i]
-                                    ->store('public/aulas/'.$curso->id.'/'.$sesion_id.'/respuestas/'.$respuesta->id);
+                                    ->store('public/aulas/'.$publicacion->curso_id.'/'.$publicacion_id.'/respuestas/'.$respuesta->id);
                     $archivos[] = $rootFile;
                 }
                 
@@ -88,6 +98,10 @@ class AulasVirtualesController extends Controller
 
     public function store(Request $request, $slug_curso)
     {
+        if (!isset($slug_curso)) {
+            return back()->with("status.newAula", "error");
+        }
+
         if (!$request->has("publicaciontxt") && !isset($request->publicaciontxt) && !$request->has("titulo")) {
             return back()->with("status.newAula", "error");
         }
@@ -130,21 +144,69 @@ class AulasVirtualesController extends Controller
     }
 
 
+    public function eliminarPost($publicacion_id)
+    {
+        if (isset($publicacion_id)) {
+            
+            $publicacion = Publicacion::where('id', $publicacion_id)
+                            ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
+
+            if ($publicacion) {
+                DB::beginTransaction();
+
+                $carpeta = 'public/aulas/'.$publicacion->curso_id.'/'.$publicacion->id.'/';
+                $this->eliminarCarpeta($carpeta);
+
+                $respuestas = Respuesta::where('publicacion_id', $publicacion_id)->get();
+                if ($respuestas->count() > 0) {
+                    if ($respuestas->delete()) {
+                        if ($publicacion->delete()) {
+                            DB::commit();
+                            return back()->with("status.deletePublicacion", "success");
+                        }
+                        DB::rollback();
+                        return back()->with("status.deletePublicacion", "error");
+                        //return "b";
+                    }
+                    DB::rollback();
+                    return back()->with("status.deletePublicacion", "error");
+                    //return "d";
+                }
+                
+                if ($publicacion->delete()) {
+                    DB::commit();
+                    return back()->with("status.deletePublicacion", "success");
+                }
+                DB::rollback();
+                return back()->with("status.deletePublicacion", "error");
+                //return "c";
+            }
+            DB::rollback();
+            return back()->with("status.deletePublicacion", "error");
+            //return "v";
+        }
+        DB::rollback();
+        return back()->with("status.deletePublicacion", "error");
+        //return "q";
+    }
+
+
     public function eliminarRespuesta($respuesta_id)
     {
         if (isset($respuesta_id)) {
             
-            $respuesta = Respuesta::where('id', $respuesta_id)->where('user_id', auth()->user()->id)->first();
+            //$respuesta = Respuesta::where('id', $respuesta_id)->where('user_id', auth()->user()->id)->first();
+            $respuesta = Respuesta::where('id', $respuesta_id)->first();
             if ($respuesta) {
 
-                $archivos = json_decode($respuestas->archivos);
-                for ($i=0; $i <= count($archivos) - 1; $i++) { 
-                    $this->eliminarImagen($archivos[$i]);
-                }
+                //ELIMINAR ARCHIVOS ADDJUNTOS DE LA RESPUESTA
+                $publicacion = Publicacion::where('id', $respuesta->publicacion_id)->first();
+                $carpeta     = 'public/aulas/'.$publicacion->curso_id.'/'.$publicacion->id.'/respuestas/'.$respuesta_id.'/';
+                $this->eliminarCarpeta($carpeta);
 
+                // ELIMINAR RESPUESTA DE LA BASE
                 DB::beginTransaction();
-
-                if ($respuestas->delete()) {
+                if ($respuesta->delete()) {
                     DB::commit();
                     return back()->with("status.deleteRespuesta", "success");
                 }
@@ -162,9 +224,131 @@ class AulasVirtualesController extends Controller
     }
 
 
+    public function updatePublicidad(Request $request, $publicacion_id)
+    {
+        if (!isset($publicacion_id)) {
+            return back()->with("status.updatePublicidad", "error");
+        }
+
+        if (!$request->has('publicaciontxt') && !isset($request->publicaciontxt)) {
+            return back()->with("status.updatePublicidad", "error");
+        }
+
+        $publicacion = Publicacion::where('id', $publicacion_id)
+                            ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
+
+        DB::beginTransaction();
+        if ($publicacion) {
+            $publicacion->publicacion = $request->publicaciontxt;
+
+            if ( $publicacion->save() ) {
+                if ( $request->hasFile('archivos_aula') ) {
+                    $archivos    = array();
+                    // if ($publicacion->archivos != null) {
+                    //     $objArchivos = json_decode($publicacion->archivos);
+                    //     //RECORRER LOS VIEJOS ARCHIVOS
+                    //     for ($i=0; $i <= count($objArchivos) - 1; $i++) { 
+                    //         $archivos[] = $objArchivos[$i];
+                    //     }
+                    // }
+
+                    //ELIMINAR ARCHIVOS ANTERIORES
+                    $carpeta     = 'public/aulas/'.$publicacion->curso_id.'/'.$publicacion->id.'/publicacion/';
+                    $this->eliminarCarpeta($carpeta);
+
+                    //RECORRER LOS NUEVOS ARCHIVOS
+                    for ($j=0; $j <= count($request->archivos_aula) - 1; $j++) { 
+                        $rootFile = $request->file('archivos_aula')[$j]
+                                            ->store('public/aulas/'.$publicacion->curso_id.'/'.$publicacion_id.'/publicacion/');
+                        $archivos[] = $rootFile;
+                    }
+
+                    $arrayArchivos          = json_encode($archivos);
+                    $publicacion->archivos  = $arrayArchivos;
+                    if ($publicacion->save()) {
+                        DB::commit();
+                        return back()->with("status.updatePublicidad", "success");
+                    }
+
+                    DB::rollback();
+                    return back()->with("status.updatePublicidad", "error");
+                }
+
+                DB::commit();
+                return back()->with("status.updatePublicidad", "success");
+            }
+
+            DB::rollback();
+            return back()->with("status.updatePublicidad", "error");
+        }
+        DB::rollback();
+        return back()->with("status.updatePublicidad", "error");
+    }
+
+
     public function updateRespuesta(Request $request, $publicacion_id, $respuesta_id)
     {
-        return $request;
+
+        if (!isset($publicacion_id) && !isset($respuesta_id)) {
+            return back()->with("status.updateRespuesta", "error");
+        }
+
+        $publicacion = Publicacion::where('id', $publicacion_id)
+                            ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
+
+        DB::beginTransaction();
+        if ($publicacion) {
+            $respuesta = Respuesta::where('id', $respuesta_id)
+                            ->where('publicacion_id', $publicacion_id)
+                            ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
+
+            if ($respuesta) {
+                $respuesta->respuesta = $request->publicaciontxt;
+                if ($respuesta->save()) {
+                    if ( $request->hasFile('archivos_aula') ) {
+                        $archivos    = array();
+                        // if ($respuesta->archivos != null) {
+                        //     $objArchivos = json_decode($respuesta->archivos);
+                        //     //RECORRER LOS VIEJOS ARCHIVOS
+                        //     for ($i=0; $i <= count($objArchivos) - 1; $i++) { 
+                        //         $archivos[] = $objArchivos[$i];
+                        //     }
+                        // }
+                        
+
+                        //ELIMINAR ARCHIVOS
+                        $carpeta     = 'public/aulas/'.$publicacion->curso_id.'/'.$publicacion->id.'/respuestas/'.$respuesta_id.'/';
+                        $this->eliminarCarpeta($carpeta);
+
+                        
+                        //RECORRER LOS NUEVOS ARCHIVOS
+                        for ($j=0; $j <= count($request->archivos_aula) - 1; $j++) { 
+                            $rootFile = $request->file('archivos_aula')[$j]
+                                                ->store('public/aulas/'.$publicacion->curso_id.'/'.$publicacion_id.'/respuestas/'.$respuesta_id.'/');
+                            $archivos[] = $rootFile;
+                        }
+
+                        $arrayArchivos          = json_encode($archivos);
+                        $respuesta->archivos  = $arrayArchivos;
+                        if ($respuesta->save()) {
+                            DB::commit();
+                            return back()->with("status.updateRespuesta", "success");
+                        }
+
+                        DB::rollback();
+                        return back()->with("status.updateRespuesta", "error");
+                    }
+                    DB::commit();
+                    return back()->with("status.updateRespuesta", "success");
+                }
+                DB::rollback();
+                return back()->with("status.updateRespuesta", "error");
+            }
+            DB::rollback();
+            return back()->with("status.updateRespuesta", "error");
+        }
+        DB::rollback();
+        return back()->with("status.updateRespuesta", "error");
     }
 
 
@@ -230,5 +414,11 @@ class AulasVirtualesController extends Controller
     protected function eliminarImagen($file)
     {
         return \Storage::delete($file);
+    }
+
+
+    protected function eliminarCarpeta($file)
+    {
+        return \Storage::deleteDirectory($file);
     }
 }

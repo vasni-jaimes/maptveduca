@@ -383,6 +383,74 @@ if (formSendMensajes) {
   formSendMensajes.addEventListener('input', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarMensajes);
   $(document).change("input", _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarMensajes);
   $("select").change(_functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarMensajes);
+} //ELIMINAR PUBLICACION
+
+
+var eliminar_public = document.querySelectorAll('.eliminar_public');
+
+if (eliminar_public) {
+  for (var i = 0; i <= eliminar_public.length - 1; i++) {
+    eliminar_public[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].eliminarPublicacion);
+  }
+} //CLICK EN EDITAR PARA MOSTRAR FORMULARIO DE EDITAR
+
+
+var editar_public = document.querySelectorAll('.editar_public');
+
+if (editar_public) {
+  for (var i = 0; i <= editar_public.length - 1; i++) {
+    editar_public[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].desplegarFormularioEdit);
+  }
+} //EDITAR PUBLICACION
+
+
+var editar_publicacion = document.querySelectorAll('.editar-publicacion button.editarp');
+
+if (editar_publicacion) {
+  for (var i = 0; i <= editar_publicacion.length - 1; i++) {
+    editar_publicacion[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].editarPublicacion);
+  }
+} //CANCELAR EDICION
+
+
+var cancelar_edicion = document.querySelectorAll('.cancelar-edicion');
+
+if (cancelar_edicion) {
+  for (var i = 0; i <= cancelar_edicion.length - 1; i++) {
+    cancelar_edicion[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].cancelarEdicion);
+  }
+} //EDITAR RESPUESTA PARA MOSTRAR FORMULARIO
+
+
+var editar_resp = document.querySelectorAll('.editar_resp');
+
+if (editar_resp) {
+  for (var i = 0; i <= editar_resp.length - 1; i++) {
+    editar_resp[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].mostrarFormularioResp);
+  }
+} //EDITAR RESPUESTA.
+
+
+var editarr = document.querySelectorAll('.editarr');
+
+if (editarr) {
+  for (var i = 0; i <= editarr.length - 1; i++) {
+    editarr[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].editarRespuesta);
+  }
+} //AGREGAR RESPUESTA.
+
+
+var agregar_respuesta = document.querySelectorAll('.agregar-respuesta button');
+var agregar_nuevo_post = document.querySelector('.agregar-nuevo_post button');
+
+if (agregar_respuesta) {
+  for (var i = 0; i <= agregar_respuesta.length - 1; i++) {
+    agregar_respuesta[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].agregarRespuesta);
+  }
+}
+
+if (agregar_nuevo_post) {
+  agregar_nuevo_post.addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].agregarRespuesta);
 }
 
 /***/ }),
@@ -396,6 +464,65 @@ if (formSendMensajes) {
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  agregarRespuesta: function agregarRespuesta(e) {
+    e.preventDefault();
+    var modal = document.querySelectorAll('.ibox-content');
+
+    for (var i = 0; i <= modal.length - 1; i++) {
+      modal[i].classList.add('sk-loading');
+    }
+
+    e.target.parentElement.submit();
+  },
+  editarRespuesta: function editarRespuesta(e) {
+    e.preventDefault();
+    var modal = document.querySelectorAll('.ibox-content');
+
+    for (var i = 0; i <= modal.length - 1; i++) {
+      modal[i].classList.add('sk-loading');
+    }
+
+    e.target.parentElement.submit();
+  },
+  mostrarFormularioResp: function mostrarFormularioResp(e) {
+    e.preventDefault();
+    var resp = e.target.getAttribute('data-resp');
+    document.querySelector('.editar-respuesta[data-resp="' + resp + '"]').style.display = "block";
+  },
+  cancelarEdicion: function cancelarEdicion(e) {
+    e.preventDefault();
+    e.target.parentElement.parentElement.parentElement.style.display = "none";
+    return false;
+  },
+  desplegarFormularioEdit: function desplegarFormularioEdit(e) {
+    e.preventDefault();
+    var pub = e.target.getAttribute('data-pub');
+    document.querySelector('.editar-publicacion[data-pub="' + pub + '"]').style.display = "block";
+  },
+  editarPublicacion: function editarPublicacion(e) {
+    e.preventDefault();
+    var modal = document.querySelectorAll('.ibox-content');
+
+    for (var i = 0; i <= modal.length - 1; i++) {
+      modal[i].classList.add('sk-loading');
+    }
+
+    e.target.parentElement.submit();
+  },
+  eliminarPublicacion: function eliminarPublicacion(e) {
+    e.preventDefault();
+    var modal = document.querySelectorAll('.ibox-content');
+
+    for (var i = 0; i <= modal.length - 1; i++) {
+      modal[i].classList.add('sk-loading');
+    } //quitar division de eliminar y editar
+
+
+    e.target.parentElement.parentElement.parentElement.classList.remove('show');
+    e.target.parentElement.parentElement.parentElement.parentElement.classList.remove('show'); //generar evento submit
+
+    e.target.parentElement.submit();
+  },
   validarMensajes: function validarMensajes(e) {
     e.preventDefault();
     mensaje = document.querySelector('textarea[name="mensaje"]');

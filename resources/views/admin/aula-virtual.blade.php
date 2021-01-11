@@ -35,7 +35,7 @@
         <div class="col-lg-2"></div>
     </div>
 
-
+    <!-- MENSAJES AL MOMENTO DE AGREGAR UNA PUBLICACION -->
     @if (session()->has("status.newAula"))
         @if (session()->get("status.newAula") == "error")
             <div class="row justify-content-center">
@@ -58,6 +58,134 @@
             </div>
         @endif
     @endif
+
+
+    <!-- MENSAJES AL MOMENTO DE ELIMINAR UNA PUBLICACION -->
+    @if (session()->has("status.deletePublicacion"))
+        @if (session()->get("status.deletePublicacion") == "error")
+            <div class="row justify-content-center">
+                <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
+                    Ocurrio un error, intentelo más tarde.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+        @elseif (session()->get("status.deletePublicacion") == "success")
+            <div class="row justify-content-center">
+                <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
+                    Se elimino la publicacion correctamente
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        @endif
+    @endif
+
+
+    <!-- MENSAJES AL MOMENTO DE ELIMINAR UNA RESPUESTA -->
+    @if (session()->has("status.deletePublicacion"))
+        @if (session()->get("status.deletePublicacion") == "error")
+            <div class="row justify-content-center">
+                <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
+                    Ocurrio un error, intentelo más tarde.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+        @elseif (session()->get("status.deletePublicacion") == "success")
+            <div class="row justify-content-center">
+                <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
+                    Se elimino la respuesta correctamente
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        @endif
+    @endif
+
+
+
+     <!-- MENSAJE PARA EDITAR PUBLICIDAD -->
+    @if (session()->has("status.updatePublicidad"))
+        @if (session()->get("status.updatePublicidad") == "error")
+            <div class="row justify-content-center">
+                <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
+                    Ocurrio un error, intentelo más tarde.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+        @elseif (session()->get("status.updatePublicidad") == "success")
+            <div class="row justify-content-center">
+                <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
+                    Se actualizo la publicacion correctamente
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        @endif
+    @endif
+
+
+    <!-- MENSAJE PARA EDITAR RESPUESTA -->
+    @if (session()->has("status.updateRespuesta"))
+        @if (session()->get("status.updateRespuesta") == "error")
+            <div class="row justify-content-center">
+                <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
+                    Ocurrio un error, intentelo más tarde.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+        @elseif (session()->get("status.updateRespuesta") == "success")
+            <div class="row justify-content-center">
+                <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
+                    Se actualizo la respuesta correctamente
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        @endif
+    @endif
+
+
+        <!-- MENSAJE POR AGREGAR LA RESPUESTA -->
+    @if (session()->has("status.newRespuesta"))
+        @if (session()->get("status.newRespuesta") == "error")
+            <div class="row justify-content-center">
+                <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
+                    Ocurrio un error, intentelo más tarde.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+        @elseif (session()->get("status.newRespuesta") == "success")
+            <div class="row justify-content-center">
+                <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
+                    Se agrego la respuesta correctamente
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        @endif
+    @endif
+
+
 
 
     @if ($errors->any())
@@ -99,10 +227,15 @@
                                                 <i class="fa fa-angle-down"></i>
                                             </button>
                                             <ul class="dropdown-menu m-t-xs">
-                                                <li><a href="#">Config</a></li>
+                                                <li><a href="#" class="editar_public" data-pub="{{ $publicacion->id }}">editar</a></li>
+                                                <li>
+                                                    <form method="POST" action="{{ route('eliminar.publicacion', $publicacion->id) }}" name="eliminarPublicacion">
+                                                        @csrf
+                                                        <a href="#" class="eliminar_public">eliminar</a></li>
+                                                    </form>
+                                                </li>
                                             </ul>
                                         </div>
-
 
                                         <div class="social-avatar">
                                             <div class="media-body">
@@ -117,6 +250,20 @@
                                                 {!! $publicacion->publicacion !!}
                                             </p>
                                         </div>
+
+                                        <!-- EDITAR PUBLCIACION -->
+                                        <div class="social-comment editar-publicacion" data-pub="{{ $publicacion->id }}">
+                                            <div class="media-body">
+                                                <form action="{{ route('aula-publicidad.update', $publicacion->id) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <textarea name="publicaciontxt" class="form-control" placeholder="editar publicacion">{{ $publicacion->publicacion }}</textarea><br>
+                                                    <input type="file" name="archivos_aula[]" multiple=""><br><br>
+                                                    <button class="btn btn-white btn-sm cancelar-edicion" type="submit">Cancelar</button>
+                                                    <button class="btn btn-primary btn-sm editarp" type="submit">Editar Publicacion</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- /EDITAR PUBLCIACION -->
 
                                         <hr>
                                         @if ($publicacion->archivos != null)
@@ -141,9 +288,27 @@
                                                 @foreach($respuestas->where('publicacion_id', $publicacion->id) as $respuesta)
                                                     
                                                     <div class="social-comment">
+
+                                                        <div class="float-right social-action dropdown">
+                                                            <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                                                                <i class="fa fa-angle-down"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu m-t-xs">
+                                                                @if ($respuesta->instructor_id == Auth::guard('admins')->user()->instructor_id)
+                                                                    <li><a href="#" class="editar_resp" data-resp="{{ $respuesta->id }}">editar</a></li>
+                                                                @endif
+                                                                <li>
+                                                                    <form method="POST" action="{{ route('eliminar.respuesta', $respuesta->id) }}" name="eliminarPublicacion">
+                                                                        @csrf
+                                                                        <a href="#" class="eliminar_public">eliminar</a></li>
+                                                                    </form>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+
                                                         <div class="media-body">
                                                             <a href="#">
-                                                                @if ($respuesta->instructor_id != null)
+                                                                @if ($respuesta->instructor_id == Auth::guard('admins')->user()->instructor_id)
                                                                      Profr. {{ $respuesta->instructor->nombres." ".$respuesta->instructor->apellidos }}
                                                                 @else
                                                                     {{ $respuesta->usuario->nombre." ".$respuesta->usuario->apaterno }}
@@ -154,9 +319,10 @@
                                                             <br/>
                                                         </div>
                                                     </div>
-                                                    <hr>
 
                                                     @if ($respuesta->archivos != null)
+                                                        <br>
+                                                        <hr>
                                                         <div class="btn-archivo flex flex-center between">
                                                             <ul>
                                                                 @php  
@@ -168,6 +334,23 @@
                                                                 @endfor
                                                             </ul>
                                                         </div>
+           
+                                                    @endif
+
+                                                    @if ($respuesta->instructor_id == Auth::guard('admins')->user()->instructor_id)
+                                                        <!-- EDITAR RESPUESTA -->
+                                                        <div class="social-comment editar-respuesta" data-resp="{{ $respuesta->id }}">
+                                                            <div class="media-body">
+                                                                <form action="{{ route('aula-respuesta.update', [$publicacion->id,$respuesta->id]) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <textarea name="publicaciontxt" class="form-control" placeholder="publicacion">{{ $respuesta->respuesta }}</textarea><br>
+                                                                    <input type="file" name="archivos_aula[]" multiple=""><br><br>
+                                                                    <button class="btn btn-white btn-sm cancelar-edicion" type="submit">Cancelar</button>
+                                                                    <button class="btn btn-primary btn-sm editarr" type="submit">Editar Respuesta</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /EDITAR RESPUESTA -->
                                                         <hr><br>
                                                     @endif
 
@@ -175,12 +358,12 @@
 
                                             @endif
                                             
-                                            <div class="social-comment">
+                                            <div class="social-comment agregar-respuesta">
                                                 <div class="media-body">
                                                     <form action="{{ route('aula-virtual-respuesta.store', $publicacion->id) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                                                         @csrf
                                                         <textarea name="publicaciontxt" class="form-control" placeholder="publicacion"></textarea><br>
-                                                        <input type="file" name="archivo_aula"><br><br>
+                                                        <input type="file" name="archivos_aula[]" multiple=""><br><br>
                                                         <button class="btn btn-primary btn-sm" type="submit">Publicar</button>
                                                     </form>
                                                 </div>
@@ -195,8 +378,12 @@
 
                 <hr>
                 <h2> Publicación Nueva </h2><br>
-                <div class="social-comment">
-                    <div class="media-body">
+                <div class="social-comment ibox-content">
+                    <div class="sk-spinner sk-spinner-double-bounce">
+                        <div class="sk-double-bounce1"></div>
+                        <div class="sk-double-bounce2"></div>
+                    </div>
+                    <div class="media-body agregar-nuevo_post">
                         <form action="{{ route('aula-virtual.store', $curso->slug) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">

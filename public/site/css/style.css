@@ -381,6 +381,10 @@ body {
 * html .clearfix             { zoom: 1; } /* IE6 */
 *:first-child+html .clearfix { zoom: 1; } /* IE7 */
 
+.edit-respuesta {
+    display: none;
+}
+
 .hoja-900 {
     display: block;
     max-width: 900px;

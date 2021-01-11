@@ -3,6 +3,28 @@
 
 let funciones = {
 
+	ocultarEditarRespuesta: function(e) {
+		e.preventDefault();
+		let resp = e.target.getAttribute('data-resp');
+		document.querySelector('.edit-respuesta[data-resp="'+resp+'"]').style.display = "none";
+		return false;
+
+	},
+
+	mostrarFormEditarResp: function(e) {
+		e.preventDefault();
+		let resp = e.target.getAttribute('data-resp');
+		document.querySelector('.edit-respuesta[data-resp="'+resp+'"]').style.display = "block";
+		return false;
+	},
+
+	eliminarRespuesta: function(e) {
+		e.preventDefault();
+
+		//generar evento submit
+		e.target.parentElement.submit();
+	},
+
 	editarPerfil: function(e) {
 		e.preventDefault();
 		e.stopPropagation();

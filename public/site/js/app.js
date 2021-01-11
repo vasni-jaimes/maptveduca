@@ -202,6 +202,32 @@ var btn_perfil = document.querySelector('.btn_perfil');
 
 if (btn_perfil) {
   btn_perfil.addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].editarPerfil);
+} //ELIMINAR RESPUESTA
+
+
+var acciones_respuestas = document.querySelectorAll('.acciones_respuestas form a');
+
+if (acciones_respuestas) {
+  for (var i = 0; i <= acciones_respuestas.length - 1; i++) {
+    acciones_respuestas[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].eliminarRespuesta);
+  }
+} //MOSTRAR FORMULARIO PARA EDITAR PUBLICACION
+
+
+var form_editar = document.querySelectorAll('a.form-editar_show');
+
+if (form_editar) {
+  for (var i = 0; i <= form_editar.length - 1; i++) {
+    form_editar[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].mostrarFormEditarResp);
+  }
+}
+
+var btn_cancelar = document.querySelectorAll('.btn-cancelar');
+
+if (btn_cancelar) {
+  for (var i = 0; i <= form_editar.length - 1; i++) {
+    btn_cancelar[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].ocultarEditarRespuesta);
+  }
 }
 
 /***/ }),
@@ -215,6 +241,23 @@ if (btn_perfil) {
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  ocultarEditarRespuesta: function ocultarEditarRespuesta(e) {
+    e.preventDefault();
+    var resp = e.target.getAttribute('data-resp');
+    document.querySelector('.edit-respuesta[data-resp="' + resp + '"]').style.display = "none";
+    return false;
+  },
+  mostrarFormEditarResp: function mostrarFormEditarResp(e) {
+    e.preventDefault();
+    var resp = e.target.getAttribute('data-resp');
+    document.querySelector('.edit-respuesta[data-resp="' + resp + '"]').style.display = "block";
+    return false;
+  },
+  eliminarRespuesta: function eliminarRespuesta(e) {
+    e.preventDefault(); //generar evento submit
+
+    e.target.parentElement.submit();
+  },
   editarPerfil: function editarPerfil(e) {
     e.preventDefault();
     e.stopPropagation();

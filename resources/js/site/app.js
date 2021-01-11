@@ -103,4 +103,31 @@ if (btn_perfil) {
 
 
 
+//ELIMINAR RESPUESTA
+const acciones_respuestas = document.querySelectorAll('.acciones_respuestas form a');
+if (acciones_respuestas) {
+	for (var i = 0; i <= acciones_respuestas.length - 1; i++) {
+		acciones_respuestas[i].addEventListener('click', funciones.eliminarRespuesta);
+	}
+}
+
+
+//MOSTRAR FORMULARIO PARA EDITAR PUBLICACION
+const form_editar = document.querySelectorAll('a.form-editar_show');
+if (form_editar) {
+	for (var i = 0; i <= form_editar.length - 1; i++) {
+		form_editar[i].addEventListener('click', funciones.mostrarFormEditarResp);
+	}
+}
+
+
+const btn_cancelar = document.querySelectorAll('.btn-cancelar');
+if (btn_cancelar) {
+	for (var i = 0; i <= form_editar.length - 1; i++) {
+		btn_cancelar[i].addEventListener('click', funciones.ocultarEditarRespuesta);
+	}
+}
+
+
+
 
