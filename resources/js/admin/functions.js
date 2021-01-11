@@ -3,6 +3,74 @@
 
 let funciones = {
 
+	agregarRespuesta: function(e) {
+		e.preventDefault();
+
+		const modal = document.querySelectorAll('.ibox-content');
+		for (var i = 0; i <= modal.length - 1; i++) {
+			modal[i].classList.add('sk-loading');
+		}
+
+		e.target.parentElement.submit();
+
+	},
+
+	editarRespuesta: function(e) {
+		e.preventDefault();
+
+		const modal = document.querySelectorAll('.ibox-content');
+		for (var i = 0; i <= modal.length - 1; i++) {
+			modal[i].classList.add('sk-loading');
+		}
+
+		e.target.parentElement.submit();
+		
+	},
+
+	mostrarFormularioResp: function(e) {
+		e.preventDefault();
+		let resp = e.target.getAttribute('data-resp');
+		document.querySelector('.editar-respuesta[data-resp="'+resp+'"]').style.display = "block";
+	},
+
+	cancelarEdicion: function(e) {
+		e.preventDefault();
+		e.target.parentElement.parentElement.parentElement.style.display = "none";
+		return false;
+	},
+
+	desplegarFormularioEdit: function(e) {
+		e.preventDefault();
+		let pub = e.target.getAttribute('data-pub');
+		document.querySelector('.editar-publicacion[data-pub="'+pub+'"]').style.display = "block";
+	},
+
+	editarPublicacion: function(e) {
+		e.preventDefault();
+
+		const modal = document.querySelectorAll('.ibox-content');
+		for (var i = 0; i <= modal.length - 1; i++) {
+			modal[i].classList.add('sk-loading');
+		}
+
+		e.target.parentElement.submit();
+	},
+
+	eliminarPublicacion: function(e) {
+		e.preventDefault();
+		const modal = document.querySelectorAll('.ibox-content');
+		for (var i = 0; i <= modal.length - 1; i++) {
+			modal[i].classList.add('sk-loading');
+		}
+
+		//quitar division de eliminar y editar
+		e.target.parentElement.parentElement.parentElement.classList.remove('show');
+		e.target.parentElement.parentElement.parentElement.parentElement.classList.remove('show');
+
+		//generar evento submit
+		e.target.parentElement.submit();
+	},
+
 	validarMensajes: function(e) {
 		e.preventDefault();
 		mensaje = document.querySelector('textarea[name="mensaje"]');

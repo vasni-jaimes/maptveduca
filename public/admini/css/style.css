@@ -32,6 +32,11 @@
   display: none;
 }*/
 
+.editar-publicacion,
+.editar-respuesta {
+  display: none;
+}
+
 .glyphicon {
   position: relative;
   top: 1px;

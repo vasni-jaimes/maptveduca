@@ -84,3 +84,7 @@ Route::post('aula-virtual/{curso_id}', 'Admin\AulasVirtualesController@store')->
 Route::post('aula-virtual-respuesta/{publicacion_id}', 'Admin\AulasVirtualesController@respuestaStore')->name('aula-virtual-respuesta.store');
 Route::get('downloadFile/{slug_id}/{publicacion_id}/{positionFile}', 'Admin\AulasVirtualesController@downloadFile')->name('down.publicacion');
 Route::get('downloadFileResp/{slug_id}/{publicacion_id}/{respuesta_id}/{positionFile}', 'Admin\AulasVirtualesController@downloadFileResp')->name('down.downloadFileResp');
+Route::post('eliminar-publicacion/{publicacion_id}', 'Admin\AulasVirtualesController@eliminarPost')->name('eliminar.publicacion');
+Route::post('eliminar-respuesta/{respuesta_id}', 'Admin\AulasVirtualesController@eliminarRespuesta')->name('eliminar.respuesta');
+Route::post('actualizar-publicidad/{publicacion_id}', 'Admin\AulasVirtualesController@updatePublicidad')->name('aula-publicidad.update');
+Route::post('actualizar-respuesta/{publicacion_id}/{respuesta_id}', 'Admin\AulasVirtualesController@updateRespuesta')->name('aula-respuesta.update');

@@ -13,7 +13,7 @@
     <div class="hoja-1200">
 
         <ul class="flex breadcrumb-curso">
-            <li>TABLERO PERSONAL / AULAS VIRTUALES</li>
+            <li> <a href="{{ route('micuenta.index') }}"> TABLERO PERSONAL </a> / <a href="{{ route('aulas-virtuales.show') }}"> AULAS VIRTUALES </a> </li>
         </ul> <!-- /breadcrumb-curso -->  
 
         <div class="wrapper-aulas">
@@ -88,6 +88,8 @@
                                                 <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $respuesta->created_at }}</span></p>
                                             @endif
                                         </div> <!-- /flex -->
+
+
                                         <div class="respuesta-alumno">
                                             <div class="row-acordeon">
                                                 <p>{!! $respuesta->respuesta !!}</p>
@@ -107,82 +109,65 @@
                                             @endif
                                         </div> <!-- /respuesta-alumno -->
 
+
+                                        @if ($respuesta->user_id == auth()->user()->id)
+                                            <div class="acciones_respuestas">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" class="form-editar_show" data-resp="{{ $respuesta->id }}"> Editar </a>
+                                                    </li>
+                                                    <li>
+                                                        <form method="POST" action="{{ route('eliminar.resp-web', $respuesta->id) }}" name="eliminar-respuesta">
+                                                            @csrf
+                                                            <a href=""> Eliminar </a>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+
+                                            <div class="wrapper-respuesta edit-respuesta" data-resp="{{ $respuesta->id }}">
+                                                <p>Editar Respuesta </p>
+                                                <div class="row-forma">
+                                                    <form action="{{ route('update.resp-web', [$publicacion->id, $respuesta->id]) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <textarea class="mytextarea" name="publicaciontxt"></textarea>
+                                                        <div class="flex between">
+                                                            <div class="btn-archivo flex flex-center">
+                                                                <input type="file" name="upload[]" id="upload" multiple="" class="cargar-cv">
+                                                                <label for="upload"><span>Adjuntar archivos</span></label>
+                                                                <ul>
+                                                                    <li class="conteo-archivos">Archivo 1</li>
+                                                                </ul>
+                                                            </div> <!-- /flex -->
+                                                            <button class="btn-publicar btn-cancelar" data-resp="{{ $respuesta->id }}" style="background: #fff">Cancelar</button>
+                                                            <button class="btn-publicar">Editar</button>
+                                                        </div> <!-- /flex -->
+                                                    </form>
+                                                </div> <!-- /row-forma -->
+                                                <br>
+                                            </div> <!-- /wrapper-respuesta -->
+
+                                        @endif
+
                                     @endforeach
                                 @endif
 
                             </div> <!-- /row-respuesta -->
-                        </div> <!-- /wrapper-acordeon -->
-                    </li>
 
+                        </div> <!-- /wrapper-acordeon -->
+
+                    </li>
                 @endforeach
-                {{-- <li>
-                    <div class="boton-acordeon flex between">
-                        <p>Lección 3: Nombre de la lección...</p>
-                        <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>20/07/2020  00:00</span></p>
-                    </div> <!-- /flex -->
-                </li>
-                <li>
-                    <div class="boton-acordeon flex between">
-                        <p>Lección 2: Nombre de la lección...</p>
-                        <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>20/07/2020  00:00</span></p>
-                    </div> <!-- /flex -->
-                </li>
-                <li>
-                    <div class="boton-acordeon flex between">
-                        <p>Lección 1: Nombre de la lección...</p>
-                        <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>20/07/2020  00:00</span></p>
-                    </div> <!-- /flex -->
-                </li> --}}
+                
             </ul> <!-- /acordeon-materias -->
         </div> <!-- /wrapper-aulas -->
-        
-        {{-- <div class="wrapper-aulas">
-            <h1>Materia 1</h1>
-            <ul class="acordeon-materias">
-                <li>
-                    <div class="boton-acordeon flex between">
-                        <p>Lección 4: Nombre de la lección...</p>
-                        <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>20/07/2020  00:00</span></p>
-                    </div> <!-- /flex -->
-                    <div class="wrapper-acordeon">
-                        <div class="row-acordeon">
-                            <p>Profr. Nombre Apellido</p>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim</p>
-                        </div> <!-- /row-acordeon -->
-                        <div class="btn-archivo">
-                            <ul>
-                                <li>Archivo 1</li>
-                                <li>Archivo 2</li>
-                                <li>Archivo 3</li>
-                            </ul>
-                        </div> <!-- /btn-archivo -->
-                    </div> <!-- /wrapper-acordeon -->
-                </li>
-                <li>
-                    <div class="boton-acordeon flex between">
-                        <p>Lección 3: Nombre de la lección...</p>
-                        <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>20/07/2020  00:00</span></p>
-                    </div> <!-- /flex -->
-                </li>
-                <li>
-                    <div class="boton-acordeon flex between">
-                        <p>Lección 2: Nombre de la lección...</p>
-                        <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>20/07/2020  00:00</span></p>
-                    </div> <!-- /flex -->
-                </li>
-                <li>
-                    <div class="boton-acordeon flex between">
-                        <p>Lección 1: Nombre de la lección...</p>
-                        <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>20/07/2020  00:00</span></p>
-                    </div> <!-- /flex -->
-                </li>
-            </ul> <!-- /acordeon-materias -->
-        </div> --}} <!-- /wrapper-aulas -->
 
      </div> <!-- /hoja-1200 -->
      
 </section> <!-- /aulas -->
 
+<script type="text/javascript" src="/site/js/app.js"></script>
 <script src="/site/js/tinymce.min.js"></script>
 
 <script>

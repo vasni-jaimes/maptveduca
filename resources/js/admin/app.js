@@ -286,3 +286,71 @@ if (formSendMensajes) {
 	$("select").change(funciones.validarMensajes);
 }
 
+
+//ELIMINAR PUBLICACION
+const eliminar_public = document.querySelectorAll('.eliminar_public');
+if (eliminar_public) {
+	for (var i = 0; i <= eliminar_public.length - 1; i++) {
+		eliminar_public[i].addEventListener('click', funciones.eliminarPublicacion);
+	}
+}
+
+
+//CLICK EN EDITAR PARA MOSTRAR FORMULARIO DE EDITAR
+const editar_public = document.querySelectorAll('.editar_public');
+if (editar_public) {
+	for (var i = 0; i <= editar_public.length - 1; i++) {
+		editar_public[i].addEventListener('click', funciones.desplegarFormularioEdit);
+	}
+}
+
+//EDITAR PUBLICACION
+const editar_publicacion = document.querySelectorAll('.editar-publicacion button.editarp');
+if (editar_publicacion) {
+	for (var i = 0; i <= editar_publicacion.length - 1; i++) {
+		editar_publicacion[i].addEventListener('click', funciones.editarPublicacion);
+	}
+}
+
+
+//CANCELAR EDICION
+const cancelar_edicion = document.querySelectorAll('.cancelar-edicion');
+if (cancelar_edicion) {
+	for (var i = 0; i <= cancelar_edicion.length - 1; i++) {
+		cancelar_edicion[i].addEventListener('click', funciones.cancelarEdicion);
+	}
+}
+
+
+//EDITAR RESPUESTA PARA MOSTRAR FORMULARIO
+const editar_resp = document.querySelectorAll('.editar_resp');
+if (editar_resp) {
+	for (var i = 0; i <= editar_resp.length - 1; i++) {
+		editar_resp[i].addEventListener('click', funciones.mostrarFormularioResp);
+	}
+}
+
+//EDITAR RESPUESTA.
+const editarr = document.querySelectorAll('.editarr');
+if (editarr) {
+	for (var i = 0; i <= editarr.length - 1; i++) {
+		editarr[i].addEventListener('click', funciones.editarRespuesta);
+	}
+}
+
+//AGREGAR RESPUESTA.
+const agregar_respuesta = document.querySelectorAll('.agregar-respuesta button');
+const agregar_nuevo_post = document.querySelector('.agregar-nuevo_post button');
+if (agregar_respuesta) {
+	for (var i = 0; i <= agregar_respuesta.length - 1; i++) {
+		agregar_respuesta[i].addEventListener('click', funciones.agregarRespuesta);
+	}
+}
+
+if (agregar_nuevo_post) {
+	agregar_nuevo_post.addEventListener('click', funciones.agregarRespuesta);
+}
+
+
+
+

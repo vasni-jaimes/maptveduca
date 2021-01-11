@@ -95,6 +95,65 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  agregarRespuesta: function agregarRespuesta(e) {
+    e.preventDefault();
+    var modal = document.querySelectorAll('.ibox-content');
+
+    for (var i = 0; i <= modal.length - 1; i++) {
+      modal[i].classList.add('sk-loading');
+    }
+
+    e.target.parentElement.submit();
+  },
+  editarRespuesta: function editarRespuesta(e) {
+    e.preventDefault();
+    var modal = document.querySelectorAll('.ibox-content');
+
+    for (var i = 0; i <= modal.length - 1; i++) {
+      modal[i].classList.add('sk-loading');
+    }
+
+    e.target.parentElement.submit();
+  },
+  mostrarFormularioResp: function mostrarFormularioResp(e) {
+    e.preventDefault();
+    var resp = e.target.getAttribute('data-resp');
+    document.querySelector('.editar-respuesta[data-resp="' + resp + '"]').style.display = "block";
+  },
+  cancelarEdicion: function cancelarEdicion(e) {
+    e.preventDefault();
+    e.target.parentElement.parentElement.parentElement.style.display = "none";
+    return false;
+  },
+  desplegarFormularioEdit: function desplegarFormularioEdit(e) {
+    e.preventDefault();
+    var pub = e.target.getAttribute('data-pub');
+    document.querySelector('.editar-publicacion[data-pub="' + pub + '"]').style.display = "block";
+  },
+  editarPublicacion: function editarPublicacion(e) {
+    e.preventDefault();
+    var modal = document.querySelectorAll('.ibox-content');
+
+    for (var i = 0; i <= modal.length - 1; i++) {
+      modal[i].classList.add('sk-loading');
+    }
+
+    e.target.parentElement.submit();
+  },
+  eliminarPublicacion: function eliminarPublicacion(e) {
+    e.preventDefault();
+    var modal = document.querySelectorAll('.ibox-content');
+
+    for (var i = 0; i <= modal.length - 1; i++) {
+      modal[i].classList.add('sk-loading');
+    } //quitar division de eliminar y editar
+
+
+    e.target.parentElement.parentElement.parentElement.classList.remove('show');
+    e.target.parentElement.parentElement.parentElement.parentElement.classList.remove('show'); //generar evento submit
+
+    e.target.parentElement.submit();
+  },
   validarMensajes: function validarMensajes(e) {
     e.preventDefault();
     mensaje = document.querySelector('textarea[name="mensaje"]');

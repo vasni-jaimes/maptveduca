@@ -44,7 +44,7 @@ class AulasVirtualesController extends Controller
 
     public function respuestaStore(Request $request, $publicacion_id)
     {
-        if (!$request->has("publicaciontxt") && !isset($request->publicaciontxt)) {
+        if (!$request->has("publicaciontxt") || !isset($request->publicaciontxt)) {
             return back()->with("status.newRespuesta", "error");
         }
 
@@ -117,5 +117,118 @@ class AulasVirtualesController extends Controller
         }
 
         echo "<script> window.close() </script>";
+    }
+
+
+    public function eliminarRespuesta($respuesta_id)
+    {
+        if (isset($respuesta_id)) {
+            
+            //$respuesta = Respuesta::where('id', $respuesta_id)->where('user_id', auth()->user()->id)->first();
+            $respuesta = Respuesta::where('id', $respuesta_id)->where('user_id', auth()->user()->id)->first();
+            if ($respuesta) {
+
+                //ELIMINAR ARCHIVOS ADDJUNTOS DE LA RESPUESTA
+                $publicacion = Publicacion::where('id', $respuesta->publicacion_id)->first();
+                $carpeta     = 'public/aulas/'.$publicacion->curso_id.'/'.$publicacion->id.'/respuestas/'.$respuesta_id.'/';
+                $this->eliminarCarpeta($carpeta);
+
+                // ELIMINAR RESPUESTA DE LA BASE
+                DB::beginTransaction();
+                if ($respuesta->delete()) {
+                    DB::commit();
+                    return back()->with("status.deleteRespuesta", "success");
+                }
+
+                DB::rollback();
+                return back()->with("status.deleteRespuesta", "error");
+            }
+
+            DB::rollback();
+            return back()->with("status.deleteRespuesta", "error");
+        }
+
+        DB::rollback();
+        return back()->with("status.deleteRespuesta", "error");
+    }
+
+
+    public function updateRespuesta(Request $request, $publicacion_id, $respuesta_id)
+    {
+
+        if (!isset($publicacion_id) && !isset($respuesta_id)) {
+            return back()->with("status.updateRespuesta", "error");
+        }
+
+        if (!$request->has('publicaciontxt') || !isset($request->publicaciontxt)) {
+            return back()->with("status.updateRespuesta", "error");
+        }
+
+        $publicacion = Publicacion::where('id', $publicacion_id)->first();
+
+        DB::beginTransaction();
+        if ($publicacion) {
+            $respuesta = Respuesta::where('id', $respuesta_id)
+                            ->where('publicacion_id', $publicacion_id)
+                            ->where('user_id', auth()->user()->id)->first();
+
+            if ($respuesta) {
+                $respuesta->respuesta = $request->publicaciontxt;
+                if ($respuesta->save()) {
+                    if ( $request->hasFile('upload') ) {
+                        $archivos    = array();
+                        // if ($respuesta->archivos != null) {
+                        //     $objArchivos = json_decode($respuesta->archivos);
+                        //     //RECORRER LOS VIEJOS ARCHIVOS
+                        //     for ($i=0; $i <= count($objArchivos) - 1; $i++) { 
+                        //         $archivos[] = $objArchivos[$i];
+                        //     }
+                        // }
+
+                        //ELIMINAR ARCHIVOS
+                        $carpeta     = 'public/aulas/'.$publicacion->curso_id.'/'.$publicacion->id.'/respuestas/'.$respuesta_id.'/';
+                        $this->eliminarCarpeta($carpeta);
+
+                        
+                        //RECORRER LOS NUEVOS ARCHIVOS
+                        for ($j=0; $j <= count($request->upload) - 1; $j++) { 
+                            $rootFile = $request->file('upload')[$j]
+                                                ->store('public/aulas/'.$publicacion->curso_id.'/'.$publicacion_id.'/respuestas/'.$respuesta_id.'/');
+                            $archivos[] = $rootFile;
+                        }
+
+                        $arrayArchivos          = json_encode($archivos);
+                        $respuesta->archivos  = $arrayArchivos;
+                        if ($respuesta->save()) {
+                            DB::commit();
+                            return back()->with("status.updateRespuesta", "success");
+                        }
+
+                        DB::rollback();
+                        return back()->with("status.updateRespuesta", "error");
+                    }
+                    DB::commit();
+                    return back()->with("status.updateRespuesta", "success");
+                }
+                DB::rollback();
+                return back()->with("status.updateRespuesta", "error");
+            }
+            DB::rollback();
+            return back()->with("status.updateRespuesta", "error");
+        }
+        DB::rollback();
+        return back()->with("status.updateRespuesta", "error");
+    }
+
+
+    protected function eliminarImagen($file)
+    {
+        return \Storage::delete($file);
+    }
+
+
+    protected function eliminarCarpeta($file)
+    {
+        return \Storage::deleteDirectory($file);
     }
 }

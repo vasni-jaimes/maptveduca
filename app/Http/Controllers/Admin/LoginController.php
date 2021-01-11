@@ -46,5 +46,12 @@ class LoginController extends Controller
 
         return false;
     }
+
+
+    public function logout()
+    {
+        $this->guard()->logout();
+        return redirect('/admin');
+    }
     
 }
