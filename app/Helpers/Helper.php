@@ -55,4 +55,10 @@ class Helper
     {
         return DB::table('tablero_cursos')->where('curso_id', $curso_id)->count();
     }
+
+
+    public function istrimestre($user_id)
+    {
+        return DB::table('usuarios_membresia')->where('user_id', $user_id)->count();
+    }
 }

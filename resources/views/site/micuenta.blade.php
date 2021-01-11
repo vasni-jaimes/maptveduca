@@ -187,20 +187,7 @@
                                             <span> No hay mensajes </span>
                                         </div>
                                     @endforelse
-                                    {{-- <div class="item-inbox">
-                                        <span>17/Junio/ 2020 18:00 hrs</span>
-                                        <div class="item-mensaje">
-                                            <div class="txt-mensaje">
-                                                <p><strong>De:</strong> MAPtv Educa </p>
-                                                <p><strong>Notificación:</strong></p>
-                                                <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
-                                                <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
-                                                <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
-                                                <p>¡Bienvenido!</p>
-                                            </div> <!-- /txt-mensaje -->
-                                            <a href="javascript:void(0)">Ver mensaje completo</a>
-                                        </div> <!-- /item-mensaje -->
-                                    </div> <!-- /item-inbox --> --}}
+                
                                 </div> <!-- /tab-mensaje -->
 
 
@@ -222,20 +209,7 @@
                                             <span> No hay notificaciones </span>
                                         </div>
                                     @endforelse
-                                    {{-- <div class="item-inbox">
-                                        <span>17/Junio/ 2020 18:00 hrs</span>
-                                        <div class="item-mensaje">
-                                            <div class="txt-mensaje">
-                                                <p><strong>De:</strong> MAPtv Educa </p>
-                                                <p><strong>Notificación:</strong></p>
-                                                <p>Hola, Usuario. El siguiente pago de tu membresía se cargará automáticamente dentro de 7 días. Para cambiar tu método de pago ve a la sección “Pagos”, ubicada en el menú lateral de tu tablero personal. Las membresías se cargan de manera automática cada 30 días.</p>
-                                                <p>Has elegido la membresía académica, bajo el programa Técnico Profesional en Producción Musical. Si por alguna razón quisieras modificar tu membresía, dirígete a la sección “Perfil”, ubicada en el menú lateral de tu tablero personal.</p>
-                                                <p>Recuerda que para el tipo de membresía que has elegido aplican algunas restricciones de cancelación.</p>
-                                                <p>¡Bienvenido!</p>
-                                            </div> <!-- /txt-mensaje -->
-                                            <a href="javascript:void(0)">Ver mensaje completo</a>
-                                        </div> <!-- /item-mensaje -->
-                                    </div> <!-- /item-inbox --> --}}
+                            
                                 </div> <!-- /tab-notificacion -->
                                 
                             </div> <!-- /row-tabs -->
@@ -289,7 +263,7 @@
                         <h3>Favoritos</h3>
                         <div class="row-favoritos">
                             @if ($favoritosCursos->count() > 0)
-                                <div class="row-black item-favoritos">
+                                <div class="row-black item-favoritos item-cursos">
                                     <h3>Cursos</h3>
                                     <ul class="slide-cursos">
                                         @foreach($favoritosCursos as $curso)
@@ -310,7 +284,7 @@
                             
 
                             @if ($favoritosEventos->count() > 0)
-                                <div class="row-black item-favoritos">
+                                <div class="row-black item-favoritos item-eventos">
                                     <h3>Eventos</h3>
                                     <ul class="slide-cursos">
                                         @foreach($favoritosEventos as $evento)
@@ -352,15 +326,49 @@
                                 <div class="f-shadow">
                                     <div class="s-favorito">
                                         <div class="close-shadow"></div> <!-- /close-shadow -->
-                                        <p>¿Seguro quieres quitar este item de tus favoritos?</p>
+                                        <p>¿Seguro quieres quitar este curso de tus favoritos?</p>
                                         <ul>
-                                            <li><a href="#">No</a></li>
-                                            <li><a href="#">Si</a></li>
+                                            <li><a href="#" class="no_delete-fav">No</a></li>
+                                            <li><a href="#" class="si_delete-fav">Si</a></li>
                                         </ul>
                                     </div> <!-- /s-favorito -->
                                 </div> <!-- /f-favorito -->
                             </div> <!-- /shadow-favorito -->
+
+                            <div class="shadow-favorito" id="shadow-favorito_evento">
+                                <div class="f-shadow">
+                                    <div class="s-favorito">
+                                        <div class="close-shadow"></div> <!-- /close-shadow -->
+                                        <p>¿Seguro quieres quitar este evento de tus favoritos?</p>
+                                        <ul>
+                                            <li><a href="#" class="no_delete-fav">No</a></li>
+                                            <li><a href="#" class="si_delete-fav">Si</a></li>
+                                        </ul>
+                                    </div> <!-- /s-favorito -->
+                                </div> <!-- /f-favorito -->
+                            </div> <!-- /shadow-favorito -->
+
                             
+                            <div class="shadow-favorito" id="shadow-exito">
+                                <div class="f-shadow">
+                                    <div class="s-favorito">
+                                        <div class="close-shadow"></div> <!-- /close-shadow -->
+                                        <p>Se elimino de favoritos correctamente</p>
+                                        <ul>
+                                            <li><a href="#" class="ok_favoritos-micuenta">OK</a></li>
+                                        </ul>
+                                    </div> <!-- /s-favorito -->
+                                </div> <!-- /f-favorito -->
+                            </div> <!-- /shadow-favorito -->
+
+
+                            <div class="shadow-favorito" id="loading" style="z-index: 9999">
+                                <div class="f-shadow">
+                                    <img src="/site/img/musica.gif">
+                                </div> <!-- /f-favorito -->
+                            </div> <!-- /shadow-favorito -->
+
+
                         </div> <!-- /row-favoritos -->
                     </div>
 
@@ -615,73 +623,73 @@
                             </div> <!-- /row-itinerario -->
                             
                         </div>
+                        
+                        <div style="margin-bottom: 30px;" data-seccion="status" class="section">
+                            <h3>Status académico</h3>
+                            <div class="row-perfil row-status">
+                                <div class="flex">
+                                    <div class="item-perfil">
+                                        <h4>Información del alumno</h4>
+                                        <p>ALUMNO: {{ auth()->user()->nombre. " ".auth()->user()->apaterno. " ".auth()->user()->amaterno }}</p>
+                                        <ul>
+                                            <li>Programa académico: Técnico Profesional en Producción Musical</li>
+                                            <li>Inscrito desde: Octubre 2020 (cuarto trimestre 2020)</li>
+                                            <li>Activo desde: Junio 2020</li>
+                                        </ul>
+                                    </div> <!-- /item-perfil -->
+                                    <div class="item-perfil">
+                                        <h4>Kardex del alumno</h4>
+                                        <table class="tabla-perfil">
+                                            <tr>
+                                                <th>Trimestre</th>
+                                                <th>Materia</th>
+                                                <th>Calificación general</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Oct - Dic 2020</td>
+                                                <td>Materia</td>
+                                                <td>100</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="vacio">&nbps;</td>
+                                                <td>Materia</td>
+                                                <td>100</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="vacio">&nbps;</td>
+                                                <td>Materia</td>
+                                                <td>100</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ene - Mar 2021</td>
+                                                <td>Materia</td>
+                                                <td>100</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="vacio">&nbps;</td>
+                                                <td>Materia</td>
+                                                <td>100</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="vacio">&nbps;</td>
+                                                <td>Materia</td>
+                                                <td>100</td>
+                                            </tr>
+                                        </table>
+                                        <div class="text-right">
+                                            <a class="descarga">
+                                                <div class="flex flex-center">
+                                                    <img src="/site/img/descarga.png">
+                                                    <p>Descargar en pdf</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div> <!-- /item-perfil -->
+                                </div> <!-- /flex -->
+                            </div> <!-- /row-perfil -->
+                        </div>
 
                     @endif
-                        
-                    <div style="margin-bottom: 30px;" data-seccion="meterias">
-                        <h3>Status académico</h3>
-                        <div class="row-perfil row-status">
-                            <div class="flex">
-                                <div class="item-perfil">
-                                    <h4>Información del alumno</h4>
-                                    <p>ALUMNO: {{ auth()->user()->nombre. " ".auth()->user()->apaterno. " ".auth()->user()->amaterno }}</p>
-                                    <ul>
-                                        <li>Programa académico: Técnico Profesional en Producción Musical</li>
-                                        <li>Inscrito desde: Octubre 2020 (cuarto trimestre 2020)</li>
-                                        <li>Activo desde: Junio 2020</li>
-                                    </ul>
-                                </div> <!-- /item-perfil -->
-                                <div class="item-perfil">
-                                    <h4>Kardex del alumno</h4>
-                                    <table class="tabla-perfil">
-                                        <tr>
-                                            <th>Trimestre</th>
-                                            <th>Materia</th>
-                                            <th>Calificación general</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Oct - Dic 2020</td>
-                                            <td>Materia</td>
-                                            <td>100</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="vacio">&nbps;</td>
-                                            <td>Materia</td>
-                                            <td>100</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="vacio">&nbps;</td>
-                                            <td>Materia</td>
-                                            <td>100</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ene - Mar 2021</td>
-                                            <td>Materia</td>
-                                            <td>100</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="vacio">&nbps;</td>
-                                            <td>Materia</td>
-                                            <td>100</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="vacio">&nbps;</td>
-                                            <td>Materia</td>
-                                            <td>100</td>
-                                        </tr>
-                                    </table>
-                                    <div class="text-right">
-                                        <a class="descarga">
-                                            <div class="flex flex-center">
-                                                <img src="/site/img/descarga.png">
-                                                <p>Descargar en pdf</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div> <!-- /item-perfil -->
-                            </div> <!-- /flex -->
-                        </div> <!-- /row-perfil -->
-                    </div>
 
                 </div> <!-- /wrapper-tablero -->
                 

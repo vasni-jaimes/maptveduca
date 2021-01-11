@@ -88,3 +88,8 @@ Route::post('eliminar-publicacion/{publicacion_id}', 'Admin\AulasVirtualesContro
 Route::post('eliminar-respuesta/{respuesta_id}', 'Admin\AulasVirtualesController@eliminarRespuesta')->name('eliminar.respuesta');
 Route::post('actualizar-publicidad/{publicacion_id}', 'Admin\AulasVirtualesController@updatePublicidad')->name('aula-publicidad.update');
 Route::post('actualizar-respuesta/{publicacion_id}/{respuesta_id}', 'Admin\AulasVirtualesController@updateRespuesta')->name('aula-respuesta.update');
+
+
+
+//CALIFICACIONES
+Route::get('calificaciones-alumnos', 'Admin\CalificacionesController@index')->name('calificaciones-alumnos');

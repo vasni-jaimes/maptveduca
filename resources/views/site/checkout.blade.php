@@ -91,9 +91,15 @@
                                    @endforeach
                                 </select>
                             </div><br>
-                            <button>
+                            <button style="cursor: pointer;">
                                 <img src="https://www.paypalobjects.com/marketing/web/mx/logos-buttons/Paga-con-yellow_227x44.png" alt="Check out with PayPal" />
                             </button>
+
+                             @if (session()->has("error"))
+                                <div class="error">
+                                    {{ session()->get("error") }}
+                                </div>
+                            @endif
 
                         </form>
                         
@@ -179,12 +185,26 @@
 
 
 
-        @if (session()->has("error"))
+       {{--  @if (session()->has("error"))
             <div class="error">
                 {{ session()->get("error") }}
             </div>
-        @endif
+        @endif --}}
 
 	</div> <!-- /shadowbox -->
 
+
+
+    <!-- LOADING -->
+    <div class="shadow-favorito" id="loading" style="z-index: 9999">
+        <div class="f-shadow">
+            <img src="/site/img/musica.gif">
+        </div> <!-- /f-favorito -->
+    </div> <!-- /shadow-favorito -->
+
+@stop
+
+
+@section('js-content')
+    <script type="text/javascript" src="/site/js/app.js"></script>
 @stop

@@ -174,7 +174,7 @@ var registro_evento = document.querySelector('.registrarte_evento');
 
 if (registro_evento) {
   registro_evento.addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].registroEvento);
-} //ELIMINAR DE FAVORITOS
+} //MOSTRAR MODAL DE FAVORITOS CURSOS
 
 
 var delete_fav = document.querySelectorAll('.delete_curso-fav');
@@ -182,17 +182,56 @@ var delete_fav = document.querySelectorAll('.delete_curso-fav');
 if (delete_fav) {
   for (var i = 0; i <= delete_fav.length - 1; i++) {
     delete_fav[i].addEventListener('click', function (e) {
-      _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].eliminarCursoFav(e, "curso");
+      var slug = e.target.getAttribute('data-slg');
+      document.querySelector('#shadow-favorito .si_delete-fav').setAttribute('data-slg', slug);
+      document.querySelector('#shadow-favorito').style.display = "block"; //funciones.eliminarCursoFav(e, "curso");
     });
   }
-}
+} //MOSTRAR MODAL DE FAVORITOS EVENTOS
+
 
 var delete_faveve = document.querySelectorAll('.delete_evento-fav');
 
 if (delete_faveve) {
   for (var i = 0; i <= delete_faveve.length - 1; i++) {
     delete_faveve[i].addEventListener('click', function (e) {
+      var slug = e.target.getAttribute('data-slg');
+      document.querySelector('#shadow-favorito_evento .si_delete-fav').setAttribute('data-slg', slug);
+      document.querySelector('#shadow-favorito_evento').style.display = "block"; //funciones.eliminarCursoFav(e, "evento");
+    });
+  }
+} //ELIMINAR FAVORITOS CURSOS
+
+
+var shadow_favorito = document.querySelectorAll('.shadow-favorito .si_delete-fav');
+
+if (shadow_favorito) {
+  for (var i = 0; i <= shadow_favorito.length - 1; i++) {
+    shadow_favorito[i].addEventListener('click', function (e) {
+      _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].eliminarCursoFav(e, "curso");
+    });
+  }
+} //ELIMINAR FAVORITOS EVENTOS
+
+
+var shadow_favorito_evento = document.querySelectorAll('.shadow-favorito_evento .si_delete-fav');
+
+if (shadow_favorito_evento) {
+  for (var i = 0; i <= shadow_favorito_evento.length - 1; i++) {
+    shadow_favorito_evento[i].addEventListener('click', function (e) {
       _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].eliminarCursoFav(e, "evento");
+    });
+  }
+} //CANCELAR DE NO ELIMINAR UN FAVORITO
+
+
+var cancel_favorito = document.querySelectorAll('.no_delete-fav');
+
+if (cancel_favorito) {
+  for (var i = 0; i <= cancel_favorito.length - 1; i++) {
+    cancel_favorito[i].addEventListener('click', function (e) {
+      document.querySelector('#shadow-favorito').style.display = "none";
+      document.querySelector('#shadow-favorito_evento').style.display = "none";
     });
   }
 } //EDITAR DATOS DEL PERFIL DE USUARIO
@@ -220,7 +259,8 @@ if (form_editar) {
   for (var i = 0; i <= form_editar.length - 1; i++) {
     form_editar[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].mostrarFormEditarResp);
   }
-}
+} //BOTON CANCELAR PARA ELIMINAR FAVORITO
+
 
 var btn_cancelar = document.querySelectorAll('.btn-cancelar');
 
@@ -228,6 +268,26 @@ if (btn_cancelar) {
   for (var i = 0; i <= form_editar.length - 1; i++) {
     btn_cancelar[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].ocultarEditarRespuesta);
   }
+} //cerrar modal ok
+
+
+var ok_favoritos = document.querySelector('.ok_favoritos-micuenta');
+
+if (ok_favoritos) {
+  ok_favoritos.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector('#shadow-exito').style.display = "none";
+  });
+}
+
+var form_checkout = document.querySelector('.form-checkout button');
+
+if (form_checkout) {
+  form_checkout.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
+    document.querySelector('.form-checkout').submit();
+  });
 }
 
 /***/ }),
@@ -319,7 +379,11 @@ var funciones = {
     }
   },
   eliminarCursoFav: function eliminarCursoFav(e, section) {
-    e.preventDefault();
+    e.preventDefault(); //OCULTAR MENSAJE DE ELIMINAR FAVORITOS
+
+    document.querySelector('#shadow-favorito').style.display = "none";
+    document.querySelector('#shadow-favorito_evento').style.display = "none";
+    document.querySelector('#loading').style.display = "block";
     var slug = e.target.getAttribute('data-slg');
 
     if (slug) {
@@ -340,17 +404,39 @@ var funciones = {
         return response.json();
       }).then(function (res) {
         if (res.message == 'ok') {
-          swal("OK", "Se elimino de favoritos correctamente", "success");
-          e.target.parentNode.remove();
+          //swal("OK", "Se elimino de favoritos correctamente", "success");
+          document.querySelector('.delete[data-slg="' + slug + '"]').parentNode.remove();
+
+          if (section == 'curso') {
+            var fav = document.querySelectorAll('.item-cursos ul.slide-cursos li').length;
+
+            if (fav <= 0) {
+              var texto = "<p>¡Aún no tienes cursos favoritos! Ve a la sección CURSOS y márca cuantos quieras como favoritos.</p>" + "<p>Los encontrarás aquí cuando vuelvas.</p>";
+              document.querySelector('.item-cursos').insertAdjacentHTML('beforeend', texto);
+            }
+          } else if (section == 'evento') {
+            var _fav = document.querySelectorAll('.item-eventos ul.slide-cursos li').length;
+
+            if (_fav <= 0) {
+              var _texto = "<p>¡Aún no tienes cursos favoritos! Ve a la sección CURSOS y márca cuantos quieras como favoritos.</p>" + "<p>Los encontrarás aquí cuando vuelvas.</p>";
+
+              document.querySelector('.item-cursos').insertAdjacentHTML('beforeend', _texto);
+            }
+          }
+
+          document.querySelector('#loading').style.display = "none";
+          document.querySelector('#shadow-exito').style.display = "block"; //e.target.parentNode.remove();
         } else {
           //alert('no');
           swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          document.querySelector('#loading').style.display = "none";
         }
       });
     }
   },
   registroEvento: function registroEvento(e) {
     e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
     var slug = e.target.getAttribute('data-crs');
 
     if (slug) {
@@ -370,18 +456,20 @@ var funciones = {
         return response.json();
       }).then(function (res) {
         if (res.message == 'ok') {
-          swal("OK", "Se agrego a tu tablero correctamente", "success"); //alert('ok');
-
+          //swal("OK", "Se agrego a tu tablero correctamente", "success");
+          //alert('ok');
           location.reload();
         } else {
           //alert('no');
           swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          document.querySelector('#loading').style.display = "none";
         }
       });
     }
   },
   empezarCurso: function empezarCurso(e) {
     e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
     var slug = e.target.getAttribute('data-crs');
 
     if (slug) {
@@ -401,12 +489,13 @@ var funciones = {
         return response.json();
       }).then(function (res) {
         if (res.message == 'ok') {
-          swal("OK", "Se agrego a tu tablero correctamente", "success"); //alert('ok');
-
+          //swal("OK", "Se agrego a tu tablero correctamente", "success");
+          //alert('ok');
           location.reload();
         } else {
           //alert('no');
           swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          document.querySelector('#loading').style.display = "none";
         }
       });
     }
@@ -436,6 +525,7 @@ var funciones = {
   },
   guardarFavoritos: function guardarFavoritos(e, section) {
     e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
     var data_crs = e.target.parentNode.getAttribute('data-crs');
     var seccion = section;
 
@@ -457,12 +547,15 @@ var funciones = {
         return response.json();
       }).then(function (res) {
         if (res.message == 'ok') {
-          swal("OK", "Se agrego el " + seccion + " a favoritos", "success"); //alert('ok');
-
+          //swal("OK", "Se agrego el "+seccion+" a favoritos", "success");
+          //alert('ok');
+          document.querySelector('#loading').style.display = "none";
+          document.querySelector('#shadow-exito').style.display = "block";
           document.querySelector('.favorito').remove();
         } else {
           //alert('no');
           swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          document.querySelector('#loading').style.display = "none";
         }
       });
     }

@@ -173,7 +173,11 @@ var funciones = {
     }
   },
   eliminarCursoFav: function eliminarCursoFav(e, section) {
-    e.preventDefault();
+    e.preventDefault(); //OCULTAR MENSAJE DE ELIMINAR FAVORITOS
+
+    document.querySelector('#shadow-favorito').style.display = "none";
+    document.querySelector('#shadow-favorito_evento').style.display = "none";
+    document.querySelector('#loading').style.display = "block";
     var slug = e.target.getAttribute('data-slg');
 
     if (slug) {
@@ -194,17 +198,39 @@ var funciones = {
         return response.json();
       }).then(function (res) {
         if (res.message == 'ok') {
-          swal("OK", "Se elimino de favoritos correctamente", "success");
-          e.target.parentNode.remove();
+          //swal("OK", "Se elimino de favoritos correctamente", "success");
+          document.querySelector('.delete[data-slg="' + slug + '"]').parentNode.remove();
+
+          if (section == 'curso') {
+            var fav = document.querySelectorAll('.item-cursos ul.slide-cursos li').length;
+
+            if (fav <= 0) {
+              var texto = "<p>¡Aún no tienes cursos favoritos! Ve a la sección CURSOS y márca cuantos quieras como favoritos.</p>" + "<p>Los encontrarás aquí cuando vuelvas.</p>";
+              document.querySelector('.item-cursos').insertAdjacentHTML('beforeend', texto);
+            }
+          } else if (section == 'evento') {
+            var _fav = document.querySelectorAll('.item-eventos ul.slide-cursos li').length;
+
+            if (_fav <= 0) {
+              var _texto = "<p>¡Aún no tienes cursos favoritos! Ve a la sección CURSOS y márca cuantos quieras como favoritos.</p>" + "<p>Los encontrarás aquí cuando vuelvas.</p>";
+
+              document.querySelector('.item-cursos').insertAdjacentHTML('beforeend', _texto);
+            }
+          }
+
+          document.querySelector('#loading').style.display = "none";
+          document.querySelector('#shadow-exito').style.display = "block"; //e.target.parentNode.remove();
         } else {
           //alert('no');
           swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          document.querySelector('#loading').style.display = "none";
         }
       });
     }
   },
   registroEvento: function registroEvento(e) {
     e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
     var slug = e.target.getAttribute('data-crs');
 
     if (slug) {
@@ -224,18 +250,20 @@ var funciones = {
         return response.json();
       }).then(function (res) {
         if (res.message == 'ok') {
-          swal("OK", "Se agrego a tu tablero correctamente", "success"); //alert('ok');
-
+          //swal("OK", "Se agrego a tu tablero correctamente", "success");
+          //alert('ok');
           location.reload();
         } else {
           //alert('no');
           swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          document.querySelector('#loading').style.display = "none";
         }
       });
     }
   },
   empezarCurso: function empezarCurso(e) {
     e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
     var slug = e.target.getAttribute('data-crs');
 
     if (slug) {
@@ -255,12 +283,13 @@ var funciones = {
         return response.json();
       }).then(function (res) {
         if (res.message == 'ok') {
-          swal("OK", "Se agrego a tu tablero correctamente", "success"); //alert('ok');
-
+          //swal("OK", "Se agrego a tu tablero correctamente", "success");
+          //alert('ok');
           location.reload();
         } else {
           //alert('no');
           swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          document.querySelector('#loading').style.display = "none";
         }
       });
     }
@@ -290,6 +319,7 @@ var funciones = {
   },
   guardarFavoritos: function guardarFavoritos(e, section) {
     e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
     var data_crs = e.target.parentNode.getAttribute('data-crs');
     var seccion = section;
 
@@ -311,12 +341,15 @@ var funciones = {
         return response.json();
       }).then(function (res) {
         if (res.message == 'ok') {
-          swal("OK", "Se agrego el " + seccion + " a favoritos", "success"); //alert('ok');
-
+          //swal("OK", "Se agrego el "+seccion+" a favoritos", "success");
+          //alert('ok');
+          document.querySelector('#loading').style.display = "none";
+          document.querySelector('#shadow-exito').style.display = "block";
           document.querySelector('.favorito').remove();
         } else {
           //alert('no');
           swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          document.querySelector('#loading').style.display = "none";
         }
       });
     }
