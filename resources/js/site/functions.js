@@ -142,15 +142,15 @@ let funciones = {
 	            	else {
 	            		//alert('no');
 	            		swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+	            		document.querySelector('#loading').style.display = "none";
 	            	}
 	            });
 		}
-
-		document.querySelector('#loading').style.display = "none";
 	},
 
 	registroEvento: function(e) {
 		e.preventDefault();
+		document.querySelector('#loading').style.display = "block";
 		let slug = e.target.getAttribute('data-crs');
 		if (slug) {
 			let token = document.querySelector("input[name='_token']").value;
@@ -168,13 +168,14 @@ let funciones = {
 	            .then(response => response.json())
 	            .then(res => {
 	            	if (res.message == 'ok') {
-	            		swal("OK", "Se agrego a tu tablero correctamente", "success");
+	            		//swal("OK", "Se agrego a tu tablero correctamente", "success");
 	            		//alert('ok');
 	            		location.reload();
 	            	}
 	            	else {
 	            		//alert('no');
 	            		swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+	            		document.querySelector('#loading').style.display = "none";
 	            	}
 	            });
 		}
@@ -182,6 +183,7 @@ let funciones = {
 
 	empezarCurso: function(e) {
 		e.preventDefault();
+		document.querySelector('#loading').style.display = "block";
 		let slug = e.target.getAttribute('data-crs');
 		if (slug) {
 			let token = document.querySelector("input[name='_token']").value;
@@ -199,13 +201,14 @@ let funciones = {
 	            .then(response => response.json())
 	            .then(res => {
 	            	if (res.message == 'ok') {
-	            		swal("OK", "Se agrego a tu tablero correctamente", "success");
+	            		//swal("OK", "Se agrego a tu tablero correctamente", "success");
 	            		//alert('ok');
 	            		location.reload();
 	            	}
 	            	else {
 	            		//alert('no');
 	            		swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+	            		document.querySelector('#loading').style.display = "none";
 	            	}
 	            });
 		}
@@ -239,6 +242,7 @@ let funciones = {
 
 	guardarFavoritos: function(e, section) {
 		e.preventDefault();
+
 		document.querySelector('#loading').style.display = "block";
 		let data_crs = e.target.parentNode.getAttribute('data-crs');
 		let seccion = section;
@@ -269,11 +273,11 @@ let funciones = {
 	            	else {
 	            		//alert('no');
 	            		swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+	            		document.querySelector('#loading').style.display = "none";
 	            	}
 	            });
 		}
 		
-		document.querySelector('#loading').style.display = "none";
 	},
 
 	filtrosCursos: function(e) {

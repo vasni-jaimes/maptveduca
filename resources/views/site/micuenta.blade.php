@@ -362,9 +362,9 @@
                             </div> <!-- /shadow-favorito -->
 
 
-                            <div class="shadow-favorito" id="loading">
+                            <div class="shadow-favorito" id="loading" style="z-index: 9999">
                                 <div class="f-shadow">
-                                    <img src="/site/img/musica.gif" alt="loading" />
+                                    <img src="/site/img/musica.gif">
                                 </div> <!-- /f-favorito -->
                             </div> <!-- /shadow-favorito -->
 

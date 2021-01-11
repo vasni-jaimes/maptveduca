@@ -106,6 +106,11 @@
                                     <li> <a href="{{ route('listado-materias.index') }}"> Lista de Materias </a></li>
                                 </ul>
                             </li>
+
+                            <li>
+                                <a href="{{ route('calificaciones-alumnos') }}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Calificaciones</span>  </a>
+                            </li>
+
                         @endif
                     </ul>
                 </div>

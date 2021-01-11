@@ -280,6 +280,16 @@ if (ok_favoritos) {
   });
 }
 
+var form_checkout = document.querySelector('.form-checkout button');
+
+if (form_checkout) {
+  form_checkout.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
+    document.querySelector('.form-checkout').submit();
+  });
+}
+
 /***/ }),
 
 /***/ "./resources/js/site/functions.js":
@@ -419,14 +429,14 @@ var funciones = {
         } else {
           //alert('no');
           swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          document.querySelector('#loading').style.display = "none";
         }
       });
     }
-
-    document.querySelector('#loading').style.display = "none";
   },
   registroEvento: function registroEvento(e) {
     e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
     var slug = e.target.getAttribute('data-crs');
 
     if (slug) {
@@ -446,18 +456,20 @@ var funciones = {
         return response.json();
       }).then(function (res) {
         if (res.message == 'ok') {
-          swal("OK", "Se agrego a tu tablero correctamente", "success"); //alert('ok');
-
+          //swal("OK", "Se agrego a tu tablero correctamente", "success");
+          //alert('ok');
           location.reload();
         } else {
           //alert('no');
           swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          document.querySelector('#loading').style.display = "none";
         }
       });
     }
   },
   empezarCurso: function empezarCurso(e) {
     e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
     var slug = e.target.getAttribute('data-crs');
 
     if (slug) {
@@ -477,12 +489,13 @@ var funciones = {
         return response.json();
       }).then(function (res) {
         if (res.message == 'ok') {
-          swal("OK", "Se agrego a tu tablero correctamente", "success"); //alert('ok');
-
+          //swal("OK", "Se agrego a tu tablero correctamente", "success");
+          //alert('ok');
           location.reload();
         } else {
           //alert('no');
           swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          document.querySelector('#loading').style.display = "none";
         }
       });
     }
@@ -542,11 +555,10 @@ var funciones = {
         } else {
           //alert('no');
           swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          document.querySelector('#loading').style.display = "none";
         }
       });
     }
-
-    document.querySelector('#loading').style.display = "none";
   },
   filtrosCursos: function filtrosCursos(e) {
     e.preventDefault();

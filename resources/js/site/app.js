@@ -180,3 +180,13 @@ if (ok_favoritos) {
 }
 
 
+const form_checkout = document.querySelector('.form-checkout button');
+if (form_checkout) {
+	form_checkout.addEventListener('click', function(e) {
+		e.preventDefault();
+		document.querySelector('#loading').style.display = "block";
+		document.querySelector('.form-checkout').submit();
+	});
+}
+
+
