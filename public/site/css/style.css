@@ -683,6 +683,19 @@ header a {
     text-align: center;
 }
 
+.menu-user ul li form button {
+    display: block;
+    padding: 0;
+    font-size: 10px;
+    font-family: 'Poppins medium';
+    color: #000;
+    border-radius: 0;
+    border: none;
+    margin: auto;
+    background-color: transparent;
+    outline: none;
+}
+
 .ico-login:hover .menu-user {
     display: block;
 }
@@ -1513,6 +1526,17 @@ video#myVideo {
     text-align: center;
 }
 
+.img-birrete {
+    width: 50%;
+}
+
+.img-birrete img {
+    display: block;
+    width: 90px;
+    height: auto;
+    margin: 0 auto 20px;
+}
+
 .wrapper-academica table {
     width: 100%;
     border-spacing: 8px;
@@ -1582,6 +1606,7 @@ video#myVideo {
     display: block;
     padding: 10px 20px;
     color: #fff;
+    line-height: 130%;
 }
 
 .wrapper-academica table tr td.last-td span {
@@ -1705,6 +1730,7 @@ video#myVideo {
     border: 0; 
     padding: 12px 10px;
     margin: 0 0 30px;
+    border-radius: 0;
     border-bottom: 1px solid #000;
     font-size: 15px;
 }
@@ -2312,6 +2338,22 @@ video#myVideo {
     background-color: #ffc314;
 }
 
+.sidebar-single ul.row-leccion li ul {
+    margin: 8px 0 0;
+}
+
+.sidebar-single ul.row-leccion li ul li {
+    padding: 2px 0;
+}
+
+.sidebar-single ul.row-leccion li ul li.active:before {
+    width: 6px;
+    top: 0;
+    height: 22px;
+    left: -12px;
+    border-radius: 0;
+} 
+
 .perfil-profesor {
     margin: 0 0 25px;
 }
@@ -2344,6 +2386,10 @@ video#myVideo {
     font-family: 'Poppins bold';
 }
 
+.bio-profesor p:last-of-type {
+    margin: 15px 0 0;
+}
+
 .single-contenido {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -2367,7 +2413,7 @@ video#myVideo {
 
 .txt-sidebar p {
     margin: 0 0 10px;
-    font-size: 10px;
+    font-size: 12px;
     font-family: 'Poppins regular';
     line-height: 130%;
 }
@@ -2749,22 +2795,24 @@ section.membresia {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    display: flex;
     padding: 20px;
     border: 1px solid #000;
+    align-items: center;
 }
 
-.item-texto p {
+.item-txt p {
     padding: 0 0 20px;
     font-family: 'Poppins regular';
     font-size: 16px;
     line-height: 130%;
 }
 
-.item-texto p:last-of-type {
+.item-txt p:last-of-type {
     padding: 0;
 }
 
-.item-texto p strong {
+.item-txt p strong {
     font-family: 'Poppins bold';
 }
 
@@ -3444,10 +3492,15 @@ section.membresia {
 }
 
 .respuesta-faq > div p {
+    padding: 0 0 15px;
     color: #fff;
     font-family: 'Poppins regular';
     font-size: 14px;
     line-height: 130%;
+}
+
+.respuesta-faq > div p:last-of-type {
+    padding: 0;
 }
 
 .row-form {
@@ -4873,12 +4926,17 @@ a[href="#page"] {
     .wrapper-academica table tr td,
     .wrapper-academica table tr.last-tr td {
         padding: 10px;
+        font-size: 12px;
         text-align: left;
     }
     
-    .wrapper-academica table tr.last-tr th,
+    /*.wrapper-academica table tr.last-tr th,
     .wrapper-academica table tr:first-of-type th {
         display: none;
+    }*/
+    
+    .wrapper-academica table tr:first-of-type th:first-of-type {
+        background-color: transparent!important;
     }
     
     .wrapper-academica table tr td.last-td {
@@ -4887,7 +4945,7 @@ a[href="#page"] {
     }
     
     .wrapper-academica table tr.last-tr td:first-of-type {
-        border: 1px solid #e6e6e6;
+        border: none;
         color: #000;
     }
     

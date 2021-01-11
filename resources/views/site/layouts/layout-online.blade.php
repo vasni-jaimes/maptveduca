@@ -109,7 +109,7 @@
                         <div class="ico-login">
                             <a href="#"><img src="/site/img/ico-user.png"></a>
                             <div class="menu-user">
-                                <p>Hola, {{ auth()->user()->nombre." ".auth()->user()->apaterno." ".auth()->user()->amaterno }}</p>
+                                <p>Hola, {{ auth()->user()->nombre }}</p>
                                 <ul>
                                     <li><a href="{{ route('micuenta.index') }}">Tablero</a></li>
                                     

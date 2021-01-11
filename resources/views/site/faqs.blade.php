@@ -27,11 +27,11 @@
                     <div class="row-faqs">
 
                         <div class="titulo-faq">
-                            <p>¿De dónde surge maptv educa?</p>
+                            <p>¿Por qué surge MAPtv Educa?</p>
                         </div> <!-- /titulo-faq -->
                         
                         <div class="respuesta-faq">
-                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                            <div><p>MAPtv Educa se crea como un proyecto de M.A.P. Colegio de Música, Audio y Producción debido a la pandemia mundial por COVID-19 surgida a principios de 2020. El objetivo de esta plataforma es llevar la educación que nos caracteriza como institución a todos los rincones de latinoamérica. Nos apasiona la música y la producción musical, y queremos compartirla contigo.</p></div>
                         </div> <!-- /respuesta-faq -->
                         
                         <div class="titulo-faq">
@@ -39,7 +39,7 @@
                         </div> <!-- /titulo-faq -->
                         
                         <div class="respuesta-faq">
-                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                            <div><p>En MAPtv Educa la carrera técnica se lleva a cabo de manera trimestral. Revisa las fechas de inicio de cada trimestre en la sección “Membresía Académica”. Cuando se abran las fechas de inscripciones, debes inscribirte ingresando a la sección “Membresía Académica” y dando click en el botón “Obtén tu membresía e inscríbete”. Después, sólo realiza tu pago vía PayPal y ¡empieza a estudiar!</p></div>
                         </div> <!-- /respuesta-faq -->
                         
                         <div class="titulo-faq">
@@ -47,15 +47,18 @@
                         </div> <!-- /titulo-faq -->
                         
                         <div class="respuesta-faq">
-                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                            <div><p>En nuestra plataforma, al estudiar la carrera técnica, podrás tener acceso a material audiovisual creado exclusivamente para MAPtv Educa y guiado por tus profesores, podrás charlar directamente con ellos a través de sesiones mensuales vía Zoom, leer y descargar material correspondiente a cada materia, interactuar con profesores y alumnos a través de aulas virtuales y obtener retroalimentación de tus entregas y tareas.</p>
+                            <p>Adicionalmente, cada mes tendrás acceso a actividades como Eventos virtuales, tales como Clínicas y Conciertos/Masterclasses. Dichos eventos pueden ser gratuitos o con costo. Tu membresía académica incluye acceso a un Evento con costo y a un Concierto/Masterclass con costo al trimestre. Podrás ingresar a todos los eventos gratuitos también.
+                            <p>¡Estamos felices de formar parte de tu carrera como productor(a) musical!</p></div>
                         </div> <!-- /respuesta-faq -->
                         
                         <div class="titulo-faq">
-                            <p>¿Qué herramientas tengo como estudiante?</p>
+                            <p>¿Qué son las clases en línea y qué diferencia tienen con el resto de servicios de la plataforma?</p>
                         </div> <!-- /titulo-faq -->
                         
                         <div class="respuesta-faq">
-                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                            <div><p>Las clases en línea son series de sesiones de corta duración, por ejemplo, una clase en línea puede constar de sólo cuatro sesiones repartidas a lo largo de un mes. Estas sesiones tienen costo y son impartidas por profesionales en múltiples disciplinas en materia de producción musical o música.</p>
+                            <p>Consulta la oferta de clases en línea en la sección “Clases en Línea” del menú principal.</p></div>
                         </div> <!-- /respuesta-faq -->
                         
                         <div class="titulo-faq">
@@ -63,31 +66,24 @@
                         </div> <!-- /titulo-faq -->
                         
                         <div class="respuesta-faq">
-                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                            <div><p>¡Próximamente, en MAPtv Educa tendremos la carrera técnica en música disponible para ti!</p>
+                            <p>Por el momento contamos con Clases en Línea, que son sesiones vía Zoom con horarios y fechas específicas, en donde podrás encontrar una variada oferta de clases de instrumento. Éstas clases tienen costo y se lanzarán cada cierto tiempo. ¡No pierdas de vista los lanzamientos de Clases en Línea en la página de inicio!</p></div>
                         </div> <!-- /respuesta-faq -->
                         
                         <div class="titulo-faq">
-                            <p>¿Maptv educa tiene instalaciones presenciales?</p>
+                            <p>¿MAPtv Educa tiene instalaciones?</p>
                         </div> <!-- /titulo-faq -->
                         
                         <div class="respuesta-faq">
-                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                            <div><p>MAPtv Educa es exclusivamente una plataforma virtual, sin embargo, te ofrece la posibilidad de pasar un verano en las instalaciones de M.A.P. Colegio de Música, Audio y Producción (Puebla, México). Visita su sitio oficial: www.colegiomap.com</p></div>
                         </div> <!-- /respuesta-faq -->
                         
                         <div class="titulo-faq">
-                            <p>¿Qué hago si no cuento con el material para estudiar?</p>
+                            <p>¿Qué hago si hay un problema con la plataforma?</p>
                         </div> <!-- /titulo-faq -->
                         
                         <div class="respuesta-faq">
-                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
-                        </div> <!-- /respuesta-faq -->
-                        
-                        <div class="titulo-faq">
-                            <p>¿Qué hago si tengo un problema con la plataforma?</p>
-                        </div> <!-- /titulo-faq -->
-                        
-                        <div class="respuesta-faq">
-                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                            <div><p>SI llegara a presentarse un problema con el funcionamiento o manejo de la plataforma, comunícate inmediatamente con nosotros vía correo electrónico a la dirección maptveduca.info@gmail.com indicando en tu mensaje tu nombre completo y describiendo con detalle la situación. Te responderemos a la brevedad para resolver el problema.</p></div>
                         </div> <!-- /respuesta-faq -->
                         
                         <div class="titulo-faq">
@@ -95,7 +91,7 @@
                         </div> <!-- /titulo-faq -->
                         
                         <div class="respuesta-faq">
-                            <div><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit </p></div>
+                            <div><p>Los pagos se realizan vía PayPal como cargos recurrentes mensualmente.</p></div>
                         </div> <!-- /respuesta-faq -->
 
                     </div> <!-- /row-maptv -->
