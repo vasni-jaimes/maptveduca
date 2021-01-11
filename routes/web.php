@@ -151,6 +151,10 @@ Route::get('faqs', function() {
 	return view('site.faqs');
 })->name('faqs');
 
+Route::get('gracias', function() {
+	return view('site.gracias');
+})->name('gracias');
+
 // Route::get('nosotros', function() {
 // 	return view('site.nosotros');
 // })->name('nosotros');

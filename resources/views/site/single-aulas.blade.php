@@ -26,7 +26,7 @@
                         <div class="boton-acordeon flex between">
                             <p>Lección: {{  $publicacion->nombre }}</p>
                             @if ($publicacion->archivos != null)
-                                <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $publicacion->created_at }}</span></p>
+                            <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $publicacion->created_at }}</span></p>
                             @endif
                         </div> <!-- /flex -->
                         <div class="wrapper-acordeon">
@@ -77,55 +77,60 @@
                                 @if ($respuestas->where('publicacion_id', $publicacion->id)->count() > 0)
                                     @foreach($respuestas->where('publicacion_id', $publicacion->id) as $respuesta)
 
-                                        <div class="boton-alumno flex between">
-                                            @if ($respuesta->instructor_id != null)
-                                                <p> Profr. {{ $respuesta->instructor->nombres." ".$respuesta->instructor->apellidos }}</p>
-                                            @else
-                                                <p> {{ $respuesta->usuario->nombre." ".$respuesta->usuario->apaterno }} </p>
-                                            @endif
+                                        <div class="flex">
+                                            
+                                            <div class="row-alumno">
+                                                <div class="boton-alumno flex between">
+                                                    @if ($respuesta->instructor_id != null)
+                                                        <p> Profr. {{ $respuesta->instructor->nombres." ".$respuesta->instructor->apellidos }}</p>
+                                                    @else
+                                                        <p> {{ $respuesta->usuario->nombre." ".$respuesta->usuario->apaterno }} </p>
+                                                    @endif
 
-                                            @if ($respuesta->archivos != null)
-                                                <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $respuesta->created_at }}</span></p>
-                                            @endif
-                                        </div> <!-- /flex -->
+                                                    @if ($respuesta->archivos != null)
+                                                        <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $respuesta->created_at }}</span></p>
+                                                    @endif
+                                                </div> <!-- /flex -->
 
+                                                <div class="respuesta-alumno">
+                                                    <div class="row-acordeon">
+                                                        {!! $respuesta->respuesta !!}
+                                                    </div> <!-- /row-acordeon -->
+                                                    @if ($respuesta->archivos != null)
+                                                        <div class="btn-archivo flex flex-center between">
+                                                            <ul>
+                                                                @php  
+                                                                    $archivos = json_decode($respuesta->archivos);
+                                                                @endphp
 
-                                        <div class="respuesta-alumno">
-                                            <div class="row-acordeon">
-                                                <p>{!! $respuesta->respuesta !!}</p>
-                                            </div> <!-- /row-acordeon -->
-                                            @if ($respuesta->archivos != null)
-                                                <div class="btn-archivo flex flex-center between">
-                                                    <ul>
-                                                        @php  
-                                                            $archivos = json_decode($respuesta->archivos);
-                                                        @endphp
-
-                                                        @for($i = 0; $i <= count($archivos) - 1; $i++)
-                                                            <li> <a href="{{ route('down.publicacion.web', [$curso->slug, $publicacion->id,$respuesta->id, $i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a> </li>
-                                                        @endfor
-                                                    </ul>
-                                                </div> <!-- /btn-archivo -->
-                                            @endif
-                                        </div> <!-- /respuesta-alumno -->
-
-
-                                        @if ($respuesta->user_id == auth()->user()->id)
-                                            <div class="acciones_respuestas">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" class="form-editar_show" data-resp="{{ $respuesta->id }}"> Editar </a>
-                                                    </li>
-                                                    <li>
-                                                        <form method="POST" action="{{ route('eliminar.resp-web', $respuesta->id) }}" name="eliminar-respuesta">
-                                                            @csrf
-                                                            <a href=""> Eliminar </a>
-                                                        </form>
-                                                    </li>
-                                                </ul>
+                                                                @for($i = 0; $i <= count($archivos) - 1; $i++)
+                                                                    <li> <a href="{{ route('down.publicacion.web', [$curso->slug, $publicacion->id,$respuesta->id, $i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a> </li>
+                                                                @endfor
+                                                            </ul>
+                                                        </div> <!-- /btn-archivo -->
+                                                    @endif
+                                                </div> <!-- /respuesta-alumno -->
                                             </div>
 
-
+                                            @if ($respuesta->user_id == auth()->user()->id)
+                                                <div class="acciones_respuestas">
+                                                    <ul class="flex">
+                                                        <li class="r-editar">
+                                                            <a href="#" class="form-editar_show" data-resp="{{ $respuesta->id }}"> Editar </a>
+                                                        </li>
+                                                        <li class="r-eliminar">
+                                                            <form method="POST" action="{{ route('eliminar.resp-web', $respuesta->id) }}" name="eliminar-respuesta">
+                                                                @csrf
+                                                                <a href=""> Eliminar </a>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                        </div>
+                                
+                                        @if ($respuesta->user_id == auth()->user()->id)
+                        
                                             <div class="wrapper-respuesta edit-respuesta" data-resp="{{ $respuesta->id }}">
                                                 <p>Editar Respuesta </p>
                                                 <div class="row-forma">

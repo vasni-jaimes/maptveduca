@@ -28,7 +28,7 @@
                                 @foreach($temario as $ctemario)
                                     <li class="active {{ $ctemario->slug ==  $clase['slug'] ? "active-leccion" : "" }}" data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug }}">{{ $ctemario->nombre_video }}
                                         @if (count($ctemario->url_video) > 1)
-                                            <ul class="row-leccion">
+                                            <ul>
                                                 @for($i = 0; $i <= count($ctemario->url_video) - 1; $i++)
                                                     <li class="active" data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug."/".$i }}"> Session #{{ $i + 1 }} </li>
                                                 @endfor
@@ -99,6 +99,7 @@
                                     <p>Membresía académica</p>
                                     <p>$2,000.00 MXN mensuales*</p>
                                     <p><small>Este curso pertenece al plan de estudios del programa: Técnico en Producción Musical</small></p>
+
                                     <a href="{{ route('checkout', 'membresia-academica') }}">Obtener</a>
                                     <p><small>* Recuerda que esta membresía también te da  acceso a todos los cursos que no pertenecen a tu plan de estudios.</small></p>
                                 </div>
@@ -121,9 +122,9 @@
                                 @else
                                     <div>
                                         <p>¡Estás listo para comenzar!</p>
-                                        <p>Ahora podrás encontrar este curso en tu tablero personal para que puedas acceder rápidamente a él.</p>
+                                        <p><small>Ahora podrás encontrar este curso en tu tablero personal para que puedas acceder rápidamente a él.</small></p>
                                         <p>¿Quieres saber cómo aprovechar mejor este curso?</p>
-                                        <p>Echa un vistazo rápido a las recomendaciones para tomar este curso por tu cuenta:</p>
+                                        <p><small>Echa un vistazo rápido a las recomendaciones para tomar este curso por tu cuenta:</small></p>
                                         <a href="#">Camino de aprendizaje</a>
                                     </div>
                                 @endif
@@ -153,10 +154,10 @@
                                 @else
                                     <div>
                                         <p>¡Estás listo para comenzar!</p>
-                                        <p>Ahora podrás encontrar este curso en tu tablero personal para acceder rápidamente a él.</p>
+                                        <p><small>Ahora podrás encontrar este curso en tu tablero personal para acceder rápidamente a él.</small></p>
                                         <p>¿Qué sigue?</p>
-                                        <p>Recuerda ingresar al Aula Virtual de este curso cada semana para subir tus tareas y recibir retroalimentación de tu profesor.</p>
-                                        <p>Revisa tus calificaciones en el área de status del alumno.</p>
+                                        <p><small>Recuerda ingresar al Aula Virtual de este curso cada semana para subir tus tareas y recibir retroalimentación de tu profesor.</small></p>
+                                        <p><small>Revisa tus calificaciones en el área de status del alumno.</small></p>
                                     </div>
                                 @endif
                                 
@@ -187,10 +188,10 @@
                                 @else
                                     <div>
                                         <p>¡Estás listo para comenzar!</p>
-                                        <p>Ahora podrás encontrar este curso en tu tablero personal para acceder rápidamente a él.</p>
+                                        <p><small>Ahora podrás encontrar este curso en tu tablero personal para acceder rápidamente a él.</small></p>
                                         <p>¿Qué sigue?</p>
-                                        <p>Recuerda ingresar al Aula Virtual de este curso cada semana para subir tus tareas y recibir retroalimentación de tu profesor.</p>
-                                        <p>Revisa tus calificaciones en el área de status del alumno.</p>
+                                        <p><small>Recuerda ingresar al Aula Virtual de este curso cada semana para subir tus tareas y recibir retroalimentación de tu profesor.</small></p>
+                                        <p><small>Revisa tus calificaciones en el área de status del alumno.</small></p>
                                     </div>
                                 @endif
                             </div> <!-- /txt-sidebar -->

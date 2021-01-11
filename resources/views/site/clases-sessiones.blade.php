@@ -89,9 +89,9 @@
                                     <span><a href="#">En curso</a></span>
                                     <div>
                                         <p><strong>¡Estás listo para comenzar!</strong></p>
-                                        <p>Ahora podrás encontrar esta clase en tu tablero personal para acceder rápidamente a ella.</p>
+                                        <p><small>Ahora podrás encontrar esta clase en tu tablero personal para acceder rápidamente a ella.</small></p>
                                         <p><strong>¿Qué sigue?</strong></p>
-                                        <p>Revisa tu correo electrónico y guarda los datos de acceso a las sesiones.</p>
+                                        <p><small>Revisa tu correo electrónico y guarda los datos de acceso a las sesiones.</small></p>
                                     </div>
                                 </div>
                                 

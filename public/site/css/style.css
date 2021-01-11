@@ -687,6 +687,19 @@ header a {
     text-align: center;
 }
 
+.menu-user ul li form button {
+    display: block;
+    padding: 0;
+    font-size: 10px;
+    font-family: 'Poppins medium';
+    color: #000;
+    border-radius: 0;
+    border: none;
+    margin: auto;
+    background-color: transparent;
+    outline: none;
+}
+
 .ico-login:hover .menu-user {
     display: block;
 }
@@ -1517,6 +1530,17 @@ video#myVideo {
     text-align: center;
 }
 
+.img-birrete {
+    width: 50%;
+}
+
+.img-birrete img {
+    display: block;
+    width: 90px;
+    height: auto;
+    margin: 0 auto 20px;
+}
+
 .wrapper-academica table {
     width: 100%;
     border-spacing: 8px;
@@ -1586,6 +1610,7 @@ video#myVideo {
     display: block;
     padding: 10px 20px;
     color: #fff;
+    line-height: 130%;
 }
 
 .wrapper-academica table tr td.last-td span {
@@ -1696,6 +1721,34 @@ video#myVideo {
     line-height: 130%;
 }
 
+.formulario p {
+    padding: 0 0 15px;
+    font-family: 'Poppins regular';
+    font-size: 15px;
+    line-height: 130%;
+}
+
+.formulario p:last-of-type {
+    padding: 0;
+}
+
+.formulario p a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.formulario a.btn-amarillo {
+    display: inline-block;
+    padding: 10px 5%;
+    margin: 20px 0 0;
+    font-family: 'Poppins semibold';
+    font-size: 18px;
+    border-radius: 25px;
+    background-color: #FFC314;
+    text-decoration: none;
+    color: #000;
+}
+
 .form div {
     display: flex;
     justify-content: space-between;
@@ -1709,8 +1762,9 @@ video#myVideo {
     border: 0; 
     padding: 12px 10px;
     margin: 0 0 30px;
+    border-radius: 0;
     border-bottom: 1px solid #000;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .form div .input {
@@ -1779,7 +1833,7 @@ video#myVideo {
 
 .row-terminos p {
     font-family: 'Poppins regular';
-    font-size: 15px;
+    font-size: 14px;
     line-height: 130%;
 }
 
@@ -2316,6 +2370,22 @@ video#myVideo {
     background-color: #ffc314;
 }
 
+.sidebar-single ul.row-leccion li ul {
+    margin: 8px 0 0;
+}
+
+.sidebar-single ul.row-leccion li ul li {
+    padding: 2px 0;
+}
+
+.sidebar-single ul.row-leccion li ul li.active:before {
+    width: 6px;
+    top: 0;
+    height: 22px;
+    left: -12px;
+    border-radius: 0;
+} 
+
 .perfil-profesor {
     margin: 0 0 25px;
 }
@@ -2348,6 +2418,10 @@ video#myVideo {
     font-family: 'Poppins bold';
 }
 
+.bio-profesor p:last-of-type {
+    margin: 15px 0 0;
+}
+
 .single-contenido {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -2371,7 +2445,7 @@ video#myVideo {
 
 .txt-sidebar p {
     margin: 0 0 10px;
-    font-size: 10px;
+    font-size: 12px;
     font-family: 'Poppins regular';
     line-height: 130%;
 }
@@ -2753,22 +2827,24 @@ section.membresia {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    display: flex;
     padding: 20px;
     border: 1px solid #000;
+    align-items: center;
 }
 
-.item-texto p {
+.item-txt p {
     padding: 0 0 20px;
     font-family: 'Poppins regular';
     font-size: 16px;
     line-height: 130%;
 }
 
-.item-texto p:last-of-type {
+.item-txt p:last-of-type {
     padding: 0;
 }
 
-.item-texto p strong {
+.item-txt p strong {
     font-family: 'Poppins bold';
 }
 
@@ -3448,10 +3524,15 @@ section.membresia {
 }
 
 .respuesta-faq > div p {
+    padding: 0 0 15px;
     color: #fff;
     font-family: 'Poppins regular';
     font-size: 14px;
     line-height: 130%;
+}
+
+.respuesta-faq > div p:last-of-type {
+    padding: 0;
 }
 
 .row-form {
@@ -3551,6 +3632,34 @@ section.membresia {
 
 .wrapper-checkout .formulario h2 {
     margin: 0 0 30px;
+}
+
+.wrapper-checkout .formulario label {
+    display: block;
+    font-family: 'Poppins regular';
+    font-size: 15px;
+    line-height: 130%;
+}
+
+.wrapper-checkout .formulario select {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: 320px;
+    width: 100%;
+    border-radius: 0;
+    padding: 5px 10px;
+}
+
+.wrapper-checkout .formulario button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    outline: none;
+}
+
+.wrapper-checkout .formulario button img {
+    margin: 0;
 }
 
 .form-checkout .button {
@@ -4362,7 +4471,7 @@ span.ico-edit:hover p {
 
 .boton-acordeon {
     position: relative;
-    padding: 15px 50px 15px 30px;
+    padding: 15px 50px 15px 20px;
     margin: 0px 0px 12px;
     font-family: 'Poppins medium';
     font-size: 17px;
@@ -4395,6 +4504,7 @@ span.ico-edit:hover p {
 
 .boton-acordeon p {
     display: flex;
+    font-family: 'Poppins medium';
     align-items: center;
 }
 
@@ -4413,18 +4523,22 @@ span.ico-edit:hover p {
 }
 
 .row-acordeon {
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 .row-acordeon p {
     padding: 0 0 20px;
     font-family: 'Poppins medium';
-    font-size: 17px;
+    font-size: 14px;
     line-height: 130%;
 }
 
 .row-acordeon p:last-of-type {
     padding: 0;
+}
+
+.btn-archivo {
+    margin: 20px 0 0;
 }
 
 .btn-archivo,
@@ -4456,13 +4570,13 @@ span.ico-edit:hover p {
 }
 
 .wrapper-respuesta {
-    margin: 50px 0 0;
+    margin: 20px 0 0;
 }
 
 .wrapper-respuesta p {
     padding: 0 0 18px;
     font-family: 'Poppins regular';
-    font-size: 16px;
+    font-size: 14px;
     line-height: 130%;
 }
 
@@ -4507,8 +4621,16 @@ span.ico-edit:hover p {
     margin: 35px 0 0;
 }
 
+.row-alumno {
+    width: 100%;
+}
+
 .boton-alumno {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     position: relative;
+    width: 100%;
     padding: 10px 50px 10px 30px;
     margin: 0px 0px 12px;
     font-family: 'Poppins medium';
@@ -4554,6 +4676,35 @@ span.ico-edit:hover p {
     height: auto;
 }
 
+.acciones_respuestas {
+    position: relative;
+}
+
+.acciones_respuestas li {
+    margin-left: 10px;
+}
+
+.acciones_respuestas li.r-editar {
+    background-image: url('/site/img/edit.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.acciones_respuestas li.r-eliminar {
+    background-image: url('/site/img/delete.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.acciones_respuestas li a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    font-size: 0;
+}
+
 .respuesta-alumno {
     display: none;
     padding: 0 0 30px;
@@ -4562,7 +4713,7 @@ span.ico-edit:hover p {
 .respuesta-alumno p {
     padding: 0 0 20px;
     font-family: 'Poppins medium';
-    font-size: 17px;
+    font-size: 14px;
     line-height: 130%;
 }
 
@@ -4573,11 +4724,14 @@ span.ico-edit:hover p {
 .btn-publicar {
     display: block;
     padding: 8px 5%;
+    margin: 20px 0 0;
     border-radius: 25px;
     font-family: 'Poppins medium';
     font-size: 14px;
     color: #000;
     background-color: #ffc314;
+    border: 0;
+    border-color: 0;
     line-height: 130%;
 }
     
@@ -4877,12 +5031,17 @@ a[href="#page"] {
     .wrapper-academica table tr td,
     .wrapper-academica table tr.last-tr td {
         padding: 10px;
+        font-size: 12px;
         text-align: left;
     }
     
-    .wrapper-academica table tr.last-tr th,
+    /*.wrapper-academica table tr.last-tr th,
     .wrapper-academica table tr:first-of-type th {
         display: none;
+    }*/
+    
+    .wrapper-academica table tr:first-of-type th:first-of-type {
+        background-color: transparent!important;
     }
     
     .wrapper-academica table tr td.last-td {
@@ -4891,7 +5050,7 @@ a[href="#page"] {
     }
     
     .wrapper-academica table tr.last-tr td:first-of-type {
-        border: 1px solid #e6e6e6;
+        border: none;
         color: #000;
     }
     

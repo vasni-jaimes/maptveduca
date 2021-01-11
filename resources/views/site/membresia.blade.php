@@ -39,7 +39,7 @@
                     </div> <!-- /flex -->
 
                     <div class="txt-columna text-center">
-                        <p>Al finalizar tu carrera técnica recibirás un certificado de parte de M.A.P. Colegio de Música, Audio y Producción <br>(Incorporado a SEP)</p>
+                        <p>Al finalizar tu carrera técnica <strong>recibirás un certificado de parte de M.A.P. Colegio de Música, Audio y Producción</strong> <br>(Incorporado a SEP)</p>
                         <p>Mira cómo funciona la carrera técnica:</p>
                     </div> <!-- /text-center -->
                     
@@ -263,6 +263,12 @@
                     <h2>¿Qué obtengo con la membresía académica?</h2>
                     
                     <div class="hoja-700">
+                        
+                        <div class="flex end">
+                            <div class="img-birrete">
+                                <img src="/site/img/ico-academica.png">
+                            </div> <!-- /img-birrete -->
+                        </div> <!-- /flex -->
 
                         <table style="width: 100%; border-spacing: 10px; border-collapse: separate; table-layout: fixed;">
                             <tr>
@@ -326,9 +332,11 @@
                             <h3>AULAS VIRTUALES</h3>
                         </div> <!-- /item-titulo -->
                         <div class="col-7 item-texto">
-                            <p>Al ser miembro académico, tienes acceso a las Aulas Virtuales por curso. Podrás ingresar a través de tu área personal de miembro, o área de control académico.</p>
-                            <p>Este espacio te permite tener <strong>interacción escrita directamente con tu profesor</strong>, quien asignará actividades semanalmente y te compartirá material especial.</p>
-                            <p>Aquí mismo <strong>podrás subir archivos correspondientes a tus entregas semanales e interactuar con estudiantes que también están cursando el programa.</strong></p>
+                            <div class="item-txt">
+                                <p>Al ser miembro académico, tienes acceso a las Aulas Virtuales por curso. Podrás ingresar a través de tu área personal de miembro, o área de control académico.</p>
+                                <p>Este espacio te permite tener <strong>interacción escrita directamente con tu profesor</strong>, quien asignará actividades semanalmente y te compartirá material especial.</p>
+                                <p>Aquí mismo <strong>podrás subir archivos correspondientes a tus entregas semanales e interactuar con estudiantes que también están cursando el programa.</strong></p>
+                            </div> <!-- /item-txt -->
                         </div> <!-- /item-texto -->
                     </div> <!-- /row-herramienta -->
                     
@@ -338,7 +346,9 @@
                             <h3>Sesiones en vivo con profesores</h3>
                         </div> <!-- /item-titulo -->
                         <div class="col-7 item-texto">
-                            <p>Cada curso se complementa con una sesión en vivo (vía Zoom) al mes para que puedas hacer preguntas, obtener información de la experiencia directa del profesor.</p>
+                            <div class="item-txt">
+                                <p>Cada curso se complementa con una sesión en vivo (vía Zoom) al mes para que puedas hacer preguntas, obtener información de la experiencia directa del profesor.</p>
+                            </div> <!-- /item-txt -->
                         </div> <!-- /item-texto -->
                     </div> <!-- /row-herramienta -->
                     
@@ -348,8 +358,10 @@
                             <h3>Área de control académico</h3>
                         </div> <!-- /item-titulo -->
                         <div class="col-7 item-texto">
-                            <p>Al adquirir tu membresía académica, automáticamente se añadirá la sección "Control Académico" a tu tablero personal.</p>
-                            <p>Ahí <strong>podrás accesar en cualquier momento a las aulas virtuales por curso y a tu información de alumno (calificaciones y status académico)</strong>, además de conjuntar en un sólo lugar todos cursos del semestre en progreso.</p>
+                            <div class="item-txt">
+                                <p>Al adquirir tu membresía académica, automáticamente se añadirá la sección "Control Académico" a tu tablero personal.</p>
+                                <p>Ahí <strong>podrás accesar en cualquier momento a las aulas virtuales por curso y a tu información de alumno (calificaciones y status académico)</strong>, además de conjuntar en un sólo lugar todos cursos del semestre en progreso.</p>
+                            </div> <!-- /item-txt -->
                         </div> <!-- /item-texto -->
                     </div> <!-- /row-herramienta -->
                     
@@ -359,7 +371,9 @@
                             <h3>Cursos base y extras</h3>
                         </div> <!-- /item-titulo -->
                         <div class="col-7 item-texto">
-                            <p>Con tu membresía académica <strong>tienes acceso a todos los cursos de MAPtv Educa, sin importar que no pertenezcan a tu plan de estudios.</strong> Si quieres complementar tus conocimientos o aprender algo nuevo, sólo basta añadir el curso de tu interés a tu tablero personal.</p>
+                            <div class="item-txt">
+                                <p>Con tu membresía académica <strong>tienes acceso a todos los cursos de MAPtv Educa, sin importar que no pertenezcan a tu plan de estudios.</strong> Si quieres complementar tus conocimientos o aprender algo nuevo, sólo basta añadir el curso de tu interés a tu tablero personal.</p>
+                            </div> <!-- /item-txt -->
                         </div> <!-- /item-texto -->
                     </div> <!-- /row-herramienta -->
                     

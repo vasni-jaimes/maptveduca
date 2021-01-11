@@ -182,7 +182,7 @@ $(document).ready(function(){
         $(this).next('.lista-itinerario').slideToggle(500);
     });
 
-    $('.wrapper-academica table').stacktable();
+    /*$('.wrapper-academica table').stacktable();*/
     
     $('#ico-filtro').on('click', function () {
 		$(this).addClass('active');

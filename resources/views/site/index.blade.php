@@ -94,7 +94,7 @@
 	            <tr>
 	                <th>&nbsp</th>
 	                <!--<th>Membresía básica</th>-->
-	                <th>Membresía académica <span>Estudia una carrera técnica en línea</span></th>
+	                <th>Membresía académica <span>Estudia la carrera técnica en Producción Musical</span></th>
 	            </tr>
 	            <tr>
 	                <td>Material audiovisual de estudio</td>
@@ -139,7 +139,7 @@
 	            <tr class="last-tr">
 	                <td class="last-td">&nbsp</td>
 	                <!--<td class="last-td"><span>$123 MXN mensuales</span><a href="#" class="bg-amarillo">Prueba gratuita por 30 días</a></td>-->
-	                <td class="last-td"><span>$1234 MXN mensuales <small>por carrera técnica</small></span></td>
+	                <td class="last-td"><span>$2,000 MXN mensuales<br>en modalidad trimestral</span></td>
 	            </tr>
 	        </table>
 	        
