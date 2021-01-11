@@ -85,7 +85,7 @@ class RegisterController extends Controller
 
         if ($usr) {
             $this->sendMensajeBienvenida($usr);
-            return true;
+            return $usr;
         }
 
         return false;

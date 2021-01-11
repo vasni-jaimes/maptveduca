@@ -103,7 +103,8 @@ class UsersController extends Controller
                         ->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
         /* HISTORIAL DE PAGOS */
-        $pagos = UsuarioMembresia::with(['membresia', 'evento', 'curso'])->get();
+        $pagos = UsuarioMembresia::with(['membresia', 'evento', 'curso'])
+                    ->where('user_id', auth()->user()->id)->get();
 
         /* NOTIFICACIONES */
         $notificaciones = Notificacion::where('user_id', auth()->user()->id)

@@ -173,6 +173,30 @@ class CursosController extends Controller
                                     ->where('trimestre', 4)
                                     ->count();
         }
+        else if (count($pagos) > 12 && count($pagos) <= 15) {
+            return Recomendacion::where('carrera_id', auth()->user()->obtenerCarrera())
+                                    ->where('curso_id', $curso_id)
+                                    ->where('trimestre', 5)
+                                    ->count();
+        }
+        else if (count($pagos) > 15 && count($pagos) <= 18) {
+            return Recomendacion::where('carrera_id', auth()->user()->obtenerCarrera())
+                                    ->where('curso_id', $curso_id)
+                                    ->where('trimestre', 6)
+                                    ->count();
+        }
+        else if (count($pagos) > 18 && count($pagos) <= 21) {
+            return Recomendacion::where('carrera_id', auth()->user()->obtenerCarrera())
+                                    ->where('curso_id', $curso_id)
+                                    ->where('trimestre', 7)
+                                    ->count();
+        }
+        else if (count($pagos) > 21 && count($pagos) <= 24) {
+            return Recomendacion::where('carrera_id', auth()->user()->obtenerCarrera())
+                                    ->where('curso_id', $curso_id)
+                                    ->where('trimestre', 8)
+                                    ->count();
+        }
     }
 
 

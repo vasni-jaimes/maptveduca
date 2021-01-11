@@ -93,6 +93,11 @@ let funciones = {
 	eliminarCursoFav: function(e, section) {
 		e.preventDefault();
 
+		//OCULTAR MENSAJE DE ELIMINAR FAVORITOS
+		document.querySelector('#shadow-favorito').style.display = "none";
+		document.querySelector('#shadow-favorito_evento').style.display = "none";
+		document.querySelector('#loading').style.display = "block";
+
 		let slug = e.target.getAttribute('data-slg');
 		if (slug) {
 			let token = document.querySelector("input[name='_token']").value;
@@ -110,8 +115,29 @@ let funciones = {
 	            .then(response => response.json())
 	            .then(res => {
 	            	if (res.message == 'ok') {
-	            		swal("OK", "Se elimino de favoritos correctamente", "success");
-	            		e.target.parentNode.remove();
+	            		//swal("OK", "Se elimino de favoritos correctamente", "success");
+						document.querySelector('.delete[data-slg="'+slug+'"]').parentNode.remove();
+
+						if (section == 'curso') {
+							let fav = document.querySelectorAll('.item-cursos ul.slide-cursos li').length;
+							if (fav <= 0) {
+								let texto = "<p>¡Aún no tienes cursos favoritos! Ve a la sección CURSOS y márca cuantos quieras como favoritos.</p>"
+                                    		+"<p>Los encontrarás aquí cuando vuelvas.</p>";
+								document.querySelector('.item-cursos').insertAdjacentHTML('beforeend', texto);
+							}
+						}
+						else if (section == 'evento') {
+							let fav = document.querySelectorAll('.item-eventos ul.slide-cursos li').length;
+							if (fav <= 0) {
+								let texto = "<p>¡Aún no tienes cursos favoritos! Ve a la sección CURSOS y márca cuantos quieras como favoritos.</p>"
+                                    		+"<p>Los encontrarás aquí cuando vuelvas.</p>";
+								document.querySelector('.item-cursos').insertAdjacentHTML('beforeend', texto);
+							}
+						}
+
+						document.querySelector('#loading').style.display = "none";
+						document.querySelector('#shadow-exito').style.display = "block";
+	            		//e.target.parentNode.remove();
 	            	}
 	            	else {
 	            		//alert('no');
@@ -119,6 +145,8 @@ let funciones = {
 	            	}
 	            });
 		}
+
+		document.querySelector('#loading').style.display = "none";
 	},
 
 	registroEvento: function(e) {
@@ -211,6 +239,7 @@ let funciones = {
 
 	guardarFavoritos: function(e, section) {
 		e.preventDefault();
+		document.querySelector('#loading').style.display = "block";
 		let data_crs = e.target.parentNode.getAttribute('data-crs');
 		let seccion = section;
 
@@ -231,8 +260,10 @@ let funciones = {
 	            .then(response => response.json())
 	            .then(res => {
 	            	if (res.message == 'ok') {
-	            		swal("OK", "Se agrego el "+seccion+" a favoritos", "success");
+	            		//swal("OK", "Se agrego el "+seccion+" a favoritos", "success");
 	            		//alert('ok');
+	            		document.querySelector('#loading').style.display = "none";
+	            		document.querySelector('#shadow-exito').style.display = "block";
 	            		document.querySelector('.favorito').remove();
 	            	}
 	            	else {
@@ -241,6 +272,8 @@ let funciones = {
 	            	}
 	            });
 		}
+		
+		document.querySelector('#loading').style.display = "none";
 	},
 
 	filtrosCursos: function(e) {

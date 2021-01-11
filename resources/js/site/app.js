@@ -75,21 +75,62 @@ if (registro_evento) {
 }
 
 
-//ELIMINAR DE FAVORITOS
+//MOSTRAR MODAL DE FAVORITOS CURSOS
 let delete_fav = document.querySelectorAll('.delete_curso-fav');
 if (delete_fav) {
 	for (var i = 0; i <= delete_fav.length - 1; i++) {
 		delete_fav[i].addEventListener('click', function(e) {
+			let slug = e.target.getAttribute('data-slg');
+			document.querySelector('#shadow-favorito .si_delete-fav').setAttribute('data-slg', slug);
+			document.querySelector('#shadow-favorito').style.display = "block";
+			//funciones.eliminarCursoFav(e, "curso");
+		});
+	}
+}
+
+//MOSTRAR MODAL DE FAVORITOS EVENTOS
+let delete_faveve = document.querySelectorAll('.delete_evento-fav');
+if (delete_faveve) {
+	for (var i = 0; i <= delete_faveve.length - 1; i++) {
+		delete_faveve[i].addEventListener('click', function(e) {
+			let slug = e.target.getAttribute('data-slg');
+			document.querySelector('#shadow-favorito_evento .si_delete-fav').setAttribute('data-slg', slug);
+			document.querySelector('#shadow-favorito_evento').style.display = "block";
+			//funciones.eliminarCursoFav(e, "evento");
+		});
+	}
+}
+
+
+
+//ELIMINAR FAVORITOS CURSOS
+let shadow_favorito = document.querySelectorAll('.shadow-favorito .si_delete-fav');
+if (shadow_favorito) {
+	for (var i = 0; i <= shadow_favorito.length - 1; i++) {
+		shadow_favorito[i].addEventListener('click', function(e) {
 			funciones.eliminarCursoFav(e, "curso");
 		});
 	}
 }
 
-let delete_faveve = document.querySelectorAll('.delete_evento-fav');
-if (delete_faveve) {
-	for (var i = 0; i <= delete_faveve.length - 1; i++) {
-		delete_faveve[i].addEventListener('click', function(e) {
+//ELIMINAR FAVORITOS EVENTOS
+let shadow_favorito_evento = document.querySelectorAll('.shadow-favorito_evento .si_delete-fav');
+if (shadow_favorito_evento) {
+	for (var i = 0; i <= shadow_favorito_evento.length - 1; i++) {
+		shadow_favorito_evento[i].addEventListener('click', function(e) {
 			funciones.eliminarCursoFav(e, "evento");
+		});
+	}
+}
+
+
+//CANCELAR DE NO ELIMINAR UN FAVORITO
+const cancel_favorito = document.querySelectorAll('.no_delete-fav');
+if (cancel_favorito) {
+	for (var i = 0; i <= cancel_favorito.length - 1; i++) {
+		cancel_favorito[i].addEventListener('click', function(e) {
+			document.querySelector('#shadow-favorito').style.display = "none";
+			document.querySelector('#shadow-favorito_evento').style.display = "none";
 		});
 	}
 }
@@ -120,7 +161,7 @@ if (form_editar) {
 	}
 }
 
-
+//BOTON CANCELAR PARA ELIMINAR FAVORITO
 const btn_cancelar = document.querySelectorAll('.btn-cancelar');
 if (btn_cancelar) {
 	for (var i = 0; i <= form_editar.length - 1; i++) {
@@ -129,5 +170,13 @@ if (btn_cancelar) {
 }
 
 
+//cerrar modal ok
+const ok_favoritos = document.querySelector('.ok_favoritos-micuenta');
+if (ok_favoritos) {
+	ok_favoritos.addEventListener('click', function(e) {
+		e.preventDefault();
+		document.querySelector('#shadow-exito').style.display = "none";
+	})
+}
 
 

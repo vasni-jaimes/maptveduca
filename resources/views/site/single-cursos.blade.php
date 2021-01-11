@@ -99,7 +99,7 @@
                                     <p>Membresía académica</p>
                                     <p>$2,000.00 MXN mensuales*</p>
                                     <p><small>Este curso pertenece al plan de estudios del programa: Técnico en Producción Musical</small></p>
-                                    <a href="#">Obtener</a>
+                                    <a href="{{ route('checkout', 'membresia-academica') }}">Obtener</a>
                                     <p><small>* Recuerda que esta membresía también te da  acceso a todos los cursos que no pertenecen a tu plan de estudios.</small></p>
                                 </div>
                             </div> <!-- /txt-sidebar -->
@@ -219,6 +219,27 @@
         </div> <!-- /hoja-1000 -->
 
     </section> <!-- /single-curso -->
+
+
+    <!-- LOADING -->
+    <div class="shadow-favorito" id="loading">
+        <div class="f-shadow">
+            <img src="/site/img/musica.gif" alt="loading" />
+        </div> <!-- /f-favorito -->
+    </div> <!-- /shadow-favorito -->
+
+    <!-- exito -->
+    <div class="shadow-favorito" id="shadow-exito">
+        <div class="f-shadow">
+            <div class="s-favorito">
+                <div class="close-shadow"></div> <!-- /close-shadow -->
+                <p>Se agrego a favoritos correctamente</p>
+                <ul>
+                    <li><a href="#" class="ok_favoritos-micuenta">OK</a></li>
+                </ul>
+            </div> <!-- /s-favorito -->
+        </div> <!-- /f-favorito -->
+    </div> <!-- /shadow-favorito -->
 
 @stop
 
