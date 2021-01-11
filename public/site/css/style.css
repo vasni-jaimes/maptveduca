@@ -1721,6 +1721,34 @@ video#myVideo {
     line-height: 130%;
 }
 
+.formulario p {
+    padding: 0 0 15px;
+    font-family: 'Poppins regular';
+    font-size: 15px;
+    line-height: 130%;
+}
+
+.formulario p:last-of-type {
+    padding: 0;
+}
+
+.formulario p a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.formulario a.btn-amarillo {
+    display: inline-block;
+    padding: 10px 5%;
+    margin: 20px 0 0;
+    font-family: 'Poppins semibold';
+    font-size: 18px;
+    border-radius: 25px;
+    background-color: #FFC314;
+    text-decoration: none;
+    color: #000;
+}
+
 .form div {
     display: flex;
     justify-content: space-between;
@@ -1736,7 +1764,7 @@ video#myVideo {
     margin: 0 0 30px;
     border-radius: 0;
     border-bottom: 1px solid #000;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .form div .input {
@@ -1805,7 +1833,7 @@ video#myVideo {
 
 .row-terminos p {
     font-family: 'Poppins regular';
-    font-size: 15px;
+    font-size: 14px;
     line-height: 130%;
 }
 
@@ -3606,6 +3634,34 @@ section.membresia {
     margin: 0 0 30px;
 }
 
+.wrapper-checkout .formulario label {
+    display: block;
+    font-family: 'Poppins regular';
+    font-size: 15px;
+    line-height: 130%;
+}
+
+.wrapper-checkout .formulario select {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: 320px;
+    width: 100%;
+    border-radius: 0;
+    padding: 5px 10px;
+}
+
+.wrapper-checkout .formulario button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    outline: none;
+}
+
+.wrapper-checkout .formulario button img {
+    margin: 0;
+}
+
 .form-checkout .button {
     display: inline-block;
     padding: 5px 8%;
@@ -4415,7 +4471,7 @@ span.ico-edit:hover p {
 
 .boton-acordeon {
     position: relative;
-    padding: 15px 50px 15px 30px;
+    padding: 15px 50px 15px 20px;
     margin: 0px 0px 12px;
     font-family: 'Poppins medium';
     font-size: 17px;
@@ -4448,6 +4504,7 @@ span.ico-edit:hover p {
 
 .boton-acordeon p {
     display: flex;
+    font-family: 'Poppins medium';
     align-items: center;
 }
 
@@ -4466,18 +4523,22 @@ span.ico-edit:hover p {
 }
 
 .row-acordeon {
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 .row-acordeon p {
     padding: 0 0 20px;
     font-family: 'Poppins medium';
-    font-size: 17px;
+    font-size: 14px;
     line-height: 130%;
 }
 
 .row-acordeon p:last-of-type {
     padding: 0;
+}
+
+.btn-archivo {
+    margin: 20px 0 0;
 }
 
 .btn-archivo,
@@ -4509,13 +4570,13 @@ span.ico-edit:hover p {
 }
 
 .wrapper-respuesta {
-    margin: 50px 0 0;
+    margin: 20px 0 0;
 }
 
 .wrapper-respuesta p {
     padding: 0 0 18px;
     font-family: 'Poppins regular';
-    font-size: 16px;
+    font-size: 14px;
     line-height: 130%;
 }
 
@@ -4560,8 +4621,16 @@ span.ico-edit:hover p {
     margin: 35px 0 0;
 }
 
+.row-alumno {
+    width: 100%;
+}
+
 .boton-alumno {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     position: relative;
+    width: 100%;
     padding: 10px 50px 10px 30px;
     margin: 0px 0px 12px;
     font-family: 'Poppins medium';
@@ -4607,6 +4676,35 @@ span.ico-edit:hover p {
     height: auto;
 }
 
+.acciones_respuestas {
+    position: relative;
+}
+
+.acciones_respuestas li {
+    margin-left: 10px;
+}
+
+.acciones_respuestas li.r-editar {
+    background-image: url('/site/img/edit.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.acciones_respuestas li.r-eliminar {
+    background-image: url('/site/img/delete.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.acciones_respuestas li a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    font-size: 0;
+}
+
 .respuesta-alumno {
     display: none;
     padding: 0 0 30px;
@@ -4615,7 +4713,7 @@ span.ico-edit:hover p {
 .respuesta-alumno p {
     padding: 0 0 20px;
     font-family: 'Poppins medium';
-    font-size: 17px;
+    font-size: 14px;
     line-height: 130%;
 }
 
@@ -4626,11 +4724,14 @@ span.ico-edit:hover p {
 .btn-publicar {
     display: block;
     padding: 8px 5%;
+    margin: 20px 0 0;
     border-radius: 25px;
     font-family: 'Poppins medium';
     font-size: 14px;
     color: #000;
     background-color: #ffc314;
+    border: 0;
+    border-color: 0;
     line-height: 130%;
 }
     
