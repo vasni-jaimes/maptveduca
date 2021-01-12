@@ -95,6 +95,11 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  mostarrLoadingForm: function mostarrLoadingForm(e) {
+    e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
+    e.target.parentElement.parentElement.submit();
+  },
   ocultarEditarRespuesta: function ocultarEditarRespuesta(e) {
     e.preventDefault();
     var resp = e.target.getAttribute('data-resp');
@@ -106,11 +111,6 @@ var funciones = {
     var resp = e.target.getAttribute('data-resp');
     document.querySelector('.edit-respuesta[data-resp="' + resp + '"]').style.display = "block";
     return false;
-  },
-  eliminarRespuesta: function eliminarRespuesta(e) {
-    e.preventDefault(); //generar evento submit
-
-    e.target.parentElement.submit();
   },
   editarPerfil: function editarPerfil(e) {
     e.preventDefault();

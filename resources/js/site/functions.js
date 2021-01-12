@@ -3,6 +3,12 @@
 
 let funciones = {
 
+	mostarrLoadingForm: function(e) {
+		e.preventDefault();
+		document.querySelector('#loading').style.display = "block";
+		e.target.parentElement.parentElement.submit();
+	},
+
 	ocultarEditarRespuesta: function(e) {
 		e.preventDefault();
 		let resp = e.target.getAttribute('data-resp');
@@ -16,13 +22,6 @@ let funciones = {
 		let resp = e.target.getAttribute('data-resp');
 		document.querySelector('.edit-respuesta[data-resp="'+resp+'"]').style.display = "block";
 		return false;
-	},
-
-	eliminarRespuesta: function(e) {
-		e.preventDefault();
-
-		//generar evento submit
-		e.target.parentElement.submit();
 	},
 
 	editarPerfil: function(e) {

@@ -248,7 +248,51 @@ var acciones_respuestas = document.querySelectorAll('.acciones_respuestas form a
 
 if (acciones_respuestas) {
   for (var i = 0; i <= acciones_respuestas.length - 1; i++) {
-    acciones_respuestas[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].eliminarRespuesta);
+    acciones_respuestas[i].addEventListener('click', function (e) {
+      e.preventDefault();
+      var rsp = e.target.getAttribute('data-rsp');
+      document.querySelector('#shadow-eliminar_respuesta .si_delete-resp').setAttribute('data-rsp', rsp);
+      document.querySelector('#shadow-eliminar_respuesta').style.display = "block";
+    }); //acciones_respuestas[i].addEventListener('click', funciones.eliminarRespuesta);
+  }
+} //CONFIRMAR ELIMINAR RESPUESTA
+
+
+var delete_resp = document.querySelector('#shadow-eliminar_respuesta .si_delete-resp');
+
+if (delete_resp) {
+  delete_resp.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector('#shadow-eliminar_respuesta').style.display = "none";
+    document.querySelector('#loading').style.display = "block";
+    var rsp = e.target.getAttribute('data-rsp');
+    document.querySelector('.acciones_respuestas form a.eliminar-resp_a[data-rsp="' + rsp + '"]').parentElement.submit();
+  });
+} //CANCELAR ELIMINAR RESPUESTA
+
+
+var no_delete_resp = document.querySelector('.no_delete-resp');
+
+if (no_delete_resp) {
+  no_delete_resp.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector('#shadow-eliminar_respuesta').style.display = "none";
+  });
+} //RESPUESTA
+
+
+var btn_responder_web = document.querySelector('.btn-responder_web');
+
+if (btn_responder_web) {
+  btn_responder_web.addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].mostarrLoadingForm);
+} //EDITAR RESPUESTA
+
+
+var btn_editar_web = document.querySelectorAll('.btn-editar_web');
+
+if (btn_editar_web) {
+  for (var i = 0; i <= btn_editar_web.length - 1; i++) {
+    btn_editar_web[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].mostarrLoadingForm);
   }
 } //MOSTRAR FORMULARIO PARA EDITAR PUBLICACION
 
@@ -301,6 +345,11 @@ if (form_checkout) {
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  mostarrLoadingForm: function mostarrLoadingForm(e) {
+    e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
+    e.target.parentElement.parentElement.submit();
+  },
   ocultarEditarRespuesta: function ocultarEditarRespuesta(e) {
     e.preventDefault();
     var resp = e.target.getAttribute('data-resp');
@@ -312,11 +361,6 @@ var funciones = {
     var resp = e.target.getAttribute('data-resp');
     document.querySelector('.edit-respuesta[data-resp="' + resp + '"]').style.display = "block";
     return false;
-  },
-  eliminarRespuesta: function eliminarRespuesta(e) {
-    e.preventDefault(); //generar evento submit
-
-    e.target.parentElement.submit();
   },
   editarPerfil: function editarPerfil(e) {
     e.preventDefault();
