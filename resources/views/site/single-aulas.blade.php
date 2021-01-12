@@ -86,10 +86,14 @@
                                                     @else
                                                         <p> {{ $respuesta->usuario->nombre." ".$respuesta->usuario->apaterno }} </p>
                                                     @endif
-
-                                                    @if ($respuesta->archivos != null)
-                                                        <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $respuesta->created_at }}</span></p>
-                                                    @endif
+                                                    <p>
+                                                        @if ($respuesta->archivos != null)
+                                                            <a hrfe="#">
+                                                                <img src="/site/img/clip.png">
+                                                            </a>
+                                                        @endif
+                                                        <span>{{ $respuesta->created_at }}</span>
+                                                    </p>
                                                 </div> <!-- /flex -->
 
                                                 <div class="respuesta-alumno">
