@@ -67,7 +67,7 @@
                                                     <li class="conteo-archivos">Archivo 1</li>
                                                 </ul>
                                             </div> <!-- /flex -->
-                                            <button class="btn-publicar">Publicar</button>
+                                            <button class="btn-publicar btn-responder_web">Publicar</button>
                                         </div> <!-- /flex -->
                                     </form>
                                 </div> <!-- /row-forma -->
@@ -125,7 +125,7 @@
                                                         <li class="r-eliminar">
                                                             <form method="POST" action="{{ route('eliminar.resp-web', $respuesta->id) }}" name="eliminar-respuesta">
                                                                 @csrf
-                                                                <a href=""> Eliminar </a>
+                                                                <a href="" class="eliminar-resp_a" data-rsp="{{ $respuesta->id }}"> Eliminar </a>
                                                             </form>
                                                         </li>
                                                     </ul>
@@ -150,7 +150,7 @@
                                                                 </ul>
                                                             </div> <!-- /flex -->
                                                             <button class="btn-publicar btn-cancelar" data-resp="{{ $respuesta->id }}" style="background: #fff">Cancelar</button>
-                                                            <button class="btn-publicar">Editar</button>
+                                                            <button class="btn-publicar btn-editar_web">Editar</button>
                                                         </div> <!-- /flex -->
                                                     </form>
                                                 </div> <!-- /row-forma -->
@@ -176,8 +176,33 @@
      
 </section> <!-- /aulas -->
 
+
+<!-- LOADING -->
+<div class="shadow-favorito" id="loading" style="z-index: 9999">
+    <div class="f-shadow">
+        <img src="/site/img/musica.gif">
+    </div> <!-- /f-favorito -->
+</div> <!-- /shadow-favorito -->
+
+
+<!-- ELIMINAR RESPUESTA -->
+<div class="shadow-favorito" id="shadow-eliminar_respuesta">
+    <div class="f-shadow">
+        <div class="s-favorito">
+            <div class="close-shadow"></div> <!-- /close-shadow -->
+            <p>¿Seguro quieres eliminar tu respuesta?</p>
+            <ul>
+                <li><a href="#" class="no_delete-resp">No</a></li>
+                <li><a href="#" class="si_delete-resp">Si</a></li>
+            </ul>
+        </div> <!-- /s-favorito -->
+    </div> <!-- /f-favorito -->
+</div> <!-- /shadow-favorito -->
+
+
 <script type="text/javascript" src="/site/js/app.js"></script>
-<script src="/site/js/tinymce.min.js"></script>
+{{-- <script src="/site/js/tinymce.min.js"></script> --}}
+<script src="https://cdn.tiny.cloud/1/clhjic9y1wb7el9uh6xtffdhm9i3ktjzyt8qvefsh2uhs2nl/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script>
 

@@ -148,7 +148,52 @@ if (btn_perfil) {
 const acciones_respuestas = document.querySelectorAll('.acciones_respuestas form a');
 if (acciones_respuestas) {
 	for (var i = 0; i <= acciones_respuestas.length - 1; i++) {
-		acciones_respuestas[i].addEventListener('click', funciones.eliminarRespuesta);
+		acciones_respuestas[i].addEventListener('click', function(e) {
+			e.preventDefault();
+			let rsp = e.target.getAttribute('data-rsp');
+			document.querySelector('#shadow-eliminar_respuesta .si_delete-resp').setAttribute('data-rsp', rsp);
+			document.querySelector('#shadow-eliminar_respuesta').style.display = "block";
+		});
+		//acciones_respuestas[i].addEventListener('click', funciones.eliminarRespuesta);
+	}
+}
+
+
+//CONFIRMAR ELIMINAR RESPUESTA
+const delete_resp = document.querySelector('#shadow-eliminar_respuesta .si_delete-resp');
+if (delete_resp) {
+	delete_resp.addEventListener('click', function(e) {
+		e.preventDefault();
+		document.querySelector('#shadow-eliminar_respuesta').style.display = "none";
+		document.querySelector('#loading').style.display = "block";
+		let rsp = e.target.getAttribute('data-rsp');
+		document.querySelector('.acciones_respuestas form a.eliminar-resp_a[data-rsp="'+rsp+'"]').parentElement.submit();
+	})
+}
+
+
+//CANCELAR ELIMINAR RESPUESTA
+const no_delete_resp = document.querySelector('.no_delete-resp');
+if (no_delete_resp) {
+	no_delete_resp.addEventListener('click', function(e) {
+		e.preventDefault();
+		document.querySelector('#shadow-eliminar_respuesta').style.display = "none";
+	})
+}
+
+
+//RESPUESTA
+const btn_responder_web = document.querySelector('.btn-responder_web');
+if (btn_responder_web) {
+	btn_responder_web.addEventListener('click', funciones.mostarrLoadingForm);
+}
+
+
+//EDITAR RESPUESTA
+const btn_editar_web = document.querySelectorAll('.btn-editar_web');
+if (btn_editar_web) {
+	for (var i = 0; i <= btn_editar_web.length - 1; i++) {
+		btn_editar_web[i].addEventListener('click', funciones.mostarrLoadingForm);
 	}
 }
 
