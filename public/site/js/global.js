@@ -64,17 +64,18 @@ $(document).ready(function(){
       ]
     });
     
+    $('.slide-cursos').on("init", function(event, slick){
+        console.log(slick.slideCount);
+        if(slick.slideCount > 4) {
+            $(this).addClass('slide-pad');
+        }
+    });    
+    
     $('.slide-cursos').slick({
       dots: false,
       arrows: true,
-      slidesToShow: 5,
+      slidesToShow: 4,
       responsive: [
-        {
-          breakpoint: 850,
-          settings: {
-            slidesToShow: 4
-          }
-        },
         {
           breakpoint: 768,
           settings: {

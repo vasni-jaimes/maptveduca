@@ -73,6 +73,18 @@
                         @endforeach
                     </ul> <!-- /flex -->
                 </div> <!-- /wrapper-clases -->
+            @else
+            
+                <div class="wrapper-clases">
+                
+                    <h3>Clínicas</h3>
+                    
+                    <ul class="proximamente">
+                        <li><p>Próximamente</p></li>
+                    </ul> <!-- /proximamente -->
+                    
+                </div>
+            
             @endif
             
             @if ($eventos->where("tipo_evento_id", 2)->count() > 0)
@@ -98,6 +110,18 @@
                         @endforeach
                     </ul> <!-- /flex -->
                 </div> <!-- /wrapper-clases -->
+            @else
+            
+                <div class="wrapper-clases">
+                
+                    <h3>Conciertos/Masterclass</h3>
+                    
+                    <ul class="proximamente">
+                        <li><p>Próximamente</p></li>
+                    </ul> <!-- /proximamente -->
+                    
+                </div>
+            
             @endif
             
 

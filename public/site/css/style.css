@@ -600,7 +600,8 @@ header a {
     margin: 0 0 10px;
 }
 
-.item-child li span {
+.item-child li span,
+.item-child li span a {
     display: block;
     margin: 20px 0 10px;
     color: #ffb514;
@@ -1984,10 +1985,10 @@ video#myVideo {
 }
 
 .row-cursos > div {
-    margin: 35px 0 0;
+    margin: 0 0 35px;
 }
 
-.row-cursos > div:first-of-type {
+.row-cursos > div:last-of-type {
     margin: 0;
 }
 
@@ -2031,7 +2032,7 @@ video#myVideo {
 }
 
 .row-slide {
-    padding: 15px;
+    padding: 15px 10px;
 }
 
 .row-yellow .row-slide {
@@ -2044,7 +2045,10 @@ video#myVideo {
 
 .slide-cursos {
     position: relative;
-    padding: 0 33px 0 30px;
+}
+
+.slide-cursos.slide-pad {
+    padding: 0 32px 0 30px;
 }
 
 .slide-cursos .slick-track {
@@ -2624,7 +2628,7 @@ section.membresia {
 }
 
 .row-columnas p {
-    padding: 0 0 20px;
+    padding: 0 0 15px;
     font-family: 'Poppins regular';
     font-size: 16px;
     line-height: 130%;
@@ -2972,7 +2976,7 @@ section.membresia {
 /*----------------------------------  CLASES EN LÍNEA  ----------------------------------*/
 
 .wrapper-clases {
-    margin: 0 0 70px;
+    margin: 0 0 50px;
 }
 
 .wrapper-clases h3 {
@@ -2996,6 +3000,13 @@ section.membresia {
 .wrapper-clases ul li img {
     display: block;
     width: 100%;
+}
+
+.proximamente li p {
+    font-family: 'Poppins regular';
+    font-size: 24px;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 .txt-clase {
@@ -4286,13 +4297,13 @@ span.ico-edit:hover p {
 
 .s-favorito {
     position: relative;
-    padding: 3% 4%;
+    padding: 2% 3%;
     border-radius: 18px;
     background-color: #fff;
 }
 
 .s-favorito p {
-    max-width: 220px;
+    max-width: 225px;
     width: 100%;
     margin: 0 0 20px;
     font-family: 'Poppins medium';
@@ -4307,7 +4318,8 @@ span.ico-edit:hover p {
 }
 
 .s-favorito ul li {
-    width: 48%;
+    flex: 1;
+    margin: 0 1%;
 }
 
 .s-favorito ul li a {
@@ -5530,7 +5542,7 @@ a[href="#page"] {
     
     .slide-cursos {
         padding: 0;
-        margin: 0 0 25px;
+        /*margin: 0 0 25px;*/
     }
     
     .banner-botones h4 {
@@ -5547,5 +5559,9 @@ a[href="#page"] {
     
     .banner-small {
         padding: 25% 0 0;
+    }
+    
+    .banner-inicio p {
+        font-size: 18px;
     }
 }

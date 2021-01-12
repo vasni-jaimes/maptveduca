@@ -28,7 +28,7 @@
                                         <li>
                                             <span>Producción musical</span>
                                             <ul class="item-child">
-                                                <li><span>Guía de estudio</span></li>
+                                                <li><span><a href="{{ route("guia-estudio") }}" class="bg-amarillo">Guía de estudio</span></a></li>
                                                 <li><a href="#">Cursos base</a></li>
                                                 <li><a href="#">Cursos extra</a></li>
                                                 <li><span>Área</span></li>

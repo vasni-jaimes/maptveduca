@@ -222,7 +222,7 @@
                             <div class="flex">
                                 <div class="item-perfil">
                                     <h4>Información de pago</h4>
-                                    <p>Actualiza tu información de pago en PayPal</p>
+                                    <p>Realiza tus pagos o actualiza tu información de pago en PayPal</p>
                                     <a href="{{ route("checkout", "membresia-academica") }}"><img src="site/img/paypal.png"></a>
                                 </div> <!-- /item-perfil -->
                                 <div class="item-perfil">
@@ -252,7 +252,7 @@
                                             @endforeach
                                         </table>
                                     @else
-                                        <p> Aún no hay </p>
+                                        <p>Aún no hay pagos realizados</p>
                                     @endif
                                 </div> <!-- /item-perfil -->
                             </div> <!-- /flex -->

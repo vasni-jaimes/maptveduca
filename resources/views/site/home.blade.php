@@ -22,7 +22,9 @@
                     <ul class="slide-inicio">
                         @forelse($cursos as $curso)
                             <li>
-                                <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> <!-- /img-slide -->
+                                <a href="{{ route("single-cursos.show", $curso->slug) }}">
+                                    <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> <!-- /img-slide -->
+                                </a>
                             </li>
                         @empty
                             <li>
