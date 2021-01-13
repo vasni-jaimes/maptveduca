@@ -65,7 +65,7 @@
                             <p><strong>CERTIFICACIÓN: </strong></p>
                             <p>Certificado con validez oficial expedido por M.A.P. Colegio de Música, Audio y Producción <br>(Incorporado a SEP)</p>
                         </div> <!-- /txt-programa -->
-                        <a class="btn-amarillo" href="javascript:void(0)">Plan de estudios</a>
+                        <a class="btn-amarillo btn-plan" href="javascript:void(0)">Plan de estudios</a>
                         <div class="row-planes">
                             <div class="flex wrap">
                                 <div class="item-plan">

@@ -11,7 +11,7 @@
         <div class="hoja-1000">
             
             <ul class="breadcrumb-curso">
-                <li><a href="#">Cursos</a></li>
+                <li><a href="{{ route("cursos") }}">Cursos</a></li>
                 <li><span>{{ $curso->nombre }}</span></li>
             </ul> <!-- /breadcrumb-curso -->
             

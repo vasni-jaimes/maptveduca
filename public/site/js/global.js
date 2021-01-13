@@ -241,10 +241,16 @@ $(document).ready(function(){
         $(this).next('.respuesta-alumno').slideToggle(500);
     });
     
-    $('.item-programa a').click(function(e) {    
+    $('.item-programa a.btn-plan').click(function(e) {    
         e.preventDefault();
         $(this).toggleClass('active-plan');   
         $(this).next('.row-planes').slideToggle(500);
+    });
+    
+    $('.sidebar-tablero ul li.item-control a').click(function(e) {    
+        e.preventDefault();
+        $(this).toggleClass('active');   
+        $(this).next('.sidebar-tablero ul li.item-control ul').slideToggle(500);
     });
     
     $('.delete').click(function(){

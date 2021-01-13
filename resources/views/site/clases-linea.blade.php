@@ -62,8 +62,7 @@
                                             </p>
                                             <span> 
                                                 {{ $clase->FormatoLetras( $clase->sesiones[0]->fecha_inicio, 1 ) . " AL ". 
-                                                    $clase->FormatoLetras( $clase->sesiones[ $clase->sesiones->count() - 1 ]->fecha_inicio, 2 ). " ".
-                                                    $clase->FormatoTiempo( $clase->sesiones[0]->fecha_inicio ). "HRS" }} 
+                                                    $clase->FormatoLetras( $clase->sesiones[ $clase->sesiones->count() - 1 ]->fecha_inicio, 2 ). " " }} 
                                             </span>
                                             {{-- <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span> --}}
                                         </div> <!-- /txt-clase -->
@@ -112,8 +111,7 @@
                                             </p>
                                             <span> 
                                                 {{ $clase->FormatoLetras( $clase->sesiones[0]->fecha_inicio, 1 ) . " AL ". 
-                                                    $clase->FormatoLetras( $clase->sesiones[ $clase->sesiones->count() - 1 ]->fecha_inicio, 2 ). " ".
-                                                    $clase->FormatoTiempo( $clase->sesiones[0]->fecha_inicio ). "HRS" }} 
+                                                    $clase->FormatoLetras( $clase->sesiones[ $clase->sesiones->count() - 1 ]->fecha_inicio, 2 ). " " }} 
                                             </span>
                                             {{-- <span>LUNES · 00 JUNIO AL 00 JULIO · 18:00 HRS</span> --}}
                                         </div> <!-- /txt-clase -->

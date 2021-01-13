@@ -7,7 +7,7 @@
     @foreach($categorias as $categoria)
         <ul>
             <li style="cursor: pointer; font-weight: bold" class="{{ $categoria->quitarAcentos($categoria->nombre) }}" data-cat="{{ $categoria->quitarAcentos($categoria->nombre) }}"> 
-                {{ $categoria->nombre }} ({{ $categoria->obtenerConteoCat( $categoria->id )}} ) 
+                {{ $categoria->nombre }} ({{ $categoria->obtenerConteoCat( $categoria->id )}}) 
             </li>
         </ul>
 
@@ -24,7 +24,7 @@
 
     <ul>
         <li style="cursor: pointer; font-weight: bold" class="profesores" data-cat="profesores"> 
-            Profesor( 0 ) 
+            Profesor (0) 
         </li>
     </ul>
 
