@@ -1910,6 +1910,14 @@ video#myVideo {
     background-position: center;
 }
 
+.banner-guia {
+    padding: 25% 0 0;
+    background-image: url('/site/img/sitio/teclado.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 .sidebar-single ul.row-leccion li.active-leccion,
 .sidebar-single ul.row-leccion li.active-leccion ul li {
     font-family: 'Poppins medium';
@@ -3487,6 +3495,10 @@ section.membresia {
 
 /*----------------------------------  GUÍA DE ESTUDIOS  ----------------------------------*/
 
+.row-guia {
+    margin: 0 0 50px;
+}
+
 .row-guia h3 {
     padding: 35px 15px 15px;
     font-family: 'Oswald medium';
@@ -3494,6 +3506,98 @@ section.membresia {
     color: #000;
     text-transform: uppercase;
     line-height: 130%;
+}
+
+.flex-guia {
+    width: 100%;
+    margin: 0 0 50px;
+}
+
+.item-guia {
+    padding: 30px 4%;
+}
+
+.item-guia h3 {
+    max-width: 400px;
+    width: 100%;
+    font-family: 'Oswald medium';
+    font-size: 26px;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 130%;
+}
+
+.item-guia ul {
+    margin: 20px 0 0;
+    padding: 0 0 0 10px;
+}
+
+.item-guia ul li {
+    position: relative;
+    margin: 0 0 4px;
+    padding: 0 0 0 10px;
+    color: #fff;
+    font-family: 'Poppins regular';
+    font-size: 13px;
+    line-height: 130%;
+}
+
+.item-guia.item-kit ul li {
+    color: #000;
+}
+
+.item-guia ul li:before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.item-guia.item-kit {
+    text-align: right;
+}
+
+.item-guia.item-kit ul li:before {
+    background-color: #000;
+}
+
+.item-guia.item-kit h3 {
+    display: inline-block;
+    max-width: 300px;
+}
+
+.item-guia.item-kit p {
+    color: #fff; 
+    font-family: 'Poppins semibold';
+    font-size: 11px;
+    line-height: 130%;
+}
+
+.item-guia.item-kit p strong {
+    display: inline-block;
+    margin: 0 0 5px;
+    color: #000;
+    font-size: 13px;
+    line-height: 130%;
+    text-transform: uppercase;
+}
+
+.item-guia.item-kit ul li {
+    text-align: left;
+}
+
+.item-equipo {
+    width: 60%;
+    background-color: #000;
+}
+
+.item-kit {
+    width: 40%;
+    background-color: #ffb514;
 }
 
 
