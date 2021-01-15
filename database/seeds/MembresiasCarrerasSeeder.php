@@ -19,9 +19,9 @@ class MembresiasCarrerasSeeder extends Seeder
         ]);
 
 
-        \DB::table('membresias_carreras')->insert([
-        	"membresia_id" => 2,
-        	"carrera_id" => 2,
-        ]);
+        // \DB::table('membresias_carreras')->insert([
+        // 	"membresia_id" => 2,
+        // 	"carrera_id" => 2,
+        // ]);
     }
 }

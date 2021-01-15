@@ -20,11 +20,11 @@ class CareersSeeder extends Seeder
             "status" => 1
     	]);
 
-    	 $career = Career::create([
-    		"nombre" => "Tecnico profesional en musical",
-    		"precio" => "1250",
-            "status" => 1
-    	]);
+    	//  $career = Career::create([
+    	// 	"nombre" => "Tecnico profesional en musical",
+    	// 	"precio" => "1250",
+     //        "status" => 1
+    	// ]);
 
     	$career->save();
     }
