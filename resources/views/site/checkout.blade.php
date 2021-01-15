@@ -85,18 +85,20 @@
                             <div>
                                 <label>Selecciona el programa que deseas cursar</label><br>
                                 <select class="input" name="carrera">
-                                   <option value=""> Carreras </option>
                                    @foreach($membresia->carreras as $carreras)
-                                        <option value="{{ $carreras->id }}"> {{ $carreras->nombre }} </option>
+                                        <option value="{{ $carreras->id }}" selected> {{ $carreras->nombre }} </option>
                                    @endforeach
                                 </select>
                             </div><br>
+
+                            <p>Precio: $2,000.00 MXM</p><br>
+
                             <button style="cursor: pointer;">
                                 <img src="https://www.paypalobjects.com/marketing/web/mx/logos-buttons/Paga-con-yellow_227x44.png" alt="Check out with PayPal" />
-                            </button>
+                            </button><br>
 
                              @if (session()->has("error"))
-                                <div class="error">
+                                <div class="error" style="color: red; margin-top: 20px;">
                                     {{ session()->get("error") }}
                                 </div>
                             @endif

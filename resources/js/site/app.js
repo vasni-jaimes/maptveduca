@@ -27,7 +27,7 @@ let sidebar_single = document.querySelectorAll('.single-curso .sidebar-single ul
 if (sidebar_single) {
 	for (var i = 0; i <= sidebar_single.length - 1; i++) {
 		sidebar_single[i].addEventListener('click', function(e) {
-			//alert('');
+			//document.querySelector('#loading').style.display = "block";
 			let url = e.target.getAttribute('data-url');
 			window.location.href = url;
 		});
@@ -224,7 +224,7 @@ if (ok_favoritos) {
 	})
 }
 
-
+//FORM CHECKOUT
 const form_checkout = document.querySelector('.form-checkout button');
 if (form_checkout) {
 	form_checkout.addEventListener('click', function(e) {
@@ -232,6 +232,20 @@ if (form_checkout) {
 		document.querySelector('#loading').style.display = "block";
 		document.querySelector('.form-checkout').submit();
 	});
+}
+
+
+//UPLADE FILE
+let uploadedFile = document.querySelectorAll('input[name="upload[]"]');
+if (uploadedFile) {
+	for (var i = 0; i <= uploadedFile.length - 1; i++) {
+		uploadedFile[i].addEventListener('change', function(e) {
+			e.preventDefault();
+			var pdrs = e.target.files.length;
+			$(e.target).next().next().children().html('Archivo '+pdrs);
+			$(e.target).next().next().children().css('display', 'inline-block');
+		});
+	}
 }
 
 

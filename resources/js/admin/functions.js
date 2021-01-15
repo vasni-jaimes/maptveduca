@@ -857,6 +857,7 @@ let funciones = {
 
 			/* TEMARIO */
 			nombres_cursos = document.querySelectorAll("input[name='nombre_video[]']"),
+			nombres_videos = document.querySelectorAll(".nombre_videos"),
 			videos_url = document.querySelectorAll(".url_videos"),
 			descripcion_curso = document.querySelectorAll("textarea[name='descripcion_curso[]']"),
 
@@ -960,6 +961,16 @@ let funciones = {
 		});
 
 
+		//Validar nombres de videos
+		nombres_videos.forEach((item, index) => {
+			if (item.value == '') {
+				error_videos = true;
+				item.parentNode.classList.add('has-error');
+				item.parentNode.nextElementSibling.innerHTML = 'El campo es requerido';
+			}
+		});
+
+
 		// Validar nombre y videos URL
 		descripcion_curso.forEach((item, index) => {
 			if (item.value == '') {
@@ -1017,8 +1028,9 @@ let funciones = {
 	},
 
 	htmlAgregarVideo: function(contador) {
-		return '<div class="div-container_videourl">'
-					+'<input type="text" class="form-control mt-3 url_videos" name="video_url['+contador+'][]" placeholder="url video">'
+		return '<div class="div-container_videourl d-flex col-11" style="padding: 0;">'
+					+'<input type="text" placeholder="Nombre del video" class="form-control mt-3 nombre_videos" name="nombre_video_url['+contador+'][]">'
+					+'<input type="text" placeholder="Url del video" class="form-control mt-3 url_videos" name="video_url['+contador+'][]">'
 				+'</div>'
 				+'<span class="form-text m-b-none errors"></span>';
 	},
@@ -1037,7 +1049,8 @@ let funciones = {
                         +'<label class="col-sm-2 col-form-label">Video url: </label>'
                         +'<div class="col-sm-10">'
                         	+'<div class="d-flex">'
-                            	+'<input type="text" class="form-control url_videos" name="video_url['+contador+'][]">'
+                        		+'<input type="text" placeholder="Nombre del video" class="form-control nombre_videos" name="nombre_video_url['+contador+'][]">'
+                            	+'<input type="text" placeholder="Url del video" class="form-control url_videos" name="video_url['+contador+'][]">'
                             	+'<button class="btn btn-success ml-4 add-url_video"> + </button>'
                                 +'<button class="btn btn-danger ml-2 remove-url_video"> - </button>'
                             +'</div>'

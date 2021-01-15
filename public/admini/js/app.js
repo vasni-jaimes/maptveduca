@@ -150,7 +150,8 @@ if (frmAgregarCurso || frmActualizarCurso) {
   container_videourl.forEach(function (item) {
     item.addEventListener('click', function (e) {
       e.preventDefault();
-      e.target.parentNode.nextElementSibling.nextElementSibling.lastElementChild.remove();
+      e.target.parentElement.nextElementSibling.nextElementSibling.firstElementChild.remove();
+      e.target.parentElement.nextElementSibling.nextElementSibling.firstElementChild.remove();
     });
   }); //EVENTO PARA OBTENER LAS SUBCATEGORIAS DEPENDIENDO DE LA CATEGORIA
 
@@ -451,6 +452,19 @@ if (agregar_respuesta) {
 
 if (agregar_nuevo_post) {
   agregar_nuevo_post.addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].agregarRespuesta);
+} //BOOTN GUARDAR CALIFICACIONES
+
+
+var frm_agregar_calificaciones = document.querySelector('form[name="frm-agregar_calificaciones"] button');
+
+if (frm_agregar_calificaciones) {
+  frm_agregar_calificaciones.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.target.disabled = true;
+    document.querySelector('.ibox-content').classList.add('sk-loading');
+    document.querySelector("form[name='frm-agregar_calificaciones']").submit();
+    return false;
+  });
 }
 
 /***/ }),
@@ -1210,6 +1224,7 @@ var funciones = {
 
     /* TEMARIO */
     nombres_cursos = document.querySelectorAll("input[name='nombre_video[]']"),
+        nombres_videos = document.querySelectorAll(".nombre_videos"),
         videos_url = document.querySelectorAll(".url_videos"),
         descripcion_curso = document.querySelectorAll("textarea[name='descripcion_curso[]']"),
 
@@ -1305,6 +1320,14 @@ var funciones = {
         item.parentNode.classList.add('has-error');
         item.parentNode.nextElementSibling.innerHTML = 'El campo es requerido';
       }
+    }); //Validar nombres de videos
+
+    nombres_videos.forEach(function (item, index) {
+      if (item.value == '') {
+        error_videos = true;
+        item.parentNode.classList.add('has-error');
+        item.parentNode.nextElementSibling.innerHTML = 'El campo es requerido';
+      }
     }); // Validar nombre y videos URL
 
     descripcion_curso.forEach(function (item, index) {
@@ -1354,11 +1377,11 @@ var funciones = {
     return regex.test(email) ? true : false;
   },
   htmlAgregarVideo: function htmlAgregarVideo(contador) {
-    return '<div class="div-container_videourl">' + '<input type="text" class="form-control mt-3 url_videos" name="video_url[' + contador + '][]" placeholder="url video">' + '</div>' + '<span class="form-text m-b-none errors"></span>';
+    return '<div class="div-container_videourl d-flex col-11" style="padding: 0;">' + '<input type="text" placeholder="Nombre del video" class="form-control mt-3 nombre_videos" name="nombre_video_url[' + contador + '][]">' + '<input type="text" placeholder="Url del video" class="form-control mt-3 url_videos" name="video_url[' + contador + '][]">' + '</div>' + '<span class="form-text m-b-none errors"></span>';
   },
   htmlVideoCurso: function htmlVideoCurso(contador) {
     contador++;
-    return '<div class="clone-videos">' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Nombre del video: </label>' + '<div class="col-sm-10">' + '<input type="text" class="form-control" name="nombre_video[]">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Video url: </label>' + '<div class="col-sm-10">' + '<div class="d-flex">' + '<input type="text" class="form-control url_videos" name="video_url[' + contador + '][]">' + '<button class="btn btn-success ml-4 add-url_video"> + </button>' + '<button class="btn btn-danger ml-2 remove-url_video"> - </button>' + '</div>' + '<span class="form-text m-b-none errors"></span>' + '<div class="parent_mas-videos"></div>' + '</div>' + '</div>' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Descripcion: </label>' + '<div class="col-sm-10">' + '<textarea class="form-control" name="descripcion_curso[]" rows="3"></textarea>' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '<div class="form-group row mb-5">' + '<label class="col-sm-2 col-form-label">Material Extra: </label>' + '<div class="col-sm-10">' + '<input id="logo" type="file" name="material_extra[' + contador + '][]" multiple class="form-control" accept="jpg,jpeg,png">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '</div>';
+    return '<div class="clone-videos">' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Nombre del video: </label>' + '<div class="col-sm-10">' + '<input type="text" class="form-control" name="nombre_video[]">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Video url: </label>' + '<div class="col-sm-10">' + '<div class="d-flex">' + '<input type="text" placeholder="Nombre del video" class="form-control nombre_videos" name="nombre_video_url[' + contador + '][]">' + '<input type="text" placeholder="Url del video" class="form-control url_videos" name="video_url[' + contador + '][]">' + '<button class="btn btn-success ml-4 add-url_video"> + </button>' + '<button class="btn btn-danger ml-2 remove-url_video"> - </button>' + '</div>' + '<span class="form-text m-b-none errors"></span>' + '<div class="parent_mas-videos"></div>' + '</div>' + '</div>' + '<div class="form-group row">' + '<label class="col-sm-2 col-form-label">Descripcion: </label>' + '<div class="col-sm-10">' + '<textarea class="form-control" name="descripcion_curso[]" rows="3"></textarea>' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '<div class="form-group row mb-5">' + '<label class="col-sm-2 col-form-label">Material Extra: </label>' + '<div class="col-sm-10">' + '<input id="logo" type="file" name="material_extra[' + contador + '][]" multiple class="form-control" accept="jpg,jpeg,png">' + '<span class="form-text m-b-none errors"></span>' + '</div>' + '</div>' + '</div>';
   }
 };
 exports.funciones = funciones;

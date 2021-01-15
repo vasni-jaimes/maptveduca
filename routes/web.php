@@ -60,6 +60,7 @@ Route::post('usuario/editar', 'Site\UsersController@editar')->name('usuario.edit
 Route::get('checkout/{slug_membresia}', 'Site\CheckoutController@index')->name('checkout');
 Route::get('pago/{slug_membresia}', 'Site\CheckoutController@PayWithPaypal')->name('paago-membresia');
 Route::get('pago/{slug_membresia}/status', 'Site\CheckoutController@PaypalStatus')->name('pago-status');
+Route::get('gracias', 'Site\CheckoutController@getGracias')->name('gracias');
 
 
 //FAVORITOS
@@ -80,6 +81,9 @@ Route::get('downloadFile/{slug_id}/{publicacion_id}/{respuesta_id}/{positionFile
 Route::post('eliminar-respuesta/{respuesta_id}', 'Site\AulasVirtualesController@eliminarRespuesta')->name('eliminar.resp-web');
 Route::post('actualizar-respuesta/{publicacion_id}/{respuesta_id}', 'Site\AulasVirtualesController@updateRespuesta')->name('update.resp-web');
 
+
+//GUIA DE ESTUDIO
+Route::get('guia-estudio', 'Site\GuiaEstudioController@index')->name('guia-estudio');
 
 
 
@@ -143,17 +147,17 @@ Route::get('membresia-basica', function() {
 
 
 
-Route::get('guia-estudio', function() {
-	return view('site.guia-estudio');
-})->name('guia-estudio');
+// Route::get('guia-estudio', function() {
+// 	return view('site.guia-estudio');
+// })->name('guia-estudio');
 
 Route::get('faqs', function() {
 	return view('site.faqs');
 })->name('faqs');
 
-Route::get('gracias', function() {
-	return view('site.gracias');
-})->name('gracias');
+// Route::get('gracias', function() {
+// 	return view('site.gracias');
+// })->name('gracias');
 
 // Route::get('nosotros', function() {
 // 	return view('site.nosotros');

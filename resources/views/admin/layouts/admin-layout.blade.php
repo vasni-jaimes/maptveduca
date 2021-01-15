@@ -23,7 +23,7 @@
                                 <img alt="image" class="rounded-circle" src="/admini/img/user-photo.png" width="40px" height="40px" />
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                     <span class="block m-t-xs font-bold"> {{ Auth::guard('admins')->user()->nombre }} </span>
-                                    @if (Auth::guard('admins')->user()->id == 1)
+                                    @if (Auth::guard('admins')->user()->rol_id == 1)
                                         <span class="text-muted text-xs block">Administrador <b class="caret"></b></span>
                                     @else
                                         <span class="text-muted text-xs block">Maestr@ <b class="caret"></b></span>

@@ -57,7 +57,8 @@ if (frmAgregarCurso || frmActualizarCurso) {
 	container_videourl.forEach( (item) => {
 		item.addEventListener('click', function(e) {
 			e.preventDefault();
-			e.target.parentNode.nextElementSibling.nextElementSibling.lastElementChild.remove();
+			e.target.parentElement.nextElementSibling.nextElementSibling.firstElementChild.remove();
+			e.target.parentElement.nextElementSibling.nextElementSibling.firstElementChild.remove();
 		});
 	});
 
@@ -352,5 +353,17 @@ if (agregar_nuevo_post) {
 }
 
 
+//BOOTN GUARDAR CALIFICACIONES
+const frm_agregar_calificaciones = document.querySelector('form[name="frm-agregar_calificaciones"] button');
+if (frm_agregar_calificaciones) {
+	frm_agregar_calificaciones.addEventListener('click', function(e) {
+		e.preventDefault();
+
+		e.target.disabled = true;
+        document.querySelector('.ibox-content').classList.add('sk-loading');
+    	document.querySelector("form[name='frm-agregar_calificaciones']").submit();
+    	return false;
+	})
+}
 
 

@@ -59,6 +59,23 @@ class Helper
 
     public function istrimestre($user_id)
     {
-        return DB::table('usuarios_membresia')->where('user_id', $user_id)->count();
+        $trimestre = DB::table('usuarios_membresia')->where('user_id', $user_id)->count();
+        if ($trimestre <= 3) 
+            return 1;
+        elseif ($trimestre > 3 && $trimestre <= 6)
+            return 2;
+        elseif ($trimestre > 6 && $trimestre <= 9)
+            return 3;
+        elseif ($trimestre > 9 && $trimestre <= 12)
+            return 4;
+        elseif ($trimestre > 12 && $trimestre <= 15) 
+            return 5;
+        elseif ($trimestre > 15 && $trimestre <= 18)
+            return 6;
+        elseif ($trimestre > 18 && $trimestre <= 21)
+            return 7;
+        elseif ($trimestre > 21 && $trimestre <= 24)
+            return 8;
+            
     }
 }

@@ -38,6 +38,10 @@ class ValidateUpdateCurso extends FormRequest
             "descripcion"            => "required|string",
             "nombre_video"           => "required|array",
             "nombre_video.*"         => "required|string",
+            "nombre_video_url"       => "required|array",
+            "nombre_video_url.*"     => "required|array",
+            "nombre_video_url.*.*"   => "required|string",
+            
             "video_url"              => "required|array",
             "video_url.*"            => "required|array",
             "video_url.*.*"          => "required|string",

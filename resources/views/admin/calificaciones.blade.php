@@ -36,8 +36,8 @@
     </div>
 
 
-    @if (session()->has("status.recomendacion"))
-        @if (session()->get("status.recomendacion") == "error")
+    @if (session()->has("status.calificacion"))
+        @if (session()->get("status.calificacion") == "error")
             <div class="row justify-content-center">
                 <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
                     Ocurrio un error, intentelo más tarde.
@@ -47,10 +47,10 @@
                 </div>
             </div>
 
-        @elseif (session()->get("status.recomendacion") == "success")
+        @elseif (session()->get("status.calificacion") == "success")
             <div class="row justify-content-center">
                 <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
-                    Se creo la recomendacion correctamente
+                    Se mando la calificacion correctamente
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -87,145 +87,141 @@
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>
                     </div>
-                    <form action="{{ route("lista-recomendaciones.update", $carrera->id) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-agregar_recomendaciones">
+                    <form action="{{ route('calificaciones.store', [$alumno_id, $slug_curso]) }}" method="POST" accept-charset="UTF-8" name="frm-agregar_calificaciones">
                         @csrf
 
-                        <h1> {{ $carrera->nombre }} </h1>
+                        <h1>  {{ $curso->nombre }} </h1>
 
                         <div class="hr-line-dashed"></div><br>
 
-                        <h2> Primer Trimestre </h2><br>
-                        
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Calificacion: </label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="calificacion_uno" value="{{ old("calificacion_uno") }}"> 
-                                <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_uno') !!} </span>
+                        @if ($trimestreAlumno >= 1)
+
+                            <h2> Primer Trimestre </h2><br>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Calificacion: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="calificacion_uno" value="{{ old("calificacion_uno", @$califi["primero"]) }}"> 
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_uno') !!} </span>
+                                </div>
                             </div>
-                        </div>
+
+                        @endif
 
 
                         <div class="hr-line-dashed"></div>
 
+                        @if ($trimestreAlumno >= 2)
 
-                        <h2> Segundo Trimestre </h2><br>
-                        
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Calificacion: </label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="calificacion_uno" value="{{ old("calificacion_uno") }}"> 
-                                <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_uno') !!} </span>
+                            <h2> Segundo Trimestre </h2><br>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Calificacion: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="calificacion_dos" value="{{ old("calificacion_dos", @$califi["segundo"]) }}"> 
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_dos') !!} </span>
+                                </div>
                             </div>
-                        </div>
+
+                        @endif
 
 
                         <div class="hr-line-dashed"></div>
 
+                        @if ($trimestreAlumno >= 3)
 
-                        <h2> Tercer Trimestre </h2><br>
-                        
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> cursos: </label>
-                            <div class="col-sm-10 mb-3">
-                                <select data-placeholder="Cursos" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_cursos_tercer[]">
-                                    @foreach($cursos as $curso)
-                                        <option value="{{ $curso->id }}" @if(in_array($curso->id, old('select_cursos_tercer', $tri3))) selected @endif>
-                                            {{ $curso->nombre }}
-                                        </option>    
-                                    @endforeach
-                                </select>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('select_cursos_tercer.*') !!} </span>
+                            <h2> Tercer Trimestre </h2><br>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Calificacion: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="calificacion_tres" value="{{ old("calificacion_tres", @$califi["tercero"]) }}"> 
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_tres') !!} </span>
+                                </div>
                             </div>
-                        </div>
+
+                        @endif
 
 
                         <div class="hr-line-dashed"></div>
 
+                        @if ($trimestreAlumno >= 4)
 
-                        <h2> Cuarto Trimestre </h2><br>
-                        
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> cursos: </label>
-                            <div class="col-sm-10 mb-3">
-                                <select data-placeholder="Cursos" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_cursos_cuarto[]">
-                                    @foreach($cursos as $curso)
-                                        <option value="{{ $curso->id }}" @if(in_array($curso->id, old('select_cursos_cuarto', $tri4))) selected @endif>
-                                            {{ $curso->nombre }}
-                                        </option>    
-                                    @endforeach
-                                </select>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('select_cursos_cuarto.*') !!} </span>
+                            <h2> Cuarto Trimestre </h2><br>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Calificacion: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="calificacion_cuatro" value="{{ old("calificacion_cuatro", @$califi["cuarto"]) }}"> 
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_cuatro') !!} </span>
+                                </div>
                             </div>
-                        </div>
 
+                        @endif
 
-                        <h2> Quinto Trimestre </h2><br>
-                        
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> cursos: </label>
-                            <div class="col-sm-10 mb-3">
-                                <select data-placeholder="Cursos" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_cursos_quinto[]">
-                                    @foreach($cursos as $curso)
-                                        <option value="{{ $curso->id }}" @if(in_array($curso->id, old('select_cursos_quinto', $tri5))) selected @endif>
-                                            {{ $curso->nombre }}
-                                        </option>    
-                                    @endforeach
-                                </select>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('select_cursos_quinto.*') !!} </span>
+                        <div class="hr-line-dashed"></div>
+
+                        @if ($trimestreAlumno >= 5)
+
+                            <h2> Quinto Trimestre </h2><br>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Calificacion: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="calificacion_cinco" value="{{ old("calificacion_cinco", @$califi["quinto"]) }}"> 
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_cinco') !!} </span>
+                                </div>
                             </div>
-                        </div>
 
+                        @endif
 
+                        <div class="hr-line-dashed"></div>
 
-                        <h2> Sexto Trimestre </h2><br>
-                        
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> cursos: </label>
-                            <div class="col-sm-10 mb-3">
-                                <select data-placeholder="Cursos" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_cursos_sexto[]">
-                                    @foreach($cursos as $curso)
-                                        <option value="{{ $curso->id }}" @if(in_array($curso->id, old('select_cursos_sexto', $tri6))) selected @endif>
-                                            {{ $curso->nombre }}
-                                        </option>    
-                                    @endforeach
-                                </select>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('select_cursos_sexto.*') !!} </span>
+                        @if ($trimestreAlumno >= 6)
+
+                            <h2> Sexto Trimestre </h2><br>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Calificacion: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="calificacion_seis" value="{{ old("calificacion_seis") }}"> 
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_seis') !!} </span>
+                                </div>
                             </div>
-                        </div>
 
+                        @endif
 
-                        <h2> Septimo Trimestre </h2><br>
-                        
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> cursos: </label>
-                            <div class="col-sm-10 mb-3">
-                                <select data-placeholder="Cursos" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_cursos_septimo[]">
-                                    @foreach($cursos as $curso)
-                                        <option value="{{ $curso->id }}" @if(in_array($curso->id, old('select_cursos_septimo', $tri7))) selected @endif>
-                                            {{ $curso->nombre }}
-                                        </option>    
-                                    @endforeach
-                                </select>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('select_cursos_septimo.*') !!} </span>
+                        <div class="hr-line-dashed"></div>
+
+                        @if ($trimestreAlumno >= 7)
+
+                            <h2> Septimo Trimestre </h2><br>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Calificacion: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="calificacion_siete" value="{{ old("calificacion_siete") }}"> 
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_siete') !!} </span>
+                                </div>
                             </div>
-                        </div>
 
+                        @endif
 
-                        <h2> Octavo Trimestre </h2><br>
-                        
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> cursos: </label>
-                            <div class="col-sm-10 mb-3">
-                                <select data-placeholder="Cursos" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_cursos_octavo[]">
-                                    @foreach($cursos as $curso)
-                                        <option value="{{ $curso->id }}" @if(in_array($curso->id, old('select_cursos_octavo', $tri8))) selected @endif>
-                                            {{ $curso->nombre }}
-                                        </option>    
-                                    @endforeach
-                                </select>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('select_cursos_octavo.*') !!} </span>
+                        <div class="hr-line-dashed"></div>
+
+                        @if ($trimestreAlumno >= 8)
+
+                            <h2> Octavo Trimestre </h2><br>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Calificacion: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="calificacion_ocho" value="{{ old("calificacion_ocho") }}"> 
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_ocho') !!} </span>
+                                </div>
                             </div>
-                        </div>
+
+                        @endif
 
 
                         <div class="hr-line-dashed"></div>

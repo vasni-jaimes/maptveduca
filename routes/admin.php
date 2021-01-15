@@ -93,3 +93,6 @@ Route::post('actualizar-respuesta/{publicacion_id}/{respuesta_id}', 'Admin\Aulas
 
 //CALIFICACIONES
 Route::get('calificaciones-alumnos', 'Admin\CalificacionesController@index')->name('calificaciones-alumnos');
+Route::get('calificaciones-materias/{alumno_id}', 'Admin\CalificacionesController@getMaterias')->name('calificaciones-materias');
+Route::get('calificaciones/{user_id}/{slug_curso}', 'Admin\CalificacionesController@getCalificaciones')->name('calificaciones');
+Route::post('calificaciones/{user_id}/{slug_curso}', 'Admin\CalificacionesController@storeCalificaciones')->name('calificaciones.store');

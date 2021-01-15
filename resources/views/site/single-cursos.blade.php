@@ -11,7 +11,7 @@
         <div class="hoja-1000">
             
             <ul class="breadcrumb-curso">
-                <li><a href="{{ route("cursos") }}">Cursos</a></li>
+                <li><a href="{{ route('cursos') }}">Cursos</a></li>
                 <li><span>{{ $curso->nombre }}</span></li>
             </ul> <!-- /breadcrumb-curso -->
             
@@ -26,11 +26,21 @@
 
                             @if ( auth()->user()->tieneSuscripcion()  )
                                 @foreach($temario as $ctemario)
-                                    <li class="active {{ $ctemario->slug ==  $clase['slug'] ? "active-leccion" : "" }}" data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug }}">{{ $ctemario->nombre_video }}
+                                    <li class="active" data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug."/0" }}">
+                                        
+                                        {!! $ctemario->slug ==  $clase['slug'] ? "<span style='font-weight: bold;'>".$ctemario->nombre_video."</span>" : $ctemario->nombre_video !!}
+
                                         @if (count($ctemario->url_video) > 1)
                                             <ul>
                                                 @for($i = 0; $i <= count($ctemario->url_video) - 1; $i++)
-                                                    <li class="active" data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug."/".$i }}"> Session #{{ $i + 1 }} </li>
+                                                    <li class="active" data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug."/".$i }}"> 
+                                                        @if ($ctemario->slug ==  $clase['slug'] && $subclase_id == $i)
+                                                            @php $nombre_url = $ctemario->nombre_video_url[$i] @endphp
+                                                            <span style="font-weight: bold;">{{ $ctemario->nombre_video_url[$i] }}</span>
+                                                        @else
+                                                            {{ $ctemario->nombre_video_url[$i] }}
+                                                        @endif
+                                                    </li>
                                                 @endfor
                                             </ul>
                                         @endif
@@ -71,9 +81,9 @@
                         </div> <!-- /row-video -->
                         
                         <div class="txt-single">
-                            <h3>{{ $clase['nombre_video'] }}</h3>
+                            <h3>{{ isset($nombre_url) ? $nombre_url : $clase['nombre_video'] }}</h3>
                             <div class="descripcion-single">
-                                <p> {{ $clase['descripcion'] }} </p>
+                                <p> {!! $clase['descripcion'] !!} </p>
                             </div> <!-- /descripcion-single -->
                         </div> <!-- /txt-single -->
                     

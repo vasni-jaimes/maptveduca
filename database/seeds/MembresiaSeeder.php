@@ -24,7 +24,7 @@ class MembresiaSeeder extends Seeder
          Membresia::create([
         	"nombre" => "Membresía académica",
         	"slug" => "membresia-academica",
-        	"precio" => 500.00,
+        	"precio" => 2000.00,
         ]);
     }
 }

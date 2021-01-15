@@ -241,7 +241,7 @@ $(document).ready(function(){
         $(this).next('.respuesta-alumno').slideToggle(500);
     });
     
-    $('.item-programa a.btn-plan').click(function(e) {    
+    $('.item-programa a.toogle-plan').click(function(e) {    
         e.preventDefault();
         $(this).toggleClass('active-plan');   
         $(this).next('.row-planes').slideToggle(500);

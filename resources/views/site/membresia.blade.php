@@ -65,7 +65,9 @@
                             <p><strong>CERTIFICACIÓN: </strong></p>
                             <p>Certificado con validez oficial expedido por M.A.P. Colegio de Música, Audio y Producción <br>(Incorporado a SEP)</p>
                         </div> <!-- /txt-programa -->
-                        <a class="btn-amarillo btn-plan" href="javascript:void(0)">Plan de estudios</a>
+
+                        <a class="btn-amarillo toogle-plan" href="javascript:void(0)">Plan de estudios</a>
+                        {{-- btn-plan --}}
                         <div class="row-planes">
                             <div class="flex wrap">
                                 <div class="item-plan">
@@ -138,7 +140,7 @@
                                 </div> <!-- /item-plan -->
                             </div> <!-- /flex -->
                         </div> <!-- /row-planes -->
-                        <a class="btn-amarillo btn-border" href="{{ route("checkout", "membresia-academica") }}">Obtén tu membresía e inscríbete</a>
+                        <a href="{{ route("checkout", "membresia-academica") }}" class="btn-amarillo btn-border">Obtén tu membresía e inscríbete</a>
                     </div> <!-- /item-programa -->
                     
                     <!--<div class="col-6 item-programa">
