@@ -101,7 +101,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Calificacion: </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="calificacion_uno" value="{{ old("calificacion_uno", $califi["primero"]) }}"> 
+                                    <input type="text" class="form-control" name="calificacion_uno" value="{{ old("calificacion_uno", @$califi["primero"]) }}"> 
                                     <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_uno') !!} </span>
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Calificacion: </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="calificacion_dos" value="{{ old("calificacion_dos", $califi["segundo"]) }}"> 
+                                    <input type="text" class="form-control" name="calificacion_dos" value="{{ old("calificacion_dos", @$califi["segundo"]) }}"> 
                                     <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_dos') !!} </span>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Calificacion: </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="calificacion_tres" value="{{ old("calificacion_tres", $califi["tercero"]) }}"> 
+                                    <input type="text" class="form-control" name="calificacion_tres" value="{{ old("calificacion_tres", @$califi["tercero"]) }}"> 
                                     <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_tres') !!} </span>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Calificacion: </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="calificacion_cuatro" value="{{ old("calificacion_cuatro", $califi["cuarto"]) }}"> 
+                                    <input type="text" class="form-control" name="calificacion_cuatro" value="{{ old("calificacion_cuatro", @$califi["cuarto"]) }}"> 
                                     <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_cuatro') !!} </span>
                                 </div>
                             </div>
@@ -168,7 +168,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Calificacion: </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="calificacion_cinco" value="{{ old("calificacion_cinco", $califi["quinto"]) }}"> 
+                                    <input type="text" class="form-control" name="calificacion_cinco" value="{{ old("calificacion_cinco", @$califi["quinto"]) }}"> 
                                     <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_cinco') !!} </span>
                                 </div>
                             </div>
