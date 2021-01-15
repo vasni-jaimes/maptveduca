@@ -17,8 +17,8 @@
 
     	                <h2>¡Gracias por unirte a la familia!</h2>
                         <p>Recibirás un correo electrónico con la información necesaria para empezar a estudiar.</p>
-                        <p><small>¿Tienes preguntas? <a href="#">Escríbenos</a> y te atenderemos lo antes posible.</small></p>
-                        <a class="btn-amarillo" href="#">Ir a mi Tablero Personal</a>
+                        <p><small>¿Tienes preguntas? <a href="{{ route('faqs') }}">Escríbenos</a> y te atenderemos lo antes posible.</small></p>
+                        <a class="btn-amarillo" href="{{ route('micuenta.index') }}">Ir a mi Tablero Personal</a>
 
     	            </div> <!-- /formulario -->
 	        </div>

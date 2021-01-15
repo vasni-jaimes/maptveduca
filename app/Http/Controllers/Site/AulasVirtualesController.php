@@ -34,9 +34,8 @@ class AulasVirtualesController extends Controller
     public function showAula($slug)
     {
     	$curso         = Course::where('slug', $slug)->where('status', 1)->first();
-        $publicaciones = Publicacion::with(['instructor'])  
-                            ->where('curso_id', $curso->id)->get();
-        $respuestas    = Respuesta::with(['usuario', 'instructor'])->get();
+        $publicaciones = Publicacion::with(['instructor'])->where('curso_id', $curso->id)->orderBy('created_at', 'desc')->get();
+        $respuestas    = Respuesta::with(['usuario', 'instructor'])->orderBy('created_at', 'desc')->get();
 
     	return view('site.single-aulas', compact("curso", "publicaciones", "respuestas"));
     }

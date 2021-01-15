@@ -67,7 +67,7 @@
                                                 <td class="center">
                                                     
                                                     <div class="btn-group">
-                                                     	<a href = "#" class="btn-info btn btn-xs mr-3">Calificaciones</a>
+                                                     	<a href = "{{ route('calificaciones-materias', $alumno->id) }}" class="btn-info btn btn-xs mr-3">Materias</a>
                                                    </div>
 
                                                 </td>

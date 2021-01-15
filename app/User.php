@@ -21,9 +21,15 @@ class User extends Authenticatable
     }
 
 
+    // public function ultimaSuscripcion()
+    // {
+    //     return auth()->user()->suscripcion[count(auth()->user()->suscripcion) - 1];
+    // }
+
+
     public function ultimaSuscripcion()
     {
-        return auth()->user()->suscripcion[count(auth()->user()->suscripcion) - 1];
+        return $this->suscripcion[count($this->suscripcion) - 1];
     }
 
 

@@ -100,6 +100,9 @@
                                     <h3>{{ $instructor->nombres. " ".$instructor->apellidos }}</h3>
                                     <p>{{ $instructor->especialidad }}</p>
                                 </div> <!-- /txt-equipo -->
+                                <div class="txt-bio">
+                                    <p> {!! $instructor->bibliografia !!} </p>
+                                </div> <!-- /txt-bio -->
                             </li>
 
                         @endforeach

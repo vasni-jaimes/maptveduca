@@ -45,13 +45,22 @@ class CheckoutController extends Controller
     }
 
 
+    public function getGracias()
+    {
+        if (!session()->has('gracias')) {
+            return redirect()->route("home");
+        }
+
+        return view("site.gracias");
+    }
+
+
     public function PayWithPaypal(Request $request, $slug_membresia)
     {
 
     	if ($this->validarMembresiaUsuario()){
             return back()->withInput()->with("error", "El usuario ya cuenta con una suscripcion activa");
-    	} 
-
+    	}
 
     	//OBTENER MEMBRESIA A PAGAR
     	$membresia = Membresia::where('slug', $slug_membresia)->first();
@@ -149,7 +158,7 @@ class CheckoutController extends Controller
         	if ($user_membresia) {
                 $this->MensajeBienvenidaSuscripcion();
                 DB::commit();
-                return redirect()->route("home")->with("success", "Gracias! El pago a través de PayPal se ha ralizado correctamente.");
+                return redirect()->route("gracias")->with("success", "Gracias! El pago a través de PayPal se ha ralizado correctamente.");
         	}
         }
         

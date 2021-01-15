@@ -11,6 +11,10 @@ use DB;
 
 class RecomendacionesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("authadmin:auth");
+    }
     /**
      * Display a listing of the resource.
      *

@@ -24,7 +24,7 @@ class CoursesRepositorie
 		$course 					      = new Course();
 		$course->nombre 				  = $request->nombre_curso;
 		$course->video_bienvenida 	      = $request->video_bienvenida;
-		$course->descripcion_bienvenida   = $request->descripcion;
+		$course->descripcion_bienvenida   = str_replace(PHP_EOL, '<br />', $request->descripcion);
         $course->categoria_id             = $request->select_categorias;
         if ($request->has("curso_extra")) {
             $course->extra = 1;
@@ -75,7 +75,7 @@ class CoursesRepositorie
         $course                           = Course::findOrFail($id);
         $course->nombre                   = $request->nombre_curso;
         $course->video_bienvenida         = $request->video_bienvenida;
-        $course->descripcion_bienvenida   = $request->descripcion;
+        $course->descripcion_bienvenida   = str_replace(PHP_EOL, '<br />', $request->descripcion);
         $course->categoria_id             = $request->select_categorias;
         if ($request->has("curso_extra")) {
             $course->extra = 1;
@@ -173,8 +173,9 @@ class CoursesRepositorie
     		$temario_curso[$i] = array("nombre_video" => $request->nombre_video[$i], 
                                         "slug" => $this->helper->createSlug($request->nombre_video[$i], $i, "maptv"),
     									"url_video" => $request->video_url[$i], 
+                                        "nombre_video_url" => $request->nombre_video_url[$i],
                                         "material_extra" => $material_extra,
-    									"descripcion_curso" => $request->descripcion_curso[$i] );
+    									"descripcion_curso" => str_replace(PHP_EOL, '<br />', $request->descripcion_curso[$i]) );
     	}
 
     	return json_encode($temario_curso);

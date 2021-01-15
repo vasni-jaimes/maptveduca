@@ -10,6 +10,7 @@ use App\Course;
 use App\Category;
 use App\Favorito;
 use App\Recomendacion;
+use App\TableroCursos;
 use DB;
 
 class CursosController extends Controller
@@ -41,6 +42,8 @@ class CursosController extends Controller
             $curso   = Course::with(["instructor"])->where("status", 1)->where("slug", $curso_id)->first();
             $temario = json_decode($curso->temario);
             $clase   = $this->obtenerClase($clase_id, $temario, $subclase_id);
+            //agregar el curso a mi tablero
+            $this->agregaramitablero($curso->id);
 
             if (!$clase) {
                 return redirect()->route('single-cursos.show', $curso_id);
@@ -50,7 +53,7 @@ class CursosController extends Controller
         $validarSide = $this->validacionSidebar($curso->id);
         $miTablero   = $this->estaEnMiTablero($curso->id);
         $favorito    = Favorito::where('user_id', auth()->user()->id)->where('curso_id', $curso->id)->first();
-    	return view("site.single-cursos", compact("curso", "temario", "clase", "clase_id", "favorito", "validarSide", "miTablero"));
+    	return view("site.single-cursos", compact("curso", "temario", "clase", "clase_id", "favorito", "validarSide", "miTablero", "subclase_id"));
     }
 
     public function download($slug_curso, $slug_sesion)
@@ -114,8 +117,8 @@ class CursosController extends Controller
         foreach ($temario as $team) {
             if ($team->slug == $clase_id) {
                 $clase = array("slug" => $team->slug, "url_video" => $team->url_video[$subclase], 
-                                "nombre_video" => $team->nombre_video, "material_extra" => $team->material_extra, 
-                                "descripcion" => $team->descripcion_curso);
+                                "nombre_video_url" => $team->nombre_video_url[$subclase], "nombre_video" => $team->nombre_video, 
+                                "material_extra" => $team->material_extra, "descripcion" => $team->descripcion_curso);
             }
         }
 
@@ -199,6 +202,24 @@ class CursosController extends Controller
         }
     }
 
+
+    protected function agregaramitablero($curso_id)
+    {
+        $tablero = TableroCursos::where('curso_id', $curso_id)
+                        ->where('user_id', auth()->user()->id)->first();
+
+        if (!$tablero) {
+            $tablero = new TableroCursos();
+            $tablero->curso_id = $curso_id;
+            $tablero->user_id = auth()->user()->id;
+            $tablero->progreso = 0;
+            if ($tablero->save()) {
+                return true;
+            }
+        }
+
+        return true;
+    }
 
     protected function estaEnMiTablero($curso_id)
     {
