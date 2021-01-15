@@ -3557,7 +3557,14 @@ section.membresia {
     background-color: #fff;
 }
 
+.item-guia.item-equipo {
+    width: 60%;
+    background-color: #000;
+}
+
 .item-guia.item-kit {
+    width: 40%;
+    background-color: #ffb514;
     text-align: right;
 }
 
@@ -3590,14 +3597,32 @@ section.membresia {
     text-align: left;
 }
 
-.item-equipo {
-    width: 60%;
-    background-color: #000;
+.item-guia.item-kit ul.btn-guia {
+    display: flex;
+    padding: 0;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.item-kit {
-    width: 40%;
-    background-color: #ffb514;
+.item-guia.item-kit ul.btn-guia li {
+    padding: 0;
+}
+
+.item-guia.item-kit ul.btn-guia li:before {
+    display: none;
+}
+
+.item-guia.item-kit ul.btn-guia li a {
+    display: block;
+    padding: 10px;
+    font-family: 'Poppins semibold';
+    font-size: 12px;
+    border-radius: 10px;
+    background-color: #fff;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    line-height: 130%;   
 }
 
 

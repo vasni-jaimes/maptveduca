@@ -92,7 +92,7 @@
                         <li>Micrófono dinámico</li>
                         <li>Controlador MIDI</li>
                     </ul>
-                    <ul>
+                    <ul class="btn-guia">
                         <li><p>*Envíos sólo a la República Mexicana.</p></li>
                         <li><a href="#">¡Me interesa!</a></li>
                     </ul>
