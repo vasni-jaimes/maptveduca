@@ -28,8 +28,28 @@ class MensajesController extends Controller
     public function sendMensaje(ValidarMensajes $request)
     {
 
+        //return $request->has('select_usuarios');
+
         if ((!$request->has('select_cursos') || !isset($request->select_cursos)) && 
             (!$request->has('select_usuarios') || empty($request->select_usuarios) )) {
+            
+            $alumnos = $this->getMisAlumnos();
+
+            DB::beginTransaction();
+            foreach ($alumnos as $alumno) {
+                $mensaje = new Mensaje();
+                $mensaje->admin_id = Auth::guard('admins')->user()->id;
+                $mensaje->user_id = $alumno->id;
+                $mensaje->mensaje = $request->mensaje;
+                $mensaje->save();
+            }
+
+            DB::commit();
+            return back()->with("status.newMensaje", "success");
+
+        }
+        else if ((!$request->has('select_cursos') || !isset($request->select_cursos)) && 
+            ($request->has('select_usuarios') || !empty($request->select_usuarios) )) {
             
             $alumnos = $this->getMisAlumnos();
 
