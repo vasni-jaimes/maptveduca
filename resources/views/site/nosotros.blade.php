@@ -48,8 +48,10 @@
                 
                 <div class="row-maptv">
                     <div class="banner-maptv">
-                        <div class="txt-maptv">
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor </p>
+                        <div class="txt-maptv text-center">
+                            <p><strong>La industria musical es ampliamente diversa.</strong></p> 
+                            <p><strong>MAPtv Educa cuenta con divisiones especiales que atienden diferentes áreas, como lo son: Educación presencial, educación virtual, y producciones musicales profesionales tanto discográficas como de eventos masivos.</strong></p>
+                            <p><strong>¡Conócelas!</strong></p>
                         </div> <!-- /txt-maptv -->
                     </div> <!-- /row-maptv -->
 
@@ -59,7 +61,11 @@
                                 <img src="/site/img/logo-map.png">
                             </div> <!-- /img-marcas -->
                             <div>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor </p>
+                                <p>Colegio MAP (Puebla, México) es un referente en la escena nacional mexicana como una de las escuelas de producción musical y música con mayor crecimiento en los últimos años.</p>
+                                <p>Fundada en 2006 y renovada una década después, hoy es una institución que se mantiene fiel a su objetivo inicial: formar a los productores musicales del siglo XXI, multidisciplinarios, competitivos y exitosos.</p>
+                                <p>Actualmente cuenta con una de las pocas secciones estudiantiles de la Audio Engineering Society en México, además de ser parte de la ALAEMUS (Asociación Latinoamericana de Escuelas de Música).</p>
+                                <p>Colegio MAP se encuentra en la ciudad de Puebla, en Calzada Zavaleta 5620, Concepción La Cruz.</p>
+                                <p><a href="https://www.colegiomap.com/" target="_blank">www.colegiomap.com</a></p>
                             </div>
                         </li>
                         <li>
@@ -67,7 +73,10 @@
                                 <img src="/site/img/logo-recording.png">
                             </div> <!-- /img-marcas -->
                             <div>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor </p>
+                                <p>MAP Recording es una productora discográfica y estudio de grabación profesional dentro de las instalaciones de Colegio MAP.</p>
+                                <p>Fundada como marca en 2018, pero activa desde 2008, MAP Recording ha visto pasar por sus estudios a artistas locales, regionales y nacionales.</p>
+                                <p>Ha sido el lugar de nacimiento de la carrera de nuevos artistas y continúa siendo parte del día a día de la comunidad estudiantil de Colegio MAP.</p>
+                                <p>www.maprecording.com</p>
                             </div>
                         </li>
                         <li>
@@ -75,7 +84,11 @@
                                 <img src="/site/img/logo-maptv.png">
                             </div> <!-- /img-marcas -->
                             <div>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor </p>
+                                <p>MAPtv EDUCA, como plataforma virtual, busca llevar a toda latinoamérica la calidad que ya caracteriza a Colegio MAP.</p>
+                                <p>Nuestra oferta académica está creada por las mismas mentes que han llevado a Colegio MAP a ser un referente en producción musical y música en México, añadiendo las ventajas que la interacción en línea brinda tanto a estudiantes como a profesores.</p>
+                                <p>Dentro de MAPtv EDUCA encontrarás a los profesores que imparten clases en Colegio MAP, además de colaboradores y artistas invitados, activos al 100% en la industria musical latina.</p>
+                                <p>Encuentra algunas de las actividades virtuales que hemos hecho en los últimos meses en nuestro canal de YouTube: MAPtv México.</p>
+                                <p><a href="https://www.maptveduca.com/" target="_blank">www.maptveduca.com</a></p>
                             </div>
                         </li>
                     </ul> <!-- /flex -->

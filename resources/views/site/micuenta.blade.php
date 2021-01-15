@@ -277,7 +277,7 @@
                             @else
                                 <div class="item-favoritos">
                                     <h3>Cursos</h3>
-                                    <p>¡Aún no tienes cursos favoritos! Ve a la sección CURSOS y márca cuantos quieras como favoritos.</p>
+                                    <p>¡Aún no tienes cursos favoritos! Ve a la sección <a href="{{ route("cursos") }}">CURSOS</a> y márca cuantos quieras como favoritos.</p>
                                     <p>Los encontrarás aquí cuando vuelvas.</p>
                                 </div>
                             @endif
@@ -298,7 +298,7 @@
                             @else
                                 <div class="item-favoritos">
                                     <h3>Eventos</h3>
-                                    <p>¡Aún no tienes eventos favoritos! Ve a la sección EVENTOS y márca cuantos quieras como favoritos.</p>
+                                    <p>¡Aún no tienes eventos favoritos! Ve a la sección <a href="{{ route("eventos.index") }}">EVENTOS</a> y márca cuantos quieras como favoritos.</p>
                                     <p>Los encontrarás aquí cuando vuelvas.</p>
                                 </div>
                             @endif
@@ -317,7 +317,7 @@
                             @else
                                 <div class="item-favoritos">
                                     <h3>Clases en línea</h3>
-                                    <p>¡Aún no tienes clases en línea favoritos! Ve a la sección CLASES EN LÍNEA y márca cuantos quieras como favoritos.</p>
+                                    <p>¡Aún no tienes clases en línea favoritos! Ve a la sección <a href="{{ route("clases-linea.index") }}">CLASES EN LÍNEA</a> y márca cuantos quieras como favoritos.</p>
                                     <p>Los encontrarás aquí cuando vuelvas.</p>
                                 </div>
                             @endif

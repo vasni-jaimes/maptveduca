@@ -1315,6 +1315,10 @@ video#myVideo {
     line-height: 130%;
 }
 
+.txt-maptv p strong {
+    font-family: 'Poppins semibold';
+}
+
 .txt-maptv ul {
     padding-left: 10px;
     margin: 10px 0;
@@ -1906,8 +1910,17 @@ video#myVideo {
     background-position: center;
 }
 
-.active-leccion {
-    font-weight: bold;
+.banner-guia {
+    padding: 25% 0 0;
+    background-image: url('/site/img/sitio/teclado.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.sidebar-single ul.row-leccion li.active-leccion,
+.sidebar-single ul.row-leccion li.active-leccion ul li {
+    font-family: 'Poppins medium';
     cursor: pointer;
 }
 
@@ -2355,12 +2368,13 @@ video#myVideo {
     font-size: 11px;
     background-color: #d8d8d8;
     line-height: normal;
-    cursor: pointer;
+    cursor: default;
 }
 
 .sidebar-single ul.row-leccion li.active {
     background-color: #fff;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .sidebar-single ul.row-leccion li.active:before {
@@ -3357,8 +3371,10 @@ section.membresia {
 }
 
 .flex-marcas li {
+    display: flex;
     width: 32%;
     text-align: center;
+    flex-direction: column;
 }
 
 .flex-marcas li img {
@@ -3399,9 +3415,17 @@ section.membresia {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
     padding: 20px;
     margin: 30px 0;
     background-color: #f2f2f2;
+}
+
+.flex-marcas li > div a {
+    color: #000;
+    text-decoration: underline;
 }
 
 .wrapper-equipo h2 {
@@ -3428,7 +3452,7 @@ section.membresia {
 }
 
 .wrapper-equipo ul li .txt-equipo {
-    height: 100%;
+    /*height: 100%;*/
     padding: 30px 15px;
     background-color: #ffc314;
     text-align: center;
@@ -3455,7 +3479,7 @@ section.membresia {
     right: 0;
     bottom: 0;
     overflow-y: auto;
-    background-color: #000;
+    background-color: rgba(0,0,0,0.9);
     opacity: 0;
     cursor: default;
 }
@@ -3471,6 +3495,10 @@ section.membresia {
 
 /*----------------------------------  GUÍA DE ESTUDIOS  ----------------------------------*/
 
+.row-guia {
+    margin: 0 0 50px;
+}
+
 .row-guia h3 {
     padding: 35px 15px 15px;
     font-family: 'Oswald medium';
@@ -3478,6 +3506,98 @@ section.membresia {
     color: #000;
     text-transform: uppercase;
     line-height: 130%;
+}
+
+.flex-guia {
+    width: 100%;
+    margin: 0 0 50px;
+}
+
+.item-guia {
+    padding: 30px 4%;
+}
+
+.item-guia h3 {
+    max-width: 400px;
+    width: 100%;
+    font-family: 'Oswald medium';
+    font-size: 26px;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 130%;
+}
+
+.item-guia ul {
+    margin: 20px 0 0;
+    padding: 0 0 0 10px;
+}
+
+.item-guia ul li {
+    position: relative;
+    margin: 0 0 4px;
+    padding: 0 0 0 10px;
+    color: #fff;
+    font-family: 'Poppins regular';
+    font-size: 13px;
+    line-height: 130%;
+}
+
+.item-guia.item-kit ul li {
+    color: #000;
+}
+
+.item-guia ul li:before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.item-guia.item-kit {
+    text-align: right;
+}
+
+.item-guia.item-kit ul li:before {
+    background-color: #000;
+}
+
+.item-guia.item-kit h3 {
+    display: inline-block;
+    max-width: 300px;
+}
+
+.item-guia.item-kit p {
+    color: #fff; 
+    font-family: 'Poppins semibold';
+    font-size: 11px;
+    line-height: 130%;
+}
+
+.item-guia.item-kit p strong {
+    display: inline-block;
+    margin: 0 0 5px;
+    color: #000;
+    font-size: 13px;
+    line-height: 130%;
+    text-transform: uppercase;
+}
+
+.item-guia.item-kit ul li {
+    text-align: left;
+}
+
+.item-equipo {
+    width: 60%;
+    background-color: #000;
+}
+
+.item-kit {
+    width: 40%;
+    background-color: #ffb514;
 }
 
 
@@ -3807,7 +3927,8 @@ section.membresia {
 }
 
 .sidebar-tablero ul li a:hover,
-.sidebar-tablero ul li.active a {
+.sidebar-tablero ul li.active a,
+.sidebar-tablero ul li.item-control > a.active {
     background-color: #d1d1d1;
 }
 
@@ -3824,8 +3945,9 @@ section.membresia {
     cursor: pointer;
 }
 
-.sidebar-tablero ul li.item-control > a {
-    border-bottom: 1px solid #666;
+.sidebar-tablero ul li.item-control ul {
+    display: none;
+    border-top: 1px solid #666;
 }
 
 .sidebar-tablero ul li.item-control ul li a {
@@ -4199,6 +4321,11 @@ span.ico-edit:hover p {
     line-height: 130%;
 }
 
+.row-favoritos p a {
+    color: #000;
+    text-decoration: underline;
+}
+
 .row-favoritos h3 {
     margin: 0 0 20px;
 }
@@ -4558,13 +4685,10 @@ span.ico-edit:hover p {
     width: 100%;
 }
 
-.btn-archivo ul {
-    margin-left: 10px;
-}
-
 .btn-archivo ul li {
     display: inline-block;
     padding: 8px 5%;
+    margin: 0 10px;
     border-radius: 25px;
     font-family: 'Poppins medium';
     font-size: 14px;
@@ -4617,6 +4741,7 @@ span.ico-edit:hover p {
     font-family: 'Poppins medium';
     font-size: 14px;
     background-color: #666666;
+    cursor: pointer;
 }
 
 .cargar-cv + label span {
@@ -4633,6 +4758,10 @@ span.ico-edit:hover p {
     margin: 35px 0 0;
 }
 
+.row-respuesta > div {
+    margin: 0px 0px 12px;
+}
+
 .row-alumno {
     width: 100%;
 }
@@ -4642,9 +4771,9 @@ span.ico-edit:hover p {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     position: relative;
+    min-height: 44px;
     width: 100%;
     padding: 10px 50px 10px 30px;
-    margin: 0px 0px 12px;
     font-family: 'Poppins medium';
     font-size: 17px;
     color: #000;
@@ -4684,12 +4813,14 @@ span.ico-edit:hover p {
 }
 
 .boton-alumno img {
-    width: 12px;
+    width: 10px;
     height: auto;
 }
 
 .acciones_respuestas {
     position: relative;
+    display: flex;
+    max-height: 44px;
 }
 
 .acciones_respuestas li {
@@ -4733,6 +4864,10 @@ span.ico-edit:hover p {
     padding: 0;
 }
 
+.respuesta-alumno .btn-archivo ul li {
+    margin: 0 5px 10px;
+}
+
 .btn-publicar {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -4750,6 +4885,7 @@ span.ico-edit:hover p {
     border: 0;
     line-height: 130%;
     outline: none;
+    cursor: pointer;
 }
 
 .btn-cancelar {

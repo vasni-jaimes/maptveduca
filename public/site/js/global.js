@@ -247,6 +247,12 @@ $(document).ready(function(){
         $(this).next('.row-planes').slideToggle(500);
     });
     
+    $('.sidebar-tablero ul li.item-control a').click(function(e) {    
+        e.preventDefault();
+        $(this).toggleClass('active');   
+        $(this).next('.sidebar-tablero ul li.item-control ul').slideToggle(500);
+    });
+    
     $('.delete').click(function(){
         $('#shadow-favorito').fadeIn(300); 
     });
