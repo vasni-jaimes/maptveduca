@@ -24,6 +24,7 @@ class InstructoresController extends Controller
         $this->instructoresDecorator = $instructoresDecorator;
         $this->helper           = $helper;
         $this->middleware("authadmin:auth");
+        $this->middleware("ValidarAdmin");
     }
 
     /**

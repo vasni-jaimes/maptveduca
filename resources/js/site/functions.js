@@ -3,6 +3,98 @@
 
 let funciones = {
 
+	verNotificacioneseWeb: function(e) {
+		let notificacion = e.target.getAttribute('data-noti');
+		if (notificacion) {
+
+			/* ACCIONES PARA QUITAR PUNTOS PENDIENTES  */
+			
+			document.querySelector(".notificacion[data-noti='"+notificacion+"']").remove();
+    		let html = document.querySelector('.ico-login .notificacion');
+    		let numeroNotifi = parseInt(html.innerHTML) - 1;
+    		if (numeroNotifi <= 0) {
+    			document.querySelector('.ico-login .notificacion').remove();
+    		}
+    		else {
+    			document.querySelector('.ico-login .notificacion').innerHTML = numeroNotifi;
+    		}
+    		e.target.setAttribute('data-noti', '');
+    		e.target.classList.remove('ver-notify');
+
+    		/* ACCIONES PARA QUITAR PUNTOS PENDIENTES  */
+
+
+
+			let token = document.querySelector("input[name='_token']").value;
+
+			let opciones = {
+	            method: "POST",
+	            credentials: "same-origin",
+	            body: JSON.stringify({"notificacion": notificacion, "_token": token }),
+	            headers:{
+	                "Content-Type": "application/json"
+	            }
+	        };
+
+	        fetch('/ver-notificacion', opciones)
+	            .then(response => response.json())
+	            .then(res => {
+	            	if (res.message == 'ok') {
+	            		console.log('todo salio bien')
+	            	}
+	            	else {
+	            		console.log('ocurrio un error');
+	            	}
+	            });
+		}
+	},
+
+	verMensajeWeb: function(e) {
+		let mensaje = e.target.getAttribute('data-msj');
+		if (mensaje) {
+
+			/* ACCIONES PARA QUITAR PUNTOS PENDIENTES  */
+
+			document.querySelector(".notificacion[data-msj='"+mensaje+"']").remove();
+    		let html = document.querySelector('.ico-login .notificacion');
+    		let numeroNotifi = parseInt(html.innerHTML) - 1;
+    		if (numeroNotifi <= 0) {
+    			document.querySelector('.ico-login .notificacion').remove();
+    		}
+    		else {
+    			document.querySelector('.ico-login .notificacion').innerHTML = numeroNotifi;
+    		}
+    		e.target.setAttribute('data-msj', '');
+    		e.target.classList.remove('ver-msj');
+
+    		/* ACCIONES PARA QUITAR PUNTOS PENDIENTES  */
+
+
+
+			let token = document.querySelector("input[name='_token']").value;
+
+			let opciones = {
+	            method: "POST",
+	            credentials: "same-origin",
+	            body: JSON.stringify({"mensaje": mensaje, "_token": token }),
+	            headers:{
+	                "Content-Type": "application/json"
+	            }
+	        };
+
+	        fetch('/ver-mensaje', opciones)
+	            .then(response => response.json())
+	            .then(res => {
+	            	if (res.message == 'ok') {
+	            		console.log('todo salio bien')
+	            	}
+	            	else {
+	            		console.log('ocurrio un error');
+	            	}
+	            });
+		}
+	},
+
 	mostarrLoadingForm: function(e) {
 		e.preventDefault();
 		document.querySelector('#loading').style.display = "block";

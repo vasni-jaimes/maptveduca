@@ -50,14 +50,13 @@ class MensajesController extends Controller
         }
         else if ((!$request->has('select_cursos') || !isset($request->select_cursos)) && 
             ($request->has('select_usuarios') || !empty($request->select_usuarios) )) {
-            
-            $alumnos = $this->getMisAlumnos();
+        
 
             DB::beginTransaction();
-            foreach ($alumnos as $alumno) {
+            for ($i = 0; $i <= count($request->select_usuarios) - 1; $i++) {
                 $mensaje = new Mensaje();
                 $mensaje->admin_id = Auth::guard('admins')->user()->id;
-                $mensaje->user_id = $alumno->id;
+                $mensaje->user_id = $request->select_usuarios[0];
                 $mensaje->mensaje = $request->mensaje;
                 $mensaje->save();
             }
@@ -118,7 +117,7 @@ class MensajesController extends Controller
 
         $alumnos = DB::table('tablero_cursos')
                     ->join('users', 'tablero_cursos.user_id', 'users.id')
-                    ->where('curso_id', $request->curso_id)
+                    ->where('tablero_cursos.curso_id', $request->curso_id)
                     ->get();
 
         if ($alumnos->count() > 0) {
@@ -127,6 +126,25 @@ class MensajesController extends Controller
 
         return response()->json(["message" => "no_results"]);
 
+    }
+
+
+    public function verMensaje(Request $request)
+    {
+        if ($request->has('mensaje') && isset($request->mensaje) && is_numeric($request->mensaje)) {
+            $mensaje = Mensaje::where('user_id', auth()->user()->id)->where('id', $mensaje)->first();
+            if ($mensaje) {
+                $mensaje->pendiente = 0;
+                if ($mensaje->save()) {
+                    return response()->json(['message' => 'ok']);
+                }
+                
+                return response()->json(['message' => 'error']);
+            }
+            
+
+            return response()->json(['message' => 'error']);
+        }
     }
 
 

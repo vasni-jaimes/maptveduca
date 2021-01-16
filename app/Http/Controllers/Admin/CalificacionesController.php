@@ -56,7 +56,7 @@ class CalificacionesController extends Controller
         $trimestre  = $this->helper->istrimestre($user->id);
         $cursos     = $this->cursosPorTrimestre($trimestre, $user);
 
-        return view('admin.calificaciones-materias', compact('cursos', 'alumno_id'));
+        return view('admin.calificaciones-materias', compact('cursos', 'alumno_id', 'user'));
     }
 
     public function getCalificaciones($alumno_id, $slug_curso)
@@ -105,7 +105,7 @@ class CalificacionesController extends Controller
         }
 
 
-        return view('admin.calificaciones', compact("trimestreAlumno", "calificaciones", "curso", "alumno_id", "slug_curso", "califi"));
+        return view('admin.calificaciones', compact("trimestreAlumno", "calificaciones", "curso", "user", "alumno_id", "slug_curso", "califi"));
     }
 
 

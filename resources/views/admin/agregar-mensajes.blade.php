@@ -115,11 +115,11 @@
                             <div class="col-sm-10 mb-3 sub-usuarios">
                                 <select data-placeholder="Usuarios" class="chosen-select" multiple style="width:350px;" tabindex="4" name="select_usuarios[]">
                                     @foreach($usuarios as $usuario)
-                                        @if ($usuario->tieneSuscripcion())
+                                        {{-- @if ($usuario->tieneSuscripcion()) --}}
                                             <option value="{{ $usuario->id }}">
                                                 {{ $usuario->nombre.' '. $usuario->apaterno.' '.$usuario->amaterno }}
                                             </option>
-                                        @endif
+                                        {{-- @endif --}}
                                     @endforeach
                                 </select>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('select_usuarios.*') !!} </span>

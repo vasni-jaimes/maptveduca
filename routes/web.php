@@ -85,6 +85,10 @@ Route::post('actualizar-respuesta/{publicacion_id}/{respuesta_id}', 'Site\AulasV
 //GUIA DE ESTUDIO
 Route::get('guia-estudio', 'Site\GuiaEstudioController@index')->name('guia-estudio');
 
+//MENSAJES
+Route::post('ver-mensaje', 'Site\UsersController@verMensaje')->name('verMensaje');
+Route::post('ver-notificacion', 'Site\UsersController@verNotificacion')->name('verNotificacion');
+
 
 
 

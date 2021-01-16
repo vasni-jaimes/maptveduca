@@ -19,13 +19,16 @@
     
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Calificaciones</h2>
+            <h2>Calificaciones - {{ $user->nombre." ".$user->apaterno." ".$user->amaterno }}</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="index.html">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a>Calificaciones - alumnos</a>
+                    <a href="{{ route('calificaciones-alumnos') }}">Calificaciones - Alumnos</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route('calificaciones-materias', $alumno_id) }}">Calificaciones - Materias</a>
                 </li>
                 <li class="breadcrumb-item active">
                     <strong>Calificaciones</strong>
@@ -184,7 +187,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Calificacion: </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="calificacion_seis" value="{{ old("calificacion_seis") }}"> 
+                                    <input type="text" class="form-control" name="calificacion_seis" value="{{ old("calificacion_seis", @$califi["sexto"]) }}"> 
                                     <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_seis') !!} </span>
                                 </div>
                             </div>
@@ -200,7 +203,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Calificacion: </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="calificacion_siete" value="{{ old("calificacion_siete") }}"> 
+                                    <input type="text" class="form-control" name="calificacion_siete" value="{{ old("calificacion_siete", @$califi["septimo"]) }}"> 
                                     <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_siete') !!} </span>
                                 </div>
                             </div>
@@ -216,7 +219,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Calificacion: </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="calificacion_ocho" value="{{ old("calificacion_ocho") }}"> 
+                                    <input type="text" class="form-control" name="calificacion_ocho" value="{{ old("calificacion_ocho", @$califi["octavo"]) }}"> 
                                     <span class='form-text m-b-none errors'> {!! $errors->first('calificacion_ocho') !!} </span>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ValidarPerfilEdit;
+use App\Helpers\Helper;
 use App\Favorito;
 use App\Recomendacion;
 use App\TableroCursos;
@@ -15,14 +16,16 @@ use App\User;
 use App\Mensaje;
 use App\UsuarioMembresia;
 use App\Notificacion;
+use App\Calificacion;
 use Carbon\Carbon;
 use DB;
 
 class UsersController extends Controller
 {
 
-	public function __construct()
+	public function __construct(Helper $helper)
     {
+        $this->helper = $helper;
         $this->middleware('auth');
     }
 
@@ -106,11 +109,23 @@ class UsersController extends Controller
         $pagos = UsuarioMembresia::with(['membresia', 'evento', 'curso'])
                     ->where('user_id', auth()->user()->id)->get();
 
+        /* CALIFICACIONES */
+        //$calificaciones = $this->obtenerCalificaciones();
+        $trimestreActual = $this->helper->istrimestre(auth()->user()->id);
+        $recomendacionesCompletas = Recomendacion::with(['cursos'])->where('carrera_id', auth()->user()->obtenerCarrera())->get();
+        //return $recomendacionesCompletas;
+
+
         /* NOTIFICACIONES */
         $notificaciones = Notificacion::where('user_id', auth()->user()->id)
                             ->orWhere('user_id', 0)->orderBy('created_at', 'desc')->get();
 
-    	return view('site.micuenta', compact("favoritosCursos", "favoritosEventos", "favoritosClases", "materias", "tableroCursos", "tableroEventos", "eventosOld", "tituloTrimestre", "mensajes", "pagos", "notificaciones"));
+
+        /* HELPER */
+        $helper = $this->helper;
+        
+
+    	return view('site.micuenta', compact("favoritosCursos", "favoritosEventos", "favoritosClases", "materias", "tableroCursos", "tableroEventos", "eventosOld", "tituloTrimestre", "mensajes", "pagos", "notificaciones", "trimestreActual", "recomendacionesCompletas", "helper"));
     }
 
 
@@ -142,6 +157,45 @@ class UsersController extends Controller
             return "8vo Trimestre";
         }
     }
+
+
+   public function verMensaje(Request $request)
+    {
+        if ($request->has('mensaje') && isset($request->mensaje) && is_numeric($request->mensaje)) {
+            $mensaje = Mensaje::where('user_id', auth()->user()->id)->where('id', $request->mensaje)->first();
+            if ($mensaje) {
+                $mensaje->pendiente = 0;
+                if ($mensaje->save()) {
+                    return response()->json(['message' => 'ok']);
+                }
+                
+                return response()->json(['message' => 'error']);
+            }
+            
+
+            return response()->json(['message' => 'error']);
+        }
+    }
+
+
+    public function verNotificacion(Request $request)
+    {
+        if ($request->has('notificacion') && isset($request->notificacion) && is_numeric($request->notificacion)) {
+            $notificacion = Notificacion::where('user_id', auth()->user()->id)->where('id', $request->notificacion)->first();
+            if ($notificacion) {
+                $notificacion->pendiente = 0;
+                if ($notificacion->save()) {
+                    return response()->json(['message' => 'ok']);
+                }
+                
+                return response()->json(['message' => 'error']);
+            }
+            
+
+            return response()->json(['message' => 'error']);
+        }
+    }
+
 
     protected function cursosPorTrimestre()
     {

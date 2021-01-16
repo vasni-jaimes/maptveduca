@@ -36,7 +36,7 @@
 
                     <ul class="li-micuenta">
                         <li class="active" data-seccion="perfil"><a href="">Perfil</a></li>
-                        <li data-seccion="inbox"><a href="">Inbox</a></li>
+                        <li data-seccion="inbox"><a href=""> <small class="notificacion"></small> Inbox</a></li>
                         <li data-seccion="pagos"><a href="">Pagos</a></li>
                         <li data-seccion="favoritos"><a href="">Favoritos</a></li>
                         @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->ultimaSuscripcion()->id == 1 || auth()->user()->ultimaSuscripcion()->id == 2))
@@ -165,10 +165,15 @@
                                 <div class="s-tab tab-1">
                                     @forelse($mensajes as $mensaje)
                                         <div class="item-inbox">
-                                            <p><small class="notificacion"></small><span>{{ $mensaje->FormatoLetras($mensaje->created_at) }}</span></p>
+                                            <p>
+                                                @if ($mensaje->pendiente)
+                                                    <small class="notificacion" data-msj="{{ $mensaje->id }}"></small>
+                                                @endif
+                                                <span>{{ $mensaje->FormatoLetras($mensaje->created_at) }}</span>
+                                            </p>
                                             <div class="item-mensaje">
                                                 <div class="txt-mensaje">
-                                                    @if ($mensaje->admin->id == 1)
+                                                    @if ($mensaje->admin->rol_id == 1)
                                                         <p><strong>De:</strong> MAPtv Educa </p>
                                                     @else
                                                         <p>
@@ -179,7 +184,11 @@
                                                     <p><strong>Mensaje:</strong></p>
                                                     <p>{!! $mensaje->mensaje !!}</p>
                                                 </div> <!-- /txt-mensaje -->
-                                                <a href="javascript:void(0)">Ver mensaje completo</a>
+                                                @if ($mensaje->pendiente)
+                                                    <a href="javascript:void(0)" class="ver-msj" data-msj="{{ $mensaje->id }}">Ver mensaje completo</a>
+                                                @else
+                                                    <a href="javascript:void(0)">Ver mensaje completo</a>
+                                                @endif
                                             </div> <!-- /item-mensaje -->
                                         </div> <!-- /item-inbox -->
                                     @empty
@@ -194,14 +203,24 @@
                                 <div class="s-tab tab-2">
                                     @forelse($notificaciones as $notificacion)
                                         <div class="item-inbox">
-                                            <p><small class="notificacion"></small><span>{{ $notificacion->FormatoLetras($notificacion->created_at) }}</span></p>
+                                            <p>
+                                                @if ($notificacion->pendiente)
+                                                    <small class="notificacion" data-noti="{{ $notificacion->id }}"></small>
+                                                @endif
+                                                <span>{{ $notificacion->FormatoLetras($notificacion->created_at) }}</span>
+                                            </p>
                                             <div class="item-mensaje">
                                                 <div class="txt-mensaje">
                                                     <p><strong>De:</strong> MAPtv Educa </p>
                                                     <p><strong>Notificación:</strong></p>
                                                     <p> {!! $notificacion->mensaje !!} </p>
                                                 </div> <!-- /txt-mensaje -->
-                                                <a href="javascript:void(0)">Ver mensaje completo</a>
+                                                @if ($notificacion->pendiente)
+                                                    <a href="javascript:void(0)" class="ver-notify" data-noti="{{ $notificacion->id }}">Ver mensaje completo</a>
+                                                @else
+                                                    <a href="javascript:void(0)">Ver mensaje completo</a>
+                                                @endif
+                                                
                                             </div> <!-- /item-mensaje -->
                                         </div> <!-- /item-inbox -->
                                     @empty
@@ -645,36 +664,131 @@
                                                 <th>Materia</th>
                                                 <th>Calificación general</th>
                                             </tr>
-                                            <tr>
-                                                <td>Oct - Dic 2020</td>
-                                                <td>Materia</td>
-                                                <td>100</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="vacio">&nbps;</td>
-                                                <td>Materia</td>
-                                                <td>100</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="vacio">&nbps;</td>
-                                                <td>Materia</td>
-                                                <td>100</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ene - Mar 2021</td>
-                                                <td>Materia</td>
-                                                <td>100</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="vacio">&nbps;</td>
-                                                <td>Materia</td>
-                                                <td>100</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="vacio">&nbps;</td>
-                                                <td>Materia</td>
-                                                <td>100</td>
-                                            </tr>
+
+                                            @if ($trimestreActual >= 1)
+                                                <tr>
+                                                    <td>{{ $helper->obtenerFechaTrimestre() }}</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                </tr>
+                                                @foreach($recomendacionesCompletas->where('trimestre', 1) as $recomendacion)
+                                                    <tr>
+                                                        <td class="vacio">&nbps;</td>
+                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
+                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+                                            @if ($trimestreActual >= 2)
+                                                <tr>
+                                                    <td>Oct - Dic 2020</td>
+                                                    <td>Materia</td>
+                                                    <td>100</td>
+                                                </tr>
+                                                @foreach($recomendacionesCompletas->where('trimestre', 2) as $recomendacion)
+                                                    <tr>
+                                                        <td class="vacio">&nbps;</td>
+                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
+                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+                                            @if ($trimestreActual >= 3)
+                                                <tr>
+                                                    <td>Oct - Dic 2020</td>
+                                                    <td>Materia</td>
+                                                    <td>100</td>
+                                                </tr>
+                                                @foreach($recomendacionesCompletas->where('trimestre', 3) as $recomendacion)
+                                                    <tr>
+                                                        <td class="vacio">&nbps;</td>
+                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
+                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+                                            @if ($trimestreActual >= 4)
+                                                <tr>
+                                                    <td>Oct - Dic 2020</td>
+                                                    <td>Materia</td>
+                                                    <td>100</td>
+                                                </tr>
+                                                @foreach($recomendacionesCompletas->where('trimestre', 4) as $recomendacion)
+                                                    <tr>
+                                                        <td class="vacio">&nbps;</td>
+                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
+                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+                                            @if ($trimestreActual >= 5)
+                                                <tr>
+                                                    <td>Oct - Dic 2020</td>
+                                                    <td>Materia</td>
+                                                    <td>100</td>
+                                                </tr>
+                                                @foreach($recomendacionesCompletas->where('trimestre', 5) as $recomendacion)
+                                                    <tr>
+                                                        <td class="vacio">&nbps;</td>
+                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
+                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+                                            @if ($trimestreActual >= 6)
+                                                <tr>
+                                                    <td>Oct - Dic 2020</td>
+                                                    <td>Materia</td>
+                                                    <td>100</td>
+                                                </tr>
+                                                @foreach($recomendacionesCompletas->where('trimestre', 6) as $recomendacion)
+                                                    <tr>
+                                                        <td class="vacio">&nbps;</td>
+                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
+                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+
+                                            @if ($trimestreActual >= 7)
+                                                <tr>
+                                                    <td>Oct - Dic 2020</td>
+                                                    <td>Materia</td>
+                                                    <td>100</td>
+                                                </tr>
+                                                @foreach($recomendacionesCompletas->where('trimestre', 7) as $recomendacion)
+                                                    <tr>
+                                                        <td class="vacio">&nbps;</td>
+                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
+                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+
+                                            @if ($trimestreActual >= 8)
+                                                <tr>
+                                                    <td>Oct - Dic 2020</td>
+                                                    <td>Materia</td>
+                                                    <td>100</td>
+                                                </tr>
+                                                @foreach($recomendacionesCompletas->where('trimestre', 8) as $recomendacion)
+                                                    <tr>
+                                                        <td class="vacio">&nbps;</td>
+                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
+                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+                                            
+                                            
                                         </table>
                                         <div class="text-right">
                                             <a class="descarga">
