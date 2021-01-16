@@ -155,6 +155,18 @@ Route::get('faqs', function() {
 	return view('site.faqs');
 })->name('faqs');
 
+Route::get('recover', function() {
+	return view('site.recover');
+})->name('recover');
+
+Route::get('terminos', function() {
+	return view('site.terminos');
+})->name('terminos');
+
+Route::get('privacidad', function() {
+	return view('site.privacidad');
+})->name('privacidad');
+
 // Route::get('gracias', function() {
 // 	return view('site.gracias');
 // })->name('gracias');

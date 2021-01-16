@@ -14,14 +14,14 @@
 <section class="micuenta">
 
     <div class="hoja-1200">
-        
-        <div>
-            <span class="ico-filtro" id="ico-tablero"><img src="site/img/filtro.png"></span>
-        </div> <!-- /text-right -->
 
         <ul class="flex breadcrumb-curso">
             <li>TABLERO PERSONAL</li>
         </ul> <!-- /breadcrumb-curso -->  
+        
+        <div>
+            <span class="ico-filtro" id="ico-tablero"><img src="site/img/filtro.png"></span>
+        </div> <!-- /text-right -->
         
         <div class="wrapper-micuenta">
             
@@ -71,34 +71,28 @@
                                         <fieldset>
                                             <label>Correo electrónico</label>
                                             <input type="text" name="email" class="input" placeholder="usuario@gmail.com" value="{{ auth()->user()->email }}">
-                                            <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset>
                                             <label>Nombre</label>
                                             <input type="text" name="nombre" class="input" placeholder="Usuario" value="{{ auth()->user()->nombre }}">
-                                            <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset>
                                             <label>Apellido Materno</label>
                                             <input type="text" name="amaterno" class="input" placeholder="Apellido Materno" value="{{ auth()->user()->amaterno }}">
-                                            <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset>
                                             <label>Apellido Paterno</label>
                                             <input type="text" name="apaterno" class="input" placeholder="Apellido Paterno" value="{{ auth()->user()->apaterno }}">
-                                            <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                         </fieldset>
                                         <fieldset class="columns">
                                             <div class="flex flex-perfil between">
                                                 <div>
                                                     <label>Fecha de nacimiento</label>
                                                     <input type="text" name="fecha_nacimiento" class="input datepicker" data-date-format="yyyy-mm-dd" placeholder="DD/MM/AAAA" value="{{ auth()->user()->fecha_nacimiento }}">
-                                                    <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                                 </div>
                                                 <div>
                                                     <label>Contraseña</label>
                                                     <input type="text" name="password" class="input" placeholder="···············" class="input">
-                                                    <span class="ico-edit"><img src="/site/img/edit.png"></span>
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -143,8 +137,8 @@
                                     <small>Al cancelar tu membresía básica tendrás acceso a sus privilegios hasta que termine tu periodo pagado.</small>
                                 </div> <!-- /s-membresia -->
                                 
-                                <div class="s-membresia">
-                                    <div class="close-shadow"></div> <!-- /close-shadow -->
+                                <!--<div class="s-membresia">
+                                    <div class="close-shadow"></div> <!-- /close-shadow
                                     <p>¿QUÉ CAMBIO DESEAS HACER?</p>
                                     <a href="#">Quiero cambiar mi membresía a básica o cancelar mi membresía académica</a>
                                     <small>Si das click en la opción de arriba, nos comunicaremos  contigo en un lapso de 24 horas para dar seguimiento a tu solicitud.</small>
@@ -578,9 +572,9 @@
                                 <div class="flex-cursos">
                                     @if ($materias->count() > 0)
                                         <p>{{ $tituloTrimestre }}</p>
-                                        <ul class="flex between wrap">
+                                        <ul class="flex flex-materias wrap">
                                             @foreach($materias as $materia)
-                                                <li class="col-3">
+                                                <li class="col-2">
                                                     <img src="{{ Storage::url($materia->cursos->url_img) }}">
                                                     <div class="txt-clase">
                                                         <p>{{ $materia->cursos->nombre }}</p>

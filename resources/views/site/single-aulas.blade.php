@@ -46,9 +46,6 @@
                                                 <li> <a href="{{ route('down.publicacion', [$curso->slug,$publicacion->id,$i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a> </li>
                                             @endfor
                                         </ul>
-                                        <div class="ver-mas">
-                                            <img src="/site/img/plus.png">
-                                        </div> <!-- /ver-mas -->
                                     </div> <!-- /btn-archivo -->
                                 @endif
 

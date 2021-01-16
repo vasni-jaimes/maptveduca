@@ -18,7 +18,9 @@
 			<div class="menu-general">
 			    <div class="hoja-1200">
 			        <div class="flex between">
-			            <img src="/site/img/logo-amarillo.png">
+                        <a href="{{ route("home") }}">
+			             <img src="/site/img/logo-amarillo.png">
+                        </a>
 			            <ul class="flex flex-center between menu">
 			                <li><a href="{{ route("home") }}">Inicio</a></li>
 			                <li class="parent">
@@ -83,7 +85,7 @@
                                 <a href="{{ route("membresias.index") }}">Membresías</a>
                                 <div class="menu-child">
                                     <ul class="flex">
-                                        <li><a href="#">Membresía académica</a></li>
+                                        <li><a href="{{ route("membresias.index") }}">Membresía académica</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -107,7 +109,7 @@
 			                </a>
 			            </div> <!-- /toggle -->
                         <div class="ico-login">
-                            <a href="#"><img src="/site/img/ico-user.png"></a>
+                            <a href="javascript:void()"><img src="/site/img/ico-user.png"></a>
                             <div class="menu-user">
                                 <p>Hola, {{ auth()->user()->nombre }}</p>
                                 <ul>
@@ -119,7 +121,6 @@
                                             <button>Cerrar sesión</button>
                                         </form>
                                     </li>
-                                
                                 </ul>
                             </div> <!-- /menu-user -->
                             <span class="notificacion">2</span>
@@ -137,32 +138,32 @@
                             <div class="flex">
                                 <ul>
                                     <!--<li><a href="#">Membresía Básica</a></li>-->
-                                    <li><a href="#">Membresía Académica</a></li>
+                                    <li><a href="{{ route("membresias.index") }}">Membresía Académica</a></li>
                                     <!--<li><a href="#">Guías de estudio</a></li>-->
                                 </ul>
                                 <ul>
-                                    <li><a href="#">Cursos</a></li>
-                                    <li><a href="#">Clases en línea</a></li>
-                                    <li><a href="#">Eventos</a></li>
+                                    <li><a href="{{ route("cursos") }}">Cursos</a></li>
+                                    <li><a href="{{ route("clases-linea.index") }}">Clases en línea</a></li>
+                                    <li><a href="{{ route("eventos.index") }}">Eventos</a></li>
                                 </ul>
                             </div>
                             <div class="flex">
                                 <ul>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">Contacto</a></li>
+                                    <li><a href="{{ route("faqs") }}">FAQ/Contacto</a></li>
+                                    <!--<li><a href="#">Contacto</a></li>-->
                                 </ul>
                                 <ul>
-                                    <li><a href="#">Nosotros</a></li>
-                                    <li><a href="#">Colegio MAP</a></li>
+                                    <li><a href="{{ route("nosotros.index") }}">Nosotros</a></li>
+                                    <!--<li><a href="#">Colegio MAP</a></li>-->
                                 </ul>
                             </div>
                         </div> <!-- /flex -->
 
                         <div class="row-redes flex flex-column">
                             <ul class="flex-redes end">
-                                <li><a href="#"><img src="/site/img/facebook.png"></a></li>
-                                <li><a href="#"><img src="/site/img/instagram.png"></a></li>
-                                <li><a href="#"><img src="/site/img/youtube.png"></a></li>
+                                <li><a href="https://www.facebook.com/maptveduca" target="_blank"><img src="/site/img/facebook.png"></a></li>
+                                <li><a href="https://www.instagram.com/maptveduca/" target="_blank"><img src="/site/img/instagram.png"></a></li>
+                                <li><a href="https://www.youtube.com/c/MAPtvMéxico" target="_blank"><img src="/site/img/youtube.png"></a></li>
                             </ul> <!-- /flex -->
                             <a class="btn-footer" href="#">Estudia presencialmente con nosotros en Colegio MAP (Puebla, Puebla, México)</a>
                         </div> <!-- /row-redes -->
@@ -171,9 +172,9 @@
                         <div class="flex between">
                             <p>2020  MAPtv Educa. Todos los derechos reservados</p>
                             <ul class="flex">
-                                <li><a href="#">Aviso de Privacidad</a></li>
+                                <li><a href="{{ route("privacidad") }}">Aviso de Privacidad</a></li>
                                 <li>/</li>
-                                <li><a href="#">Términos y Condiciones</a></li>
+                                <li><a href="{{ route("terminos") }}">Términos y Condiciones</a></li>
                             </ul> <!-- /flex -->
                         </div> <!-- /flex -->
                     </div> <!-- /row-copyright -->
