@@ -32,7 +32,7 @@
 
                         <div class="col-6">
                             <div class="row-video">
-                                <iframe src="https://www.youtube.com/embed/CBZyA-Pj52U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe src="https://www.youtube.com/embed/p6ZZOIs7pI4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div> <!-- /row-video -->
                         </div> <!-- /col-6 -->
 
@@ -92,9 +92,9 @@
                         <li>Micrófono dinámico</li>
                         <li>Controlador MIDI</li>
                     </ul>
-                    <ul>
+                    <ul class="btn-guia">
                         <li><p>*Envíos sólo a la República Mexicana.</p></li>
-                        <li><a href="#">¡Me interesa!</a></li>
+                        <li><a href="{{ route("membresias.index") }}">¡Me interesa!</a></li>
                     </ul>
                 </li>
             </ul> <!-- /flex-guia -->

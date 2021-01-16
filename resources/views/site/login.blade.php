@@ -26,9 +26,11 @@
 	                <h2>¡Bienvenido de nuevo!</h2>
 	                <form action="{{ route("send.login") }}" class="form" method="POST" name="form_login">
 	                	@csrf
-	                    <input class="input" type="text" name="email" placeholder="Correo electrónico" value="{{ old("email") }}">
-	                    <input class="input" type="password" name="password" placeholder="Contraseña">
+	                    <input class="input" type="text" name="email" placeholder="Correo electrónico*" value="{{ old("email") }}">
+	                    <input class="input" type="password" name="password" placeholder="Contraseña*">
+                        <a href="{{ route('recover') }}">¿Olvidaste tu contraseña?</a>
 	                    <input type="submit" class="button">
+                        <p><em>*Campos requeridos</em></p>
 	                </form> <!-- /form -->
 	                <ul class="flex">
 	                    <li>¿Aún no eres miembro?</li>

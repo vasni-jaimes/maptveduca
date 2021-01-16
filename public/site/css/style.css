@@ -543,8 +543,8 @@ header a {
 }
 
 .menu-general img {
+    display: block;
     max-width: 247px;
-    width: 100%;
     padding: 10px 0;
 }
 
@@ -688,6 +688,10 @@ header a {
     text-align: center;
 }
 
+.menu-user ul li a:hover {
+    text-decoration: underline;
+}
+
 .menu-user ul li form button {
     display: block;
     padding: 0;
@@ -699,6 +703,11 @@ header a {
     margin: auto;
     background-color: transparent;
     outline: none;
+    cursor: pointer;
+}
+
+.menu-user ul li form button:hover {
+    text-decoration: underline;
 }
 
 .ico-login:hover .menu-user {
@@ -1720,7 +1729,7 @@ video#myVideo {
 }
 
 .formulario h2 {
-    margin: 0 0 50px;
+    margin: 0 0 35px;
     font-family: 'Poppins bold';
     font-size: 20px;
     line-height: 130%;
@@ -1740,6 +1749,13 @@ video#myVideo {
 .formulario p a {
     color: #000;
     text-decoration: underline;
+}
+
+.formulario p em {
+    display: block;
+    margin: 10px 0 0;
+    font-style: italic;
+    font-size: 12px;
 }
 
 .formulario a.btn-amarillo {
@@ -1766,10 +1782,21 @@ video#myVideo {
     width: 100%;
     border: 0; 
     padding: 12px 10px;
-    margin: 0 0 30px;
+    margin: 0 0 20px;
     border-radius: 0;
     border-bottom: 1px solid #000;
     font-size: 14px;
+}
+
+.form .input.campo-requerido {
+    border-bottom: 1px solid red;
+}
+
+.form a {
+    display: block;
+    color: #777;
+    font-family: 'Poppins regular';
+    font-size: 12px;
 }
 
 .form div .input {
@@ -1838,7 +1865,7 @@ video#myVideo {
 
 .row-terminos p {
     font-family: 'Poppins regular';
-    font-size: 14px;
+    font-size: 12px;
     line-height: 130%;
 }
 
@@ -1854,7 +1881,7 @@ video#myVideo {
 .row-terminos ul li,
 .row-terminos ul li a {
     font-family: 'Poppins regular';
-    font-size: 15px;
+    font-size: 12px;
     line-height: normal;
 }
 
@@ -1950,6 +1977,7 @@ video#myVideo {
 
 .ico-filtro {
     display: none;
+    margin: 10px 0;
 }
 
 .sidebar-cursos {
@@ -3514,6 +3542,9 @@ section.membresia {
 }
 
 .item-guia {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     padding: 30px 4%;
 }
 
@@ -3557,7 +3588,27 @@ section.membresia {
     background-color: #fff;
 }
 
+.item-guia.item-equipo {
+    position: relative;
+    width: 60%;
+    background-color: #000;
+}
+
+.item-guia.item-equipo:after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    right: -30px;
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-left: 30px solid #000;
+}
+
 .item-guia.item-kit {
+    width: 40%;
+    background-color: #ffb514;
     text-align: right;
 }
 
@@ -3590,14 +3641,32 @@ section.membresia {
     text-align: left;
 }
 
-.item-equipo {
-    width: 60%;
-    background-color: #000;
+.item-guia.item-kit ul.btn-guia {
+    display: flex;
+    padding: 0;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.item-kit {
-    width: 40%;
-    background-color: #ffb514;
+.item-guia.item-kit ul.btn-guia li {
+    padding: 0;
+}
+
+.item-guia.item-kit ul.btn-guia li:before {
+    display: none;
+}
+
+.item-guia.item-kit ul.btn-guia li a {
+    display: block;
+    padding: 10px;
+    font-family: 'Poppins semibold';
+    font-size: 12px;
+    border-radius: 10px;
+    background-color: #fff;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    line-height: 130%;   
 }
 
 
@@ -3754,6 +3823,16 @@ section.membresia {
     text-transform: uppercase;
 }
 
+.wrapper-recover .formulario h2 {
+    margin: 0 0 15px;
+}
+
+.wrapper-recover .formulario p {
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto 30px;
+}
+
 
 /*----------------------------------  CHECKOUT  ----------------------------------*/
 
@@ -3762,7 +3841,7 @@ section.membresia {
 }
 
 .wrapper-checkout .formulario h2 {
-    margin: 0 0 30px;
+    margin: 0 0 35px;
 }
 
 .wrapper-checkout .formulario label {
@@ -4014,7 +4093,7 @@ section.membresia {
 
 .form-perfil fieldset {
     position: relative;
-    padding: 0 40px 0 0;
+    padding: 0;
     margin: 0 0 12px;
 }
 
@@ -4071,7 +4150,7 @@ section.membresia {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     position: relative;
-    padding: 0 40px 0 0;
+    padding: 0;
     width: 49%;
 }
 
@@ -4227,7 +4306,7 @@ span.ico-edit:hover p {
     vertical-align: middle;
 }
 
-.item-inbox small {
+small.notificacion {
     display: inline-block;
     width: 7px;
     height: 7px;
@@ -4370,6 +4449,10 @@ span.ico-edit:hover p {
     border-radius: 25px;
     background-color: #ffc314;
     text-align: center;
+}
+
+.row-favoritos .flex-cursos .flex-materias ul li {
+    margin: 15px 0.5%;
 }
 
 .item-favoritos {
@@ -4891,6 +4974,63 @@ span.ico-edit:hover p {
 .btn-cancelar {
     border: 1px solid #000;
 }
+
+
+/*----------------------------------  FOOTER  ----------------------------------*/
+
+.wrapper-terminos {
+    margin: 30px 0 50px;
+} 
+
+.wrapper-terminos img {
+    display: block;
+    max-width: 275px;
+    width: 100%;
+    margin: 0 auto 30px;
+}
+
+.wrapper-terminos h1 {
+    margin: 0 0 50px;
+    font-family: 'Oswald medium';
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 130%;
+}
+
+.wrapper-terminos p {
+    margin: 0 0 20px;
+    font-family: 'Oswald light';
+    font-size: 20px;
+    line-height: 130%;
+}
+
+.wrapper-terminos p strong {
+    font-family: 'Oswald medium';
+}
+
+.wrapper-terminos ul {
+    margin: 0 0 20px;
+} 
+
+.wrapper-terminos ul li {
+    position: relative;
+    padding: 0 0 0 15px;
+    font-family: 'Oswald light';
+    font-size: 20px;
+    line-height: 130%;
+}
+
+.wrapper-terminos ul li:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #000;
+}
     
 
 /*----------------------------------  FOOTER  ----------------------------------*/
@@ -4915,7 +5055,7 @@ footer {
 }
 
 .flex-footer > div:last-of-type ul {
-    margin-left: 178px;
+    margin-left: 142px;
 }
 
 .flex-footer ul:first-of-type,
@@ -5498,6 +5638,19 @@ a[href="#page"] {
         margin: 0 0 10px;
     }
     
+    .item-guia.item-equipo,
+    .item-guia.item-kit {
+        width: 100%;
+    }
+    
+    .item-guia.item-kit {
+        text-align: left;
+    } 
+    
+    .item-guia.item-equipo:after {
+        display: none;
+    }
+    
     footer {
         padding: 35px 0;
     }
@@ -5595,7 +5748,7 @@ a[href="#page"] {
     .wrapper-profesores,
     .banner-title,
     .wrapper-cursos {
-        padding: 35px 0;
+        padding: 30px 0;
     }
     
     header img.logo {

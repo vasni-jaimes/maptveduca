@@ -30,19 +30,20 @@
 	                <form action="{{ route("registro") }}" class="form" method="POST" name="form_registro">
 	                	@csrf
 	                    <div>
-	                        <input class="input" type="text" name="nombre" placeholder="Nombre" value="{{ old("nombre") }}">
-	                        <input class="input" type="text" name="apaterno" placeholder="Apellido Paterno" value="{{ old("apaterno") }}">
+	                        <input class="input" type="text" name="nombre" placeholder="Nombre(s)*" value="{{ old("nombre") }}">
+	                        <input class="input" type="text" name="apaterno" placeholder="Apellido Paterno*" value="{{ old("apaterno") }}">
 	                    </div>
 	                    <div>
-	                        <input class="input" type="text" name="amaterno" placeholder="Apellido materno" value="{{ old("amaterno") }}">
+	                        <input class="input" type="text" name="amaterno" placeholder="Apellido materno*" value="{{ old("amaterno") }}">
 	                        <input class="input datepicker" type="text" name="fecha_nacimiento" data-date-format="yyyy-mm-dd" placeholder="Fecha de nacimiento" value="{{ old("fecha_nacimiento") }}">
 	                    </div>
-	                    <input class="input" type="text" name="email" placeholder="Correo electrónico" value="{{ old("email") }}">
+	                    <input class="input" type="text" name="email" placeholder="Correo electrónico*" value="{{ old("email") }}">
 	                    <div>
-	                        <input class="input" type="password" name="password" placeholder="Contraseña">
+	                        <input class="input" type="password" name="password" placeholder="Contraseña*">
 	                        <input class="input" type="password" name="password_confirmation" placeholder="Repetir contraseña">
 	                    </div>
 	                    <input type="submit" class="button">
+                        <p><em>*Campos requeridos</em></p>
 	                </form> <!-- /form -->
 	                <ul class="flex">
 	                    <li>¿Ya eres miembro?</li>
