@@ -10,7 +10,7 @@
 	    <div class="hoja-900">
 	        <div class="flex flex-header between flex-center">
 	            <img class="logo" src="/site/img/logo.png">
-	            <{{-- a href="{{ route('login') }}">Inicie sesión</a> --}}
+	            {{-- <a href="{{ route('login') }}">Inicie sesión</a> --}}
 	        </div> <!-- /flex -->
 	    </div> <!-- /hoja-900 -->
 	</header>
