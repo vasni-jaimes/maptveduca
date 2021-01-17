@@ -2617,6 +2617,10 @@ video#myVideo {
     text-transform: uppercase;
 }
 
+.txt-single.txt-subtitle h3 {
+    font-size: 20px;
+}
+
 .txt-single > p {
     padding: 0 0 20px;
     font-family: 'Poppins light';

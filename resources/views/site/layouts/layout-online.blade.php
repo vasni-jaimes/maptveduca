@@ -167,16 +167,16 @@
                                 <li><a href="https://www.instagram.com/maptveduca/" target="_blank"><img src="/site/img/instagram.png"></a></li>
                                 <li><a href="https://www.youtube.com/c/MAPtvMéxico" target="_blank"><img src="/site/img/youtube.png"></a></li>
                             </ul> <!-- /flex -->
-                            <a class="btn-footer" href="#">Estudia presencialmente con nosotros en Colegio MAP (Puebla, Puebla, México)</a>
+                            <a class="btn-footer" href="https://www.colegiomap.com/" target="_blank">Estudia presencialmente con nosotros en Colegio MAP (Puebla, Puebla, México)</a>
                         </div> <!-- /row-redes -->
                     </div> <!-- /flex -->
                     <div class="row-copyright">
                         <div class="flex between">
                             <p>2020  MAPtv Educa. Todos los derechos reservados</p>
                             <ul class="flex">
-                                <li><a href="{{ route("privacidad") }}">Aviso de Privacidad</a></li>
+                                <li><a href="{{ route("privacidad") }}" target="_blank">Aviso de Privacidad</a></li>
                                 <li>/</li>
-                                <li><a href="{{ route("terminos") }}">Términos y Condiciones</a></li>
+                                <li><a href="{{ route("terminos") }}" target="_blank">Términos y Condiciones</a></li>
                             </ul> <!-- /flex -->
                         </div> <!-- /flex -->
                     </div> <!-- /row-copyright -->

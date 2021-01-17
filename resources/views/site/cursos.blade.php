@@ -31,29 +31,33 @@
                                 <div class="titulo-cursos">
                                     <h2> {{ $categoria->nombre }} </h2>
                                 </div> <!-- /titulo-cursos -->
+                                
+                                <div class="row-slide">
 
-                                <ul class="slide-cursos">
-                                    @foreach($cursos as $curso)
-                                        <li>
-                                            <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                    <ul class="slide-cursos">
+                                        @foreach($cursos as $curso)
+                                            <li>
+                                                <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    
+                                    @if ($cursos->where("extra", 1)->count() > 0)
+                                        <div class="row-extra flex between">
+                                            <span>Cursos <br> extra ></span>
 
-                                @if ($cursos->where("extra", 1)->count() > 0)
-                                    <div class="row-extra flex between">
-                                        <span>Cursos <br> extra ></span>
-                                        
-                                        <ul class="slide-extra">
-                                            @foreach($cursos->where("extra", 1) as $curso)
-                                                <li>
-                                                   <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
-                                                </li>
-                                            @endforeach
-                                        </ul> <!-- /slide-extra -->
-                                        
-                                    </div> <!-- /row-extra -->
-                                @endif
+                                            <ul class="slide-extra">
+                                                @foreach($cursos->where("extra", 1) as $curso)
+                                                    <li>
+                                                       <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
+                                                    </li>
+                                                @endforeach
+                                            </ul> <!-- /slide-extra -->
+
+                                        </div> <!-- /row-extra -->
+                                    @endif
+                                    
+                                </div>
 
                             </div>
 
