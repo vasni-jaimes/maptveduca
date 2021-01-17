@@ -81,7 +81,7 @@
                         </div> <!-- /row-video -->
                         
                         <div class="txt-single">
-                            <h3>{{ isset($nombre_url) ? $nombre_url : $clase['nombre_video'] }}</h3>
+                            <h3> {{ $curso->nombre }} - {{ isset($nombre_url) ? $nombre_url : $clase['nombre_video'] }}</h3>
                             <div class="descripcion-single">
                                 <p> {!! $clase['descripcion'] !!} </p>
                             </div> <!-- /descripcion-single -->

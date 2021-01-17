@@ -22,12 +22,15 @@ class CursosController extends Controller
     }
 
 
-    public function index()
+    public function index($origen = null)
     {
-        $categorias     = Category::with(["subcategorias"])->where("status", 1)->get();
-        $instructores   = Instructor::with("Cursos")->where("status", 1)->get();
+        //if ($origen == null) {
+            $cursos         = Course::where("status", 1)->get();
+            $categorias     = Category::with(["subcategorias"])->where("status", 1)->get();
+            $instructores   = Instructor::with("Cursos")->where("status", 1)->get();
+        //}
         
-    	return view("site.cursos", compact("categorias", "instructores"));
+    	return view("site.cursos", compact("categorias", "instructores", "cursos"));
     }
 
     public function show($curso_id, $clase_id = null, $subclase_id = 0)

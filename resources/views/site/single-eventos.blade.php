@@ -60,7 +60,7 @@
                         
                         <div class="txt-single">
                             <div class="descripcion-single">
-                                <p>{{ $evento->descripcion }}</p>
+                                <p>{!! $evento->descripcion !!}</p>
                             </div> <!-- /descripcion-single -->
                         </div> <!-- /txt-single -->
                     

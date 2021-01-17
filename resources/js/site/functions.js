@@ -14,6 +14,7 @@ let funciones = {
     		let numeroNotifi = parseInt(html.innerHTML) - 1;
     		if (numeroNotifi <= 0) {
     			document.querySelector('.ico-login .notificacion').remove();
+    			document.querySelector('.not-inbox').remove();
     		}
     		else {
     			document.querySelector('.ico-login .notificacion').innerHTML = numeroNotifi;
@@ -60,6 +61,7 @@ let funciones = {
     		let numeroNotifi = parseInt(html.innerHTML) - 1;
     		if (numeroNotifi <= 0) {
     			document.querySelector('.ico-login .notificacion').remove();
+    			document.querySelector('.not-inbox').remove();
     		}
     		else {
     			document.querySelector('.ico-login .notificacion').innerHTML = numeroNotifi;

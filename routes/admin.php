@@ -96,3 +96,7 @@ Route::get('calificaciones-alumnos', 'Admin\CalificacionesController@index')->na
 Route::get('calificaciones-materias/{alumno_id}', 'Admin\CalificacionesController@getMaterias')->name('calificaciones-materias');
 Route::get('calificaciones/{user_id}/{slug_curso}', 'Admin\CalificacionesController@getCalificaciones')->name('calificaciones');
 Route::post('calificaciones/{user_id}/{slug_curso}', 'Admin\CalificacionesController@storeCalificaciones')->name('calificaciones.store');
+
+
+//TEXTO ALTERNATIVO CARRERA
+Route::get('textoalternativo-materias', 'Admin\TextoAlternativoCntroller@show')->name('texto-materias');
