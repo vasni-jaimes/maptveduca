@@ -42,8 +42,9 @@ class CheckoutController extends Controller
 
     public function index($slug_membresia)
     {
-    	$membresia = Membresia::with("carreras")->where('slug', $slug_membresia)->first();
-        return view("site.checkout", compact("membresia"));
+    	// $membresia = Membresia::with("carreras")->where('slug', $slug_membresia)->first();
+     //    return view("site.checkout", compact("membresia"));
+        return redirect()->route("home");
     }
 
 
@@ -59,6 +60,7 @@ class CheckoutController extends Controller
 
     public function PayWithPaypal(Request $request, $slug_membresia)
     {
+         return redirect()->route("home");
 
     	if ($this->validarMembresiaUsuario()){
             return back()->withInput()->with("error", "El usuario ya cuenta con una suscripcion activa");
