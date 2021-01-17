@@ -30,7 +30,7 @@
                                         
                                         {!! $ctemario->slug ==  $clase['slug'] ? "<span style='font-weight: bold;'>".$ctemario->nombre_video."</span>" : $ctemario->nombre_video !!}
 
-                                        @if (count($ctemario->url_video) > 1)
+                                        @if (count($ctemario->url_video) > 0)
                                             <ul>
                                                 @for($i = 0; $i <= count($ctemario->url_video) - 1; $i++)
                                                     <li class="active" data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug."/".$i }}"> 
