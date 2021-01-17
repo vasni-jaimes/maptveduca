@@ -94,7 +94,7 @@
                     </ul>
                     <ul class="btn-guia">
                         <li><p>*Envíos sólo a la República Mexicana.</p></li>
-                        <li><a href="{{ route("membresias.index") }}">¡Me interesa!</a></li>
+                        <li><a href="mailto:maptveduca.info@gmail.com">¡Me interesa!</a></li>
                     </ul>
                 </li>
             </ul> <!-- /flex-guia -->
