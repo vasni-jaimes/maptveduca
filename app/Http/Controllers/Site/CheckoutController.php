@@ -190,8 +190,11 @@ class CheckoutController extends Controller
         $mensaje = new Mensaje();
         $mensaje->admin_id = 1;
         $mensaje->user_id = auth()->user()->id;
-        $mensaje->mensaje = "<strong>Hola ".auth()->user()->nombre." ".auth()->user()->apaterno."</strong>";
-        $mensaje->mensaje .= "<br> En hora buena, ahora podras disfrutar de nuestro contenido libremente.";
+        $mensaje->mensaje = "<strong>Hola ".auth()->user()->nombre." ".auth()->user()->apaterno."</strong><br><br>";
+        $mensaje->mensaje .= "<br> ¡Bienvenid@ a MAPtv Educa! Navega por nuestra plataforma para descubrir lo que tenemos para ti. Recuerda que para estudiar el Técnico en     Producción Musical a través de nuestros Cursos debes adquirir la Membresía Académica. De otro modo, sólo tendrás acceso a la oferta de Eventos y Clases en Línea.<br><br>
+
+            ¡Visita la sección “Membresía Académica” para conocer más!
+";
         $mensaje->save();
     }
 }

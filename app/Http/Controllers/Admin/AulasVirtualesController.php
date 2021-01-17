@@ -10,6 +10,7 @@ use App\Helpers\Helper;
 use App\Course;
 use App\Publicacion;
 use App\Respuesta;
+use App\Notificacion;
 use DB;
 
 class AulasVirtualesController extends Controller
@@ -128,12 +129,14 @@ class AulasVirtualesController extends Controller
                     $publicacion->archivos = $objArchivos;
                     if ($publicacion->save()) {
                         DB::commit();
+                        $this->sendNotificaciones($curso);
                         return back()->with("status.newAula", "success");
                     }
                     DB::rollback();
                     return back()->with("status.newAula", "error");
                 }
                 DB::commit();
+                $this->sendNotificaciones($curso);
                 return back()->with("status.newAula", "success");
             }
             DB::rollback();
@@ -420,5 +423,23 @@ class AulasVirtualesController extends Controller
     protected function eliminarCarpeta($file)
     {
         return \Storage::deleteDirectory($file);
+    }
+
+
+    protected function sendNotificaciones($curso)
+    {
+        $alumnos    = DB::table('tablero_cursos')->where('curso_id', $curso->id)->get();
+        $profesor   = DB::table('courses_instructors')->where('course_id', $curso->id)->first();
+        $profesorTitular   = DB::table('instructors')->where('id', $profesor->instructor_id)->first();
+
+
+        foreach ($alumnos as $alumno) {
+           $notificacion = new Notificacion();
+            $notificacion->user_id = $alumno->user_id;
+            $notificacion->mensaje = "¡Se ha publicado una nueva actividad!
+                                        El profesor ".$profesorTitular->nombres." ".$profesorTitular->apellidos." ha publicado una nueva actividad en el Aula Virtual de <br>
+                                        la materia ".$curso->nombre." Da click aquí para verla: <a href='".route('aula-virtual.show', $curso->slug)."'>".$curso->nombre."</a>";
+            $notificacion->save();
+        }
     }
 }

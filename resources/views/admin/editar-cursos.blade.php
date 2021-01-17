@@ -200,7 +200,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Descripcion: </label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="descripcion" rows="3">{{ old("descripcion", $curso->descripcion_bienvenida) }}</textarea>
+                                <textarea class="form-control" name="descripcion" rows="3">{{ old("descripcion", str_replace('<br />',PHP_EOL, $curso->descripcion_bienvenida)) }}) }}</textarea>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('descripcion') !!} </span>
                             </div>
                         </div>
@@ -335,7 +335,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Descripcion: </label>
                                             <div class="col-sm-10">
-                                                <textarea class="form-control" name="descripcion_curso[]" rows="3">{{ old("descripcion_curso.".$j, $team->descripcion_curso) }}</textarea>
+                                                <textarea class="form-control" name="descripcion_curso[]" rows="3">{{ old("descripcion_curso.".$j, str_replace('<br />',PHP_EOL, $team->descripcion_curso)) }}</textarea>
                                                 <span class='form-text m-b-none errors'> {!! $errors->first('descripcion_curso.*') !!} </span>
                                             </div>
                                         </div>

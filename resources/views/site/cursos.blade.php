@@ -33,7 +33,7 @@
                                 </div> <!-- /titulo-cursos -->
 
                                 <ul class="slide-cursos">
-                                    @foreach($cursos as $curso)
+                                    @foreach($cursos->where('categoria_id', $categoria->id) as $curso)
                                         <li>
                                             <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
                                         </li>
@@ -45,7 +45,7 @@
                                         <span>Cursos <br> extra ></span>
                                         
                                         <ul class="slide-extra">
-                                            @foreach($cursos->where("extra", 1) as $curso)
+                                            @foreach($cursos->where('categoria_id', $categoria->id)->where("extra", 1) as $curso)
                                                 <li>
                                                    <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
                                                 </li>

@@ -176,7 +176,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Descripcion: </label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="descripcion" rows="3">{{ old("descripcion", $evento->descripcion) }}</textarea>
+                                <textarea class="form-control" name="descripcion" rows="3">{{ old("descripcion", str_replace('<br />',PHP_EOL, $evento->descripcion)) }}</textarea>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('descripcion') !!} </span>
                             </div>
                         </div>
