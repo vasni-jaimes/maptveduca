@@ -22,7 +22,7 @@ class EventosRepositorie
         $evento                     = new Evento();
         $evento->nombre             = $request->nombre_evento;
         $evento->video_bienvenida   = $request->video_bienvenida;
-        $evento->descripcion        = $request->descripcion;
+        $evento->descripcion        = str_replace(PHP_EOL, '<br />', $request->descripcion);
         $evento->fecha_lanzamiento  = $request->fecha_inicio." ".$request->hora_inicio;
         $evento->tipo_evento_id     = $request->select_tipo;
         $evento->video_evento       = $request->url_video;
@@ -63,7 +63,7 @@ class EventosRepositorie
         $evento                     = Evento::findOrFail($id);
         $evento->nombre             = $request->nombre_evento;
         $evento->video_bienvenida   = $request->video_bienvenida;
-        $evento->descripcion        = $request->descripcion;
+        $evento->descripcion        = str_replace(PHP_EOL, '<br />', $request->descripcion);
         $evento->fecha_lanzamiento  = $request->fecha_inicio." ".$request->hora_inicio;
         $evento->tipo_evento_id     = $request->select_tipo;
         $evento->video_evento       = $request->url_video;

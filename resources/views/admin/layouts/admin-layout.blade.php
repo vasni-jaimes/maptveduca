@@ -111,6 +111,10 @@
                                 <a href="{{ route('calificaciones-alumnos') }}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Calificaciones</span>  </a>
                             </li>
 
+                            <li>
+                                <a href="{{ route('texto-materias') }}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Zoom Cursos Recomendados</span>  </a>
+                            </li>
+
                         @endif
                     </ul>
                 </div>

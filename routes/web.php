@@ -31,7 +31,7 @@ Route::post('registro', 'Auth\RegisterController@register')->name('registro');
 
 
 //CURSOS
-Route::get('cursos', 'Site\CursosController@index')->name('cursos');
+Route::get('cursos/{origen?}', 'Site\CursosController@index')->name('cursos');
 Route::get('single-cursos/{curso_id}/{clase_id?}/{subclase_id?}', 'Site\CursosController@show')->name('single-cursos.show');
 Route::get('download/material/{slug_curso}/{slug_sesion}', 'Site\CursosController@download')->name('download.material-curso');
 

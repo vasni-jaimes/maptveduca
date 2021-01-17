@@ -6,7 +6,7 @@
     <div class="close-sidebar"><span>X</span></div>
     @foreach($categorias as $categoria)
         <ul>
-            <li style="cursor: pointer; font-weight: bold" class="{{ $categoria->quitarAcentos($categoria->nombre) }}" data-cat="{{ $categoria->quitarAcentos($categoria->nombre) }}"> 
+            <li style="cursor: pointer; font-weight: bold" class="{{ "padre-".$categoria->quitarAcentos($categoria->nombre) }}" data-cat="{{ "padre-".$categoria->quitarAcentos($categoria->nombre) }}"> 
                 {{ $categoria->nombre }} ({{ $categoria->obtenerConteoCat( $categoria->id )}}) 
             </li>
         </ul>

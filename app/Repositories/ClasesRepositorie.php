@@ -23,7 +23,7 @@ class ClasesRepositorie
     	$clase = new Clase();
     	$clase->nombre_clase 			= $request->nombre_clase;
     	$clase->video_bienvenida 		= $request->video_bienvenida;
-    	$clase->descripcion_bienvenida 	= $request->descripcion;
+    	$clase->descripcion_bienvenida 	= str_replace(PHP_EOL, '<br />', $request->descripcion);
     	$clase->cuantas_sesiones 		= $request->select_sesiones;
         $clase->category_id             = $request->select_categorias;
 
@@ -65,7 +65,7 @@ class ClasesRepositorie
         $clase                          = Clase::findOrFail($id);
         $clase->nombre_clase            = $request->nombre_clase;
         $clase->video_bienvenida        = $request->video_bienvenida;
-        $clase->descripcion_bienvenida  = $request->descripcion;
+        $clase->descripcion_bienvenida  = $str_replace(PHP_EOL, '<br />', $request->descripcion);
         $clase->cuantas_sesiones        = $request->select_sesiones;
         $clase->category_id             = $request->select_categorias;
 

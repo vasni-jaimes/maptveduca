@@ -23,6 +23,46 @@
                 <div class="row-cursos interior-curso">
 
 
+                    @foreach($categorias as $categoria)
+
+                        @if ($categoria->obtenerConteoCat($categoria->id) > 0)
+
+                            <div class="row-yellow padre-{{ $categoria->quitarAcentos($categoria->nombre) }}">
+                                <div class="titulo-cursos">
+                                    <h2> {{ $categoria->nombre }} </h2>
+                                </div> <!-- /titulo-cursos -->
+
+                                <ul class="slide-cursos">
+                                    @foreach($cursos as $curso)
+                                        <li>
+                                            <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                                @if ($cursos->where("extra", 1)->count() > 0)
+                                    <div class="row-extra flex between">
+                                        <span>Cursos <br> extra ></span>
+                                        
+                                        <ul class="slide-extra">
+                                            @foreach($cursos->where("extra", 1) as $curso)
+                                                <li>
+                                                   <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
+                                                </li>
+                                            @endforeach
+                                        </ul> <!-- /slide-extra -->
+                                        
+                                    </div> <!-- /row-extra -->
+                                @endif
+
+                            </div>
+
+                        @endif
+
+                    @endforeach
+
+
+
                     @foreach($instructores as $instructor)
                         @if ($instructor->cursos->count() > 0)
                             <div class="instruct row-yellow {{ md5($instructor->id) }}" style="display: none">
@@ -57,11 +97,12 @@
                             </div>
                         @endif
                     @endforeach
+
                     
                     @foreach($categorias as $categoria)
 
                         @if ($categoria->obtenerConteoCat($categoria->id) > 0)
-                            <div class="row-yellow {{ $categoria->quitarAcentos($categoria->nombre) }}">
+                            <div class="row-yellow {{ $categoria->quitarAcentos($categoria->nombre) }}" style="display: none">
                                 <div class="titulo-cursos">
                                     <h2> {{ $categoria->nombre }} </h2>
                                 </div> <!-- /titulo-cursos -->
@@ -107,7 +148,7 @@
                                     @php $cursos = $categoria->ObtenerCursos($subcategoria->id); @endphp
                                     @if ($cursos->count() > 0)
 
-                                        <div class="div-item {{ $categoria->quitarAcentos($subcategoria->nombre). " ".$categoria->quitarAcentos($categoria->nombre) }}">
+                                        <div class="div-item {{ $categoria->quitarAcentos($subcategoria->nombre). " ".$categoria->quitarAcentos($categoria->nombre) }}" style="display: none">
                                             <h3> {{ $subcategoria->nombre }} </h3>
 
                                             <div class="row-slide">

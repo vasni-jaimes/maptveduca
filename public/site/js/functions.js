@@ -106,6 +106,7 @@ var funciones = {
 
       if (numeroNotifi <= 0) {
         document.querySelector('.ico-login .notificacion').remove();
+        document.querySelector('.not-inbox').remove();
       } else {
         document.querySelector('.ico-login .notificacion').innerHTML = numeroNotifi;
       }
@@ -148,6 +149,7 @@ var funciones = {
 
       if (numeroNotifi <= 0) {
         document.querySelector('.ico-login .notificacion').remove();
+        document.querySelector('.not-inbox').remove();
       } else {
         document.querySelector('.ico-login .notificacion').innerHTML = numeroNotifi;
       }

@@ -36,7 +36,7 @@
 
                     <ul class="li-micuenta">
                         <li class="active" data-seccion="perfil"><a href="">Perfil</a></li>
-                        <li data-seccion="inbox"><a href=""> <small class="notificacion"></small> Inbox</a></li>
+                        <li data-seccion="inbox"><a href=""> @if (auth()->user()->MensajesNotify()) <small class="notificacion not-inbox"></small> @endif Inbox</a></li>
                         <li data-seccion="pagos"><a href="">Pagos</a></li>
                         <li data-seccion="favoritos"><a href="">Favoritos</a></li>
                         @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->ultimaSuscripcion()->id == 1 || auth()->user()->ultimaSuscripcion()->id == 2))
