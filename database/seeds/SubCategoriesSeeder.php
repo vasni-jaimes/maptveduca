@@ -50,6 +50,66 @@ class SubCategoriesSeeder extends Seeder
             "status" => 1
         ]);
 
+
+        $subcategoria = Subcategoria::create([
+            "categoria_id" => 1,
+            "nombre" => "Acústica",
+            "status" => 1
+        ]);
+
+
+
+        $subcategoria = Subcategoria::create([
+            "categoria_id" => 1,
+            "nombre" => "Audio",
+            "status" => 1
+        ]);
+
+
+        $subcategoria = Subcategoria::create([
+            "categoria_id" => 1,
+            "nombre" => "Industria musical",
+            "status" => 1
+        ]);
+
+
+
+        $subcategoria = Subcategoria::create([
+            "categoria_id" => 1,
+            "nombre" => "Historia de la música",
+            "status" => 1
+        ]);
+
+
+        $subcategoria = Subcategoria::create([
+            "categoria_id" => 1,
+            "nombre" => "MIDI",
+            "status" => 1
+        ]);
+        
+
+        $subcategoria = Subcategoria::create([
+            "categoria_id" => 1,
+            "nombre" => "Mástering",
+            "status" => 1
+        ]);
+
+
+        $subcategoria = Subcategoria::create([
+            "categoria_id" => 1,
+            "nombre" => "Audio en vivo",
+            "status" => 1
+        ]);
+
+
+        $subcategoria = Subcategoria::create([
+            "categoria_id" => 1,
+            "nombre" => "Música electrónica",
+            "status" => 1
+        ]);
+        
+
+
         $subcategoria = Subcategoria::create([
             "categoria_id" => 1,
             "nombre" => "Mezcla",
