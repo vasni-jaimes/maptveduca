@@ -80,17 +80,17 @@
                             <iframe src="{{ $clase['url_video'] }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div> <!-- /row-video -->
                         
-                        <div class="txt-single">
+                        <div class="txt-single txt-subtitle">
                             <h3> {{ $curso->nombre }} - {{ isset($nombre_url) ? $nombre_url : $clase['nombre_video'] }}</h3>
                             <div class="descripcion-single">
                                 <p> {!! $clase['descripcion'] !!} </p>
                             </div> <!-- /descripcion-single -->
                         </div> <!-- /txt-single -->
                     
-                        <div class="banner-botones">
+                        <a href="{{ route("guia-estudio") }}" class="banner-botones">
                             <h4>¿PRIMERA VEZ ESTUDIANDO EN LÍNEA?</h4>
                             <p>Te damos algunas recomendaciones para que aproveches al máximo esta experiencia.</p>
-                        </div> <!-- /banner-botones -->
+                        </a> <!-- /banner-botones -->
                         
                     </div> <!-- /single-contenido -->
                     

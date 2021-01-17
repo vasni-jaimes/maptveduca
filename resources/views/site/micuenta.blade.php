@@ -663,7 +663,7 @@
 
                                             @if ($trimestreActual >= 1)
                                                 <tr>
-                                                    <td>{{ $helper->obtenerFechaTrimestre() }}</td>
+                                                    <td style="border-right: 4px solid #ffff;">{{ $helper->obtenerFechaTrimestre() }}</td>
                                                     <td> </td>
                                                     <td> </td>
                                                 </tr>
@@ -678,7 +678,7 @@
 
                                             @if ($trimestreActual >= 2)
                                                 <tr>
-                                                    <td>Oct - Dic 2020</td>
+                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
                                                     <td>Materia</td>
                                                     <td>100</td>
                                                 </tr>
@@ -693,7 +693,7 @@
 
                                             @if ($trimestreActual >= 3)
                                                 <tr>
-                                                    <td>Oct - Dic 2020</td>
+                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
                                                     <td>Materia</td>
                                                     <td>100</td>
                                                 </tr>
@@ -708,7 +708,7 @@
 
                                             @if ($trimestreActual >= 4)
                                                 <tr>
-                                                    <td>Oct - Dic 2020</td>
+                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
                                                     <td>Materia</td>
                                                     <td>100</td>
                                                 </tr>
@@ -723,7 +723,7 @@
 
                                             @if ($trimestreActual >= 5)
                                                 <tr>
-                                                    <td>Oct - Dic 2020</td>
+                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
                                                     <td>Materia</td>
                                                     <td>100</td>
                                                 </tr>
@@ -738,7 +738,7 @@
 
                                             @if ($trimestreActual >= 6)
                                                 <tr>
-                                                    <td>Oct - Dic 2020</td>
+                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
                                                     <td>Materia</td>
                                                     <td>100</td>
                                                 </tr>
@@ -754,7 +754,7 @@
 
                                             @if ($trimestreActual >= 7)
                                                 <tr>
-                                                    <td>Oct - Dic 2020</td>
+                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
                                                     <td>Materia</td>
                                                     <td>100</td>
                                                 </tr>
@@ -770,7 +770,7 @@
 
                                             @if ($trimestreActual >= 8)
                                                 <tr>
-                                                    <td>Oct - Dic 2020</td>
+                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
                                                     <td>Materia</td>
                                                     <td>100</td>
                                                 </tr>
