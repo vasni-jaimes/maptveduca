@@ -93,7 +93,7 @@
                             
                             <p>El costo de esta membresía es de:</p>
                             <p><small>Cantidades en pesos mexicanos</small></p><br>
-                            <p><strong>$2,000.00 mensuales</strong></p>
+                            <p><strong>${{ number_format($membresia->precio, 3) }} mensuales</strong></p>
                             <p><small>hasta concluir tus estudios o solicitar una cancelación</small></p><br>
 
                             <button style="cursor: pointer;">
