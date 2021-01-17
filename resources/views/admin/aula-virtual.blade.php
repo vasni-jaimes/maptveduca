@@ -19,16 +19,16 @@
     
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Crear nuevo Instructor</h2>
+            <h2>{{ $curso->nombre }}r</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="index.html">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a>Instructores</a>
+                    <a href="">Lista de Cursos</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <strong>Crear nuevo instructor</strong>
+                    <strong>Publicaciónes</strong>
                 </li>
             </ol>
         </div>
@@ -205,16 +205,16 @@
                 @foreach($publicaciones as $publicacion)
                     <div class="row justify-content-center mt-3">
                         <div class="col-lg-10">
-                            <div class="ibox">
+                            <div class="ibox border-bottom">
                                 <div class="ibox-title">
                                     <h5>{{  $publicacion->nombre }}</h5>
                                     <div class="ibox-tools">
                                         <a class="collapse-link">
-                                            <i class="fa fa-chevron-up"></i>
+                                            <i class="fa fa-chevron-down"></i>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="ibox-content" id="app">
+                                <div class="ibox-content" id="app" style="display: none;">
                                 	<div class="sk-spinner sk-spinner-double-bounce">
                                         <div class="sk-double-bounce1"></div>
                                         <div class="sk-double-bounce2"></div>

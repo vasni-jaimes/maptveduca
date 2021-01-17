@@ -21,9 +21,6 @@
                 <li class="breadcrumb-item">
                     <a href="index.html">Home</a>
                 </li>
-                <li class="breadcrumb-item">
-                    <a>Cursos</a>
-                </li>
                 <li class="breadcrumb-item active">
                     <strong>Lista de Cursos</strong>
                 </li>

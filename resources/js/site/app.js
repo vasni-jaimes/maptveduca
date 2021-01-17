@@ -249,3 +249,26 @@ if (uploadedFile) {
 }
 
 
+
+//VER MENSAJE
+let ver_msj = document.querySelectorAll('a.ver-msj');
+if (ver_msj) {
+	for (var i = 0; i <= ver_msj.length - 1; i++) {
+		ver_msj[i].addEventListener('click', funciones.verMensajeWeb);
+	}
+}
+
+
+
+//VER MENSAJE
+let ver_notify = document.querySelectorAll('a.ver-notify');
+if (ver_notify) {
+	for (var i = 0; i <= ver_notify.length - 1; i++) {
+		ver_notify[i].addEventListener('click', funciones.verNotificacioneseWeb);
+	}
+}
+
+
+
+
+

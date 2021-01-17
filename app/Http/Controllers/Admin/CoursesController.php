@@ -17,6 +17,7 @@ use App\Course;
 use App\Subcategoria;
 use App\Notificacion;
 use Illuminate\Support\Facades\Validator;
+use App\User;
 use DB;
 
 class CoursesController extends Controller
@@ -30,6 +31,7 @@ class CoursesController extends Controller
         $this->coursesDecorator = $coursesDecorator;
         $this->helper           = $helper;
         $this->middleware("authadmin:auth");
+        $this->middleware("ValidarAdmin");
     }
 
     /**
@@ -180,9 +182,15 @@ class CoursesController extends Controller
 
     protected function sendNotificaciones($curso)
     {
-        $notificacion = new Notificacion();
-        $notificacion->user_id = 0;
-        $notificacion->mensaje = "Se Creeo contenido nuevo, <br> Actualmente se genero un curso nuevo y para verlo solo hay que darle click: <a href='".route("single-cursos.show", $curso->slug)."' target='_blank'>".$curso->nombre."</a>";
-        $notificacion->save();
+        $alumnos = User::all();
+
+        foreach ($alumnos as $alumno) {
+           $notificacion = new Notificacion();
+            $notificacion->user_id = $alumno->id;
+            $notificacion->mensaje = "Se Creeo contenido nuevo, <br> Actualmente se genero un curso nuevo y para verlo solo hay que darle click: <a href='".route("single-cursos.show", $curso->slug)."' target='_blank'>".$curso->nombre."</a>";
+            $notificacion->save();
+        }
+
+        
     }
 }

@@ -27,6 +27,7 @@ class ClasesController extends Controller
         $this->clasesDecorator = $clasesDecorator;
         $this->helper           = $helper;
         $this->middleware("authadmin:auth");
+        $this->middleware("ValidarAdmin");
     }
 
     /**
@@ -149,9 +150,13 @@ class ClasesController extends Controller
 
     protected function sendNotificaciones($clase)
     {
-        $notificacion = new Notificacion();
-        $notificacion->user_id = 0;
-        $notificacion->mensaje = "Se Creeo contenido nuevo, <br> Actualmente se genero un curso nuevo y para verlo solo hay que darle click: <a href='".route("single-cursos.show", $clase->slug)."' target='_blank'>".$clase->nombre."</a>";
-        $notificacion->save();
+        $alumnos = User::all();
+
+        foreach ($alumnos as $alumno) {
+            $notificacion = new Notificacion();
+            $notificacion->user_id = $alumno->id;
+            $notificacion->mensaje = "Se Creeo contenido nuevo, <br> Actualmente se genero un curso nuevo y para verlo solo hay que darle click: <a href='".route("single-cursos.show", $clase->slug)."' target='_blank'>".$clase->nombre."</a>";
+            $notificacion->save();
+        }
     }
 }

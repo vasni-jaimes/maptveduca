@@ -12,6 +12,7 @@ class UsersController extends Controller
     public function __construct()
     {
        $this->middleware("authadmin:auth");
+       $this->middleware("ValidarAdmin");
     }
 
     /**

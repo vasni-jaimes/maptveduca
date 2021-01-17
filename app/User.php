@@ -6,7 +6,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Carbon\Carbon;
-use Membresia;
+use App\Membresia;
+use App\Mensaje;
+use App\Notificacion;
 use DB;
 
 class User extends Authenticatable
@@ -47,6 +49,20 @@ class User extends Authenticatable
     }
 
 
+    public function ultimoPago()
+    {
+        //FECHA DE HOY
+        date_default_timezone_set('America/Mexico_City');
+        $hoy = Carbon::now()->format('Y-m-d');
+
+        $suscripcion2 = DB::table('usuarios_membresia')
+                            ->where('fecha_fin', '>', $hoy)->where('fehca_inicio', '<=', $hoy)->where('user_id', $this->id)
+                            ->first();
+
+        return $suscripcion2;
+    }
+
+
     public function obtenerCarrera()
     {
         //FECHA DE HOY
@@ -62,6 +78,20 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+
+    public function MensajesNotify()
+    {
+        $contMsj = Mensaje::where('user_id', $this->id)->where('pendiente', 1)->count();
+        $contNotify = Notificacion::where('user_id', $this->id)->where('pendiente', 1)->count();
+        $total = $contMsj + $contNotify;
+
+        if ($total <= 0) {
+            return false;
+        }
+
+        return $total;
     }
 
 

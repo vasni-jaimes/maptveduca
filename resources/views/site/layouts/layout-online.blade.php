@@ -123,7 +123,9 @@
                                     </li>
                                 </ul>
                             </div> <!-- /menu-user -->
-                            <span class="notificacion">2</span>
+                            @if (auth()->user()->MensajesNotify())
+                                <span class="notificacion">{{ auth()->user()->MensajesNotify() }}</span>
+                            @endif
                         </div> <!-- /ico-login -->
 			        </div> <!-- /flex -->
 			    </div> <!-- /hoja-1200 -->

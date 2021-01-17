@@ -17,6 +17,7 @@ class CreateNotificacionesTable extends Migration
             $table->id();
             $table->integer('user_id')->default(0);
             $table->text('mensaje');
+            $table->boolean('pendiente')->default(1);
             $table->timestamps();
         });
     }

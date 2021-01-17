@@ -2,6 +2,7 @@
 
 
 namespace App\Helpers;
+use Carbon\Carbon;
 use DB;
 
 class Helper
@@ -77,5 +78,50 @@ class Helper
         elseif ($trimestre > 21 && $trimestre <= 24)
             return 8;
             
+    }
+
+    public function obtenerFechaTrimestre()
+    {
+        $trimestre = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->count();
+        if ($trimestre == 1 || $trimestre == 4 || $trimestre == 7 || $trimestre == 10 || $trimestre == 13 || $trimestre == 16 || $trimestre == 19 || $trimestre == 22){ 
+
+            $ultimoPago     = auth()->user()->ultimoPago();
+            $fehcaInicio    = $ultimoPago->fehca_inicio;
+            $start          = Carbon::parse($fehcaInicio);
+            $end            = Carbon::parse($fehcaInicio)->addMonths(3);
+
+            return $this->fechaFormat($start, $end);
+        }
+        elseif ($trimestre == 2 || $trimestre == 5 || $trimestre == 8 || $trimestre == 11 || $trimestre == 14 || $trimestre == 17 || $trimestre == 20 || $trimestre == 23){
+
+            $ultimoPago     = auth()->user()->ultimoPago();
+            $fehcaInicio    = $ultimoPago->fehca_inicio;
+            $start          = Carbon::parse($fehcaInicio)->subMonths(1);
+            $end            = Carbon::parse($fehcaInicio)->addMonths(2);
+
+            return $this->fechaFormat($start, $end);
+        }
+        elseif ($trimestre == 3 || $trimestre == 6 || $trimestre == 9 || $trimestre == 12 || $trimestre == 15 || $trimestre == 18 || $trimestre == 21 || $trimestre == 24){
+
+            $ultimoPago     = auth()->user()->ultimoPago();
+            $fehcaInicio    = $ultimoPago->fehca_inicio;
+            $start          = Carbon::parse($fehcaInicio)->subMonths(2);
+            $end            = Carbon::parse($fehcaInicio)->addMonths(1);
+
+            return $this->fechaFormat($start, $end);
+        } 
+    }
+
+
+    protected function fechaFormat($start, $end)
+    {
+        $meses  = array("ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC");
+        $fecha1  = Carbon::parse($start);
+        $mes1    = $meses[($fecha1->format('n')) - 1];
+
+        $fecha2  = Carbon::parse($end);
+        $mes2    = $meses[($fecha2->format('n')) - 1];
+
+        return $mes1." - ".$mes2." ".$fecha1->format('Y');
     }
 }

@@ -26,6 +26,7 @@ class EventosController extends Controller
         $this->eventosDecorator = $eventosDecorator;
         $this->helper           = $helper;
         $this->middleware("authadmin:auth");
+        $this->middleware("ValidarAdmin");
     }
 
     /**
@@ -147,9 +148,13 @@ class EventosController extends Controller
 
     protected function sendNotificaciones($evento)
     {
-        $notificacion = new Notificacion();
-        $notificacion->user_id = 0;
-        $notificacion->mensaje = "Se Creeo contenido nuevo, <br> Actualmente se genero un curso nuevo y para verlo solo hay que darle click: <a href='".route("single-cursos.show", $evento->slug)."' target='_blank'>".$evento->nombre."</a>";
-        $notificacion->save();
+        $alumnos = User::all();
+
+        foreach ($alumnos as $alumno) {
+            $notificacion = new Notificacion();
+            $notificacion->user_id = $alumno->id;
+            $notificacion->mensaje = "Se Creeo contenido nuevo, <br> Actualmente se genero un curso nuevo y para verlo solo hay que darle click: <a href='".route("single-cursos.show", $evento->slug)."' target='_blank'>".$evento->nombre."</a>";
+            $notificacion->save();
+        }
     }
 }
