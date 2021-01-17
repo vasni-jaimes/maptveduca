@@ -91,6 +91,9 @@
                                     <li> <a href="{{ route("lista-recomendaciones.index") }}"> Lista de recomendaciones </a></li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="{{ route('texto-materias') }}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Zoom Cursos Recomendados</span>  </a>
+                            </li>
                         @endif
                         <li>
                             <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Mensajes</span> <span class="fa arrow"></span></a>
@@ -109,10 +112,6 @@
 
                             <li>
                                 <a href="{{ route('calificaciones-alumnos') }}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Calificaciones</span>  </a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('texto-materias') }}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Zoom Cursos Recomendados</span>  </a>
                             </li>
 
                         @endif

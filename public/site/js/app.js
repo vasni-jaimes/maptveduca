@@ -365,6 +365,17 @@ if (ver_notify) {
   for (var i = 0; i <= ver_notify.length - 1; i++) {
     ver_notify[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].verNotificacioneseWeb);
   }
+} //ENVIAR CONTACTO
+
+
+var enviar_mensaje = document.querySelector('.enviar-mensaje');
+
+if (enviar_mensaje) {
+  enviar_mensaje.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
+    document.querySelector('.form-contacto').submit();
+  });
 }
 
 /***/ }),

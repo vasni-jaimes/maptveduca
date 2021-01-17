@@ -69,6 +69,9 @@ Route::get('lista-recomendaciones', 'Admin\RecomendacionesController@index')->na
 Route::get('agregar-recomendaciones/{recom_id}', 'Admin\RecomendacionesController@edit')->name('lista-recomendaciones.edit');
 Route::post('editar-recomendaciones/{recom_id}', 'Admin\RecomendacionesController@update')->name('lista-recomendaciones.update');
 
+Route::get('agregar-recomendaciones-extra/{recom_id}', 'Admin\RecomendacionesController@showCursosExtra')->name('lista-recomendaciones-extra.edit');
+Route::post('editar-recomendaciones-extra/{recom_id}', 'Admin\RecomendacionesController@updateExtra')->name('lista-recomendaciones-extra.update');
+
 
 
 //MENSAJES
@@ -99,4 +102,7 @@ Route::post('calificaciones/{user_id}/{slug_curso}', 'Admin\CalificacionesContro
 
 
 //TEXTO ALTERNATIVO CARRERA
-Route::get('textoalternativo-materias', 'Admin\TextoAlternativoCntroller@show')->name('texto-materias');
+Route::get('textoalternativo-carreras', 'Admin\TextoAlternativoCntroller@show')->name('texto-materias');
+Route::get('textoalternativo-materias/{carrera_id}', 'Admin\TextoAlternativoCntroller@index')->name('texto-lista-materias');
+Route::get('agregar-textoalternatico/{curso_id}/{carrera_id}', 'Admin\TextoAlternativoCntroller@getTexto')->name('texto-alternativo');
+Route::post('agregar-textoalternatico/{curso_id}', 'Admin\TextoAlternativoCntroller@insertTexto')->name('texto-alternativo.insert');

@@ -57,12 +57,12 @@
                                     <tbody>
                                         @foreach($materias as $materia)
                                             <tr class="gradeX">
-                                                <td> {{ $materia->nombre }} </td>
-                                                <td> <img src="{{ Storage::url($materia->url_img) }}" style="width: 100px"> </td>
-                                                <td> {{ $helper->contarAlumnos($materia->id) }} </td>
+                                                <td> {{ $materia->cursos->nombre }} </td>
+                                                <td> <img src="{{ Storage::url($materia->cursos->url_img) }}" style="width: 100px"> </td>
+                                                <td> {{ $helper->contarAlumnos($materia->cursos->id) }} </td>
                                                 <td class="center">
                                                     <div class="btn-group">
-                                                     	<a href = "#" class="btn-info btn btn-xs mr-3">Ver materias</a>
+                                                     	<a href = "{{ route('texto-alternativo', [$materia->cursos->slug, $carrera_id]) }}" class="btn-info btn btn-xs mr-3">Agregar texto</a>
                                                    </div>
 
                                                 </td>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\RecomendacionesExtra;
 use App\Recomendacion;
+use Illuminate\Support\Facades\Storage;
 
 class GuiaEstudioController extends Controller
 {
@@ -22,6 +24,12 @@ class GuiaEstudioController extends Controller
 	                        ->where('carrera_id', auth()->user()->obtenerCarrera())
 	                        ->get();
 
-    	return view('site.guia-estudio', compact("recomendaciones"));
+        $recomendacionesextra = RecomendacionesExtra::with(['cursos' => function($query){
+                                    $query->where('status', 1);
+                                }])
+                                ->where('carrera_id', auth()->user()->obtenerCarrera())
+                                ->get();
+
+    	return view('site.guia-estudio', compact("recomendaciones", "recomendacionesextra"));
     }
 }

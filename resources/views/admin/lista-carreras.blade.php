@@ -61,7 +61,7 @@
                                                 <td> {{ $carrera->nombre }} </td>
                                                 <td class="center">
                                                     <div class="btn-group">
-                                                     	<a href = "{{ route('lista-recomendaciones.edit', $carrera->id) }}" class="btn-info btn btn-xs mr-3">Agregar Contenido</a>
+                                                     	<a href = "{{ route('texto-lista-materias', $carrera->id) }}" class="btn-info btn btn-xs mr-3">Agregar Contenido</a>
                                                    </div>
                                                 </td>
                                             </tr>

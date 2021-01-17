@@ -26,6 +26,8 @@ class CheckoutController extends Controller
 
 	public function __construct()
 	{
+        $this->middleware('auth');
+
 		$payPalConfig = Config::get('paypal');
 
         $this->apiContext = new ApiContext(
@@ -45,11 +47,11 @@ class CheckoutController extends Controller
     }
 
 
-    public function getGracias()
-    {
-        // if (!session()->has('gracias')) {
-        //     return redirect()->route("home");
-        // }
+    public function getGracias(Request $request)
+    {   
+        if (!session()->has('gracias')) {
+            return redirect()->route("home");
+        }
 
         return view("site.gracias");
     }
@@ -158,7 +160,7 @@ class CheckoutController extends Controller
         	if ($user_membresia) {
                 $this->MensajeBienvenidaSuscripcion();
                 DB::commit();
-                return redirect()->route("gracias")->with("success", "Gracias! El pago a través de PayPal se ha ralizado correctamente.");
+                return redirect()->route("gracias")->with("gracias", "Gracias! El pago a través de PayPal se ha ralizado correctamente.");
         	}
         }
         

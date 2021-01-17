@@ -59,6 +59,7 @@
                                                 <td class="center">
                                                     <div class="btn-group">
                                                      	<a href = "{{ route('lista-recomendaciones.edit', $carrera->id) }}" class="btn-info btn btn-xs mr-3">Agregar Contenido</a>
+                                                        <a href = "{{ route('lista-recomendaciones-extra.edit', $carrera->id) }}" class="btn-info btn btn-xs mr-3">Agregar Contenido Extra</a>
                                                    </div>
                                                 </td>
                                             </tr>

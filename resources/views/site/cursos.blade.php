@@ -35,14 +35,14 @@
                                 <div class="row-slide">
 
                                     <ul class="slide-cursos">
-                                        @foreach($cursos->where('categoria_id', $categoria->id) as $curso)
+                                        @foreach($cursos->where('categoria_id', $categoria->id)->where("extra", 0) as $curso)
                                             <li>
                                                 <a href="{{ route("single-cursos.show", $curso->slug) }}"> <div class="img-slide" style="background-image: url({{Storage::url($curso->url_img) }});"></div> </a> <!-- /img-slide -->
                                             </li>
                                         @endforeach
                                     </ul>
 
-                                    @if ($cursos->where("extra", 1)->count() > 0)
+                                    @if ($cursos->where('categoria_id', $categoria->id)->where("extra", 1)->count() > 0)
                                         <div class="row-extra flex between">
                                             <span>Cursos <br> extra ></span>
                                             
