@@ -203,6 +203,12 @@ $(document).ready(function(){
         $('.sidebar-tablero').animate({left: 0});
 	}); //$('#navbar-toggle').on('click', function () {
     
+    $('.close-tablero').on('click', function () {
+        $('#ico-tablero').removeClass('active');
+        $('body').css('overflow', 'auto');
+		$('.sidebar-tablero').animate({left: '-55%'});
+    });
+    
     $('.item-mensaje a').click(function(){
         if ( !$(this).hasClass('active') ) {
 			$(this).addClass('active');

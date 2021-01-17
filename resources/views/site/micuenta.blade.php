@@ -28,6 +28,8 @@
             <div class="flex flex-start">
             
                 <div class="sidebar-single sidebar-tablero">
+                    
+                    <div class="close-tablero"><span>X</span></div>
 
                     <div class="sidebar-perfil">
                         <img src="/site/img/ico-user.png">

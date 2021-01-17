@@ -3980,6 +3980,21 @@ section.membresia {
     border: 1px solid #666;
 }
 
+.close-tablero {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    margin: 0 0 15px;
+}
+
+.close-tablero span {
+    display: inline-block;
+    font-family: 'Poppins semibold';
+    font-size: 18px;
+    color: #fff;
+}
+
 .sidebar-perfil {
     padding: 20px 15px;
     background-color: #000;
@@ -5521,7 +5536,8 @@ a[href="#page"] {
         height: auto;
     }
     
-    .close-sidebar {
+    .close-sidebar,
+    .close-tablero {
         display: block;
     }
     
