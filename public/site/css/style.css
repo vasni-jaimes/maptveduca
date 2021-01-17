@@ -1860,7 +1860,7 @@ video#myVideo {
 }
 
 .row-terminos {
-    margin: 8% 0 0;
+    margin: 40px 0 0;
 }
 
 .row-terminos p {
@@ -3863,6 +3863,31 @@ section.membresia {
     width: 100%;
     border-radius: 0;
     padding: 5px 10px;
+}
+
+.wrapper-checkout .formulario p {
+    padding: 0;
+}
+
+.wrapper-checkout .formulario p.small {
+    font-size: 12px;
+}
+
+.wrapper-checkout .formulario p small {
+    display: block;
+    color: #777;
+    font-family: 'Poppins regular';
+    font-size: 12px;
+}
+
+.wrapper-checkout .formulario p strong {
+    font-size: 22px;
+    font-family: 'Poppins bold';
+}
+
+.wrapper-checkout .formulario p a {
+    font-family: 'Poppins semibold';
+    text-decoration: none;
 }
 
 .wrapper-checkout .formulario button {

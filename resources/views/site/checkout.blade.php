@@ -90,12 +90,18 @@
                                    @endforeach
                                 </select>
                             </div><br>
-
-                            <p>Precio: $2,000.00 MXM</p><br>
+                            
+                            <p>El costo de esta membresía es de:</p>
+                            <p><small>Cantidades en pesos mexicanos</small></p><br>
+                            <p><strong>$2,000.00 mensuales</strong></p>
+                            <p><small>hasta concluir tus estudios o solicitar una cancelación</small></p><br>
 
                             <button style="cursor: pointer;">
                                 <img src="https://www.paypalobjects.com/marketing/web/mx/logos-buttons/Paga-con-yellow_227x44.png" alt="Check out with PayPal" />
-                            </button><br>
+                            </button><br><br>
+                            
+                            <p class="small">Una vez que envíes tus datos, recibirás un correo electrónico de bienvenida con instrucciones para empezar a estudiar.</p>
+                            <p class="small">Si tienes alguna duda, por favor comunícate con nosotros a <a href="mailto:maptveduca.info@gmail.com">maptveduca.info@gmail.com</a></p>
 
                              @if (session()->has("error"))
                                 <div class="error" style="color: red; margin-top: 20px;">
