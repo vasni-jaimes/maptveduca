@@ -187,7 +187,7 @@ class CoursesController extends Controller
         foreach ($alumnos as $alumno) {
            $notificacion = new Notificacion();
             $notificacion->user_id = $alumno->id;
-            $notificacion->mensaje = "Se Creeo contenido nuevo, <br> Actualmente se genero un curso nuevo y para verlo solo hay que darle click: <a href='".route("single-cursos.show", $curso->slug)."' target='_blank'>".$curso->nombre."</a>";
+            $notificacion->mensaje = "¡Nuevo contenido disponible! <br> Se ha creado un curso nuevo. Para verlo da click aquí: <a href='".route("single-cursos.show", $curso->slug)."' target='_blank'>".$curso->nombre."</a>";
             $notificacion->save();
         }
 
