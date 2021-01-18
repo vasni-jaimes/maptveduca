@@ -82,26 +82,31 @@
 
                         <form action="{{ route('paago-membresia', $membresia->slug) }}" class="form-checkout" method="GET">
                             @csrf
-                            <div>
-                                <label>Selecciona el programa que deseas cursar</label><br>
-                                <select class="input" name="carrera">
-                                   @foreach($membresia->carreras as $carreras)
-                                        <option value="{{ $carreras->id }}" selected> {{ $carreras->nombre }} </option>
-                                   @endforeach
-                                </select>
-                            </div><br>
-                            
-                            <p>El costo de esta membresía es de:</p>
-                            <p><small>Cantidades en pesos mexicanos</small></p><br>
-                            <p><strong>${{ number_format($membresia->precio, 2) }} mensuales</strong></p>
-                            <p><small>hasta concluir tus estudios o solicitar una cancelación</small></p><br>
 
-                            <button style="cursor: pointer;">
-                                <img src="https://www.paypalobjects.com/marketing/web/mx/logos-buttons/Paga-con-yellow_227x44.png" alt="Check out with PayPal" />
-                            </button><br><br>
-                            
-                            <p class="small">Una vez que envíes tus datos, recibirás un correo electrónico de bienvenida con instrucciones para empezar a estudiar.</p>
-                            <p class="small">Si tienes alguna duda, por favor comunícate con nosotros a <a href="mailto:maptveduca.info@gmail.com">maptveduca.info@gmail.com</a></p>
+                            <h2> Los pagos se habilitarán próximamente </h2>
+                            @php $stat = false; @endphp
+                            @if ($stat)
+                                {{-- <div>
+                                    <label>Selecciona el programa que deseas cursar</label><br>
+                                    <select class="input" name="carrera">
+                                       @foreach($membresia->carreras as $carreras)
+                                            <option value="{{ $carreras->id }}" selected> {{ $carreras->nombre }} </option>
+                                       @endforeach
+                                    </select>
+                                </div><br> --}}
+                                
+                                {{-- <p>El costo de esta membresía es de:</p>
+                                <p><small>Cantidades en pesos mexicanos</small></p><br>
+                                <p><strong>${{ number_format($membresia->precio, 2) }} mensuales</strong></p>
+                                <p><small>hasta concluir tus estudios o solicitar una cancelación</small></p><br> --}}
+
+                                {{-- <button style="cursor: pointer;">
+                                    <img src="https://www.paypalobjects.com/marketing/web/mx/logos-buttons/Paga-con-yellow_227x44.png" alt="Check out with PayPal" />
+                                </button><br><br> --}}
+                                
+                                {{-- <p class="small">Una vez que envíes tus datos, recibirás un correo electrónico de bienvenida con instrucciones para empezar a estudiar.</p>
+                                <p class="small">Si tienes alguna duda, por favor comunícate con nosotros a <a href="mailto:maptveduca.info@gmail.com">maptveduca.info@gmail.com</a></p> --}}
+                            @endif
 
                              @if (session()->has("error"))
                                 <div class="error" style="color: red; margin-top: 20px;">

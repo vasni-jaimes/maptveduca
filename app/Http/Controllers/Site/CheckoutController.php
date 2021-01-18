@@ -42,9 +42,9 @@ class CheckoutController extends Controller
 
     public function index($slug_membresia)
     {
-    	// $membresia = Membresia::with("carreras")->where('slug', $slug_membresia)->first();
-     //    return view("site.checkout", compact("membresia"));
-        return redirect()->route("home");
+    	$membresia = Membresia::with("carreras")->where('slug', $slug_membresia)->first();
+        return view("site.checkout", compact("membresia"));
+        //return redirect()->route("home");
     }
 
 
