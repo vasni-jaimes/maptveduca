@@ -31,7 +31,7 @@
 
                         <div class="col-6">
                             <div class="row-video">
-                                <iframe src="https://www.youtube.com/embed/ytaAFFtLm8g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe src="https://player.vimeo.com/video/501573270" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div> <!-- /row-video -->
                         </div> <!-- /col-6 -->
 

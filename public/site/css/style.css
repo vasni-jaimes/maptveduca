@@ -614,10 +614,10 @@ header a {
     margin: 0 0 10px;
 }
 
-.parent:hover .menu-child {
+/*.parent:hover .menu-child {
     display: block;
 }
-
+*/
 .mm-navbar__title,
 .menu > li > a {
     color: #fff;
