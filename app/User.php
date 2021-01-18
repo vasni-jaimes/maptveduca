@@ -35,6 +35,12 @@ class User extends Authenticatable
     }
 
 
+    public function primeraSuscripcion()
+    {
+        return $this->suscripcion[0];
+    }
+
+
     public function tieneSuscripcion()
     {
         //FECHA DE HOY

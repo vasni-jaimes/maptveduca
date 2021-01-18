@@ -149,4 +149,15 @@ class Helper
 
         return $status;
     }
+
+
+    public function formatoFechaStatus($fecha)
+    {
+        $meses  = array("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
+        $fecha1  = Carbon::parse($fecha);
+        $mes1    = $meses[($fecha1->format('n')) - 1];
+
+
+        return $mes1." ".$fecha1->format('Y');
+    }
 }
