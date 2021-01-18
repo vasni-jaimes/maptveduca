@@ -641,7 +641,7 @@
                                         <h4>Información del alumno</h4>
                                         <p>ALUMNO: {{ auth()->user()->nombre. " ".auth()->user()->apaterno. " ".auth()->user()->amaterno }}</p>
                                         <ul>
-                                            <li>Programa académico: {{ auth()->user()->obtenerCarrera() == 1 ? "Tecnico en produccion musical" : "Profesional en produccion musical" }}Técnico Profesional en Producción Musical</li>
+                                            <li>Programa académico: {{ auth()->user()->obtenerCarrera() == 1 ? "Tecnico en produccion musical" : "Profesional en produccion musical" }} </li>
                                             <li>Inscrito desde: {{ $helper->formatoFechaStatus(auth()->user()->primeraSuscripcion()->created_at) }} </li>
                                             <li>Activo desde: {{ $helper->formatoFechaStatus(auth()->user()->created_at) }}</li>
                                         </ul>
