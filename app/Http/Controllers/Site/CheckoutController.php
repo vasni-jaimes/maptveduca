@@ -60,7 +60,7 @@ class CheckoutController extends Controller
 
     public function PayWithPaypal(Request $request, $slug_membresia)
     {
-         return redirect()->route("home");
+         //return redirect()->route("home");
 
     	if ($this->validarMembresiaUsuario()){
             return back()->withInput()->with("error", "El usuario ya cuenta con una suscripcion activa");
