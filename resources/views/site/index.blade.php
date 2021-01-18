@@ -10,7 +10,7 @@
 	    <div class="hoja-900">
 	        <div class="flex flex-header between flex-center">
 	            <img class="logo" src="/site/img/logo.png">
-	            {{-- <a href="{{ route('login') }}">Inicie sesión</a> --}}
+	            <a href="{{ route('login') }}">Inicie sesión</a>
 	        </div> <!-- /flex -->
 	    </div> <!-- /hoja-900 -->
 	</header>
@@ -23,7 +23,7 @@
 	        <div class="hoja-900">
 	            <h1>Cursos virtuales de música y producción musical</h1>
 	            <p>Un proyecto de <span class="amarillo">MAP Colegio de Música, Audio y Producción</span></p>
-	            {{-- <a class="btn-amarillo" href="{{ route("registro.show") }}">Regístrate gratis</a> --}}
+	            <a class="btn-amarillo" href="{{ route("registro.show") }}">Regístrate gratis</a>
 	        </div> <!-- /hoja-900 -->
 	    </div> <!-- /txt-video -->
 	</section> <!-- /video-home -->
@@ -145,7 +145,7 @@
 	        
 	        <div class="row-registro">
 	            <p>¿Quieres conocer el sitio antes de decidir?</p>
-	            {{-- <a class="btn-amarillo" href="{{ route("registro.show") }}">Regístrate gratis</a> --}}
+	            <a class="btn-amarillo" href="{{ route("registro.show") }}">Regístrate gratis</a>
 	        </div> <!-- /row-registro -->
             
 	    </div> <!-- /hoja-1000 -->
