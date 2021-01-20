@@ -83,7 +83,7 @@
                         <form action="{{ route('paago-membresia', $membresia->slug) }}" class="form-checkout" method="GET">
                             @csrf
 
-                            <h2> Los pagos se habilitarán próximamente </h2>
+                            {{-- <h2> Los pagos se habilitarán próximamente </h2> --}}
                             {{-- @php $stat = false; @endphp
                             @if ($stat) --}}
                                 <div>

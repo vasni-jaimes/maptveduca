@@ -53,6 +53,8 @@ class CursosController extends Controller
             }
         }
 
+        //return $clase;
+
         $validarSide = $this->validacionSidebar($curso->id);
         $miTablero   = $this->estaEnMiTablero($curso->id);
         $favorito    = Favorito::where('user_id', auth()->user()->id)->where('curso_id', $curso->id)->first();

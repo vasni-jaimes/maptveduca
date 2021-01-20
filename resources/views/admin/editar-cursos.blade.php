@@ -285,7 +285,7 @@
                                                             <a target="_blank" href="{{ Storage::url("cursos/".$imagenes[$i]) }}">
                                                                 {{ basename($imagenes[$i]) }}
                                                             </a>
-                                                            <span><i class="fa fa-times eliminar_archivo" aria-hidden="true" data-metadata="{{ Storage::url("cursos/".$imagenes[$i]) }}" style="color:red;cursor:pointer"></i></span>
+                                                            <span><i class="fa fa-times eliminar_archivo" aria-hidden="true" data-sesion="{{ $a }}" data-slug="{{ $curso->slug }}" data-metadata="{{ Storage::url("cursos/".$imagenes[$i]) }}" style="color:red;cursor:pointer"></i></span>
                                                         </div>
                                                      @endfor
                                                 @endif
@@ -353,7 +353,7 @@
                                                             <a target="_blank" href="{{ Storage::url("cursos/".$imagenes[$i]) }}">
                                                                 {{ basename($imagenes[$i]) }}
                                                             </a>
-                                                            <span><i class="fa fa-times eliminar_archivo" aria-hidden="true" data-metadata="{{ "public/cursos/".$imagenes[$i] }}" style="color:red;cursor:pointer"></i></span>
+                                                            <span><i class="fa fa-times eliminar_archivo" aria-hidden="true" data-sesion="{{ $a }}" data-slug="{{ $curso->slug }}" data-metadata="{{ "public/cursos/".$imagenes[$i] }}" style="color:red;cursor:pointer"></i></span>
                                                         </div>
                                                      @endfor
                                                 @endif

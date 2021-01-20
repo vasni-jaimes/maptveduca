@@ -72,17 +72,28 @@ class TextoAlternativoCntroller extends Controller
         $txtAlterno = TextoAlternativo::where('curso_id', $curso_id)->first();
 
         if ($txtAlterno) {
-            $textoAltern->texto = str_replace(PHP_EOL, '<br />', $request->textoalternativo);
+            $txtAlterno->texto = str_replace(PHP_EOL, '<br />', $request->textoalternativo);
+
+            if ($txtAlterno->save()) {
+                DB::commit();
+                return back()->with("status.newTexto", "success");
+            }
+
+             DB::rollback();
+            return back()->with("status.newTexto", "error");
         }
         else {
             $textoAltern = new TextoAlternativo();
             $textoAltern->curso_id = $curso_id;
             $textoAltern->texto    = str_replace(PHP_EOL, '<br />', $request->textoalternativo);
-        }
 
-        if ($textoAltern->save()) {
-            DB::commit();
-            return back()->with("status.newTexto", "success");
+            if ($textoAltern->save()) {
+                DB::commit();
+                return back()->with("status.newTexto", "success");
+            }
+
+             DB::rollback();
+            return back()->with("status.newTexto", "error");
         }
 
         DB::rollback();
