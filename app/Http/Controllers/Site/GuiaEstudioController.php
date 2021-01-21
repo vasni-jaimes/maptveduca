@@ -30,6 +30,8 @@ class GuiaEstudioController extends Controller
                                 ->where('carrera_id', auth()->user()->obtenerCarrera())
                                 ->get();
 
+        //return $recomendaciones;
+
     	return view('site.guia-estudio', compact("recomendaciones", "recomendacionesextra"));
     }
 }

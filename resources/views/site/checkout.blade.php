@@ -83,9 +83,9 @@
                         <form action="{{ route('paago-membresia', $membresia->slug) }}" class="form-checkout" method="GET">
                             @csrf
 
-                            {{-- <h2> Los pagos se habilitarán próximamente </h2> --}}
-                            {{-- @php $stat = false; @endphp
-                            @if ($stat) --}}
+                            <h2> Los pagos se habilitarán próximamente </h2>
+                            @php $stat = false; @endphp
+                            @if ($stat)
                                 <div>
                                     <label>Selecciona el programa que deseas cursar</label><br>
                                     <select class="input" name="carrera">
@@ -106,7 +106,7 @@
                                 
                                 <p class="small">Una vez que envíes tus datos, recibirás un correo electrónico de bienvenida con instrucciones para empezar a estudiar.</p>
                                 <p class="small">Si tienes alguna duda, por favor comunícate con nosotros a <a href="mailto:maptveduca.info@gmail.com">maptveduca.info@gmail.com</a></p>
-                            {{-- @endif --}}
+                            @endif
 
                              @if (session()->has("error"))
                                 <div class="error" style="color: red; margin-top: 20px;">

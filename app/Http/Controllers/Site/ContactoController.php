@@ -35,7 +35,7 @@ class ContactoController extends Controller
     	$contacto->mensaje 	= $request->mensaje;
     	if ($contacto->save()) {
             DB::commit();
-            $this->MandarEmail($request);
+            //$this->MandarEmail($request);
     		return back()->with("status.newContacto", "success");
     	}
 
@@ -48,6 +48,6 @@ class ContactoController extends Controller
     protected function MandarEmail($request)
     {
         //maptveduca.info@gmail.com
-        return Mail::to("853e9296af-b1cadc@inbox.mailtrap.io")->send(new MensajeContacto($request));
+        return Mail::to("maptveduca.info@gmail.com")->send(new MensajeContacto($request));
     }
 }
