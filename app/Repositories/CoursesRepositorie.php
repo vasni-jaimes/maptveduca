@@ -34,7 +34,10 @@ class CoursesRepositorie
 		if ($course->save()) {
             //TEMARIO DEL CURSO
             $course->slug           = $this->helper->createSlug($request->nombre_curso, $course->id, "maptv");
-            $course->temario        = $this->jsonConverteTemarioCurso($request, $course->id);
+
+            $mytemario              = $this->jsonConverteTemarioCurso($request, $course->id);
+
+            $course->temario        = $mytemario;
 			//SUBIR IMAGEN DEL CURSO
 			$rootImg = $request->file('img_curso')->store('public/cursos/'.$course->id.'/img_principal/');
             $course->url_img = $rootImg;
@@ -84,7 +87,10 @@ class CoursesRepositorie
         if ($course->save()) {
             //TEMARIO DEL CURSO
             $course->slug           = $this->helper->createSlug($request->nombre_curso, $course->id, "maptv");
-            $course->temario        = $this->jsonConverteTemarioCursoUdate($request, $course->id, $course->temario);
+
+            $mytemario              = $this->jsonConverteTemarioCursoUdate($request, $course->id, $course->temario);
+
+            $course->temario        = $mytemario;
             //SUBIR IMAGEN DEL CURSO
             if ( $request->hasFile('img_curso') ) {
                 $this->eliminarImagen($request->img_curso);
