@@ -89,6 +89,10 @@ Route::get('guia-estudio', 'Site\GuiaEstudioController@index')->name('guia-estud
 Route::post('ver-mensaje', 'Site\UsersController@verMensaje')->name('verMensaje');
 Route::post('ver-notificacion', 'Site\UsersController@verNotificacion')->name('verNotificacion');
 
+//CONTACTO
+Route::get('faqs', 'Site\ContactoController@index')->name('faqs');
+Route::post('contacto', 'Site\ContactoController@store')->name('contacto.store');
+
 
 
 
@@ -155,9 +159,9 @@ Route::get('membresia-basica', function() {
 // 	return view('site.guia-estudio');
 // })->name('guia-estudio');
 
-Route::get('faqs', function() {
-	return view('site.faqs');
-})->name('faqs');
+// Route::get('faqs', function() {
+// 	return view('site.faqs');
+// })->name('faqs');
 
 Route::get('recover', function() {
 	return view('site.recover');

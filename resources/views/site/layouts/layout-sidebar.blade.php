@@ -24,7 +24,7 @@
 
     <ul>
         <li style="cursor: pointer; font-weight: bold" class="profesores" data-cat="profesores"> 
-            Profesor (0) 
+            Profesor ({{ $instructores->count() }}) 
         </li>
     </ul>
 

@@ -122,10 +122,18 @@ class CoursesController extends Controller
 
     public function deleteFile(Request $request)
     {
-        if ($request->has('documento')) {
-            if (Storage::delete($request->documento)) {
-                return response()->json(['message' => 'ok'], 200);
+        if ($request->has('documento') && $request->has('slug') 
+            && isset($request->documento) && isset($request->slug) 
+            && $request->has('session') && isset($request->session) && is_numeric($request->session) ) {
+
+            if ($this->eliminarMaterialExtra($request->slug, $request->session, $request->documento)) {
+               if (Storage::delete($request->documento)) {
+                    return response()->json(['message' => 'ok'], 200);
+                }
+
+                return response()->json(['message' => 'no_delete'], 200);
             }
+
             return response()->json(['message' => 'no_delete'], 200);
         }
 
@@ -189,8 +197,24 @@ class CoursesController extends Controller
             $notificacion->user_id = $alumno->id;
             $notificacion->mensaje = "¡Nuevo contenido disponible! <br> Se ha creado un curso nuevo. Para verlo da click aquí: <a href='".route("single-cursos.show", $curso->slug)."' target='_blank'>".$curso->nombre."</a>";
             $notificacion->save();
+        }  
+    }
+
+
+
+    protected function eliminarMaterialExtra($slug, $session, $file)
+    {
+        $curso = Course::where('slug', $slug)->where('status', 1)->first();
+        if ($curso) {
+            $temarios = json_decode($curso->temario, true);
+            $temarios[$session]['material_extra'] = array();
         }
 
-        
+        $curso->temario = $temarios;
+        if ($curso->save()) {
+            return true;
+        }
+
+        return true;
     }
 }

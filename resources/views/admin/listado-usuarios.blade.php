@@ -69,7 +69,8 @@
                                                     
                                                     <div class="btn-group">
                                                       <a href = "#" class="btn-info btn btn-xs mr-3">Ver perfil</a>
-                                                      <a href="#" class="btn-danger btn btn-xs">Eliminar usuario</a>
+                                                      <a href="#" class="btn-danger btn btn-xs mr-3">Eliminar usuario</a>
+                                                      <a href = "#" class="btn-info btn btn-xs mr-3">Editar</a>
                                                       @if ($usuario->status == 1)
                                                           <a href = "#" class="btn-danger btn btn-xs ml-2">Desactivar</a>
                                                         @else

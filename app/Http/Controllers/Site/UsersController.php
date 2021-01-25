@@ -115,6 +115,7 @@ class UsersController extends Controller
         $recomendacionesCompletas = Recomendacion::with(['cursos'])->where('carrera_id', auth()->user()->obtenerCarrera())->get();
         //return $recomendacionesCompletas;
 
+        //return auth()->user()->obtenerCarrera();
 
         /* NOTIFICACIONES */
         $notificaciones = Notificacion::where('user_id', auth()->user()->id)

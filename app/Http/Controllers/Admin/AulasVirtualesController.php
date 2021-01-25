@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\Helper;
+use App\Http\Requests\ValidarPublicacionAulasMaestro;
 use App\Course;
 use App\Publicacion;
 use App\Respuesta;
@@ -54,8 +55,8 @@ class AulasVirtualesController extends Controller
             return back()->with("status.newRespuesta", "error");
         }
 
-        if (!$request->has("publicaciontxt") && !isset($request->publicaciontxt)) {
-            return back()->with("status.newRespuesta", "error");
+        if (!$request->has("publicaciontxt") || !isset($request->publicaciontxt)) {
+            return back()->with("status.newRespuesta.campo", "error");
         }
 
         //OBTENER PUBLICACION CON CURSO
@@ -97,13 +98,9 @@ class AulasVirtualesController extends Controller
     }
 
 
-    public function store(Request $request, $slug_curso)
+    public function store(ValidarPublicacionAulasMaestro $request, $slug_curso)
     {
         if (!isset($slug_curso)) {
-            return back()->with("status.newAula", "error");
-        }
-
-        if (!$request->has("publicaciontxt") && !isset($request->publicaciontxt) && !$request->has("titulo")) {
             return back()->with("status.newAula", "error");
         }
 
@@ -292,7 +289,11 @@ class AulasVirtualesController extends Controller
     public function updateRespuesta(Request $request, $publicacion_id, $respuesta_id)
     {
 
-        if (!isset($publicacion_id) && !isset($respuesta_id)) {
+        if (!isset($publicacion_id) || !isset($respuesta_id)) {
+            return back()->with("status.updateRespuesta", "error");
+        }
+
+        if (!isset($request->publicaciontxt) || !$request->has('publicaciontxt')) {
             return back()->with("status.updateRespuesta", "error");
         }
 

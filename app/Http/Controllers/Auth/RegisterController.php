@@ -74,6 +74,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // return false;
         $usr = User::create([
                     'nombre' => $data['nombre'],
                     'email' => $data['email'],
@@ -98,16 +99,10 @@ class RegisterController extends Controller
         $mensaje->admin_id = 1;
         $mensaje->user_id = $usr->id;
         $mensaje->mensaje = "<strong>Hola ".$usr->nombre." ".$usr->apaterno."</strong>";
-        $mensaje->mensaje .= "<br> ¡Enhorabuena! Bienvenid@ a la familia MAPtv Educa. A partir de ahora, disfruta de todo nuestro contenido de cursos. <br><br>
+        $mensaje->mensaje .= "<br> ¡Bienvenid@ a MAPtv Educa! Navega por nuestra plataforma para descubrir lo que tenemos para ti. Recuerda que para estudiar el Técnico en     Producción Musical a través de nuestros Cursos debes adquirir la Membresía Académica. De otro modo, sólo tendrás acceso a la oferta de Eventos y Clases en Línea.<br><br>
 
-                                Para activar tus cursos, dentro de tu Tablero Personal dirígete al menú “Control Académico” / “Materias” y visita cada uno de los cursos. Dentro de los mismos, da click en “Empezar curso” o navega a través de las sesiones de video.<br><br>
-
-                                Una vez activados tus cursos, dentro de tu Tablero Personal dirígete al menú “Control Académico” / “Aulas Virtuales”. Ahí verás el Aula Virtual de cada una de tus materias. Dentro de cada una tu profesor publicará periódicamente avisos y actividades. En esta sección es donde entregarás tus tareas.<br><br>
-
-                                Para revisar los horarios de las sesiones en Zoom con tus profesores, dentro de tu Tablero Personal dirígete a la sección “Control Académico” / “Materias”. En la parte inferior, da click en cada una de tus materias y se desplegarán los horarios y links a tus sesiones virtuales.<br><br>
-
-                                ¡Disfruta de nuestro contenido! Esperamos tu experiencia sea inigualable.
-                                ";
+            ¡Visita la sección “Membresía Académica” para conocer más!
+";
         $mensaje->save();
     }
 }

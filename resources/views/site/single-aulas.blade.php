@@ -24,9 +24,15 @@
                         <li>
                             <div class="boton-acordeon flex between">
                                 <p>Lección: {{  $publicacion->nombre }}</p>
-                                @if ($publicacion->archivos != null)
-                                <p><a hrfe="#"><img src="/site/img/clip.png"></a><span>{{ $publicacion->created_at }}</span></p>
-                                @endif
+                                
+                                <p>
+                                    @if ($publicacion->archivos != null)
+                                        <a hrfe="#">
+                                            <img src="/site/img/clip.png">
+                                        </a>
+                                    @endif
+                                    <span>{{ $publicacion->created_at }}</span>
+                                </p>
                             </div> <!-- /flex -->
                             <div class="wrapper-acordeon">
 
@@ -57,8 +63,8 @@
                                             <textarea class="mytextarea" name="publicaciontxt"></textarea>
                                             <div class="flex between">
                                                 <div class="btn-archivo flex flex-center">
-                                                    <input type="file" name="upload[]" id="upload" multiple="" class="cargar-cv">
-                                                    <label for="upload"><span>Adjuntar archivos</span></label>
+                                                    <input type="file" name="upload[]" id="uploadpub{{ $publicacion->id }}" multiple="" class="cargar-cv">
+                                                    <label for="uploadpub{{ $publicacion->id }}"><span>Adjuntar archivos</span></label>
                                                     <ul>
                                                         <li class="conteo-archivos" style="display: none;">Archivo 1</li>
                                                     </ul>
@@ -139,7 +145,7 @@
                                                             <textarea class="mytextarea" name="publicaciontxt"> {{ $respuesta->respuesta }} </textarea>
                                                             <div class="flex between">
                                                                 <div class="btn-archivo flex flex-center">
-                                                                    <input type="file" name="upload[]" id="upload{{ $respuesta->id }}" multiple="" class="cargar-cv">
+                                                                    <input type="file" name="upload{{ $respuesta->id }}[]" id="upload{{ $respuesta->id }}" multiple="" class="cargar-cv">
                                                                     <label for="upload{{ $respuesta->id }}"><span>Adjuntar archivos</span></label>
                                                                     <ul>
                                                                         <li class="conteo-archivos" style="display: none;">Archivo 1</li>

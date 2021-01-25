@@ -810,11 +810,14 @@ let funciones = {
 		e.target.disabled = true;
 
 		let token = document.querySelector("input[name='_token']").value,
-			documento = e.target.getAttribute('data-metadata');
+			documento = e.target.getAttribute('data-metadata'),
+			slug = e.target.getAttribute('data-slug'),
+			sesion = e.target.getAttribute('data-sesion');
+
         let opciones = {
             method: "POST",
             credentials: "same-origin",
-            body: JSON.stringify({"documento": documento, "_token": token}),
+            body: JSON.stringify({"documento": documento, "session": sesion, "slug": slug, "_token": token}),
             headers:{
                 "Content-Type": "application/json"
             }

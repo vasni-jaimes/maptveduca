@@ -20,6 +20,7 @@ class CreateAulasRespuestasTable extends Migration
             $table->integer('publicacion_id');
             $table->text('respuesta');
             $table->text('archivos')->nullable();
+            $table->boolean('pendiente')->default(1);
             $table->timestamps();
         });
     }

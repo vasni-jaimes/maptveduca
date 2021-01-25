@@ -473,7 +473,8 @@
                             <div class="row-favoritos">
                                 <p>AQUÍ ENCONTRARÁS TUS CLASES EN LÍNEA PRÓXIMAS Y ADQUIRIDAS</p>
                                 <div class="flex-cursos">
-                                    <p>PRÓXIMAS</p>
+                                     <p> Aún no tienes clases. </p>
+                                    {{-- <p>PRÓXIMAS</p>
                                     <ul class="flex between wrap">
                                         <li class="col-3">
                                             <img src="/site/img/fulano.jpg">
@@ -577,7 +578,7 @@
                                                 <a href="#">Ir a la clase</a>
                                             </div> <!-- /txt-clase -->
                                         </li>
-                                    </ul>
+                                    </ul> --}}
                                 </div>
                             </div> <!-- /row-favoritos -->
                         </div>
@@ -609,33 +610,26 @@
                                     @endif
                                 </div>
                             </div> <!-- /row-favoritos -->
-                            
-                            <div class="row-itinerario">
-                                <p>Itinerario de sesiones en Zoom</p>
-                                <div class="item-itinerario">
-                                    <h4>Materia 1</h4>
-                                    <div class="lista-itinerario">
-                                        <ul>
-                                            <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
-                                            <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
-                                            <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
-                                            <li>Viernes 21 enero · 20:00 hrs | ID Zoom: 123 234 345 |  Link: <a href="#">linkasesiónzoom.com</a></li>
-                                        </ul>
-                                    </div>
-                                </div> <!-- /item-itinerario -->
-                                <div class="item-itinerario">
-                                    <h4>Materia 2</h4>
-                                </div> <!-- /item-itinerario -->
-                                <div class="item-itinerario">
-                                    <h4>Materia 3</h4>
-                                </div> <!-- /item-itinerario -->
-                                <div class="item-itinerario">
-                                    <h4>Materia 4</h4>
-                                </div> <!-- /item-itinerario -->
-                                <div class="item-itinerario">
-                                    <h4>Materia 5</h4>
-                                </div> <!-- /item-itinerario -->
-                            </div> <!-- /row-itinerario -->
+                                
+                            @if ($materias->count() > 0)
+                                @if ($helper->contarTextoAltern($materias))
+                                    <div class="row-itinerario">
+                                        <p>Itinerario de sesiones en Zoom</p>
+                                        @foreach($materias as $materia)
+                                            <div class="item-itinerario">
+                                                <h4>{{ $materia->cursos->nombre }}</h4>
+                                                <div class="lista-itinerario">
+                                                    <ul>
+                                                        <li>
+                                                            {!! $helper->obtenerTextoAlternativo($materia->cursos->id) !!}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div> <!-- /item-itinerario -->
+                                        @endforeach
+                                    </div> <!-- /row-itinerario -->
+                                @endif
+                            @endif
                             
                         </div>
                         
@@ -647,9 +641,9 @@
                                         <h4>Información del alumno</h4>
                                         <p>ALUMNO: {{ auth()->user()->nombre. " ".auth()->user()->apaterno. " ".auth()->user()->amaterno }}</p>
                                         <ul>
-                                            <li>Programa académico: Técnico Profesional en Producción Musical</li>
-                                            <li>Inscrito desde: Octubre 2020 (cuarto trimestre 2020)</li>
-                                            <li>Activo desde: Junio 2020</li>
+                                            <li>Programa académico: {{ auth()->user()->obtenerCarrera() == 1 ? "Tecnico en produccion musical" : "Profesional en produccion musical" }} </li>
+                                            <li>Inscrito desde: {{ $helper->formatoFechaStatus(auth()->user()->primeraSuscripcion()->created_at) }} </li>
+                                            <li>Activo desde: {{ $helper->formatoFechaStatus(auth()->user()->created_at) }}</li>
                                         </ul>
                                     </div> <!-- /item-perfil -->
                                     <div class="item-perfil">

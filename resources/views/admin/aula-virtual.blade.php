@@ -256,7 +256,9 @@
                                             <div class="media-body">
                                                 <form action="{{ route('aula-publicidad.update', $publicacion->id) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                                                     @csrf
-                                                    <textarea name="publicaciontxt" class="form-control" placeholder="editar publicacion">{{ $publicacion->publicacion }}</textarea><br>
+                                                    <textarea name="publicaciontxt" class="form-control" placeholder="editar publicacion">{{ $publicacion->publicacion }}</textarea>
+
+                                                    <br>
                                                     <input type="file" name="archivos_aula[]" multiple=""><br><br>
                                                     <button class="btn btn-white btn-sm cancelar-edicion" type="submit">Cancelar</button>
                                                     <button class="btn btn-primary btn-sm editarp" type="submit">Editar Publicacion</button>
@@ -343,7 +345,8 @@
                                                             <div class="media-body">
                                                                 <form action="{{ route('aula-respuesta.update', [$publicacion->id,$respuesta->id]) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                                                                     @csrf
-                                                                    <textarea name="publicaciontxt" class="form-control" placeholder="publicacion">{{ $respuesta->respuesta }}</textarea><br>
+                                                                    <textarea name="publicaciontxt" class="form-control" placeholder="publicacion">{{ $respuesta->respuesta }}</textarea>
+                                                                    <br>
                                                                     <input type="file" name="archivos_aula[]" multiple=""><br><br>
                                                                     <button class="btn btn-white btn-sm cancelar-edicion" type="submit">Cancelar</button>
                                                                     <button class="btn btn-primary btn-sm editarr" type="submit">Editar Respuesta</button>
@@ -362,7 +365,9 @@
                                                 <div class="media-body">
                                                     <form action="{{ route('aula-virtual-respuesta.store', $publicacion->id) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                                                         @csrf
-                                                        <textarea name="publicaciontxt" class="form-control" placeholder="publicacion"></textarea><br>
+                                                        <textarea name="publicaciontxt" class="form-control" placeholder="publicacion"></textarea>
+                                                        {!! session()->has("status.newRespuesta.campo") == true ? "<span class='form-text m-b-none errors'>El campo es requerido</span> <br>" : "" !!}
+                                                        <br>
                                                         <input type="file" name="archivos_aula[]" multiple=""><br><br>
                                                         <button class="btn btn-primary btn-sm" type="submit">Publicar</button>
                                                     </form>
@@ -388,11 +393,12 @@
                             @csrf
                             <div class="form-group row">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" placeholder="titulo de la publicacion" name="titulo" value="{{ old("nombre_evento") }}"> 
+                                    <input type="text" class="form-control" placeholder="titulo de la publicacion" name="titulo" value="{{ old("titulo") }}"> 
                                     <span class='form-text m-b-none errors'> {!! $errors->first('titulo') !!} </span>
                                 </div>
                             </div>
-                            <textarea name="publicaciontxt" class="form-control" placeholder="publicacion"></textarea><br>
+                            <textarea name="publicaciontxt" class="form-control" placeholder="publicacion"></textarea>
+                            <span class='form-text m-b-none errors'> {!! $errors->first('publicaciontxt') !!} </span><br>
                             <input type="file" name="archivos_aula[]" multiple=""><br><br>
                             <button class="btn btn-primary btn-sm" type="submit">Publicar</button>
                         </form>

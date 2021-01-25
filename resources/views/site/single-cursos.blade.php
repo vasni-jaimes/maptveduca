@@ -28,15 +28,15 @@
                                 @foreach($temario as $ctemario)
                                     <li class="active" data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug."/0" }}">
                                         
-                                        {!! $ctemario->slug ==  $clase['slug'] ? "<span style='font-weight: bold;'>".$ctemario->nombre_video."</span>" : $ctemario->nombre_video !!}
+                                        {!! $ctemario->slug ==  $clase['slug'] ? "<span data-url='/single-cursos/".$curso->slug."/".$ctemario->slug."/0' style='font-weight: bold;'>".$ctemario->nombre_video."</span>" : $ctemario->nombre_video !!}
 
-                                        @if (count($ctemario->url_video) > 1)
+                                        @if (count($ctemario->url_video) > 0)
                                             <ul>
                                                 @for($i = 0; $i <= count($ctemario->url_video) - 1; $i++)
                                                     <li class="active" data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug."/".$i }}"> 
                                                         @if ($ctemario->slug ==  $clase['slug'] && $subclase_id == $i)
                                                             @php $nombre_url = $ctemario->nombre_video_url[$i] @endphp
-                                                            <span style="font-weight: bold;">{{ $ctemario->nombre_video_url[$i] }}</span>
+                                                            <span data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug."/".$i }}" style="font-weight: bold;">{{ $ctemario->nombre_video_url[$i] }}</span>
                                                         @else
                                                             {{ $ctemario->nombre_video_url[$i] }}
                                                         @endif

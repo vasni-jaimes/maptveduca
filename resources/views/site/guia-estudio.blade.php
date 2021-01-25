@@ -104,182 +104,339 @@
                 <div class="titulo-cursos">
                     <h2>Producción musical</h2>
                 </div> <!-- /titulo-cursos -->
+
+
+                @if ($recomendaciones->where('trimestre', 1)->count() > 0)
                 
-                <h3>Primer grupo de cursos</h3>
+                    <h3>Primer grupo de cursos</h3>
 
-                <div class="row-slide">
+                    <div class="row-slide">
 
-                    <ul class="slide-cursos">
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                    </ul> <!-- /slide-cursos -->
+                        <ul class="slide-cursos">
+                            @foreach($recomendaciones->where('trimestre', 1) as $recomendacion)
+                                <li>
+                                    <a href="{{ route('single-cursos.show', $recomendacion->cursos->slug) }}">
+                                        <div class="img-slide" style="background-image: url({{ Storage::url($recomendacion->cursos->url_img) }});"></div>
+                                    </a> <!-- /img-slide -->
+                                </li>
+                            @endforeach
+                        </ul> <!-- /slide-cursos -->
 
-                    <div class="row-extra flex between">
-                        <span>Cursos <br> extra ></span>
+                         @if ($recomendacionesextra->where('trimestre', 1)->count() > 0)
 
-                        <ul class="slide-extra">
-                            <li>
-                                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                            </li>
-                            <li>
-                                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                            </li>
-                        </ul> <!-- /slide-extra -->
+                            <div class="row-extra flex between">
+                                <span>Cursos <br> extra ></span>
 
-                    </div> <!-- /row-extra -->
+                                <ul class="slide-extra">
+                                    @foreach($recomendacionesextra->where('trimestre', 1) as $recomendacionextra)
+                                        <li>
+                                            <a href="{{ route('single-cursos.show', $recomendacionextra->cursos->slug) }}">
+                                                <div class="img-slide" style="background-image: url({{ Storage::url($recomendacionextra->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul> <!-- /slide-extra -->
 
-                </div> <!-- /row-slide -->
+                            </div> <!-- /row-extra -->
+
+                        @endif
+
+                    </div> <!-- /row-slide -->
+
+                @endif
+
+
+
+
+                @if ($recomendaciones->where('trimestre', 2)->count() > 0)
                 
-                <h3>Segundo grupo de cursos</h3>
+                    <h3>Segundo grupo de cursos</h3>
 
-                <div class="row-slide">
+                    <div class="row-slide">
 
-                    <ul class="slide-cursos">
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                    </ul> <!-- /slide-cursos -->
+                        <ul class="slide-cursos">
+                            @foreach($recomendaciones->where('trimestre', 2) as $recomendacion)
+                                <li>
+                                    <a href="{{ route('single-cursos.show', $recomendacion->cursos->slug) }}">
+                                        <div class="img-slide" style="background-image: url({{ Storage::url($recomendacion->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul> <!-- /slide-cursos -->
 
-                    <div class="row-extra flex between">
-                        <span>Cursos <br> extra ></span>
+                         @if ($recomendacionesextra->where('trimestre', 2)->count() > 0)
 
-                        <ul class="slide-extra">
-                            <li>
-                                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                            </li>
-                            <li>
-                                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                            </li>
-                        </ul> <!-- /slide-extra -->
+                            <div class="row-extra flex between">
+                                <span>Cursos <br> extra ></span>
 
-                    </div> <!-- /row-extra -->
+                                <ul class="slide-extra">
+                                    @foreach($recomendacionesextra->where('trimestre', 2) as $recomendacionextra)
+                                        <li>
+                                            <a href="{{ route('single-cursos.show', $recomendacionextra->cursos->slug) }}">
+                                                <div class="img-slide" style="background-image: url({{ Storage::url($recomendacionextra->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul> <!-- /slide-extra -->
 
-                </div> <!-- /row-slide -->
+                            </div> <!-- /row-extra -->
+
+                        @endif
+
+                    </div> <!-- /row-slide -->
+
+                @endif
+
+
+
+                @if ($recomendaciones->where('trimestre', 3)->count() > 0)
                 
-                <h3>Tercer grupo de cursos</h3>
+                    <h3>Tercer grupo de cursos</h3>
 
-                <div class="row-slide">
+                    <div class="row-slide">
 
-                    <ul class="slide-cursos">
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                    </ul> <!-- /slide-cursos -->
+                        <ul class="slide-cursos">
+                            @foreach($recomendaciones->where('trimestre', 3) as $recomendacion)
+                                <li>
+                                    <a href="{{ route('single-cursos.show', $recomendacion->cursos->slug) }}">
+                                        <div class="img-slide" style="background-image: url({{ Storage::url($recomendacion->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul> <!-- /slide-cursos -->
 
-                    <div class="row-extra flex between">
-                        <span>Cursos <br> extra ></span>
+                         @if ($recomendacionesextra->where('trimestre', 3)->count() > 0)
 
-                        <ul class="slide-extra">
-                            <li>
-                                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                            </li>
-                            <li>
-                                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                            </li>
-                        </ul> <!-- /slide-extra -->
+                            <div class="row-extra flex between">
+                                <span>Cursos <br> extra ></span>
 
-                    </div> <!-- /row-extra -->
+                                <ul class="slide-extra">
+                                    @foreach($recomendacionesextra->where('trimestre', 3) as $recomendacionextra)
+                                        <a href="{{ route('single-cursos.show', $recomendacionextra->cursos->slug) }}">
+                                            <div class="img-slide" style="background-image: url({{ Storage::url($recomendacionextra->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                        </a>
+                                    @endforeach
+                                </ul> <!-- /slide-extra -->
 
-                </div> <!-- /row-slide -->
+                            </div> <!-- /row-extra -->
+
+                        @endif
+
+                    </div> <!-- /row-slide -->
+
+                @endif
+
+
+
+
+                @if ($recomendaciones->where('trimestre', 4)->count() > 0)
                 
-                <h3>Cuarto grupo de cursos</h3>
+                    <h3>Cuarto grupo de cursos</h3>
 
-                <div class="row-slide">
+                    <div class="row-slide">
 
-                    <ul class="slide-cursos">
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                        <li>
-                            <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                        </li>
-                    </ul> <!-- /slide-cursos -->
+                        <ul class="slide-cursos">
+                            @foreach($recomendaciones->where('trimestre', 4) as $recomendacion)
+                                <li>
+                                    <a href="{{ route('single-cursos.show', $recomendacion->cursos->slug) }}">
+                                        <div class="img-slide" style="background-image: url({{ Storage::url($recomendacion->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul> <!-- /slide-cursos -->
 
-                    <div class="row-extra flex between">
-                        <span>Cursos <br> extra ></span>
+                         @if ($recomendacionesextra->where('trimestre', 4)->count() > 0)
 
-                        <ul class="slide-extra">
-                            <li>
-                                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                            </li>
-                            <li>
-                                <div class="img-slide" style="background-image: url('/site/img/fulano.jpg');"></div> <!-- /img-slide -->
-                            </li>
-                        </ul> <!-- /slide-extra -->
+                            <div class="row-extra flex between">
+                                <span>Cursos <br> extra ></span>
 
-                    </div> <!-- /row-extra -->
+                                <ul class="slide-extra">
+                                    @foreach($recomendacionesextra->where('trimestre', 4) as $recomendacionextra)
+                                        <li>
+                                            <a href="{{ route('single-cursos.show', $recomendacionextra->cursos->slug) }}">
+                                                <div class="img-slide" style="background-image: url({{ Storage::url($recomendacionextra->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul> <!-- /slide-extra -->
 
-                </div> <!-- /row-slide -->
+                            </div> <!-- /row-extra -->
+
+                        @endif
+
+                    </div> <!-- /row-slide -->
+
+                @endif
+
+
+
+
+                @if ($recomendaciones->where('trimestre', 5)->count() > 0)
+                
+                    <h3>Quinto grupo de cursos</h3>
+
+                    <div class="row-slide">
+
+                        <ul class="slide-cursos">
+                            @foreach($recomendaciones->where('trimestre', 5) as $recomendacion)
+                                <li>
+                                    <a href="{{ route('single-cursos.show', $recomendacion->cursos->slug) }}">
+                                        <div class="img-slide" style="background-image: url({{ Storage::url($recomendacion->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul> <!-- /slide-cursos -->
+
+                         @if ($recomendacionesextra->where('trimestre', 5)->count() > 0)
+
+                            <div class="row-extra flex between">
+                                <span>Cursos <br> extra ></span>
+
+                                <ul class="slide-extra">
+                                    @foreach($recomendacionesextra->where('trimestre', 5) as $recomendacionextra)
+                                        <li>
+                                            <a href="{{ route('single-cursos.show', $recomendacionextra->cursos->slug) }}">
+                                                <div class="img-slide" style="background-image: url({{ Storage::url($recomendacionextra->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul> <!-- /slide-extra -->
+
+                            </div> <!-- /row-extra -->
+
+                        @endif
+
+                    </div> <!-- /row-slide -->
+
+                @endif
+
+
+
+
+                @if ($recomendaciones->where('trimestre', 6)->count() > 0)
+                
+                    <h3>Sexto grupo de cursos</h3>
+
+                    <div class="row-slide">
+
+                        <ul class="slide-cursos">
+                            @foreach($recomendaciones->where('trimestre', 6) as $recomendacion)
+                                <li>
+                                    <a href="{{ route('single-cursos.show', $recomendacion->cursos->slug) }}">
+                                        <div class="img-slide" style="background-image: url({{ Storage::url($recomendacion->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul> <!-- /slide-cursos -->
+
+                         @if ($recomendacionesextra->where('trimestre', 6)->count() > 0)
+
+                            <div class="row-extra flex between">
+                                <span>Cursos <br> extra ></span>
+
+                                <ul class="slide-extra">
+                                    @foreach($recomendacionesextra->where('trimestre', 6) as $recomendacionextra)
+                                        <li>
+                                            <a href="{{ route('single-cursos.show', $recomendacionextra->cursos->slug) }}">
+                                                <div class="img-slide" style="background-image: url({{ Storage::url($recomendacionextra->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul> <!-- /slide-extra -->
+
+                            </div> <!-- /row-extra -->
+
+                        @endif
+
+                    </div> <!-- /row-slide -->
+
+                @endif
+
+
+
+
+                @if ($recomendaciones->where('trimestre', 7)->count() > 0)
+                
+                    <h3>Septimo grupo de cursos</h3>
+
+                    <div class="row-slide">
+
+                        <ul class="slide-cursos">
+                            @foreach($recomendaciones->where('trimestre', 7) as $recomendacion)
+                                <li>
+                                    <a href="{{ route('single-cursos.show', $recomendacion->cursos->slug) }}">
+                                        <div class="img-slide" style="background-image: url({{ Storage::url($recomendacion->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul> <!-- /slide-cursos -->
+
+                         @if ($recomendacionesextra->where('trimestre', 7)->count() > 0)
+
+                            <div class="row-extra flex between">
+                                <span>Cursos <br> extra ></span>
+
+                                <ul class="slide-extra">
+                                    @foreach($recomendacionesextra->where('trimestre', 7) as $recomendacionextra)
+                                        <li>
+                                            <a href="{{ route('single-cursos.show', $recomendacionextra->cursos->slug) }}">
+                                                <div class="img-slide" style="background-image: url({{ Storage::url($recomendacionextra->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul> <!-- /slide-extra -->
+
+                            </div> <!-- /row-extra -->
+
+                        @endif
+
+                    </div> <!-- /row-slide -->
+
+                @endif
+
+
+
+
+                @if ($recomendaciones->where('trimestre', 8)->count() > 0)
+                
+                    <h3>Octavo grupo de cursos</h3>
+
+                    <div class="row-slide">
+
+                        <ul class="slide-cursos">
+                            @foreach($recomendaciones->where('trimestre', 8) as $recomendacion)
+                                <li>
+                                    <a href="{{ route('single-cursos.show', $recomendacion->cursos->slug) }}">
+                                        <div class="img-slide" style="background-image: url({{ Storage::url($recomendacion->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul> <!-- /slide-cursos -->
+
+                         @if ($recomendacionesextra->where('trimestre', 8)->count() > 0)
+
+                            <div class="row-extra flex between">
+                                <span>Cursos <br> extra ></span>
+
+                                <ul class="slide-extra">
+                                    @foreach($recomendacionesextra->where('trimestre', 8) as $recomendacionextra)
+                                        <li>
+                                            <a href="{{ route('single-cursos.show', $recomendacionextra->cursos->slug) }}">
+                                                <div class="img-slide" style="background-image: url({{ Storage::url($recomendacionextra->cursos->url_img) }});"></div> <!-- /img-slide -->
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul> <!-- /slide-extra -->
+
+                            </div> <!-- /row-extra -->
+
+                        @endif
+
+                    </div> <!-- /row-slide -->
+
+                @endif
+
+
 
             </div> <!-- /bg-yellow -->
 

@@ -1178,12 +1178,16 @@ var funciones = {
     e.preventDefault();
     e.target.disabled = true;
     var token = document.querySelector("input[name='_token']").value,
-        documento = e.target.getAttribute('data-metadata');
+        documento = e.target.getAttribute('data-metadata'),
+        slug = e.target.getAttribute('data-slug'),
+        sesion = e.target.getAttribute('data-sesion');
     var opciones = {
       method: "POST",
       credentials: "same-origin",
       body: JSON.stringify({
         "documento": documento,
+        "session": sesion,
+        "slug": slug,
         "_token": token
       }),
       headers: {

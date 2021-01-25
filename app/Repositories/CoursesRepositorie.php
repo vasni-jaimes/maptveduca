@@ -34,7 +34,10 @@ class CoursesRepositorie
 		if ($course->save()) {
             //TEMARIO DEL CURSO
             $course->slug           = $this->helper->createSlug($request->nombre_curso, $course->id, "maptv");
-            $course->temario        = $this->jsonConverteTemarioCurso($request, $course->id);
+
+            $mytemario              = $this->jsonConverteTemarioCurso($request, $course->id);
+
+            $course->temario        = $mytemario;
 			//SUBIR IMAGEN DEL CURSO
 			$rootImg = $request->file('img_curso')->store('public/cursos/'.$course->id.'/img_principal/');
             $course->url_img = $rootImg;
@@ -84,7 +87,10 @@ class CoursesRepositorie
         if ($course->save()) {
             //TEMARIO DEL CURSO
             $course->slug           = $this->helper->createSlug($request->nombre_curso, $course->id, "maptv");
-            $course->temario        = $this->jsonConverteTemarioCurso($request, $course->id);
+
+            $mytemario              = $this->jsonConverteTemarioCursoUdate($request, $course->id, $course->temario);
+
+            $course->temario        = $mytemario;
             //SUBIR IMAGEN DEL CURSO
             if ( $request->hasFile('img_curso') ) {
                 $this->eliminarImagen($request->img_curso);
@@ -149,6 +155,46 @@ class CoursesRepositorie
             DB::rollback();
             return back()->withInput()->with("status.updateCurso", "error");
         }
+    }
+
+
+    protected function jsonConverteTemarioCursoUdate($request, $course_id, $temario)
+    {
+        //GENERANDO JSON PARA GUARDAR TEMARIO EN BASE DE DATOS
+        $temario_curso  = Array();
+        $material_extra = Array();
+        $arrayTeam      = json_decode($temario, true);
+
+
+        for ($i=0; $i <= count($request->nombre_video) - 1; $i++) { 
+            $material_extra = Array();
+            if (isset($request->material_extra[$i])) {
+
+                for ($j=0; $j <= count($request->material_extra[$i]) - 1; $j++) { 
+
+                    if (count($arrayTeam[$i]['material_extra']) > 0) {
+                        $this->eliminarImagen($arrayTeam[$i]['material_extra'][0]);
+                    }
+
+                    $request->file('material_extra')[$i][$j]->store('public/cursos/'.$course_id.'/material_extra/'.$i.'/');
+                    $rootMaterial = $request->file('material_extra')[$i][$j]->store('public/cursos/'.$course_id.'/material_extra/'.$i.'/');
+                    $material_extra[$j] = $rootMaterial;
+                }
+            }
+            else {
+                $material_extra = $arrayTeam[$i]['material_extra'];
+            }
+
+
+            $temario_curso[$i] = array("nombre_video" => $request->nombre_video[$i], 
+                                        "slug" => $this->helper->createSlug($request->nombre_video[$i], $i, "maptv"),
+                                        "url_video" => $request->video_url[$i], 
+                                        "nombre_video_url" => $request->nombre_video_url[$i],
+                                        "material_extra" => $material_extra,
+                                        "descripcion_curso" => str_replace(PHP_EOL, '<br />', $request->descripcion_curso[$i]) );
+        }
+
+        return json_encode($temario_curso);
     }
 
 
@@ -276,4 +322,5 @@ class CoursesRepositorie
     {
         return \Storage::delete($file);
     }
+
 }

@@ -3,6 +3,7 @@
 
 namespace App\Helpers;
 use Carbon\Carbon;
+use App\TextoAlternativo;
 use DB;
 
 class Helper
@@ -123,5 +124,40 @@ class Helper
         $mes2    = $meses[($fecha2->format('n')) - 1];
 
         return $mes1." - ".$mes2." ".$fecha1->format('Y');
+    }
+
+
+    public function obtenerTextoAlternativo($curso_id)
+    {
+        $texto = TextoAlternativo::where('curso_id', $curso_id)->first();
+        if ($texto) {
+            return $texto->texto;
+        }
+
+        return false;
+    }
+
+
+    public function contarTextoAltern($materias)
+    {
+        $status = false;
+        foreach ($materias as $materia) {
+            if ( $this->obtenerTextoAlternativo($materia->cursos->id) ) {
+                $status = true;
+            }
+        }
+
+        return $status;
+    }
+
+
+    public function formatoFechaStatus($fecha)
+    {
+        $meses  = array("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
+        $fecha1  = Carbon::parse($fecha);
+        $mes1    = $meses[($fecha1->format('n')) - 1];
+
+
+        return $mes1." ".$fecha1->format('Y');
     }
 }

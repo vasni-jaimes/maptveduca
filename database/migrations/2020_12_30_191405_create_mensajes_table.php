@@ -17,6 +17,7 @@ class CreateMensajesTable extends Migration
             $table->id();
             $table->integer('admin_id');
             $table->integer('user_id');
+            $table->boolean('envia')->default(1);
             $table->text('mensaje');
             $table->boolean('pendiente')->default(1);
             $table->timestamps();
