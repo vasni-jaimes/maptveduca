@@ -34,8 +34,6 @@ $(document).ready(function(){
         {
           breakpoint: 480,
           settings: {
-            dots: true,
-            arrows: false,
             slidesToShow: 1
           }
         }
@@ -58,6 +56,7 @@ $(document).ready(function(){
           settings: {
             dots: true,
             arrows: false,
+            centerMode: true,
             slidesToShow: 1
           }
         }
@@ -269,6 +268,26 @@ $(document).ready(function(){
     
     $('.close-shadow').click(function(){
         $('.shadow-favorito').fadeOut(300); 
+    });
+    
+    $('.flex-lista').slick({
+      dots: true,
+      arrows: false,
+      slidesToShow: 3,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 2
+          }
+        },
+        {
+          breakpoint: 525,
+          settings: {
+            slidesToShow: 1
+          }
+        }
+      ]
     });
     
 });

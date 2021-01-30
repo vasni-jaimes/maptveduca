@@ -123,14 +123,14 @@
                     </div> <!-- /row-maptv -->
 
                     <ul class="flex flex-lista">
-                        <li>
+                        <li class="i-lista">
                             <img src="/site/img/ico-play.png">
                             <h3>Cursos</h3>
                             <div>
                                 <p>Los cursos se componen de varias sesiones de video que te guiarán a través de un tema o área específicos: producción musical, música teórica y teórico-práctica, y negocios de la música.</p>
                             </div>
                         </li>
-                        <li>
+                        <li class="i-lista">
                             <img src="/site/img/ico-compu.png">
                             <h3>Clases en línea</h3>
                             <div>
@@ -138,7 +138,7 @@
                                 <p>Las clases en línea tienen un costo adicional.</p>
                             </div>
                         </li>
-                        <li>
+                        <li class="i-lista">
                             <img src="/site/img/ico-eventos.png">
                             <h3>Eventos</h3>
                             <div>
@@ -149,20 +149,7 @@
                     
                     <div class="row-contenido">
                         <h2>PUEDES ACCEDER AL CONTENIDO DE DOS FORMAS:</h2>
-                        <ul class="flex">
-                            <li>
-                                <img src="/site/img/ico-clasica.png">
-                                <h3>Membresía Básica</h3>
-                                <div>
-                                    <p><strong>¡PRÓXIMAMENTE!</strong></p>
-                                    <p>Esta membresía te permite tomar los cursos que quieras, a tu ritmo.</p>
-                                    <p>También te da acceso a los eventos básicos, que incluyen clínicas y conciertos/masterclass.</p>
-                                    <p>Te da acceso a una guía de estudio para que sepas cómo aprovechar al máximo nuestro contenido.</p>
-                                    <p>Los cursos que completes bajo esta modalidad no tienen validez académica.</p>
-                                    <span class="precio">Esta membresía estará <br> disponible muy pronto</span>
-                                    <!--<span class="gratis">Pruébala gratis por 30 días</span>-->
-                                </div>
-                            </li>
+                        <ul class="flex reverse">
                             <li>
                                 <img src="/site/img/ico-academica.png">
                                 <h3>Membresía Académica</h3>
@@ -179,6 +166,19 @@
                                     <p>Esta membresía también te da acceso todos los cursos de MAPtv Educa, aunque no pertenezcan a tu plan de estudios, además de a los eventos básicos, que incluyen clínicas y conciertos/masterclass.</p>
                                     <p>Inicio de cursos: Enero 2021</p>
                                     <a class="btn-amarillo" href="{{ route("membresias.index") }}">¡Me interesa!</a>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="/site/img/ico-clasica.png">
+                                <h3>Membresía Básica</h3>
+                                <div>
+                                    <p><strong>¡PRÓXIMAMENTE!</strong></p>
+                                    <p>Esta membresía te permite tomar los cursos que quieras, a tu ritmo.</p>
+                                    <p>También te da acceso a los eventos básicos, que incluyen clínicas y conciertos/masterclass.</p>
+                                    <p>Te da acceso a una guía de estudio para que sepas cómo aprovechar al máximo nuestro contenido.</p>
+                                    <p>Los cursos que completes bajo esta modalidad no tienen validez académica.</p>
+                                    <span class="precio">Esta membresía estará <br> disponible muy pronto</span>
+                                    <!--<span class="gratis">Pruébala gratis por 30 días</span>-->
                                 </div>
                             </li>
                         </ul>
