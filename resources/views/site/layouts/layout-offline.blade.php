@@ -54,7 +54,7 @@
                     </div> <!-- /flex -->
                     <div class="row-copyright">
                         <div class="flex between">
-                            <p>2020  MAPtv Educa. Todos los derechos reservados</p>
+                            <p><?= date('Y'); ?> MAPtv Educa. Todos los derechos reservados</p>
                             <ul class="flex">
                                 <li><a href="{{ route("privacidad") }}" target="_blank">Aviso de Privacidad</a></li>
                                 <li>/</li>

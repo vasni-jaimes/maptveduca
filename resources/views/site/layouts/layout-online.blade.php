@@ -172,7 +172,7 @@
                     </div> <!-- /flex -->
                     <div class="row-copyright">
                         <div class="flex between">
-                            <p>2020  MAPtv Educa. Todos los derechos reservados</p>
+                            <p><?= date('Y'); ?> MAPtv Educa. Todos los derechos reservados</p>
                             <ul class="flex">
                                 <li><a href="{{ route("privacidad") }}" target="_blank">Aviso de Privacidad</a></li>
                                 <li>/</li>
@@ -187,13 +187,13 @@
 
 		<nav id="menu">
 		    <ul class="flex between menu">
-		        <li><a href="#">Inicio</a></li>
-		        <li><a href="#">Cursos</a></li>
-		        <li><a href="#">Membresías</a></li>
-		        <li><a href="#">Clases en línea</a></li>
-		        <li><a href="#">Eventos</a></li>
-		        <li><a href="#">Nosotros</a></li>
-		        <li><a href="#">FAQ/Contacto</a></li>
+		        <li><a href="{{ route("home") }}">Inicio</a></li>
+		        <li><a href="{{ route("cursos") }}">Cursos</a></li>
+		        <li><a href="{{ route("membresias.index") }}">Membresías</a></li>
+		        <li><a href="{{ route("clases-linea.index") }}">Clases en línea</a></li>
+		        <li><a href="{{ route("eventos.index") }}">Eventos</a></li>
+		        <li><a href="{{ route("nosotros.index") }}">Nosotros</a></li>
+		        <li><a href="{{ route("faqs") }}">FAQ/Contacto</a></li>
 		    </ul>
 		</nav>
 

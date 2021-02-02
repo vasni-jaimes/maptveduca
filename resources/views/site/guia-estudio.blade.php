@@ -45,7 +45,7 @@
             </div> <!-- /wrapper-columnas -->
             
             <ul class="flex flex-lista">
-                <li>
+                <li class="i-lista">
                     <img src="/site/img/consejo1.png">
                     <h3>Consejo 1</h3>
                     <div>
@@ -53,7 +53,7 @@
                         <p>Cada semestre, revisa los horarios de sesiones virtuales para cada materia y tenlos a la mano. ¡No lo olvides!</p>
                     </div>
                 </li>
-                <li>
+                <li class="i-lista">
                     <img src="/site/img/consejo2.png">
                     <h3>Consejo 2</h3>
                     <div>
@@ -61,7 +61,7 @@
                         <p>Reserva un espacio especial para tomar tus clases y trabajar. ¡Mantenlo agradable y motivador!</p>
                     </div>
                 </li>
-                <li>
+                <li class="i-lista">
                     <img src="/site/img/consejo3.png">
                     <h3>Consejo 3</h3>
                     <div>
