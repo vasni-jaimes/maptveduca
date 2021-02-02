@@ -188,6 +188,21 @@
 
 
 
+        <!-- MENSAJES DE SUCCES PERO CON ARCHIVOS QUE NO SE PUEDEN ALMACENAR -->
+    @if (session()->has("status.fileExist"))
+        <div class="row justify-content-center">
+            <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
+                Se Actualizo correctamente, pero los siguientes archivos no se pudieron subir por que ya existen archivos con el mismo nombre <br>  [ <span style="color: red;"> {{ session()->get("status.fileExist") }} </span> ]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    @endif
+
+
+
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -276,7 +291,9 @@
                                                     @endphp
 
                                                     @for($i = 0; $i <= count($archivos) - 1; $i++)
-                                                        <li> <a href="{{ route('down.publicacion', [$curso->slug,$publicacion->id,$i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a> </li>
+                                                        <li> <a href="{{ route('down.publicacion', [$curso->slug,$publicacion->id,$i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a>
+                                                            <span class="delete-filex" data-pub="{{ $publicacion->id }}" data-file="{{ $i }}">X</span>
+                                                        </li>
                                                     @endfor
                                                 </ul>
                                             </div>
@@ -332,7 +349,11 @@
                                                                 @endphp
 
                                                                 @for($i = 0; $i <= count($archivos) - 1; $i++)
-                                                                    <li> <a href="{{ route('down.downloadFileResp', [$curso->slug,$publicacion->id,$respuesta->id,$i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a> </li>
+                                                                    <li> <a href="{{ route('down.downloadFileResp', [$curso->slug,$publicacion->id,$respuesta->id,$i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a>
+                                                                         @if ($respuesta->instructor_id == Auth::guard('admins')->user()->instructor_id)
+                                                                            <span class="delete-resp_filex" data-rsp="{{ $respuesta->id }}" data-file="{{ $i }}">X</span>
+                                                                        @endif
+                                                                    </li>
                                                                 @endfor
                                                             </ul>
                                                         </div>
@@ -454,6 +475,7 @@
             });
        });
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/admini/js/app.js"></script>
 
 @stop

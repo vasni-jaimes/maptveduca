@@ -95,6 +95,46 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  eliminarArchivoAulas: function eliminarArchivoAulas(e) {
+    e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
+    var rsp = e.target.getAttribute('data-rsp');
+    var file = e.target.getAttribute('data-file');
+    var token = document.querySelector("input[name='_token']").value;
+    var opciones = {
+      method: "POST",
+      credentials: "same-origin",
+      body: JSON.stringify({
+        "respuesta": rsp,
+        "archivo": file,
+        "_token": token
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    fetch('/eliminar-archivo', opciones).then(function (response) {
+      return response.json();
+    }).then(function (res) {
+      if (res.message == 'ok') {
+        document.querySelector('#shadow-confirm_deletefile p').innerHTML = "Se elimino con exito el archivo.";
+        document.querySelector('#loading').style.display = "none";
+        document.querySelector('#shadow-eliminar_archivo').style.display = "none";
+        document.querySelector('#shadow-confirm_deletefile').style.display = "block";
+        document.querySelector('span[data-rsp="' + rsp + '"][data-file="' + file + '"]').parentElement.remove();
+      } else {
+        document.querySelector('#shadow-confirm_deletefile p').innerHTML = "Ocurrio un error intentalo mas tarde.";
+        document.querySelector('#loading').style.display = "none";
+        document.querySelector('#shadow-eliminar_archivo').style.display = "none";
+        document.querySelector('#shadow-confirm_deletefile').style.display = "block";
+      }
+    })["catch"](function (error) {
+      document.querySelector('#shadow-confirm_deletefile p').innerHTML = "Ocurrio un error intentalo mas tarde.";
+      document.querySelector('#loading').style.display = "none";
+      document.querySelector('#shadow-eliminar_archivo').style.display = "none";
+      document.querySelector('#shadow-confirm_deletefile').style.display = "block";
+    });
+  },
   verNotificacioneseWeb: function verNotificacioneseWeb(e) {
     var notificacion = e.target.getAttribute('data-noti');
 
@@ -196,6 +236,8 @@ var funciones = {
     e.preventDefault();
     var resp = e.target.getAttribute('data-resp');
     document.querySelector('.edit-respuesta[data-resp="' + resp + '"]').style.display = "block";
+    document.querySelector('.respuesta-alumno[data-resp="' + resp + '"]').style.display = "block";
+    document.querySelector('.boton-alumno[data-resp="' + resp + '"]').classList.add('active-acordeon');
     return false;
   },
   editarPerfil: function editarPerfil(e) {

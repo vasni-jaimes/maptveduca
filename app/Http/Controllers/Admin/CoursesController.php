@@ -144,7 +144,6 @@ class CoursesController extends Controller
 
     public function cambiarStatus(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             "id"     => "required|string",
             "status" => "required|numeric"
@@ -163,7 +162,7 @@ class CoursesController extends Controller
 
         DB::beginTransaction(); 
         $curso          = Course::findOrFail($id);
-        $curso->id      = $id;
+        //$curso->id      = $id;
         $curso->status = $status;
 
         if ($curso->save()) {

@@ -25,6 +25,107 @@ class AulasVirtualesController extends Controller
     }
 
 
+    public function eliminarArchivoResp(Request $request)
+    {
+        if (!$request->has('archivo') || !isset($request->archivo)) {
+            return response()->json(['message' => 'error_parameter']);
+        }
+
+        if (!$request->has('respuesta') || !isset($request->respuesta)) {
+            return response()->json(['message' => 'error_parameter']);
+        }
+
+        if (!is_numeric($request->archivo) || !is_numeric($request->respuesta)) {
+           return response()->json(['message' => 'parameter_invalid']);
+        }
+
+        $respuesta = Respuesta::where('id', $request->respuesta)->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
+
+        if ($respuesta) {
+
+            if ($respuesta->archivos != null) {
+                
+                $archivosResp    = json_decode($respuesta->archivos);
+                $nuevoArrayFiles = array();
+                //RECORRER ARRAY DE ARCHIVOS PARA IDENTIFICAR EL QUE SE VA A ELIMINAR
+                for ($i=0; $i <= count($archivosResp) - 1; $i++) {
+                    if ($i == $request->archivo) {
+                        $this->eliminarImagen($archivosResp[$i]);
+                    }
+                    else {
+                        $nuevoArrayFiles[] = $archivosResp[$i];
+                    }
+                }
+
+                $saveArrayFiles = json_encode($nuevoArrayFiles);
+                $respuesta->archivos = $saveArrayFiles;
+
+                if ($respuesta->save()) {
+                     DB::commit();
+                    return response()->json(['message' => 'ok']);
+                }
+            }
+
+            DB::rollback();
+            return response()->json(['message' => 'error']);
+        }
+
+        DB::rollback();
+        return response()->json(['message' => 'error']);
+    }
+
+    public function eliminarArchivo(Request $request)
+    {
+        if (!$request->has('archivo') || !isset($request->archivo)) {
+            return response()->json(['message' => 'error_parameter']);
+        }
+
+        if (!$request->has('publicacion') || !isset($request->publicacion)) {
+            return response()->json(['message' => 'error_parameter']);
+        }
+
+        if (!is_numeric($request->archivo) || !is_numeric($request->publicacion)) {
+           return response()->json(['message' => 'parameter_invalid']);
+        }
+
+        $publicacion = Publicacion::where('id', $request->publicacion)
+                            ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
+
+
+        if ($publicacion) {
+            if ($publicacion->archivos != null) {
+                $archivosResp    = json_decode($publicacion->archivos);
+                $nuevoArrayFiles = array();
+                 //RECORRER ARRAY DE ARCHIVOS PARA IDENTIFICAR EL QUE SE VA A ELIMINAR
+                for ($i=0; $i <= count($archivosResp) - 1; $i++) {
+                    if ($i == $request->archivo) {
+                        $this->eliminarImagen($archivosResp[$i]);
+                    }
+                    else {
+                        $nuevoArrayFiles[] = $archivosResp[$i];
+                    }
+                }
+
+                $saveArrayFiles = json_encode($nuevoArrayFiles);
+                $publicacion->archivos = $saveArrayFiles;
+
+                if ($publicacion->save()) {
+                    DB::commit();
+                    return response()->json(['message' => 'ok']);
+                }
+
+                DB::rollback();
+                return response()->json(['message' => 'error']);
+            }
+
+            DB::rollback();
+            return response()->json(['message' => 'error']);
+        }
+
+
+    }
+
+
     public function index()
     {
     	$helper = $this->helper;
@@ -77,7 +178,7 @@ class AulasVirtualesController extends Controller
                 $archivos = array();
                 for ($i=0; $i <= count($request->archivos_aula) - 1; $i++) { 
                     $rootFile = $request->file('archivos_aula')[$i]
-                                    ->store('public/aulas/'.$publicacion->curso_id.'/'.$publicacion_id.'/respuestas/'.$respuesta->id);
+                                    ->storeAs('public/aulas/'.$publicacion->curso_id.'/'.$publicacion_id.'/respuestas/'.$respuesta->id.'/', $request->file('archivos_aula')[$i]->getClientOriginalName());
                     $archivos[] = $rootFile;
                 }
                 
@@ -118,7 +219,7 @@ class AulasVirtualesController extends Controller
                     //SUBIR ARCHIVO DE AULA
                     $archivos = array();
                     for ($i=0; $i <= count($request->archivos_aula) - 1; $i++) { 
-                        $rootFile = $request->file('archivos_aula')[$i]->store('public/aulas/'.$curso->id.'/'.$publicacion->id.'/publicacion/');
+                        $rootFile = $request->file('archivos_aula')[$i]->storeAs('public/aulas/'.$curso->id.'/'.$publicacion->id.'/publicacion/', $request->file('archivos_aula')[$i]->getClientOriginalName());
                         $archivos[] = $rootFile;
                     }
 
@@ -244,28 +345,44 @@ class AulasVirtualesController extends Controller
             if ( $publicacion->save() ) {
                 if ( $request->hasFile('archivos_aula') ) {
                     $archivos    = array();
-                    // if ($publicacion->archivos != null) {
-                    //     $objArchivos = json_decode($publicacion->archivos);
-                    //     //RECORRER LOS VIEJOS ARCHIVOS
-                    //     for ($i=0; $i <= count($objArchivos) - 1; $i++) { 
-                    //         $archivos[] = $objArchivos[$i];
-                    //     }
-                    // }
+                    
+                    //ARCHIVOS VIEJOS
+                    if ($publicacion->archivos != null) {
+                        $objArchivos = json_decode($publicacion->archivos);
+                        //RECORRER LOS VIEJOS ARCHIVOS
+                        for ($i=0; $i <= count($objArchivos) - 1; $i++) { 
+                            $archivos[] = $objArchivos[$i];
+                        }
+                    }
 
-                    //ELIMINAR ARCHIVOS ANTERIORES
-                    $carpeta     = 'public/aulas/'.$publicacion->curso_id.'/'.$publicacion->id.'/publicacion/';
-                    $this->eliminarCarpeta($carpeta);
 
                     //RECORRER LOS NUEVOS ARCHIVOS
+                    $statusFile = false;
+                    $miFile     = "";
                     for ($j=0; $j <= count($request->archivos_aula) - 1; $j++) { 
-                        $rootFile = $request->file('archivos_aula')[$j]
-                                            ->store('public/aulas/'.$publicacion->curso_id.'/'.$publicacion_id.'/publicacion/');
-                        $archivos[] = $rootFile;
+
+                        $exists = Storage::exists('public/aulas/'.$publicacion->curso_id.'/'.$publicacion_id.'/publicacion/'.$request->file('archivos_aula')[$j]->getClientOriginalName());
+
+                        if ($exists) {
+                            $statusFile = true;
+                            $miFile    .= $request->file('archivos_aula')[$j]->getClientOriginalName().", ";
+                        }
+                        else {
+                            $rootFile = $request->file('archivos_aula')[$j]
+                                            ->storeAs('public/aulas/'.$publicacion->curso_id.'/'.$publicacion_id.'/publicacion/', $request->file('archivos_aula')[$j]->getClientOriginalName());
+                            $archivos[] = $rootFile;
+                        }
                     }
 
                     $arrayArchivos          = json_encode($archivos);
                     $publicacion->archivos  = $arrayArchivos;
                     if ($publicacion->save()) {
+
+                        if ($statusFile) {
+                            DB::commit();
+                            return back()->with("status.fileExist", $miFile);
+                        }
+
                         DB::commit();
                         return back()->with("status.updatePublicidad", "success");
                     }
@@ -311,30 +428,45 @@ class AulasVirtualesController extends Controller
                 if ($respuesta->save()) {
                     if ( $request->hasFile('archivos_aula') ) {
                         $archivos    = array();
-                        // if ($respuesta->archivos != null) {
-                        //     $objArchivos = json_decode($respuesta->archivos);
-                        //     //RECORRER LOS VIEJOS ARCHIVOS
-                        //     for ($i=0; $i <= count($objArchivos) - 1; $i++) { 
-                        //         $archivos[] = $objArchivos[$i];
-                        //     }
-                        // }
-                        
 
-                        //ELIMINAR ARCHIVOS
-                        $carpeta     = 'public/aulas/'.$publicacion->curso_id.'/'.$publicacion->id.'/respuestas/'.$respuesta_id.'/';
-                        $this->eliminarCarpeta($carpeta);
+                        //ARCHIVOS VIEJOS
+                        if ($respuesta->archivos != null) {
+                            $objArchivos = json_decode($respuesta->archivos);
+                            //RECORRER LOS VIEJOS ARCHIVOS
+                            for ($i=0; $i <= count($objArchivos) - 1; $i++) { 
+                                $archivos[] = $objArchivos[$i];
+                            }
+                        }
 
                         
                         //RECORRER LOS NUEVOS ARCHIVOS
+                        $statusFile = false;
+                        $miFile     = "";
                         for ($j=0; $j <= count($request->archivos_aula) - 1; $j++) { 
-                            $rootFile = $request->file('archivos_aula')[$j]
-                                                ->store('public/aulas/'.$publicacion->curso_id.'/'.$publicacion_id.'/respuestas/'.$respuesta_id.'/');
-                            $archivos[] = $rootFile;
+
+                            $exists = Storage::exists('public/aulas/'.$publicacion->curso_id.'/'.$publicacion_id.'/respuestas/'.$respuesta_id.'/'.$request->file('archivos_aula')[$j]->getClientOriginalName());
+
+                            if ($exists) {
+                                $statusFile = true;
+                                $miFile    .= $request->file('archivos_aula')[$j]->getClientOriginalName().", ";
+                            }
+                            else {
+
+                                $rootFile = $request->file('archivos_aula')[$j]
+                                                ->storeAs('public/aulas/'.$publicacion->curso_id.'/'.$publicacion_id.'/respuestas/'.$respuesta_id.'/', $request->file('archivos_aula')[$j]->getClientOriginalName());
+                                $archivos[] = $rootFile;
+                            }
                         }
 
                         $arrayArchivos          = json_encode($archivos);
                         $respuesta->archivos  = $arrayArchivos;
                         if ($respuesta->save()) {
+
+                            if ($statusFile) {
+                                DB::commit();
+                                return back()->with("status.fileExist", $miFile);
+                            }
+
                             DB::commit();
                             return back()->with("status.updateRespuesta", "success");
                         }

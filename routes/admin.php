@@ -27,6 +27,12 @@ Route::get('agregar-administrador', 'Admin\AministardoresController@create')->na
 
 //USUARIOS
 Route::get('listado-usuarios', "Admin\UsersController@index")->name('listado-usuarios');
+Route::get('agregar-usuario', 'Admin\UsersController@create')->name('usuarios.create');
+Route::post('agregar-usuario', 'Admin\UsersController@store')->name('usuarios.store');
+Route::get('editar-usuario/{user_id}', 'Admin\UsersController@edit')->name('usuarios.edit');
+Route::post('actualizar-usuario/{user_id}', 'Admin\UsersController@update')->name('usuarios.update');
+Route::post('cambiar-status-user', 'Admin\UsersController@cambiarStatus')->name('cambiar-status-user');
+Route::post('eliminar-usuario/{user_id}', 'Admin\UsersController@destroy')->name('usuario.destroy');
 
 //CURSOS
 Route::get('agregar-curso', 'Admin\CoursesController@create')->name('agregar-curso.create');
@@ -91,7 +97,8 @@ Route::post('eliminar-publicacion/{publicacion_id}', 'Admin\AulasVirtualesContro
 Route::post('eliminar-respuesta/{respuesta_id}', 'Admin\AulasVirtualesController@eliminarRespuesta')->name('eliminar.respuesta');
 Route::post('actualizar-publicidad/{publicacion_id}', 'Admin\AulasVirtualesController@updatePublicidad')->name('aula-publicidad.update');
 Route::post('actualizar-respuesta/{publicacion_id}/{respuesta_id}', 'Admin\AulasVirtualesController@updateRespuesta')->name('aula-respuesta.update');
-
+Route::post('eliminar-archivo', 'Admin\AulasVirtualesController@eliminarArchivo')->name('eliminarArchivo');
+Route::post('eliminar-archivo_resp', 'Admin\AulasVirtualesController@eliminarArchivoResp')->name('eliminarArchivoResp');
 
 
 //CALIFICACIONES

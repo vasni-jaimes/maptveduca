@@ -80,6 +80,7 @@ Route::post('aula-virtual-respuesta/{publicacion_id}', 'Site\AulasVirtualesContr
 Route::get('downloadFile/{slug_id}/{publicacion_id}/{respuesta_id}/{positionFile}', 'Site\AulasVirtualesController@downloadFile')->name('down.publicacion.web');
 Route::post('eliminar-respuesta/{respuesta_id}', 'Site\AulasVirtualesController@eliminarRespuesta')->name('eliminar.resp-web');
 Route::post('actualizar-respuesta/{publicacion_id}/{respuesta_id}', 'Site\AulasVirtualesController@updateRespuesta')->name('update.resp-web');
+Route::post('eliminar-archivo', 'Site\AulasVirtualesController@eliminarArchivo')->name('eliminarArchivo');
 
 
 //GUIA DE ESTUDIO

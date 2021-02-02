@@ -465,6 +465,84 @@ if (frm_agregar_calificaciones) {
     document.querySelector("form[name='frm-agregar_calificaciones']").submit();
     return false;
   });
+} //Eliminar archivo
+
+
+var delete_filex = document.querySelectorAll('.delete-filex');
+
+if (delete_filex) {
+  for (var i = 0; i <= delete_filex.length - 1; i++) {
+    delete_filex[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].alertConfirmDelete);
+  }
+} //Eliminar archivo de respuesta
+
+
+var delete_resp_filex = document.querySelectorAll('.delete-resp_filex');
+
+if (delete_resp_filex) {
+  for (var i = 0; i <= delete_resp_filex.length - 1; i++) {
+    delete_resp_filex[i].addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].alertConfirmDeleteResp);
+  }
+} //FORMULARIO USUARIO
+
+
+var frmAgregarUsuario = document.querySelector("form[name='frm-agregar_usuario']");
+var frmActualizarUsuario = document.querySelector("form[name='frm-editar_usuario']");
+
+if (frmAgregarUsuario || frmActualizarUsuario) {
+  if (frmAgregarUsuario) {
+    frmAgregarUsuario.addEventListener('submit', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarUsuario);
+    frmAgregarUsuario.addEventListener('input', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarUsuario);
+    $(document).change("input", _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarUsuario);
+    $("select").change(_functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarUsuario);
+  }
+
+  if (frmActualizarUsuario) {
+    frmActualizarUsuario.addEventListener('submit', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarUsuario);
+    frmActualizarUsuario.addEventListener('input', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarUsuario);
+    $(document).change("input", _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarUsuario);
+    $("select").change(_functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarAgregarUsuario);
+  }
+} //CHECK USUARIOS CON SUSCRIPCION
+
+
+var suscripcion = document.querySelector('input[name="suscripcion"]');
+
+if (suscripcion) {
+  $('input').on('ifChanged', function (event) {
+    if ($(this).is(':checked')) {
+      $("select[name='select_carreras']").parents(".form-group").css("display", "flex");
+    } else {
+      $("select[name='select_carreras']").parents(".form-group").css("display", "none");
+    }
+  });
+} //Cambiar status curso
+
+
+var tabla_usuarios = document.querySelector("table.tabla-usuarios");
+
+if (tabla_usuarios) {
+  var _btn_activar4 = document.querySelectorAll(".btn-activar");
+
+  if (_btn_activar4) {
+    _btn_activar4.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].cambiarStatus("/admin/cambiar-status-user", e);
+      });
+    });
+  }
+
+  var _btn_desactivar4 = document.querySelectorAll(".btn-desactivar");
+
+  if (_btn_desactivar4) {
+    _btn_desactivar4.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].cambiarStatus("/admin/cambiar-status-user", e);
+      });
+    });
+  }
 }
 
 /***/ }),
@@ -478,6 +556,222 @@ if (frm_agregar_calificaciones) {
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  validarAgregarUsuario: function validarAgregarUsuario(e) {
+    e.preventDefault();
+    var nombre = document.querySelector("input[name='nombre']");
+    var amaterno = document.querySelector("input[name='amaterno']");
+    var apaterno = document.querySelector("input[name='apaterno']");
+    var email = document.querySelector("input[name='email']");
+    var fecha_nacimineto = document.querySelector("input[name='fecha_nacimineto']");
+    var password = document.querySelector("input[name='password']");
+    var password_confirm = document.querySelector("input[name='password_confirmation']");
+    /* STATUS */
+
+    var error_videos = false; //SE ELIMINAN LOS RASTROS DE ERRORES
+
+    document.querySelectorAll('.errors').forEach(function (item) {
+      item.innerHTML = '';
+    });
+    document.querySelectorAll('.chosen-choices').forEach(function (item) {
+      item.style.borderColor = "#e5e6e7";
+    });
+
+    if (document.querySelector('.has-error')) {
+      document.querySelectorAll('.has-error').forEach(function (item) {
+        item.classList.remove('has-error');
+      });
+    } //SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+
+    if (nombre.value == '') {
+      nombre.parentNode.classList.add('has-error');
+      nombre.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (amaterno.value == '') {
+      amaterno.parentNode.classList.add('has-error');
+      amaterno.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (apaterno.value == '') {
+      apaterno.parentNode.classList.add('has-error');
+      apaterno.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (email.value == '') {
+      email.parentNode.classList.add('has-error');
+      email.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (!funciones.validarEmail(email.value)) {
+      email.parentNode.classList.add('has-error');
+      email.nextElementSibling.innerHTML = 'El email no es valido';
+      error_videos = true;
+    }
+
+    if (fecha_nacimineto.value == '') {
+      fecha_nacimineto.parentNode.classList.add('has-error');
+      fecha_nacimineto.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (e.target.getAttribute('name') == 'frm-agregar_usuario') {
+      if (password.value == '') {
+        password.parentNode.classList.add('has-error');
+        password.nextElementSibling.innerHTML = 'El campo es requerido';
+        error_videos = true; // password.classList.add('campo-requerido');
+        // validate = false;
+      }
+
+      if (password.value.length < 8) {
+        password.parentNode.classList.add('has-error');
+        password.nextElementSibling.innerHTML = 'El campo debe tener un minimo de 8 caracteres';
+        error_videos = true; // password.classList.add('campo-requerido');
+        // validate = false;			
+      }
+
+      if (password.value !== password_confirm.value) {
+        password_confirm.parentNode.classList.add('has-error');
+        password_confirm.nextElementSibling.innerHTML = 'Los passwords no coinciden';
+        error_videos = true; // password.classList.add('campo-requerido')
+        // validate = false;
+      }
+    }
+
+    if (e.target.getAttribute('name') == 'frm-editar_usuario') {
+      if (password.value != '') {
+        if (password.value.length < 8) {
+          password.parentNode.classList.add('has-error');
+          password.nextElementSibling.innerHTML = 'El campo debe tener un minimo de 8 caracteres';
+          error_videos = true; // password.classList.add('campo-requerido');
+          // validate = false;			
+        }
+      }
+    }
+
+    if (error_videos == true) {
+      if (e.type == 'submit') {
+        var posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+        window.scrollTo(0, posicion);
+      }
+
+      return false;
+    }
+
+    if (e.type == 'submit') {
+      e.target.disabled = true;
+      document.querySelector('.ibox-content').classList.add('sk-loading');
+
+      if (e.target.getAttribute('name') == 'frm-agregar_usuario') {
+        document.querySelector("form[name='frm-agregar_usuario']").submit();
+        return false;
+      } // document.querySelector("form[name='frm-editar_instructor']").submit();
+      // return false;
+
+    }
+  },
+  alertConfirmDeleteResp: function alertConfirmDeleteResp(e) {
+    e.preventDefault();
+    var respuesta = e.target.getAttribute('data-rsp');
+    var file = e.target.getAttribute('data-file');
+    var li = e.target.parentElement;
+    swal({
+      title: "¿Estas Segur@?",
+      text: "¿Estas segur@ que quieres eliminar el archivo?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(function (willDelete) {
+      if (willDelete) {
+        var token = document.querySelector("input[name='_token']").value;
+        var opciones = {
+          method: "POST",
+          credentials: "same-origin",
+          body: JSON.stringify({
+            "respuesta": respuesta,
+            "archivo": file,
+            "_token": token
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        };
+        fetch('/admin/eliminar-archivo_resp', opciones).then(function (response) {
+          return response.json();
+        }).then(function (res) {
+          if (res.message == 'ok') {
+            li.remove();
+            swal("Se Elimino el archivo correctamente", {
+              icon: "success"
+            });
+          } else {
+            swal("Ocurrio un error, intentelo más tarde", {
+              icon: "error"
+            });
+          }
+        })["catch"](function (error) {
+          swal("Ocurrio un error, intentelo más tarde", {
+            icon: "error"
+          });
+        });
+      } else {
+        swal("Se cancelo la eliminacion");
+      }
+    });
+  },
+  alertConfirmDelete: function alertConfirmDelete(e) {
+    e.preventDefault();
+    var publicacion = e.target.getAttribute('data-pub');
+    var file = e.target.getAttribute('data-file');
+    var li = e.target.parentElement;
+    swal({
+      title: "¿Estas Segur@?",
+      text: "¿Estas segur@ que quieres eliminar el archivo?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(function (willDelete) {
+      if (willDelete) {
+        var token = document.querySelector("input[name='_token']").value;
+        var opciones = {
+          method: "POST",
+          credentials: "same-origin",
+          body: JSON.stringify({
+            "publicacion": publicacion,
+            "archivo": file,
+            "_token": token
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        };
+        fetch('/admin/eliminar-archivo', opciones).then(function (response) {
+          return response.json();
+        }).then(function (res) {
+          if (res.message == 'ok') {
+            li.remove();
+            swal("Se Elimino el archivo correctamente", {
+              icon: "success"
+            });
+          } else {
+            swal("Ocurrio un error, intentelo más tarde", {
+              icon: "error"
+            });
+          }
+        })["catch"](function (error) {
+          swal("Ocurrio un error, intentelo más tarde", {
+            icon: "error"
+          });
+        });
+      } else {
+        swal("Se cancelo la eliminacion");
+      }
+    });
+  },
   agregarRespuesta: function agregarRespuesta(e) {
     e.preventDefault();
     var modal = document.querySelectorAll('.ibox-content');
@@ -834,17 +1128,23 @@ var funciones = {
 
     if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
       if (password.value == '') {
-        password.classList.add('campo-requerido');
-        validate = false;
+        password.parentNode.classList.add('has-error');
+        password.nextElementSibling.innerHTML = 'El campo es requerido';
+        error_videos = true; // password.classList.add('campo-requerido');
+        // validate = false;
       }
 
       if (password.value.length < 8) {
-        password.classList.add('campo-requerido');
-        validate = false;
+        password.parentNode.classList.add('has-error');
+        password.nextElementSibling.innerHTML = 'El campo es requerido';
+        error_videos = true; // password.classList.add('campo-requerido');
+        // validate = false;			
       }
 
       if (password.value !== password_confirm.value) {
-        password.classList.add('campo-requerido');
+        password_confirm.parentNode.classList.add('has-error');
+        password_confirm.nextElementSibling.innerHTML = 'El campo es requerido';
+        error_videos = true; // password.classList.add('campo-requerido')
       }
     }
 
