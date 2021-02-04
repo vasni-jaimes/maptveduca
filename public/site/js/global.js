@@ -184,10 +184,11 @@ $(document).ready(function(){
 
     /*$('.wrapper-academica table').stacktable();*/
     
-    $('#ico-filtro').on('click', function () {
+    $('#ico-filtro').on('click', function (e) {
 		$(this).addClass('active');
         $('body').css('overflow', 'hidden');
         $('.sidebar-cursos').animate({left: 0});
+        e.stopPropagation();
 	}); //$('#navbar-toggle').on('click', function () {
     
     $('.close-sidebar').on('click', function () {
@@ -196,10 +197,11 @@ $(document).ready(function(){
 		$('.sidebar-cursos').animate({left: '-55%'});
     });
     
-    $('#ico-tablero').on('click', function () {
+    $('#ico-tablero').on('click', function (e) {
 		$(this).addClass('active');
         $('body').css('overflow', 'hidden');
         $('.sidebar-tablero').animate({left: 0});
+        e.stopPropagation();
 	}); //$('#navbar-toggle').on('click', function () {
     
     $('.close-tablero').on('click', function () {
@@ -292,20 +294,16 @@ $(document).ready(function(){
     
 });
 
-/*$(document).on("click", function(event){
-    var $trigger = $("#ico-filtro");
-    if($trigger !== event.target && !$trigger.has(event.target).length){
+$(document).click(function(e) { 
+    if($('.sidebar-cursos').is(':visible')&&!$(e.target).closest('.sidebar-cursos').length) {
         $('#ico-filtro').removeClass('active');
         $('body').css('overflow', 'auto');
 		$('.sidebar-cursos').animate({left: '-55%'});
-    }            
-});
-
-$(document).on("click", function(event){
-    var $trigger = $("#ico-tablero");
-    if($trigger !== event.target && !$trigger.has(event.target).length){
+    }
+    
+    if($('.sidebar-tablero').is(':visible')&&!$(e.target).closest('.sidebar-tablero').length) {
         $('#ico-tablero').removeClass('active');
         $('body').css('overflow', 'auto');
 		$('.sidebar-tablero').animate({left: '-55%'});
-    }            
-});*/
+    }       
+});

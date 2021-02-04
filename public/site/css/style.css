@@ -2136,6 +2136,10 @@ video#myVideo {
     outline: none;
 }
 
+.slide-cursos .slick-slide li a {
+    display: block;
+}
+
 .slide-cursos .img-slide {
     padding: 160% 0 0;
     box-shadow: none;
@@ -4788,6 +4792,7 @@ small.notificacion {
     color: #000;
     background-color: #d8d8d8;
     text-transform: uppercase;
+    line-height: 130%;
 }
 
 .acordeon-materias li {
@@ -5861,6 +5866,14 @@ a[href="#page"] {
     .banner-title,
     .wrapper-cursos {
         padding: 30px 0;
+    }
+    
+    .wrapper-aulas {
+        padding: 20px;
+    }
+    
+    .lista-materias li a {
+        padding: 15px;
     }
     
     header img.logo {
