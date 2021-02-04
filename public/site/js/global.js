@@ -291,3 +291,21 @@ $(document).ready(function(){
     });
     
 });
+
+/*$(document).on("click", function(event){
+    var $trigger = $("#ico-filtro");
+    if($trigger !== event.target && !$trigger.has(event.target).length){
+        $('#ico-filtro').removeClass('active');
+        $('body').css('overflow', 'auto');
+		$('.sidebar-cursos').animate({left: '-55%'});
+    }            
+});
+
+$(document).on("click", function(event){
+    var $trigger = $("#ico-tablero");
+    if($trigger !== event.target && !$trigger.has(event.target).length){
+        $('#ico-tablero').removeClass('active');
+        $('body').css('overflow', 'auto');
+		$('.sidebar-tablero').animate({left: '-55%'});
+    }            
+});*/

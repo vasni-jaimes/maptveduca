@@ -2590,6 +2590,7 @@ video#myVideo {
 
 .sidebar-registro .material,
 .sidebar-registro .favorito {
+    display: flex;
     margin: 15px 0 0;
     padding: 15px;
     background-color: #000;
