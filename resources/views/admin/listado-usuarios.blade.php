@@ -31,6 +31,32 @@
         </div>
         <div class="col-lg-2"></div>
     </div>
+
+
+    @if (session()->has("status.deleteUsuario"))
+        @if (session()->get("status.deleteUsuario") == "error")
+            <div class="row justify-content-center">
+                <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
+                    Ocurrio un error, intentelo más tarde.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+        @elseif (session()->get("status.deleteUsuario") == "success")
+            <div class="row justify-content-center">
+                <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
+                    Se elimino el usuario correctamente
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        @endif
+    @endif
+
+
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-lg-12">
@@ -48,7 +74,7 @@
                     <div class="ibox-content">
                         <div class="table-responsive">
                             @if (!$usuarios->isEmpty())
-                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <table class="table table-striped table-bordered table-hover dataTables-example tabla-usuarios">
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
@@ -68,13 +94,18 @@
                                                 <td class="center">
                                                     
                                                     <div class="btn-group">
-                                                      <a href = "#" class="btn-info btn btn-xs mr-3">Ver perfil</a>
-                                                      <a href="#" class="btn-danger btn btn-xs mr-3">Eliminar usuario</a>
-                                                      <a href = "#" class="btn-info btn btn-xs mr-3">Editar</a>
+                                                      {{-- <a href = "#" class="btn-info btn btn-xs mr-3">Ver perfil</a> --}}
+                                                        <form action="{{ route('usuario.destroy', $usuario->id) }}" method="POST" name="form_eliminar-usuario">
+                                                            @csrf
+                                                            <input type="hidden" name="us_id" value="{{ $usuario->id }}">
+                                                            <button class="btn-danger btn btn-xs mr-3">Eliminar usuario</button>    
+                                                        </form>
+                                                      
+                                                      <a href = "{{ route('usuarios.edit', $usuario->id) }}" class="btn-info btn btn-xs mr-3">Editar</a>
                                                       @if ($usuario->status == 1)
-                                                          <a href = "#" class="btn-danger btn btn-xs ml-2">Desactivar</a>
+                                                          <a href = "#" class="btn-danger btn btn-xs ml-2 btn-desactivar" data-st="0" data-id="{{ $usuario->id }}">Desactivar</a>
                                                         @else
-                                                            <a href="#" class="btn-primary btn btn-xs ml-2">Activar</a>
+                                                            <a href="#" class="btn-primary btn btn-xs ml-2 btn-desactivar" data-st="1" data-id="{{ $usuario->id }}">Activar</a>
                                                         @endif
                                                    </div>
 
@@ -149,6 +180,8 @@
          
          });
          
-      </script>
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/admini/js/app.js"></script>
 
 @stop

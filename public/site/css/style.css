@@ -4752,6 +4752,15 @@ small.notificacion {
     margin: 15px 0 0;
 }
 
+.delete-filex {
+    color: red;
+    position: absolute;
+    right: 15px;
+    top: 3px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .wrapper-aulas {
     margin: 15px 0 100px;
     padding: 40px;

@@ -55,6 +55,7 @@
                                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Usuarios</span> <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
                                     <li> <a href="{{ route("listado-usuarios") }}"> Lista de Usuarios </a></li>
+                                    <li> <a href="{{ route("usuarios.create") }}"> Agregar Usuario </a></li>
                                 </ul>
                             </li>
                             <li>

@@ -212,8 +212,6 @@ if (tabla_clases) {
 	}
 }
 
-
-
 //Cambiar status eventos
 let tabla_eventos = document.querySelector("table.tabla-eventos");
 if (tabla_eventos) {
@@ -364,6 +362,91 @@ if (frm_agregar_calificaciones) {
     	document.querySelector("form[name='frm-agregar_calificaciones']").submit();
     	return false;
 	})
+}
+
+
+//Eliminar archivo
+const delete_filex = document.querySelectorAll('.delete-filex');
+if (delete_filex) {
+	for (var i = 0; i <= delete_filex.length - 1; i++) {
+		delete_filex[i].addEventListener('click', funciones.alertConfirmDelete);
+	}
+}
+
+
+//Eliminar archivo de respuesta
+const delete_resp_filex = document.querySelectorAll('.delete-resp_filex');
+if (delete_resp_filex) {
+	for (var i = 0; i <= delete_resp_filex.length - 1; i++) {
+		delete_resp_filex[i].addEventListener('click', funciones.alertConfirmDeleteResp);
+	}
+}
+
+
+
+//FORMULARIO USUARIO
+const frmAgregarUsuario = document.querySelector("form[name='frm-agregar_usuario']");
+const frmActualizarUsuario = document.querySelector("form[name='frm-editar_usuario']");
+if (frmAgregarUsuario || frmActualizarUsuario) {
+
+	if (frmAgregarUsuario) {
+		frmAgregarUsuario.addEventListener('submit', funciones.validarAgregarUsuario);
+		frmAgregarUsuario.addEventListener('input', funciones.validarAgregarUsuario);
+		$(document).change("input", funciones.validarAgregarUsuario);
+		$("select").change(funciones.validarAgregarUsuario);
+	}
+
+	if (frmActualizarUsuario) {
+		frmActualizarUsuario.addEventListener('submit', funciones.validarAgregarUsuario);
+		frmActualizarUsuario.addEventListener('input', funciones.validarAgregarUsuario);
+		$(document).change("input", funciones.validarAgregarUsuario);
+		$("select").change(funciones.validarAgregarUsuario);
+	}
+}
+
+
+//CHECK USUARIOS CON SUSCRIPCION
+const suscripcion = document.querySelector('input[name="suscripcion"]');
+if (suscripcion) {
+	$('input').on('ifChanged', function(event) {
+		if ($(this).is(':checked')) {
+			$("select[name='select_carreras']")
+				.parents(".form-group").css("display", "flex");
+		}
+		else {
+			$("select[name='select_carreras']")
+				.parents(".form-group").css("display", "none");
+		}
+
+	});
+}
+
+
+
+
+
+//Cambiar status curso
+let tabla_usuarios = document.querySelector("table.tabla-usuarios");
+if (tabla_usuarios) {
+	let btn_activar = document.querySelectorAll(".btn-activar");
+	if (btn_activar) {
+		btn_activar.forEach( (item) => {
+			item.addEventListener('click', function(e) {
+				e.preventDefault();
+				funciones.cambiarStatus("/admin/cambiar-status-user", e);
+			})
+		});
+	}
+
+	let btn_desactivar = document.querySelectorAll(".btn-desactivar");
+	if (btn_desactivar) {
+		btn_desactivar.forEach( (item) => {
+			item.addEventListener('click', function(e) {
+				e.preventDefault();
+				funciones.cambiarStatus("/admin/cambiar-status-user", e);
+			});
+		});
+	}
 }
 
 

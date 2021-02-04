@@ -19,7 +19,7 @@
     
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Crear nuevo curso</h2>
+            <h2>Editar curso</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="index.html">Home</a>
@@ -28,7 +28,7 @@
                     <a>Cursos</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <strong>Crear nuevo curso</strong>
+                    <strong>Editar curso</strong>
                 </li>
             </ol>
         </div>

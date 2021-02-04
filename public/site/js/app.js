@@ -376,6 +376,48 @@ if (enviar_mensaje) {
     document.querySelector('#loading').style.display = "block";
     document.querySelector('.form-contacto').submit();
   });
+} //ELIMINAR ARCHIVO EN AULAS VIRTUALES
+
+
+var deletefilex = document.querySelectorAll('.delete-filex');
+
+if (deletefilex) {
+  for (var i = 0; i <= deletefilex.length - 1; i++) {
+    deletefilex[i].addEventListener('click', function (e) {
+      e.preventDefault();
+      var rsp = e.target.getAttribute('data-rsp');
+      var file = e.target.getAttribute('data-file');
+      document.querySelector('#shadow-eliminar_archivo .si_deletefile-resp').setAttribute('data-rsp', rsp);
+      document.querySelector('#shadow-eliminar_archivo .si_deletefile-resp').setAttribute('data-file', file);
+      document.querySelector('#shadow-eliminar_archivo').style.display = "block";
+    });
+  }
+}
+
+var eliminar_archivo = document.querySelector('#shadow-eliminar_archivo .si_deletefile-resp');
+
+if (eliminar_archivo) {
+  eliminar_archivo.addEventListener('click', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].eliminarArchivoAulas);
+} //OK ELIMINAR ARCHIVO
+
+
+var ok_deletefile_resp = document.querySelector('.ok_deletefile-resp');
+
+if (ok_deletefile_resp) {
+  ok_deletefile_resp.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector('#shadow-confirm_deletefile').style.display = "none";
+  });
+} //CANCELAR ELIMINAR ARCHIVO
+
+
+var no_deletefile_resp = document.querySelector('#shadow-eliminar_archivo .no_deletefile-resp');
+
+if (no_deletefile_resp) {
+  no_deletefile_resp.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector('#shadow-eliminar_archivo').style.display = "none";
+  });
 }
 
 /***/ }),
@@ -389,6 +431,46 @@ if (enviar_mensaje) {
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  eliminarArchivoAulas: function eliminarArchivoAulas(e) {
+    e.preventDefault();
+    document.querySelector('#loading').style.display = "block";
+    var rsp = e.target.getAttribute('data-rsp');
+    var file = e.target.getAttribute('data-file');
+    var token = document.querySelector("input[name='_token']").value;
+    var opciones = {
+      method: "POST",
+      credentials: "same-origin",
+      body: JSON.stringify({
+        "respuesta": rsp,
+        "archivo": file,
+        "_token": token
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    fetch('/eliminar-archivo', opciones).then(function (response) {
+      return response.json();
+    }).then(function (res) {
+      if (res.message == 'ok') {
+        document.querySelector('#shadow-confirm_deletefile p').innerHTML = "Se elimino con exito el archivo.";
+        document.querySelector('#loading').style.display = "none";
+        document.querySelector('#shadow-eliminar_archivo').style.display = "none";
+        document.querySelector('#shadow-confirm_deletefile').style.display = "block";
+        document.querySelector('span[data-rsp="' + rsp + '"][data-file="' + file + '"]').parentElement.remove();
+      } else {
+        document.querySelector('#shadow-confirm_deletefile p').innerHTML = "Ocurrio un error intentalo mas tarde.";
+        document.querySelector('#loading').style.display = "none";
+        document.querySelector('#shadow-eliminar_archivo').style.display = "none";
+        document.querySelector('#shadow-confirm_deletefile').style.display = "block";
+      }
+    })["catch"](function (error) {
+      document.querySelector('#shadow-confirm_deletefile p').innerHTML = "Ocurrio un error intentalo mas tarde.";
+      document.querySelector('#loading').style.display = "none";
+      document.querySelector('#shadow-eliminar_archivo').style.display = "none";
+      document.querySelector('#shadow-confirm_deletefile').style.display = "block";
+    });
+  },
   verNotificacioneseWeb: function verNotificacioneseWeb(e) {
     var notificacion = e.target.getAttribute('data-noti');
 
@@ -490,6 +572,8 @@ var funciones = {
     e.preventDefault();
     var resp = e.target.getAttribute('data-resp');
     document.querySelector('.edit-respuesta[data-resp="' + resp + '"]').style.display = "block";
+    document.querySelector('.respuesta-alumno[data-resp="' + resp + '"]').style.display = "block";
+    document.querySelector('.boton-alumno[data-resp="' + resp + '"]').classList.add('active-acordeon');
     return false;
   },
   editarPerfil: function editarPerfil(e) {

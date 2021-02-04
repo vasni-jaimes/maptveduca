@@ -188,6 +188,7 @@ class CheckoutController extends Controller
 
 	    return true;
     }
+    
 
     protected function MensajeBienvenidaSuscripcion()
     {

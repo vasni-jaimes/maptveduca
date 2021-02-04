@@ -3,6 +3,254 @@
 
 let funciones = {
 
+	validarAgregarUsuario: function(e) {
+		e.preventDefault();
+
+		let nombre = document.querySelector("input[name='nombre']");
+		let amaterno = document.querySelector("input[name='amaterno']");
+		let apaterno = document.querySelector("input[name='apaterno']");
+		let email = document.querySelector("input[name='email']");
+		let fecha_nacimineto = document.querySelector("input[name='fecha_nacimineto']");
+		let password = document.querySelector("input[name='password']");
+		let password_confirm = document.querySelector("input[name='password_confirmation']");
+
+		/* STATUS */
+		let error_videos = false;
+
+		//SE ELIMINAN LOS RASTROS DE ERRORES
+		document.querySelectorAll('.errors').forEach(function(item) {
+			item.innerHTML = '';
+		});
+
+		document.querySelectorAll('.chosen-choices').forEach((item) => {
+			item.style.borderColor = "#e5e6e7";
+		});
+
+		if (document.querySelector('.has-error')) {
+			document.querySelectorAll('.has-error').forEach((item) => {
+				item.classList.remove('has-error');
+			});
+		}
+		//SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+
+		if (nombre.value == '') {
+			nombre.parentNode.classList.add('has-error');
+			nombre.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		if (amaterno.value == '') {
+			amaterno.parentNode.classList.add('has-error');
+			amaterno.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		if (apaterno.value == '') {
+			apaterno.parentNode.classList.add('has-error');
+			apaterno.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		if (email.value == '') {
+			email.parentNode.classList.add('has-error');
+			email.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		if (!funciones.validarEmail(email.value)) {
+			email.parentNode.classList.add('has-error');
+			email.nextElementSibling.innerHTML = 'El email no es valido';
+			error_videos = true;
+		}
+
+		if (fecha_nacimineto.value == '') {
+			fecha_nacimineto.parentNode.classList.add('has-error');
+			fecha_nacimineto.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+
+		if (e.target.getAttribute('name') == 'frm-agregar_usuario') {
+
+			if (password.value == '') {
+				password.parentNode.classList.add('has-error');
+				password.nextElementSibling.innerHTML = 'El campo es requerido';
+				error_videos = true;
+				// password.classList.add('campo-requerido');
+				// validate = false;
+			}
+
+			if (password.value.length < 8) {
+				password.parentNode.classList.add('has-error');
+				password.nextElementSibling.innerHTML = 'El campo debe tener un minimo de 8 caracteres';
+				error_videos = true;
+				// password.classList.add('campo-requerido');
+				// validate = false;			
+			}
+
+			if (password.value !== password_confirm.value) {
+				password_confirm.parentNode.classList.add('has-error');
+				password_confirm.nextElementSibling.innerHTML = 'Los passwords no coinciden';
+				error_videos = true;
+				// password.classList.add('campo-requerido')
+				// validate = false;
+			}
+		}
+
+
+		if (e.target.getAttribute('name') == 'frm-editar_usuario') {
+			if (password.value != '') {
+				if (password.value.length < 8) {
+					password.parentNode.classList.add('has-error');
+					password.nextElementSibling.innerHTML = 'El campo debe tener un minimo de 8 caracteres';
+					error_videos = true;
+					// password.classList.add('campo-requerido');
+					// validate = false;			
+				}
+			}
+		}
+
+
+		if (error_videos == true) {
+			if (e.type == 'submit') {
+				let posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+				window.scrollTo(0, posicion);
+			}
+
+			return false;
+		}
+
+		if (e.type == 'submit') {
+			e.target.disabled = true;
+	        document.querySelector('.ibox-content').classList.add('sk-loading');
+
+	        if (e.target.getAttribute('name') == 'frm-agregar_usuario') {
+	        	document.querySelector("form[name='frm-agregar_usuario']").submit();
+	        	return false;
+	        }
+
+	        // document.querySelector("form[name='frm-editar_instructor']").submit();
+	        // return false;
+	    }
+
+
+	},
+
+	alertConfirmDeleteResp: function(e) {
+		e.preventDefault();
+
+		let respuesta = e.target.getAttribute('data-rsp');
+		let file = e.target.getAttribute('data-file');
+		let li = e.target.parentElement;
+
+		swal({
+			title: "¿Estas Segur@?",
+			text: "¿Estas segur@ que quieres eliminar el archivo?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+
+				let token = document.querySelector("input[name='_token']").value;
+
+				let opciones = {
+		            method: "POST",
+		            credentials: "same-origin",
+		            body: JSON.stringify({"respuesta": respuesta, "archivo": file, "_token": token }),
+		            headers:{
+		                "Content-Type": "application/json"
+		            }
+		        };
+
+
+		        fetch('/admin/eliminar-archivo_resp', opciones)
+		            .then(response => response.json())
+		            .then(res => {
+		            	if (res.message == 'ok') {
+		            			
+		            			li.remove();
+		            			swal("Se Elimino el archivo correctamente", {
+									icon: "success",
+						  		});
+		            	}
+		            	else {
+		            		swal("Ocurrio un error, intentelo más tarde", {
+								icon: "error",
+						  	});
+		            	}
+		            })
+			        .catch(function(error) {
+						swal("Ocurrio un error, intentelo más tarde", {
+							icon: "error",
+						});
+					});
+
+		  	} else {
+		    	swal("Se cancelo la eliminacion");
+		  	}
+		});
+	},
+
+	alertConfirmDelete: function(e) {
+		e.preventDefault();
+
+		let publicacion = e.target.getAttribute('data-pub');
+		let file = e.target.getAttribute('data-file');
+		let li = e.target.parentElement;
+
+		swal({
+			title: "¿Estas Segur@?",
+			text: "¿Estas segur@ que quieres eliminar el archivo?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+
+				let token = document.querySelector("input[name='_token']").value;
+
+				let opciones = {
+		            method: "POST",
+		            credentials: "same-origin",
+		            body: JSON.stringify({"publicacion": publicacion, "archivo": file, "_token": token }),
+		            headers:{
+		                "Content-Type": "application/json"
+		            }
+		        };
+
+
+		        fetch('/admin/eliminar-archivo', opciones)
+		            .then(response => response.json())
+		            .then(res => {
+		            	if (res.message == 'ok') {
+		            			
+		            			li.remove();
+		            			swal("Se Elimino el archivo correctamente", {
+									icon: "success",
+						  		});
+		            	}
+		            	else {
+		            		swal("Ocurrio un error, intentelo más tarde", {
+								icon: "error",
+						  	});
+		            	}
+		            })
+			        .catch(function(error) {
+						swal("Ocurrio un error, intentelo más tarde", {
+							icon: "error",
+						});
+					});
+
+		  	} else {
+		    	swal("Se cancelo la eliminacion");
+		  	}
+		});
+	},
+
 	agregarRespuesta: function(e) {
 		e.preventDefault();
 
@@ -390,17 +638,26 @@ let funciones = {
 		if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
 
 			if (password.value == '') {
-				password.classList.add('campo-requerido');
-				validate = false;
+				password.parentNode.classList.add('has-error');
+				password.nextElementSibling.innerHTML = 'El campo es requerido';
+				error_videos = true;
+				// password.classList.add('campo-requerido');
+				// validate = false;
 			}
 
 			if (password.value.length < 8) {
-				password.classList.add('campo-requerido');
-				validate = false;			
+				password.parentNode.classList.add('has-error');
+				password.nextElementSibling.innerHTML = 'El campo es requerido';
+				error_videos = true;
+				// password.classList.add('campo-requerido');
+				// validate = false;			
 			}
 
 			if (password.value !== password_confirm.value) {
-				password.classList.add('campo-requerido')
+				password_confirm.parentNode.classList.add('has-error');
+				password_confirm.nextElementSibling.innerHTML = 'El campo es requerido';
+				error_videos = true;
+				// password.classList.add('campo-requerido')
 			}
 		}
 

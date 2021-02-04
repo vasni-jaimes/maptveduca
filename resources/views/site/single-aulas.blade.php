@@ -82,7 +82,7 @@
                                             <div class="flex">
                                                 
                                                 <div class="row-alumno">
-                                                    <div class="boton-alumno flex between">
+                                                    <div class="boton-alumno flex between" data-resp="{{ $respuesta->id }}">
                                                         @if ($respuesta->instructor_id != null)
                                                             <p> Profr. {{ $respuesta->instructor->nombres." ".$respuesta->instructor->apellidos }}</p>
                                                         @else
@@ -98,7 +98,7 @@
                                                         </p>
                                                     </div> <!-- /flex -->
 
-                                                    <div class="respuesta-alumno">
+                                                    <div class="respuesta-alumno" data-resp="{{ $respuesta->id }}">
                                                         <div class="row-acordeon">
                                                             {!! $respuesta->respuesta !!}
                                                         </div> <!-- /row-acordeon -->
@@ -110,7 +110,7 @@
                                                                     @endphp
 
                                                                     @for($i = 0; $i <= count($archivos) - 1; $i++)
-                                                                        <li> <a href="{{ route('down.publicacion.web', [$curso->slug, $publicacion->id,$respuesta->id, $i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a> </li>
+                                                                        <li> <a href="{{ route('down.publicacion.web', [$curso->slug, $publicacion->id,$respuesta->id, $i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a> <span class="delete-filex" data-rsp="{{ $respuesta->id }}" data-file="{{ $i }}">X</span> </li>
                                                                     @endfor
                                                                 </ul>
                                                             </div> <!-- /btn-archivo -->
@@ -145,7 +145,7 @@
                                                             <textarea class="mytextarea" name="publicaciontxt"> {{ $respuesta->respuesta }} </textarea>
                                                             <div class="flex between">
                                                                 <div class="btn-archivo flex flex-center">
-                                                                    <input type="file" name="upload{{ $respuesta->id }}[]" id="upload{{ $respuesta->id }}" multiple="" class="cargar-cv">
+                                                                    <input type="file" name="upload[]" id="upload{{ $respuesta->id }}" multiple="" class="cargar-cv">
                                                                     <label for="upload{{ $respuesta->id }}"><span>Adjuntar archivos</span></label>
                                                                     <ul>
                                                                         <li class="conteo-archivos" style="display: none;">Archivo 1</li>
@@ -201,6 +201,52 @@
         </div> <!-- /s-favorito -->
     </div> <!-- /f-favorito -->
 </div> <!-- /shadow-favorito -->
+
+
+
+@if (session()->has("status.fileExist"))
+    <!-- NO SE PUEDE AGREGAR EL ARCHIVO LLEVAN EL MISMO NUMERO -->
+    <div class="shadow-favorito" style="display: block;">
+        <div class="f-shadow">
+            <div class="s-favorito">
+                <div class="close-shadow"></div> <!-- /close-shadow -->
+                <p style="max-width: 400px;">Se Actualizo correctamente, pero los siguientes archivos no se pudieron subir por que ya existen archivos con el mismo nombre <br>  [ <span style="color: red;"> {{ session()->get("status.fileExist") }} </span> ] </p>
+            </div> <!-- /s-favorito -->
+        </div> <!-- /f-favorito -->
+    </div> <!-- /shadow-favorito -->
+@endif
+
+
+
+<!-- ELIMINAR ARCHIVO -->
+<div class="shadow-favorito" id="shadow-eliminar_archivo">
+    <div class="f-shadow">
+        <div class="s-favorito">
+            <div class="close-shadow"></div> <!-- /close-shadow -->
+            <p>¿Seguro quieres eliminar el archivo?</p>
+            <ul>
+                <li><a href="#" class="no_deletefile-resp">No</a></li>
+                <li><a href="#" class="si_deletefile-resp">Si</a></li>
+            </ul>
+        </div> <!-- /s-favorito -->
+    </div> <!-- /f-favorito -->
+</div> <!-- /shadow-favorito -->
+
+
+
+<!-- ELIMINAR ARCHIVO -->
+<div class="shadow-favorito" id="shadow-confirm_deletefile">
+    <div class="f-shadow">
+        <div class="s-favorito">
+            <div class="close-shadow"></div> <!-- /close-shadow -->
+            <p></p>
+            <ul>
+                <li><a href="#" class="ok_deletefile-resp">Ok</a></li>
+            </ul>
+        </div> <!-- /s-favorito -->
+    </div> <!-- /f-favorito -->
+</div> <!-- /shadow-favorito -->
+
 
 
 <script type="text/javascript" src="/site/js/app.js"></script>

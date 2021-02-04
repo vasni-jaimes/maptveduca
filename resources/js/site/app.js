@@ -280,3 +280,47 @@ if (enviar_mensaje) {
 }
 
 
+
+//ELIMINAR ARCHIVO EN AULAS VIRTUALES
+let deletefilex = document.querySelectorAll('.delete-filex');
+if (deletefilex) {
+	for (var i = 0; i <= deletefilex.length - 1; i++) {
+		deletefilex[i].addEventListener('click', function(e) {
+			e.preventDefault();
+			let rsp = e.target.getAttribute('data-rsp');
+			let file = e.target.getAttribute('data-file');
+			document.querySelector('#shadow-eliminar_archivo .si_deletefile-resp').setAttribute('data-rsp', rsp);
+			document.querySelector('#shadow-eliminar_archivo .si_deletefile-resp').setAttribute('data-file', file);
+			document.querySelector('#shadow-eliminar_archivo').style.display = "block";
+		});
+	}
+}
+
+
+let eliminar_archivo = document.querySelector('#shadow-eliminar_archivo .si_deletefile-resp');
+if (eliminar_archivo) {
+	eliminar_archivo.addEventListener('click', funciones.eliminarArchivoAulas);
+}
+
+
+//OK ELIMINAR ARCHIVO
+let ok_deletefile_resp = document.querySelector('.ok_deletefile-resp');
+if (ok_deletefile_resp) {
+	ok_deletefile_resp.addEventListener('click', function(e) {
+		e.preventDefault();
+		document.querySelector('#shadow-confirm_deletefile').style.display = "none";
+	})
+}
+
+
+
+//CANCELAR ELIMINAR ARCHIVO
+let no_deletefile_resp = document.querySelector('#shadow-eliminar_archivo .no_deletefile-resp');
+if (no_deletefile_resp) {
+	no_deletefile_resp.addEventListener('click', function(e) {
+		e.preventDefault();
+		document.querySelector('#shadow-eliminar_archivo').style.display = "none";
+	})
+}
+
+

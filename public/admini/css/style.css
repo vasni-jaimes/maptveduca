@@ -32,6 +32,20 @@
   display: none;
 }*/
 
+.delete-resp_filex,
+.delete-filex {
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+  width: 20px;
+  height: 22px;
+  border: 1px solid red;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  margin-left: 10px;
+}
+
 .editar-publicacion,
 .editar-respuesta {
   display: none;
