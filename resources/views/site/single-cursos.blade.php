@@ -15,12 +15,17 @@
                 <li><span>{{ $curso->nombre }}</span></li>
             </ul> <!-- /breadcrumb-curso -->
             
+            <div>
+                <span class="ico-filtro" id="ico-single"><img src="/site/img/filtro.png"></span>
+            </div> <!-- /text-right -->
+            
             <div class="wrapper-curso">
                 <div class="flex">
 
                     <div class="sidebar-single">
+                        <div class="close-single"><span>X</span></div>
                         <h3>Contenido del curso</h3>
-                       {{--  auth()->user()->suscripcion[0] --}}
+                        {{--  auth()->user()->suscripcion[0] --}}
                         <ul class="row-leccion">
                             <li class="active {{ $clase_id == null ? "active-leccion" : "" }}" data-url="/single-cursos/{{ $curso->slug }}">Bienvenida</li>
 
@@ -86,6 +91,18 @@
                                 <p> {!! $clase['descripcion'] !!} </p>
                             </div> <!-- /descripcion-single -->
                         </div> <!-- /txt-single -->
+                        
+                        <div class="s-mobile">
+                            
+                            <div class="img-profesor" style="background-image: url({{Storage::url($curso->instructor[0]->img) }});"></div>
+
+                            <div class="bio-profesor">
+                                <p>{{ $curso->instructor[0]->nombres. " ".$curso->instructor[0]->apellidos }}</p>
+                                <p>{{ $curso->instructor[0]->especialidad }}.</p>
+                                <p>{!! $curso->instructor[0]->bibliografia !!}</p>
+                            </div> <!-- /bio-profesor -->
+                            
+                        </div> <!-- /s-mobile -->
                     
                         <a href="{{ route("guia-estudio") }}" class="banner-botones">
                             <h4>¿PRIMERA VEZ ESTUDIANDO EN LÍNEA?</h4>
