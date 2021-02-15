@@ -34,14 +34,17 @@ class LoginController extends Controller
     {
         $usr = Administrator::where('email', $request->email)->where('status', 1)->first();
 
-        if ($usr->rol_id == 2) {
-            $this->redirectTo = "/admin/agregar-mensaje";
-        }
-
         if ($usr) {
-            return $this->guard()->attempt(
-                $this->credentials($request), $request->filled('remember')
-            );
+
+            if ($usr->rol_id == 2) {
+                $this->redirectTo = "/admin/agregar-mensaje";
+            }
+
+            if ($usr) {
+                return $this->guard()->attempt(
+                    $this->credentials($request), $request->filled('remember')
+                );
+            }
         }
 
         return false;

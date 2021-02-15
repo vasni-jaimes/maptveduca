@@ -669,9 +669,10 @@ var funciones = {
       if (e.target.getAttribute('name') == 'frm-agregar_usuario') {
         document.querySelector("form[name='frm-agregar_usuario']").submit();
         return false;
-      } // document.querySelector("form[name='frm-editar_instructor']").submit();
-      // return false;
+      }
 
+      document.querySelector("form[name='frm-editar_usuario']").submit();
+      return false;
     }
   },
   alertConfirmDeleteResp: function alertConfirmDeleteResp(e) {

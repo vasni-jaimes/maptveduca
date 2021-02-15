@@ -307,6 +307,7 @@ $(document).ready(function(){
     
 });
 
+
 $(document).click(function(e) { 
     if ($(window).width() < 767) {
         if($('.sidebar-cursos').is(':visible')&&!$(e.target).closest('.sidebar-cursos').length) {

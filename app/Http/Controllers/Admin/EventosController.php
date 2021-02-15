@@ -13,6 +13,7 @@ use App\Evento;
 use App\TipoEventos;
 use App\Notificacion;
 use Illuminate\Support\Facades\Validator;
+use App\User;
 use DB;
 
 class EventosController extends Controller

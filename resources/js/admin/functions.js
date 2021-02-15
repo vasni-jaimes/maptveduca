@@ -130,8 +130,8 @@ let funciones = {
 	        	return false;
 	        }
 
-	        // document.querySelector("form[name='frm-editar_instructor']").submit();
-	        // return false;
+	        document.querySelector("form[name='frm-editar_usuario']").submit();
+	        return false;
 	    }
 
 
