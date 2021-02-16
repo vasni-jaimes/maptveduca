@@ -49,7 +49,7 @@
                                             @endphp
 
                                             @for($i = 0; $i <= count($archivos) - 1; $i++)
-                                                <li> <a href="{{ route('down.publicacion', [$curso->slug,$publicacion->id,$i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a> </li>
+                                                <li> <a href="{{ route('down.publicacionprofe.web', [$curso->slug,$publicacion->id,$i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a> </li>
                                             @endfor
                                         </ul>
                                     </div> <!-- /btn-archivo -->

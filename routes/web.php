@@ -78,6 +78,10 @@ Route::get('aulas-virtuales', 'Site\AulasVirtualesController@showAulas')->name('
 Route::get('aula-virtual/{user_id}', 'Site\AulasVirtualesController@showAula')->name('aula-virtual.show');
 Route::post('aula-virtual-respuesta/{publicacion_id}', 'Site\AulasVirtualesController@respuestaStore')->name('aula-virtual-web.store');
 Route::get('downloadFile/{slug_id}/{publicacion_id}/{respuesta_id}/{positionFile}', 'Site\AulasVirtualesController@downloadFile')->name('down.publicacion.web');
+
+Route::get('downloadFileProfe/{slug_id}/{publicacion_id}/{positionFile}', 'Site\AulasVirtualesController@downloadFileProfe')->name('down.publicacionprofe.web');
+
+
 Route::post('eliminar-respuesta/{respuesta_id}', 'Site\AulasVirtualesController@eliminarRespuesta')->name('eliminar.resp-web');
 Route::post('actualizar-respuesta/{publicacion_id}/{respuesta_id}', 'Site\AulasVirtualesController@updateRespuesta')->name('update.resp-web');
 Route::post('eliminar-archivo', 'Site\AulasVirtualesController@eliminarArchivo')->name('eliminarArchivo');

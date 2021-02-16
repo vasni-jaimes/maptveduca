@@ -138,6 +138,32 @@ class AulasVirtualesController extends Controller
     }
 
 
+    public function downloadFileProfe($slug_curso, $publicacion_id, $positionFile)
+    {
+        $curso = Course::where('slug', $slug_curso)->where('status', 1)->first();
+        if ($curso) {
+            $publicacion = Publicacion::where('curso_id', $curso->id)
+                            ->where('id', $publicacion_id)->first();
+
+            if ($publicacion) {
+                $archivos = json_decode($publicacion->archivos);
+                for ($i=0; $i <= count($archivos) - 1; $i++) { 
+                    if ($positionFile == $i) {
+                        if (isset($archivos[$i])) {
+                            echo "<script> window.close() </script>";
+                            return response()->download(storage_path("app/".$archivos[$i]));
+                        }
+                    }
+                }
+            }
+
+            echo "<script> window.close() </script>";
+        }
+
+        echo "<script> window.close() </script>";
+    }
+
+
     public function downloadFile($slug_curso, $publicacion_id, $respuesta_id, $positionFile)
     {
         $curso = Course::where('slug', $slug_curso)->where('status', 1)->first();
