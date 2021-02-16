@@ -166,7 +166,7 @@
                             </div> <!-- /txt-equipo -->
                         </li> --}}
                         
-                        <li class="relleno"></li>
+                        {{-- <li class="relleno"></li> --}}
                         
                     </ul>
                     
