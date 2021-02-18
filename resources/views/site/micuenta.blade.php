@@ -104,23 +104,12 @@
                                 <div class="item-perfil">
                                     <h4>Membresía</h4>
                                     @if (count(auth()->user()->suscripcion) > 0)
-                                        @for ($i = 0; $i <= count(auth()->user()->suscripcion) - 1; $i++)
-                                            @if (auth()->user()->suscripcion[$i]->id == 1)
-                                                <a href="#">Membresía Basica
-                                                    <span class="ico-edit" id="edit-membresia">
-                                                        <img src="/site/img/edit.png">
-                                                        <p>Modificar membresía</p>
-                                                    </span>
-                                                </a>
-                                            @elseif (auth()->user()->suscripcion[$i]->id == 2)
-                                                 <a href="#">Membresía Académica
-                                                    <span class="ico-edit" id="edit-membresia">
-                                                        <img src="/site/img/edit.png">
-                                                        <p>Modificar membresía</p>
-                                                    </span>
-                                                </a>
-                                            @endif
-                                        @endfor
+                                        <a href="#">{{ auth()->user()->ultimaSuscripcion()->nombre }}
+                                            <span class="ico-edit" id="edit-membresia">
+                                                <img src="/site/img/edit.png">
+                                                <p>Modificar membresía</p>
+                                            </span>
+                                        </a>
                                     @else
                                         <p>No tienes ninguna suscripcion activa</p>
                                     @endif

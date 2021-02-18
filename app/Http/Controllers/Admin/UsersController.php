@@ -138,7 +138,7 @@ class UsersController extends Controller
         $user->email            = $request->email;
         $user->fecha_nacimiento = $request->fecha_nacimineto;
 
-        if ($request->has('password')) {
+        if ($request->has('password') && isset($request->password)) {
             $user->password     = Hash::make($request->password);
         }
 

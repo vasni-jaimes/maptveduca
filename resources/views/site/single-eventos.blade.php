@@ -66,30 +66,38 @@
                     
                         <div class="row-evento">
                             
-                            @if ( auth()->user()->tieneSuscripcion() && $evento->especial == 0 && $evento->isArchivado() == true)
+                            @if ($evento->especial == 0)
+
                                 <h3>Mira el evento aquí:</h3>
-                            @endif
 
-                            @if ( !$evento->isArchivado() )
-                                <p><span class="txt-yellow"> {{ $evento->FormatoLetras($evento->fecha_lanzamiento, 3) }} </span></p>
-                            @endif
-
-
-                            @if ( auth()->user()->tieneSuscripcion() && $evento->especial == 0 && $evento->isArchivado() == true)
-                                <div class="row-video">
-                                    <iframe src="{{ $evento->video_evento }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div> <!-- /row-video -->
-                            @endif
+                                @if ( !$evento->isArchivado() )
+                                    <p><span class="txt-yellow"> {{ $evento->FormatoLetras($evento->fecha_lanzamiento, 3) }} </span></p>
+                                @endif
 
 
-                            @if ( auth()->user()->tieneSuscripcion() && $evento->especial == 1 && $evento->isArchivado() == true && $eventoPagado == true )
+                                {{-- @if ( auth()->user()->tieneSuscripcion() && $evento->especial == 0 && $evento->isArchivado() == true) --}}
+                                @if ( auth()->user()->tieneSuscripcion() )
+                                    <div class="row-video">
+                                        <iframe src="{{ $evento->video_evento }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div> <!-- /row-video -->
+                                @endif
+
+                            @else
+
                                 <h3>Mira el evento aquí:</h3>
-                            @endif
 
-                            @if ( auth()->user()->tieneSuscripcion() && $evento->especial == 1 && $evento->isArchivado() == true && $eventoPagado == true )
-                                <div class="row-video">
-                                    <iframe src="{{ $evento->video_evento }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div> <!-- /row-video -->
+                                @if ( !$evento->isArchivado() )
+                                    <p><span class="txt-yellow"> {{ $evento->FormatoLetras($evento->fecha_lanzamiento, 3) }} </span></p>
+                                @endif
+
+
+                                {{-- @if ( auth()->user()->tieneSuscripcion() && $evento->especial == 1 && $evento->isArchivado() == true && $eventoPagado == true ) --}}
+                                @if ( auth()->user()->tieneSuscripcion() && $eventoPagado == true )
+                                    <div class="row-video">
+                                        <iframe src="{{ $evento->video_evento }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div> <!-- /row-video -->
+                                @endif
+
                             @endif
 
                         </div> <!-- /row-evento -->
