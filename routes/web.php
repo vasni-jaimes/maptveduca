@@ -22,6 +22,10 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('send.login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
 //HOME
 Route::get('home', 'Site\HomeController@index')->name('home');
 
@@ -61,6 +65,11 @@ Route::get('checkout/{slug_membresia}', 'Site\CheckoutController@index')->name('
 Route::get('pago/{slug_membresia}', 'Site\CheckoutController@PayWithPaypal')->name('paago-membresia');
 Route::get('pago/{slug_membresia}/status', 'Site\CheckoutController@PaypalStatus')->name('pago-status');
 Route::get('gracias', 'Site\CheckoutController@getGracias')->name('gracias');
+
+// PAGO DE EVENTO
+Route::get('pago-evento/{evento_id}', 'Site\EventosCheckout@PayWithPaypal')->name('paago-evento');
+Route::get('pago-evento/{evento_id}/status', 'Site\EventosCheckout@PaypalStatus')->name('pago-evento-status');
+Route::get('pagoevento/{slug_membresia}/status', 'Site\EventosCheckout@PaypalStatus')->name('pagoevento-status');
 
 
 //FAVORITOS
@@ -136,9 +145,9 @@ Route::post('contacto', 'Site\ContactoController@store')->name('contacto.store')
 // 	return view('site.single-clases');
 // })->name('single-clases');
 
-Route::get('evento-archivado', function() {
-	return view('site.evento-archivado');
-})->name('evento-archivado');
+// Route::get('evento-archivado', function() {
+// 	return view('site.evento-archivado');
+// })->name('evento-archivado');
 
 Route::get('membresia-basica', function() {
 	return view('site.membresia-basica');
@@ -168,7 +177,7 @@ Route::get('membresia-basica', function() {
 // 	return view('site.faqs');
 // })->name('faqs');
 
-Route::get('recover', function() {
+Route::get('password/email', function() {
 	return view('site.recover');
 })->name('recover');
 

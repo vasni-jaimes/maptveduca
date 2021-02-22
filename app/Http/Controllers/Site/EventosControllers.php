@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegistroEvento;
 use App\Evento;
 use App\Favorito;
 use DB;
@@ -37,15 +39,27 @@ class EventosControllers extends Controller
         $eventoPagado    = DB::table('eventos_pagados')->where("user_id", auth()->user()->id)->where('evento_id', $evento->id)->first();
         $estaEnMiTablero = $this->estaEnMiTablero($evento->id);
 
-    	return view('site.single-eventos', compact("evento", "favorito", "eventoPagado", "estaEnMiTablero"));    
+        //OBTENER EVENTOS RELACIONADOS Y ARCHIVADOS
+        date_default_timezone_set('America/Mexico_City');
+        $hoy          = date('Y-m-d H:i:s', time());
+
+        $eventosRelacionados = Evento::with(["instructor"])
+                                    ->where("id", "!=", $evento->id)
+                                    ->where("status", 1)
+                                    ->where("fecha_lanzamiento", "<", $hoy)
+                                    ->where("tipo_evento_id", $evento->tipo_evento_id)
+                                    ->get();
+
+
+    	return view('site.single-eventos', compact("evento", "favorito", "eventoPagado", "estaEnMiTablero", "eventosRelacionados"));    
     }
 
 
     public function agregarTablero(Request $request)
     {
-        if (!auth()->user()->tieneSuscripcion()) {
-            return response()->json(["message" => "not_membresia"]);
-        }
+        // if (!auth()->user()->tieneSuscripcion()) {
+        //     return response()->json(["message" => "not_membresia"]);
+        // }
 
         if ( $request->has('slug') && $request->has('slug')) {
             $evento = Evento::where('slug', $request->slug)->where('status', 1)->first();
@@ -64,6 +78,7 @@ class EventosControllers extends Controller
                             ]);
 
                     if ($tablero) {
+                        $this->MandarEmail($evento, "No aplica (eventos gratuitos abiertos al público)");
                         return response()->json(["message" => "ok"]);
                     }
 
@@ -82,9 +97,9 @@ class EventosControllers extends Controller
 
     protected function estaEnMiTablero($evento_id)
     {
-        if (!auth()->user()->tieneSuscripcion()) {
-            return false;
-        }
+        // if (!auth()->user()->tieneSuscripcion()) {
+        //     return false;
+        // }
 
         $eventoTablero = DB::table('tablero_eventos')
                                     ->where('evento_id', $evento_id)
@@ -96,5 +111,13 @@ class EventosControllers extends Controller
         }
 
         return false;
+    }
+
+
+    protected function MandarEmail($evento, $status)
+    {
+        //maptveduca.info@gmail.com
+        $email = auth()->user()->email;
+        return Mail::to($email)->send(new RegistroEvento($evento, $status));
     }
 }

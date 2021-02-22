@@ -137,13 +137,15 @@
                                 <ul>
                                     @foreach($archivados->where("tipo_evento_id", 1) as $archivado)
                                         <li class="col-3">
-                                            <img src="{{ Storage::url($archivado->img_evento) }}">
-                                            <div class="txt-clase">
-                                                <h4>{{ $archivado->nombre }}</h4>
-                                                <p>{{ $archivado->instructor[0]->nombres.' '.$archivado->instructor[0]->apellidos }}</p>
-                                                <span> {{ $archivado->FormatoLetras($archivado->fecha_lanzamiento, 0) }} </span>
-                                                <span>CLÍNICA BÁSICA</span>
-                                            </div> <!-- /txt-clase -->
+                                            <a href="{{ route("evento.show", $archivado->slug) }}">
+                                                <img src="{{ Storage::url($archivado->img_evento) }}">
+                                                <div class="txt-clase">
+                                                    <h4>{{ $archivado->nombre }}</h4>
+                                                    <p>{{ $archivado->instructor[0]->nombres.' '.$archivado->instructor[0]->apellidos }}</p>
+                                                    <span> {{ $archivado->FormatoLetras($archivado->fecha_lanzamiento, 0) }} </span>
+                                                    <span>CLÍNICA BÁSICA</span>
+                                                </div> <!-- /txt-clase -->
+                                            </a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -158,13 +160,15 @@
                                 <ul>
                                     @foreach($archivados->where("tipo_evento_id", 2) as $archivado)
                                         <li class="col-3">
-                                            <img src="{{ Storage::url($archivado->img_evento) }}">
-                                            <div class="txt-clase">
-                                                <h4>{{ $archivado->nombre }}</h4>
-                                                <p>{{ $archivado->instructor[0]->nombres.' '.$archivado->instructor[0]->apellidos }}</p>
-                                                <span> {{ $archivado->FormatoLetras($archivado->fecha_lanzamiento, 0) }} </span>
-                                                <span>CLÍNICA BÁSICA</span>
-                                            </div> <!-- /txt-clase -->
+                                            <a href="{{ route("evento.show", $archivado->slug) }}">
+                                                <img src="{{ Storage::url($archivado->img_evento) }}">
+                                                <div class="txt-clase">
+                                                    <h4>{{ $archivado->nombre }}</h4>
+                                                    <p>{{ $archivado->instructor[0]->nombres.' '.$archivado->instructor[0]->apellidos }}</p>
+                                                    <span> {{ $archivado->FormatoLetras($archivado->fecha_lanzamiento, 0) }} </span>
+                                                    <span>CLÍNICA BÁSICA</span>
+                                                </div> <!-- /txt-clase -->
+                                            </a>
                                         </li>
                                     @endforeach
                                 </ul>

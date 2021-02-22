@@ -418,6 +418,17 @@ if (no_deletefile_resp) {
     e.preventDefault();
     document.querySelector('#shadow-eliminar_archivo').style.display = "none";
   });
+} //DALE AL BOTTON OK DE STATUS DE EVENTO
+//cerrar modal ok
+
+
+var ok_evento = document.querySelector('.ok_evento');
+
+if (ok_evento) {
+  ok_evento.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector('#shadow-eventok').style.display = "none";
+  });
 }
 
 /***/ }),

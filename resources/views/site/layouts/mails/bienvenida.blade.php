@@ -11,7 +11,7 @@
 		
 		<tr>	
 			<td colspan="2">
-				<img style="display: block; width: 100%;" src="img/banner.png">
+				<img style="display: block; width: 100%;" src="{{ Request::root() }}/site/img/layouts/bienvenida/banner.png">
 			</td>
 		</tr>
 		
@@ -25,7 +25,7 @@
         
         <tr>
             <td>
-				<img style="display: block; width: 100%;" src="img/audifonos.jpg">
+				<img style="display: block; width: 100%;" src="{{ Request::root() }}/site/img/layouts/bienvenida/audifonos.jpg">
 			</td>
             <td style="padding: 20px;">
                 <p style="margin: 0; font-size: 20px; line-height: 130%; line-height: 130%;"><strong>HOY INICIA LA EXPERIENCIA DE ESTUDIAR</strong></p>
@@ -43,7 +43,7 @@
         <tr>
 			<td colspan="2" style="padding: 30px;">
                 <p style="margin: 0; padding-bottom: 15px; text-align: center; font-size: 15px; line-height: 130%;">Al ingresar a <a style="color: #000; text-decoration: none;" href="https://www.maptveduca.com/"><strong>maptveduca.com</strong></a>, ve a tu Tablero Personal dando click en el ícono que encontraras en la parte superior derecha de la página:</p>
-                <img style="display: block; padding-bottom: 15px;  margin: auto;" src="img/user.png">
+                <img style="display: block; padding-bottom: 15px;  margin: auto;" src="{{ Request::root() }}/site/img/layouts/bienvenida/user.png">
                 <p style="margin: 0; text-align: center; font-size: 15px; line-height: 130%;">Dentro de tu Tablero Personal encontrarás toda tu información personal y académica si exploras las opciones del <strong>panel izquierdo.</strong></p>
                 <p style="margin: 0; padding-bottom: 15px; text-align: center; font-size: 15px; line-height: 130%;">Dentro de la sección <strong>Control Académico / Materias</strong> encontrarás los <strong>cursos que corresponden a tu trimestre en curso y los horarios de sesiones Zoom con tus profesores.</strong></p>
                 <p style="margin: 0; padding-bottom: 15px; text-align: center; font-size: 15px; line-height: 130%;">Dentro de cada curso encontrarás una <strong>serie de videos</strong> que podrás navegar de acuerdo a los diferentes temas. Cada uno cuenta con <strong>material descargable.</strong></p>
@@ -64,18 +64,18 @@
                 <p style="font-size: 20px; line-height: 130%;"><strong>¡EMPIEZA A CREAR HOY MISMO!</strong></p>
             </td>
             <td>
-				<img style="display: block; width: 100%;" src="img/produccion.jpg">
+				<img style="display: block; width: 100%;" src="{{ Request::root() }}/site/img/layouts/bienvenida/produccion.jpg">
 			</td>
         </tr>
         
         <tr>
             <td colspan="2" style="padding: 20px; background-color: #000;">
                 <ul style="padding-left: 0; list-style: none; text-align: center;">
-                    <li style="display: inline-block; vertical-align: middle;"><img src="img/facebook.png"></li>
-                    <li style="display: inline-block; vertical-align: middle;"><img src="img/instagram.png"></li>
-                    <li style="display: inline-block; vertical-align: middle;"><img src="img/youtube.png"></li>
-                    <li style="display: inline-block; vertical-align: middle;"><img src="img/email.png"></li>
-                    <li style="display: inline-block; vertical-align: middle;"><img src="img/mundo.png"></li>
+                    <li style="display: inline-block; vertical-align: middle;"><img src="{{ Request::root() }}/site/img/layouts/bienvenida/facebook.png"></li>
+                    <li style="display: inline-block; vertical-align: middle;"><img src="{{ Request::root() }}/site/img/layouts/bienvenida/instagram.png"></li>
+                    <li style="display: inline-block; vertical-align: middle;"><img src="{{ Request::root() }}/site/img/layouts/bienvenida/youtube.png"></li>
+                    <li style="display: inline-block; vertical-align: middle;"><img src="{{ Request::root() }}/site/img/layouts/bienvenida/email.png"></li>
+                    <li style="display: inline-block; vertical-align: middle;"><img src="{{ Request::root() }}/site/img/layouts/bienvenida/mundo.png"></li>
                 </ul>
             </td>
         </tr>

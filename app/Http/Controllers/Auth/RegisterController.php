@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Mensaje;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailRegistro;
 
 class RegisterController extends Controller
 {
@@ -85,6 +87,7 @@ class RegisterController extends Controller
                 ]);
 
         if ($usr) {
+            $this->MandarEmail($usr);
             $this->sendMensajeBienvenida($usr);
             return $usr;
         }
@@ -101,8 +104,15 @@ class RegisterController extends Controller
         $mensaje->mensaje = "<strong>Hola ".$usr->nombre." ".$usr->apaterno."</strong>";
         $mensaje->mensaje .= "<br> ¡Bienvenid@ a MAPtv Educa! Navega por nuestra plataforma para descubrir lo que tenemos para ti. Recuerda que para estudiar el Técnico en     Producción Musical a través de nuestros Cursos debes adquirir la Membresía Académica. De otro modo, sólo tendrás acceso a la oferta de Eventos y Clases en Línea.<br><br>
 
-            ¡Visita la sección “Membresía Académica” para conocer más!
-";
+            ¡Visita la sección “Membresía Académica” para conocer más!";
         $mensaje->save();
+    }
+
+
+    protected function MandarEmail($usr)
+    {
+        //maptveduca.info@gmail.com
+        $email = $usr->email;
+        return Mail::to($email)->send(new MailRegistro());
     }
 }

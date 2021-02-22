@@ -150,7 +150,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row" @if ($evento->especial == 0) style = "display:none" @endif >
                             <label class="col-sm-2 col-form-label">Precio: </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="precio" value="{{ old("precio") }}">
@@ -199,14 +199,6 @@
                         <div class="hr-line-dashed"></div>
 
                         <div class="eventos_two">
-
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Precio: </label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="precio" value="{{ old("precio") }}">
-                                    <span class='form-text m-b-none errors'> {!! $errors->first('precio') !!} </span>
-                                </div>
-                            </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">URL video: </label>
@@ -262,6 +254,16 @@
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
             });
+
+            $(".i-checks input").on('ifChanged', function (e) {
+                if (e.target.checked == true) {
+                    $('input[name="precio"]').parent().parent().css('display', 'flex');
+                }
+                else {
+                    $('input[name="precio"]').parent().parent().css('display', 'none');
+                }
+            });
+
             $('.chosen-select').chosen({width: "100%"});
             $('.custom-file-input').on('change', function() {
                 let fileName = $(this).val().split('\\').pop();

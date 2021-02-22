@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Collection;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailBienvenida;
+
 use PayPal\Api\Amount;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
@@ -160,6 +164,7 @@ class CheckoutController extends Controller
 
 
         	if ($user_membresia) {
+                $this->MandarEmail();
                 $this->MensajeBienvenidaSuscripcion();
                 DB::commit();
                 return redirect()->route("gracias")->with("gracias", "Gracias! El pago a través de PayPal se ha ralizado correctamente.");
@@ -208,5 +213,13 @@ class CheckoutController extends Controller
                                 ";
 
         $mensaje->save();
+    }
+
+
+    protected function MandarEmail()
+    {
+        //maptveduca.info@gmail.com
+        $email = auth()->user()->email;
+        return Mail::to($email)->send(new MailBienvenida());
     }
 }
