@@ -113,9 +113,12 @@
                                 @endif
 
                                 {{-- @if ( auth()->user()->tieneSuscripcion() && $evento->especial == 0 && $evento->isArchivado() == true) --}} 
-                                <div class="row-video">
-                                    <iframe src="{{ $evento->video_evento }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div> <!-- /row-video -->
+
+                                @if ($estaEnMiTablero == true)
+                                    <div class="row-video">
+                                        <iframe src="{{ $evento->video_evento }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div> <!-- /row-video -->
+                                @endif
 
                             @else
 
