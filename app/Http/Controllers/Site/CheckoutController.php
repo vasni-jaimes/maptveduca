@@ -164,7 +164,7 @@ class CheckoutController extends Controller
 
 
         	if ($user_membresia) {
-                $this->MandarEmail();
+                //$this->MandarEmail();
                 $this->MensajeBienvenidaSuscripcion();
                 DB::commit();
                 return redirect()->route("gracias")->with("gracias", "Gracias! El pago a través de PayPal se ha ralizado correctamente.");

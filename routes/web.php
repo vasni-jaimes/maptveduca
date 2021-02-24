@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::get('/variables', function() {
+	return config('mail.mailers.smtp');
+});
+
 //INDEX
 Route::get('/', 'Site\IndexController@showIndex')->name('show.index');
 

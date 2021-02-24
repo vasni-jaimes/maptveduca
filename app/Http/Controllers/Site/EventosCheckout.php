@@ -143,7 +143,7 @@ class EventosCheckout extends Controller
 
 
         	if ( $eventos_pagados == true && $tablero == true ) {
-                $this->MandarEmail($evento, "Pagado");
+                //$this->MandarEmail($evento, "Pagado");
                 DB::commit();
                 return redirect()->route("evento.show", $slug_evento)->with("gracias", "Gracias! El pago a través de PayPal se ha ralizado correctamente.");
         	}

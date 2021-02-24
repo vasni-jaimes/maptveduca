@@ -78,7 +78,7 @@ class EventosControllers extends Controller
                             ]);
 
                     if ($tablero) {
-                        $this->MandarEmail($evento, "No aplica (eventos gratuitos abiertos al público)");
+                        //$this->MandarEmail($evento, "No aplica (eventos gratuitos abiertos al público)");
                         return response()->json(["message" => "ok"]);
                     }
 
