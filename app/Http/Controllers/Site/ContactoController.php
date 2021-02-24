@@ -35,7 +35,7 @@ class ContactoController extends Controller
     	$contacto->mensaje 	= $request->mensaje;
     	if ($contacto->save()) {
             DB::commit();
-            $this->MandarEmail($request);
+            //$this->MandarEmail($request);
     		return back()->with("status.newContacto", "success");
     	}
 
