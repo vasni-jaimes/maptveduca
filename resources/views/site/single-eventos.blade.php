@@ -49,8 +49,8 @@
         <div class="hoja-1000">
             
             <ul class="flex breadcrumb-curso">
-                <li><a href="#">Evento</a></li>
-                <li><a href="#"> {{ ($evento->tipo_evento_id == 1) ? "Clínica" : "Concierto - Masterclass básico" }} </a></li>
+                <li><a href="{{ route('eventos.index') }}">Evento</a></li>
+                <li><a href=""> {{ ($evento->tipo_evento_id == 1) ? "Clínica" : "Concierto - Masterclass básico" }} </a></li>
                 <li><span>{{ $evento->nombre }}</span></li>
             </ul> <!-- /breadcrumb-curso -->
             
@@ -171,30 +171,6 @@
                     </div> <!-- /single-contenido -->
                     
                     <div class="sidebar-registro">
-                        {{-- @if ( $estaEnMiTablero == false && $evento->especial == 0 )
-                            <div class="txt-sidebar">
-                                <span><a href="#" class="registrarte_evento" data-crs="{{ $evento->slug }}">Regístrate</a></span>
-                                <div>
-                                    <p>Obtén tu membresía para registrarte a los cursos</p>
-                                    <hr class="b-bottom">
-                                    <p>Membresía básica $500.00 MXN mensuales*</p>
-                                    <p><small>* Pruébala por 30 días</small></p>
-                                    <a href="#">Obtener</a>
-                                    <hr class="b-bottom">
-                                    <p>Membresía académica</p>
-                                    <p><small>$2,000.00 MXN mensuales*</small></p>
-                                    <a href="{{ route('checkout', 'membresia-academica') }}">Obtener</a>
-                                    <p><small>* Recuerda que esta membresía también te da  acceso a todos los cursos que no pertenecen a tu plan de estudios.</small></p>
-                                </div>
-                            </div>
-                            @if (!$favorito)
-                                <div class="flex flex-center favorito favevento" data-crs="{{ $evento->slug }}" data-seccion="evento">
-                                    <img src="/site/img/estrella.png">
-                                    <p>Marca este evento como favorito</p>
-                                </div>
-                            @endif --}}
-                        
-                  
 
                         @if ( $evento->especial == 1 && $eventoPagado == false )
                         
