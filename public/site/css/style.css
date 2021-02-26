@@ -2365,6 +2365,7 @@ video#myVideo {
     position: relative;
     padding-left: 10px;
     margin-left: 10px;
+    line-height: 130%;
 }
 
 .breadcrumb-curso li:first-of-type {
@@ -2642,7 +2643,6 @@ video#myVideo {
 
 .row-video {
 	position: relative;
-    margin: 0 0 20px;
 	padding-bottom: 56.25%; /*panorámico*/
 	height: 0;
     border: 1px solid #f2f2f2;
@@ -3098,11 +3098,28 @@ section.membresia {
 
 .wrapper-clases ul li {
     margin: 15px 0;
+    background-color: #000;
+}
+
+.wrapper-clases ul.proximamente li {
+    background-color: transparent;
 }
 
 .wrapper-clases ul li img {
     display: block;
     width: 100%;
+}
+
+.wrapper-clases .img-evento {
+    padding: 100% 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wrapper-clases ul li.relleno {
+    width: 24%;
+    height: 1px;
+    background-color: transparent;
 }
 
 .proximamente li p {
@@ -3262,6 +3279,22 @@ section.membresia {
     text-align: center;
 }
 
+.wrapper-biblioteca .img-evento {
+    padding: 100% 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wrapper-biblioteca .slick-track {
+    display: flex;
+}
+
+.wrapper-biblioteca .slick-slide {
+    float: none!important;
+    height: auto!important;
+    background-color: #000;
+}
+
 .bloque-slide {
     position: relative;
     padding: 20px 0;
@@ -3389,9 +3422,25 @@ section.membresia {
     background-image: url(/site/img/next-yellow.png);
 }
 
-.flex-ponente .row-video {
-    padding-bottom: 51.25%;
+.item-evento .slick-track {
+    display: flex;
+} 
+
+.item-evento .slick-slide {
+    float: none!important;
+    height: auto!important;
+    background-color: #000;
 }
+
+.item-evento .img-evento {
+    padding: 100% 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/*.flex-ponente .row-video {
+    padding-bottom: 51.25%;
+}*/
 
 .row-ponente {
     -webkit-box-sizing: border-box;
@@ -3407,6 +3456,7 @@ section.membresia {
     font-family: 'Oswald medium';
     font-size: 28px;
     text-transform: uppercase;
+    line-height: 130%;
 }
 
 .row-ponente p {

@@ -60,7 +60,7 @@
                             @if ($evento->tipo_evento_id == 1)
                                 <li class="col-3">
                                     <a href="{{ route("evento.show", $evento->slug) }}">
-                                        <img src="{{ Storage::url($evento->img_evento) }}">
+                                        <div class="img-evento" style="background-image: url({{ Storage::url($evento->img_evento) }});"></div>
                                         <div class="txt-clase">
                                             <h4>{{ $evento->nombre }}</h4>
                                             <p>{{ $evento->instructor[0]->nombres.' '.$evento->instructor[0]->apellidos }}</p>
@@ -71,6 +71,8 @@
                                 </li>
                             @endif
                         @endforeach
+                        <li class="relleno"></li>
+                        <li class="relleno"></li>
                     </ul> <!-- /flex -->
                 </div> <!-- /wrapper-clases -->
             @else
@@ -97,7 +99,7 @@
                             @if ($evento->tipo_evento_id == 2)
                                 <li class="col-3">
                                     <a href="{{ route("evento.show", $evento->slug) }}">
-                                        <img src="{{ Storage::url($evento->img_evento) }}">
+                                        <div class="img-evento" style="background-image: url({{ Storage::url($evento->img_evento) }});"></div>
                                         <div class="txt-clase">
                                             <h4>{{ $evento->nombre }}</h4>
                                             <p>{{ $evento->instructor[0]->nombres.' '.$evento->instructor[0]->apellidos }}</p>
@@ -108,6 +110,8 @@
                                 </li>
                             @endif
                         @endforeach
+                        <li class="relleno"></li>
+                        <li class="relleno"></li>
                     </ul> <!-- /flex -->
                 </div> <!-- /wrapper-clases -->
             @else
@@ -138,7 +142,7 @@
                                     @foreach($archivados->where("tipo_evento_id", 1) as $archivado)
                                         <li class="col-3">
                                             <a href="{{ route("evento.show", $archivado->slug) }}">
-                                                <img src="{{ Storage::url($archivado->img_evento) }}">
+                                                <div class="img-evento" style="background-image: url('{{ Storage::url($archivado->img_evento) }}');"></div>
                                                 <div class="txt-clase">
                                                     <h4>{{ $archivado->nombre }}</h4>
                                                     <p>{{ $archivado->instructor[0]->nombres.' '.$archivado->instructor[0]->apellidos }}</p>
@@ -161,7 +165,7 @@
                                     @foreach($archivados->where("tipo_evento_id", 2) as $archivado)
                                         <li class="col-3">
                                             <a href="{{ route("evento.show", $archivado->slug) }}">
-                                                <img src="{{ Storage::url($archivado->img_evento) }}">
+                                                <div class="img-evento" style="background-image: url('{{ Storage::url($archivado->img_evento) }}');"></div>
                                                 <div class="txt-clase">
                                                     <h4>{{ $archivado->nombre }}</h4>
                                                     <p>{{ $archivado->instructor[0]->nombres.' '.$archivado->instructor[0]->apellidos }}</p>

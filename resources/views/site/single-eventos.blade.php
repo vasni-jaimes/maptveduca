@@ -146,12 +146,12 @@
                                 
                                     <div class="item-evento">
 
-                                        <p class="titulo"><span> {{ $evento->tipo_evento_id == 1 ? "Clínicas" : "Conciertos/Masterclass" }} </span></p>
+                                        <p class="titulo"><span> {{ $evento->tipo_evento_id == 1 ? "Clínicas" : "Conciertos/M.class" }} </span></p>
                                         <ul>
 
                                             @foreach($eventosRelacionados as $eventoArch)
                                                 <li class="col-3">
-                                                    <img src="{{ Storage::url($eventoArch->img_evento) }}">
+                                                    <div class="img-evento" style="background-image: url({{ Storage::url($evento->img_evento) }});"></div>
                                                     <div class="txt-clase">
                                                         <h4>{{ $eventoArch->nombre }}</h4>
                                                         <p>{{ $eventoArch->instructor[0]->nombres.' '.$eventoArch->instructor[0]->apellidos }}</p>
