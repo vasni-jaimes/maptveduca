@@ -79,7 +79,9 @@
                     <ul class="slide-inicio">
                         @forelse($eventos as $evento)
                             <li>
-                                <div class="img-slide" style="background-image: url({{Storage::url($evento->img_evento) }});"></div> <!-- /img-slide -->
+                                <a href="{{ route("evento.show", $evento->slug) }}">
+                                    <div class="img-slide" style="background-image: url({{Storage::url($evento->img_evento) }});"></div> <!-- /img-slide -->
+                                </a>
                             </li>
                         @empty
                             <li>
