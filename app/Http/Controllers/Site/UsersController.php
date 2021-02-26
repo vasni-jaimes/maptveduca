@@ -83,7 +83,7 @@ class UsersController extends Controller
 
             //FECHA DE HOY
             date_default_timezone_set('America/Mexico_City');
-            $hoy = Carbon::now()->format('Y-m-d');
+            $hoy = Carbon::now()->format('Y-m-d H:i:s');
 
         $tableroEventos = DB::table('tablero_eventos')
                             ->join('eventos', 'tablero_eventos.evento_id', 'eventos.id')
@@ -98,7 +98,7 @@ class UsersController extends Controller
                             ->select('eventos.*')
                             ->where('eventos.status', 1)
                             ->where('tablero_eventos.user_id', auth()->user()->id)
-                            ->where('fecha_lanzamiento', '<=', $hoy)
+                            ->where('fecha_lanzamiento', '<', $hoy)
                             ->get();
 
         /* MENSAJES */

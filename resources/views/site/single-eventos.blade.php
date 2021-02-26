@@ -49,7 +49,7 @@
         <div class="hoja-1000">
             
             <ul class="flex breadcrumb-curso">
-                <li><a href="{{ route('eventos.index') }}">Evento</a></li>
+                <li><a href="{{ route('eventos.index') }}">Eventos</a></li>
                 <li> {{ ($evento->tipo_evento_id == 1) ? "Clínica" : "Concierto - Masterclass básico" }} </li>
                 <li><span>{{ $evento->nombre }}</span></li>
             </ul> <!-- /breadcrumb-curso -->

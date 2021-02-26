@@ -43,9 +43,9 @@
                         <li data-seccion="favoritos"><a href="">Favoritos</a></li>
                         @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->ultimaSuscripcion()->id == 1 || auth()->user()->ultimaSuscripcion()->id == 2))
                             <li data-seccion="cursos"><a href="">Cursos</a></li>
-                            <li data-seccion="eventos"><a href="">Eventos</a></li>
-                            <li data-seccion="clases"><a href="">Clases en línea</a></li>
                         @endif
+                        <li data-seccion="eventos"><a href="">Eventos</a></li>
+                        <li data-seccion="clases"><a href="">Clases en línea</a></li>
                         @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimaSuscripcion()->id == 2)
                             <li class="item-control">
                                 <a href="#">Control Académico</a>
@@ -414,165 +414,165 @@
                                 </div>
                             </div> <!-- /row-favoritos -->
                         </div>
-                        
-                        <div style="margin-bottom: 30px;" data-seccion="eventos" class="section">
-                            <h3>Mis eventos</h3>
-                            <div class="row-favoritos">
-                                <p>AQUÍ ENCONTRARÁS TUS EVENTOS PRÓXIMOS Y ADQUIRIDOS</p>
-                                <div class="flex-cursos">
-                                    @if ($tableroEventos->count() > 0)
-                                        <p>PRÓXIMOS</p>
-                                        <ul class="flex between wrap">
-                                            @foreach($tableroEventos as $eventos)
-                                                <li class="col-3">
-                                                    <img src="{{ Storage::url($eventos->img_evento) }}">
-                                                    <div class="txt-clase">
-                                                        <p>{{ $eventos->nombre }}</p>
-                                                        <p>{{ $eventos->fecha_lanzamiento }}</p>
-                                                        <a href="{{ route('evento.show', $eventos->slug) }}">Ir al evento</a>
-                                                    </div> <!-- /txt-clase -->
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                    @if ($eventosOld->count() > 0)
-                                        <p>ARCHIVADOS</p>
-                                        <ul class="flex between wrap">
-                                            @foreach($eventosOld as $eventoOld)
-                                                <li class="col-3">
-                                                    <img src="{{ Storage::url($eventoOld->img_evento) }}">
-                                                    <div class="txt-clase">
-                                                        <p>{{ $eventoOld->nombre }}</p>
-                                                        <p>{{ $eventoOld->fecha_lanzamiento }}</p>
-                                                        <a href="{{ route('evento.show', $eventoOld->slug) }}">Ir al evento</a>
-                                                    </div> <!-- /txt-clase -->
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                    @if ($tableroEventos->count() <= 0 && $eventosOld->count() <= 0)
-                                        <p> Aún no tienes eventos. </p>
-                                    @endif
-                                </div>
-                            </div> <!-- /row-favoritos -->
-                        </div>
-                        
-                        <div style="margin-bottom: 30px;" data-seccion="clases" class="section">
-                            <h3>Mis clases en línea</h3>
-                            <div class="row-favoritos">
-                                <p>AQUÍ ENCONTRARÁS TUS CLASES EN LÍNEA PRÓXIMAS Y ADQUIRIDAS</p>
-                                <div class="flex-cursos">
-                                     <p> Aún no tienes clases. </p>
-                                    {{-- <p>PRÓXIMAS</p>
-                                    <ul class="flex between wrap">
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir a la clase</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir a la clase</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir a la clase</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir a la clase</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                    </ul>
-                                    <p>EN CURSO</p>
-                                    <ul class="flex between wrap">
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir a la clase</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir a la clase</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir a la clase</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir a la clase</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                    </ul>
-                                    <p>CONCLUIDAS</p>
-                                    <ul class="flex between wrap">
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir a la clase</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir a la clase</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir a la clase</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                        <li class="col-3">
-                                            <img src="/site/img/fulano.jpg">
-                                            <div class="txt-clase">
-                                                <p>Nombre del curso</p>
-                                                <p>00/00/000</p>
-                                                <a href="#">Ir a la clase</a>
-                                            </div> <!-- /txt-clase -->
-                                        </li>
-                                    </ul> --}}
-                                </div>
-                            </div> <!-- /row-favoritos -->
-                        </div>
 
                     @endif
+
+                    <div style="margin-bottom: 30px;" data-seccion="eventos" class="section">
+                        <h3>Mis eventos</h3>
+                        <div class="row-favoritos">
+                            <p>AQUÍ ENCONTRARÁS TUS EVENTOS PRÓXIMOS Y ADQUIRIDOS</p>
+                            <div class="flex-cursos">
+                                @if ($tableroEventos->count() > 0)
+                                    <p>PRÓXIMOS</p>
+                                    <ul class="flex between wrap">
+                                        @foreach($tableroEventos as $eventos)
+                                            <li class="col-3">
+                                                <img src="{{ Storage::url($eventos->img_evento) }}">
+                                                <div class="txt-clase">
+                                                    <p>{{ $eventos->nombre }}</p>
+                                                    <p>{{ $eventos->fecha_lanzamiento }}</p>
+                                                    <a href="{{ route('evento.show', $eventos->slug) }}">Ir al evento</a>
+                                                </div> <!-- /txt-clase -->
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                                @if ($eventosOld->count() > 0)
+                                    <p>ARCHIVADOS</p>
+                                    <ul class="flex between wrap">
+                                        @foreach($eventosOld as $eventoOld)
+                                            <li class="col-3">
+                                                <img src="{{ Storage::url($eventoOld->img_evento) }}">
+                                                <div class="txt-clase">
+                                                    <p>{{ $eventoOld->nombre }}</p>
+                                                    <p>{{ $eventoOld->fecha_lanzamiento }}</p>
+                                                    <a href="{{ route('evento.show', $eventoOld->slug) }}">Ir al evento</a>
+                                                </div> <!-- /txt-clase -->
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                                @if ($tableroEventos->count() <= 0 && $eventosOld->count() <= 0)
+                                    <p> Aún no tienes eventos. </p>
+                                @endif
+                            </div>
+                        </div> <!-- /row-favoritos -->
+                    </div>
+                        
+                    <div style="margin-bottom: 30px;" data-seccion="clases" class="section">
+                        <h3>Mis clases en línea</h3>
+                        <div class="row-favoritos">
+                            <p>AQUÍ ENCONTRARÁS TUS CLASES EN LÍNEA PRÓXIMAS Y ADQUIRIDAS</p>
+                            <div class="flex-cursos">
+                                 <p> Aún no tienes clases. </p>
+                                {{-- <p>PRÓXIMAS</p>
+                                <ul class="flex between wrap">
+                                    <li class="col-3">
+                                        <img src="/site/img/fulano.jpg">
+                                        <div class="txt-clase">
+                                            <p>Nombre del curso</p>
+                                            <p>00/00/000</p>
+                                            <a href="#">Ir a la clase</a>
+                                        </div> <!-- /txt-clase -->
+                                    </li>
+                                    <li class="col-3">
+                                        <img src="/site/img/fulano.jpg">
+                                        <div class="txt-clase">
+                                            <p>Nombre del curso</p>
+                                            <p>00/00/000</p>
+                                            <a href="#">Ir a la clase</a>
+                                        </div> <!-- /txt-clase -->
+                                    </li>
+                                    <li class="col-3">
+                                        <img src="/site/img/fulano.jpg">
+                                        <div class="txt-clase">
+                                            <p>Nombre del curso</p>
+                                            <p>00/00/000</p>
+                                            <a href="#">Ir a la clase</a>
+                                        </div> <!-- /txt-clase -->
+                                    </li>
+                                    <li class="col-3">
+                                        <img src="/site/img/fulano.jpg">
+                                        <div class="txt-clase">
+                                            <p>Nombre del curso</p>
+                                            <p>00/00/000</p>
+                                            <a href="#">Ir a la clase</a>
+                                        </div> <!-- /txt-clase -->
+                                    </li>
+                                </ul>
+                                <p>EN CURSO</p>
+                                <ul class="flex between wrap">
+                                    <li class="col-3">
+                                        <img src="/site/img/fulano.jpg">
+                                        <div class="txt-clase">
+                                            <p>Nombre del curso</p>
+                                            <p>00/00/000</p>
+                                            <a href="#">Ir a la clase</a>
+                                        </div> <!-- /txt-clase -->
+                                    </li>
+                                    <li class="col-3">
+                                        <img src="/site/img/fulano.jpg">
+                                        <div class="txt-clase">
+                                            <p>Nombre del curso</p>
+                                            <p>00/00/000</p>
+                                            <a href="#">Ir a la clase</a>
+                                        </div> <!-- /txt-clase -->
+                                    </li>
+                                    <li class="col-3">
+                                        <img src="/site/img/fulano.jpg">
+                                        <div class="txt-clase">
+                                            <p>Nombre del curso</p>
+                                            <p>00/00/000</p>
+                                            <a href="#">Ir a la clase</a>
+                                        </div> <!-- /txt-clase -->
+                                    </li>
+                                    <li class="col-3">
+                                        <img src="/site/img/fulano.jpg">
+                                        <div class="txt-clase">
+                                            <p>Nombre del curso</p>
+                                            <p>00/00/000</p>
+                                            <a href="#">Ir a la clase</a>
+                                        </div> <!-- /txt-clase -->
+                                    </li>
+                                </ul>
+                                <p>CONCLUIDAS</p>
+                                <ul class="flex between wrap">
+                                    <li class="col-3">
+                                        <img src="/site/img/fulano.jpg">
+                                        <div class="txt-clase">
+                                            <p>Nombre del curso</p>
+                                            <p>00/00/000</p>
+                                            <a href="#">Ir a la clase</a>
+                                        </div> <!-- /txt-clase -->
+                                    </li>
+                                    <li class="col-3">
+                                        <img src="/site/img/fulano.jpg">
+                                        <div class="txt-clase">
+                                            <p>Nombre del curso</p>
+                                            <p>00/00/000</p>
+                                            <a href="#">Ir a la clase</a>
+                                        </div> <!-- /txt-clase -->
+                                    </li>
+                                    <li class="col-3">
+                                        <img src="/site/img/fulano.jpg">
+                                        <div class="txt-clase">
+                                            <p>Nombre del curso</p>
+                                            <p>00/00/000</p>
+                                            <a href="#">Ir a la clase</a>
+                                        </div> <!-- /txt-clase -->
+                                    </li>
+                                    <li class="col-3">
+                                        <img src="/site/img/fulano.jpg">
+                                        <div class="txt-clase">
+                                            <p>Nombre del curso</p>
+                                            <p>00/00/000</p>
+                                            <a href="#">Ir a la clase</a>
+                                        </div> <!-- /txt-clase -->
+                                    </li>
+                                </ul> --}}
+                            </div>
+                        </div> <!-- /row-favoritos -->
+                    </div>
 
                     @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimaSuscripcion()->id == 2)
                     
