@@ -318,6 +318,10 @@
                         </tr>
                     </table>
                     
+                    <div class="txt-inicio">
+                        <p><strong>Inicio de trimestre:</strong> Abril 12, 2021 <span>¡Inscríbete hoy!</span></p>
+                    </div> <!-- /txt-inicio -->
+                    
                 </div> <!-- /wrapper-academica -->
                 
                 <div class="wrapper-herramienta">
