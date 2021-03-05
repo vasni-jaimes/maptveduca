@@ -72,8 +72,8 @@
                                                 <td class="center">
                                                     
                                                     <div class="btn-group">
-                                                     	<a href = "#" class="btn-info btn btn-xs mr-3">Ver Curso</a>
-                                                     	<a href="{{ route("editar-evento.edit", $helper::base64_encode_url($evento->id)) }}" class="btn-primary btn btn-xs mr-3">Editar Evneto</a>
+                                                     	<a href = "#" class="btn-info btn btn-xs mr-3">Ver Evento</a>
+                                                     	<a href="{{ route("editar-evento.edit", $helper::base64_encode_url($evento->id)) }}" class="btn-primary btn btn-xs mr-3">Editar Evento</a>
                                                      	<a href="#" class="btn-danger btn btn-xs mr-3">Eliminar Evento</a>
                                                      	@if ($evento->status == 1)
                                                            <a href = "#" class="btn-danger btn btn-xs btn-desactivar" data-id="{{ $helper::base64_encode_url($evento->id) }}" data-st="0">Desactivar</a>

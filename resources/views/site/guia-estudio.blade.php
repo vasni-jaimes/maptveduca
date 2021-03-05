@@ -82,7 +82,7 @@
                         <li>Software de edición y manipulación de audio (DAW)</li>
                     </ul>
                 </li>
-                <li class="item-guia item-kit">
+                <!--<li class="item-guia item-kit">
                     <p><strong>Si no cuentas con el equipo necesario...</strong></p>
                     <h3>Solicita tu kit de producción musical</h3>
                     <p>Personalízalo y págalo con cargo a tu colegiatura mensual</p>
@@ -96,7 +96,7 @@
                         <li><p>*Envíos sólo a la República Mexicana.</p></li>
                         <li><a href="mailto:maptveduca.info@gmail.com">¡Me interesa!</a></li>
                     </ul>
-                </li>
+                </li>-->
             </ul> <!-- /flex-guia -->
             
             <div class="row-yellow row-guia">

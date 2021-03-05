@@ -143,6 +143,10 @@
 	            </tr>
 	        </table>
 	        
+            <div class="txt-inicio">
+                <p><strong>Inicio de trimestre:</strong> Abril 12, 2021 <span>¡Inscríbete hoy!</span></p>
+            </div> <!-- /txt-inicio -->
+            
 	        <div class="row-registro">
 	            <p>¿Quieres conocer el sitio antes de decidir?</p>
 	            <a class="btn-amarillo" href="{{ route("registro.show") }}">Regístrate gratis</a>

@@ -1919,6 +1919,26 @@ video#myVideo {
     line-height: normal;
 }
 
+.txt-inicio {
+    margin: 50px 0 0;
+}
+
+.txt-inicio p {
+    font-size: 24px;
+    text-align: center;
+}
+
+.txt-inicio p strong {
+    font-family: 'Oswald medium';
+}
+
+.txt-inicio p span {
+    display: block;
+    color: #FFC314;
+    font-family: 'Oswald medium';
+    line-height: 130%;
+}
+
 
 
 /*----------------------------------  CURSOS  ----------------------------------*/
@@ -3672,8 +3692,8 @@ section.membresia {
 }
 
 .item-guia h3 {
-    max-width: 400px;
-    width: 100%;
+    /*max-width: 400px;
+    width: 100%;*/
     font-family: 'Oswald medium';
     font-size: 26px;
     color: #fff;
@@ -3713,11 +3733,12 @@ section.membresia {
 
 .item-guia.item-equipo {
     position: relative;
-    width: 60%;
+    /*width: 60%;*/
+    width: 100%;
     background-color: #000;
 }
 
-.item-guia.item-equipo:after {
+/*.item-guia.item-equipo:after {
     content: '';
     position: absolute;
     top: 30px;
@@ -3790,7 +3811,7 @@ section.membresia {
     color: #000;
     text-align: center;
     line-height: 130%;   
-}
+}*/
 
 
 
@@ -4587,9 +4608,22 @@ small.notificacion {
     margin: 15px 0;
 }
 
-.row-favoritos .flex-cursos ul li img {
+.row-favoritos .flex-cursos ul li.relleno {
+    width: 24%;
+    height: 1px;
+    border: 0;
+    background-color: transparent;
+}
+
+/*.row-favoritos .flex-cursos ul li img {
     display: block;
     width: 100%;
+}*/
+
+.row-favoritos .flex-cursos ul li .img-evento {
+    padding: 100% 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .row-favoritos .flex-cursos ul li .txt-clase {
@@ -5615,6 +5649,12 @@ a[href="#page"] {
     .col-10,
     .col-11,
     .col-12 { width: 100%; }
+    
+    .wrapper-clases ul li.relleno,
+    .wrapper-equipo ul li.relleno,
+    .row-favoritos .flex-cursos ul li.relleno {
+        width: 100%;
+    }
     
     .s-mobile {
         display: block;

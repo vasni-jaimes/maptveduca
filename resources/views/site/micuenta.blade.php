@@ -427,7 +427,7 @@
                                     <ul class="flex between wrap">
                                         @foreach($tableroEventos as $eventos)
                                             <li class="col-3">
-                                                <img src="{{ Storage::url($eventos->img_evento) }}">
+                                                <div style="background-image: url('{{ Storage::url($eventos->img_evento) }}');" class="img-evento"></div> <!-- /img-evento -->
                                                 <div class="txt-clase">
                                                     <p>{{ $eventos->nombre }}</p>
                                                     <p>{{ $eventos->fecha_lanzamiento }}</p>
@@ -442,7 +442,7 @@
                                     <ul class="flex between wrap">
                                         @foreach($eventosOld as $eventoOld)
                                             <li class="col-3">
-                                                <img src="{{ Storage::url($eventoOld->img_evento) }}">
+                                                <div style="background-image: url('{{ Storage::url($eventoOld->img_evento) }}');" class="img-evento"></div> <!-- /img-evento -->
                                                 <div class="txt-clase">
                                                     <p>{{ $eventoOld->nombre }}</p>
                                                     <p>{{ $eventoOld->fecha_lanzamiento }}</p>
@@ -450,6 +450,8 @@
                                                 </div> <!-- /txt-clase -->
                                             </li>
                                         @endforeach
+                                        <li class="relleno"></li>
+                                        <li class="relleno"></li>
                                     </ul>
                                 @endif
                                 @if ($tableroEventos->count() <= 0 && $eventosOld->count() <= 0)
