@@ -203,7 +203,7 @@ if (delete_faveve) {
 } //ELIMINAR FAVORITOS CURSOS
 
 
-var shadow_favorito = document.querySelectorAll('.shadow-favorito .si_delete-fav');
+var shadow_favorito = document.querySelectorAll('#shadow-favorito .si_delete-fav');
 
 if (shadow_favorito) {
   for (var i = 0; i <= shadow_favorito.length - 1; i++) {
@@ -214,7 +214,7 @@ if (shadow_favorito) {
 } //ELIMINAR FAVORITOS EVENTOS
 
 
-var shadow_favorito_evento = document.querySelectorAll('.shadow-favorito_evento .si_delete-fav');
+var shadow_favorito_evento = document.querySelectorAll('#shadow-favorito_evento .si_delete-fav');
 
 if (shadow_favorito_evento) {
   for (var i = 0; i <= shadow_favorito_evento.length - 1; i++) {
@@ -687,9 +687,9 @@ var funciones = {
             var _fav = document.querySelectorAll('.item-eventos ul.slide-cursos li').length;
 
             if (_fav <= 0) {
-              var _texto = "<p>¡Aún no tienes cursos favoritos! Ve a la sección CURSOS y márca cuantos quieras como favoritos.</p>" + "<p>Los encontrarás aquí cuando vuelvas.</p>";
+              var _texto = "<p>¡Aún no tienes eventos favoritos! Ve a la sección EVENTOS y márca cuantos quieras como favoritos.</p>" + "<p>Los encontrarás aquí cuando vuelvas.</p>";
 
-              document.querySelector('.item-cursos').insertAdjacentHTML('beforeend', _texto);
+              document.querySelector('.item-eventos').insertAdjacentHTML('beforeend', _texto);
             }
           }
 

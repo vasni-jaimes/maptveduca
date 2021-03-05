@@ -268,9 +268,9 @@ let funciones = {
 						else if (section == 'evento') {
 							let fav = document.querySelectorAll('.item-eventos ul.slide-cursos li').length;
 							if (fav <= 0) {
-								let texto = "<p>¡Aún no tienes cursos favoritos! Ve a la sección CURSOS y márca cuantos quieras como favoritos.</p>"
+								let texto = "<p>¡Aún no tienes eventos favoritos! Ve a la sección EVENTOS y márca cuantos quieras como favoritos.</p>"
                                     		+"<p>Los encontrarás aquí cuando vuelvas.</p>";
-								document.querySelector('.item-cursos').insertAdjacentHTML('beforeend', texto);
+								document.querySelector('.item-eventos').insertAdjacentHTML('beforeend', texto);
 							}
 						}
 
