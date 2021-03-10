@@ -104,7 +104,7 @@ if (delete_faveve) {
 
 
 //ELIMINAR FAVORITOS CURSOS
-let shadow_favorito = document.querySelectorAll('.shadow-favorito .si_delete-fav');
+let shadow_favorito = document.querySelectorAll('#shadow-favorito .si_delete-fav');
 if (shadow_favorito) {
 	for (var i = 0; i <= shadow_favorito.length - 1; i++) {
 		shadow_favorito[i].addEventListener('click', function(e) {
@@ -114,7 +114,7 @@ if (shadow_favorito) {
 }
 
 //ELIMINAR FAVORITOS EVENTOS
-let shadow_favorito_evento = document.querySelectorAll('.shadow-favorito_evento .si_delete-fav');
+let shadow_favorito_evento = document.querySelectorAll('#shadow-favorito_evento .si_delete-fav');
 if (shadow_favorito_evento) {
 	for (var i = 0; i <= shadow_favorito_evento.length - 1; i++) {
 		shadow_favorito_evento[i].addEventListener('click', function(e) {
