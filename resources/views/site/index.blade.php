@@ -83,7 +83,7 @@
 	    
 	</section> <!-- /wrapper-profesores -->
 
-    <section class="wrapper-eventos">
+    <!--<section class="wrapper-eventos">
         
         <div class="hoja-1000">
 
@@ -94,16 +94,16 @@
 	        	@foreach($instructores as $instructor)
 
 	        		<li>
-		                <div class="img-slide" style="background-image: url({{Storage::url($instructor->img) }});"></div> <!-- /img-slide -->
+		                <div class="img-slide" style="background-image: url({{Storage::url($instructor->img) }});"></div> <!-- /img-slide
 		            </li>
 
 	        	@endforeach
 	        
 	        </ul>
             
-        </div> <!-- /hoja-1000 -->
+        </div> <!-- /hoja-1000
         
-    </section>
+    </section>-->
 	    
 	<section class="wrapper-academica">
 	    
