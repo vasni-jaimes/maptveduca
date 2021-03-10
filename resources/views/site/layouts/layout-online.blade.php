@@ -22,8 +22,8 @@
 			             <img src="/site/img/logo-amarillo.png">
                         </a>
 			            <ul class="flex flex-center between menu">
-			                <li><a href="{{ route("home") }}">Inicio</a></li>
-			                <li class="parent">
+			                <li class="{{ Request::routeIs('home') ? 'active' : '' }}"><a href="{{ route("home") }}">Inicio</a></li>
+			                <li class="parent {{ Request::routeIs('cursos') ? 'active' : '' }}">
                                 <a href="{{ route("cursos") }}">Cursos</a>
                                 <div class="menu-child">
                                     <ul class="flex">
@@ -81,7 +81,7 @@
                                     </ul>
                                 </div> <!-- /menu-child -->
                             </li>
-			                <li class="parent">
+			                <li class="parent {{ Request::routeIs('membresias.index') ? 'active' : '' }}">
                                 <a href="{{ route("membresias.index") }}">Membresías</a>
                                 <div class="menu-child">
                                     <ul class="flex">
@@ -89,10 +89,10 @@
                                     </ul>
                                 </div>
                             </li>
-			                <li><a href="{{ route("clases-linea.index") }}">Clases en línea</a></li>
-			                <li><a href="{{ route("eventos.index") }}">Eventos</a></li>
-			                <li><a href="{{ route("nosotros.index") }}">Nosotros</a></li>
-			                <li><a href="{{ route("faqs") }}">FAQ/Contacto</a></li>
+			                <li class="parent {{ Request::routeIs('clases-linea.index') ? 'active' : '' }}"><a href="{{ route("clases-linea.index") }}">Clases en línea</a></li>
+			                <li class="parent {{ Request::routeIs('eventos.index') ? 'active' : '' }}"><a href="{{ route("eventos.index") }}">Eventos</a></li>
+			                <li class="parent {{ Request::routeIs('nosotros.index') ? 'active' : '' }}"><a href="{{ route("nosotros.index") }}">Nosotros</a></li>
+			                <li class="parent {{ Request::routeIs('faqs') ? 'active' : '' }}"><a href="{{ route("faqs") }}">FAQ/Contacto</a></li>
 			            </ul>
 			            <div class="toggle">
 			                <a class="menu-open" href="#menu" id="navbar-toggle">

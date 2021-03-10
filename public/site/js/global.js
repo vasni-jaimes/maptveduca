@@ -1,5 +1,13 @@
 $(document).ready(function(){
     
+    $('#menu a').each(function(){
+        var href = $(this).attr('href');
+
+        if ( window.location.href.indexOf(href) >= 0 ){
+            $(this).parent('li').addClass('current-page');
+        }
+    });
+    
     $('.lista-contenido').slick({
       arrows: false,
       dots: true,
