@@ -165,16 +165,21 @@ class CoursesRepositorie
         $material_extra = Array();
         $arrayTeam      = json_decode($temario, true);
 
+        //dd($material_extra);
+
 
         for ($i=0; $i <= count($request->nombre_video) - 1; $i++) { 
-            $material_extra = Array();
+            //$material_extra = Array();
             if (isset($request->material_extra[$i])) {
 
                 for ($j=0; $j <= count($request->material_extra[$i]) - 1; $j++) { 
 
-                    if (count($arrayTeam[$i]['material_extra']) > 0) {
-                        $this->eliminarImagen($arrayTeam[$i]['material_extra'][0]);
+                    if (isset($arrayTeam[$i]['material_extra'])) {
+                       if (count($arrayTeam[$i]['material_extra']) > 0) {
+                            $this->eliminarImagen($arrayTeam[$i]['material_extra'][0]);
+                        }
                     }
+                    
 
                     $request->file('material_extra')[$i][$j]->store('public/cursos/'.$course_id.'/material_extra/'.$i.'/');
                     $rootMaterial = $request->file('material_extra')[$i][$j]->store('public/cursos/'.$course_id.'/material_extra/'.$i.'/');
@@ -182,7 +187,8 @@ class CoursesRepositorie
                 }
             }
             else {
-                $material_extra = $arrayTeam[$i]['material_extra'];
+                $mextra = isset($arrayTeam[$i]) ? $arrayTeam[$i]['material_extra'] : Array();
+                $material_extra = $mextra;
             }
 
 

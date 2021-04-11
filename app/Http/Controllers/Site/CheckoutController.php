@@ -10,6 +10,13 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailBienvenida;
 
+//API REST
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ClientException;
+
+
 use PayPal\Api\Amount;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
@@ -26,157 +33,234 @@ use DB;
 
 class CheckoutController extends Controller
 {
-	private $apiContext;
+	//private $apiContext;
+    private $client;
+    private $payPalConfig;
+    private $acces_token;
+    private $productId;
+    private $plan;
+
 
 	public function __construct()
 	{
         $this->middleware('auth');
 
-		$payPalConfig = Config::get('paypal');
+		$this->payPalConfig = Config::get('paypal');
 
-        $this->apiContext = new ApiContext(
-            new OAuthTokenCredential(
-                $payPalConfig['client_id'],
-                $payPalConfig['secret']
-            )
-        );
-
-        $this->apiContext->setConfig($payPalConfig['settings']);
+        $this->client = new Client([
+            "base_uri" => "https://api-m.sandbox.paypal.com",
+        ]);
 	}
 
     public function index($slug_membresia)
     {
+        //Obtener token
+        $this->ObtenerAccessToken();
+        //return $this->acces_token;
+        $this->GenerarProducto();
+        //return $this->productId;
+        $this->GenerarPlanPago();
+
+        //return $this->plan;
+
+        return $this->suscripcionPorducto();
+
+
     	$membresia = Membresia::with("carreras")->where('slug', $slug_membresia)->first();
         return view("site.checkout", compact("membresia"));
-        //return redirect()->route("home");
     }
 
 
     public function getGracias(Request $request)
     {   
-        if (!session()->has('gracias')) {
-            return redirect()->route("home");
-        }
+        // if (!session()->has('gracias')) {
+        //     return redirect()->route("home");
+        // }
 
         return view("site.gracias");
+    }   
+
+    //MAIN
+    public function pagoMembresia()
+    {
+        //OBTENER EL TOKEN DEL API
+        if (!$this->ObtenerAccessToken()) {
+            return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
+        }
+
+        //CREAR UN PRODUCTO DIGITAL
+        if (!$this->GenerarProducto()) {
+            return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
+        }
+
+        //CREAR PLAN DE PAGO CON EL ID DEL PRODUCTO
+        //.......
+
+
+
+        //CREAR SUSCRIPCION CON EL ID DEL PLAN DE PAGO
+        //.......
+
+
+        return $this->acces_token;
     }
 
 
-    public function PayWithPaypal(Request $request, $slug_membresia)
+    protected function ObtenerAccessToken()
     {
-         //return redirect()->route("home");
-
-    	if ($this->validarMembresiaUsuario()){
-            return back()->withInput()->with("error", "El usuario ya cuenta con una suscripcion activa");
-    	}
-
-    	//OBTENER MEMBRESIA A PAGAR
-    	$membresia = Membresia::where('slug', $slug_membresia)->first();
-
-    	//SI LA MEMBRESIA ES ACADEMICA, VALIDAMOS PARAMETROS
-    	if ($membresia->id == 2) {
-    		$career = Career::where('id', $request->carrera)->first();
-
-	     	if (!$request->has('carrera') && $membresia->id == 2) {
-                return back()->withInput()->with("error", "No esta el parametro necesario");
-	    	}
-
-	    	if (!is_numeric($request->carrera)) {
-                return back()->withInput()->with("error", "El parametro no es valido");	
-	    	}
-
-	    	if (collect($career)->isEmpty()) {
-                return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
-	    	}
-    	}
-
-
-
-
-    	$payer = new Payer();
-        $payer->setPaymentMethod('paypal');
-
-        $amount = new Amount();
-        $amount->setTotal($membresia->precio);
-        $amount->setCurrency('MXN');
-
-        $transaction = new Transaction();
-        $transaction->setAmount($amount);
-        // $transaction->setDescription('See your IQ results');
-
-        $callbackUrl = route("pago-status", $slug_membresia);
-
-        $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl($callbackUrl."?carrera=".$request->carrera)
-            ->setCancelUrl($callbackUrl."?carrera=".$request->carrera);
-
-        $payment = new Payment();
-        $payment->setIntent('sale')
-            ->setPayer($payer)
-            ->setTransactions(array($transaction))
-            ->setRedirectUrls($redirectUrls);
-
         try {
-            $payment->create($this->apiContext);
-            return redirect()->away($payment->getApprovalLink());
-        } catch (PayPalConnectionException $ex) {
-            echo $ex->getData();
+            $res = $this->client->post('/v1/oauth2/token', 
+                                            ['auth' => [$this->payPalConfig['client_id'], $this->payPalConfig['secret']],
+                                            'form_params' => ['grant_type' => 'client_credentials']]);
+
+            if ($res->getReasonPhrase() == 'OK') {
+                $respuesta          = json_decode($res->getBody()->getContents());
+                $this->acces_token  = $respuesta->access_token;
+
+                return true;
+            }
+
+            return false;
+
+        } catch (ClientException $e) {
+            $responsError = $e->getResponse();
+            $error        = json_decode($responsError->getBody()->getContents());
+            \Log::error($error->message);
+            return false;
         }
     }
 
 
-    public function PaypalStatus(Request $request, $slug_membresia)
+    protected function GenerarProducto()
     {
-    	$paymentId = $request->input('paymentId');
-        $payerId = $request->input('PayerID');
-        $token = $request->input('token');
+        try {
+            $res = $this->client->post('/v1/catalogs/products', 
+                        ['json' => ["name" => "Cursos Maptveduca", 
+                                    "description" => "cursos de paga para la plataforma Maptveduca", 
+                                    "type" => "DIGITAL",
+                                    "category" => "EDUCATIONAL_AND_TEXTBOOKS", 
+                                    "image_url" => "https://example.com/streaming.jpg",
+                                    "home_url" => "https://maptvduca.valeriastrempler.com/"], 
+                         'headers' => ['content-type' => 'application/json',
+                                    'authorization' => 'Bearer '.$this->acces_token]
+                        ]
+                    );
 
-        if (!$paymentId || !$payerId || !$token) {
-            return redirect()->route("checkout", $slug_membresia)->with("error", "Lo sentimos! El pago a través de PayPal no se pudo realizar.");
+            if ($res->getReasonPhrase() == 'Created') {
+                $respuesta       = json_decode($res->getBody()->getContents());
+                $this->productId = $respuesta->id;
+                return true;
+            }
+
+            return false;
+
+        } catch (ClientException $e) {
+            $responsError = $e->getResponse();
+            $error        = json_decode($responsError->getBody()->getContents());
+            \Log::error($error->message);
+            return false;
         }
-
-        $payment = Payment::get($paymentId, $this->apiContext);
-
-        $execution = new PaymentExecution();
-        $execution->setPayerId($payerId);
-
-        /** Execute the payment **/
-        $result = $payment->execute($execution, $this->apiContext);
-
-        if ($result->getState() === 'approved') {
-
-        	//OBTENER MEMBRESIA A PAGAR
-            date_default_timezone_set('America/Mexico_City');
-        	$membresia 		= Membresia::where('slug', $slug_membresia)->first();
-        	$carrera 		= $request->has("carrera") ? $request->carrera : null;
-        	$fecha_inicio 	= Carbon::now()->format('Y-m-d');
-        	$fecha_final	= Carbon::now()->addMonth()->format('Y-m-d');
-
-        	//CREAR REGISTRO
-            DB::beginTransaction();
-        	$user_membresia = DB::table('usuarios_membresia')->insert([
-        		"user_id" 		=> auth()->user()->id,
-        		"membresia_id" 	=> $membresia->id,
-        		"carrera_id" 	=> $carrera,
-        		"fehca_inicio" 	=> $fecha_inicio,
-        		"fecha_fin" 	=> $fecha_final,
-        	]);
-
-
-        	if ($user_membresia) {
-                //$this->MandarEmail();
-                $this->MensajeBienvenidaSuscripcion();
-                DB::commit();
-                return redirect()->route("gracias")->with("gracias", "Gracias! El pago a través de PayPal se ha ralizado correctamente.");
-        	}
-        }
-        
-        DB::rollback();
-        return redirect()->route("checkout", $slug_membresia)->with("error", "Lo sentimos! El pago a través de PayPal no se pudo realizar.");
     }
 
 
-    public function validarMembresiaUsuario()
+
+    protected function GenerarPlanPago()
+    {
+         try {
+            $res = $this->client->post('/v1/billing/plans', 
+                        ['json' => ["product_id" => $this->productId,
+                                    "name" => "plan mensual a maptvduca",
+                                    "description" => "plan de pago mensual para la plataforma maptvduca",
+                                    "status" => "ACTIVE",
+                                    "billing_cycles" => [
+                                        [
+                                            "frequency" => ["interval_unit" => "MONTH", "interval_count" => 1],
+                                            "tenure_type" => "REGULAR",
+                                            "sequence" => 1,
+                                            "total_cycles" => 24,
+                                            "pricing_scheme" => [
+                                                "fixed_price" => [
+                                                    "value" => "10", 
+                                                    "currency_code" => "MXN"
+                                                ],
+                                            ],
+                                        ]
+                                    ],
+                                    "payment_preferences" => [ 
+                                        "auto_bill_outstanding" => true,
+                                        "setup_fee_failure_action" => "CONTINUE",
+                                        "payment_failure_threshold" => 3, 
+                                    ],
+                                    "taxes" => ["percentage" => "0", "inclusive" => false],
+                                ],
+                         'headers' => ['content-type' => 'application/json', 'authorization' => 'Bearer '.$this->acces_token]
+                        ]
+                    );
+
+            if ($res->getReasonPhrase() == 'Created') {
+                $respuesta       = json_decode($res->getBody()->getContents());
+                $this->plan = $respuesta->id;
+                return true;
+            }
+            return false;
+
+        } catch (ClientException $e) {
+            $responsError = $e->getResponse();
+            $error        = json_decode($responsError->getBody()->getContents());
+            \Log::error($error->message);
+            return false;
+        }
+    }
+
+
+    protected function suscripcionPorducto()
+    {
+        try {
+            $res = $this->client->post('/v1/billing/subscriptions', 
+                        ['json' => ["plan_id" => $this->plan, 
+                                    "start_time" => "2021-11-01T00:00:00Z", 
+                                    "subscriber" => [
+                                        "name" => ["given_name" => "Jimena Pruebas"],
+                                        "email_address" => "baster07mi@gmail.com",
+                                    ],
+                                    "auto_renewal" => true,
+                                    "application_context" => [
+                                        "brand_name" => "Maptveduca",
+                                        "locale" => "en-MX",
+                                        "user_action" => "SUBSCRIBE_NOW",
+                                        "payment_method" => ["payer_selected" => "PAYPAL", "payee_preferred" => "IMMEDIATE_PAYMENT_REQUIRED"]
+                                    ],
+                                    "return_url" => "http://maptvduca.valeriastrempler.com/?pagina=perfil",
+                                    "cancel_url" => "http://maptvduca.valeriastrempler.com/?pagina=perfil"
+                                ], 
+                         'headers' => ['content-type' => 'application/json',
+                                    'authorization' => 'Bearer '.$this->acces_token]
+                        ]
+                    );
+
+
+            if ($res->getReasonPhrase() == 'Created') {
+                $respuesta       = json_decode($res->getBody()->getContents());
+                 dd($respuesta);
+                $this->productId = $respuesta->id;
+                return true;
+            }
+
+            return false;
+
+        } catch (ClientException $e) {
+            $responsError = $e->getResponse();
+            $error        = json_decode($responsError->getBody()->getContents());
+
+            dd($error);
+
+            \Log::error($error->message);
+            return false;
+        }
+    }
+
+
+    protected function validarMembresiaUsuario()
     {
     	$fecha 	= Carbon::now()->format('Y-m-d');
 

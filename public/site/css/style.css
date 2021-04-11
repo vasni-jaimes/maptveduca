@@ -4572,6 +4572,11 @@ small.notificacion {
     line-height: 130%;
 }
 
+.row-favoritos .flex-cursos ul li img {
+    display: block;
+    width: 100%;
+}
+
 .row-favoritos {
     position: relative;
     padding: 20px;

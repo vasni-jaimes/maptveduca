@@ -84,7 +84,7 @@
                             @csrf
 
                             <h2> Los pagos se habilitarán próximamente </h2>
-                            @php $stat = false; @endphp
+                            @php $stat = true; @endphp
                             @if ($stat)
                                 <div>
                                     <label>Selecciona el programa que deseas cursar</label><br>
