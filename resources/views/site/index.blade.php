@@ -82,6 +82,28 @@
 	    </div> <!-- /hoja-1200 -->
 	    
 	</section> <!-- /wrapper-profesores -->
+
+    <!--<section class="wrapper-eventos">
+        
+        <div class="hoja-1000">
+
+            <h2>Eventos</h2>
+            
+            <ul class="slide">
+
+	        	@foreach($instructores as $instructor)
+
+	        		<li>
+		                <div class="img-slide" style="background-image: url({{Storage::url($instructor->img) }});"></div> <!-- /img-slide
+		            </li>
+
+	        	@endforeach
+	        
+	        </ul>
+            
+        </div> <!-- /hoja-1000
+        
+    </section>-->
 	    
 	<section class="wrapper-academica">
 	    

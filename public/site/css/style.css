@@ -630,7 +630,9 @@ header a {
     letter-spacing: 0.34px;
 }
 
-.menu > li > a:hover {
+.menu > li > a:hover,
+.menu > li.active > a,
+#menu li.current-page a {
     color: #ffb514;
 }
 
@@ -1549,6 +1551,24 @@ video#myVideo {
 .flex-logos li img {
     width: auto;
     max-height: 90px;
+}
+
+
+
+/*----------------------------------  CONTENIDO Eventos  ----------------------------------*/
+
+.wrapper-eventos {
+    padding: 50px 0;
+    background-color: #f2f2f2;
+}
+
+.wrapper-eventos h2 {
+    margin: 0 0 50px;
+    color: #000;
+    font-family: 'Oswald medium';
+    font-size: 40px;
+    text-align: center;
+    line-height: 130%;
 }
 
 
@@ -5701,7 +5721,8 @@ a[href="#page"] {
     .wrapper-contenido h2,
     .wrapper-profesores h2,
     .wrapper-academica h2,
-    .wrapper-herramienta h2 {
+    .wrapper-herramienta h2,
+    .wrapper-eventos h2 {
         margin: 0 0 35px;
     }
     
@@ -6002,7 +6023,8 @@ a[href="#page"] {
     .wrapper-contenido,
     .wrapper-profesores,
     .banner-title,
-    .wrapper-cursos {
+    .wrapper-cursos,
+    .wrapper-eventos {
         padding: 30px 0;
     }
     
@@ -6026,7 +6048,8 @@ a[href="#page"] {
     .wrapper-profesores h2,
     .wrapper-academica h2,
     .wrapper-herramienta h2,
-    .wrapper-basica h2 {
+    .wrapper-basica h2,
+    .wrapper-eventos h2 {
         font-size: 30px;
     }
     
