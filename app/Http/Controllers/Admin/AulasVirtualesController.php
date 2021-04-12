@@ -259,8 +259,16 @@ class AulasVirtualesController extends Controller
                 $this->eliminarCarpeta($carpeta);
 
                 $respuestas = Respuesta::where('publicacion_id', $publicacion_id)->get();
+
+                //return $respuestas;
+
                 if ($respuestas->count() > 0) {
-                    if ($respuestas->delete()) {
+
+                    foreach ($respuestas as $respuesta) {
+                        $respuesta->delete();
+                    }
+
+                   // if ($respuestas->delete()) {
                         if ($publicacion->delete()) {
                             DB::commit();
                             return back()->with("status.deletePublicacion", "success");
@@ -268,9 +276,9 @@ class AulasVirtualesController extends Controller
                         DB::rollback();
                         return back()->with("status.deletePublicacion", "error");
                         //return "b";
-                    }
-                    DB::rollback();
-                    return back()->with("status.deletePublicacion", "error");
+                    //}
+                    // DB::rollback();
+                    // return back()->with("status.deletePublicacion", "error");
                     //return "d";
                 }
                 

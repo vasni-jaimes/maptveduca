@@ -86,8 +86,8 @@
 
 
     <!-- MENSAJES AL MOMENTO DE ELIMINAR UNA RESPUESTA -->
-    @if (session()->has("status.deletePublicacion"))
-        @if (session()->get("status.deletePublicacion") == "error")
+    @if (session()->has("status.deleteRespuesta"))
+        @if (session()->get("status.deleteRespuesta") == "error")
             <div class="row justify-content-center">
                 <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
                     Ocurrio un error, intentelo más tarde.
@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-        @elseif (session()->get("status.deletePublicacion") == "success")
+        @elseif (session()->get("status.deleteRespuesta") == "success")
             <div class="row justify-content-center">
                 <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
                     Se elimino la respuesta correctamente
