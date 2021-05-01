@@ -78,8 +78,14 @@ class CheckoutController extends Controller
         //     return redirect()->route("home");
         // }
 
-        return $request;
+        //return $request;
 
+        if ($request->has('subscription_id')) {
+            $this->validarMembresiaUsuario($request->subscription_id);
+        }
+
+        echo "ff";
+        return false;
         return view("site.gracias");
     }   
 
@@ -273,22 +279,50 @@ class CheckoutController extends Controller
     }
 
 
-    protected function validarMembresiaUsuario()
+    // protected function validarMembresiaUsuario()
+    // {
+    // 	$fecha 	= Carbon::now()->format('Y-m-d');
+
+    // 	$results = DB::table('usuarios_membresia')
+	   //  			->where("user_id", auth()->user()->id)
+	   //  			->where('fehca_inicio', '<=', $fecha)
+	   //  			->where('fecha_fin', '>', $fecha)
+	   //  			->first();
+
+
+	   //  if (collect($results)->isEmpty()) {
+	   //  	return false;
+	   //  }
+
+	   //  return true;
+    // }
+
+
+    protected function validarMembresiaUsuario($subscription_id)
     {
-    	$fecha 	= Carbon::now()->format('Y-m-d');
+        try {
+            $res = $this->client->get('/v1/billing/subscriptions/'.$subscription_id, 
+                        ['headers' => ['content-type' => 'application/json',
+                                        'authorization' => 'Bearer '.$this->acces_token]
+                        ]
+                    );
 
-    	$results = DB::table('usuarios_membresia')
-	    			->where("user_id", auth()->user()->id)
-	    			->where('fehca_inicio', '<=', $fecha)
-	    			->where('fecha_fin', '>', $fecha)
-	    			->first();
+            if ($res->getReasonPhrase() == 'Created') {
+                $respuesta       = json_decode($res->getBody()->getContents());
+                dd($respuesta);
+                //$this->productId = $respuesta->id;
+                //return true;
+            }
 
+            return false;
 
-	    if (collect($results)->isEmpty()) {
-	    	return false;
-	    }
-
-	    return true;
+        } catch (ClientException $e) {
+            $responsError = $e->getResponse();
+            $error        = json_decode($responsError->getBody()->getContents());
+            dd($error);
+            //\Log::error($error->message);
+            return false;
+        }
     }
     
 
