@@ -28,6 +28,7 @@ use PayPal\Rest\ApiContext;
 use App\Membresia;
 use App\Mensaje;
 use App\Career;
+use App\User;
 use Carbon\Carbon;
 use DB;
 
@@ -77,6 +78,8 @@ class CheckoutController extends Controller
         //     return redirect()->route("home");
         // }
 
+        return $request;
+
         return view("site.gracias");
     }   
 
@@ -94,12 +97,14 @@ class CheckoutController extends Controller
         }
 
         //CREAR PLAN DE PAGO CON EL ID DEL PRODUCTO
-        //.......
-
-
+        if (!$this->GenerarPlanPago()) {
+            return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
+        }
 
         //CREAR SUSCRIPCION CON EL ID DEL PLAN DE PAGO
-        //.......
+        if (!$this->suscripcionPorducto()) {
+            return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
+        }
 
 
         return $this->acces_token;
@@ -166,7 +171,7 @@ class CheckoutController extends Controller
 
     protected function GenerarPlanPago()
     {
-         try {
+        try {
             $res = $this->client->post('/v1/billing/plans', 
                         ['json' => ["product_id" => $this->productId,
                                     "name" => "plan mensual a maptvduca",
@@ -228,10 +233,10 @@ class CheckoutController extends Controller
                                         "brand_name" => "Maptveduca",
                                         "locale" => "en-MX",
                                         "user_action" => "SUBSCRIBE_NOW",
-                                        "payment_method" => ["payer_selected" => "PAYPAL", "payee_preferred" => "IMMEDIATE_PAYMENT_REQUIRED"]
+                                        "payment_method" => ["payer_selected" => "PAYPAL", "payee_preferred" => "IMMEDIATE_PAYMENT_REQUIRED"],
+                                        "return_url" => "http://maptvduca.valeriastrempler.com/gracias",
+                                        "cancel_url" => "http://maptvduca.valeriastrempler.com/cancelar-suscripcion",
                                     ],
-                                    "return_url" => "http://maptvduca.valeriastrempler.com/?pagina=perfil",
-                                    "cancel_url" => "http://maptvduca.valeriastrempler.com/?pagina=perfil"
                                 ], 
                          'headers' => ['content-type' => 'application/json',
                                     'authorization' => 'Bearer '.$this->acces_token]
@@ -241,9 +246,20 @@ class CheckoutController extends Controller
 
             if ($res->getReasonPhrase() == 'Created') {
                 $respuesta       = json_decode($res->getBody()->getContents());
-                 dd($respuesta);
-                $this->productId = $respuesta->id;
-                return true;
+                $linkpay         = $respuesta->links[0]->href;
+                $suscripcion_id  = $respuesta->id;
+                $fecha_creacion  = $respuesta->create_time; 
+
+
+                //INSERTAR DATOS DE SUSCRIPCION
+                $usuario                             = User::find(auth()->user()->id);
+                $usuario->suscripcion_id             = $suscripcion_id;
+                $usuario->fecha_creacion_suscripcion = $fecha_creacion;
+                if ( $usuario->save() ) {
+                    return redirect($linkpay);
+                }
+
+                return false;
             }
 
             return false;
@@ -251,9 +267,6 @@ class CheckoutController extends Controller
         } catch (ClientException $e) {
             $responsError = $e->getResponse();
             $error        = json_decode($responsError->getBody()->getContents());
-
-            dd($error);
-
             \Log::error($error->message);
             return false;
         }
