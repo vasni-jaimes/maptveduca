@@ -79,6 +79,19 @@ Route::get('agregar-recomendaciones-extra/{recom_id}', 'Admin\RecomendacionesCon
 Route::post('editar-recomendaciones-extra/{recom_id}', 'Admin\RecomendacionesController@updateExtra')->name('lista-recomendaciones-extra.update');
 
 
+//GRUPOS
+Route::get('lista-grupos', 'Admin\GruposController@index')->name('index-admin.grupos');
+Route::get('agregar-grupo', 'Admin\GruposController@create')->name('create-admin.grupos');
+Route::post('agregar-grupo', 'Admin\GruposController@store')->name('store-admin.grupos');
+Route::get('editar-grupo/{grupo_id}', 'Admin\GruposController@edit')->name('edit-admin.grupos');
+Route::post('editar-grupo/{grupo_id}', 'Admin\GruposController@update')->name('update-admin.grupos');
+
+
+//INSCRIPCIONES
+Route::get('inscripciones', 'Admin\InscripcionesController@index')->name('inscripciones.index');
+Route::post('inscripciones', 'Admin\InscripcionesController@store')->name('inscripciones.store');
+
+
 
 //MENSAJES
 Route::get('agregar-mensaje', 'Admin\MensajesController@mandarMensaje')->name('mandarMensaje');
@@ -88,8 +101,11 @@ Route::post('buscar-alumnos', 'Admin\MensajesController@searchAlumnos')->name('s
 
 //AULAS VIRTUALES
 Route::get('listado-materias', 'Admin\AulasVirtualesController@index')->name('listado-materias.index');
-Route::get('aula-virtual/{slug}', 'Admin\AulasVirtualesController@create')->name('aula-virtual.create');
-Route::post('aula-virtual/{curso_id}', 'Admin\AulasVirtualesController@store')->name('aula-virtual.store');
+Route::get('listado-grupos-aulas/{materias_slug}', 'Admin\AulasVirtualesController@indexGrupos')->name('listado-grupos.aulas');
+
+Route::get('aula-virtual/{materias_slug}/{grupo_slug}', 'Admin\AulasVirtualesController@create')->name('aula-virtual.create');
+Route::post('aula-virtual/{curso_id}/{grupo_slug}', 'Admin\AulasVirtualesController@store')->name('aula-virtual.store');
+
 Route::post('aula-virtual-respuesta/{publicacion_id}', 'Admin\AulasVirtualesController@respuestaStore')->name('aula-virtual-respuesta.store');
 Route::get('downloadFile/{slug_id}/{publicacion_id}/{positionFile}', 'Admin\AulasVirtualesController@downloadFile')->name('down.publicacion');
 Route::get('downloadFileResp/{slug_id}/{publicacion_id}/{respuesta_id}/{positionFile}', 'Admin\AulasVirtualesController@downloadFileResp')->name('down.downloadFileResp');

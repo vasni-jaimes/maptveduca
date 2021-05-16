@@ -95,6 +95,55 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  validarAgregarGrupo: function validarAgregarGrupo(e) {
+    e.preventDefault();
+    var nombre_grupo = document.querySelector("input[name='nombre_grupo']");
+    /* STATUS */
+
+    var error_videos = false; //SE ELIMINAN LOS RASTROS DE ERRORES
+
+    document.querySelectorAll('.errors').forEach(function (item) {
+      item.innerHTML = '';
+    });
+    document.querySelectorAll('.chosen-choices').forEach(function (item) {
+      item.style.borderColor = "#e5e6e7";
+    });
+
+    if (document.querySelector('.has-error')) {
+      document.querySelectorAll('.has-error').forEach(function (item) {
+        item.classList.remove('has-error');
+      });
+    } //SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+
+    if (nombre_grupo.value == '') {
+      nombre_grupo.parentNode.classList.add('has-error');
+      nombre_grupo.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (error_videos == true) {
+      if (e.type == 'submit') {
+        var posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+        window.scrollTo(0, posicion);
+      }
+
+      return false;
+    }
+
+    if (e.type == 'submit') {
+      e.target.disabled = true;
+      document.querySelector('.ibox-content').classList.add('sk-loading');
+
+      if (e.target.getAttribute('name') == 'frm-agregar_grupo') {
+        document.querySelector("form[name='frm-agregar_grupo']").submit();
+        return false;
+      }
+
+      document.querySelector("form[name='frm-editar_grupo']").submit();
+      return false;
+    }
+  },
   validarAgregarUsuario: function validarAgregarUsuario(e) {
     e.preventDefault();
     var nombre = document.querySelector("input[name='nombre']");

@@ -422,9 +422,6 @@ if (suscripcion) {
 }
 
 
-
-
-
 //Cambiar status curso
 let tabla_usuarios = document.querySelector("table.tabla-usuarios");
 if (tabla_usuarios) {
@@ -447,6 +444,48 @@ if (tabla_usuarios) {
 			});
 		});
 	}
+}
+
+
+//FORMULARIO GRUPOS
+const frmAgregarGrupo = document.querySelector("form[name='frm-agregar_grupo']");
+const frmActualizarGrupo = document.querySelector("form[name='frm-editar_grupo']");
+if (frmAgregarGrupo || frmActualizarGrupo) {
+
+	if (frmAgregarGrupo) {
+		frmAgregarGrupo.addEventListener('submit', funciones.validarAgregarGrupo);
+		frmAgregarGrupo.addEventListener('input', funciones.validarAgregarGrupo);
+		$(document).change("input", funciones.validarAgregarGrupo);
+		$("select").change(funciones.validarAgregarGrupo);
+	}
+
+	if (frmActualizarGrupo) {
+		frmActualizarGrupo.addEventListener('submit', funciones.validarAgregarGrupo);
+		frmActualizarGrupo.addEventListener('input', funciones.validarAgregarGrupo);
+		$(document).change("input", funciones.validarAgregarGrupo);
+		$("select").change(funciones.validarAgregarGrupo);
+	}
+}
+
+
+
+//STATUS DE INSCRIPCION
+const activa_programa = $('input[name="status"]');
+if (activa_programa) {
+	activa_programa.on('ifChecked', function(event) {
+ 		if ($(this).val() == 3) {
+ 			$('.activa_programa').css('display', 'block');
+ 			$('.div-grupos').css('display', 'flex');
+ 		}
+ 		else if ($(this).val() == 1) {
+ 			$('.div-grupos').css('display', 'flex');
+ 			$('.activa_programa').css('display', 'none');
+ 		}
+ 		else {
+ 			$('.div-grupos').css('display', 'none');
+ 			$('.activa_programa').css('display', 'none');
+ 		}
+	});
 }
 
 

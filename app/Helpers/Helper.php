@@ -53,9 +53,10 @@ class Helper
     }
 
 
-    public function contarAlumnos($curso_id)
+    public function contarAlumnos($grupo_id)
     {
-        return DB::table('tablero_cursos')->where('curso_id', $curso_id)->count();
+        //return DB::table('tablero_cursos')->where('curso_id', $curso_id)->count();
+        return DB::table('users')->where('grupo_id', $grupo_id)->count();
     }
 
 

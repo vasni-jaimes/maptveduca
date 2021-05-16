@@ -410,7 +410,7 @@
                         <div class="sk-double-bounce2"></div>
                     </div>
                     <div class="media-body agregar-nuevo_post">
-                        <form action="{{ route('aula-virtual.store', $curso->slug) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                        <form action="{{ route('aula-virtual.store', [$curso->slug, $grupo_slug]) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <div class="col-sm-12">

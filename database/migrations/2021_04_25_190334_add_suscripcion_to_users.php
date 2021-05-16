@@ -27,7 +27,8 @@ class AddSuscripcionToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('suscripcion_id');
+            $table->dropColumn('fecha_creacion_suscripcion');
         });
     }
 }

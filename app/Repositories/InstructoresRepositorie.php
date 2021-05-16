@@ -82,9 +82,7 @@ class InstructoresRepositorie
 				$instructor->img     	= $rootImg;
 			}
 			
-
 			if ($instructor->save()) {
-
 				//ACTUALIZAR INSTRUCTOR COMO ADMINISTRADOR
 				$admin 					= Administrator::where('instructor_id', $instructor->id)->first();
 				$admin->email 			= $request->email;

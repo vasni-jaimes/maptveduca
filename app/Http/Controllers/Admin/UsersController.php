@@ -9,6 +9,7 @@ use App\Http\Requests\ValidarAgregarUsuarios;
 use App\Http\Requests\ValidarUpdateUsuario;
 use Illuminate\Support\Facades\Validator;
 use App\User;
+use App\Grupo;
 use App\Career;
 use App\Mensaje;
 use Carbon\Carbon;
@@ -41,8 +42,9 @@ class UsersController extends Controller
      */
     public function create()
     {
+        $grupos  = Grupo::all();
         $careers = Career::where('status', 1)->get();
-        return view('admin.agregar-usuario', compact("careers"));
+        return view('admin.agregar-usuario', compact("careers", "grupos"));
     }
 
     /**
@@ -60,6 +62,7 @@ class UsersController extends Controller
         $user->apaterno         = $request->apaterno;
         $user->email            = $request->email;
         $user->fecha_nacimiento = $request->fecha_nacimineto;
+        $user->grupo_id         = $request->select_grupo;
         $user->password         = Hash::make($request->password);
         $user->status           = 0;
         if ($user->save()) {
@@ -116,9 +119,10 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        $grupos  = Grupo::all();
         $usuario = User::findOrFail($id);
         $careers = Career::where('status', 1)->get();
-        return view('admin.editar-usuario', compact("careers", "usuario", "id"));
+        return view('admin.editar-usuario', compact("careers", "usuario", "id", "grupos"));
     }
 
     /**
@@ -137,6 +141,7 @@ class UsersController extends Controller
         $user->apaterno         = $request->apaterno;
         $user->email            = $request->email;
         $user->fecha_nacimiento = $request->fecha_nacimineto;
+        $user->grupo_id         = $request->select_grupo;
 
         if ($request->has('password') && isset($request->password)) {
             $user->password     = Hash::make($request->password);

@@ -121,11 +121,14 @@
                             <div class="f-shadow">
                                 <div class="s-membresia">
                                     <div class="close-shadow"></div> <!-- /close-shadow -->
-                                    <p>¿QUÉ CAMBIO DESEAS HACER?</p>
-                                    <a href="#">Quiero una membresía académica</a>
-                                    <small>Conoce más sobre la Membresía Académica</small>
-                                    <a class="cancelar" href="#">Quiero cancelar mi membresía</a>
-                                    <small>Al cancelar tu membresía básica tendrás acceso a sus privilegios hasta que termine tu periodo pagado.</small>
+                                    @if(auth()->user()->tieneSuscripcion() == false)
+                                       {{--  <p>¿QUÉ CAMBIO DESEAS HACER?</p> --}}
+                                        <a href="{{ route('checkout', 'membresia-academica') }}">Quiero una membresía académica</a>
+                                        <small>Conoce más sobre la Membresía Académica</small>
+                                    @else
+                                        <a class="cancelar" href="{{ route('cancelar-subscripcion', auth()->user()->suscripcion_id) }}">Quiero cancelar mi membresía</a>
+                                        <small>Al cancelar tu membresía tendrás acceso a sus privilegios hasta que termine tu periodo pagado.</small>
+                                    @endif
                                 </div> <!-- /s-membresia -->
                                 
                                 <!--<div class="s-membresia">

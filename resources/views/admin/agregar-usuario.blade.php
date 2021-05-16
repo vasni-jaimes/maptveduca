@@ -129,6 +129,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> Grupos: </label>
+                            <div class="col-sm-10 mb-3">
+                                <select data-placeholder="grupos" class="chosen-select" style="width:350px;" name="select_grupo">
+                                    @foreach($grupos as $grupo)
+                                        <option value="{{ $grupo->id }}" {{ old('select_grupo') == $grupo->id ? "selected" : "" }}>
+                                            {{ $grupo->nombre }} 
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_carreras') !!} </span>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-5">
                             <label class="col-sm-2 col-form-label">Suscripcion: </label>
                             <div class="i-checks col-sm-10">

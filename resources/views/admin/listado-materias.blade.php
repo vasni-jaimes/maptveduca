@@ -19,7 +19,7 @@
             <h2>Lista de Cursos</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="index.html">Home</a>
+                    <a href="index.html">Aulas Virtuales</a>
                 </li>
                 <li class="breadcrumb-item active">
                     <strong>Lista de Cursos</strong>
@@ -50,7 +50,6 @@
                                         <tr>
                                             <th>Nombre</th>
                                             <th>Imagen</th>
-                                            <th>No. de Alumnos</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -59,10 +58,9 @@
                                             <tr class="gradeX">
                                                 <td> {{ $materia->nombre }} </td>
                                                 <td> <img src="{{ Storage::url($materia->url_img) }}" style="width: 100px"> </td>
-                                                <td> {{ $helper->contarAlumnos($materia->id) }} </td>
                                                 <td class="center">
                                                     <div class="btn-group">
-                                                     	<a href = "{{ route('aula-virtual.create', $materia->slug) }}" class="btn-info btn btn-xs mr-3">Ver publicaciones</a>
+                                                     	<a href = "{{ route('listado-grupos.aulas', $materia->slug) }}" class="btn-info btn btn-xs mr-3">Ver Grupos</a>
                                                    </div>
 
                                                 </td>
@@ -74,7 +72,6 @@
                                         <tr>
                                             <th>Nombre</th>
                                             <th>Imagen</th>
-                                            <th>No. de Alumnos</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </tfoot>

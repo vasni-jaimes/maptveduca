@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Helpers\Helper;
 use App\Http\Requests\ValidarPublicacionAulasMaestro;
 use App\Course;
+use App\Grupo;
 use App\Publicacion;
 use App\Respuesta;
 use App\Notificacion;
@@ -39,6 +40,7 @@ class AulasVirtualesController extends Controller
            return response()->json(['message' => 'parameter_invalid']);
         }
 
+        DB::beginTransaction();
         $respuesta = Respuesta::where('id', $request->respuesta)->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
 
         if ($respuesta) {
@@ -88,6 +90,7 @@ class AulasVirtualesController extends Controller
            return response()->json(['message' => 'parameter_invalid']);
         }
 
+        DB::beginTransaction();
         $publicacion = Publicacion::where('id', $request->publicacion)
                             ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
 
@@ -139,14 +142,24 @@ class AulasVirtualesController extends Controller
     }
 
 
-    public function create($slug)
+    public function indexGrupos($slug_materia)
+    {
+        $helper = $this->helper;
+        $grupos = Grupo::all();
+        return view('admin.listado-grupos-aulas', compact('grupos', 'helper', 'slug_materia'));
+    }
+
+
+    public function create($slug, $grupo_slug)
     {
     	$curso         = Course::where('slug', $slug)->where('status', 1)->first();
+        $grupo         = Grupo::where('slug', $grupo_slug)->first();
+
         $publicaciones = Publicacion::with(['instructor'])  
-                            ->where('curso_id', $curso->id)->orderBy('id', 'desc')->get();
+                            ->where('curso_id', $curso->id)->where('grupo_id', $grupo->id)->orderBy('id', 'desc')->get();
         $respuestas    = Respuesta::with(['usuario', 'instructor'])->get();
 
-        return view('admin.aula-virtual', compact("curso", "publicaciones", "respuestas"));
+        return view('admin.aula-virtual', compact("curso", "publicaciones", "respuestas", "grupo_slug"));
     }
 
 
@@ -199,7 +212,7 @@ class AulasVirtualesController extends Controller
     }
 
 
-    public function store(ValidarPublicacionAulasMaestro $request, $slug_curso)
+    public function store(ValidarPublicacionAulasMaestro $request, $slug_curso, $grupo_slug)
     {
         if (!isset($slug_curso)) {
             return back()->with("status.newAula", "error");
@@ -207,12 +220,16 @@ class AulasVirtualesController extends Controller
 
         $curso = Course::where('slug', $slug_curso)->where('status', 1)->first();
         if ($curso) {
+
+            $grupo = Grupo::where('slug', $grupo_slug)->first();
+
             DB::beginTransaction();
             $publicacion                = new Publicacion();
             $publicacion->curso_id      = $curso->id;
             $publicacion->instructor_id = Auth::guard('admins')->user()->instructor_id;
             $publicacion->publicacion   = $request->publicaciontxt;
             $publicacion->nombre        = $request->titulo;
+            $publicacion->grupo_id      = $grupo->id;
 
             if ($publicacion->save()) {
                 if ( $request->hasFile('archivos_aula') ) {

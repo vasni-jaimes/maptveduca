@@ -16,19 +16,13 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ClientException;
 
-
-use PayPal\Api\Amount;
-use PayPal\Api\Payer;
-use PayPal\Api\Payment;
-use PayPal\Api\RedirectUrls;
-use PayPal\Api\Transaction;
-use PayPal\Api\PaymentExecution;
-use PayPal\Auth\OAuthTokenCredential;
-use PayPal\Rest\ApiContext;
+// MODELOS
+use App\StatusInscripcion;
 use App\Membresia;
 use App\Mensaje;
 use App\Career;
 use App\User;
+use App\UsuarioMembresia;
 use Carbon\Carbon;
 use DB;
 
@@ -55,43 +49,56 @@ class CheckoutController extends Controller
 
     public function index($slug_membresia)
     {
-        //Obtener token
-        $this->ObtenerAccessToken();
-        //return $this->acces_token;
-        $this->GenerarProducto();
-        //return $this->productId;
-        $this->GenerarPlanPago();
+        //SI YA CUENTA CON UNA MEMBRESIA ACTIVA 
+        //ENTONCES NO TIENE CASO MANDARLO A LA VISTA DE PAGO (SE REDIRIGE AL HOME)
+        if ($this->validarExistenciaMembresiaUsuario()) {
+            return redirect()->route('home');
+        }
 
-        //return $this->plan;
 
-        return $this->suscripcionPorducto();
+        $status = StatusInscripcion::first();
+        $fechas = null;
 
+        if ($status->status == 3) {
+            $fechas = $this->fechasHabilitar($status);
+        }
 
     	$membresia = Membresia::with("carreras")->where('slug', $slug_membresia)->first();
-        return view("site.checkout", compact("membresia"));
+        return view("site.checkout", compact("membresia", "status", "fechas"));
     }
 
 
     public function getGracias(Request $request)
-    {   
-        // if (!session()->has('gracias')) {
-        //     return redirect()->route("home");
-        // }
-
-        //return $request;
-
-        if ($request->has('subscription_id')) {
-            $this->validarMembresiaUsuario($request->subscription_id);
+    {
+        //VALIDAR SI TIENE ACTIVA UNA MEMBRESIA O EL MES QUE CORRE
+        if ($this->validarExistenciaMembresiaUsuario()) {
+           return redirect()->route('home');
         }
 
-        echo "ff";
-        return false;
-        return view("site.gracias");
-    }   
+        //SE GUARDA LA SUBSCRIPCION QUE SE ACABA DE APROBAR
+        if ($request->has('subscription_id')) {
+            $this->ObtenerAccessToken();
+            if ($this->validarMembresiaUsuario($request)) {
+                return view("site.gracias");
+            }
+            
+            $membresia = Membresia::where('id', $request->mm)->first();
+            return redirect()->route('checkout', $membresia->slug)->withInput()->with("error", "Ocurrio un problema, intentelo más tarde plan");
+        }
+
+        $membresia = Membresia::where('id', $request->mm)->first();
+        return redirect()->route('checkout', $membresia->slug)->withInput()->with("error", "Ocurrio un problema, intentelo más tarde plan");
+    } 
+
 
     //MAIN
-    public function pagoMembresia()
+    public function PayWithPaypal($slug_membresia, Request $request)
     {
+        //OBTENER CARRERA Y MEMBRESIA
+        $membresia      = Membresia::with("carreras")->where('slug', $slug_membresia)->first();
+        $carrera        = $request->carrera;
+        $membresia_id   = $membresia->id;
+
         //OBTENER EL TOKEN DEL API
         if (!$this->ObtenerAccessToken()) {
             return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
@@ -107,15 +114,54 @@ class CheckoutController extends Controller
             return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
         }
 
-        //CREAR SUSCRIPCION CON EL ID DEL PLAN DE PAGO
-        if (!$this->suscripcionPorducto()) {
-            return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
-        }
 
-
-        return $this->acces_token;
+        return $this->suscripcionPorducto($carrera, $membresia_id);
     }
 
+
+    public function cancelarSubscripcion($id_subscripcion)
+    {
+
+        $this->ObtenerAccessToken(); //OBTENER TOKEN PARA CONSUMIR API PAYPAL
+
+        //VALIDAR SI LA SUBSCRIPCION YA FUE CANCELADA ANTES PARA REDIRIGIR AL HOME.
+        if ($this->isCancelSubscription($id_subscripcion, "CANCELLED")) {
+            return redirect()->route('home');
+        }
+
+        //SI LA SUBSCRIPCION NO FUE CANCELADA ANTES, SE CANCELA Y SE MUESTRA LA VISTA DE CANCELACION.
+        if ($this->ApiCancelSubs($id_subscripcion)) {
+            return view("site.cancelarsubscription");
+        }
+
+        //.
+        return redirect()->route('home');
+    }
+
+
+    protected function ApiCancelSubs($id_subscripcion)
+    {
+        try {
+            $res = $this->client->post('/v1/billing/subscriptions/'.$id_subscripcion.'/cancel', 
+                                            ['json' => ["reason" => "no comment"],
+                                                'headers' => ['content-type' => 'application/json',
+                                                                'authorization' => 'Bearer '.$this->acces_token]
+                                            ]
+                                    );
+
+            if ($res->statusCode() == 204) {
+               return true;
+            }
+
+            return false;
+
+        } catch (ClientException $e) {
+            $responsError = $e->getResponse();
+            $error        = json_decode($responsError->getBody()->getContents());
+            \Log::error($error->message);
+            return false;
+        }
+    }
 
     protected function ObtenerAccessToken()
     {
@@ -177,6 +223,10 @@ class CheckoutController extends Controller
 
     protected function GenerarPlanPago()
     {
+
+        $countsPagos = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->count();
+        $pagos = 24 - $countsPagos;
+
         try {
             $res = $this->client->post('/v1/billing/plans', 
                         ['json' => ["product_id" => $this->productId,
@@ -188,10 +238,10 @@ class CheckoutController extends Controller
                                             "frequency" => ["interval_unit" => "MONTH", "interval_count" => 1],
                                             "tenure_type" => "REGULAR",
                                             "sequence" => 1,
-                                            "total_cycles" => 24,
+                                            "total_cycles" => $pagos,
                                             "pricing_scheme" => [
                                                 "fixed_price" => [
-                                                    "value" => "10", 
+                                                    "value" => "2000", 
                                                     "currency_code" => "MXN"
                                                 ],
                                             ],
@@ -224,15 +274,19 @@ class CheckoutController extends Controller
     }
 
 
-    protected function suscripcionPorducto()
+    protected function suscripcionPorducto($carrera, $membresia_id)
     {
         try {
+
+            //FECHA DE HOY
+            $nameSub    = auth()->user()->nombre." ".auth()->user()->apaterno;
+            $emailSub   = auth()->user()->email;
+
             $res = $this->client->post('/v1/billing/subscriptions', 
-                        ['json' => ["plan_id" => $this->plan, 
-                                    "start_time" => "2021-11-01T00:00:00Z", 
+                        ['json' => ["plan_id" => $this->plan,
                                     "subscriber" => [
-                                        "name" => ["given_name" => "Jimena Pruebas"],
-                                        "email_address" => "baster07mi@gmail.com",
+                                        "name" => ["given_name" => $nameSub],
+                                        "email_address" => $emailSub,
                                     ],
                                     "auto_renewal" => true,
                                     "application_context" => [
@@ -240,7 +294,7 @@ class CheckoutController extends Controller
                                         "locale" => "en-MX",
                                         "user_action" => "SUBSCRIBE_NOW",
                                         "payment_method" => ["payer_selected" => "PAYPAL", "payee_preferred" => "IMMEDIATE_PAYMENT_REQUIRED"],
-                                        "return_url" => "http://maptvduca.valeriastrempler.com/gracias",
+                                        "return_url" => "http://maptvduca.valeriastrempler.com/gracias?cr=".$carrera."&mm=".$membresia_id,
                                         "cancel_url" => "http://maptvduca.valeriastrempler.com/cancelar-suscripcion",
                                     ],
                                 ], 
@@ -252,23 +306,82 @@ class CheckoutController extends Controller
 
             if ($res->getReasonPhrase() == 'Created') {
                 $respuesta       = json_decode($res->getBody()->getContents());
-                $linkpay         = $respuesta->links[0]->href;
-                $suscripcion_id  = $respuesta->id;
-                $fecha_creacion  = $respuesta->create_time; 
+                $linkpay         = $respuesta->links[0]->href; 
 
-
-                //INSERTAR DATOS DE SUSCRIPCION
-                $usuario                             = User::find(auth()->user()->id);
-                $usuario->suscripcion_id             = $suscripcion_id;
-                $usuario->fecha_creacion_suscripcion = $fecha_creacion;
-                if ( $usuario->save() ) {
-                    return redirect($linkpay);
-                }
-
-                return false;
+                return redirect($linkpay);
             }
 
             return false;
+
+        } catch (ClientException $e) {
+            $responsError = $e->getResponse();
+            $error        = json_decode($responsError->getBody()->getContents());
+            \Log::error($error->message);
+            return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde token");
+        }
+    }
+
+
+    protected function validarExistenciaMembresiaUsuario()
+    {
+    	$fecha 	= Carbon::now()->format('Y-m-d');
+
+    	$results = DB::table('usuarios_membresia')
+	    			->where("user_id", auth()->user()->id)
+	    			->where('fehca_inicio', '<=', $fecha)
+	    			->where('fecha_fin', '>', $fecha)
+	    			->first();
+
+
+	    if (collect($results)->isEmpty()) {
+	    	return false;
+	    }
+
+	    return true;
+    }
+
+
+    protected function validarMembresiaUsuario($request)
+    {
+        try {
+            $status = false;
+            $res = $this->client->get('/v1/billing/subscriptions/'.$request->subscription_id, 
+                        ['headers' => ['content-type' => 'application/json',
+                                        'authorization' => 'Bearer '.$this->acces_token]
+                        ]
+                    );
+
+            if ($res->getReasonPhrase() == 'OK') {
+                $respuesta = json_decode($res->getBody()->getContents());
+                if ($respuesta->status == "ACTIVE") {
+                    //FECHA DE HOY
+                    date_default_timezone_set('America/Mexico_City');
+                    $hoy    = Carbon::now()->format('Y-m-d');
+                    $final  = Carbon::now()->addMonth()->format('Y-m-d');
+
+                    DB::beginTransaction();
+                    $usuarioMembresia               = new UsuarioMembresia();
+                    $usuarioMembresia->user_id      = auth()->user()->id;
+                    $usuarioMembresia->membresia_id = $request->mm;
+                    $usuarioMembresia->carrera_id   = $request->cr;
+                    $usuarioMembresia->fehca_inicio = $hoy;
+                    $usuarioMembresia->fecha_fin    = $final;
+
+                    if ($usuarioMembresia->save()) {
+                        $user                             = User::find(auth()->user()->id);
+                        $user->suscripcion_id             = $request->subscription_id;
+
+                        if ($user->save()) {
+                            DB::commit();
+                            $status = true;
+                        }
+                        DB::rollback();
+                    }
+                    DB::rollback();
+                }
+            }
+
+            return $status;
 
         } catch (ClientException $e) {
             $responsError = $e->getResponse();
@@ -279,39 +392,19 @@ class CheckoutController extends Controller
     }
 
 
-    // protected function validarMembresiaUsuario()
-    // {
-    // 	$fecha 	= Carbon::now()->format('Y-m-d');
 
-    // 	$results = DB::table('usuarios_membresia')
-	   //  			->where("user_id", auth()->user()->id)
-	   //  			->where('fehca_inicio', '<=', $fecha)
-	   //  			->where('fecha_fin', '>', $fecha)
-	   //  			->first();
-
-
-	   //  if (collect($results)->isEmpty()) {
-	   //  	return false;
-	   //  }
-
-	   //  return true;
-    // }
-
-
-    protected function validarMembresiaUsuario($subscription_id)
+    protected function isCancelSubscription($subscription_id, $status)
     {
         try {
+            $status = false;
             $res = $this->client->get('/v1/billing/subscriptions/'.$subscription_id, 
                         ['headers' => ['content-type' => 'application/json',
                                         'authorization' => 'Bearer '.$this->acces_token]
                         ]
                     );
 
-            if ($res->getReasonPhrase() == 'Created') {
-                $respuesta       = json_decode($res->getBody()->getContents());
-                dd($respuesta);
-                //$this->productId = $respuesta->id;
-                //return true;
+            if ($res->getReasonPhrase() == 'CANCELLED') {
+                return true;
             }
 
             return false;
@@ -319,8 +412,7 @@ class CheckoutController extends Controller
         } catch (ClientException $e) {
             $responsError = $e->getResponse();
             $error        = json_decode($responsError->getBody()->getContents());
-            dd($error);
-            //\Log::error($error->message);
+            \Log::error($error->message);
             return false;
         }
     }
@@ -353,4 +445,21 @@ class CheckoutController extends Controller
         $email = auth()->user()->email;
         return Mail::to($email)->send(new MailBienvenida());
     }
+
+
+    protected function fechasHabilitar($inscripcion)
+    {
+        //FECHA DE HOY
+        date_default_timezone_set('America/Mexico_City');
+        $hoy    = Carbon::now()->format('Y-m-d');
+
+        $fecha_inicio   = $inscripcion->fecha_inicio;
+        $fecha_fin      = $inscripcion->fecha_fin;
+
+        if ($hoy >= $fecha_inicio && $hoy <= $fecha_fin) {
+            return true;
+        }
+
+        return false;
+    } 
 }
