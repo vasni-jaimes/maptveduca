@@ -125,9 +125,11 @@
                                        {{--  <p>¿QUÉ CAMBIO DESEAS HACER?</p> --}}
                                         <a href="{{ route('checkout', 'membresia-academica') }}">Quiero una membresía académica</a>
                                         <small>Conoce más sobre la Membresía Académica</small>
-                                    @else
-                                        <a class="cancelar" href="{{ route('cancelar-subscripcion', auth()->user()->suscripcion_id) }}">Quiero cancelar mi membresía</a>
+                                    @elseif (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimoPago()->canceled_sub == 0)
+                                        <a class="cancelar" href="{{ route('cancelar-subscripcionview') }}">Quiero cancelar mi membresía</a>
                                         <small>Al cancelar tu membresía tendrás acceso a sus privilegios hasta que termine tu periodo pagado.</small>
+                                     @elseif (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimoPago()->canceled_sub == 1)
+                                        <a class="cancelar" href="#">La suscripcion fue cancelada, espere que termine el ultimo mes que pago para volver a renovar si a si lo desea</a>
                                     @endif
                                 </div> <!-- /s-membresia -->
                                 

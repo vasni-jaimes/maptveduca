@@ -121,6 +121,12 @@ class CheckoutController extends Controller
     }
 
 
+    public function cancelarSubscripcionView()
+    {
+        return view('site.infoCancelacion');
+    }
+
+
     public function cancelarSubscripcion($id_subscripcion)
     {
 
@@ -152,6 +158,8 @@ class CheckoutController extends Controller
                                     );
 
             if ($res->statusCode() == 204) {
+
+                DB::table('usuarios_membresia')->where('id', auth()->user()->ultimoPago()->id)->update(['canceled_sub' => 1]);
                return true;
             }
 
