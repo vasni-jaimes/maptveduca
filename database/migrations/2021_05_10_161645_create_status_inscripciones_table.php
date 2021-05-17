@@ -16,8 +16,8 @@ class CreateStatusInscripcionesTable extends Migration
         Schema::create('status_inscripciones', function (Blueprint $table) {
             $table->id();
             $table->integer('status');
-            $table->date('fecha_inicio');
-            $table->date('fecha_fin');
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_fin')->nullable();
             $table->timestamps();
         });
     }
