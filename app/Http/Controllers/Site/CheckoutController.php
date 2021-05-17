@@ -112,7 +112,7 @@ class CheckoutController extends Controller
         }
 
         //CREAR PLAN DE PAGO CON EL ID DEL PRODUCTO
-        if (!$this->GenerarPlanPago()) {
+        if (!$this->GenerarPlanPago($membresia->precio)) {
             return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
         }
 
@@ -223,7 +223,7 @@ class CheckoutController extends Controller
 
 
 
-    protected function GenerarPlanPago()
+    protected function GenerarPlanPago($precio)
     {
 
         $countsPagos = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->count();
@@ -243,7 +243,7 @@ class CheckoutController extends Controller
                                             "total_cycles" => $pagos,
                                             "pricing_scheme" => [
                                                 "fixed_price" => [
-                                                    "value" => "2000", 
+                                                    "value" => $precio, 
                                                     "currency_code" => "MXN"
                                                 ],
                                             ],

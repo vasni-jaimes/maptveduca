@@ -92,47 +92,97 @@
                     </div>
                     <form action="{{ route('inscripciones.store') }}" method="POST" accept-charset="UTF-8" name="frm-agregar_status_ins">
                         @csrf
-                        <div class="i-checks"><label> <input type="radio" value="1" {{ $status->status == 1 ? "checked" : "" }} name="status"> <i></i> Activar Indefinido </label></div>
-                        <div class="i-checks"><label> <input type="radio" value="2" {{ $status->status == 2 ? "checked" : "" }} name="status"> <i></i> Desactivar Indefinido </label></div>
-                        <div class="i-checks"><label> <input type="radio" value="3" {{ $status->status == 3 ? "checked" : "" }} name="status"> <i></i> Activar programada </label></div>
 
-                        <br><br>
-                        <div class="form-group row div-grupos" {{ $status->status == 3 || $status->status == 2 ? "style='display:flex'" : "style='display:none'" }}>
-                            <label class="col-sm-2 col-form-label"> Grupos: </label>
-                            <div class="col-sm-10 mb-3">
-                                <select data-placeholder="Grupos" class="chosen-select" style="width:350px;" multiple tabindex="4" name="select_grupos[]">
-                                    @foreach($grupos as $grupo)
-                                        <option value="{{ $grupo->id }}" 
-                                            @if (in_array($grupo->id, old('select_grupos', $mygrupos))) selected @endif >
-                                            {{ $grupo->nombre }}
-                                        </option>    
-                                    @endforeach
-                                </select>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('select_grupos.*') !!} </span>
-                            </div>
-                        </div>
+                        @if ($status)
 
+                            <div class="i-checks"><label> <input type="radio" value="1" {{ $status->status == 1 ? "checked" : "" }} name="status"> <i></i> Activar Indefinido </label></div>
+                            <div class="i-checks"><label> <input type="radio" value="2" {{ $status->status == 2 ? "checked" : "" }} name="status"> <i></i> Desactivar Indefinido </label></div>
+                            <div class="i-checks"><label> <input type="radio" value="3" {{ $status->status == 3 ? "checked" : "" }} name="status"> <i></i> Activar programada </label></div>
 
-                        <div class="activa_programa" {{ $status->status == 3 ? "style='display:block'" : "style='display:none'" }}>
-                            <div class="hr-line-dashed"></div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Fecha de inicio: </label>
-                                <div class="col-sm-2">
-                                    <input class="form-control datepicker" name="fecha_inicio" data-date-format="yyyy-mm-dd" value="{{ old("fecha_inicio", $status->fecha_inicio) }}">
-                                    <span class='form-text m-b-none errors'> {!! $errors->first('fecha_inicio') !!} </span>
+                            <br><br>
+                            <div class="form-group row div-grupos" {{ $status->status == 3 || $status->status == 2 ? "style='display:flex'" : "style='display:none'" }}>
+                                <label class="col-sm-2 col-form-label"> Grupos: </label>
+                                <div class="col-sm-10 mb-3">
+                                    <select data-placeholder="Grupos" class="chosen-select" style="width:350px;" multiple tabindex="4" name="select_grupos[]">
+                                        @foreach($grupos as $grupo)
+                                            <option value="{{ $grupo->id }}" 
+                                                @if (in_array($grupo->id, old('select_grupos', $mygrupos))) selected @endif >
+                                                {{ $grupo->nombre }}
+                                            </option>    
+                                        @endforeach
+                                    </select>
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('select_grupos.*') !!} </span>
                                 </div>
                             </div>
 
 
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Fecha de fin: </label>
-                                <div class="col-sm-2">
-                                    <input class="form-control datepicker" name="fecha_fin" data-date-format="yyyy-mm-dd" value="{{ old("fecha_fin", $status->fecha_fin) }}">
-                                    <span class='form-text m-b-none errors'> {!! $errors->first('fecha_fin') !!} </span>
+                            <div class="activa_programa" {{ $status->status == 3 ? "style='display:block'" : "style='display:none'" }}>
+                                <div class="hr-line-dashed"></div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Fecha de inicio: </label>
+                                    <div class="col-sm-2">
+                                        <input class="form-control datepicker" name="fecha_inicio" data-date-format="yyyy-mm-dd" value="{{ old("fecha_inicio", $status->fecha_inicio) }}">
+                                        <span class='form-text m-b-none errors'> {!! $errors->first('fecha_inicio') !!} </span>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Fecha de fin: </label>
+                                    <div class="col-sm-2">
+                                        <input class="form-control datepicker" name="fecha_fin" data-date-format="yyyy-mm-dd" value="{{ old("fecha_fin", $status->fecha_fin) }}">
+                                        <span class='form-text m-b-none errors'> {!! $errors->first('fecha_fin') !!} </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @else
+
+
+                            <div class="i-checks"><label> <input type="radio" value="1" name="status"> <i></i> Activar Indefinido </label></div>
+                            <div class="i-checks"><label> <input type="radio" value="2" name="status"> <i></i> Desactivar Indefinido </label></div>
+                            <div class="i-checks"><label> <input type="radio" value="3" name="status"> <i></i> Activar programada </label></div>
+
+                            <br><br>
+                            <div class="form-group row div-grupos" style="display: none">
+                                <label class="col-sm-2 col-form-label"> Grupos: </label>
+                                <div class="col-sm-10 mb-3">
+                                    <select data-placeholder="Grupos" class="chosen-select" style="width:350px;" multiple tabindex="4" name="select_grupos[]">
+                                        @foreach($grupos as $grupo)
+                                            <option value="{{ $grupo->id }}" 
+                                                @if(is_array(old('select_grupos')) && in_array($instructor->id, old('select_grupos'))) selected @endif>
+                                                {{ $grupo->nombre }}
+                                            </option>    
+                                        @endforeach
+                                    </select>
+                                    <span class='form-text m-b-none errors'> {!! $errors->first('select_grupos.*') !!} </span>
+                                </div>
+                            </div>
+
+
+                            <div class="activa_programa" style="display: none">
+                                <div class="hr-line-dashed"></div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Fecha de inicio: </label>
+                                    <div class="col-sm-2">
+                                        <input class="form-control datepicker" name="fecha_inicio" data-date-format="yyyy-mm-dd" value="{{ old("fecha_inicio") }}">
+                                        <span class='form-text m-b-none errors'> {!! $errors->first('fecha_inicio') !!} </span>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Fecha de fin: </label>
+                                    <div class="col-sm-2">
+                                        <input class="form-control datepicker" name="fecha_fin" data-date-format="yyyy-mm-dd" value="{{ old("fecha_fin") }}">
+                                        <span class='form-text m-b-none errors'> {!! $errors->first('fecha_fin') !!} </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        @endif
 
 
                         <div class="hr-line-dashed"></div>
