@@ -65,7 +65,7 @@ class UsersController extends Controller
         $user->grupo_id         = $request->select_grupo;
         $user->password         = Hash::make($request->password);
         $user->status           = 0;
-        $user->renovar          = $request->has('renovar') ? 0 : 1;
+        $user->renovar          = $request->has('renovar') ? 1 : 0;
         if ($user->save()) {
 
             if ($request->has('suscripcion')) {
@@ -143,7 +143,7 @@ class UsersController extends Controller
         $user->email            = $request->email;
         $user->fecha_nacimiento = $request->fecha_nacimineto;
         $user->grupo_id         = $request->select_grupo;
-        $user->renovar          = $request->has('renovar') ? 0 : 1;
+        $user->renovar          = $request->has('renovar') ? 1 : 0;
 
 
         if ($request->has('password') && isset($request->password)) {
