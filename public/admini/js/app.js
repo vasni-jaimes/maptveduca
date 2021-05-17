@@ -509,7 +509,7 @@ if (frmAgregarUsuario || frmActualizarUsuario) {
 var suscripcion = document.querySelector('input[name="suscripcion"]');
 
 if (suscripcion) {
-  $('input').on('ifChanged', function (event) {
+  $('input[name="suscripcion"]').on('ifChanged', function (event) {
     if ($(this).is(':checked')) {
       $("select[name='select_carreras']").parents(".form-group").css("display", "flex");
     } else {
