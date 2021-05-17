@@ -100,7 +100,7 @@
                             <div class="i-checks"><label> <input type="radio" value="3" {{ $status->status == 3 ? "checked" : "" }} name="status"> <i></i> Activar programada </label></div>
 
                             <br><br>
-                            <div class="form-group row div-grupos" {{ $status->status == 3 || $status->status == 2 ? "style='display:flex'" : "style='display:none'" }}>
+                            <div class="form-group row div-grupos" {{ $status->status == 3 || $status->status == 2 ? "style=display:flex" : "style=display:none" }}>
                                 <label class="col-sm-2 col-form-label"> Grupos: </label>
                                 <div class="col-sm-10 mb-3">
                                     <select data-placeholder="Grupos" class="chosen-select" style="width:350px;" multiple tabindex="4" name="select_grupos[]">
@@ -116,7 +116,7 @@
                             </div>
 
 
-                            <div class="activa_programa" {{ $status->status == 3 ? "style='display:block'" : "style='display:none'" }}>
+                            <div class="activa_programa" {{ $status->status == 3 ? "style=display:block" : "style=display:none" }}>
                                 <div class="hr-line-dashed"></div>
 
                                 <div class="form-group row">
