@@ -157,7 +157,7 @@ class CheckoutController extends Controller
                                             ]
                                     );
 
-            if ($res->statusCode() == 204) {
+            if ($res->getStatusCode() == 204) {
 
                 DB::table('usuarios_membresia')->where('id', auth()->user()->ultimoPago()->id)->update(['canceled_sub' => 1]);
                return true;
