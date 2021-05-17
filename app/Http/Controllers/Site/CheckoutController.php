@@ -59,9 +59,11 @@ class CheckoutController extends Controller
         $status = StatusInscripcion::first();
         $fechas = null;
 
-        if ($status->status == 3) {
-            $fechas = $this->fechasHabilitar($status);
-        }
+        if ($status) {
+            if ($status->status == 3) {
+                $fechas = $this->fechasHabilitar($status);
+            }
+        } 
 
     	$membresia = Membresia::with("carreras")->where('slug', $slug_membresia)->first();
         return view("site.checkout", compact("membresia", "status", "fechas"));
