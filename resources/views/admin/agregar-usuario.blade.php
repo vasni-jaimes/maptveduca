@@ -144,11 +144,18 @@
                         </div>
 
                         <div class="form-group row mb-5">
+                            <label class="col-sm-2 col-form-label">Renovar Automaticamente: </label>
+                            <div class="i-checks col-sm-10">
+                                <label> <input type="checkbox" value="1" name="renovar" @if(old("renovar") == 1) checked @endif> <i></i></label>
+                            </div>
+                        </div>
+
+
+                         <div class="form-group row mb-5">
                             <label class="col-sm-2 col-form-label">Suscripcion: </label>
                             <div class="i-checks col-sm-10">
                                 <label> <input type="checkbox" value="1" name="suscripcion" @if(old("suscripcion") == 1) checked @endif> <i></i></label>
                             </div>
-                        </div>
 
 
                         <div class="form-group row" style="display: none">

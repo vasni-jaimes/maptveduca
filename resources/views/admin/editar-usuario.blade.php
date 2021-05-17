@@ -152,6 +152,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group row mb-5">
+                            <label class="col-sm-2 col-form-label">Renovar Automaticamente: </label>
+                            <div class="i-checks col-sm-10">
+                                <label> <input type="checkbox" value="1" name="renovar" @if(old("renovar", $usuario->renovar) == true) checked @endif> <i></i></label>
+                            </div>
+                        </div>
+
                         <div class="form-group row" style="{{ $usuario->tieneSuscripcion() == true ? "display: flex" : "display: none" }}">
                             <label class="col-sm-2 col-form-label"> Carreras: </label>
                             <div class="col-sm-10 mb-3">

@@ -21,7 +21,6 @@ class HomeController extends Controller
 
     public function index()
     {
-
         //FECHA ACTUAL
         $carbon         = new Carbon();
         $fechaActual    = $carbon->now();

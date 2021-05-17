@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Membresia;
 use App\Mensaje;
 use App\Notificacion;
+use App\UsuarioMembresia;
 use DB;
 
 class User extends Authenticatable
@@ -22,13 +23,6 @@ class User extends Authenticatable
         //return DB::table('usuarios_membresia')->where('user_id', $this->id)->first();
         return $this->belongsToMany('App\Membresia', 'usuarios_membresia', 'user_id', 'membresia_id');
     }
-
-
-    // public function ultimaSuscripcion()
-    // {
-    //     return auth()->user()->suscripcion[count(auth()->user()->suscripcion) - 1];
-    // }
-
 
     public function ultimaSuscripcion()
     {
@@ -53,6 +47,13 @@ class User extends Authenticatable
                             ->count();
 
         return $suscripcion2;
+    }
+
+
+    public function ultimaSubscripcion()
+    {
+        $suscripcion4 = UsuarioMembresia::where('user_id', $this->id)->first();
+        return $suscripcion4;
     }
 
 

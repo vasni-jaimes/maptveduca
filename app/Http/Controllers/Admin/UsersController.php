@@ -65,6 +65,7 @@ class UsersController extends Controller
         $user->grupo_id         = $request->select_grupo;
         $user->password         = Hash::make($request->password);
         $user->status           = 0;
+        $user->renovar          = $request->has('renovar') ? 0 : 1;
         if ($user->save()) {
 
             if ($request->has('suscripcion')) {
@@ -142,6 +143,8 @@ class UsersController extends Controller
         $user->email            = $request->email;
         $user->fecha_nacimiento = $request->fecha_nacimineto;
         $user->grupo_id         = $request->select_grupo;
+        $user->renovar          = $request->has('renovar') ? 0 : 1;
+
 
         if ($request->has('password') && isset($request->password)) {
             $user->password     = Hash::make($request->password);
@@ -179,15 +182,13 @@ class UsersController extends Controller
                 return back()->with("status.updateUsuario", "success");
             }
             else {
-                if ($user->tieneSuscripcion()) {
-                    date_default_timezone_set('America/Mexico_City');
-                    $hoy = Carbon::now()->format('Y-m-d');
-                    DB::table('usuarios_membresia')
-                                        ->where('fecha_fin', '>', $hoy)
-                                        ->where('fehca_inicio', '<=', $hoy)
-                                        ->where('user_id', $user->id)
-                                        ->delete();
-                }
+                date_default_timezone_set('America/Mexico_City');
+                $hoy = Carbon::now()->format('Y-m-d');
+                DB::table('usuarios_membresia')
+                                    ->where('fecha_fin', '>', $hoy)
+                                    ->where('fehca_inicio', '<=', $hoy)
+                                    ->where('user_id', $user->id)
+                                    ->delete();
             }
             
             DB::commit();
