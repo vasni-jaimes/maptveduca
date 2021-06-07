@@ -145,7 +145,8 @@ class AulasVirtualesController extends Controller
     public function indexGrupos($slug_materia)
     {
         $helper = $this->helper;
-        $grupos = Grupo::all();
+        $grupos = Grupo::with('usuarios')->get();
+        
         return view('admin.listado-grupos-aulas', compact('grupos', 'helper', 'slug_materia'));
     }
 

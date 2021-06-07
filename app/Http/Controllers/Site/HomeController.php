@@ -9,6 +9,9 @@ use App\Clase;
 use App\Evento;
 use App\ClaseSesion;
 use Carbon\Carbon;
+use App\User;
+use App\StatusInscripcion;
+use DB;
 
 class HomeController extends Controller
 {

@@ -24,8 +24,8 @@ class ValidarPublicacionAulasMaestro extends FormRequest
     public function rules()
     {
         return [
-            "publicaciontxt" => "required|string|max:255",
-            "titulo"        => "required|string|max:255",
+            "publicaciontxt" => "required|string",
+            "titulo"        => "required|string",
             "archivos_aula" => "nullable|array",
         ];
     }
@@ -35,9 +35,7 @@ class ValidarPublicacionAulasMaestro extends FormRequest
     {
         return [
             'publicaciontxt.required' => 'El campo es requerido',
-            'publicaciontxt.max' => 'El numero de caracteres excede le limite permitido',
             'titulo.required' => 'El campo es requerido',
-            'titulo.max' => 'El numero de caracteres excede le limite permitido',
         ];
     }
 }

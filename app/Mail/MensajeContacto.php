@@ -11,6 +11,7 @@ class MensajeContacto extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $subject = "Contacto";
     public $datos;
 
     /**

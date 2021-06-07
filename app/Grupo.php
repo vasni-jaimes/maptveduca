@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grupo extends Model
 {
-    //
+    public function usuarios()
+    {
+    	return $this->hasOne('App\User');
+    }
 }

@@ -378,8 +378,24 @@ class CheckoutController extends Controller
                     $usuarioMembresia->fecha_fin    = $final;
 
                     if ($usuarioMembresia->save()) {
+
                         $user                             = User::find(auth()->user()->id);
                         $user->suscripcion_id             = $request->subscription_id;
+
+                        //AGREGARLE UN GRUPO AL USUARIO SI ES NUEVO
+                        if (auth()->user()->grupo_id == null) {
+                            $status = StatusInscripcion::first();
+                            $grupos = DB::table('grupos_inscripciones')->get();
+
+                            foreach ($grupos as $grupo) {
+                                $cupo = User::where('grupo_id', $grupo->grupo_id)->count();
+
+                                if ($cupo < 30) {
+                                    $user->grupo_id = $grupo->grupo_id;
+                                    break;
+                                }
+                            }
+                        }
 
                         if ($user->save()) {
                             DB::commit();
