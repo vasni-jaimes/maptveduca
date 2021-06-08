@@ -57,7 +57,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($grupos->where('usuarios', '!=', null) as $grupo)
+                                        @foreach($grupos as $grupo)
                                             <tr class="gradeX">
                                                 <td> {{ $grupo->nombre }} </td>
                                                 <td> {{ $helper->contarAlumnos($grupo->id) }} </td>

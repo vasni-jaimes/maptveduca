@@ -13,7 +13,9 @@ use App\Grupo;
 use App\Publicacion;
 use App\Respuesta;
 use App\Notificacion;
+use App\Recomendacion;
 use DB;
+use Carbon\Carbon;
 
 class AulasVirtualesController extends Controller
 {
@@ -145,8 +147,10 @@ class AulasVirtualesController extends Controller
     public function indexGrupos($slug_materia)
     {
         $helper = $this->helper;
-        $grupos = Grupo::with('usuarios')->get();
         
+        $grupoSelect = $this->obtenerGruposForCurso($slug_materia);
+        $grupos      = Grupo::whereIn('id', $grupoSelect)->get();
+
         return view('admin.listado-grupos-aulas', compact('grupos', 'helper', 'slug_materia'));
     }
 
@@ -572,6 +576,34 @@ class AulasVirtualesController extends Controller
         echo "<script> window.close() </script>";
     }
 
+
+    protected function obtenerGruposForCurso($slug_materia)
+    {
+        date_default_timezone_set('America/Mexico_City');
+        $hoy   = Carbon::now()->format('Y-m-d');
+
+        $pagos = DB::table('usuarios_membresia')
+                    ->select('*')
+                    ->join('users', 'usuarios_membresia.user_id', 'users.id')
+                    ->where('users.grupo_id', '!=', null)
+                    ->where('usuarios_membresia.fehca_inicio', '<=', $hoy)
+                    ->where('usuarios_membresia.fecha_fin', '>=', $hoy)
+                    ->groupBy('users.grupo_id')
+                    ->get();
+
+        $curso      = Course::where('slug', $slug_materia)->first();
+        $trimestre  = Recomendacion::where('curso_id', $curso->id)->first();
+        $grupoSelect = Array();
+        foreach ($pagos as $pago) {
+            $trimesteUser = $this->helper->istrimestre($pago->user_id);
+            if ($trimesteUser == $trimestre->trimestre) {
+                $grupoSelect[] = $pago->grupo_id;
+            }
+        }
+
+        return $grupoSelect;
+    }
+    
 
     protected function eliminarImagen($file)
     {
