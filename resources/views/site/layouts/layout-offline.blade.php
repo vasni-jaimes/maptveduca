@@ -10,6 +10,15 @@
 		@yield("css-content")
 		<link rel="icon" href="/site/img/favicon.png" type="image/gif" sizes="64x64">
 	    
+	    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-191438635-2">
+        </script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-191438635-2');
+        </script>
 	</head>
 
 	<body>
