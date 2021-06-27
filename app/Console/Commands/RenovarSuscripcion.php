@@ -96,7 +96,8 @@ class RenovarSuscripcion extends Command
         } catch (ClientException $e) {
             $responsError = $e->getResponse();
             $error        = json_decode($responsError->getBody()->getContents());
-            \Log::error($error->message);
+            var_dump($error);
+            //\Log::error($error->message);
             return false;
         }
     }
