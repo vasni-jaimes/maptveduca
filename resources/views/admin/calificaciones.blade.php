@@ -97,7 +97,7 @@
 
                         <div class="hr-line-dashed"></div><br>
 
-                        @if ($trimestreAlumno >= 1)
+                        @if ($trimestreAlumno == 1)
 
                             <h2> Primer Trimestre </h2><br>
                             
@@ -114,7 +114,7 @@
 
                         <div class="hr-line-dashed"></div>
 
-                        @if ($trimestreAlumno >= 2)
+                        @if ($trimestreAlumno == 2)
 
                             <h2> Segundo Trimestre </h2><br>
                             
@@ -131,7 +131,7 @@
 
                         <div class="hr-line-dashed"></div>
 
-                        @if ($trimestreAlumno >= 3)
+                        @if ($trimestreAlumno == 3)
 
                             <h2> Tercer Trimestre </h2><br>
                             
@@ -148,7 +148,7 @@
 
                         <div class="hr-line-dashed"></div>
 
-                        @if ($trimestreAlumno >= 4)
+                        @if ($trimestreAlumno == 4)
 
                             <h2> Cuarto Trimestre </h2><br>
                             
@@ -164,7 +164,7 @@
 
                         <div class="hr-line-dashed"></div>
 
-                        @if ($trimestreAlumno >= 5)
+                        @if ($trimestreAlumno == 5)
 
                             <h2> Quinto Trimestre </h2><br>
                             
@@ -180,7 +180,7 @@
 
                         <div class="hr-line-dashed"></div>
 
-                        @if ($trimestreAlumno >= 6)
+                        @if ($trimestreAlumno == 6)
 
                             <h2> Sexto Trimestre </h2><br>
                             
@@ -196,7 +196,7 @@
 
                         <div class="hr-line-dashed"></div>
 
-                        @if ($trimestreAlumno >= 7)
+                        @if ($trimestreAlumno == 7)
 
                             <h2> Septimo Trimestre </h2><br>
                             
@@ -212,7 +212,7 @@
 
                         <div class="hr-line-dashed"></div>
 
-                        @if ($trimestreAlumno >= 8)
+                        @if ($trimestreAlumno == 8)
 
                             <h2> Octavo Trimestre </h2><br>
                             
