@@ -173,9 +173,103 @@
 	            <p>¿Quieres conocer el sitio antes de decidir?</p>
 	            <a class="btn-amarillo" href="{{ route("registro.show") }}">Regístrate gratis</a>
 	        </div> <!-- /row-registro -->
+
+	        <div class="banner-title bg-black">
+                <h2>Contacto</h2>
+            </div> <!-- /bg-black -->
+            
+            <div class="wrapper-maptv">
+                
+                <div class="row-form">
+                    
+                    <form action="{{ route('contacto.store') }}" class="form-contacto form" method="POST" name="contacto">
+                        @csrf
+                        <div>
+                            <input class="input" name="nombre" type="text" placeholder="Nombre" value="{{ old('nombre') }}">
+                            {{-- <span class='form-text m-b-none errors'> {!! $errors->first('nombre') !!} </span> --}}
+                            <input class="input" name="email" type="text" placeholder="Correo electrónico" value="{{ old('email') }}">
+                            {{-- <span class='form-text m-b-none errors'> {!! $errors->first('email') !!} </span> --}}
+                        </div>
+                        <div>
+                            <input class="input" name="ciudad" type="text" placeholder="Ciudad" value="{{ old('ciudad') }}">
+                            {{-- <span class='form-text m-b-none errors'> {!! $errors->first('ciudad') !!} </span> --}}
+                            <input class="input" name="pais" type="text" placeholder="País" value="{{ old('pais') }}">
+                            {{-- <span class='form-text m-b-none errors'> {!! $errors->first('pais') !!} </span> --}}
+                        </div>
+                        <div class="textarea">
+                            <label>Mensaje</label>
+                            <textarea placeholder="" name="mensaje">{{ old('mensaje') }}</textarea>
+                            {{-- <span class='form-text m-b-none errors'> {!! $errors->first('mensaje') !!} </span> --}}
+                        </div>
+                        <br>
+
+                        {{-- @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif --}}
+
+
+                        <div class="hs-button">
+                            <input type="submit" class="button enviar-mensaje">
+                        </div>
+                    </form>
+                    
+                </div> <!-- /row-maptv -->
+            
+            </div> <!-- /wrapper-maptv -->
             
 	    </div> <!-- /hoja-1000 -->
 	    
 	</section> <!-- /wrapper-academica -->
+
+
+	<!-- LOADING -->
+    <div class="shadow-favorito" id="loading" style="z-index: 9999">
+        <div class="f-shadow">
+            <img src="/site/img/musica.gif">
+        </div> <!-- /f-favorito -->
+    </div> <!-- /shadow-favorito -->
+
+
+    @if (session()->has("status.newContacto") || $errors->any())
+        @if (session()->get("status.newContacto") == "error" || $errors->any())
+            <!-- exito -->
+            <div class="shadow-favorito" id="shadow-exito" style="display: block;">
+                <div class="f-shadow">
+                    <div class="s-favorito">
+                        <div class="close-shadow"></div> <!-- /close-shadow -->
+                        <p>Ocurrio un error, intentelo más tarde</p>
+                        <ul>
+                            <li><a href="#" class="ok_favoritos-micuenta">OK</a></li>
+                        </ul>
+                    </div> <!-- /s-favorito -->
+                </div> <!-- /f-favorito -->
+            </div> <!-- /shadow-favorito -->
+        @else
+            <!-- exito -->
+            <div class="shadow-favorito" id="shadow-exito" style="display: block;">
+                <div class="f-shadow">
+                    <div class="s-favorito">
+                        <div class="close-shadow"></div> <!-- /close-shadow -->
+                        <p>Se mando tu mensaje correctamente</p>
+                        <ul>
+                            <li><a href="#" class="ok_favoritos-micuenta">OK</a></li>
+                        </ul>
+                    </div> <!-- /s-favorito -->
+                </div> <!-- /f-favorito -->
+            </div> <!-- /shadow-favorito -->
+        @endif
+    @endif
+
+
+
+    @section('js-content')
+        <script type="text/javascript" src="/site/js/app.js"></script>
+    @stop
 
 @stop

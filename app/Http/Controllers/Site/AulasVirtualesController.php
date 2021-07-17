@@ -9,14 +9,18 @@ use App\Course;
 use App\Publicacion;
 use App\Respuesta;
 use DB;
+use App\Helpers\Helper;
 
 class AulasVirtualesController extends Controller
 {
+
+    protected $helper;
  	
- 	public function __construct()
+ 	public function __construct(Helper $helper)
     {
         $this->middleware('auth');
         $this->middleware('ValidarAulaVirtual', ['only' => ['showAula']]);
+        $this->helper = $helper;
     }
 
 
@@ -71,8 +75,10 @@ class AulasVirtualesController extends Controller
 
     public function showAulas()
     {
+        $trimestreUser = $this->helper->istrimestre( auth()->user()->id );
     	$materias = DB::table('tablero_cursos')
                             ->join('courses', 'tablero_cursos.curso_id', 'courses.id')
+                            ->join('')
                             ->select('courses.*')
                             ->where('courses.status', 1)
                             ->where('tablero_cursos.user_id', auth()->user()->id)
