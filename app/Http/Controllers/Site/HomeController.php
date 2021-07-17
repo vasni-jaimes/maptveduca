@@ -31,7 +31,8 @@ class HomeController extends Controller
         //FECHA ACTUAL\
 
     	$cursos         = Course::where("status", 1)->orderBy('id', 'DESC')->get();
-        $eventos        = Evento::where("status", 1)->where('fecha_lanzamiento', '>', $hoy)->orderBy('id', 'DESC')->get();
+        //$eventos        = Evento::where("status", 1)->where('fecha_lanzamiento', '>', $hoy)->orderBy('id', 'DESC')->get();
+        $eventos        = Evento::where("status", 1)->orderBy('id', 'DESC')->get();
 
         //OBTENER CLASES FUTURAS
         $sesiones       = ClaseSesion::where("fecha_inicio", "<", $hoy)->get();
