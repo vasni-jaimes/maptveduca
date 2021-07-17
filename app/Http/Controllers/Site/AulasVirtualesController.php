@@ -78,10 +78,11 @@ class AulasVirtualesController extends Controller
         $trimestreUser = $this->helper->istrimestre( auth()->user()->id );
     	$materias = DB::table('tablero_cursos')
                             ->join('courses', 'tablero_cursos.curso_id', 'courses.id')
-                            ->join('')
+                            ->join('recomendaciones', 'courses.id', 'recomendaciones.curso_id')
                             ->select('courses.*')
                             ->where('courses.status', 1)
                             ->where('tablero_cursos.user_id', auth()->user()->id)
+                            ->where('recomendaciones.trimestre', $trimestreUser)
                             ->get();
 
     	return view('site.aulas', compact("materias"));
