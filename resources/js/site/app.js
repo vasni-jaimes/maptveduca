@@ -272,11 +272,9 @@ if (ver_notify) {
 //ENVIAR CONTACTO
 let enviar_mensaje = document.querySelector('.enviar-mensaje');
 if (enviar_mensaje) {
-	enviar_mensaje.addEventListener('click', function(e) {
-		e.preventDefault();
-		document.querySelector('#loading').style.display = "block";
-		document.querySelector('.form-contacto').submit();
-	})
+	enviar_mensaje.addEventListener('click', funciones.validacionContacto);
+	$(document).change("input", funciones.validacionContacto);
+	//enviar_mensaje.addEventListener('input', funciones.validacionContacto);
 }
 
 

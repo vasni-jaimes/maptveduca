@@ -62,10 +62,7 @@
                             </div>
 
                         @endif
-
                     @endforeach
-
-
 
                     @foreach($instructores as $instructor)
                         @if ($instructor->cursos->count() > 0)
@@ -101,7 +98,6 @@
                             </div>
                         @endif
                     @endforeach
-
                     
                     @foreach($categorias as $categoria)
 

@@ -108,7 +108,7 @@
                 
                 <div class="row-form">
                     
-                    <form action="{{ route('contacto.store') }}" class="form-contacto" method="POST">
+                    <form action="{{ route('contacto.store') }}" class="form-contacto form" method="POST" name="contacto">
                         @csrf
                         <div>
                             <input class="input" name="nombre" type="text" placeholder="Nombre" value="{{ old('nombre') }}">

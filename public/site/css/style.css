@@ -1846,6 +1846,10 @@ video#myVideo {
     border-bottom: 1px solid red;
 }
 
+.form textarea.campo-requerido {
+    border: 1px solid red;
+}
+
 .form a {
     display: block;
     color: #777;

@@ -3,6 +3,90 @@
 
 let funciones = {
 
+
+	validacionContacto: function(e) {
+		e.preventDefault();
+
+		console.log('hshshs');
+
+		let nombre = document.querySelector("input[name='nombre']"),
+			email = document.querySelector("input[name='email']"),
+			ciudad = document.querySelector("input[name='ciudad']"),
+			pais = document.querySelector("input[name='pais']"),
+			mensaje = document.querySelector("textarea[name='mensaje']"),
+			validate = true;
+
+
+		if (nombre.value == '') {
+			nombre.classList.add('campo-requerido');
+			validate = false;
+		}
+		else {
+			nombre.classList.remove('campo-requerido');
+		}
+
+		if (email.value == '') {
+			email.classList.add('campo-requerido');
+			validate = false;
+		}
+		else {
+			email.classList.remove('campo-requerido');
+		}
+
+
+		if (!funciones.validarEmail(email.value)) {
+			email.classList.add('campo-requerido');
+			validate = false;
+		}
+		else {
+			email.classList.remove('campo-requerido');
+		}
+
+
+		if (ciudad.value == '') {
+			ciudad.classList.add('campo-requerido');
+			validate = false;
+		}
+		else {
+			ciudad.classList.remove('campo-requerido');
+		}
+
+
+		if (pais.value == '') {
+			pais.classList.add('campo-requerido');
+			validate = false;
+		}
+		else {
+			pais.classList.remove('campo-requerido');
+		}
+
+
+		if (mensaje.value == '') {
+			mensaje.classList.add('campo-requerido');
+			validate = false;
+		}
+		else {
+			mensaje.classList.remove('campo-requerido');
+		}
+
+
+		if (validate == false) {
+			//alert('k')
+			return false;
+		}
+
+
+		if (e.type == 'click') {
+
+			document.querySelector('#loading').style.display = "block";
+
+	        e.target.disabled = true;
+	        document.querySelector('.form-contacto').submit();
+	        return false;
+	    }
+
+	},
+
 	eliminarArchivoAulas: function(e) {
 		e.preventDefault();
 
@@ -216,7 +300,7 @@ let funciones = {
 		}
 
 		if (validate == false) {
-			alert('k')
+			//alert('k')
 			return false;
 		}
 
