@@ -66,8 +66,8 @@
 
                     @foreach($instructores as $instructor)
                         @if ($instructor->cursos->count() > 0)
-                            <div class="instruct row-yellow {{ md5($instructor->id) }}" style="display: none">
-                                <div class="div-item {{ md5($instructor->id) }}">
+                            <div class="instruct row-yellow {{ "ab".md5($instructor->id) }}" style="display: none">
+                                <div class="div-item {{ "ab".md5($instructor->id) }}">
                                     <h3> {{ $instructor->nombres. " ".$instructor->apellidos }} </h3>
 
                                     <div class="row-slide">
