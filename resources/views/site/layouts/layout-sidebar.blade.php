@@ -38,7 +38,7 @@
     <ul>
         @foreach($instructores as $instructor)
             @if ($instructor->cursos->count())
-                <li style="cursor: pointer" class="{{ md5($instructor->id) }}" data-cat="{{ md5($instructor->id) }}"> 
+                <li style="cursor: pointer" class="{{ "ab".md5($instructor->id) }}" data-cat="{{ "ab".md5($instructor->id) }}"> 
                     {{ $instructor->nombres." ".$instructor->apellidos }} ({{ $instructor->cursos->count() }}) 
                 </li>
             @endif
