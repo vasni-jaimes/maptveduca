@@ -108,6 +108,14 @@
                                 <a href="{{ route('inscripciones.index') }}"><i class="fa fa-pie-chart"></i> <span class="nav-label"> Inscripciones </span>  </a>
                             </li>
 
+                           <li>
+                                <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Membresias Administrable</span> <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="{{ route('create-contenido-fecha.create') }}"> Inicio de Trimestre </a></li>
+                                    <li> <a href="#"> Membresias ( periodos de inicio ) </a></li>
+                                </ul>
+                            </li>
+
                         @endif
                         <li>
                             <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Mensajes</span> <span class="fa arrow"></span></a>

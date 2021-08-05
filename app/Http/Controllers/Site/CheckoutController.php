@@ -43,7 +43,7 @@ class CheckoutController extends Controller
 		$this->payPalConfig = Config::get('paypal');
 
         $this->client = new Client([
-            "base_uri" => "https://api-m.sandbox.paypal.com",
+            "base_uri" => "https://api-m.paypal.com",
         ]);
 	}
 
@@ -192,7 +192,7 @@ class CheckoutController extends Controller
         } catch (ClientException $e) {
             $responsError = $e->getResponse();
             $error        = json_decode($responsError->getBody()->getContents());
-            \Log::error($error->message);
+            \Log::error($error->error);
             return false;
         }
     }

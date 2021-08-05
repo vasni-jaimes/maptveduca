@@ -3,6 +3,58 @@
 
 let funciones = {
 
+	validarFechasContenido: function(e) {
+		e.preventDefault();
+
+		let inicio_trimestre = document.querySelector("input[name='inicio_trimestre']");
+
+		/* STATUS */
+		let error_videos = false;
+
+		//SE ELIMINAN LOS RASTROS DE ERRORES
+		document.querySelectorAll('.errors').forEach(function(item) {
+			item.innerHTML = '';
+		});
+
+		document.querySelectorAll('.chosen-choices').forEach((item) => {
+			item.style.borderColor = "#e5e6e7";
+		});
+
+		if (document.querySelector('.has-error')) {
+			document.querySelectorAll('.has-error').forEach((item) => {
+				item.classList.remove('has-error');
+			});
+		}
+		//SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+
+		if (inicio_trimestre.value == '') {
+			inicio_trimestre.parentNode.classList.add('has-error');
+			inicio_trimestre.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+
+		if (error_videos == true) {
+			if (e.type == 'submit') {
+				let posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+				window.scrollTo(0, posicion);
+			}
+
+			return false;
+		}
+
+
+		if (e.type == 'submit') {
+			e.target.disabled = true;
+	        document.querySelector('.ibox-content').classList.add('sk-loading');
+
+	        document.querySelector("form[name='frm-agregar_fecha']").submit();
+	        return false;
+	    }
+
+	},
+
 	validarAgregarGrupo: function(e) {
 		e.preventDefault();
 

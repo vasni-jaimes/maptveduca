@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AministardoresController extends Controller
 {
 
-     public function __construct()
+    public function __construct()
     {
         $this->middleware("authadmin:auth");
     }

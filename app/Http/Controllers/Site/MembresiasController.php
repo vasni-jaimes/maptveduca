@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Membresias;
+use App\AdministracionFecha;
 
 class MembresiasController extends Controller
 {
@@ -21,7 +22,8 @@ class MembresiasController extends Controller
      */
     public function index()
     {
-        return view("site.membresia");
+        $adminFecha     = AdministracionFecha::first();
+        return view("site.membresia", compact("adminFecha"));
     }
 
     /**

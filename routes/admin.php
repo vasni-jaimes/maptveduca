@@ -123,9 +123,14 @@ Route::get('calificaciones-materias/{alumno_id}', 'Admin\CalificacionesControlle
 Route::get('calificaciones/{user_id}/{slug_curso}', 'Admin\CalificacionesController@getCalificaciones')->name('calificaciones');
 Route::post('calificaciones/{user_id}/{slug_curso}', 'Admin\CalificacionesController@storeCalificaciones')->name('calificaciones.store');
 
+//CREAR NUEVO CONTENIDO EN FECHAS INDEX / HOME
+Route::get('create-contenido-fechas', 'Admin\AdminMembresiaController@create')->name('create-contenido-fecha.create');
+Route::post('edit-contenido-fechas', 'Admin\AdminMembresiaController@edit')->name('edit-contenido-fecha');
+
 
 //TEXTO ALTERNATIVO CARRERA
 Route::get('textoalternativo-carreras', 'Admin\TextoAlternativoCntroller@show')->name('texto-materias');
 Route::get('textoalternativo-materias/{carrera_id}', 'Admin\TextoAlternativoCntroller@index')->name('texto-lista-materias');
 Route::get('agregar-textoalternatico/{curso_id}/{carrera_id}', 'Admin\TextoAlternativoCntroller@getTexto')->name('texto-alternativo');
 Route::post('agregar-textoalternatico/{curso_id}', 'Admin\TextoAlternativoCntroller@insertTexto')->name('texto-alternativo.insert');
+

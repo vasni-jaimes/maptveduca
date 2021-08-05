@@ -489,3 +489,14 @@ if (activa_programa) {
 }
 
 
+
+//FORMULARIO FECHAS
+const frmAgregarFecha = document.querySelector("form[name='frm-agregar_fecha']");
+if (frmAgregarFecha) {
+
+	frmAgregarFecha.addEventListener('submit', funciones.validarFechasContenido);
+	frmAgregarFecha.addEventListener('input', funciones.validarFechasContenido);
+	$(document).change("input", funciones.validarFechasContenido);
+	$("select").change(funciones.validarFechasContenido);
+}
+

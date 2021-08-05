@@ -95,6 +95,49 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  validarFechasContenido: function validarFechasContenido(e) {
+    e.preventDefault();
+    var inicio_trimestre = document.querySelector("input[name='inicio_trimestre']");
+    /* STATUS */
+
+    var error_videos = false; //SE ELIMINAN LOS RASTROS DE ERRORES
+
+    document.querySelectorAll('.errors').forEach(function (item) {
+      item.innerHTML = '';
+    });
+    document.querySelectorAll('.chosen-choices').forEach(function (item) {
+      item.style.borderColor = "#e5e6e7";
+    });
+
+    if (document.querySelector('.has-error')) {
+      document.querySelectorAll('.has-error').forEach(function (item) {
+        item.classList.remove('has-error');
+      });
+    } //SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+
+    if (inicio_trimestre.value == '') {
+      inicio_trimestre.parentNode.classList.add('has-error');
+      inicio_trimestre.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (error_videos == true) {
+      if (e.type == 'submit') {
+        var posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+        window.scrollTo(0, posicion);
+      }
+
+      return false;
+    }
+
+    if (e.type == 'submit') {
+      e.target.disabled = true;
+      document.querySelector('.ibox-content').classList.add('sk-loading');
+      document.querySelector("form[name='frm-agregar_fecha']").submit();
+      return false;
+    }
+  },
   validarAgregarGrupo: function validarAgregarGrupo(e) {
     e.preventDefault();
     var nombre_grupo = document.querySelector("input[name='nombre_grupo']");
