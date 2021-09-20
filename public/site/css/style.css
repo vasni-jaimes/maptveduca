@@ -448,6 +448,10 @@ body {
     padding: 0 10px;
 }
 
+.error_login {
+    color: red;
+}
+
 header {
     position: absolute;
     top: 0; 
@@ -618,10 +622,10 @@ header a {
     margin: 0 0 10px;
 }
 
-/*.parent:hover .menu-child {
+/*.parent-membresia:hover .menu-child {
     display: block;
-}
-*/
+}*/
+
 .mm-navbar__title,
 .menu > li > a {
     color: #fff;

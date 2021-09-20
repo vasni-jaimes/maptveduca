@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'ValidarEventosExist' => \App\Http\Middleware\ValidarEventosExist::class,
         'ValidarAulaVirtual' => \App\Http\Middleware\ValidarAulaVirtual::class,
         'ValidarAdmin' => \App\Http\Middleware\ValidarAdmin::class,
+        'SoloMembresiaAcademica' => \App\Http\Middleware\SoloMembresiaAcademica::class,
     ];
 }

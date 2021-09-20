@@ -273,47 +273,47 @@
                     <table style="width: 100%; border-spacing: 10px; border-collapse: separate; table-layout: fixed;">
                         <tr>
                             <th>&nbsp</th>
-                            <!--<th>Membresía básica</th>-->
+                            <th>Membresía básica</th>
                             <th>Membresía académica <span>Carrera técnica en producción musical</span></th>
                         </tr>
                         <tr>
                             <td>Acceso a cursos base</td>
-                            <!--<td><span class="circle"></span></td>-->
+                            <td><span class="circle"></span></td>
                             <td><span class="circle"></span></td>
                         </tr>
                         <tr>
                             <td>Acceso a cursos y material extra</td>
-                            <!--<td><span class="circle"></span></td>-->
+                            <td><span class="circle"></span></td>
                             <td><span class="circle"></span></td>
                         </tr>
                         <tr>
                             <td>Acceso a clínicas y conciertos/masterclass básicas</td>
-                            <!--<td><span class="circle"></span></td>-->
+                            <td><span class="circle"></span></td>
                             <td><span class="circle"></span></td>
                         </tr>
                         <tr>
                             <td>Acceso a carrera técnica con reconocimiento oficial SEP</td>
-                            <!--<td>&nbsp</td>-->
+                            <td>&nbsp</td>
                             <td><span class="circle"></span></td>
                         </tr>
                         <tr>
                             <td>Acceso a aulas virtuales</td>
-                            <!--<td>&nbsp</td>-->
+                            <td>&nbsp</td>
                             <td><span class="circle"></span></td>
                         </tr>
                         <tr>
                             <td>Retroalimentación y sesiones en vivo de profesores titulares</td>
-                            <!--<td>&nbsp</td>-->
+                            <td>&nbsp</td>
                             <td><span class="circle"></span></td>
                         </tr>
                         <tr>
                             <td>Certificado con validez oficial</td>
-                            <!--<td>&nbsp</td>-->
+                            <td>&nbsp</td>
                             <td><span class="circle"></span></td>
                         </tr>
                         <tr class="last-tr">
                             <td class="last-td">&nbsp</td>
-                            <!--<td class="last-td"><span>$123 MXN mensuales</span><a href="{{ route("checkout", "membresia-basica") }}" class="bg-amarillo">Prueba gratuita por 30 días</a></td>-->
+                            <td class="last-td"><span>$250 MXN mensuales</span><a href="{{ route("checkout", "membresia-basica") }}" class="bg-amarillo">Prueba gratuita por 30 días</a></td>
                             <td class="last-td"><span>$2,000 MXN mensuales<br>en modalidad trimestral</span><a href="{{ route("checkout", "membresia-academica") }}" class="bg-amarillo">OBTÉN TU MEMBRESÍA E INSCRÍBETE</a></td>
                         </tr>
                     </table>

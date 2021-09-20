@@ -43,7 +43,7 @@ class CheckoutController extends Controller
 		$this->payPalConfig = Config::get('paypal');
 
         $this->client = new Client([
-            "base_uri" => "https://api-m.paypal.com",
+            "base_uri" => "https://api-m.sandbox.paypal.com",
         ]);
 	}
 
@@ -101,18 +101,19 @@ class CheckoutController extends Controller
         $carrera        = $request->carrera;
         $membresia_id   = $membresia->id;
 
+
         //OBTENER EL TOKEN DEL API
         if (!$this->ObtenerAccessToken()) {
             return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
         }
 
         //CREAR UN PRODUCTO DIGITAL
-        if (!$this->GenerarProducto()) {
+        if (!$this->GenerarProducto($membresia)) {
             return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
         }
 
         //CREAR PLAN DE PAGO CON EL ID DEL PRODUCTO
-        if (!$this->GenerarPlanPago($membresia->precio)) {
+        if (!$this->GenerarPlanPago($membresia->precio, $membresia->id)) {
             return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
         }
 
@@ -192,22 +193,22 @@ class CheckoutController extends Controller
         } catch (ClientException $e) {
             $responsError = $e->getResponse();
             $error        = json_decode($responsError->getBody()->getContents());
-            \Log::error($error->error);
+            \Log::error($error->message);
             return false;
         }
     }
 
 
-    protected function GenerarProducto()
+    protected function GenerarProducto($membresia)
     {
         try {
             $res = $this->client->post('/v1/catalogs/products', 
-                        ['json' => ["name" => "Cursos Maptveduca", 
+                        ['json' => ["name" => "Cursos Maptveduca ( ".$membresia->nombre." )", 
                                     "description" => "cursos de paga para la plataforma Maptveduca", 
                                     "type" => "DIGITAL",
                                     "category" => "EDUCATIONAL_AND_TEXTBOOKS", 
-                                    "image_url" => "https://example.com/streaming.jpg",
-                                    "home_url" => "https://maptvduca.valeriastrempler.com/"], 
+                                    "image_url" => "https://maptveduca.org/site/img/logo-amarillo.png",
+                                    "home_url" => "https://maptveduca.org/"], 
                          'headers' => ['content-type' => 'application/json',
                                     'authorization' => 'Bearer '.$this->acces_token]
                         ]
@@ -231,32 +232,20 @@ class CheckoutController extends Controller
 
 
 
-    protected function GenerarPlanPago($precio)
+    protected function GenerarPlanPago($precio, $membrecia_id)
     {
 
-        $countsPagos = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->count();
-        $pagos = 24 - $countsPagos;
+        $countsPagos        = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->count();
+        $pagos              = 24 - $countsPagos;
+        $opcionesMembresia  = $membrecia_id == 1 ? $this->arrayMembresiaBasica($pagos, $precio, $countsPagos) : $this->arrayMembresiaAcademica($pagos, $precio);
 
         try {
             $res = $this->client->post('/v1/billing/plans', 
                         ['json' => ["product_id" => $this->productId,
-                                    "name" => "plan mensual a maptvduca",
+                                    "name" => "Plan mensual a maptvduca",
                                     "description" => "plan de pago mensual para la plataforma maptvduca",
                                     "status" => "ACTIVE",
-                                    "billing_cycles" => [
-                                        [
-                                            "frequency" => ["interval_unit" => "MONTH", "interval_count" => 1],
-                                            "tenure_type" => "REGULAR",
-                                            "sequence" => 1,
-                                            "total_cycles" => $pagos,
-                                            "pricing_scheme" => [
-                                                "fixed_price" => [
-                                                    "value" => $precio, 
-                                                    "currency_code" => "MXN"
-                                                ],
-                                            ],
-                                        ]
-                                    ],
+                                    "billing_cycles" => $opcionesMembresia,
                                     "payment_preferences" => [ 
                                         "auto_bill_outstanding" => true,
                                         "setup_fee_failure_action" => "CONTINUE",
@@ -291,6 +280,7 @@ class CheckoutController extends Controller
             //FECHA DE HOY
             $nameSub    = auth()->user()->nombre." ".auth()->user()->apaterno;
             $emailSub   = auth()->user()->email;
+            $parametros = $membresia_id == 2 ? "cr=".$carrera."&mm=".$membresia_id : "mm=".$membresia_id;
 
             $res = $this->client->post('/v1/billing/subscriptions', 
                         ['json' => ["plan_id" => $this->plan,
@@ -304,8 +294,8 @@ class CheckoutController extends Controller
                                         "locale" => "en-MX",
                                         "user_action" => "SUBSCRIBE_NOW",
                                         "payment_method" => ["payer_selected" => "PAYPAL", "payee_preferred" => "IMMEDIATE_PAYMENT_REQUIRED"],
-                                        "return_url" => "http://maptvduca.valeriastrempler.com/gracias?cr=".$carrera."&mm=".$membresia_id,
-                                        "cancel_url" => "http://maptvduca.valeriastrempler.com/cancelar-suscripcion",
+                                        "return_url" => "https://maptveduca.org/gracias?".$parametros,
+                                        "cancel_url" => "https://maptveduca.org/cancelar-suscripcion",
                                     ],
                                 ], 
                          'headers' => ['content-type' => 'application/json',
@@ -373,7 +363,11 @@ class CheckoutController extends Controller
                     $usuarioMembresia               = new UsuarioMembresia();
                     $usuarioMembresia->user_id      = auth()->user()->id;
                     $usuarioMembresia->membresia_id = $request->mm;
-                    $usuarioMembresia->carrera_id   = $request->cr;
+
+                    if ($request->has("cr")) {
+                        $usuarioMembresia->carrera_id   = $request->cr;
+                    }
+                    
                     $usuarioMembresia->fehca_inicio = $hoy;
                     $usuarioMembresia->fecha_fin    = $final;
 
@@ -488,4 +482,75 @@ class CheckoutController extends Controller
 
         return false;
     } 
+
+
+    protected function arrayMembresiaBasica($pagos, $precio, $countsPagos)
+    {
+        if (!$countsPagos) {
+
+            return  [
+                        [
+                            "frequency" => ["interval_unit" => "MONTH", "interval_count" => 1],
+                            "tenure_type" => "TRIAL",
+                            "sequence" => 1,
+                            "total_cycles" => 1,
+                            "pricing_scheme" => [
+                                "fixed_price" => [
+                                    "value" => 0, 
+                                    "currency_code" => "MXN"
+                                ],
+                            ],
+                        ],
+
+                        [
+                            "frequency" => ["interval_unit" => "MONTH", "interval_count" => 1],
+                            "tenure_type" => "REGULAR",
+                            "sequence" => 2,
+                            "total_cycles" => $pagos,
+                            "pricing_scheme" => [
+                                "fixed_price" => [
+                                    "value" => $precio, 
+                                    "currency_code" => "MXN"
+                                ],
+                            ],
+                        ], 
+                    ];
+        }
+        else {
+
+            return  [
+                        [
+                            "frequency" => ["interval_unit" => "MONTH", "interval_count" => 1],
+                            "tenure_type" => "REGULAR",
+                            "sequence" => 1,
+                            "total_cycles" => $pagos,
+                            "pricing_scheme" => [
+                                "fixed_price" => [
+                                    "value" => $precio, 
+                                    "currency_code" => "MXN"
+                                ],
+                            ],
+                        ], 
+                    ];
+        }
+    }
+
+
+     protected function arrayMembresiaAcademica($pagos, $precio)
+     {
+        return  [
+                    [
+                        "frequency" => ["interval_unit" => "MONTH", "interval_count" => 1],
+                        "tenure_type" => "REGULAR",
+                        "sequence" => 1,
+                        "total_cycles" => $pagos,
+                        "pricing_scheme" => [
+                            "fixed_price" => [
+                                "value" => $precio, 
+                                "currency_code" => "MXN"
+                            ],
+                        ],
+                    ], 
+                ];
+     }
 }

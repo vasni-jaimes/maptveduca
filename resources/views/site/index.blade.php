@@ -115,52 +115,52 @@
 	        <table>
 	            <tr>
 	                <th>&nbsp</th>
-	                <!--<th>Membresía básica</th>-->
+	                <th>Membresía básica</th>
 	                <th>Membresía académica <span>Estudia la carrera técnica en Producción Musical</span></th>
 	            </tr>
 	            <tr>
 	                <td>Material audiovisual de estudio</td>
-	                <!--<td><span class="circle"></span></td>-->
+	                <td><span class="circle"></span></td>
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr>
 	                <td>Acceso a eventos virtuales básicos</td>
-	                <!--<td><span class="circle"></span></td>-->
+	                <td><span class="circle"></span></td>
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr>
 	                <td>Acceso a clínicas y conciertos/masterclass básicas</td>
-	                <!--<td><span class="circle"></span></td>-->
+	                <td><span class="circle"></span></td>
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr>
 	                <td>Carrera técnica con reconocimiento oficial SEP</td>
-	                <!--<td>&nbsp</td>-->
+	                <td>&nbsp</td>
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr>
 	                <td>Acceso a aulas virtuales</td>
-	                <!--<td>&nbsp</td>-->
+	                <td>&nbsp</td>
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr>
 	                <td>Retroalimentación y sesiones en vivo de profesores titulares</td>
-	                <!--<td>&nbsp</td>-->
+	                <td>&nbsp</td>
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr>
 	                <td>Certificado con validez oficial</td>
-	                <!--<td>&nbsp</td>-->
+	                <td>&nbsp</td>
 	                <td><span class="circle"></span></td>
 	            </tr>
                 <tr>
 	                <td>Modalidad trimestral de estudio</td>
-	                <!--<td>&nbsp</td>-->
+	                <td>&nbsp</td>
 	                <td><span class="circle"></span></td>
 	            </tr>
 	            <tr class="last-tr">
 	                <td class="last-td">&nbsp</td>
-	                <!--<td class="last-td"><span>$123 MXN mensuales</span><a href="#" class="bg-amarillo">Prueba gratuita por 30 días</a></td>-->
+	                <td class="last-td"><span>$123 MXN mensuales</span><a class="bg-amarillo">Prueba gratuita por 30 días</a></td>
 	                <td class="last-td"><span>$2,000 MXN mensuales<br>en modalidad trimestral</span></td>
 	            </tr>
 	        </table>

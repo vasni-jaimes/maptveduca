@@ -69,9 +69,9 @@ class UsersController extends Controller
         /* RECIMENDACIONES */
         $materias        = $this->cursosPorTrimestre();
         $tituloTrimestre = $this->tituloPorTrimestre();
+        
 
         /* TABLERO CURSOS */
-
         $tableroCursos = DB::table('tablero_cursos')
                             ->join('courses', 'tablero_cursos.curso_id', 'courses.id')
                             ->select('courses.*')
@@ -109,18 +109,14 @@ class UsersController extends Controller
         $pagos = UsuarioMembresia::with(['membresia', 'evento', 'curso'])
                     ->where('user_id', auth()->user()->id)->get();
 
+
         /* CALIFICACIONES */
-        //$calificaciones = $this->obtenerCalificaciones();
         $trimestreActual = $this->helper->istrimestre(auth()->user()->id);
         $recomendacionesCompletas = Recomendacion::with(['cursos'])->where('carrera_id', auth()->user()->obtenerCarrera())->get();
-        //return $recomendacionesCompletas;
-
-        //return auth()->user()->obtenerCarrera();
 
         /* NOTIFICACIONES */
         $notificaciones = Notificacion::where('user_id', auth()->user()->id)
                             ->orWhere('user_id', 0)->orderBy('created_at', 'desc')->get();
-
 
         /* HELPER */
         $helper = $this->helper;
@@ -160,7 +156,7 @@ class UsersController extends Controller
     }
 
 
-   public function verMensaje(Request $request)
+    public function verMensaje(Request $request)
     {
         if ($request->has('mensaje') && isset($request->mensaje) && is_numeric($request->mensaje)) {
             $mensaje = Mensaje::where('user_id', auth()->user()->id)->where('id', $request->mensaje)->first();

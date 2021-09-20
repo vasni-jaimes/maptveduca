@@ -11,23 +11,16 @@
 	        <div>
 	            <img class="logo" src="/site/img/logo.png">
 	            <div class="formulario">
-
-	            	@if ($errors->any())
-					    <div class="alert alert-danger" style="background:red">
-					        <ul>
-					            @foreach ($errors->all() as $error)
-					                <li>{{ $error }}</li>
-					            @endforeach
-					        </ul>
-					    </div>
-					@endif
-
-
 	                <h2>¡Bienvenido de nuevo!</h2>
 	                <form action="{{ route("send.login") }}" class="form" method="POST" name="form_login">
 	                	@csrf
 	                    <input class="input" type="text" name="email" placeholder="Correo electrónico*" value="{{ old("email") }}">
 	                    <input class="input" type="password" name="password" placeholder="Contraseña*">
+
+	                    @foreach ($errors->all() as $error)
+				            <p class="error_login"> {{ $error }} </p>
+				        @endforeach
+
                         <a href="{{ route('recover') }}">¿Olvidaste tu contraseña?</a>
 	                    <input type="submit" class="button">
                         <p><em>*Campos requeridos</em></p>

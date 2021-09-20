@@ -7,7 +7,9 @@ if (form_registro) {
 
 const form_login = document.querySelector("form[name='form_login']");
 if (form_login) {
+	form_login.addEventListener('input', funciones.validarLogin);
 	form_login.addEventListener("submit", funciones.validarLogin);
+	$(document).change("input", funciones.validarLogin);
 }
 
 

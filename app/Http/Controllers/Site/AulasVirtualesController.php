@@ -19,6 +19,7 @@ class AulasVirtualesController extends Controller
  	public function __construct(Helper $helper)
     {
         $this->middleware('auth');
+        $this->middleware('SoloMembresiaAcademica');
         $this->middleware('ValidarAulaVirtual', ['only' => ['showAula']]);
         $this->helper = $helper;
     }

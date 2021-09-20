@@ -57,10 +57,6 @@ class EventosControllers extends Controller
 
     public function agregarTablero(Request $request)
     {
-        // if (!auth()->user()->tieneSuscripcion()) {
-        //     return response()->json(["message" => "not_membresia"]);
-        // }
-
         if ( $request->has('slug') && $request->has('slug')) {
             $evento = Evento::where('slug', $request->slug)->where('status', 1)->first();
             if ($evento) {
@@ -97,10 +93,6 @@ class EventosControllers extends Controller
 
     protected function estaEnMiTablero($evento_id)
     {
-        // if (!auth()->user()->tieneSuscripcion()) {
-        //     return false;
-        // }
-
         $eventoTablero = DB::table('tablero_eventos')
                                     ->where('evento_id', $evento_id)
                                     ->where('user_id', auth()->user()->id)

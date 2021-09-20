@@ -107,7 +107,9 @@ if (form_registro) {
 var form_login = document.querySelector("form[name='form_login']");
 
 if (form_login) {
+  form_login.addEventListener('input', _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarLogin);
   form_login.addEventListener("submit", _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarLogin);
+  $(document).change("input", _functions_js__WEBPACK_IMPORTED_MODULE_0__["funciones"].validarLogin);
 }
 
 var sidebar_cursos = document.querySelector(".sidebar-cursos");
@@ -989,6 +991,16 @@ var funciones = {
     var email = document.querySelector("input[name='email']"),
         password = document.querySelector("input[name='password']"),
         validate = true;
+
+    if (document.querySelector('.error_login')) {
+      document.querySelector('.error_login').remove();
+    }
+
+    if (document.querySelector('.campo-requerido')) {
+      document.querySelectorAll('.campo-requerido').forEach(function (item) {
+        item.classList.remove('campo-requerido');
+      });
+    }
 
     if (email.value == '') {
       email.classList.add('campo-requerido');

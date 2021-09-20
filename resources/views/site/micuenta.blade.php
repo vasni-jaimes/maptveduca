@@ -37,22 +37,22 @@
                     </div> <!-- /row-tablero -->
 
                     <ul class="li-micuenta">
-                        <li class="active" data-seccion="perfil"><a href="">Perfil</a></li>
-                        <li data-seccion="inbox"><a href=""> @if (auth()->user()->MensajesNotify()) <small class="notificacion not-inbox"></small> @endif Inbox</a></li>
-                        <li data-seccion="pagos"><a href="">Pagos</a></li>
-                        <li data-seccion="favoritos"><a href="">Favoritos</a></li>
+                        <li class="active" data-seccion="perfil"><a>Perfil</a></li>
+                        <li data-seccion="inbox"><a> @if (auth()->user()->MensajesNotify()) <small class="notificacion not-inbox"></small> @endif Inbox</a></li>
+                        <li data-seccion="pagos"><a>Pagos</a></li>
+                        <li data-seccion="favoritos"><a>Favoritos</a></li>
                         @if (auth()->user()->tieneSuscripcion() == true && (auth()->user()->ultimaSuscripcion()->id == 1 || auth()->user()->ultimaSuscripcion()->id == 2))
-                            <li data-seccion="cursos"><a href="">Cursos</a></li>
+                            <li data-seccion="cursos"><a>Cursos</a></li>
                         @endif
-                        <li data-seccion="eventos"><a href="">Eventos</a></li>
-                        <li data-seccion="clases"><a href="">Clases en línea</a></li>
+                        <li data-seccion="eventos"><a>Eventos</a></li>
+                        <li data-seccion="clases"><a>Clases en línea</a></li>
                         @if (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimaSuscripcion()->id == 2)
                             <li class="item-control">
                                 <a href="#">Control Académico</a>
                                 <ul>
-                                    <li class="active" data-seccion="meterias"><a href="">Materias</a></li>
+                                    <li class="active" data-seccion="meterias"><a>Materias</a></li>
                                     <li><a href="{{ route('aulas-virtuales.show') }}">Aulas Virtuales</a></li>
-                                    <li data-seccion="status"><a href="">Status académico</a></li>
+                                    <li data-seccion="status"><a>Status académico</a></li>
                                 </ul>
                             </li>
                         @endif

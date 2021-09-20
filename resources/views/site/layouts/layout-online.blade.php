@@ -92,7 +92,7 @@
                                     </ul>
                                 </div> <!-- /menu-child -->
                             </li>
-			                <li class="parent {{ Request::routeIs('membresias.index') ? 'active' : '' }}">
+			                <li class="parent-membresia {{ Request::routeIs('membresias.index') ? 'active' : '' }}">
                                 <a href="{{ route("membresias.index") }}">Membresías</a>
                                 <div class="menu-child">
                                     <ul class="flex">

@@ -615,6 +615,18 @@ let funciones = {
 			password = document.querySelector("input[name='password']"),
 			validate = true;
 
+
+		if (document.querySelector('.error_login')) {
+			document.querySelector('.error_login').remove();
+		}
+
+		if (document.querySelector('.campo-requerido')) {
+			document.querySelectorAll('.campo-requerido').forEach((item) => {
+				item.classList.remove('campo-requerido');
+			});
+		}
+
+
 		if (email.value == '') {
 			email.classList.add('campo-requerido');
 			validate = false;
