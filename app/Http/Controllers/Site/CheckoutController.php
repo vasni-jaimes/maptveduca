@@ -233,18 +233,18 @@ class CheckoutController extends Controller
 
 
 
-    protected function GenerarPlanPago($precio, $membrecia_id)
+    protected function GenerarPlanPago($precio, $membresia_id)
     {
 
-        $countsPagosMA        = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->where('membrecia_id', 2)->count();
-        $countsPagosMB        = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->where('membrecia_id', 1)->count();
+        $countsPagosMA        = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->where('membresia_id', 2)->count();
+        $countsPagosMB        = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->where('membresia_id', 1)->count();
 
         $pagosMA              = 24 - $countsPagosMA;
         $pagosMB              = 24 - $countsPagosMB;
         $pagosTOtales         = $countsPagosMA + $countsPagosMB;
 
 
-        $opcionesMembresia  = $membrecia_id == 1 
+        $opcionesMembresia  = $membresia_id == 1 
                                 ? $this->arrayMembresiaBasica($pagosMB, $precio, $pagosTOtales) 
                                 : $this->arrayMembresiaAcademica($pagosMA, $precio);
 
