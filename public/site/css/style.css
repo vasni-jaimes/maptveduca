@@ -4053,6 +4053,8 @@ section.membresia {
     text-transform: uppercase;
     line-height: normal;
     letter-spacing: 1px;
+    margin: 0 !important;
+    text-align: left;
 }
 
 .container-icons:last-child figure {
@@ -4073,6 +4075,7 @@ section.membresia {
 .wrapper-maptv .content-div_icons {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 
@@ -6287,5 +6290,17 @@ a[href="#page"] {
     
     .row-clases p small {
         font-size: 16px;
+    }
+
+    .container-icons:last-child {
+        margin-right: 7px;
+    }
+
+    .container-icons:first-child figure {
+        width: 100px;
+    }
+
+    .container-icons:last-child figure {
+        width: 90px;
     }
 }

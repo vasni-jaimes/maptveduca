@@ -120,7 +120,7 @@
                                     <hr class="b-bottom">
                                     <p>Membresía básica $250.00 MXN mensuales*</p>
                                     <p><small>* Pruébala por 30 días</small></p>
-                                    <a href="#">Obtener</a>
+                                    <a href="{{ route('checkout', 'membresia-basica') }}">Obtener</a>
                                     <hr class="b-bottom">
                                     <p>Membresía académica</p>
                                     <p>$2,000.00 MXN mensuales*</p>
