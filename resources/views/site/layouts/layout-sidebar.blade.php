@@ -4,6 +4,13 @@
 
 <div class="sidebar-cursos">
     <div class="close-sidebar"><span>X</span></div>
+
+    <ul class="guia-es">
+        <li style="cursor: pointer; font-weight: bold">
+            <a href="{{ route("guia-estudio") }}" style="color: #000">Guia de estudio</a>
+        </li>
+    </ul>
+
     @foreach($categorias as $categoria)
 
         @if ($categoria->obtenerConteoCat( $categoria->id ))

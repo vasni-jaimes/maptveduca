@@ -16,7 +16,7 @@ if (form_login) {
 let sidebar_cursos = document.querySelector(".sidebar-cursos");
 if (sidebar_cursos) {
 
-	const categorias = document.querySelectorAll(".sidebar-cursos ul");
+	const categorias = document.querySelectorAll(".sidebar-cursos ul:not(.guia-es)");
 	if (categorias) {
 		for(var i = 0; i <= categorias.length - 1; i++) {
 			categorias[i].addEventListener("click", funciones.filtrosCursos)
