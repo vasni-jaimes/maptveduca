@@ -26,6 +26,12 @@ class MembresiasController extends Controller
         return view("site.membresia", compact("adminFecha"));
     }
 
+
+    public function indexBasica()
+    {
+        return view("site.membresia-basica");
+    }
+
     /**
      * Show the form for creating a new resource.
      *

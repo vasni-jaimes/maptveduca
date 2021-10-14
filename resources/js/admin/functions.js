@@ -3,6 +3,91 @@
 
 let funciones = {
 
+	validarStatusInscripciones: (e) => {
+		e.preventDefault();
+		const status = document.querySelector("input[name='status']");
+
+		/* STATUS */
+		let error_videos = false;
+
+		//SE ELIMINAN LOS RASTROS DE ERRORES
+		document.querySelectorAll('.errors').forEach(function(item) {
+			item.innerHTML = '';
+		});
+
+		document.querySelectorAll('.chosen-choices').forEach((item) => {
+			item.style.borderColor = "#e5e6e7";
+		});
+
+		if (document.querySelector('.has-error')) {
+			document.querySelectorAll('.has-error').forEach((item) => {
+				item.classList.remove('has-error');
+			});
+		}
+		//SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+		const grupos = document.querySelector('select[name="select_grupos[]"]');
+
+		switch(status.value) {
+			case '1':
+				
+				if (grupos.value == '' || grupos.value == undefined) {
+					grupos.parentNode.classList.add('has-error');
+					grupos.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+					error_videos = true;
+				}
+
+				break;
+
+			case '2':
+
+				const fecha_inicio = document.querySelector('input[name="fecha_inicio"]');
+				const fecha_final = document.querySelector('input[name="fecha_fin"]');
+
+				if (grupos.value == '' || grupos.value == undefined) {
+					grupos.parentNode.classList.add('has-error');
+					grupos.nextElementSibling.nextElementSibling.innerHTML = 'El campo es requerido';
+					error_videos = true;
+				}
+
+				if (fecha_inicio.value == '' || fecha_inicio.value == undefined) {
+					fecha_inicio.parentNode.classList.add('has-error');
+					fecha_inicio.nextElementSibling.innerHTML = 'El campo es requerido';
+					error_videos = true;
+				}
+
+				if (fecha_final.value == '' || fecha_final.value == undefined) {
+					fecha_final.parentNode.classList.add('has-error');
+					fecha_final.nextElementSibling.innerHTML = 'El campo es requerido';
+					error_videos = true;
+				}
+
+				break;
+			default:
+				console.log('default switch');
+				break;
+		}
+		
+
+		if (error_videos == true) {
+			if (e.type == 'submit') {
+				let posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+				window.scrollTo(0, posicion);
+			}
+
+			return false;
+		}
+
+
+		if (e.type == 'submit') {
+			e.target.disabled = true;
+	        document.querySelector('.ibox-content').classList.add('sk-loading');
+
+	        document.querySelector("form[name='frm-agregar_status_ins']").submit();
+	        return false;
+	    }
+
+	},
 	validarFechasContenido: function(e) {
 		e.preventDefault();
 

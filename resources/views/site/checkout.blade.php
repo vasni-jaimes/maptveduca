@@ -92,10 +92,17 @@
     	                </div> <!-- /row-terminos -->
     	            </div> <!-- /formulario -->
                 @else
-                    <div class="formulario membresia-academica">
+                    <div class="formulario membresia-basica">
 
-                        <h1>Membresia Basica</h1>
-    	                <h2>Te damos la bienvenida a la familia MAPtv Educa.</h2>
+                        <h2>¡Únete a la familia<br> MAPtv Educa!</h2>
+    	                <p>Comienza hoy tu camino en la produccion musical.</p>
+
+                        <p>EL costo de la membresia básica (suscripción) es de:</p>
+                        <h2>$250.00 MXM mensuales</h2>
+                        <p>puedes cancelar tu membresia en cualquier momento</p>
+
+                        <h3>Obtén tu prueba gratuita por 30 días</h3>
+                        <p>Después de finalizado tu periodo gratuito comenzará a cobrarse la suscripción mensual.</p>
 
                         <form action="{{ route('paago-membresia', $membresia->slug) }}" class="form-checkout basica" method="GET" name="">
                             <button style="cursor: pointer;">
@@ -120,14 +127,6 @@
                 @endif
 	        </div>
 	    </div> <!-- /wrapper-form -->
-
-
-
-       {{--  @if (session()->has("error"))
-            <div class="error">
-                {{ session()->get("error") }}
-            </div>
-        @endif --}}
 
 	</div> <!-- /shadowbox -->
 

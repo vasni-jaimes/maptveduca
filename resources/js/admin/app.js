@@ -500,3 +500,11 @@ if (frmAgregarFecha) {
 	$("select").change(funciones.validarFechasContenido);
 }
 
+
+
+//FORMULARIO STATUS
+const frm_agregar_status_ins = document.querySelector("form[name='frm-agregar_status_ins']");
+if (frm_agregar_status_ins) {
+	frm_agregar_status_ins.addEventListener('submit', funciones.validarStatusInscripciones);
+	$("select").change(funciones.validarStatusInscripciones);
+}

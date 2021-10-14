@@ -180,7 +180,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Video de Bienvenida: </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="video_bienvenida" value="{{ old("video_bienvenida") }}">
+                                <input type="text" class="form-control" placeholder="Url del video" name="video_bienvenida" value="{{ old("video_bienvenida") }}">
                                 <span class='form-text m-b-none errors'> {!! $errors->first('video_bienvenida') !!} </span>
                             </div>
                         </div>
@@ -309,7 +309,7 @@
 
                         <div class="form-group row">
                             <div class="col-sm-4 col-sm-offset-2">
-                                <button class="btn btn-white btn-sm" type="submit">Cancel</button>
+                                <a href="{{ route('agregar-curso.index') }}" class="btn btn-white btn-sm" type="submit">Cancel</a>
                                 <button class="btn btn-primary btn-sm" type="submit">Save changes</button>
                             </div>
                         </div>

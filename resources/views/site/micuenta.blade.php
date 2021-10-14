@@ -134,11 +134,11 @@
                                 </div> <!-- /s-membresia -->
                                 
                                 <!--<div class="s-membresia">
-                                    <div class="close-shadow"></div> <!-- /close-shadow
+                                    <div class="close-shadow"></div>--> <!-- /close-shadow
                                     <p>¿QUÉ CAMBIO DESEAS HACER?</p>
                                     <a href="#">Quiero cambiar mi membresía a básica o cancelar mi membresía académica</a>
                                     <small>Si das click en la opción de arriba, nos comunicaremos  contigo en un lapso de 24 horas para dar seguimiento a tu solicitud.</small>
-                                </div> <!-- /s-membresia -->
+                                </div>--> <!-- /s-membresia -->
                             </div> <!-- /f-favorito -->
                         </div> <!-- /shadow-favorito -->
                     </div>
@@ -150,6 +150,7 @@
                                 <ul>
                                     <li class="tab tab-active" data-id="1">Mensajes</li>
                                     <li class="tab" data-id="2">Notificaciones</li>
+                                    <li class="tab" data-id="3">Chat</li>
                                 </ul>
                                 
                                 <div class="s-tab tab-1">
@@ -186,9 +187,7 @@
                                             <span> No hay mensajes </span>
                                         </div>
                                     @endforelse
-                
                                 </div> <!-- /tab-mensaje -->
-
 
                                 <div class="s-tab tab-2">
                                     @forelse($notificaciones as $notificacion)
@@ -218,8 +217,24 @@
                                             <span> No hay notificaciones </span>
                                         </div>
                                     @endforelse
-                            
                                 </div> <!-- /tab-notificacion -->
+
+                                <div class="s-tab tab-3">
+                                    <div class="item-inbox">
+                                        <p>
+                                            <small class="notificacion" data-noti=""></small>
+                                            <span>Mensaje de prueba</span>
+                                        </p>
+                                        <div class="item-mensaje">
+                                                <div class="txt-mensaje">
+                                                <p><strong>De:</strong> MAPtv Educa </p>
+                                                <p><strong>Notificación:</strong></p>
+                                                <p> Mensaje de prueba </p>
+                                            </div> <!-- /txt-mensaje -->
+                                            <a href="javascript:void(0)" class="ver-notify" data-noti="">Ver mensaje completo</a>
+                                        </div> <!-- /item-mensaje -->
+                                    </div>
+                                </div> <!-- /tab-chat -->
                                 
                             </div> <!-- /row-tabs -->
                         </div> <!-- /row-perfil -->

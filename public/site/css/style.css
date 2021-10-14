@@ -94,7 +94,7 @@ table {
 
 @font-face {
     font-family: 'Oswald regular';
-    src: url(/site/fonts/oswald/'Oswald-Regular.woff2') format('woff2'),
+    src: url('/site/fonts/oswald/Oswald-Regular.woff2') format('woff2'),
         url('/site/fonts/oswald/Oswald-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
@@ -622,9 +622,21 @@ header a {
     margin: 0 0 10px;
 }
 
-/*.parent-membresia:hover .menu-child {
+.parent-membresia .menu-child ul {
+    padding-right: 21px;
+}
+
+.parent-membresia .menu-child ul li:first-child {
+    margin-bottom: 10px;
+}
+
+.parent-membresia .menu-child ul li {
+    margin: initial;
+}
+
+.parent-membresia:hover .menu-child {
     display: block;
-}*/
+}
 
 .mm-navbar__title,
 .menu > li > a {
@@ -1971,6 +1983,11 @@ video#myVideo {
 
 /*----------------------------------  CURSOS  ----------------------------------*/
 
+.toggle-display {
+    display: none;
+    transition: opacity 5s ease-out;
+}
+
 .banner-cursos {
     padding: 25% 0 0;
     background-image: url('/site/img/sitio/consola2.jpg');
@@ -2634,6 +2651,11 @@ video#myVideo {
     text-decoration: underline;
 }
 
+.txt-sidebar > div:nth-child(1) > p:nth-child(2) > small:nth-child(1) > a:nth-child(2),
+.txt-sidebar > div:nth-child(1) > p:nth-child(2) > small:nth-child(1) > a:nth-child(1) {
+    font-size: 10px;
+}
+
 .txt-sidebar > div {
     padding: 10px;
     background-color: #fff;
@@ -2983,9 +3005,20 @@ section.membresia {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     display: flex;
+    flex-direction: column;
     padding: 20px;
     border: 1px solid #000;
     align-items: center;
+}
+
+.item-texto p {
+    margin-bottom: 15px;
+    font-family: 'Poppins light';
+}
+
+.item-texto p span {
+    line-height: 22px;
+    font-family: 'Poppins bold';
 }
 
 .item-txt p {
@@ -4006,6 +4039,46 @@ section.membresia {
 }
 
 
+.container-icons {
+    display: flex;
+    align-items: center;
+    margin-right: 60px;
+    outline: none;
+    color: #000;
+}
+
+.container-icons p {
+    font-family: 'Oswald medium';
+    font-size: 25px;
+    text-transform: uppercase;
+    line-height: normal;
+    letter-spacing: 1px;
+}
+
+.container-icons:last-child figure {
+    width: 105px;
+    margin-right: 10px;
+}
+
+
+.container-icons:first-child figure {
+    width: 120px;
+    margin-right: 10px;
+}
+
+.container-icons figure img {
+    width: 100%
+}
+
+.wrapper-maptv .content-div_icons {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
 /*----------------------------------  CHECKOUT  ----------------------------------*/
 
 .wrapper-checkout > div {
@@ -4014,6 +4087,32 @@ section.membresia {
 
 .wrapper-checkout .formulario h2 {
     margin: 0 0 35px;
+}
+
+.wrapper-checkout .formulario.membresia-basica h2 {
+    margin: 0 0 8px;
+    font-size: 32px;
+}
+
+.wrapper-checkout .formulario.membresia-basica > p:nth-child(2) {
+    margin-bottom: 70px;
+}
+
+.wrapper-checkout .formulario.membresia-basica > p:nth-child(5) {
+    font-size: 11px;
+    margin-bottom: 30px;
+}
+
+.wrapper-checkout .formulario.membresia-basica h3 {
+    font-family: 'Poppins bold';
+    font-size: 15px;
+    line-height: 130%;
+    font-weight: bold;
+}
+
+.wrapper-checkout .formulario.membresia-basica > p:nth-child(7) {
+    ont-size: 13px;
+    margin-bottom: 30px;
 }
 
 .wrapper-checkout .formulario label {

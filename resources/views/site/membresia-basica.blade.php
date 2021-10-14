@@ -46,33 +46,31 @@
                         <div class="row-herramienta flex flex-center between">
                             <div class="col-2"><span class="num">1</span></div>
                             <div class="col-10 item-texto text-center">
-                                <p>Elige un área que sea de tu interés:</p>
-                                <p>· Producción Musical</p>
-                                <p>· Música</p>
+                                <p>Echa un vistazo a las guías de estudio que hemos preparado para ti:</p>
+                                <p><a href="{{ route('guia-estudio') }}"><span class="amarillo">GUÍA DE ESTUDIO <br> PRODUCCIÓN MUSICAL</span></a></p>
                             </div> <!-- /item-texto -->
                         </div> <!-- /row-herramienta -->
 
                         <div class="row-herramienta flex flex-center between">
                             <div class="col-2"><span class="num">2</span></div>
                             <div class="col-10 item-texto text-center">
-                                <p>Echa un vistazo a las guías de estudio que hemos preparado para ti:</p>
-                                <p><span class="amarillo">GUÍA - PRODUCCIÓN MUSICAL</span></p>
-                                <p><span class="amarillo">GUÍA - MÚSICA</span></p>
+                                <p>Complementa tu aprendizaje con<br>
+                                    uno de nuestros eventos y<br>
+                                    actividades adicionales.</p>
                             </div> <!-- /item-texto -->
                         </div> <!-- /row-herramienta -->
 
                         <div class="row-herramienta flex flex-center between">
                             <div class="col-2"><span class="num">3</span></div>
                             <div class="col-10 item-texto text-center">
-                                <p>Complementa tu aprendizaje con alguna clase en línea o con uno de nuestros eventos.</p>
-                            </div> <!-- /item-texto -->
-                        </div> <!-- /row-herramienta -->
+                                <p>Recuerda utilizar tu tablero<br>
+                                    personal para acceder más<br>
+                                    rápidamente a los cursos, clases<br>
+                                    o eventos de tu interés.<br><br>
 
-                        <div class="row-herramienta flex flex-center between">
-                            <div class="col-2"><span class="num">4</span></div>
-                            <div class="col-10 item-texto text-center">
-                                <p>Recuerda utilizar tu tablero personal para acceder más rápidamente a los cursos, clases o eventos de tu interés.</p>
-                                <p>¡Puedes marcarlos como favoritos para enviarlos a tu tablero!</p>
+                                    ¡Puedes marcarlos como<br>
+                                    favoritos para enviarlos a tu<br>
+                                    tablero!</p>
                             </div> <!-- /item-texto -->
                         </div> <!-- /row-herramienta -->
                             
@@ -105,13 +103,13 @@
                             </tr>
                             <tr>
                                 <td>&nbsp</td>
-                                <td>$123 MXN mensuales</td>
+                                <td>$250 MXN mensuales</td>
                             </tr>
                         </table>
 
                     </div> <!-- /wrapper-basica -->
                     
-                    <a class="btn-grande" href="#">¡PRUÉBALA GRATIS POR 30 DÍAS!</a>
+                    <a class="btn-grande" href="{{ route("checkout", "membresia-basica") }}">¡PRUÉBALA GRATIS POR 30 DÍAS!</a>
      
                 </div> <!-- /hoja-900 -->
                 

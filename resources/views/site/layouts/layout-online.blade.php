@@ -92,11 +92,12 @@
                                     </ul>
                                 </div> <!-- /menu-child -->
                             </li>
-			                <li class="parent-membresia {{ Request::routeIs('membresias.index') ? 'active' : '' }}">
-                                <a href="{{ route("membresias.index") }}">Membresías</a>
+			                <li class="parent-membresia {{ Request::routeIs('membresias.index') || Request::routeIs('membresia-basica') ? 'active' : '' }}">
+                                <a href="#">Membresías</a>
                                 <div class="menu-child">
-                                    <ul class="flex">
-                                        <li><a href="{{ route("membresias.index") }}">Membresía académica</a></li>
+                                    <ul>
+                                        <li><a href="{{ route("membresias.index") }}">Académica</a></li>
+                                        <li><a href="{{ route("membresia-basica") }}">Básica</a></li>
                                     </ul>
                                 </div>
                             </li>

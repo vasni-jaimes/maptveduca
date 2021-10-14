@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ValidarMensajes;
 use App\User;
 use App\Mensaje;
+use Carbon\Carbon;
 use DB;
 
 class MensajesController extends Controller
@@ -115,8 +116,16 @@ class MensajesController extends Controller
             return response()->json(['message' => 'no_parameters']);
         }
 
+        //FECHA DE HOY
+        date_default_timezone_set('America/Mexico_City');
+        $hoy = Carbon::now()->format('Y-m-d');
+
         $alumnos = DB::table('tablero_cursos')
                     ->join('users', 'tablero_cursos.user_id', 'users.id')
+                    ->join('usuarios_membresia', 'users.id', 'usuarios_membresia.user_id')
+                    ->where('usuarios_membresia.fecha_fin', '>', $hoy)
+                    ->where('usuarios_membresia.fehca_inicio', '<=', $hoy)
+                    ->where('usuarios_membresia.membresia_id', 2)
                     ->where('tablero_cursos.curso_id', $request->curso_id)
                     ->get();
 
@@ -163,9 +172,21 @@ class MensajesController extends Controller
                     ->whereIn('curso_id', $cursos)
                     ->select('user_id')
                     ->get();
-        $tablero = collect($tablero)->pluck('user_id')->toArray();
+
+        $nuevoTablero = array();
+        foreach($tablero as $tableros) {
+            $alumno = User::find($tableros->user_id);
+            if ($alumno->ultimaSubscripcion()->membresia_id == 2) {
+                $nuevoTablero[] = $tableros;
+            }
+        }
+
+
+        $tablero = collect($nuevoTablero)->pluck('user_id')->toArray();
 
         $alumnos = User::where('status', 1)->whereIn('id', $tablero)->get();
+
+
 
         return $alumnos;
     }

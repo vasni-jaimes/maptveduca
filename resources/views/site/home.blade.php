@@ -211,53 +211,25 @@
 
 
             <div class="banner-title bg-black">
-                <h2>Contacto</h2>
+                <h2>!Escríbenos¡</h2>
             </div> <!-- /bg-black -->
-            
+
             <div class="wrapper-maptv">
-                
-                <div class="row-form">
-                    
-                    <form action="{{ route('contacto.store') }}" class="form-contacto form" method="POST" name="contacto">
-                        @csrf
-                        <div>
-                            <input class="input" name="nombre" type="text" placeholder="Nombre" value="{{ old('nombre') }}">
-                            {{-- <span class='form-text m-b-none errors'> {!! $errors->first('nombre') !!} </span> --}}
-                            <input class="input" name="email" type="text" placeholder="Correo electrónico" value="{{ old('email') }}">
-                            {{-- <span class='form-text m-b-none errors'> {!! $errors->first('email') !!} </span> --}}
-                        </div>
-                        <div>
-                            <input class="input" name="ciudad" type="text" placeholder="Ciudad" value="{{ old('ciudad') }}">
-                            {{-- <span class='form-text m-b-none errors'> {!! $errors->first('ciudad') !!} </span> --}}
-                            <input class="input" name="pais" type="text" placeholder="País" value="{{ old('pais') }}">
-                            {{-- <span class='form-text m-b-none errors'> {!! $errors->first('pais') !!} </span> --}}
-                        </div>
-                        <div class="textarea">
-                            <label>Mensaje</label>
-                            <textarea placeholder="" name="mensaje">{{ old('mensaje') }}</textarea>
-                            {{-- <span class='form-text m-b-none errors'> {!! $errors->first('mensaje') !!} </span> --}}
-                        </div>
-                        <br>
-
-                        {{-- @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif --}}
-
-
-                        <div class="hs-button">
-                            <input type="submit" class="button enviar-mensaje">
-                        </div>
-                    </form>
-                    
-                </div> <!-- /row-maptv -->
-            
-            </div> <!-- /wrapper-maptv -->
+                <div class="row-form content-div_icons">
+                    <a class="container-icons" href="mailto:maptveduca.info@gmail.com">
+                        <figure>
+                            <img src="/site/img/iconos-mail.png" alt="email">
+                        </figure>
+                        <p>Envíanos<br>un email</p>
+                    </a>
+                    <a class="container-icons" href="https://wa.me/+522215238428" target="_blank">
+                        <figure>
+                            <img src="/site/img/iconos-whatssap.png" alt="whatssap">
+                        </figure>
+                        <p>Envíanos<br>un whatssap</p>
+                    </a>
+                </div>
+            </div>
             
         </div> <!-- /hoja-1000 -->
     </section> <!-- /inicio -->

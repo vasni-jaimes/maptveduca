@@ -235,9 +235,17 @@ class CheckoutController extends Controller
     protected function GenerarPlanPago($precio, $membrecia_id)
     {
 
-        $countsPagos        = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->count();
-        $pagos              = 24 - $countsPagos;
-        $opcionesMembresia  = $membrecia_id == 1 ? $this->arrayMembresiaBasica($pagos, $precio, $countsPagos) : $this->arrayMembresiaAcademica($pagos, $precio);
+        $countsPagosMA        = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->where('membrecia_id', 2)->count();
+        $countsPagosMB        = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->where('membrecia_id', 1)->count();
+
+        $pagosMA              = 24 - $countsPagosMA;
+        $pagosMB              = 24 - $countsPagosMB;
+        $pagosTOtales         = $countsPagosMA + $countsPagosMB;
+
+
+        $opcionesMembresia  = $membrecia_id == 1 
+                                ? $this->arrayMembresiaBasica($pagosMB, $precio, $pagosTOtales) 
+                                : $this->arrayMembresiaAcademica($pagosMA, $precio);
 
         try {
             $res = $this->client->post('/v1/billing/plans', 
@@ -376,19 +384,24 @@ class CheckoutController extends Controller
                         $user                             = User::find(auth()->user()->id);
                         $user->suscripcion_id             = $request->subscription_id;
 
-                        //AGREGARLE UN GRUPO AL USUARIO SI ES NUEVO
-                        if (auth()->user()->grupo_id == null) {
-                            $status = StatusInscripcion::first();
-                            $grupos = DB::table('grupos_inscripciones')->get();
+                        //AGREGARLE UN GRUPO AL USUARIO SI ES NUEVO y SI ES DE MEMBRESIA ACADEMICA
+                        if ($request->mm == 2) {
+                            if (auth()->user()->grupo_id == null) {
+                                $status = StatusInscripcion::first();
+                                $grupos = DB::table('grupos_inscripciones')->get();
 
-                            foreach ($grupos as $grupo) {
-                                $cupo = User::where('grupo_id', $grupo->grupo_id)->count();
+                                foreach ($grupos as $grupo) {
+                                    $cupo = User::where('grupo_id', $grupo->grupo_id)->count();
 
-                                if ($cupo < 30) {
-                                    $user->grupo_id = $grupo->grupo_id;
-                                    break;
+                                    if ($cupo < 30) {
+                                        $user->grupo_id = $grupo->grupo_id;
+                                        break;
+                                    }
                                 }
                             }
+                        }
+                        else {
+                            $user->grupo_id = null;
                         }
 
                         if ($user->save()) {

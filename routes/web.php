@@ -54,7 +54,8 @@ Route::get('evento/{evento_id}', 'Site\EventosControllers@show')->name('evento.s
 
 
 //MEMBRESIAS
-Route::get('membresias', 'Site\MembresiasController@index')->name('membresias.index');
+Route::get('membresia-basica', 'Site\MembresiasController@indexBasica')->name('membresia-basica');
+Route::get('membresia-academica', 'Site\MembresiasController@index')->name('membresias.index');
 
 //NOSOTROS
 Route::get('nosotros', 'Site\NosotrosControllers@index')->name('nosotros.index');

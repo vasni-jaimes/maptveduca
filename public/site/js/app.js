@@ -125,14 +125,39 @@ if (sidebar_cursos) {
 } //REDIRECCION DE CLASES - CURSOS
 
 
-var sidebar_single = document.querySelectorAll('.single-curso .sidebar-single ul li.active');
+var sidebar_single = document.querySelectorAll('.single-curso .sidebar-single > ul > li.active');
 
 if (sidebar_single) {
   for (var i = 0; i <= sidebar_single.length - 1; i++) {
     sidebar_single[i].addEventListener('click', function (e) {
-      //document.querySelector('#loading').style.display = "block";
+      e.stopPropagation();
       var url = e.target.getAttribute('data-url');
-      window.location.href = url;
+      return url == null ? false : window.location.href = url;
+    });
+  }
+} //TOGGLE CLASS (CURSOS)
+
+
+var active_tema = document.querySelectorAll('.single-curso .sidebar-single > ul > li.active-tema');
+
+if (active_tema) {
+  for (var i = 0; i <= active_tema.length - 1; i++) {
+    active_tema[i].addEventListener('click', function (e) {
+      e.stopPropagation();
+      var url = e.target.getAttribute('data-url');
+      if (url != null) return false;
+
+      if (e.target.classList.contains('active-tema')) {
+        var lista = e.target.firstChild.nextSibling.nextSibling.nextSibling;
+        var style = window.getComputedStyle(lista);
+        style.display == 'none' ? lista.style.display = 'block' : lista.style.display = 'none';
+      } else {
+        var _lista = e.target.nextSibling.nextSibling;
+
+        var _style = window.getComputedStyle(_lista);
+
+        _style.display == 'none' ? _lista.style.display = 'block' : _lista.style.display = 'none';
+      }
     });
   }
 } //AGREGAR FAVORITOS EN MIS CURSOS Y EVENTOS
@@ -1059,8 +1084,8 @@ exports.funciones = funciones;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/maptveduca/resources/js/site/app.js */"./resources/js/site/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/maptveduca/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/maptveduca/resources/js/site/app.js */"./resources/js/site/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/maptveduca/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

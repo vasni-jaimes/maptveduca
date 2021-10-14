@@ -31,12 +31,11 @@
 
                             @if ( auth()->user()->tieneSuscripcion()  )
                                 @foreach($temario as $ctemario)
-                                    <li class="active" data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug."/0" }}">
-                                        
-                                        {!! $ctemario->slug ==  $clase['slug'] ? "<span data-url='/single-cursos/".$curso->slug."/".$ctemario->slug."/0' style='font-weight: bold;'>".$ctemario->nombre_video."</span>" : $ctemario->nombre_video !!}
+                                    <li class="active active-tema">
+                                        {!! $ctemario->slug ==  $clase['slug'] ? "<span style='font-weight: bold;'>".$ctemario->nombre_video."</span>" : "<span>".$ctemario->nombre_video."</span>" !!}
 
                                         @if (count($ctemario->url_video) > 0)
-                                            <ul>
+                                            <ul class="{{ $ctemario->slug ==  $clase['slug'] ? "" : "toggle-display" }}">
                                                 @for($i = 0; $i <= count($ctemario->url_video) - 1; $i++)
                                                     <li class="active" data-url="/single-cursos/{{ $curso->slug."/".$ctemario->slug."/".$i }}"> 
                                                         @if ($ctemario->slug ==  $clase['slug'] && $subclase_id == $i)
@@ -119,10 +118,10 @@
                                 <div>
                                     <p>Obtén tu membresía para comenzar este curso</p>
                                     <hr class="b-bottom">
-                                    <!--<p>Membresía básica $500.00 MXN mensuales*</p>
+                                    <p>Membresía básica $250.00 MXN mensuales*</p>
                                     <p><small>* Pruébala por 30 días</small></p>
                                     <a href="#">Obtener</a>
-                                    <hr class="b-bottom">-->
+                                    <hr class="b-bottom">
                                     <p>Membresía académica</p>
                                     <p>$2,000.00 MXN mensuales*</p>
                                     <p><small>Este curso pertenece al plan de estudios del programa: Técnico en Producción Musical</small></p>
@@ -138,7 +137,7 @@
                                 </div> <!-- /favorito -->
                             @endif
 
-                        <br>
+                            <br>
                         
                         @elseif ( $validarSide == "sb#2" )
 
@@ -148,10 +147,11 @@
                                 @else
                                     <div>
                                         <p>¡Estás listo para comenzar!</p>
-                                        <p><small>Ahora podrás encontrar este curso en tu tablero personal para que puedas acceder rápidamente a él.</small></p>
-                                        <p>¿Quieres saber cómo aprovechar mejor este curso?</p>
-                                        <p><small>Echa un vistazo rápido a las recomendaciones para tomar este curso por tu cuenta:</small></p>
-                                        <a href="#">Camino de aprendizaje</a>
+                                        <p><small>Ahora podrás encontrar este curso en tu <a href="{{ route('micuenta.index') }}">tablero</a>  <a href="{{ route('micuenta.index') }}">personal</a> para que puedas acceder rápidamente a él.</small></p>
+                                        <p>¿Qué sigue?</p>
+                                        <p><small>Consulta la gúia de estudio (camino de aprendizaje) para saber en qué orden te recomendamos ver cada curso</small></p>
+
+                                        <a href="{{ route('guia-estudio') }}">Camino de aprenizaje</a>
                                     </div>
                                 @endif
                             </div> <!-- /txt-sidebar -->
@@ -170,7 +170,7 @@
                                 </a> <!-- /favorito -->
                             @endif
                         
-                        <br>
+                            <br>
 
                         @elseif ( $validarSide == "sb#3" )
                         
@@ -203,9 +203,8 @@
                                 </a> <!-- /favorito -->
                             @endif
                         
-                        <br>
+                            <br>
                         
-
                         @elseif ( $validarSide == "sb#4" )
 
                             <div class="txt-sidebar">

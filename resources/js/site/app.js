@@ -25,13 +25,38 @@ if (sidebar_cursos) {
 }
 
 //REDIRECCION DE CLASES - CURSOS
-let sidebar_single = document.querySelectorAll('.single-curso .sidebar-single ul li.active');
+let sidebar_single = document.querySelectorAll('.single-curso .sidebar-single > ul > li.active');
 if (sidebar_single) {
 	for (var i = 0; i <= sidebar_single.length - 1; i++) {
 		sidebar_single[i].addEventListener('click', function(e) {
-			//document.querySelector('#loading').style.display = "block";
+			e.stopPropagation();
 			let url = e.target.getAttribute('data-url');
-			window.location.href = url;
+			return url == null ? false : window.location.href = url;
+		});
+	}
+}
+
+//TOGGLE CLASS (CURSOS)
+let active_tema = document.querySelectorAll('.single-curso .sidebar-single > ul > li.active-tema')
+if (active_tema) {
+	for (var i = 0; i <= active_tema.length - 1; i++) {
+		active_tema[i].addEventListener('click', function(e) {
+			e.stopPropagation();
+			let url = e.target.getAttribute('data-url');
+
+			if (url != null)
+				return false;
+
+			if (e.target.classList.contains('active-tema')) {
+				let lista = e.target.firstChild.nextSibling.nextSibling.nextSibling;
+				let style = window.getComputedStyle(lista);
+				(style.display == 'none') ? lista.style.display = 'block' : lista.style.display = 'none';
+			}
+			else {
+				let lista = e.target.nextSibling.nextSibling;
+				let style = window.getComputedStyle(lista);
+				(style.display == 'none') ? lista.style.display = 'block' : lista.style.display = 'none';
+			}
 		});
 	}
 }

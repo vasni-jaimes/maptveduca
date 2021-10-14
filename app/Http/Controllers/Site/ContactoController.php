@@ -14,7 +14,7 @@ class ContactoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ["only" => ["MandarEmail"]]);
+        $this->middleware('auth', ["only" => ["MandarEmail", "store", "index"]]);
     }
 
 

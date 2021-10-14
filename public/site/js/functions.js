@@ -702,7 +702,7 @@ exports.funciones = funciones;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/maptveduca/resources/js/site/functions.js */"./resources/js/site/functions.js");
+module.exports = __webpack_require__(/*! /var/www/html/maptveduca/resources/js/site/functions.js */"./resources/js/site/functions.js");
 
 
 /***/ })
