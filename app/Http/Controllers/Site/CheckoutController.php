@@ -43,7 +43,8 @@ class CheckoutController extends Controller
 		$this->payPalConfig = Config::get('paypal');
 
         $this->client = new Client([
-            "base_uri" => "https://api-m.sandbox.paypal.com",
+            //"base_uri" => "https://api-m.sandbox.paypal.com",
+            "base_uri" => "https://api-m.paypal.com",
         ]);
 	}
 
