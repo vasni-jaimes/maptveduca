@@ -211,7 +211,7 @@
 
 
             <div class="banner-title bg-black">
-                <h2>!Escríbenos¡</h2>
+                <h2>¡Escríbenos!</h2>
             </div> <!-- /bg-black -->
 
             <div class="wrapper-maptv">
@@ -226,7 +226,7 @@
                         <figure>
                             <img src="/site/img/iconos-whatssap.png" alt="whatssap">
                         </figure>
-                        <p>Envíanos<br>un whatssap</p>
+                        <p>Envíanos<br>un whatsapp</p>
                     </a>
                 </div>
             </div>

@@ -118,72 +118,12 @@ Route::post('contacto', 'Site\ContactoController@store')->name('contacto.store')
 
 
 
-//VISTAS ESTATICAS
-// Route::get('eventos', function() {
-// 	return view('site.eventos');
-// })->name('eventos');
-
-// Route::get('aulas', function() {
-// 	return view('site.aulas');
-// })->name('aulas');
-
-// Route::get('single-aulas', function() {
-// 	return view('site.single-aulas');
-// })->name('single-aulas');
-
-// Route::get('checkout', function() {
-// 	return view('site.checkout');
-// })->name('checkout');
-
-// Route::get('micuenta', function() {
-// 	return view('site.micuenta');
-// })->name('micuenta');
-
-//new
-// Route::get('clases-linea', function() {
-// 	return view('site.clases-linea');
-// })->name('clases-linea');
-
-//
-// Route::get('clases-sessiones', function() {
-// 	return view('site.clases-sessiones');
-// })->name('clases-sessiones');
-
-// Route::get('single-clases', function() {
-// 	return view('site.single-clases');
-// })->name('single-clases');
-
-// Route::get('evento-archivado', function() {
-// 	return view('site.evento-archivado');
-// })->name('evento-archivado');
 
 Route::get('membresia-basica', function() {
 	return view('site.membresia-basica');
 })->name('membresia-basica');
 
-// Route::get('membresia', function() {
-// 	return view('site.membresia');
-// })->name('membresia');
 
-
-// Route::get('single-eventos', function() {
-// 	return view('site.single-eventos');
-// })->name('single-eventos');
-
-
-// Route::get('single-cursos', function() {
-// 	return view('site.single-cursos');
-// })->name('single-cursos');
-
-
-
-// Route::get('guia-estudio', function() {
-// 	return view('site.guia-estudio');
-// })->name('guia-estudio');
-
-// Route::get('faqs', function() {
-// 	return view('site.faqs');
-// })->name('faqs');
 
 Route::get('password/email', function() {
 	return view('site.recover');
@@ -197,15 +137,9 @@ Route::get('privacidad', function() {
 	return view('site.privacidad');
 })->name('privacidad');
 
-// Route::get('gracias', function() {
-// 	return view('site.gracias');
-// })->name('gracias');
-
-// Route::get('nosotros', function() {
-// 	return view('site.nosotros');
-// })->name('nosotros');
-
-
+//Route::get('gracias', function() {
+//	return view('site.gracias');
+//})->name('gracias');
 
 
 //Auth::routes();

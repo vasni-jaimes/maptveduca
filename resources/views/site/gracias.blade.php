@@ -1,4 +1,4 @@
-<!-- HEADER AND FOOTER -->
+roust<!-- HEADER AND FOOTER -->
 @extends('site.layouts.layout-online')
 <!-- /HEADER AND FOOTER -->
 
@@ -16,8 +16,8 @@
     	            <div class="formulario membresia-basica">
 
     	                <h2>¡Gracias por unirte a la familia!</h2>
-                        <p>Recibirás un correo electrónico con la información necesaria para empezar a estudiar.</p>
-                        <p><small>¿Tienes preguntas? <a href="{{ route('faqs') }}">Escríbenos</a> y te atenderemos lo antes posible.</small></p>
+                        <p>Comienza a explorar la plataforma y <br> #EstudiaLoQueAmas </p>
+                        <p><small>¿Tienes preguntas? <a href="mailto:maptveduca.info@gmail.com">Escríbenos</a> y te atenderemos lo antes posible.</small></p>
                         <a class="btn-amarillo" href="{{ route('micuenta.index') }}">Ir a mi Tablero Personal</a>
 
     	            </div> <!-- /formulario -->

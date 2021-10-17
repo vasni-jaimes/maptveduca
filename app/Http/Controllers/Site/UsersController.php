@@ -66,7 +66,7 @@ class UsersController extends Controller
     							->where('user_id', auth()->user()->id)
     							->where('clase_id', '!=', null)->get();
 
-        /* RECIMENDACIONES */
+        /* RECOMENDACIONES */
         $materias        = $this->cursosPorTrimestre();
         $tituloTrimestre = $this->tituloPorTrimestre();
         
@@ -120,7 +120,6 @@ class UsersController extends Controller
 
         /* HELPER */
         $helper = $this->helper;
-        
 
     	return view('site.micuenta', compact("favoritosCursos", "favoritosEventos", "favoritosClases", "materias", "tableroCursos", "tableroEventos", "eventosOld", "tituloTrimestre", "mensajes", "pagos", "notificaciones", "trimestreActual", "recomendacionesCompletas", "helper"));
     }

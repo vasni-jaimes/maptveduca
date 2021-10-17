@@ -113,6 +113,15 @@
                                     @else
                                         <p>No tienes ninguna suscripcion activa</p>
                                     @endif
+
+                                    @if (auth()->user()->ultimaSubscripcion()->canceled_sub == 1)
+                                        <p class="suscripcion-cancelada">
+                                            Tu Suscripción fue cancelada correctamente, 
+                                            pero aún puedes acceder a los cursos por el ultimo mes que pagaste,
+                                            te quedan {{ auth()->user()->contadorDiasSuscripcion() }} días para disfrutar. 
+                                        </p>
+                                    @endif
+
                                 </div> <!-- /item-perfil -->
                             </div> <!-- /flex -->
                         </div> <!-- /row-perfil -->
@@ -150,7 +159,6 @@
                                 <ul>
                                     <li class="tab tab-active" data-id="1">Mensajes</li>
                                     <li class="tab" data-id="2">Notificaciones</li>
-                                    <li class="tab" data-id="3">Chat</li>
                                 </ul>
                                 
                                 <div class="s-tab tab-1">
@@ -218,23 +226,6 @@
                                         </div>
                                     @endforelse
                                 </div> <!-- /tab-notificacion -->
-
-                                <div class="s-tab tab-3">
-                                    <div class="item-inbox">
-                                        <p>
-                                            <small class="notificacion" data-noti=""></small>
-                                            <span>Mensaje de prueba</span>
-                                        </p>
-                                        <div class="item-mensaje">
-                                                <div class="txt-mensaje">
-                                                <p><strong>De:</strong> MAPtv Educa </p>
-                                                <p><strong>Notificación:</strong></p>
-                                                <p> Mensaje de prueba </p>
-                                            </div> <!-- /txt-mensaje -->
-                                            <a href="javascript:void(0)" class="ver-notify" data-noti="">Ver mensaje completo</a>
-                                        </div> <!-- /item-mensaje -->
-                                    </div>
-                                </div> <!-- /tab-chat -->
                                 
                             </div> <!-- /row-tabs -->
                         </div> <!-- /row-perfil -->

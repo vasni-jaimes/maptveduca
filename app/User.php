@@ -88,6 +88,32 @@ class User extends Authenticatable
         return false;
     }
 
+    public function contadorDiasSuscripcion()
+    {
+        date_default_timezone_set('America/Mexico_City');
+        $hoy = Carbon::now()->format('Y-m-d');
+
+        $suscripcion = $this->ultimaSubscripcion();
+        $fecha1= new \DateTime($hoy);
+        $fecha2= new \DateTime($suscripcion->fecha_fin);
+        $diff = $fecha1->diff($fecha2);
+
+        // El resultados sera 3 dias
+        echo $diff->days;
+
+
+        //return $this->dias_pasados($suscripcion->fecha_inicio, $suscripcion->fecha_fin);
+    }
+
+
+
+    protected function dias_pasados($fecha_inicial,$fecha_final)
+    {   
+        $dias = (strtotime($fecha_inicial)-strtotime($fecha_final))/86400;
+        $dias = abs($dias); $dias = floor($dias);
+        return $dias;
+    }
+
 
     public function MensajesNotify()
     {
