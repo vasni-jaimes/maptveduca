@@ -117,14 +117,6 @@ Route::post('contacto', 'Site\ContactoController@store')->name('contacto.store')
 
 
 
-
-
-Route::get('membresia-basica', function() {
-	return view('site.membresia-basica');
-})->name('membresia-basica');
-
-
-
 Route::get('password/email', function() {
 	return view('site.recover');
 })->name('recover');

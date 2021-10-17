@@ -20,20 +20,10 @@
                 
                 <div class="row-columnas">
                     
-                    <div class="flex between">
-
-                        <div class="col-6">
-                            <p>Si lo que quieres es aprender a tu propio ritmo y explorar nuestros cursos libremente, te reomendamos la membresía básica, que te dará acceso a todos nuestros cursos (principales y extra), además de la mayoría de clínicas y conciertos/masterclass.</p>
-                            <p>¡Mira todo lo que puedes hacer!</p>
-                        </div> <!-- /col-6 -->
-
-                        <div class="col-6">
-                            <div class="row-video">
-                                <iframe src="https://www.youtube.com/embed/CBZyA-Pj52U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div> <!-- /row-video -->
-                        </div> <!-- /col-6 -->
-
-                    </div> <!-- /flex -->
+                    <div class="col-10 container-text_basica">
+                        <p>Si lo que quieres es aprender a tu propio ritmo y explorar nuestros cursos libremente, te reomendamos la membresía básica, que te dará acceso a todos nuestros cursos (principales y extra), además de la mayoría de clínicas y conciertos/masterclass.</p>
+                        <p>¡Mira todo lo que puedes hacer!</p>
+                    </div> <!-- /col-6 -->
                     
                 </div> <!-- /row-columnas -->
                 
