@@ -127,12 +127,16 @@ class UsersController extends Controller
 
         /* FECHAS DE INSCRIPCION */
         $grupo = Grupo::where("id", auth()->user()->grupo_id)->first();
-        $fechaInscripcion = CiclosEscolares::with(['fechasTrimestres' => function($query) {
-            //FECHA DE HOY
-            date_default_timezone_set('America/Mexico_City');
-            $hoy = Carbon::now()->format('Y-m-d H:i:s');
-            $query->where("fecha_inicio", "<=", $hoy);
-        }])->where("id", $grupo->ciclo_id)->first();
+        $fechaInscripcion = null;
+        if ($grupo) {
+            $fechaInscripcion = CiclosEscolares::with(['fechasTrimestres' => function($query) {
+                //FECHA DE HOY
+                date_default_timezone_set('America/Mexico_City');
+                $hoy = Carbon::now()->format('Y-m-d H:i:s');
+                $query->where("fecha_inicio", "<=", $hoy);
+            }])->where("id", $grupo->ciclo_id)->first();
+        }
+        
 
 
     	return view('site.micuenta', compact("favoritosCursos", "favoritosEventos", "favoritosClases", "materias", "tableroCursos", "tableroEventos", "eventosPasados", "tituloTrimestre", "mensajes", "pagos", "notificaciones", "trimestreActual", "recomendacionesCompletas", "helper", "fechaInscripcion", "materiasTexto"));
