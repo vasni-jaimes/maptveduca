@@ -69,10 +69,18 @@ class UsersController extends Controller
     							->where('user_id', auth()->user()->id)
     							->where('clase_id', '!=', null)->get();
 
-        /* RECOMENDACIONES */
-        $materias        = $this->cursosPorTrimestre();
-        $tituloTrimestre = $this->tituloPorTrimestre();
-        $materiasTexto   = $this->obtenerTextoAlternativo($materias);
+
+        $materias        = null;
+        $tituloTrimestre = null;
+        $materiasTexto   = null;
+        if (auth()->user()->tieneSuscripcion()) {
+            /* RECOMENDACIONES */
+            $materias        = $this->cursosPorTrimestre();
+            $tituloTrimestre = $this->tituloPorTrimestre();
+            $materiasTexto   = $this->obtenerTextoAlternativo($materias);
+        }
+
+        
             
 
         /* TABLERO CURSOS */
@@ -101,9 +109,14 @@ class UsersController extends Controller
                     ->where('user_id', auth()->user()->id)->orderBy('fehca_inicio', 'asc')->get();
 
 
-        /* CALIFICACIONES */
-        $trimestreActual = $this->helper->istrimestre(auth()->user()->grupo_id);
-        $recomendacionesCompletas = Recomendacion::with(['cursos'])->where('carrera_id', auth()->user()->tieneSuscripcion()->carrera_id)->get();
+        $trimestreActual = null;
+        $recomendacionesCompletas = null;
+        if (auth()->user()->tieneSuscripcion()) {
+            /* CALIFICACIONES */
+            $trimestreActual = $this->helper->istrimestre(auth()->user()->grupo_id);
+            $recomendacionesCompletas = Recomendacion::with(['cursos'])->where('carrera_id', auth()->user()->tieneSuscripcion()->carrera_id)->get();
+        }
+
 
         /* NOTIFICACIONES */
         $notificaciones = Notificacion::where('user_id', auth()->user()->id)
