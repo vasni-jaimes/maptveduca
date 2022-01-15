@@ -148,7 +148,7 @@ class InstructoresController extends Controller
 
                 //DB::rollback();
                 //return response()->json(["message" => "error"]);
-            }
+            //}
             
             DB::rollback();
             return response()->json(["message" => "error"]);
