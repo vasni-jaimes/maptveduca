@@ -14,7 +14,7 @@ class AddGruposToAulasPublicacionCreate extends Migration
     public function up()
     {
         Schema::table('aulas_publicacion_create', function (Blueprint $table) {
-            $table->integer('grupo_id')->nullable()->after('instructor_id');
+            $table->integer('grupo_id')->nullable()->after('profesor_id');
         });
     }
 
