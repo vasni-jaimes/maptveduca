@@ -165,38 +165,21 @@
 
     <!-- Chosen -->
     <script src="/admini/js/plugins/chosen/chosen.jquery.js"></script>
-    <!-- Data picker -->
-   <script src="/admini/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-   <!-- Clock picker -->
-    <script src="/admini/js/plugins/clockpicker/clockpicker.js"></script>
 
     <!-- Custom and plugin javascript -->
     <script src="/admini/js/inspinia.js"></script>
     <script src="/admini/js/plugins/pace/pace.min.js"></script>
-    <!-- iCheck -->
-    <script src="/admini/js/plugins/iCheck/icheck.min.js"></script>
+
     <script>
         $(document).ready(function(){
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-            });
             $('.chosen-select').chosen({width: "100%"});
             $('.custom-file-input').on('change', function() {
                 let fileName = $(this).val().split('\\').pop();
                 $(this).next('.custom-file-label').addClass("selected").html(fileName);
             });
-
-            $('.clockpicker').clockpicker();
-
-            var mem = $('.datepicker').datepicker({
-                todayHighlight: true,
-                keyboardNavigation: false,
-                forceParse: false,
-                calendarWeeks: true,
-                autoclose: true
-            });
        });
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/admini/js/app.js"></script>
 
 @stop

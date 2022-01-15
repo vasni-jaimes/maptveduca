@@ -15,7 +15,7 @@ class CreateAulasRespuestasTable extends Migration
     {
         Schema::create('aulas_respuestas', function (Blueprint $table) {
             $table->id();
-            $table->integer('instructor_id')->nullable();
+            $table->integer('profesor_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('publicacion_id');
             $table->text('respuesta');

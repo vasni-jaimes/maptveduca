@@ -16,7 +16,7 @@ class CreateAulasPublicacionCreate extends Migration
         Schema::create('aulas_publicacion_create', function (Blueprint $table) {
             $table->id();
             $table->integer('curso_id');
-            $table->integer('instructor_id');
+            $table->integer('profesor_id');
             $table->string('nombre');
             $table->text('publicacion');
             $table->text('archivos')->nullable();

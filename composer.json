@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "nesbot/carbon": "^2.39",
-        "paypal/rest-api-sdk-php": "^1.14",
+        "paypal/paypal-checkout-sdk": "^1.0",
+        "spatie/laravel-permission": "^5.4",
         "symfony/psr-http-message-bridge": "^2.1"
     },
     "require-dev": {

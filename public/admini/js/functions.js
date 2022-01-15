@@ -95,6 +95,72 @@
 
 //FUNCION PARA VALIDAR EL FORMULARIO DE AGREGAR UN NUEVO USUARIO (CLIENTE)
 var funciones = {
+  validarAgregarCiclo: function validarAgregarCiclo(e) {
+    e.preventDefault();
+    var nombre_ciclo = document.querySelector("input[name='nombre_ciclo']");
+    /* STATUS */
+
+    var error_videos = false; //SE ELIMINAN LOS RASTROS DE ERRORES
+
+    document.querySelectorAll('.errors').forEach(function (item) {
+      item.innerHTML = '';
+    });
+    document.querySelectorAll('.chosen-choices').forEach(function (item) {
+      item.style.borderColor = "#e5e6e7";
+    });
+
+    if (document.querySelector('.has-error')) {
+      document.querySelectorAll('.has-error').forEach(function (item) {
+        item.classList.remove('has-error');
+      });
+    } //SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+
+    if (nombre_ciclo.value == '') {
+      nombre_ciclo.parentNode.classList.add('has-error');
+      nombre_ciclo.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    for (var i = 1; i <= 8; i++) {
+      var fecha_inicio = document.querySelector('input[name="fecha_inicio-' + i + '"]');
+      var fecha_final = document.querySelector('input[name="fecha_final-' + i + '"]');
+
+      if (fecha_inicio.value == undefined || fecha_inicio.value == "" || fecha_inicio.value == null) {
+        fecha_inicio.parentNode.classList.add('has-error');
+        fecha_inicio.nextElementSibling.innerHTML = 'El campo es requerido';
+        error_videos = true;
+      }
+
+      if (fecha_final.value == undefined || fecha_final.value == "" || fecha_final.value == null) {
+        fecha_final.parentNode.classList.add('has-error');
+        fecha_final.nextElementSibling.innerHTML = 'El campo es requerido';
+        error_videos = true;
+      }
+    }
+
+    if (error_videos == true) {
+      if (e.type == 'submit') {
+        var posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+        window.scrollTo(0, posicion);
+      }
+
+      return false;
+    }
+
+    if (e.type == 'submit') {
+      e.target.disabled = true;
+      document.querySelector('.ibox-content').classList.add('sk-loading');
+
+      if (e.target.getAttribute('name') == 'frm-agregar_ciclo-escolar') {
+        document.querySelector("form[name='frm-agregar_ciclo-escolar']").submit();
+        return false;
+      }
+
+      document.querySelector("form[name='frm-editar_ciclo-escolar']").submit();
+      return false;
+    }
+  },
   validarStatusInscripciones: function validarStatusInscripciones(e) {
     e.preventDefault();
     var status = document.querySelector("input[name='status']");
@@ -219,6 +285,7 @@ var funciones = {
   validarAgregarGrupo: function validarAgregarGrupo(e) {
     e.preventDefault();
     var nombre_grupo = document.querySelector("input[name='nombre_grupo']");
+    var ciclo_escolar = document.querySelector("select[name='ciclo_escolar']");
     /* STATUS */
 
     var error_videos = false; //SE ELIMINAN LOS RASTROS DE ERRORES
@@ -240,6 +307,12 @@ var funciones = {
     if (nombre_grupo.value == '') {
       nombre_grupo.parentNode.classList.add('has-error');
       nombre_grupo.nextElementSibling.innerHTML = 'El campo es requerido';
+      error_videos = true;
+    }
+
+    if (ciclo_escolar.value == '') {
+      ciclo_escolar.parentNode.classList.add('has-error');
+      ciclo_escolar.nextElementSibling.innerHTML = 'El campo es requerido';
       error_videos = true;
     }
 
@@ -616,7 +689,7 @@ var funciones = {
             $(this).next('.custom-file-label').addClass("selected").html(fileName);
           });
         } else {
-          swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+          swal("Error", "No se encontraron alumnos en el curso", "error");
         }
       });
     }
@@ -772,19 +845,17 @@ var funciones = {
       }
     });
   },
-  validarAgregarInstructor: function validarAgregarInstructor(e) {
+  validarAgregarAdministrador: function validarAgregarAdministrador(e) {
     e.preventDefault();
-    var nombre = document.querySelector("input[name='nombre_instructor']");
-    var apellido = document.querySelector("input[name='apellido_instructor']");
+    var nombre = document.querySelector("input[name='nombres']");
+    var apellido = document.querySelector("input[name='apellidos']");
     var email = document.querySelector("input[name='email']");
-    var bibliografia = document.querySelector("textarea[name='bibliografia']");
-    var especialidad = document.querySelector("input[name='especialidad']");
+    var roles = document.querySelector("select[name='select_roles']");
     var password = document.querySelector("input[name='password']");
     var password_confirm = document.querySelector("input[name='password_confirmation']");
-    var img_instructor = document.querySelector("input[name='avatar']");
     /* STATUS */
 
-    var error_videos = false; //SE ELIMINAN LOS RASTROS DE ERRORES
+    var errores = false; //SE ELIMINAN LOS RASTROS DE ERRORES
 
     document.querySelectorAll('.errors').forEach(function (item) {
       item.innerHTML = '';
@@ -803,72 +874,180 @@ var funciones = {
     if (nombre.value == '') {
       nombre.parentNode.classList.add('has-error');
       nombre.nextElementSibling.innerHTML = 'El campo es requerido';
-      error_videos = true;
+      errores = true;
     }
 
     if (apellido.value == '') {
       apellido.parentNode.classList.add('has-error');
       apellido.nextElementSibling.innerHTML = 'El campo es requerido';
-      error_videos = true;
+      errores = true;
     }
 
     if (email.value == '') {
       email.parentNode.classList.add('has-error');
       email.nextElementSibling.innerHTML = 'El campo es requerido';
-      error_videos = true;
+      errores = true;
     }
 
     if (!funciones.validarEmail(email.value)) {
       email.parentNode.classList.add('has-error');
       email.nextElementSibling.innerHTML = 'El email no es valido';
-      error_videos = true;
+      errores = true;
+    }
+
+    if (roles.value == '') {
+      roles.parentNode.classList.add('has-error');
+      roles.nextElementSibling.innerHTML = 'El campo es requerido';
+      errores = true;
+    }
+
+    if (roles.value == 2) {
+      var categorias = document.querySelector("select[name='select_categorias']");
+
+      if (categorias.value == '') {
+        categorias.parentNode.classList.add('has-error');
+        categorias.nextElementSibling.innerHTML = 'El campo es requerido';
+        errores = true;
+      }
+    }
+
+    if (e.target.getAttribute('name') == 'frm-agregar_administrador') {
+      if (password.value == '') {
+        password.parentNode.classList.add('has-error');
+        password.nextElementSibling.innerHTML = 'El campo es requerido';
+        errores = true;
+      }
+
+      if (password.value.length < 8) {
+        password.parentNode.classList.add('has-error');
+        password.nextElementSibling.innerHTML = 'El campo es requerido';
+        errores = true;
+      }
+
+      if (password.value !== password_confirm.value) {
+        password_confirm.parentNode.classList.add('has-error');
+        password_confirm.nextElementSibling.innerHTML = 'Los campos no coinciden';
+        errores = true;
+      }
+    }
+
+    if (errores == true) {
+      if (e.type == 'submit') {
+        var posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+        window.scrollTo(0, posicion);
+      }
+
+      return false;
+    }
+
+    if (e.type == 'submit') {
+      e.target.disabled = true;
+      document.querySelector('.ibox-content').classList.add('sk-loading');
+
+      if (e.target.getAttribute('name') == 'frm-agregar_administrador') {
+        document.querySelector("form[name='frm-agregar_administrador']").submit();
+        return false;
+      }
+
+      document.querySelector("form[name='frm-editar_administrador']").submit();
+      return false;
+    }
+  },
+  validarAgregarInstructor: function validarAgregarInstructor(e) {
+    e.preventDefault();
+    var nombre = document.querySelector("input[name='nombre_instructor']");
+    var apellido = document.querySelector("input[name='apellido_instructor']");
+    var email = document.querySelector("input[name='email']");
+    var bibliografia = document.querySelector("textarea[name='bibliografia']");
+    var especialidad = document.querySelector("input[name='especialidad']");
+    var password = document.querySelector("input[name='password']");
+    var password_confirm = document.querySelector("input[name='password_confirmation']");
+    var img_instructor = document.querySelector("input[name='avatar']");
+    /* STATUS */
+
+    var errores = false; //SE ELIMINAN LOS RASTROS DE ERRORES
+
+    document.querySelectorAll('.errors').forEach(function (item) {
+      item.innerHTML = '';
+    });
+    document.querySelectorAll('.chosen-choices').forEach(function (item) {
+      item.style.borderColor = "#e5e6e7";
+    });
+
+    if (document.querySelector('.has-error')) {
+      document.querySelectorAll('.has-error').forEach(function (item) {
+        item.classList.remove('has-error');
+      });
+    } //SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+
+    if (nombre.value == '') {
+      nombre.parentNode.classList.add('has-error');
+      nombre.nextElementSibling.innerHTML = 'El campo es requerido';
+      errores = true;
+    }
+
+    if (apellido.value == '') {
+      apellido.parentNode.classList.add('has-error');
+      apellido.nextElementSibling.innerHTML = 'El campo es requerido';
+      errores = true;
+    }
+
+    if (email.value == '') {
+      email.parentNode.classList.add('has-error');
+      email.nextElementSibling.innerHTML = 'El campo es requerido';
+      errores = true;
+    }
+
+    if (!funciones.validarEmail(email.value)) {
+      email.parentNode.classList.add('has-error');
+      email.nextElementSibling.innerHTML = 'El email no es valido';
+      errores = true;
     }
 
     if (especialidad.value == '') {
       especialidad.parentNode.classList.add('has-error');
       especialidad.nextElementSibling.innerHTML = 'El email no es valido';
-      error_videos = true;
+      errores = true;
     }
 
     if (bibliografia.value == '') {
       bibliografia.parentNode.classList.add('has-error');
       bibliografia.nextElementSibling.innerHTML = 'El campo es requerido';
-      error_videos = true;
+      errores = true;
     }
 
     if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
       if (password.value == '') {
         password.parentNode.classList.add('has-error');
         password.nextElementSibling.innerHTML = 'El campo es requerido';
-        error_videos = true; // password.classList.add('campo-requerido');
+        errores = true; // password.classList.add('campo-requerido');
         // validate = false;
       }
 
       if (password.value.length < 8) {
         password.parentNode.classList.add('has-error');
         password.nextElementSibling.innerHTML = 'El campo es requerido';
-        error_videos = true; // password.classList.add('campo-requerido');
+        errores = true; // password.classList.add('campo-requerido');
         // validate = false;			
       }
 
       if (password.value !== password_confirm.value) {
         password_confirm.parentNode.classList.add('has-error');
         password_confirm.nextElementSibling.innerHTML = 'El campo es requerido';
-        error_videos = true; // password.classList.add('campo-requerido')
+        errores = true; // password.classList.add('campo-requerido')
       }
     }
-
-    console.log(e.target.getAttribute('name'));
 
     if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
       if (img_instructor.value == '') {
         img_instructor.parentNode.classList.add('has-error');
         img_instructor.nextElementSibling.innerHTML = 'El campo es requerido';
-        error_videos = true;
+        errores = true;
       }
     }
 
-    if (error_videos == true) {
+    if (errores == true) {
       if (e.type == 'submit') {
         var posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
         window.scrollTo(0, posicion);

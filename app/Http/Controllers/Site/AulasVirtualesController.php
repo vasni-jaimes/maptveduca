@@ -76,7 +76,7 @@ class AulasVirtualesController extends Controller
 
     public function showAulas()
     {
-        $trimestreUser = $this->helper->istrimestre( auth()->user()->id );
+        $trimestreUser = $this->helper->istrimestre( auth()->user()->grupo_id );
     	$materias = DB::table('tablero_cursos')
                             ->join('courses', 'tablero_cursos.curso_id', 'courses.id')
                             ->join('recomendaciones', 'courses.id', 'recomendaciones.curso_id')
@@ -94,8 +94,8 @@ class AulasVirtualesController extends Controller
     {
         $grupo         = auth()->user()->grupo_id;
     	$curso         = Course::where('slug', $slug)->where('status', 1)->first();
-        $publicaciones = Publicacion::with(['instructor'])->where('curso_id', $curso->id)->where('grupo_id', $grupo)->orderBy('created_at', 'desc')->get();
-        $respuestas    = Respuesta::with(['usuario', 'instructor'])->orderBy('created_at', 'desc')->get();
+        $publicaciones = Publicacion::with(['profesor'])->where('curso_id', $curso->id)->where('grupo_id', $grupo)->orderBy('created_at', 'desc')->get();
+        $respuestas    = Respuesta::with(['usuario', 'profesor'])->orderBy('created_at', 'desc')->get();
 
     	return view('site.single-aulas', compact("curso", "publicaciones", "respuestas"));
     }

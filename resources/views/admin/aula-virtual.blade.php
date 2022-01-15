@@ -19,13 +19,16 @@
     
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>{{ $curso->nombre }}r</h2>
+            <h2>{{ $curso->nombre }} - {{ $grupo->nombre }}</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="index.html">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="">Lista de Cursos</a>
+                    <a href="{{ route('listado-materias.index') }}">Lista de Cursos</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route('listado-grupos.aulas', $slug) }}">Lista de Grupos</a>
                 </li>
                 <li class="breadcrumb-item active">
                     <strong>Publicaciónes</strong>
@@ -217,7 +220,7 @@
     <div class="row justify-content-center mt-3">
         <div class="col-lg-10">
             <div class="ibox">
-                @foreach($publicaciones as $publicacion)
+                @forelse($publicaciones as $publicacion)
                     <div class="row justify-content-center mt-3">
                         <div class="col-lg-10">
                             <div class="ibox border-bottom">
@@ -237,25 +240,29 @@
 
                                     <div class="social-feed-box">
 
-                                        <div class="float-right social-action dropdown">
-                                            <button data-toggle="dropdown" class="dropdown-toggle btn-white">
-                                                <i class="fa fa-angle-down"></i>
-                                            </button>
-                                            <ul class="dropdown-menu m-t-xs">
-                                                <li><a href="#" class="editar_public" data-pub="{{ $publicacion->id }}">editar</a></li>
-                                                <li>
-                                                    <form method="POST" action="{{ route('eliminar.publicacion', $publicacion->id) }}" name="eliminarPublicacion">
-                                                        @csrf
-                                                        <a href="#" class="eliminar_public">eliminar</a></li>
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        @if ( Auth::guard('admins')->user()->hasRole(['admin', 'profesor_lider']) )
+
+                                            <div class="float-right social-action dropdown">
+                                                <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                                                    <i class="fa fa-angle-down"></i>
+                                                </button>
+                                                <ul class="dropdown-menu m-t-xs">
+                                                    <li><a href="#" class="editar_public" data-pub="{{ $publicacion->id }}">editar</a></li>
+                                                    <li>
+                                                        <form method="POST" action="{{ route('eliminar.publicacion', $publicacion->id) }}" name="eliminarPublicacion">
+                                                            @csrf
+                                                            <a href="#" class="eliminar_public">eliminar</a></li>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        @endif
 
                                         <div class="social-avatar">
                                             <div class="media-body">
                                                 <a href="#">
-                                                    Profr. {{ $publicacion->instructor->nombres." ".$publicacion->instructor->apellidos }}
+                                                    Profr. {{ $publicacion->profesor->nombres." ".$publicacion->profesor->apellidos }}
                                                 </a>
                                                 <small class="text-muted">{{ $publicacion->created_at }}</small>
                                             </div>
@@ -266,21 +273,25 @@
                                             </p>
                                         </div>
 
-                                        <!-- EDITAR PUBLCIACION -->
-                                        <div class="social-comment editar-publicacion" data-pub="{{ $publicacion->id }}">
-                                            <div class="media-body">
-                                                <form action="{{ route('aula-publicidad.update', $publicacion->id) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <textarea name="publicaciontxt" class="form-control" placeholder="editar publicacion">{{ $publicacion->publicacion }}</textarea>
+                                        @if ( Auth::guard('admins')->user()->hasRole(['admin', 'profesor_lider']) )
 
-                                                    <br>
-                                                    <input type="file" name="archivos_aula[]" multiple=""><br><br>
-                                                    <button class="btn btn-white btn-sm cancelar-edicion" type="submit">Cancelar</button>
-                                                    <button class="btn btn-primary btn-sm editarp" type="submit">Editar Publicacion</button>
-                                                </form>
+                                            <!-- EDITAR PUBLCIACION -->
+                                            <div class="social-comment editar-publicacion" data-pub="{{ $publicacion->id }}">
+                                                <div class="media-body">
+                                                    <form action="{{ route('aula-publicidad.update', $publicacion->id) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <textarea name="publicaciontxt" class="form-control" placeholder="editar publicacion">{{ $publicacion->publicacion }}</textarea>
+
+                                                        <br>
+                                                        <input type="file" name="archivos_aula[]" multiple=""><br><br>
+                                                        <button class="btn btn-white btn-sm cancelar-edicion" type="submit">Cancelar</button>
+                                                        <button class="btn btn-primary btn-sm editarp" type="submit">Editar Publicacion</button>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!-- /EDITAR PUBLCIACION -->
+                                            <!-- /EDITAR PUBLCIACION -->
+
+                                        @endif
 
                                         <hr>
                                         @if ($publicacion->archivos != null)
@@ -308,27 +319,32 @@
                                                     
                                                     <div class="social-comment">
 
-                                                        <div class="float-right social-action dropdown">
-                                                            <button data-toggle="dropdown" class="dropdown-toggle btn-white">
-                                                                <i class="fa fa-angle-down"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu m-t-xs">
-                                                                @if ($respuesta->instructor_id == Auth::guard('admins')->user()->instructor_id)
-                                                                    <li><a href="#" class="editar_resp" data-resp="{{ $respuesta->id }}">editar</a></li>
-                                                                @endif
-                                                                <li>
-                                                                    <form method="POST" action="{{ route('eliminar.respuesta', $respuesta->id) }}" name="eliminarPublicacion">
-                                                                        @csrf
-                                                                        <a href="#" class="eliminar_public">eliminar</a></li>
-                                                                    </form>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                                        @if ( Auth::guard('admins')->user()->hasRole(['admin', 'profesor_lider']) )
+
+                                                            <div class="float-right social-action dropdown">
+                                                                <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                                                                    <i class="fa fa-angle-down"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu m-t-xs">
+                                                                    @if ($respuesta->profesor != null)
+                                                                        <li><a href="#" class="editar_resp" data-resp="{{ $respuesta->id }}">editar</a></li>
+                                                                    @endif
+                                                                    <li>
+                                                                        <form method="POST" action="{{ route('eliminar.respuesta', $respuesta->id) }}" name="eliminarPublicacion">
+                                                                            @csrf
+                                                                            <a href="#" class="eliminar_public">eliminar</a></li>
+                                                                        </form>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+
+                                                        @endif
+                                                        
 
                                                         <div class="media-body">
                                                             <a href="#">
-                                                                @if ($respuesta->instructor_id == Auth::guard('admins')->user()->instructor_id)
-                                                                     Profr. {{ $respuesta->instructor->nombres." ".$respuesta->instructor->apellidos }}
+                                                                @if ($respuesta->profesor != null)
+                                                                     Profr. {{ $respuesta->profesor->nombres." ".$respuesta->profesor->apellidos }}
                                                                 @else
                                                                     {{ $respuesta->usuario->nombre." ".$respuesta->usuario->apaterno }}
                                                                 @endif
@@ -350,7 +366,7 @@
 
                                                                 @for($i = 0; $i <= count($archivos) - 1; $i++)
                                                                     <li> <a href="{{ route('down.downloadFileResp', [$curso->slug,$publicacion->id,$respuesta->id,$i]) }}" style="text-decoration: none;outline:none; color: black;">{{ basename($archivos[$i]) }} </a>
-                                                                         @if ($respuesta->instructor_id == Auth::guard('admins')->user()->instructor_id)
+                                                                         @if ($respuesta->profesor != null)
                                                                             <span class="delete-resp_filex" data-rsp="{{ $respuesta->id }}" data-file="{{ $i }}">X</span>
                                                                         @endif
                                                                     </li>
@@ -360,7 +376,7 @@
            
                                                     @endif
 
-                                                    @if ($respuesta->instructor_id == Auth::guard('admins')->user()->instructor_id)
+                                                    @if ($respuesta->profesor != null)
                                                         <!-- EDITAR RESPUESTA -->
                                                         <div class="social-comment editar-respuesta" data-resp="{{ $respuesta->id }}">
                                                             <div class="media-body">
@@ -379,52 +395,69 @@
                                                     @endif
 
                                                 @endforeach
-
                                             @endif
                                             
-                                            <div class="social-comment agregar-respuesta">
-                                                <div class="media-body">
-                                                    <form action="{{ route('aula-virtual-respuesta.store', $publicacion->id) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
-                                                        @csrf
-                                                        <textarea name="publicaciontxt" class="form-control" placeholder="publicacion"></textarea>
-                                                        {!! session()->has("status.newRespuesta.campo") == true ? "<span class='form-text m-b-none errors'>El campo es requerido</span> <br>" : "" !!}
-                                                        <br>
-                                                        <input type="file" name="archivos_aula[]" multiple=""><br><br>
-                                                        <button class="btn btn-primary btn-sm" type="submit">Publicar</button>
-                                                    </form>
+                                            @if ( Auth::guard('admins')->user()->hasRole(['admin', 'profesor_lider']) )
+                                                
+                                                <div class="social-comment agregar-respuesta">
+                                                    <div class="media-body">
+                                                        <form action="{{ route('aula-virtual-respuesta.store', $publicacion->id) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <textarea name="publicaciontxt" class="form-control" placeholder="publicacion"></textarea>
+                                                            {!! session()->has("status.newRespuesta.campo") == true ? "<span class='form-text m-b-none errors'>El campo es requerido</span> <br>" : "" !!}
+                                                            <br>
+                                                            <input type="file" name="archivos_aula[]" multiple=""><br><br>
+                                                            <button class="btn btn-primary btn-sm" type="submit">Publicar</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                            </div>
+
+                                            @endif
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                            <h2> Aún no hay publicaciónes en está Aula Virtual </h2>
+                        </div>
+                    </div>
+                @endforelse
 
-                <hr>
-                <h2> Publicación Nueva </h2><br>
-                <div class="social-comment ibox-content">
-                    <div class="sk-spinner sk-spinner-double-bounce">
-                        <div class="sk-double-bounce1"></div>
-                        <div class="sk-double-bounce2"></div>
-                    </div>
-                    <div class="media-body agregar-nuevo_post">
-                        <form action="{{ route('aula-virtual.store', [$curso->slug, $grupo_slug]) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group row">
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" placeholder="titulo de la publicacion" name="titulo" value="{{ old("titulo") }}"> 
-                                    <span class='form-text m-b-none errors'> {!! $errors->first('titulo') !!} </span>
+                @if ( Auth::guard('admins')->user()->hasRole(['admin', 'profesor_lider']) )
+
+                    <hr>
+
+                    <h2> Publicación Nueva </h2><br>
+
+                    <div class="social-comment ibox-content">
+                        <div class="sk-spinner sk-spinner-double-bounce">
+                            <div class="sk-double-bounce1"></div>
+                            <div class="sk-double-bounce2"></div>
+                        </div>
+                        <div class="media-body agregar-nuevo_post">
+                            <form action="{{ route('aula-virtual.store', [$curso->slug, $grupo_slug]) }}" name="publicar-texto" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" placeholder="titulo de la publicacion" name="titulo" value="{{ old("titulo") }}"> 
+                                        <span class='form-text m-b-none errors'> {!! $errors->first('titulo') !!} </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <textarea name="publicaciontxt" class="form-control" placeholder="publicacion"></textarea>
-                            <span class='form-text m-b-none errors'> {!! $errors->first('publicaciontxt') !!} </span><br>
-                            <input type="file" name="archivos_aula[]" multiple=""><br><br>
-                            <button class="btn btn-primary btn-sm" type="submit">Publicar</button>
-                        </form>
+                                <textarea name="publicaciontxt" class="form-control" placeholder="publicacion"></textarea>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('publicaciontxt') !!} </span><br>
+                                <input type="file" name="archivos_aula[]" multiple=""><br><br>
+                                <button class="btn btn-primary btn-sm" type="submit">Publicar</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+
+                @endif
+
             </div>
         </div>
     </div>

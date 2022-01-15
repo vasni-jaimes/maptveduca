@@ -17,6 +17,7 @@ class CreateGruposTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('slug')->nullable();
+            $table->integer('ciclo_id');
             $table->timestamps();
         });
     }

@@ -21,10 +21,11 @@ class InstructoresController extends Controller
 
     public function __construct(InstructoresDecorator $instructoresDecorator, Helper $helper)
     {
-        $this->instructoresDecorator = $instructoresDecorator;
-        $this->helper           = $helper;
         $this->middleware("authadmin:auth");
-        $this->middleware("ValidarAdmin");
+        $this->middleware(["role:admin,admins"]);
+
+        $this->instructoresDecorator = $instructoresDecorator;
+        $this->helper                = $helper;
     }
 
     /**
@@ -82,6 +83,7 @@ class InstructoresController extends Controller
         $id             = $this->helper::base64_decode_url($id);
         $instructor     = Instructor::findOrFail($id);
         $helper         = $this->helper;
+        
         return view("admin.editar-instructor", compact("instructor", "id", "helper"));
     }
 

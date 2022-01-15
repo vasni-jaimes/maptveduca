@@ -165,12 +165,25 @@
                                 <select data-placeholder="Carreras" class="chosen-select" style="width:350px;" name="select_carreras">
                                     @foreach($careers as $career)
                                         <option value="{{ $career->id }}"
-                                            @if($usuario->obtenerCarrera() == $career->id) selected @endif>
+                                            @if($usuario->tieneSuscripcion()->carrera_id == $career->id) selected @endif>
                                             {{ $career->nombre }} 
                                         </option>
                                     @endforeach
                                 </select>
                                 <span class='form-text m-b-none errors'> {!! $errors->first('select_carreras') !!} </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Regalar meses: </label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="meses_regalo">
+                                    <option value="">meses</option>
+                                    @for($i=1; $i <= 12; $i++)
+                                        <option value="{{ $i }}">{{ $i < 10 ? "0".$i : $i }}</option>
+                                    @endfor
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('meses_regalo') !!} </span>
                             </div>
                         </div>
 

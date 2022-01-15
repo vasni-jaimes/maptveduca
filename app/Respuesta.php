@@ -19,4 +19,9 @@ class Respuesta extends Model
     {
     	return $this->hasOne('App\User', 'id', 'user_id');
     }
+
+    public function profesor()
+    {
+        return $this->hasOne('App\Administrator', 'id', 'profesor_id');
+    }
 }

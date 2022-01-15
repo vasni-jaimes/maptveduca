@@ -25,7 +25,7 @@ class ValidarAulaVirtual
     {
         $curso = Course::where('slug', $request->user_id)->where('status', 1)->first();
         if ($curso) {
-            $trimestreUser = $this->helper->istrimestre( auth()->user()->id );
+            $trimestreUser = $this->helper->istrimestre( auth()->user()->grupo_id );
 
             $tablero = DB::table('tablero_cursos')
                         ->join('recomendaciones', 'tablero_cursos.curso_id', 'recomendaciones.curso_id')

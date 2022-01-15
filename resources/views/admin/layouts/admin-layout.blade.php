@@ -22,11 +22,13 @@
                             <div class="dropdown profile-element">
                                 <img alt="image" class="rounded-circle" src="/admini/img/user-photo.png" width="40px" height="40px" />
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="block m-t-xs font-bold"> {{ Auth::guard('admins')->user()->nombre }} </span>
-                                    @if (Auth::guard('admins')->user()->rol_id == 1)
+                                    <span class="block m-t-xs font-bold"> {{ Auth::guard('admins')->user()->nombres }} </span>
+                                    @if (Auth::guard('admins')->user()->hasRole('admin'))
                                         <span class="text-muted text-xs block">Administrador <b class="caret"></b></span>
-                                    @else
-                                        <span class="text-muted text-xs block">Maestr@ <b class="caret"></b></span>
+                                    @elseif (Auth::guard('admins')->user()->hasRole('profesor_lider'))
+                                        <span class="text-muted text-xs block">Profes@r lider<b class="caret"></b></span>
+                                    @elseif (Auth::guard('admins')->user()->hasRole('director'))
+                                        <span class="text-muted text-xs block">Director<b class="caret"></b></span>
                                     @endif
                                 </a>
                                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -43,21 +45,23 @@
                                 MTv
                             </div>
                         </li>
-                        @if (Auth::guard('admins')->user()->rol_id == 1)
+                            
+                        @if ( Auth::guard('admins')->user()->hasRole('admin') )
+
                             <li>
-                                <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Administradores</span> <span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level collapse">
-                                    <li> <a href=""> Lista de Administradores </a></li>
-                                    <li> <a href="{{ route('agregar-administrador.create') }}"> Agregar Administrador </a></li>
-                                </ul>
+                                <a href="{{ route('listado-administradores.index') }}">
+                                    <i class="fa fa-pie-chart"></i> <span class="nav-label">Administradores</span>
+                                </a>
                             </li>
+                            
                             <li>
-                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Usuarios</span> <span class="fa arrow"></span></a>
+                                    <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Usuarios</span> <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
                                     <li> <a href="{{ route("listado-usuarios") }}"> Lista de Usuarios </a></li>
                                     <li> <a href="{{ route("usuarios.create") }}"> Agregar Usuario </a></li>
                                 </ul>
                             </li>
+
                             <li>
                                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Instructores</span> <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
@@ -68,22 +72,22 @@
                             <li>
                                 <a href="#"><i class="fa fa-tv"></i> <span class="nav-label">Cursos</span> <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
-                                    <li> <a href="{{ route('agregar-curso.index') }}"> Lista de Cursos </a></li>
-                                    <li> <a href="{{ route('agregar-curso.create') }}"> Agregar Cursos </a></li>
+                                    <li> <a href="{{ route("agregar-curso.index") }}"> Lista de Cursos </a> </li>
+                                    <li> <a href="{{ route("agregar-curso.create") }}"> Agregar Cursos </a> </li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-university"></i> <span class="nav-label">Clases en linea</span> <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
-                                    <li> <a href="{{ route('listado-clases.index') }}"> Lista de clases </a></li>
-                                    <li> <a href="{{ route('agregar-clase.create') }}"> Agregar clase </a></li>
+                                    <li> <a href="{{ route("listado-clases.index") }}"> Lista de clases </a></li>
+                                    <li> <a href="{{ route("agregar-clase.create") }}"> Agregar clase </a></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Eventos</span> <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
                                     <li> <a href="{{ route("listado-eventos.index") }}"> Lista de Eventos </a></li>
-                                    <li> <a href="{{ route('agregar-evento.create') }}"> Agregar Evento </a></li>
+                                    <li> <a href="{{ route("agregar-evento.create") }}"> Agregar Evento </a></li>
                                 </ul>
                             </li>
                             <li>
@@ -93,19 +97,23 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="{{ route('texto-materias') }}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Zoom Cursos Recomendados</span>  </a>
+                                <a href="{{ route("texto-materias") }}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Zoom Cursos Recomendados</span>  </a>
                             </li>
 
                              <li>
                                 <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Grupos</span> <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
-                                    <li> <a href="{{ route('index-admin.grupos') }}"> Lista de grupos </a></li>
-                                    <li> <a href="{{ route('create-admin.grupos') }}"> Crear Grupo </a></li>
+                                    <li> <a href="{{ route("index-admin.grupos") }}"> Lista de grupos </a></li>
+                                    <li> <a href="{{ route("create-admin.grupos") }}"> Crear Grupo </a></li>
                                 </ul>
                             </li>
 
                             <li>
-                                <a href="{{ route('inscripciones.index') }}"><i class="fa fa-pie-chart"></i> <span class="nav-label"> Inscripciones </span>  </a>
+                                <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Inscripciónes</span> <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="{{ route('listado-ciclos') }}"> Fechas </a></li>
+                                    <li> <a href="{{ route('inscripciones.index') }}"> Estatus </a></li>
+                                </ul>
                             </li>
 
                            <li>
@@ -115,21 +123,35 @@
                                     <li> <a href="#"> Membresias ( periodos de inicio ) </a></li>
                                 </ul>
                             </li>
+                            
+                        @endif
+
+                        @if ( Auth::guard('admins')->user()->hasRole(['admin', 'profesor_lider', 'director']) )
+
+                            <li>
+                                <a href="{{ route("lista-mensajes") }}">
+                                    <i class="fa fa-pie-chart"></i> <span class="nav-label">Mensajes</span>
+                                </a>
+                            </li>
+
+                            <!--<li>
+                                <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Mensajes</span> <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="{{ route("lista-mensajes") }}"> Lista de mensajes </a></li>
+                                    @if ( Auth::guard('admins')->user()->hasRole(['admin', 'profesor_lider']) )
+                                        <li> <a href="{{ route('mandarMensaje') }}"> Crear Mensaje </a></li>
+                                    @endif
+                                </ul>
+                            </li>-->
 
                         @endif
-                        <li>
-                            <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Mensajes</span> <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li> <a href="#"> Lista de mensajes </a></li>
-                                <li> <a href="{{ route('mandarMensaje') }}"> Crear Mensaje </a></li>
-                            </ul>
-                        </li>
-                        @if (Auth::guard('admins')->user()->rol_id == 2)
+
+                        @if ( Auth::guard('admins')->user()->hasRole(['profesor_lider', 'director']) )
+
                             <li>
-                                <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">Aulas virtuales</span> <span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level collapse">
-                                    <li> <a href="{{ route('listado-materias.index') }}"> Lista de Materias </a></li>
-                                </ul>
+                                <a href="{{ route('listado-materias.index') }}">
+                                    <i class="fa fa-pie-chart"></i> <span class="nav-label">Aulas Virtuales</span>
+                                </a>
                             </li>
 
                             <li>

@@ -14,6 +14,7 @@ use App\Publicacion;
 use App\Respuesta;
 use App\Notificacion;
 use App\Recomendacion;
+use App\CiclosFechas;
 use DB;
 use Carbon\Carbon;
 
@@ -23,8 +24,9 @@ class AulasVirtualesController extends Controller
 
     public function __construct(Helper $helper)
     {
-    	$this->helper = $helper;
         $this->middleware("authadmin:auth");
+        $this->middleware(["role:profesor_lider,admins"])->except(["index", "indexGrupos", "create"]);
+    	$this->helper = $helper;
     }
 
 
@@ -43,7 +45,7 @@ class AulasVirtualesController extends Controller
         }
 
         DB::beginTransaction();
-        $respuesta = Respuesta::where('id', $request->respuesta)->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
+        $respuesta = Respuesta::where('id', $request->respuesta)->where('profesor_id', Auth::guard('admins')->user()->id)->first();
 
         if ($respuesta) {
 
@@ -94,7 +96,7 @@ class AulasVirtualesController extends Controller
 
         DB::beginTransaction();
         $publicacion = Publicacion::where('id', $request->publicacion)
-                            ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
+                            ->where('profesor_id', Auth::guard('admins')->user()->id)->first();
 
 
         if ($publicacion) {
@@ -126,19 +128,21 @@ class AulasVirtualesController extends Controller
             DB::rollback();
             return response()->json(['message' => 'error']);
         }
-
-
     }
 
 
     public function index()
     {
-    	$helper = $this->helper;
-    	$materias = DB::table('courses_instructors')
-    					->join('courses', 'courses_instructors.course_id', 'courses.id')
-    					->where('instructor_id', Auth::guard('admins')->user()->instructor_id)
-    					->where('courses.status', 1)
-    					->get();
+    	$helper      = $this->helper;
+        $allmaterias = Recomendacion::groupBy("curso_id")->pluck('curso_id')->toArray();
+
+        if (Auth::guard('admins')->user()->hasRole('director')) {
+            $materias = Course::whereIn("id", $allmaterias)->get();
+        }
+        else {
+            $materias = Course::whereIn("id", $allmaterias)
+                            ->where('categoria_id', Auth::guard('admins')->user()->categoria_id)->get();
+        }
 
     	return view('admin.listado-materias', compact("materias", "helper"));
     }
@@ -146,12 +150,11 @@ class AulasVirtualesController extends Controller
 
     public function indexGrupos($slug_materia)
     {
-        $helper = $this->helper;
-        
-        $grupoSelect = $this->obtenerGruposForCurso($slug_materia);
-        $grupos      = Grupo::whereIn('id', $grupoSelect)->get();
+        $helper        = $this->helper;
+        $gruposMateria = $this->obtenerGruposForCurso($slug_materia);
+        $materia       = Course::where('slug', $slug_materia)->first('nombre');
 
-        return view('admin.listado-grupos-aulas', compact('grupos', 'helper', 'slug_materia'));
+        return view('admin.listado-grupos-aulas', compact('gruposMateria', 'helper', 'slug_materia', 'materia'));
     }
 
 
@@ -160,11 +163,13 @@ class AulasVirtualesController extends Controller
     	$curso         = Course::where('slug', $slug)->where('status', 1)->first();
         $grupo         = Grupo::where('slug', $grupo_slug)->first();
 
-        $publicaciones = Publicacion::with(['instructor'])  
+        $publicaciones = Publicacion::with(['profesor'])  
                             ->where('curso_id', $curso->id)->where('grupo_id', $grupo->id)->orderBy('id', 'desc')->get();
-        $respuestas    = Respuesta::with(['usuario', 'instructor'])->get();
+        $respuestas    = Respuesta::with(['usuario', 'profesor'])->get();
 
-        return view('admin.aula-virtual', compact("curso", "publicaciones", "respuestas", "grupo_slug"));
+        //return $respuestas;
+
+        return view('admin.aula-virtual', compact("curso", "publicaciones", "respuestas", "grupo_slug", "grupo", "slug"));
     }
 
 
@@ -186,9 +191,9 @@ class AulasVirtualesController extends Controller
 
         DB::beginTransaction();
         $respuesta = new Respuesta();
-        $respuesta->instructor_id = Auth::guard('admins')->user()->instructor_id;
-        $respuesta->publicacion_id = $publicacion_id;
-        $respuesta->respuesta = $request->publicaciontxt;
+        $respuesta->profesor_id     = Auth::guard('admins')->user()->id;
+        $respuesta->publicacion_id  = $publicacion_id;
+        $respuesta->respuesta       = $request->publicaciontxt;
 
         if ($respuesta->save()) {
             if ( $request->hasFile('archivos_aula') ) {
@@ -231,7 +236,7 @@ class AulasVirtualesController extends Controller
             DB::beginTransaction();
             $publicacion                = new Publicacion();
             $publicacion->curso_id      = $curso->id;
-            $publicacion->instructor_id = Auth::guard('admins')->user()->instructor_id;
+            $publicacion->profesor_id   = Auth::guard('admins')->user()->id;
             $publicacion->publicacion   = $request->publicaciontxt;
             $publicacion->nombre        = $request->titulo;
             $publicacion->grupo_id      = $grupo->id;
@@ -272,7 +277,7 @@ class AulasVirtualesController extends Controller
         if (isset($publicacion_id)) {
             
             $publicacion = Publicacion::where('id', $publicacion_id)
-                            ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
+                            ->where('profesor_id', Auth::guard('admins')->user()->id)->first();
 
             if ($publicacion) {
                 DB::beginTransaction();
@@ -366,7 +371,7 @@ class AulasVirtualesController extends Controller
         }
 
         $publicacion = Publicacion::where('id', $publicacion_id)
-                            ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
+                            ->where('profesor_id', Auth::guard('admins')->user()->id)->first();
 
         DB::beginTransaction();
         if ($publicacion) {
@@ -445,13 +450,13 @@ class AulasVirtualesController extends Controller
         }
 
         $publicacion = Publicacion::where('id', $publicacion_id)
-                            ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
+                            ->where('profesor_id', Auth::guard('admins')->user()->id)->first();
 
         DB::beginTransaction();
         if ($publicacion) {
             $respuesta = Respuesta::where('id', $respuesta_id)
                             ->where('publicacion_id', $publicacion_id)
-                            ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)->first();
+                            ->where('profesor_id', Auth::guard('admins')->user()->id)->first();
 
             if ($respuesta) {
                 $respuesta->respuesta = $request->publicaciontxt;
@@ -579,29 +584,29 @@ class AulasVirtualesController extends Controller
 
     protected function obtenerGruposForCurso($slug_materia)
     {
-        date_default_timezone_set('America/Mexico_City');
-        $hoy   = Carbon::now()->format('Y-m-d');
 
-        $pagos = DB::table('usuarios_membresia')
-                    ->select('*')
-                    ->join('users', 'usuarios_membresia.user_id', 'users.id')
-                    ->where('users.grupo_id', '!=', null)
-                    ->where('usuarios_membresia.fehca_inicio', '<=', $hoy)
-                    ->where('usuarios_membresia.fecha_fin', '>=', $hoy)
-                    ->groupBy('users.grupo_id')
-                    ->get();
+        //FECHA DE HOY
+            date_default_timezone_set('America/Mexico_City');
+            $hoy = Carbon::now()->format('Y-m-d');
+        //FECHA DE HOY\
 
-        $curso      = Course::where('slug', $slug_materia)->first();
-        $trimestre  = Recomendacion::where('curso_id', $curso->id)->first();
-        $grupoSelect = Array();
-        foreach ($pagos as $pago) {
-            $trimesteUser = $this->helper->istrimestre($pago->user_id);
-            if ($trimesteUser == $trimestre->trimestre) {
-                $grupoSelect[] = $pago->grupo_id;
-            }
-        }
+        //OBTENER GRUPOS Y TRIMESTRES ACTUALES
+        $gruposActuales = Grupo::pluck('ciclo_id')->toArray();
+        $trimestreActual = DB::table('ciclos_fechas')
+                                ->whereIn('ciclo_id', $gruposActuales)
+                                ->where('fecha_inicio', '<=',$hoy)
+                                ->where('fecha_final', '>=', $hoy)
+                                ->groupBy('trimestre')
+                                ->pluck('trimestre')
+                                ->toArray();
 
-        return $grupoSelect;
+        //OBTENER GRUPOS QUE CORRESPONDEN AL CURSO
+        $curso      = Course::where('slug', $slug_materia)->first(); // 1
+        $trimestres = Recomendacion::where('curso_id', $curso->id)->whereIn('trimestre', $trimestreActual)->pluck('trimestre')->toArray(); // 1,2
+        $ciclos     = CiclosFechas::where('trimestre', $trimestres)->pluck('ciclo_id')->toArray(); // 1,2
+        $grupos     = Grupo::where('ciclo_id', $ciclos)->get(); // 2
+
+        return $grupos;
     }
     
 

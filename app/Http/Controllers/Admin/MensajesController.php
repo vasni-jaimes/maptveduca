@@ -10,6 +10,7 @@ use App\Http\Requests\ValidarMensajes;
 use App\User;
 use App\Mensaje;
 use Carbon\Carbon;
+use App\Course;
 use DB;
 
 class MensajesController extends Controller
@@ -17,12 +18,23 @@ class MensajesController extends Controller
 	public function __construct()
 	{
 		$this->middleware("authadmin:auth");
+        $this->middleware(["role:profesor_lider|admin,admins"])->except(["listaMensajes"]);;
 	}
+
+    public function listaMensajes()
+    {
+        $usuarios = User::where('status', 1)->get();
+
+        return view("admin.mensajes.lista-mensajes", compact("usuarios"));
+    }
     
     public function mandarMensaje()
     {
     	$usuarios = $this->getMisAlumnos();
         $cursos   = $this->getMaterias();
+
+        //return $usuarios;
+
     	return view("admin.agregar-mensajes", compact("usuarios", "cursos"));
     }
 
@@ -130,7 +142,7 @@ class MensajesController extends Controller
                     ->get();
 
         if ($alumnos->count() > 0) {
-            return response()->json(["message" => "ok", "items" => $alumnos]);
+            return response()->json(["message" => "ok", "items" => $alumnos->groupBy('user_id')]);
         }
 
         return response()->json(["message" => "no_results"]);
@@ -159,13 +171,11 @@ class MensajesController extends Controller
 
     protected function getMisAlumnos()
     {
-        if (Auth::guard('admins')->user()->rol_id == 1) {
+        if (Auth::guard('admins')->user()->hasRole(['admin', 'director'])) {
             return User::where('status', 1)->get();
         }
 
-        $cursos = DB::table('courses_instructors')
-                    ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)
-                    ->get();
+        $cursos = Course::where('categoria_id', Auth::guard('admins')->user()->categoria_id)->get();
 
         $cursos = collect($cursos)->pluck('id')->toArray();
         $tablero = DB::table('tablero_cursos')
@@ -176,31 +186,24 @@ class MensajesController extends Controller
         $nuevoTablero = array();
         foreach($tablero as $tableros) {
             $alumno = User::find($tableros->user_id);
-            if ($alumno->ultimaSubscripcion()->membresia_id == 2) {
+            if ($alumno->tieneSuscripcion()->membresia_id == 2) {
                 $nuevoTablero[] = $tableros;
             }
         }
 
-
         $tablero = collect($nuevoTablero)->pluck('user_id')->toArray();
-
         $alumnos = User::where('status', 1)->whereIn('id', $tablero)->get();
-
-
 
         return $alumnos;
     }
 
     protected function getMaterias()
     {
-        if (Auth::guard('admins')->user()->rol_id == 1) {
+        if (Auth::guard('admins')->user()->hasRole(['admin', 'director'])) {
             return false;
         }
 
-        $cursos = DB::table('courses_instructors')
-                    ->join('courses', 'courses_instructors.course_id', 'courses.id')
-                    ->where('courses_instructors.instructor_id', Auth::guard('admins')->user()->instructor_id)
-                    ->get();
+        $cursos = Course::where('categoria_id', Auth::guard('admins')->user()->categoria_id)->get();
 
         if ($cursos->count() <= 0) {
             return false;

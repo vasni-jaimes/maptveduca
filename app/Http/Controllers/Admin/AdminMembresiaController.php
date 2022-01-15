@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Http\Requests\ValidarFechaContenido;
-use DB;
 use App\AdministracionFecha;
+use DB;
 
 class AdminMembresiaController extends Controller
 {
@@ -30,13 +29,13 @@ class AdminMembresiaController extends Controller
 
     	if ($request->has('inicio_trimestre')) {
 	    	DB::beginTransaction();
-	    	$administracion_fechas 					 = AdministracionFecha::first();
+	    	$administracion_fechas = AdministracionFecha::first();
 
 	    	if ($administracion_fechas) {
 	    		$administracion_fechas->inicio_trimestre = $request->inicio_trimestre;
 	    	}
 	    	else {
-	    		$administracion_fechas 					= new AdministracionFecha();
+	    		$administracion_fechas = new AdministracionFecha();
 	    		$administracion_fechas->inicio_trimestre = $request->inicio_trimestre;
 	    	}
 	    	

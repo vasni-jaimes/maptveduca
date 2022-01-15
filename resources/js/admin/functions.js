@@ -3,6 +3,78 @@
 
 let funciones = {
 
+	validarAgregarCiclo: function(e) {
+		e.preventDefault();
+
+		let nombre_ciclo = document.querySelector("input[name='nombre_ciclo']");
+
+		/* STATUS */
+		let error_videos = false;
+
+		//SE ELIMINAN LOS RASTROS DE ERRORES
+		document.querySelectorAll('.errors').forEach(function(item) {
+			item.innerHTML = '';
+		});
+
+		document.querySelectorAll('.chosen-choices').forEach((item) => {
+			item.style.borderColor = "#e5e6e7";
+		});
+
+		if (document.querySelector('.has-error')) {
+			document.querySelectorAll('.has-error').forEach((item) => {
+				item.classList.remove('has-error');
+			});
+		}
+		//SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+		if (nombre_ciclo.value == '') {
+			nombre_ciclo.parentNode.classList.add('has-error');
+			nombre_ciclo.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		for (var i = 1; i <= 8; i++) {
+
+			let fecha_inicio = document.querySelector('input[name="fecha_inicio-'+i+'"]');
+			let fecha_final = document.querySelector('input[name="fecha_final-'+i+'"]');
+
+			if (fecha_inicio.value == undefined || fecha_inicio.value == "" || fecha_inicio.value == null) {
+				fecha_inicio.parentNode.classList.add('has-error');
+				fecha_inicio.nextElementSibling.innerHTML = 'El campo es requerido';
+				error_videos = true;
+			}
+
+			if (fecha_final.value == undefined || fecha_final.value == "" || fecha_final.value == null) {
+				fecha_final.parentNode.classList.add('has-error');
+				fecha_final.nextElementSibling.innerHTML = 'El campo es requerido';
+				error_videos = true;
+			}
+		}
+
+
+		if (error_videos == true) {
+			if (e.type == 'submit') {
+				let posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+				window.scrollTo(0, posicion);
+			}
+
+			return false;
+		}
+
+		if (e.type == 'submit') {
+			e.target.disabled = true;
+	        document.querySelector('.ibox-content').classList.add('sk-loading');
+
+	        if (e.target.getAttribute('name') == 'frm-agregar_ciclo-escolar') {
+	        	document.querySelector("form[name='frm-agregar_ciclo-escolar']").submit();
+	        	return false;
+	        }
+
+	        document.querySelector("form[name='frm-editar_ciclo-escolar']").submit();
+	        return false;
+	    }
+	},
+
 	validarStatusInscripciones: (e) => {
 		e.preventDefault();
 		const status = document.querySelector("input[name='status']");
@@ -144,6 +216,7 @@ let funciones = {
 		e.preventDefault();
 
 		let nombre_grupo = document.querySelector("input[name='nombre_grupo']");
+		let ciclo_escolar = document.querySelector("select[name='ciclo_escolar']");
 
 		/* STATUS */
 		let error_videos = false;
@@ -167,6 +240,12 @@ let funciones = {
 		if (nombre_grupo.value == '') {
 			nombre_grupo.parentNode.classList.add('has-error');
 			nombre_grupo.nextElementSibling.innerHTML = 'El campo es requerido';
+			error_videos = true;
+		}
+
+		if (ciclo_escolar.value == '') {
+			ciclo_escolar.parentNode.classList.add('has-error');
+			ciclo_escolar.nextElementSibling.innerHTML = 'El campo es requerido';
 			error_videos = true;
 		}
 
@@ -592,7 +671,7 @@ let funciones = {
 				        });
 	            	}
 	            	else {
-	            		swal("Error", "Ocurrio un error, intentalo más tarde", "error");
+	            		swal("Error", "No se encontraron alumnos en el curso", "error");
 	            	}
 	            });
 		}
@@ -759,20 +838,19 @@ let funciones = {
 		});
 	},
 
-	validarAgregarInstructor: function(e) {
+	validarAgregarAdministrador: function(e) {
+
 		e.preventDefault();
 
-		let nombre = document.querySelector("input[name='nombre_instructor']");
-		let apellido = document.querySelector("input[name='apellido_instructor']");
+		let nombre = document.querySelector("input[name='nombres']");
+		let apellido = document.querySelector("input[name='apellidos']");
 		let email = document.querySelector("input[name='email']");
-		let bibliografia = document.querySelector("textarea[name='bibliografia']");
-		let especialidad = document.querySelector("input[name='especialidad']");
+		let roles = document.querySelector("select[name='select_roles']");
 		let password = document.querySelector("input[name='password']");
 		let password_confirm = document.querySelector("input[name='password_confirmation']");
-		let img_instructor = document.querySelector("input[name='avatar']");
 
 		/* STATUS */
-		let error_videos = false;
+		let errores = false;
 
 		//SE ELIMINAN LOS RASTROS DE ERRORES
 		document.querySelectorAll('.errors').forEach(function(item) {
@@ -793,37 +871,153 @@ let funciones = {
 		if (nombre.value == '') {
 			nombre.parentNode.classList.add('has-error');
 			nombre.nextElementSibling.innerHTML = 'El campo es requerido';
-			error_videos = true;
+			errores = true;
 		}
 
 		if (apellido.value == '') {
 			apellido.parentNode.classList.add('has-error');
 			apellido.nextElementSibling.innerHTML = 'El campo es requerido';
-			error_videos = true;
+			errores = true;
 		}
 
 		if (email.value == '') {
 			email.parentNode.classList.add('has-error');
 			email.nextElementSibling.innerHTML = 'El campo es requerido';
-			error_videos = true;
+			errores = true;
 		}
 
 		if (!funciones.validarEmail(email.value)) {
 			email.parentNode.classList.add('has-error');
 			email.nextElementSibling.innerHTML = 'El email no es valido';
-			error_videos = true;
+			errores = true;
+		}
+
+		if (roles.value == '') {
+			roles.parentNode.classList.add('has-error');
+			roles.nextElementSibling.innerHTML = 'El campo es requerido';
+			errores = true;
+		}
+
+		if (roles.value == 2) {
+
+			const categorias = document.querySelector("select[name='select_categorias']");
+			if (categorias.value == '') {
+				categorias.parentNode.classList.add('has-error');
+				categorias.nextElementSibling.innerHTML = 'El campo es requerido';
+				errores = true;
+			}
+		}
+
+		if (e.target.getAttribute('name') == 'frm-agregar_administrador') {
+
+			if (password.value == '') {
+				password.parentNode.classList.add('has-error');
+				password.nextElementSibling.innerHTML = 'El campo es requerido';
+				errores = true;
+			}
+
+			if (password.value.length < 8) {
+				password.parentNode.classList.add('has-error');
+				password.nextElementSibling.innerHTML = 'El campo es requerido';
+				errores = true;		
+			}
+
+			if (password.value !== password_confirm.value) {
+				password_confirm.parentNode.classList.add('has-error');
+				password_confirm.nextElementSibling.innerHTML = 'Los campos no coinciden';
+				errores = true;
+			}
+		}
+
+		if (errores == true) {
+			if (e.type == 'submit') {
+				let posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
+				window.scrollTo(0, posicion);
+			}
+
+			return false;
+		}
+
+		if (e.type == 'submit') {
+			e.target.disabled = true;
+	        document.querySelector('.ibox-content').classList.add('sk-loading');
+
+	        if (e.target.getAttribute('name') == 'frm-agregar_administrador') {
+	        	document.querySelector("form[name='frm-agregar_administrador']").submit();
+	        	return false;
+	        }
+
+	        document.querySelector("form[name='frm-editar_administrador']").submit();
+	        return false;
+	    }
+
+	},
+
+	validarAgregarInstructor: function(e) {
+		e.preventDefault();
+
+		let nombre = document.querySelector("input[name='nombre_instructor']");
+		let apellido = document.querySelector("input[name='apellido_instructor']");
+		let email = document.querySelector("input[name='email']");
+		let bibliografia = document.querySelector("textarea[name='bibliografia']");
+		let especialidad = document.querySelector("input[name='especialidad']");
+		let password = document.querySelector("input[name='password']");
+		let password_confirm = document.querySelector("input[name='password_confirmation']");
+		let img_instructor = document.querySelector("input[name='avatar']");
+
+		/* STATUS */
+		let errores = false;
+
+		//SE ELIMINAN LOS RASTROS DE ERRORES
+		document.querySelectorAll('.errors').forEach(function(item) {
+			item.innerHTML = '';
+		});
+
+		document.querySelectorAll('.chosen-choices').forEach((item) => {
+			item.style.borderColor = "#e5e6e7";
+		});
+
+		if (document.querySelector('.has-error')) {
+			document.querySelectorAll('.has-error').forEach((item) => {
+				item.classList.remove('has-error');
+			});
+		}
+		//SE ELIMINAN LOS RASTROS DE ERRORES\\
+
+		if (nombre.value == '') {
+			nombre.parentNode.classList.add('has-error');
+			nombre.nextElementSibling.innerHTML = 'El campo es requerido';
+			errores = true;
+		}
+
+		if (apellido.value == '') {
+			apellido.parentNode.classList.add('has-error');
+			apellido.nextElementSibling.innerHTML = 'El campo es requerido';
+			errores = true;
+		}
+
+		if (email.value == '') {
+			email.parentNode.classList.add('has-error');
+			email.nextElementSibling.innerHTML = 'El campo es requerido';
+			errores = true;
+		}
+
+		if (!funciones.validarEmail(email.value)) {
+			email.parentNode.classList.add('has-error');
+			email.nextElementSibling.innerHTML = 'El email no es valido';
+			errores = true;
 		}
 
 		if (especialidad.value == '') {
 			especialidad.parentNode.classList.add('has-error');
 			especialidad.nextElementSibling.innerHTML = 'El email no es valido';
-			error_videos = true;
+			errores = true;
 		}
 
 		if (bibliografia.value == '') {
 			bibliografia.parentNode.classList.add('has-error');
 			bibliografia.nextElementSibling.innerHTML = 'El campo es requerido';
-			error_videos = true;
+			errores = true;
 		}
 
 		if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
@@ -831,7 +1025,7 @@ let funciones = {
 			if (password.value == '') {
 				password.parentNode.classList.add('has-error');
 				password.nextElementSibling.innerHTML = 'El campo es requerido';
-				error_videos = true;
+				errores = true;
 				// password.classList.add('campo-requerido');
 				// validate = false;
 			}
@@ -839,7 +1033,7 @@ let funciones = {
 			if (password.value.length < 8) {
 				password.parentNode.classList.add('has-error');
 				password.nextElementSibling.innerHTML = 'El campo es requerido';
-				error_videos = true;
+				errores = true;
 				// password.classList.add('campo-requerido');
 				// validate = false;			
 			}
@@ -847,21 +1041,20 @@ let funciones = {
 			if (password.value !== password_confirm.value) {
 				password_confirm.parentNode.classList.add('has-error');
 				password_confirm.nextElementSibling.innerHTML = 'El campo es requerido';
-				error_videos = true;
+				errores = true;
 				// password.classList.add('campo-requerido')
 			}
 		}
 
-		console.log(e.target.getAttribute('name'));
 		if (e.target.getAttribute('name') == 'frm-agregar_instructor') {
 			if (img_instructor.value == '') {
 				img_instructor.parentNode.classList.add('has-error');
 				img_instructor.nextElementSibling.innerHTML = 'El campo es requerido';
-				error_videos = true;
+				errores = true;
 			}
 		}
 
-		if (error_videos == true) {
+		if (errores == true) {
 			if (e.type == 'submit') {
 				let posicion = funciones.getCoords(document.querySelectorAll(".has-error")[0]);
 				window.scrollTo(0, posicion);

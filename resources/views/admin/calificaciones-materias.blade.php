@@ -60,15 +60,15 @@
                                     <tbody>
                                         @foreach($cursos as $curso)
                                             <tr class="gradeX">
-                                               <td> {{ $curso['nombre'] }} </td>
-                                                <td> <img src="{{ Storage::url($curso['url_img']) }}" style="width: 100px"> </td>
+                                               <td> {{ $curso->cursos->nombre }} </td>
+                                                <td> <img src="{{ Storage::url($curso->cursos->url_img) }}" style="width: 100px"> </td>
                                                 <td class="center"> 
-                                                    {!! $curso['status'] == 1 ? "<span class='float-center label label-primary'>Activo</span>" : "<span style='cursor:pointer' class='float-center label label-danger'>Inactivo</span>" !!} 
+                                                    {!! $curso->cursos->status == 1 ? "<span class='float-center label label-primary'>Activo</span>" : "<span style='cursor:pointer' class='float-center label label-danger'>Inactivo</span>" !!} 
                                                 </td>
                                                 <td class="center">
                                                     
                                                     <div class="btn-group">
-                                                     	<a href = "{{ route('calificaciones', [$alumno_id, $curso['slug']]) }}" class="btn-info btn btn-xs mr-3">Calificaciones</a>
+                                                     	<a href = "{{ route('calificaciones', [$alumno_id, $curso->cursos->slug]) }}" class="btn-info btn btn-xs mr-3">Calificaciones</a>
                                                    </div>
 
                                                 </td>

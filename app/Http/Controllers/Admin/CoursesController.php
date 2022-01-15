@@ -28,10 +28,10 @@ class CoursesController extends Controller
 
     public function __construct(CoursesDecorator $coursesDecorator, Helper $helper)
     {
+        $this->middleware("authadmin:auth");
+        $this->middleware(["role:admin,admins"]);
         $this->coursesDecorator = $coursesDecorator;
         $this->helper           = $helper;
-        $this->middleware("authadmin:auth");
-        $this->middleware("ValidarAdmin");
     }
 
     /**
@@ -57,7 +57,9 @@ class CoursesController extends Controller
         $categorias     = Category::where('status', 1)->get();
         $instructors    = Instructor::where('status', 1)->get();
         $careers        = Career::where('status', 1)->get();
-        return view("admin.agregar-curso", compact("categorias", "instructors", "careers"));
+        $cursos         = Course::where('status', 1)->get();
+
+        return view("admin.agregar-curso", compact("categorias", "instructors", "careers", "cursos"));
     }
 
     /**

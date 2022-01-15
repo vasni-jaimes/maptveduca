@@ -28,7 +28,7 @@ class AuthAdmin
                 return $next($request);
             }
 
-            return redirect()->route("listado-usuarios");
+            return redirect()->route("dashboard.admin");
         }
     }
 }

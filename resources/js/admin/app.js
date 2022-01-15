@@ -162,6 +162,25 @@ if (frmAgregarInstructor || frmActualizarInstructor) {
 }
 
 
+//FORMULARIO ADMINISTRADORES
+const frmAgregarAdministrador = document.querySelector('form[name="frm-agregar_administrador"]');
+const frmEditarAdministrador = document.querySelector('form[name="frm-editar_administrador"]');
+
+if (frmAgregarAdministrador) {
+	frmAgregarAdministrador.addEventListener('submit', funciones.validarAgregarAdministrador);
+	frmAgregarAdministrador.addEventListener('input', funciones.validarAgregarAdministrador);
+	$(document).change("input", funciones.validarAgregarAdministrador);
+	$("select").change(funciones.validarAgregarAdministrador);
+}
+
+if (frmEditarAdministrador) {
+	frmEditarAdministrador.addEventListener('submit', funciones.validarAgregarAdministrador);
+	frmEditarAdministrador.addEventListener('input', funciones.validarAgregarAdministrador);
+	$(document).change("input", funciones.validarAgregarAdministrador);
+	$("select").change(funciones.validarAgregarAdministrador);
+}
+
+
 //Cambiar status curso
 let tabla_cursos = document.querySelector("table.tabla-cursos");
 if (tabla_cursos) {
@@ -501,10 +520,73 @@ if (frmAgregarFecha) {
 }
 
 
-
 //FORMULARIO STATUS
 const frm_agregar_status_ins = document.querySelector("form[name='frm-agregar_status_ins']");
 if (frm_agregar_status_ins) {
 	frm_agregar_status_ins.addEventListener('submit', funciones.validarStatusInscripciones);
 	$("select").change(funciones.validarStatusInscripciones);
+}
+
+
+//VALIDAR FECHAS EN CICLOS ESCOLARES
+const frmAgregarCiclo = document.querySelector("form[name='frm-agregar_ciclo-escolar']");
+const frmEditarCiclo = document.querySelector("form[name='frm-editar_ciclo-escolar']");
+if (frmAgregarCiclo || frmEditarCiclo) {
+
+	if (frmAgregarCiclo) {
+		frmAgregarCiclo.addEventListener('submit', funciones.validarAgregarCiclo);
+		frmAgregarCiclo.addEventListener('input', funciones.validarAgregarCiclo);
+		$(document).change("input", funciones.validarAgregarCiclo);
+		$("select").change(funciones.validarAgregarCiclo);
+	}
+
+	if (frmEditarCiclo) {
+		frmEditarCiclo.addEventListener('submit', funciones.validarAgregarCiclo);
+		frmEditarCiclo.addEventListener('input', funciones.validarAgregarCiclo);
+		$(document).change("input", funciones.validarAgregarCiclo);
+		$("select").change(funciones.validarAgregarCiclo);
+	}
+}
+
+
+const btn_eliminar_ciclos = document.querySelector("a.btn-eliminar_ciclos");
+if (btn_eliminar_ciclos) {
+	btn_eliminar_ciclos.addEventListener('click', function(e) {
+		e.preventDefault();
+		swal({
+			title: "¿Estas Segur@?",
+			text: "¿Estas segur@ que quieres eliminar el ciclo?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+				document.querySelector('.ibox-content').classList.add('sk-loading');
+				e.target.parentElement.submit();
+		  	} else {
+		    	swal("Se cancelo la eliminacion");
+		  	}
+		});
+
+	})
+}
+
+
+const roles = document.querySelector("select[name='select_roles']");
+if (roles) {
+
+	console.log('roles')
+	roles.addEventListener('change', function(e) {
+		e.preventDefault();
+
+		if (e.target.value == 2) {
+			document.querySelector('select[name="select_categorias"]')
+					.parentElement.parentElement.style.display = "flex";
+		}
+		else {
+			document.querySelector('select[name="select_categorias"]')
+					.parentElement.parentElement.style.display = "none";	
+		}		
+	})
 }

@@ -21,13 +21,11 @@ class GuiaEstudioController extends Controller
     	$recomendaciones = Recomendacion::with(['cursos' => function($query){
 	                            $query->where('status', 1);
 	                        }])
-	                        //->where('carrera_id', auth()->user()->obtenerCarrera())
 	                        ->get();
 
         $recomendacionesextra = RecomendacionesExtra::with(['cursos' => function($query){
                                     $query->where('status', 1);
                                 }])
-                                //->where('carrera_id', auth()->user()->obtenerCarrera())
                                 ->get();
 
         //return $recomendaciones;

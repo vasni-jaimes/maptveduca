@@ -24,7 +24,8 @@ class ValidarAgregarGrupo extends FormRequest
     public function rules()
     {
         return [
-            "nombre_grupo" => "required|string|min:2|max:255|unique:grupos,nombre"
+            "nombre_grupo" => "required|string|min:2|max:255|unique:grupos,nombre",
+            "ciclo_escolar" => "required|numeric",
         ];
     }
 }

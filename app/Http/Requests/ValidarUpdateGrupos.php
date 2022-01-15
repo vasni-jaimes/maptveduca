@@ -25,6 +25,7 @@ class ValidarUpdateGrupos extends FormRequest
     {
         return [
             "nombre_grupo" => "required|string|min:2|max:255|unique:grupos,nombre,".request('grupo_id').",slug",
+            "ciclo_escolar" => "required|numeric",
         ];
     }
 }

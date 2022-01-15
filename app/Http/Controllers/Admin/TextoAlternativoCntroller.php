@@ -17,9 +17,9 @@ class TextoAlternativoCntroller extends Controller
 
     public function __construct(Helper $helper)
     {
-        $this->helper = $helper;
         $this->middleware("authadmin:auth");
-        $this->middleware("ValidarAdmin");
+        $this->middleware(["role:admin,admins"]);
+        $this->helper = $helper;
     }
 
 
@@ -37,9 +37,12 @@ class TextoAlternativoCntroller extends Controller
                                 ->select('course_id')
                                 ->get()->pluck('course_id')->toArray();
 
-        $materias = Recomendacion::with('cursos')->whereIn('curso_id', $materiasCarreras)->get();
-        $helper = $this->helper;
+        $materias         = Recomendacion::with('cursos')
+                                ->whereIn('curso_id', $materiasCarreras)
+                                ->groupBy('curso_id')
+                                ->get();
 
+        $helper           = $this->helper;
 
    		return view('admin.lista-cursos-recomendados', compact("materias", "helper", "carrera_id"));
    	}

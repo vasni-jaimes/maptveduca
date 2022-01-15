@@ -98,6 +98,23 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Ciclo Escolar: </label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="ciclo_escolar"> 
+                                    <option value="">ciclos escolares</option>
+                                    @forelse($ciclos as $ciclo)
+                                        <option value="{{ $ciclo->id }}" @if (old('ciclo_escolar') == $ciclo->id) selected @endif> 
+                                            {{ $ciclo->nombre }} 
+                                        </option>
+                                    @empty
+                                        <option value=""> No se encontraron resultados </option>
+                                    @endforelse
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('ciclo_escolar') !!} </span>
+                            </div>
+                        </div>
+
 
                         <div class="hr-line-dashed"></div>
 

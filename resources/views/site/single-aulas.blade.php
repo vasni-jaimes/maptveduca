@@ -37,7 +37,7 @@
                             <div class="wrapper-acordeon">
 
                                 <div class="row-acordeon">
-                                    <p>Profr. {{ $publicacion->instructor->nombres." ".$publicacion->instructor->apellidos }}</p>
+                                    <p>Profr. {{ $publicacion->profesor->nombres." ".$publicacion->profesor->apellidos }}</p>
                                     <p>{!! $publicacion->publicacion !!}</p>
                                 </div> <!-- /row-acordeon -->
 
@@ -83,8 +83,8 @@
                                                 
                                                 <div class="row-alumno">
                                                     <div class="boton-alumno flex between" data-resp="{{ $respuesta->id }}">
-                                                        @if ($respuesta->instructor_id != null)
-                                                            <p> Profr. {{ $respuesta->instructor->nombres." ".$respuesta->instructor->apellidos }}</p>
+                                                        @if ($respuesta->profesor_id != null)
+                                                            <p> Profr. {{ $respuesta->profesor->nombres." ".$respuesta->profesor->apellidos }}</p>
                                                         @else
                                                             <p> {{ $respuesta->usuario->nombre." ".$respuesta->usuario->apaterno }} </p>
                                                         @endif

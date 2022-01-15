@@ -81,6 +81,7 @@
                                             <th>Apellido(s)</th>
                                             <th>Email</th>
                                             <th>Status</th>
+                                            <th>Plan</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -90,7 +91,10 @@
                                                 <td> {{ $usuario->nombre }} </td>
                                                 <td> {{ $usuario->amaterno." ".$usuario->apaterno }} </td>
                                                 <td> {{ $usuario->email }} </td>
-                                                <td class="center"> {!! $usuario->status == 1 ? "<span class='float-center label label-primary'>Activo</span>" : "<span class='float-center label label-danger'>Inactivo</span>" !!} </td>
+                                                <td class="center"> {!! $usuario->status == 1 ? "<span class='float-center label label-primary'>Activo</span>" : "<span class='float-center label label-danger'>Inactivo</span>" !!}</td>
+                                                <td>
+                                                    {{ @$usuario->ultimaSuscripcion()->nombre }}
+                                                </td>
                                                 <td class="center">
                                                     
                                                     <div class="btn-group">
@@ -107,6 +111,8 @@
                                                         @else
                                                             <a href="#" class="btn-primary btn btn-xs ml-2 btn-desactivar" data-st="1" data-id="{{ $usuario->id }}">Activar</a>
                                                         @endif
+
+                                                        <!-- <a href="#" class="btn-info btn btn-xs ml-3">Agregar Promoción</a> -->
                                                    </div>
 
                                                 </td>
@@ -120,6 +126,7 @@
                                             <th>Apellido(s)</th>
                                             <th>Email</th>
                                             <th>Status</th>
+                                            <th>Plan</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </tfoot>

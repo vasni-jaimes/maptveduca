@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\ResetPasswordNotification;
 use Carbon\Carbon;
-use App\Membresia;
 use App\Mensaje;
 use App\Notificacion;
 use App\UsuarioMembresia;
@@ -20,9 +19,19 @@ class User extends Authenticatable
 
     public function suscripcion()
     {
-        //return DB::table('usuarios_membresia')->where('user_id', $this->id)->first();
         return $this->belongsToMany('App\Membresia', 'usuarios_membresia', 'user_id', 'membresia_id');
     }
+
+    public function tablero_cursos()
+    {
+        return $this->belongsToMany('App\Course', 'tablero_cursos', 'user_id', 'curso_id');
+    }
+
+    public function tablero_eventos()
+    {
+        return $this->belongsToMany('App\Evento', 'tablero_eventos', 'user_id', 'evento_id');
+    }
+
 
     public function ultimaSuscripcion()
     {
@@ -35,57 +44,19 @@ class User extends Authenticatable
         return $this->suscripcion[0];
     }
 
-
     public function tieneSuscripcion()
     {
         //FECHA DE HOY
         date_default_timezone_set('America/Mexico_City');
         $hoy = Carbon::now()->format('Y-m-d');
 
-        $suscripcion2 = DB::table('usuarios_membresia')
-                            ->where('fecha_fin', '>', $hoy)->where('fehca_inicio', '<=', $hoy)->where('user_id', $this->id)
-                            ->count();
+        $suscripcion2 = UsuarioMembresia::with("membresia")
+                                        ->where('fecha_fin', '>', $hoy)
+                                        ->where('fehca_inicio', '<=', $hoy)
+                                        ->where('user_id', $this->id)
+                                        ->first();
 
         return $suscripcion2;
-    }
-
-
-    public function ultimaSubscripcion()
-    {
-        $suscripcion4 = UsuarioMembresia::where('user_id', $this->id)->first();
-        return $suscripcion4;
-    }
-
-
-    public function ultimoPago()
-    {
-        //FECHA DE HOY
-        date_default_timezone_set('America/Mexico_City');
-        $hoy = Carbon::now()->format('Y-m-d');
-
-        $suscripcion2 = DB::table('usuarios_membresia')
-                            ->where('fecha_fin', '>', $hoy)->where('fehca_inicio', '<=', $hoy)->where('user_id', $this->id)
-                            ->first();
-
-        return $suscripcion2;
-    }
-
-
-    public function obtenerCarrera()
-    {
-        //FECHA DE HOY
-        date_default_timezone_set('America/Mexico_City');
-        $hoy = Carbon::now()->format('Y-m-d');
-
-
-        $suscripcion2 = DB::table('usuarios_membresia')
-                            ->where('fecha_fin', '>', $hoy)->where('fehca_inicio', '<=', $hoy)->where('user_id', $this->id)->first();
-
-        if ($suscripcion2) {
-            return $suscripcion2->carrera_id;
-        }
-
-        return false;
     }
 
     public function contadorDiasSuscripcion()
@@ -93,26 +64,24 @@ class User extends Authenticatable
         date_default_timezone_set('America/Mexico_City');
         $hoy = Carbon::now()->format('Y-m-d');
 
-        $suscripcion = $this->ultimaSubscripcion();
-        $fecha1= new \DateTime($hoy);
-        $fecha2= new \DateTime($suscripcion->fecha_fin);
-        $diff = $fecha1->diff($fecha2);
+        $suscripcion = $this->tieneSuscripcion();
+        $fecha1      = new \DateTime($hoy);
+        $fecha2      = new \DateTime($suscripcion->fecha_fin);
+        $diff        = $fecha1->diff($fecha2);
 
         // El resultados sera 3 dias
-        echo $diff->days;
-
-
+        return $diff->days;
         //return $this->dias_pasados($suscripcion->fecha_inicio, $suscripcion->fecha_fin);
     }
 
 
 
-    protected function dias_pasados($fecha_inicial,$fecha_final)
+    /*protected function dias_pasados($fecha_inicial,$fecha_final)
     {   
         $dias = (strtotime($fecha_inicial)-strtotime($fecha_final))/86400;
         $dias = abs($dias); $dias = floor($dias);
         return $dias;
-    }
+    }*/
 
 
     public function MensajesNotify()

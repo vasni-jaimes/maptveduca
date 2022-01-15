@@ -12,7 +12,6 @@
 <div class="banner-small"></div> <!-- /banner-small -->
 
 <section class="micuenta">
-
     <div class="hoja-1200">
 
         <ul class="flex breadcrumb-curso">
@@ -104,7 +103,7 @@
                                 <div class="item-perfil">
                                     <h4>Membresía</h4>
                                     @if (count(auth()->user()->suscripcion) > 0)
-                                        <a href="#">{{ auth()->user()->ultimaSuscripcion()->nombre }}
+                                        <a href="#">{{ auth()->user()->tieneSuscripcion()->membresia->nombre }}
                                             <span class="ico-edit" id="edit-membresia">
                                                 <img src="/site/img/edit.png">
                                                 <p>Modificar membresía</p>
@@ -114,7 +113,7 @@
                                         <p>No tienes ninguna suscripcion activa</p>
                                     @endif
 
-                                    @if (auth()->user()->ultimaSubscripcion()->canceled_sub == 1)
+                                    @if (auth()->user()->tieneSuscripcion()->canceled_sub == 1)
                                         <p class="suscripcion-cancelada">
                                             Tu Suscripción fue cancelada correctamente, 
                                             pero aún puedes acceder a los cursos por el ultimo mes que pagaste,
@@ -134,20 +133,13 @@
                                        {{--  <p>¿QUÉ CAMBIO DESEAS HACER?</p> --}}
                                         <a href="{{ route('checkout', 'membresia-academica') }}">Quiero una membresía académica</a>
                                         <small>Conoce más sobre la Membresía Académica</small>
-                                    @elseif (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimoPago()->canceled_sub == 0)
+                                    @elseif (auth()->user()->tieneSuscripcion() == true && auth()->user()->tieneSuscripcion()->canceled_sub == 0)
                                         <a class="cancelar" href="{{ route('cancelar-subscripcionview') }}">Quiero cancelar mi membresía</a>
                                         <small>Al cancelar tu membresía tendrás acceso a sus privilegios hasta que termine tu periodo pagado.</small>
-                                     @elseif (auth()->user()->tieneSuscripcion() == true && auth()->user()->ultimoPago()->canceled_sub == 1)
+                                     @elseif (auth()->user()->tieneSuscripcion() == true && auth()->user()->tieneSuscripcion()->canceled_sub == 1)
                                         <a class="cancelar" href="#">La suscripcion fue cancelada, espere que termine el ultimo mes que pago para volver a renovar si a si lo desea</a>
                                     @endif
                                 </div> <!-- /s-membresia -->
-                                
-                                <!--<div class="s-membresia">
-                                    <div class="close-shadow"></div>--> <!-- /close-shadow
-                                    <p>¿QUÉ CAMBIO DESEAS HACER?</p>
-                                    <a href="#">Quiero cambiar mi membresía a básica o cancelar mi membresía académica</a>
-                                    <small>Si das click en la opción de arriba, nos comunicaremos  contigo en un lapso de 24 horas para dar seguimiento a tu solicitud.</small>
-                                </div>--> <!-- /s-membresia -->
                             </div> <!-- /f-favorito -->
                         </div> <!-- /shadow-favorito -->
                     </div>
@@ -397,17 +389,6 @@
                                 <div class="flex-cursos">
                                     @if ($tableroCursos->count() > 0)
                                         <ul class="flex between wrap">
-                                            {{-- @foreach($materias as $materia)
-                                                <li class="col-3">
-                                                    <a href="{{ route('single-cursos.show', $materia->cursos->slug) }}">
-                                                        <img src="{{ Storage::url($materia->cursos->url_img) }}">
-                                                        <div class="txt-clase">
-                                                            <p>{{ $materia->cursos->nombre }}</p>
-                                                        </div> <!-- /txt-clase -->
-                                                    </a>
-                                                </li>
-                                            @endforeach --}}
-
                                             @foreach($tableroCursos as $curso)
                                                 <li class="col-3">
                                                     <a href="{{ route('single-cursos.show', $curso->slug) }}">
@@ -425,7 +406,7 @@
                                 </div>
                             </div> <!-- /row-favoritos -->
                         </div>
-
+                        
                     @endif
 
                     <div style="margin-bottom: 30px;" data-seccion="eventos" class="section">
@@ -448,10 +429,10 @@
                                         @endforeach
                                     </ul>
                                 @endif
-                                @if ($eventosOld->count() > 0)
+                                @if ($eventosPasados->count() > 0)
                                     <p>ARCHIVADOS</p>
                                     <ul class="flex between wrap">
-                                        @foreach($eventosOld as $eventoOld)
+                                        @foreach($eventosPasados as $eventoOld)
                                             <li class="col-3">
                                                 <div style="background-image: url('{{ Storage::url($eventoOld->img_evento) }}');" class="img-evento"></div> <!-- /img-evento -->
                                                 <div class="txt-clase">
@@ -465,7 +446,7 @@
                                         <li class="relleno"></li>
                                     </ul>
                                 @endif
-                                @if ($tableroEventos->count() <= 0 && $eventosOld->count() <= 0)
+                                @if ($tableroEventos->count() <= 0 && $eventosPasados->count() <= 0)
                                     <p> Aún no tienes eventos. </p>
                                 @endif
                             </div>
@@ -477,112 +458,7 @@
                         <div class="row-favoritos">
                             <p>AQUÍ ENCONTRARÁS TUS CLASES EN LÍNEA PRÓXIMAS Y ADQUIRIDAS</p>
                             <div class="flex-cursos">
-                                 <p> Aún no tienes clases. </p>
-                                {{-- <p>PRÓXIMAS</p>
-                                <ul class="flex between wrap">
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                </ul>
-                                <p>EN CURSO</p>
-                                <ul class="flex between wrap">
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                </ul>
-                                <p>CONCLUIDAS</p>
-                                <ul class="flex between wrap">
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                    <li class="col-3">
-                                        <img src="/site/img/fulano.jpg">
-                                        <div class="txt-clase">
-                                            <p>Nombre del curso</p>
-                                            <p>00/00/000</p>
-                                            <a href="#">Ir a la clase</a>
-                                        </div> <!-- /txt-clase -->
-                                    </li>
-                                </ul> --}}
+                                <p> Aún no tienes clases. </p>
                             </div>
                         </div> <!-- /row-favoritos -->
                     </div>
@@ -595,7 +471,7 @@
                                 <p>AQUÍ ENCONTRARÁS TODOS LOS CURSOS CORRESPONDIENTES A TU PROGRAMA ACADÉMICO, ORDENADOS POR TRIMESTRE EN PROGRESO</p>
                                 <div class="flex-cursos">
                                     @if ($materias->count() > 0)
-                                        <p>{{ $tituloTrimestre }}</p>
+                                        <p>{{ $tituloTrimestre." Trimestre" }}</p>
                                         <ul class="flex flex-materias wrap">
                                             @foreach($materias as $materia)
                                                 <li class="col-2">
@@ -613,26 +489,23 @@
                                 </div>
                             </div> <!-- /row-favoritos -->
                                 
-                            @if ($materias->count() > 0)
-                                @if ($helper->contarTextoAltern($materias))
-                                    <div class="row-itinerario">
-                                        <p>Itinerario de sesiones en Zoom</p>
-                                        @foreach($materias as $materia)
-                                            <div class="item-itinerario">
-                                                <h4>{{ $materia->cursos->nombre }}</h4>
-                                                <div class="lista-itinerario">
-                                                    <ul>
-                                                        <li>
-                                                            {!! $helper->obtenerTextoAlternativo($materia->cursos->id) !!}
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div> <!-- /item-itinerario -->
-                                        @endforeach
-                                    </div> <!-- /row-itinerario -->
-                                @endif
+                            @if ($materiasTexto->count() > 0)
+                                <div class="row-itinerario">
+                                    <p>Itinerario de sesiones en Zoom</p>
+                                    @foreach($materiasTexto as $materia)
+                                        <div class="item-itinerario">
+                                            <h4>{{ $materia->cursos->nombre }}</h4>
+                                            <div class="lista-itinerario">
+                                                <ul>
+                                                    <li>
+                                                        {!! $materia->texto !!}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div> <!-- /item-itinerario -->
+                                    @endforeach
+                                </div> <!-- /row-itinerario -->
                             @endif
-                            
                         </div>
                         
                         <div style="margin-bottom: 30px;" data-seccion="status" class="section">
@@ -643,7 +516,7 @@
                                         <h4>Información del alumno</h4>
                                         <p>ALUMNO: {{ auth()->user()->nombre. " ".auth()->user()->apaterno. " ".auth()->user()->amaterno }}</p>
                                         <ul>
-                                            <li>Programa académico: {{ auth()->user()->obtenerCarrera() == 1 ? "Tecnico en produccion musical" : "Profesional en produccion musical" }} </li>
+                                            <li>Programa académico: {{ auth()->user()->tieneSuscripcion()->carrera_id == 1 ? "Tecnico en produccion musical" : "Profesional en produccion musical" }} </li>
                                             <li>Inscrito desde: {{ $helper->formatoFechaStatus(auth()->user()->primeraSuscripcion()->created_at) }} </li>
                                             <li>Activo desde: {{ $helper->formatoFechaStatus(auth()->user()->created_at) }}</li>
                                         </ul>
@@ -657,129 +530,25 @@
                                                 <th>Calificación general</th>
                                             </tr>
 
-                                            @if ($trimestreActual >= 1)
+
+                                            @foreach($fechaInscripcion->fechasTrimestres as $fecha)
+
                                                 <tr>
-                                                    <td style="border-right: 4px solid #ffff;">{{ $helper->obtenerFechaTrimestre() }}</td>
+                                                    <td style="border-right: 4px solid #ffff;">{{ $helper->fechaFormat($fecha->fecha_inicio, $fecha->fecha_final) }}</td>
                                                     <td> </td>
                                                     <td> </td>
                                                 </tr>
-                                                @foreach($recomendacionesCompletas->where('trimestre', 1) as $recomendacion)
+
+                                                @foreach($recomendacionesCompletas->where('trimestre', $fecha->trimestre) as $recomendacion)
                                                     <tr>
                                                         <td class="vacio">&nbps;</td>
                                                         <td>{{ $recomendacion->cursos->nombre }}</td>
                                                         <td>{{ $recomendacion->obtenerCalificacion() }}</td>
                                                     </tr>
                                                 @endforeach
-                                            @endif
 
-                                            @if ($trimestreActual >= 2)
-                                                <tr>
-                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
-                                                    <td>Materia</td>
-                                                    <td>100</td>
-                                                </tr>
-                                                @foreach($recomendacionesCompletas->where('trimestre', 2) as $recomendacion)
-                                                    <tr>
-                                                        <td class="vacio">&nbps;</td>
-                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
-                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
+                                            @endforeach
 
-                                            @if ($trimestreActual >= 3)
-                                                <tr>
-                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
-                                                    <td>Materia</td>
-                                                    <td>100</td>
-                                                </tr>
-                                                @foreach($recomendacionesCompletas->where('trimestre', 3) as $recomendacion)
-                                                    <tr>
-                                                        <td class="vacio">&nbps;</td>
-                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
-                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-
-                                            @if ($trimestreActual >= 4)
-                                                <tr>
-                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
-                                                    <td>Materia</td>
-                                                    <td>100</td>
-                                                </tr>
-                                                @foreach($recomendacionesCompletas->where('trimestre', 4) as $recomendacion)
-                                                    <tr>
-                                                        <td class="vacio">&nbps;</td>
-                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
-                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-
-                                            @if ($trimestreActual >= 5)
-                                                <tr>
-                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
-                                                    <td>Materia</td>
-                                                    <td>100</td>
-                                                </tr>
-                                                @foreach($recomendacionesCompletas->where('trimestre', 5) as $recomendacion)
-                                                    <tr>
-                                                        <td class="vacio">&nbps;</td>
-                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
-                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-
-                                            @if ($trimestreActual >= 6)
-                                                <tr>
-                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
-                                                    <td>Materia</td>
-                                                    <td>100</td>
-                                                </tr>
-                                                @foreach($recomendacionesCompletas->where('trimestre', 6) as $recomendacion)
-                                                    <tr>
-                                                        <td class="vacio">&nbps;</td>
-                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
-                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-
-
-                                            @if ($trimestreActual >= 7)
-                                                <tr>
-                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
-                                                    <td>Materia</td>
-                                                    <td>100</td>
-                                                </tr>
-                                                @foreach($recomendacionesCompletas->where('trimestre', 7) as $recomendacion)
-                                                    <tr>
-                                                        <td class="vacio">&nbps;</td>
-                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
-                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-
-
-                                            @if ($trimestreActual >= 8)
-                                                <tr>
-                                                    <td style="border-right: 4px solid #ffff;">Oct - Dic 2020</td>
-                                                    <td>Materia</td>
-                                                    <td>100</td>
-                                                </tr>
-                                                @foreach($recomendacionesCompletas->where('trimestre', 8) as $recomendacion)
-                                                    <tr>
-                                                        <td class="vacio">&nbps;</td>
-                                                        <td>{{ $recomendacion->cursos->nombre }}</td>
-                                                        <td>{{ $recomendacion->obtenerCalificacion() }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-
-                                            
                                             
                                         </table>
                                         <div class="text-right">
@@ -802,9 +571,7 @@
             </div> <!-- /flex -->
 
         </div> <!-- /wrapper-micuenta -->
-
     </div> <!-- /hoja-1200 -->
-    
 </section> <!-- /micuenta -->
 
 @stop

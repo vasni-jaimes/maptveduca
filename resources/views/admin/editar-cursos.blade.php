@@ -183,6 +183,22 @@
                         </div>
 
 
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> Conexion con cursos: </label>
+                            <div class="col-sm-10 mb-3">
+                                <select data-placeholder="Cursos" class="chosen-select" multiple style="width:350px;" tabindex="4" name="conection_cursos[]">
+                                    @foreach($cursos as $curso)
+                                        <option value="{{ $curso->id }}" 
+                                            @if(old('conection_cursos')) selected @endif>
+                                            {{ $curso->nombre }}
+                                        </option>    
+                                    @endforeach
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_instructores.*') !!} </span>
+                            </div>
+                        </div>
+
+
                         <div class="hr-line-dashed"></div>
 
                         <h2> Bienvenida del Curso </h2>

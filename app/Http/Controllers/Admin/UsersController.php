@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ValidarAgregarUsuarios;
 use App\Http\Requests\ValidarUpdateUsuario;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Promocion;
 use App\Grupo;
 use App\Career;
 use App\Mensaje;
@@ -21,7 +23,7 @@ class UsersController extends Controller
     public function __construct()
     {
        $this->middleware("authadmin:auth");
-       $this->middleware("ValidarAdmin");
+       $this->middleware(["role:admin,admins"]);
     }
 
     /**
@@ -68,7 +70,26 @@ class UsersController extends Controller
         $user->renovar          = $request->has('renovar') ? 1 : 0;
         if ($user->save()) {
 
-            if ($request->has('suscripcion')) {
+
+            if ($request->has('meses_regalo')) {
+
+                $promocion          = new Promocion();
+                $promocion->user_id = $user->id;
+                $promocion->meses   = $request->meses_regalo;
+
+                date_default_timezone_set('America/Mexico_City');
+
+                $hoy               = Carbon::now()->format('Y-m-d');
+                $fecha_final_promo = $this->sumarMesesFecha( $request->meses_regalo );
+
+                $promocion->fecha_inicio = $hoy;
+                $promocion->fecha_fin    = $fecha_final_promo;
+                $promocion->save();
+
+                //AGREGAR MESES A REGISTROS DE PAGO
+                $this->agregarMesesGratis($request->meses_regalo ,$user);
+            }
+            else if ($request->has('suscripcion')) {
 
                 //OBTENER MEMBRESIA A PAGAR
                 date_default_timezone_set('America/Mexico_City');
@@ -100,6 +121,7 @@ class UsersController extends Controller
         DB::rollback();
         return back()->withInput()->with("status.newUsuario", "error");
     }
+
 
     /**
      * Display the specified resource.
@@ -234,6 +256,34 @@ class UsersController extends Controller
         return back()->with("status.deleteUsuario", "error");
     }
 
+
+    protected function sumarMesesFecha($mes, $fecha = null)
+    {
+        date_default_timezone_set('America/Mexico_City');
+        $hoy = ($fecha == null) ? Carbon::now()->format('Y-m-d') : $fecha;
+        return date("d-m-Y",strtotime($hoy."+ ".$mes." month"));
+        //echo date("d-m-Y",strtotime($fecha_actual."- 1 month"));
+    }
+
+
+    protected function agregarMesesGratis($meses, $user)
+    {
+        for ($i=0; $i < $meses; $i++) { 
+            
+            //OBTENER MEMBRESIA A PAGAR
+            date_default_timezone_set('America/Mexico_City');
+            $fecha_inicio   = $this->sumarMesesFecha($i, Carbon::now()->format('Y-m-d'));
+            $fecha_final    = $this->sumarMesesFecha(1, $fecha_inicio);
+            
+            $user_membresia = DB::table('usuarios_membresia')->insert([
+                "user_id"       => $user->id,
+                "membresia_id"  => 2,
+                "carrera_id"    => $request->select_carreras,
+                "fehca_inicio"  => $fecha_inicio,
+                "fecha_fin"     => $fecha_final,
+            ]);
+        }
+    }
 
 
     public function cambiarStatus(Request $request)

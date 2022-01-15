@@ -124,8 +124,8 @@ class RenovarSuscripcion extends Command
                     DB::beginTransaction();
                     $usuarioMembresia               = new UsuarioMembresia();
                     $usuarioMembresia->user_id      = $usuario->id;
-                    $usuarioMembresia->membresia_id = $usuario->ultimaSubscripcion()->membresia_id;
-                    $usuarioMembresia->carrera_id   = $usuario->ultimaSubscripcion()->carrera_id;
+                    $usuarioMembresia->membresia_id = $usuario->tieneSuscripcion()->membresia_id;
+                    $usuarioMembresia->carrera_id   = $usuario->tieneSuscripcion()->carrera_id;
                     $usuarioMembresia->fehca_inicio = $hoy;
                     $usuarioMembresia->fecha_fin    = $final;
 
@@ -135,6 +135,9 @@ class RenovarSuscripcion extends Command
                     }
 
                     DB::rollback();
+                }
+                else if ($usuario->renovar == 1) {
+                    $this->insertarNuevaSub($usuario);
                 }
             }
 
@@ -152,7 +155,7 @@ class RenovarSuscripcion extends Command
     protected function insertarNuevaSub($usuario)
     {
         $status = false;
-        if ($usuario->ultimaSubscripcion()) {
+        if ($usuario->tieneSuscripcion()) {
             //FECHA DE HOY
             date_default_timezone_set('America/Mexico_City');
             $hoy    = Carbon::now()->format('Y-m-d');
@@ -161,8 +164,8 @@ class RenovarSuscripcion extends Command
             DB::beginTransaction();
             $usuarioMembresia               = new UsuarioMembresia();
             $usuarioMembresia->user_id      = $usuario->id;
-            $usuarioMembresia->membresia_id = $usuario->ultimaSubscripcion()->membresia_id;
-            $usuarioMembresia->carrera_id   = $usuario->ultimaSubscripcion()->carrera_id;
+            $usuarioMembresia->membresia_id = $usuario->tieneSuscripcion()->membresia_id;
+            $usuarioMembresia->carrera_id   = $usuario->tieneSuscripcion()->carrera_id;
             $usuarioMembresia->fehca_inicio = $hoy;
             $usuarioMembresia->fecha_fin    = $final;
 

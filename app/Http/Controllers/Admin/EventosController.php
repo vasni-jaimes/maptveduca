@@ -24,10 +24,11 @@ class EventosController extends Controller
 
     public function __construct(EventosDecorator $eventosDecorator, Helper $helper)
     {
+        $this->middleware("authadmin:auth");
+        $this->middleware(["role:admin,admins"]);
+        
         $this->eventosDecorator = $eventosDecorator;
         $this->helper           = $helper;
-        $this->middleware("authadmin:auth");
-        $this->middleware("ValidarAdmin");
     }
 
     /**

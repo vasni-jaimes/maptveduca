@@ -11,14 +11,16 @@ use App\Category;
 use App\Favorito;
 use App\Recomendacion;
 use App\TableroCursos;
+use App\Helpers\Helper;
 use DB;
 
 class CursosController extends Controller
 {
-    public function __construct()
+    public function __construct(Helper $helper)
     {
         $this->middleware('auth');
         $this->middleware('checkMembresiaCurso', ["only" => ["show", "download"]]);
+        $this->helper = $helper;
     }
 
 
@@ -153,10 +155,18 @@ class CursosController extends Controller
 
     protected function validarPorTrimestre($curso_id)
     {
-        $pagos = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->get();
+        //$pagos = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->get();
+        $trimestre = $this->helper->istrimestre( auth()->user()->grupo_id );
 
-        if (count($pagos) <= 3) {
-           return Recomendacion::where('carrera_id', auth()->user()->obtenerCarrera())
+        return Recomendacion::where('carrera_id', auth()->user()->tieneSuscripcion()->carrera_id)
+                                    ->where('curso_id', $curso_id)
+                                    ->where('trimestre', $trimestre)
+                                    ->count();
+
+
+
+        /*if (count($pagos) <= 3) {
+           return Recomendacion::where('carrera_id', auth()->user()->tieneSuscripcion()->carrera_id)
                                     ->where('curso_id', $curso_id)
                                     ->where('trimestre', 1)
                                     ->count();
@@ -202,7 +212,7 @@ class CursosController extends Controller
                                     ->where('curso_id', $curso_id)
                                     ->where('trimestre', 8)
                                     ->count();
-        }
+        }*/
     }
 
 

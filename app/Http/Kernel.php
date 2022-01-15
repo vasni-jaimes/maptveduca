@@ -70,5 +70,8 @@ class Kernel extends HttpKernel
         'ValidarAulaVirtual' => \App\Http\Middleware\ValidarAulaVirtual::class,
         'ValidarAdmin' => \App\Http\Middleware\ValidarAdmin::class,
         'SoloMembresiaAcademica' => \App\Http\Middleware\SoloMembresiaAcademica::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     ];
 }

@@ -13,7 +13,7 @@ class LoginController extends Controller
 
 	use AuthenticatesUsers;
 
-	protected $redirectTo = "/admin/listado-usuarios";
+	protected $redirectTo = "/admin/dashboard";
 
     public function __construct()
     {
@@ -37,7 +37,7 @@ class LoginController extends Controller
         if ($usr) {
 
             if ($usr->rol_id == 2) {
-                $this->redirectTo = "/admin/agregar-mensaje";
+                $this->redirectTo = "/admin/dashboard";
             }
 
             if ($usr) {

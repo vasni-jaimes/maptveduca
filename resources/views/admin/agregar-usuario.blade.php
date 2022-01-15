@@ -156,7 +156,7 @@
                             <div class="i-checks col-sm-10">
                                 <label> <input type="checkbox" value="1" name="suscripcion" @if(old("suscripcion") == 1) checked @endif> <i></i></label>
                             </div>
-
+                        </div>
 
                         <div class="form-group row" style="display: none">
                             <label class="col-sm-2 col-form-label"> Carreras: </label>
@@ -172,6 +172,21 @@
                                 <span class='form-text m-b-none errors'> {!! $errors->first('select_carreras') !!} </span>
                             </div>
                         </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Regalar meses: </label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="meses_regalo">
+                                    <option value="">meses</option>
+                                    @for($i=1; $i <= 12; $i++)
+                                        <option value="{{ $i }}">{{ $i < 10 ? "0".$i : $i }}</option>
+                                    @endfor
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('meses_regalo') !!} </span>
+                            </div>
+                        </div>
+
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Password: </label>

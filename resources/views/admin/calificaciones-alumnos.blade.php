@@ -62,7 +62,7 @@
                                                 	{{ $alumno->email }}
                                                 </td>
                                                 <td class="center"> 
-                                                    {{ $helper->istrimestre($alumno->id) }}
+                                                    {{ $helper->istrimestre($alumno->grupo_id) }}
                                                 </td>
                                                 <td class="center">
                                                     

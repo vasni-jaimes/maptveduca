@@ -19,7 +19,7 @@
             <h2>Lista de Cursos</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="index.html">Home</a>
+                    <a href="/admin">Home</a>
                 </li>
                 <li class="breadcrumb-item">
                     <a>Cursos</a>
@@ -74,7 +74,7 @@
                                                 <td class="center">
                                                     
                                                     <div class="btn-group">
-                                                     	<a href = "#" class="btn-info btn btn-xs mr-3">Ver Curso</a>
+                                                     	<!--<a href = "#" class="btn-info btn btn-xs mr-3">Ver Curso</a>-->
                                                      	<a href="{{ route("agregar-curso.edit", $helper::base64_encode_url($curso->id)) }}" class="btn-primary btn btn-xs mr-3">Editar Curso</a>
                                                      	<a href="#" class="btn-danger btn btn-xs mr-3">Eliminar Curso</a>
                                                      	@if ($curso->status == 1)

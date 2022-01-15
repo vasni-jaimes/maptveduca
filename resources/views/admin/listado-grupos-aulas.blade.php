@@ -16,7 +16,7 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Lista de Cursos</h2>
+            <h2>{{ $materia->nombre }} - Lista de Grupos</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="#">Aulas Virtuales</a>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="ibox-content">
                         <div class="table-responsive">
-                            @if (!$grupos->isEmpty())
+                            @if (!$gruposMateria->isEmpty())
                                 <table class="table table-striped table-bordered table-hover dataTables-example tabla-cursos">
                                     <thead>
                                         <tr>
@@ -57,7 +57,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($grupos as $grupo)
+                                        @foreach($gruposMateria as $grupo)
                                             <tr class="gradeX">
                                                 <td> {{ $grupo->nombre }} </td>
                                                 <td> {{ $helper->contarAlumnos($grupo->id) }} </td>

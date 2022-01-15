@@ -20,9 +20,16 @@ Route::get('/', 'Admin\LoginController@showLoginForm')->name('admin.login');
 Route::post('login', 'Admin\LoginController@login')->name('send.admin.login');
 Route::post('logout', 'Admin\LoginController@logout')->name('admin.logout');
 
+//DASHBOARD
+Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard.admin');
+
 
 //ADMINISTRADORES
 Route::get('agregar-administrador', 'Admin\AministardoresController@create')->name('agregar-administrador.create');
+Route::post('agregar-administrador', 'Admin\AministardoresController@store')->name('agregar-administrador.store');
+Route::get('listado-administradores', 'Admin\AministardoresController@index')->name('listado-administradores.index');
+Route::get('editar-administrador/{admin_id}', 'Admin\AministardoresController@edit')->name('editar-administradores.edit');
+Route::post('actualizar-administrador/{admin_id}', 'Admin\AministardoresController@update')->name('actualizar-administradores.update');
 
 
 //USUARIOS
@@ -33,6 +40,8 @@ Route::get('editar-usuario/{user_id}', 'Admin\UsersController@edit')->name('usua
 Route::post('actualizar-usuario/{user_id}', 'Admin\UsersController@update')->name('usuarios.update');
 Route::post('cambiar-status-user', 'Admin\UsersController@cambiarStatus')->name('cambiar-status-user');
 Route::post('eliminar-usuario/{user_id}', 'Admin\UsersController@destroy')->name('usuario.destroy');
+//Route::post('agregar-promocion/{user_id}', 'Admin\UsersController@AgregarPromocion')->name('usuario.agregar-promocion');
+
 
 //CURSOS
 Route::get('agregar-curso', 'Admin\CoursesController@create')->name('agregar-curso.create');
@@ -87,7 +96,17 @@ Route::get('editar-grupo/{grupo_id}', 'Admin\GruposController@edit')->name('edit
 Route::post('editar-grupo/{grupo_id}', 'Admin\GruposController@update')->name('update-admin.grupos');
 
 
-//INSCRIPCIONES
+//INSCRIPCIONES----------------
+
+//Cambiar Fechas de inscripciones
+Route::get('listado-ciclos', 'Admin\InscripcionesController@listadoCiclos')->name('listado-ciclos');
+Route::get('agregar-fechas-inscripciones', 'Admin\InscripcionesController@fechas')->name('vista-crear_ciclo.fechas');
+Route::get('editar-fechas-inscripciones/{slug}', 'Admin\InscripcionesController@editarFechas')->name('vista-editar_ciclo.fechas');
+Route::post('agregar-ciclo', 'Admin\InscripcionesController@guardarCiclo')->name('guardar-ciclo.fechas');
+Route::post('actualizar-ciclo/{slug}', 'Admin\InscripcionesController@actualizarFechas')->name('actualizar-ciclo.fechas');
+Route::post('eliminar-ciclo/{slug}', 'Admin\InscripcionesController@eliminarFechas')->name('eliminar-ciclo.fechas');
+
+//Estatus de inscripciones
 Route::get('inscripciones', 'Admin\InscripcionesController@index')->name('inscripciones.index');
 Route::post('inscripciones', 'Admin\InscripcionesController@store')->name('inscripciones.store');
 
@@ -95,6 +114,7 @@ Route::post('inscripciones', 'Admin\InscripcionesController@store')->name('inscr
 
 //MENSAJES
 Route::get('agregar-mensaje', 'Admin\MensajesController@mandarMensaje')->name('mandarMensaje');
+Route::get('lista-mensajes', 'Admin\MensajesController@listaMensajes')->name('lista-mensajes');
 Route::post('agregar-mensaje', 'Admin\MensajesController@sendMensaje')->name('sendMensaje');
 Route::post('buscar-alumnos', 'Admin\MensajesController@searchAlumnos')->name('searchAlumnos');
 

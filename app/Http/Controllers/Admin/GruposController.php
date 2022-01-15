@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ValidarAgregarGrupo;
 use App\Http\Requests\ValidarUpdateGrupos;
 use App\Grupo;
+use App\CiclosEscolares;
 use DB;
 
 //HELPERS
@@ -18,6 +19,7 @@ class GruposController extends Controller
     public function __construct(Helper $helper)
     {
         $this->middleware("authadmin:auth");
+        $this->middleware(["role:admin,admins"]);
         $this->helper = $helper;
     }
     /**
@@ -38,7 +40,8 @@ class GruposController extends Controller
      */
     public function create()
     {
-        return view('admin.agregar-grupo');
+        $ciclos = CiclosEscolares::all();
+        return view('admin.agregar-grupo', compact('ciclos'));
     }
 
     /**
@@ -50,8 +53,10 @@ class GruposController extends Controller
     public function store(ValidarAgregarGrupo $request)
     {
         DB::beginTransaction();
-        $grupo         = new Grupo();
-        $grupo->nombre = $request->nombre_grupo;
+        $grupo           = new Grupo();
+        $grupo->nombre   = $request->nombre_grupo;
+        $grupo->ciclo_id = $request->ciclo_escolar;
+
         if ($grupo->save()) {
             
             $grupo->slug = $this->helper->createSlug($request->nombre_grupo, $grupo->id, "maptv");
@@ -88,7 +93,8 @@ class GruposController extends Controller
     public function edit($slug)
     {
         $grupo = Grupo::where('slug', $slug)->first();
-        return view('admin.editar-grupo', compact('grupo'));
+        $ciclos = CiclosEscolares::all();
+        return view('admin.editar-grupo', compact('grupo', 'ciclos'));
     }
 
     /**
@@ -101,9 +107,10 @@ class GruposController extends Controller
     public function update(ValidarUpdateGrupos $request, $slug)
     {
         DB::beginTransaction();
-        $grupo          = Grupo::where('slug', $slug)->first();
-        $grupo->nombre  = $request->nombre_grupo;
-        $grupo->slug    = $this->helper->createSlug($request->nombre_grupo, $grupo->id, "maptv");
+        $grupo           = Grupo::where('slug', $slug)->first();
+        $grupo->nombre   = $request->nombre_grupo;
+        $grupo->slug     = $this->helper->createSlug($request->nombre_grupo, $grupo->id, "maptv");
+        $grupo->ciclo_id = $request->ciclo_escolar;
         
         if ($grupo->save()) {
             DB::commit();

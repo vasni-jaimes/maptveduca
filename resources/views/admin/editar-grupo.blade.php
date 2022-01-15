@@ -97,11 +97,28 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Ciclo Escolar: </label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="ciclo_escolar">
+                                    <option value="">ciclos escolares</option>
+                                    @forelse($ciclos as $ciclo)
+                                        <option value="{{ $ciclo->id }}" @if (old('ciclo_escolar', $grupo->ciclo_id) == $ciclo->id) selected @endif> 
+                                            {{ $ciclo->nombre }} 
+                                        </option>
+                                    @empty
+                                        <option value=""> No se encontraron resultados </option>
+                                    @endforelse
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('ciclo_escolar') !!} </span>
+                            </div>
+                        </div>
+
                         <div class="hr-line-dashed"></div>
 
                         <div class="form-group row">
                             <div class="col-sm-4 col-sm-offset-2">
-                                <button class="btn btn-white btn-sm" type="submit">Cancel</button>
+                                <a href="{{ route('index-admin.grupos') }}" class="btn btn-white btn-sm" type="submit">Cancel</a>
                                 <button class="btn btn-primary btn-sm" type="submit">Save changes</button>
                             </div>
                         </div>

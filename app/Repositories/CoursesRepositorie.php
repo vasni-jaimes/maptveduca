@@ -44,6 +44,23 @@ class CoursesRepositorie
 
             if ($course->save()) {
 
+                if ($request->has('cursos_conect')) {
+                    
+                    try {
+                        
+                        for ($i=0; $i < count($request->cursos_conect); $i++) { 
+                            DB::table('conection_cursos')->create([
+                                "curso_id" => $course->id,
+                                "curso_conection_id" => $request->cursos_conect[$i],
+                            ]);
+                        }
+
+                    } catch(Exception $e) {
+                        DB::rollback();
+                        return back()->withInput()->with("status.newCurso", "error");
+                    }
+                }
+
                 if (!$this->insertInstructor($course->id, $request->select_instructores)) {
                     DB::rollback();
                     return back()->withInput()->with("status.newCurso", "error");
@@ -99,6 +116,27 @@ class CoursesRepositorie
             }
 
             if ($course->save()) {
+
+
+                if ($request->has('cursos_conect')) {
+                    
+                    try {
+
+                        DB::table('conection_cursos')->where('curso_id', $course->id)->delete();
+                        
+                        for ($i=0; $i < count($request->cursos_conect); $i++) { 
+                            DB::table('conection_cursos')->create([
+                                "curso_id" => $course->id,
+                                "curso_conection_id" => $request->cursos_conect[$i],
+                            ]);
+                        }
+
+                    } catch(Exception $e) {
+                        DB::rollback();
+                        return back()->withInput()->with("status.newCurso", "error");
+                    }
+                }
+
 
                 //ACTUALIZAR INSTRUCTOR
                 

@@ -24,10 +24,11 @@ class ClasesController extends Controller
 
     public function __construct(ClasesDecorator $clasesDecorator, Helper $helper)
     {
-        $this->clasesDecorator = $clasesDecorator;
-        $this->helper           = $helper;
         $this->middleware("authadmin:auth");
-        $this->middleware("ValidarAdmin");
+        $this->middleware(["role:admin,admins"]);
+
+        $this->clasesDecorator  = $clasesDecorator;
+        $this->helper           = $helper;
     }
 
     /**

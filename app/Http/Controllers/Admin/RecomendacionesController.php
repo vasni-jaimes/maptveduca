@@ -15,7 +15,7 @@ class RecomendacionesController extends Controller
     public function __construct()
     {
         $this->middleware("authadmin:auth");
-        $this->middleware("ValidarAdmin");
+        $this->middleware(["role:admin,admins"]);
     }
     /**
      * Display a listing of the resource.

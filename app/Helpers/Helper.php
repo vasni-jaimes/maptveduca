@@ -4,6 +4,8 @@
 namespace App\Helpers;
 use Carbon\Carbon;
 use App\TextoAlternativo;
+use App\User;
+use App\Grupo;
 use DB;
 
 class Helper
@@ -18,13 +20,13 @@ class Helper
 
 	public static function createSlug($string, $id, $entity)
     {
-        $name = Helper::hola($string);
+        $name = Helper::coding($string);
         $str = strtolower($name);
         $slug = preg_replace('/\s+/', '-', $str);
         return "{$entity}-".self::base64_encode_url($id)."-{$slug}";
     }
 
-    public static function hola($string)
+    public static function coding($string)
     {
     	setlocale(LC_ALL, 'en_US.UTF8');
 		$var = preg_replace("/[^A-Za-z0-9 ]/", '',iconv('UTF-8', 'ASCII//TRANSLIT', $string));
@@ -55,67 +57,31 @@ class Helper
 
     public function contarAlumnos($grupo_id)
     {
-        //return DB::table('tablero_cursos')->where('curso_id', $curso_id)->count();
-        return DB::table('users')->where('grupo_id', $grupo_id)->count();
+        return User::where('grupo_id', $grupo_id)->count();
     }
 
-
-    public function istrimestre($user_id)
+    public function istrimestre($grupo_id)
     {
-        $trimestre = DB::table('usuarios_membresia')->where('user_id', $user_id)->count();
-        if ($trimestre <= 3) 
-            return 1;
-        elseif ($trimestre > 3 && $trimestre <= 6)
-            return 2;
-        elseif ($trimestre > 6 && $trimestre <= 9)
-            return 3;
-        elseif ($trimestre > 9 && $trimestre <= 12)
-            return 4;
-        elseif ($trimestre > 12 && $trimestre <= 15) 
-            return 5;
-        elseif ($trimestre > 15 && $trimestre <= 18)
-            return 6;
-        elseif ($trimestre > 18 && $trimestre <= 21)
-            return 7;
-        elseif ($trimestre > 21 && $trimestre <= 24)
-            return 8;
-            
+        if ($grupo_id == null) {
+            return false;    
+        }
+
+        //FECHA DE HOY
+        date_default_timezone_set('America/Mexico_City');
+        $hoy = Carbon::now()->format('Y-m-d');
+        //FECHA DE HOY\
+
+        $grupo  = Grupo::where('id', $grupo_id)->first();
+        $fechas = DB::table('ciclos_fechas')
+                    ->where('ciclo_id', $grupo->ciclo_id)
+                    ->where('fecha_inicio', '<=',$hoy)
+                    ->where('fecha_final', '>=', $hoy)
+                    ->first();
+
+        return $fechas->trimestre;
     }
 
-    public function obtenerFechaTrimestre()
-    {
-        $trimestre = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->count();
-        if ($trimestre == 1 || $trimestre == 4 || $trimestre == 7 || $trimestre == 10 || $trimestre == 13 || $trimestre == 16 || $trimestre == 19 || $trimestre == 22){ 
-
-            $ultimoPago     = auth()->user()->ultimoPago();
-            $fehcaInicio    = $ultimoPago->fehca_inicio;
-            $start          = Carbon::parse($fehcaInicio);
-            $end            = Carbon::parse($fehcaInicio)->addMonths(3);
-
-            return $this->fechaFormat($start, $end);
-        }
-        elseif ($trimestre == 2 || $trimestre == 5 || $trimestre == 8 || $trimestre == 11 || $trimestre == 14 || $trimestre == 17 || $trimestre == 20 || $trimestre == 23){
-
-            $ultimoPago     = auth()->user()->ultimoPago();
-            $fehcaInicio    = $ultimoPago->fehca_inicio;
-            $start          = Carbon::parse($fehcaInicio)->subMonths(1);
-            $end            = Carbon::parse($fehcaInicio)->addMonths(2);
-
-            return $this->fechaFormat($start, $end);
-        }
-        elseif ($trimestre == 3 || $trimestre == 6 || $trimestre == 9 || $trimestre == 12 || $trimestre == 15 || $trimestre == 18 || $trimestre == 21 || $trimestre == 24){
-
-            $ultimoPago     = auth()->user()->ultimoPago();
-            $fehcaInicio    = $ultimoPago->fehca_inicio;
-            $start          = Carbon::parse($fehcaInicio)->subMonths(2);
-            $end            = Carbon::parse($fehcaInicio)->addMonths(1);
-
-            return $this->fechaFormat($start, $end);
-        } 
-    }
-
-
-    protected function fechaFormat($start, $end)
+    public function fechaFormat($start, $end)
     {
         $meses  = array("ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC");
         $fecha1  = Carbon::parse($start);
@@ -128,18 +94,10 @@ class Helper
     }
 
 
-    public function obtenerTextoAlternativo($curso_id)
-    {
-        $texto = TextoAlternativo::where('curso_id', $curso_id)->first();
-        if ($texto) {
-            return $texto->texto;
-        }
-
-        return false;
-    }
+    
 
 
-    public function contarTextoAltern($materias)
+    /*public function contarTextoAltern($materias)
     {
         $status = false;
         foreach ($materias as $materia) {
@@ -149,7 +107,7 @@ class Helper
         }
 
         return $status;
-    }
+    }*/
 
 
     public function formatoFechaStatus($fecha)
@@ -161,4 +119,15 @@ class Helper
 
         return $mes1." ".$fecha1->format('Y');
     }
+
+
+    public function getFechaEspanol($fecha)
+    {
+        $meses   = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+        $fecha1  = Carbon::parse($fecha);
+        $mes     = $meses[($fecha1->format('n')) - 1];
+
+        return date("d", strtotime($fecha1)). " de ". $mes;
+    }
+
 }

@@ -20,8 +20,9 @@ class CalificacionesController extends Controller
 {
     public function __construct(Helper $helper)
     {
-    	$this->helper = $helper;
         $this->middleware("authadmin:auth");
+        $this->middleware(["role:profesor_lider|director,admins"]);
+    	$this->helper = $helper;
     }
 
 
@@ -39,7 +40,9 @@ class CalificacionesController extends Controller
     					->where('usuarios_membresia.fecha_fin', '>', $hoy)
                         ->where('usuarios_membresia.membresia_id', 2)
     					->where('users.status', 1)
+                        ->groupBy('users.id')
     					->get();
+
 
     	return view('admin.calificaciones-alumnos', compact('alumnos', 'helper'));
     }
@@ -47,14 +50,12 @@ class CalificacionesController extends Controller
 
     public function getMaterias($alumno_id)
     {
-        $user       = User::where('id', $alumno_id)->first();
-
+        $user = User::where('id', $alumno_id)->first();
         if (!$user->tieneSuscripcion() || $user->ultimaSuscripcion()->id != 2) {
             return redirect()->route('calificaciones-alumnos');
         }
 
-        $trimestre  = $this->helper->istrimestre($user->id);
-        $cursos     = $this->cursosPorTrimestre($trimestre, $user);
+        $cursos = $this->cursosPorTrimestre($user);
 
         return view('admin.calificaciones-materias', compact('cursos', 'alumno_id', 'user'));
     }
@@ -64,7 +65,7 @@ class CalificacionesController extends Controller
         $califi          = array();
         $user            = User::where('id', $alumno_id)->first();
         $curso           = Course::where('slug', $slug_curso)->where('status', 1)->first();
-        $trimestreAlumno = $this->helper->istrimestre($user->id);
+        $trimestreAlumno = $this->helper->istrimestre($user->grupo_id);
         $calificaciones  = Calificacion::where('user_id', $user->id)
                                 ->where('curso_id', $curso->id)->get();
 
@@ -103,6 +104,8 @@ class CalificacionesController extends Controller
             }
             
         }
+
+        //return $califi["tercero"];
 
 
         return view('admin.calificaciones', compact("trimestreAlumno", "calificaciones", "curso", "user", "alumno_id", "slug_curso", "califi"));
@@ -297,29 +300,19 @@ class CalificacionesController extends Controller
     }
 
 
-    protected function cursosPorTrimestre($trimestre, $user)
+    protected function cursosPorTrimestre($user)
     {
-        $cursoArray = array();
+        $trimestre       = $this->helper->istrimestre($user->grupo_id);
         $recomendaciones = Recomendacion::with(['cursos' => function($query){
-                                $query->where('status', 1);
-                            }])
-                            ->where('carrera_id', $user->obtenerCarrera())
-                            ->where('trimestre', $trimestre)
-                            ->get();
+                                    $query->where('status', 1);
+                                    if (Auth::guard('admins')->user()->hasRole('profesor_lider')) {
+                                        $query->where('categoria_id', Auth::guard('admins')->user()->categoria_id);
+                                    }
+                                }])
+                                ->where('carrera_id', $user->tieneSuscripcion()->carrera_id)
+                                ->where('trimestre', $trimestre)
+                                ->get();
 
-        foreach ($recomendaciones as $recomendacion) {
-            $curso = DB::table('courses_instructors')
-                        ->where('instructor_id', Auth::guard('admins')->user()->instructor_id)
-                        ->where('course_id', $recomendacion->cursos->id);
-
-            if ($curso) {
-                $cursoArray[] = array('nombre' => $recomendacion->cursos->nombre, 
-                                    "status" => $recomendacion->cursos->status,
-                                    "url_img" => $recomendacion->cursos->url_img,
-                                    "slug" => $recomendacion->cursos->slug);
-            }
-        }
-
-        return collect($cursoArray);
+        return $recomendaciones->where('cursos', '!=', null);
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ValidarPerfilEdit;
 use App\Helpers\Helper;
+use App\TextoAlternativo;
 use App\Favorito;
 use App\Recomendacion;
 use App\TableroCursos;
@@ -17,6 +18,8 @@ use App\Mensaje;
 use App\UsuarioMembresia;
 use App\Notificacion;
 use App\Calificacion;
+use App\CiclosEscolares;
+use App\Grupo;
 use Carbon\Carbon;
 use DB;
 
@@ -69,37 +72,25 @@ class UsersController extends Controller
         /* RECOMENDACIONES */
         $materias        = $this->cursosPorTrimestre();
         $tituloTrimestre = $this->tituloPorTrimestre();
-        
+        $materiasTexto   = $this->obtenerTextoAlternativo($materias);
+            
 
         /* TABLERO CURSOS */
-        $tableroCursos = DB::table('tablero_cursos')
-                            ->join('courses', 'tablero_cursos.curso_id', 'courses.id')
-                            ->select('courses.*')
-                            ->where('courses.status', 1)
-                            ->where('tablero_cursos.user_id', auth()->user()->id)
-                            ->get();
+        $tableroCursos = auth()->user()->tablero_cursos()->where('status', 1)->get();
 
         /* TABLERO EVENTOS */
 
-            //FECHA DE HOY
-            date_default_timezone_set('America/Mexico_City');
-            $hoy = Carbon::now()->format('Y-m-d H:i:s');
+        //FECHA DE HOY
+        date_default_timezone_set('America/Mexico_City');
+        $hoy = Carbon::now()->format('Y-m-d H:i:s');
 
-        $tableroEventos = DB::table('tablero_eventos')
-                            ->join('eventos', 'tablero_eventos.evento_id', 'eventos.id')
-                            ->select('eventos.*')
-                            ->where('eventos.status', 1)
-                            ->where('tablero_eventos.user_id', auth()->user()->id)
-                            ->where('fecha_lanzamiento', '>', $hoy)
-                            ->get();
 
-        $eventosOld = DB::table('tablero_eventos')
-                            ->join('eventos', 'tablero_eventos.evento_id', 'eventos.id')
-                            ->select('eventos.*')
-                            ->where('eventos.status', 1)
-                            ->where('tablero_eventos.user_id', auth()->user()->id)
-                            ->where('fecha_lanzamiento', '<', $hoy)
-                            ->get();
+        $tableroEventos = auth()->user()->tablero_eventos()
+                            ->where('status', 1)->where('fecha_lanzamiento', '>', $hoy)->get();
+
+        $eventosPasados = auth()->user()->tablero_eventos()
+                            ->where('status', 1)->where('fecha_lanzamiento', '<', $hoy)->get();
+
 
         /* MENSAJES */
         $mensajes = Mensaje::with(['admin'])
@@ -107,12 +98,12 @@ class UsersController extends Controller
 
         /* HISTORIAL DE PAGOS */
         $pagos = UsuarioMembresia::with(['membresia', 'evento', 'curso'])
-                    ->where('user_id', auth()->user()->id)->get();
+                    ->where('user_id', auth()->user()->id)->orderBy('fehca_inicio', 'asc')->get();
 
 
         /* CALIFICACIONES */
-        $trimestreActual = $this->helper->istrimestre(auth()->user()->id);
-        $recomendacionesCompletas = Recomendacion::with(['cursos'])->where('carrera_id', auth()->user()->obtenerCarrera())->get();
+        $trimestreActual = $this->helper->istrimestre(auth()->user()->grupo_id);
+        $recomendacionesCompletas = Recomendacion::with(['cursos'])->where('carrera_id', auth()->user()->tieneSuscripcion()->carrera_id)->get();
 
         /* NOTIFICACIONES */
         $notificaciones = Notificacion::where('user_id', auth()->user()->id)
@@ -121,37 +112,26 @@ class UsersController extends Controller
         /* HELPER */
         $helper = $this->helper;
 
-    	return view('site.micuenta', compact("favoritosCursos", "favoritosEventos", "favoritosClases", "materias", "tableroCursos", "tableroEventos", "eventosOld", "tituloTrimestre", "mensajes", "pagos", "notificaciones", "trimestreActual", "recomendacionesCompletas", "helper"));
+        /* FECHAS DE INSCRIPCION */
+        $grupo = Grupo::where("id", auth()->user()->grupo_id)->first();
+        $fechaInscripcion = CiclosEscolares::with(['fechasTrimestres' => function($query) {
+            //FECHA DE HOY
+            date_default_timezone_set('America/Mexico_City');
+            $hoy = Carbon::now()->format('Y-m-d H:i:s');
+            $query->where("fecha_inicio", "<=", $hoy);
+        }])->where("id", $grupo->ciclo_id)->first();
+
+
+    	return view('site.micuenta', compact("favoritosCursos", "favoritosEventos", "favoritosClases", "materias", "tableroCursos", "tableroEventos", "eventosPasados", "tituloTrimestre", "mensajes", "pagos", "notificaciones", "trimestreActual", "recomendacionesCompletas", "helper", "fechaInscripcion", "materiasTexto"));
     }
 
 
     protected function tituloPorTrimestre()
     {
-        $pagos = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->get();
-        if (count($pagos) <= 3) {
-            return "1er Trimestre";
-        }
-        else if (count($pagos) > 3 && count($pagos) <= 6) {
-            return "2do Trimestre";
-        }
-        else if (count($pagos) > 6 && count($pagos) <= 9) {
-            return "3er Trimestre";
-        }
-        else if (count($pagos) > 9 && count($pagos) <= 12) {
-            return "4to Trimestre";
-        }
-        else if (count($pagos) > 12 && count($pagos) <= 15) {
-            return "5to Trimestre";
-        }
-        else if (count($pagos) > 15 && count($pagos) <= 18) {
-            return "6to Trimestre";
-        }
-        else if (count($pagos) > 18 && count($pagos) <= 21) {
-            return "7mo Trimestre";
-        }
-        else if (count($pagos) > 21 && count($pagos) <= 24) {
-            return "8vo Trimestre";
-        }
+        $trimestre = $this->helper->istrimestre( auth()->user()->grupo_id );
+        $titulos = [null, "1er", "2do", "3er", "4to", "5to", "6to", "7mo", "8vo"];
+
+        return $titulos[$trimestre];
     }
 
 
@@ -186,7 +166,6 @@ class UsersController extends Controller
                 
                 return response()->json(['message' => 'error']);
             }
-            
 
             return response()->json(['message' => 'error']);
         }
@@ -195,72 +174,28 @@ class UsersController extends Controller
 
     protected function cursosPorTrimestre()
     {
-
-        $pagos = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->get();
-
-        if (count($pagos) <= 3) {
-            return Recomendacion::with(['cursos' => function($query){
-                            $query->where('status', 1);
-                        }])
-                        ->where('carrera_id', auth()->user()->obtenerCarrera())
-                        ->where('trimestre', 1)
-                        ->get();
-        }
-        else if (count($pagos) > 3 && count($pagos) <= 6) {
-            return Recomendacion::with(['cursos' => function($query){
-                            $query->where('status', 1);
-                        }])
-                        ->where('carrera_id', auth()->user()->obtenerCarrera())
-                        ->where('trimestre', 2)
-                        ->get();
-        }
-        else if (count($pagos) > 6 && count($pagos) <= 9) {
-            return Recomendacion::with(['cursos' => function($query){
-                            $query->where('status', 1);
-                        }])
-                        ->where('carrera_id', auth()->user()->obtenerCarrera())
-                        ->where('trimestre', 3)
-                        ->get();
-        }
-        else if (count($pagos) > 9 && count($pagos) <= 12) {
-            return Recomendacion::with(['cursos' => function($query){
-                            $query->where('status', 1);
-                        }])
-                        ->where('carrera_id', auth()->user()->obtenerCarrera())
-                        ->where('trimestre', 4)
-                        ->get();
-        }
-        else if (count($pagos) > 12 && count($pagos) <= 15) {
-            return Recomendacion::with(['cursos' => function($query){
-                            $query->where('status', 1);
-                        }])
-                        ->where('carrera_id', auth()->user()->obtenerCarrera())
-                        ->where('trimestre', 5)
-                        ->get();
-        }
-        else if (count($pagos) > 15 && count($pagos) <= 18) {
-            return Recomendacion::with(['cursos' => function($query){
-                            $query->where('status', 1);
-                        }])
-                        ->where('carrera_id', auth()->user()->obtenerCarrera())
-                        ->where('trimestre', 6)
-                        ->get();
-        }
-        else if (count($pagos) > 18 && count($pagos) <= 21) {
-            return Recomendacion::with(['cursos' => function($query){
-                            $query->where('status', 1);
-                        }])
-                        ->where('carrera_id', auth()->user()->obtenerCarrera())
-                        ->where('trimestre', 7)
-                        ->get();
-        }
-        else if (count($pagos) > 21 && count($pagos) <= 24) {
-            return Recomendacion::with(['cursos' => function($query){
-                            $query->where('status', 1);
-                        }])
-                        ->where('carrera_id', auth()->user()->obtenerCarrera())
-                        ->where('trimestre', 8)
-                        ->get();
-        }
+        $trimestre = $this->helper->istrimestre(auth()->user()->grupo_id);
+        return Recomendacion::with(['cursos' => function($query){
+                        $query->where('status', 1);
+                    }])
+                    ->where('carrera_id', auth()->user()->tieneSuscripcion()->carrera_id)
+                    ->where('trimestre', $trimestre)
+                    ->get();
     }
+
+
+    protected function obtenerTextoAlternativo($cursos)
+    {
+        $cursosTexto = array();
+        foreach( $cursos as $curso ) {
+            $texto = TextoAlternativo::with('cursos')->where('curso_id', $curso->curso_id)->first();
+            if ($texto != null) {
+                $cursosTexto[] = $texto;
+            }
+        }
+        
+        return collect($cursosTexto);
+    }
+
+
 }

@@ -8,8 +8,8 @@ class Publicacion extends Model
 {
     protected $table = "aulas_publicacion_create";
 
-    public function instructor()
+    public function profesor()
     {
-    	return $this->hasOne('App\Instructor', 'id', 'instructor_id');
+        return $this->hasOne('App\Administrator', 'id', 'profesor_id');
     }
 }

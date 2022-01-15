@@ -2,7 +2,7 @@
 @extends('admin.layouts.admin-layout')
 <!-- /HEADER AND FOOTER -->
 
-@section('titulo', 'Agregar Instructor')
+@section('titulo', 'Agregar Administrador')
 
 @section('css-content')
     <!-- Chosen -->
@@ -22,10 +22,10 @@
             <h2>Crear nuevo Administrador</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="index.html">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a>Administradores</a>
+                    <a href="{{ route("listado-administradores.index") }}">Lista de Administradores</a>
                 </li>
                 <li class="breadcrumb-item active">
                     <strong>Crear nuevo administrador</strong>
@@ -36,8 +36,8 @@
     </div>
 
 
-    @if (session()->has("status.newInstructor"))
-        @if (session()->get("status.newInstructor") == "error")
+    @if (session()->has("status.newAdmin"))
+        @if (session()->get("status.newAdmin") == "error")
             <div class="row justify-content-center">
                 <div class="alert alert-danger fade show col-md-10 mt-3" role="alert">
                     Ocurrio un error, intentelo más tarde.
@@ -47,10 +47,10 @@
                 </div>
             </div>
 
-        @elseif (session()->get("status.newInstructor") == "success")
+        @elseif (session()->get("status.newAdmin") == "success")
             <div class="row justify-content-center">
                 <div class="alert alert-success fade show col-md-10 mt-3" role="alert">
-                    Se creo el instructor correctamente
+                    Se creo el Usuario correctamente
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -87,21 +87,21 @@
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>
                     </div>
-                    <form action="{{ route("agregar-instructor.store") }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-agregar_instructor">
+                    <form action="" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" name="frm-agregar_administrador">
                         @csrf
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Nombre del instructor: </label>
+                            <label class="col-sm-2 col-form-label">Nombre: </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nombre_instructor" value="{{ old("nombre_instructor") }}"> 
-                                <span class='form-text m-b-none errors'> {!! $errors->first('nombre_instructor') !!} </span>
+                                <input type="text" class="form-control" name="nombres" value="{{ old("nombres") }}"> 
+                                <span class='form-text m-b-none errors'> {!! $errors->first('nombres') !!} </span>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Apellido del instructor: </label>
+                            <label class="col-sm-2 col-form-label">Apellido(s): </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="apellido_instructor" value="{{ old("apellido_instructor") }}"> 
-                                <span class='form-text m-b-none errors'> {!! $errors->first('apellido_instructor') !!} </span>
+                                <input type="text" class="form-control" name="apellidos" value="{{ old("apellidos") }}"> 
+                                <span class='form-text m-b-none errors'> {!! $errors->first('apellidos') !!} </span>
                             </div>
                         </div>
 
@@ -114,35 +114,63 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Especialidad: </label>
+                            <label class="col-sm-2 col-form-label">Rol: </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="especialidad" value="{{ old("especialidad") }}"> 
-                                <span class='form-text m-b-none errors'> {!! $errors->first('especialidad') !!} </span>
+                                <select class="form-control m-b" name="select_roles">
+                                    <option value="">roles</option>
+                                    @forelse($roles as $rol)
+                                        <option value="{{ $rol->id }}" @if (old('select_roles') == $rol->id) selected @endif> {{ $rol->name }} </option>
+                                    @empty
+                                        <option value=""> No se encontraron resultados </option>
+                                    @endforelse
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_roles') !!} </span>
                             </div>
                         </div>
+
+
+                        <div class="form-group row" style="display: none;">
+                            <label class="col-sm-2 col-form-label">Categoria a revisar: </label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="select_categorias">
+                                    <option value="">Categorias</option>
+                                    @forelse($categorias as $categoria)
+                                        <option value="{{ $categoria->id }}" @if (old('select_categorias') == $categoria->id) selected @endif> 
+                                            {{ $categoria->nombre }} 
+                                        </option>
+                                    @empty
+                                        <option value=""> No se encontraron resultados </option>
+                                    @endforelse
+                                </select>
+                                <span class='form-text m-b-none errors'> {!! $errors->first('select_roles') !!} </span>
+                            </div>
+                        </div>
+
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Bibliografia: </label>
+                            <label class="col-sm-2 col-form-label">Password: </label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="bibliografia" rows="3">{{ old("bibliografia") }}</textarea>
-                                <span class='form-text m-b-none errors'> {!! $errors->first('bibliografia') !!} </span>
+                                <input type="password" class="form-control" name="password" value="{{ old("password") }}"> 
+                                <span class='form-text m-b-none errors'> {!! $errors->first('password') !!} </span>
                             </div>
                         </div>
 
-                        <div class="form-group row mb-5">
-                            <label class="col-sm-2 col-form-label">Avatar instructor: </label>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Confirmar Password: </label>
                             <div class="col-sm-10">
-                                <input id="logo" type="file" name="avatar" class="form-control" accept="image/png, image/jpeg, image/jpg">
-                                <span class='form-text m-b-none errors'> {!! $errors->first('avatar') !!} </span>
-                            </div> 
+                                <input type="password" class="form-control" name="password_confirmation" value="{{ old("password_confirmation") }}"> 
+                                <span class='form-text m-b-none errors'> {!! $errors->first('password_confirmation') !!} </span>
+                            </div>
                         </div>
+
 
 
                         <div class="hr-line-dashed"></div>
 
                         <div class="form-group row">
                             <div class="col-sm-4 col-sm-offset-2">
-                                <button class="btn btn-white btn-sm" type="submit">Cancel</button>
+                                <a href="{{ route("listado-administradores.index") }}" class="btn btn-white btn-sm" type="submit">Cancel</a>
                                 <button class="btn btn-primary btn-sm" type="submit">Save changes</button>
                             </div>
                         </div>
@@ -164,40 +192,10 @@
     <script src="/admini/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="/admini/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- Chosen -->
-    <script src="/admini/js/plugins/chosen/chosen.jquery.js"></script>
-    <!-- Data picker -->
-   <script src="/admini/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-   <!-- Clock picker -->
-    <script src="/admini/js/plugins/clockpicker/clockpicker.js"></script>
-
     <!-- Custom and plugin javascript -->
     <script src="/admini/js/inspinia.js"></script>
     <script src="/admini/js/plugins/pace/pace.min.js"></script>
-    <!-- iCheck -->
-    <script src="/admini/js/plugins/iCheck/icheck.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-            });
-            $('.chosen-select').chosen({width: "100%"});
-            $('.custom-file-input').on('change', function() {
-                let fileName = $(this).val().split('\\').pop();
-                $(this).next('.custom-file-label').addClass("selected").html(fileName);
-            });
-
-            $('.clockpicker').clockpicker();
-
-            var mem = $('.datepicker').datepicker({
-                todayHighlight: true,
-                keyboardNavigation: false,
-                forceParse: false,
-                calendarWeeks: true,
-                autoclose: true
-            });
-       });
-    </script>
+    
     <script src="/admini/js/app.js"></script>
 
 @stop
