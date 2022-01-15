@@ -14,29 +14,31 @@ class AdminRootSeeder extends Seeder
     {
         \DB::table('administrators')->truncate();
 
-    	$admin = Administrator::create([
+    	$admin1 = Administrator::create([
     		"nombre" => "Vasni",
             "apaterno" => "Jaimes",
     		"amaterno" => "Lopez",
             "fecha_nacimiento" => "1992-07-18",
     		"email" => "baster07mi@gmail.com",
-            "rol_id" => 1,
     		"password" => bcrypt("slaner506"),
     	]);
 
-    	$admin->save();
+    	$admin1->save();
+
+        $admin1->roles()->attach([1]);
 
 
-        $admin = Administrator::create([
+        $admin2 = Administrator::create([
             "nombre" => "Jimena",
             "apaterno" => "Jimena",
             "amaterno" => "Jimena",
             "fecha_nacimiento" => "1992-07-18",
             "email" => "jimena@pruebas.com",
-            "rol_id" => 1,
             "password" => bcrypt("slaner506"),
         ]);
 
-        $admin->save();
+        $admin2->save();
+
+        $admin2->roles()->attach([1]);
     }
 }
