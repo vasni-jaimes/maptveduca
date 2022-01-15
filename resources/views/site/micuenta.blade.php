@@ -113,12 +113,14 @@
                                         <p>No tienes ninguna suscripcion activa</p>
                                     @endif
 
-                                    @if (auth()->user()->tieneSuscripcion()->canceled_sub == 1)
-                                        <p class="suscripcion-cancelada">
-                                            Tu Suscripción fue cancelada correctamente, 
-                                            pero aún puedes acceder a los cursos por el ultimo mes que pagaste,
-                                            te quedan {{ auth()->user()->contadorDiasSuscripcion() }} días para disfrutar. 
-                                        </p>
+                                    @if (auth()->user()->tieneSuscripcion())
+                                        @if (auth()->user()->tieneSuscripcion()->canceled_sub == 1)
+                                            <p class="suscripcion-cancelada">
+                                                Tu Suscripción fue cancelada correctamente, 
+                                                pero aún puedes acceder a los cursos por el ultimo mes que pagaste,
+                                                te quedan {{ auth()->user()->contadorDiasSuscripcion() }} días para disfrutar. 
+                                            </p>
+                                        @endif
                                     @endif
 
                                 </div> <!-- /item-perfil -->
