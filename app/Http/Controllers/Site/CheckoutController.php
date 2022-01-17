@@ -210,8 +210,8 @@ class CheckoutController extends Controller
                                     "description" => "cursos de paga para la plataforma Maptveduca", 
                                     "type" => "DIGITAL",
                                     "category" => "EDUCATIONAL_AND_TEXTBOOKS", 
-                                    "image_url" => "https://maptveduca.org/site/img/logo-amarillo.png",
-                                    "home_url" => "https://maptveduca.org/"], 
+                                    "image_url" => "http://ec2-52-204-254-8.compute-1.amazonaws.com/site/img/logo-amarillo.png",
+                                    "home_url" => "http://ec2-52-204-254-8.compute-1.amazonaws.com/"], 
                          'headers' => ['content-type' => 'application/json',
                                     'authorization' => 'Bearer '.$this->acces_token]
                         ]
@@ -307,8 +307,8 @@ class CheckoutController extends Controller
                                         "locale" => "en-MX",
                                         "user_action" => "SUBSCRIBE_NOW",
                                         "payment_method" => ["payer_selected" => "PAYPAL", "payee_preferred" => "IMMEDIATE_PAYMENT_REQUIRED"],
-                                        "return_url" => "https://maptveduca.org/gracias?".$parametros,
-                                        "cancel_url" => "https://maptveduca.org/cancelar-suscripcion",
+                                        "return_url" => "http://ec2-52-204-254-8.compute-1.amazonaws.com/gracias?".$parametros,
+                                        "cancel_url" => "http://ec2-52-204-254-8.compute-1.amazonaws.com/cancelar-suscripcion",
                                     ],
                                 ], 
                          'headers' => ['content-type' => 'application/json',
