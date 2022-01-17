@@ -17,9 +17,7 @@ roust<!-- HEADER AND FOOTER -->
 
     	            	@if (auth()->user()->promocion == 1)
     	            		<h2>Lo sentimos :( !</h2>
-    	            		<p> Hola {{ auth()->user()->nombre }}, ya cuentas con esta promoción, ya no es posible volver adquirirla</p>
-    	            		<br>
-    	            		<p> si tienes algun problema o no tuviste tu promocion, contactanos</p>
+    	            		<p> Hola {{ auth()->user()->nombre }}, ya cuentas con esta promoción, ya no es posible volver adquirirla, <br> si tienes algun problema o no tuviste tu promocion, contactanos</p>
     	            		<br>
     	            		<p><small>¿Tienes preguntas? <a href="mailto:maptveduca.info@gmail.com">Escríbenos</a> y te atenderemos lo antes posible.</small>
     	            	@else
