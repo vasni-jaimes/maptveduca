@@ -30,6 +30,7 @@ class UsersController extends Controller
     {
         $this->helper = $helper;
         $this->middleware('auth');
+        $this->middleware('promociones', ['only' => ['promocionLink']]);
     }
 
     public function editar(ValidarPerfilEdit $request)
