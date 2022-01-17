@@ -383,8 +383,7 @@ class CheckoutController extends Controller
                             $usuarioMembresia->fecha_fin    = $final;
 
 
-                            $hoy = new Carbon($final);
-                            $hoy->addDay()->format('Y-m-d');
+                            $hoy = new Carbon($final)->format('Y-m-d');
                             $final = new Carbon($hoy);
                             $final->addMonth()->format('Y-m-d');
 
@@ -410,6 +409,7 @@ class CheckoutController extends Controller
 
                     $user                             = User::find(auth()->user()->id);
                     $user->suscripcion_id             = $request->subscription_id;
+                    $user->promocion                  = $request->has("prom") ? 1 : 0;
 
                     //AGREGARLE UN GRUPO AL USUARIO SI ES NUEVO y SI ES DE MEMBRESIA ACADEMICA
                     if ($request->mm == 2) {
