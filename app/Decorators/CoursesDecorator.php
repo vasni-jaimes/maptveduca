@@ -35,7 +35,7 @@ Class CoursesDecorator
        	$curso 		 		= Course::with(['subcategorias', 'careers', 'instructor'])->findOrFail($id);
        	$subcategorias 		= Subcategoria::where("status", 1)->where("categoria_id", $curso->categoria_id)->get();
        	$cursos         	= Course::where('status', 1)->get();
-       	$cursosConect 		= DB::table('conection_cursos')->join('cursos', 'curso_id', 'id')->where('conection_cursos.curso_id', $id)->get();
+       	//$cursosConect 		= DB::table('conection_cursos')->join('courses', 'curso_id', 'id')->where('conection_cursos.curso_id', $id)->get();
 
  
        	$myInstructors 		= collect($curso->instructor)->pluck('id')->toArray();
