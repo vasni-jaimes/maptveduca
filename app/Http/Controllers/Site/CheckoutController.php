@@ -195,8 +195,7 @@ class CheckoutController extends Controller
         } catch (ClientException $e) {
             $responsError = $e->getResponse();
             $error        = json_decode($responsError->getBody()->getContents());
-            dd($error);
-            \Log::error($error->message);
+            \Log::error("no se puede agregar el token");
             return false;
         }
     }
@@ -389,6 +388,7 @@ class CheckoutController extends Controller
                             $final = new Carbon($hoy);
                             $final->addMonth()->format('Y-m-d');
 
+                            $usuarioMembresia->save();
                         }
                     }
                     else {
@@ -403,43 +403,41 @@ class CheckoutController extends Controller
                         
                         $usuarioMembresia->fehca_inicio = $hoy;
                         $usuarioMembresia->fecha_fin    = $final;
+
+                        $usuarioMembresia->save();
                     }
 
 
-                   
+                    $user                             = User::find(auth()->user()->id);
+                    $user->suscripcion_id             = $request->subscription_id;
 
-                    if ($usuarioMembresia->save()) {
+                    //AGREGARLE UN GRUPO AL USUARIO SI ES NUEVO y SI ES DE MEMBRESIA ACADEMICA
+                    if ($request->mm == 2) {
+                        if (auth()->user()->grupo_id == null) {
+                            $status = StatusInscripcion::first();
+                            $grupos = DB::table('grupos_inscripciones')->get();
 
-                        $user                             = User::find(auth()->user()->id);
-                        $user->suscripcion_id             = $request->subscription_id;
+                            foreach ($grupos as $grupo) {
+                                $cupo = User::where('grupo_id', $grupo->grupo_id)->count();
 
-                        //AGREGARLE UN GRUPO AL USUARIO SI ES NUEVO y SI ES DE MEMBRESIA ACADEMICA
-                        if ($request->mm == 2) {
-                            if (auth()->user()->grupo_id == null) {
-                                $status = StatusInscripcion::first();
-                                $grupos = DB::table('grupos_inscripciones')->get();
-
-                                foreach ($grupos as $grupo) {
-                                    $cupo = User::where('grupo_id', $grupo->grupo_id)->count();
-
-                                    if ($cupo < 30) {
-                                        $user->grupo_id = $grupo->grupo_id;
-                                        break;
-                                    }
+                                if ($cupo < 30) {
+                                    $user->grupo_id = $grupo->grupo_id;
+                                    break;
                                 }
                             }
                         }
-                        else {
-                            $user->grupo_id = null;
-                        }
+                    }
+                    else {
+                        $user->grupo_id = null;
+                    }
 
-                        if ($user->save()) {
-                            DB::commit();
-                            $status = true;
-                        }
+                    if ($user->save()) {
+                        DB::commit();
+                        $status = true;
+                    }
+                    else {
                         DB::rollback();
                     }
-                    DB::rollback();
                 }
             }
 
