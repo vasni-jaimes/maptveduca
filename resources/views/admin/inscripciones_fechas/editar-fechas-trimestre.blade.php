@@ -72,7 +72,7 @@
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>
                     </div>
-                    <form action="{{ route("actualizar-ciclo.fechas", $ciclo->slug) }}" method="POST" accept-charset="UTF-8" name="frm-editar_ciclo-escolar">
+                    <form action="{{ route("actualizar-ciclo.fechas", $slug) }}" method="POST" accept-charset="UTF-8" name="frm-editar_ciclo-escolar">
                         @csrf
 
                         <div class="form-group row">

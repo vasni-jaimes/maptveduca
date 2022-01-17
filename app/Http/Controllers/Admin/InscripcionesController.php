@@ -37,7 +37,10 @@ class InscripcionesController extends Controller
 	{
 		$ciclo = CiclosEscolares::with(['fechasTrimestres'])->where('slug', $slug)->first();
 		$titulo = ['Cero', 'Primer', 'Segundo', 'Tercer', 'Cuarto', 'Quinto', 'Sexto', 'Septimo', 'Octavo'];
-		return view('admin.inscripciones_fechas.editar-fechas-trimestre', compact('ciclo', 'titulo'));
+
+		//return $ciclo;
+
+		return view('admin.inscripciones_fechas.editar-fechas-trimestre', compact('ciclo', 'titulo', 'slug'));
 	}
 
 
