@@ -356,6 +356,7 @@ class CheckoutController extends Controller
     protected function validarMembresiaUsuario($request)
     {
         try {
+
             $status = false;
             $res = $this->client->get('/v1/billing/subscriptions/'.$request->subscription_id, 
                         ['headers' => ['content-type' => 'application/json',
