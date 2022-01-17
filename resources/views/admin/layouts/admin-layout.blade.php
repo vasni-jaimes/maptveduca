@@ -49,9 +49,11 @@
                         @if ( Auth::guard('admins')->user()->hasRole('admin') )
 
                             <li>
-                                <a href="{{ route('listado-administradores.index') }}">
-                                    <i class="fa fa-pie-chart"></i> <span class="nav-label">Administradores</span>
-                                </a>
+                                    <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Administradores</span> <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="{{ route("listado-administradores.index") }}"> Lista de Admins </a></li>
+                                    <li> <a href="{{ route("agregar-administrador.create") }}"> Agregar Admin </a></li>
+                                </ul>
                             </li>
                             
                             <li>
@@ -129,7 +131,7 @@
                         @if ( Auth::guard('admins')->user()->hasRole(['admin', 'profesor_lider', 'director']) )
 
                             <li>
-                                <a href="{{ route("lista-mensajes") }}">
+                                <a href="{{ route("mandarMensaje") }}">
                                     <i class="fa fa-pie-chart"></i> <span class="nav-label">Mensajes</span>
                                 </a>
                             </li>

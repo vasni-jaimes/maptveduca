@@ -88,7 +88,7 @@
                                             <tr class="gradeX">
                                                 <td> {{ $grupo->id }} </td>
                                                 <td> {{ $grupo->nombre }} </td>
-                                                <td> ... </td>
+                                                <td> {{ $helper->contarAlumnos($grupo->id) }} </td>
                                                 <td class="center">
                                                     <div class="btn-group">
                                                      	<a href="{{ route('edit-admin.grupos', $grupo->slug) }}" class="btn-primary btn btn-xs mr-3">Editar Grupo</a>

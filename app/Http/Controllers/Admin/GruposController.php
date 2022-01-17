@@ -30,7 +30,8 @@ class GruposController extends Controller
     public function index()
     {
         $grupos = Grupo::all();
-        return view('admin.listado-grupos', compact('grupos'));
+        $helper = $this->helper;
+        return view('admin.listado-grupos', compact('grupos', 'helper'));
     }
 
     /**
