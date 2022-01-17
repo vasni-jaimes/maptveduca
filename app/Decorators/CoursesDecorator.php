@@ -10,6 +10,7 @@ use App\Instructor;
 use App\Career;
 use App\Category;
 use Illuminate\Support\Collection;
+use DB;
 
 Class CoursesDecorator
 {
