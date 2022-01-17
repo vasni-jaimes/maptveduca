@@ -383,7 +383,8 @@ class CheckoutController extends Controller
                             $usuarioMembresia->fecha_fin    = $final;
 
 
-                            $hoy = new Carbon($final)->format('Y-m-d');
+                            $hoy = new Carbon($final);
+                            $hoy->format('Y-m-d');
                             $final = new Carbon($hoy);
                             $final->addMonth()->format('Y-m-d');
 
