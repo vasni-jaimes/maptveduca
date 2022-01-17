@@ -165,7 +165,7 @@
                                 <select data-placeholder="Carreras" class="chosen-select" style="width:350px;" name="select_carreras">
                                     @foreach($careers as $career)
                                         <option value="{{ $career->id }}"
-                                            @if($usuario->tieneSuscripcion()->carrera_id == $career->id) selected @endif>
+                                            @if(@$usuario->tieneSuscripcion()->carrera_id == $career->id) selected @endif>
                                             {{ $career->nombre }} 
                                         </option>
                                     @endforeach
