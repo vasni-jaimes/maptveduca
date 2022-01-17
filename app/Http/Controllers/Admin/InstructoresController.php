@@ -137,22 +137,8 @@ class InstructoresController extends Controller
 
         if ($instructor->save()) {
 
-            //$admin = Administrator::where('instructor_id', $instructor->id)->first();
-            //if ($admin) {
-                //$admin->status = $status;
-
-                //if ($admin->save()) {
-                    DB::commit();
-                    return response()->json(["message" => "ok"]);
-                //}
-
-                //DB::rollback();
-                //return response()->json(["message" => "error"]);
-            //}
-            
-            DB::rollback();
-            return response()->json(["message" => "error"]);
-            
+            DB::commit();
+            return response()->json(["message" => "ok"]);
         }
 
         DB::rollback();

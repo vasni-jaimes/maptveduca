@@ -43,8 +43,8 @@ class CheckoutController extends Controller
 		$this->payPalConfig = Config::get('paypal');
 
         $this->client = new Client([
-            //"base_uri" => "https://api-m.sandbox.paypal.com",
-            "base_uri" => "https://api-m.paypal.com",
+            "base_uri" => "https://api-m.sandbox.paypal.com",
+            //"base_uri" => "https://api-m.paypal.com",
         ]);
 	}
 
@@ -114,12 +114,13 @@ class CheckoutController extends Controller
         }
 
         //CREAR PLAN DE PAGO CON EL ID DEL PRODUCTO
-        if (!$this->GenerarPlanPago($membresia->precio, $membresia->id)) {
+        $promocion = $request->has('promocion') ? 1 : null;
+
+        if (!$this->GenerarPlanPago($membresia->precio, $membresia->id, $promocion)) {
             return back()->withInput()->with("error", "Ocurrio un problema, intentelo más tarde");
         }
 
-
-        return $this->suscripcionPorducto($carrera, $membresia_id);
+        return $this->suscripcionPorducto($carrera, $membresia_id, $promocion);
     }
 
 
@@ -194,6 +195,7 @@ class CheckoutController extends Controller
         } catch (ClientException $e) {
             $responsError = $e->getResponse();
             $error        = json_decode($responsError->getBody()->getContents());
+            dd($error);
             \Log::error($error->message);
             return false;
         }
@@ -233,19 +235,18 @@ class CheckoutController extends Controller
 
 
 
-    protected function GenerarPlanPago($precio, $membresia_id)
+    protected function GenerarPlanPago($precio, $membresia_id, $promocion)
     {
 
         $countsPagosMA        = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->where('membresia_id', 2)->count();
         $countsPagosMB        = DB::table('usuarios_membresia')->where('user_id', auth()->user()->id)->where('membresia_id', 1)->count();
 
         $pagosMA              = 24 - $countsPagosMA;
-        $pagosMB              = 24 - $countsPagosMB;
-        $pagosTOtales         = $countsPagosMA + $countsPagosMB;
+        $pagosTOtales         = $countsPagosMA + $countsPagosMB; //se usa para saber si son nuevos en la plataforma
 
 
         $opcionesMembresia  = $membresia_id == 1 
-                                ? $this->arrayMembresiaBasica($pagosMB, $precio, $pagosTOtales) 
+                                ? $this->arrayMembresiaBasica($precio, $pagosTOtales, $promocion) 
                                 : $this->arrayMembresiaAcademica($pagosMA, $precio);
 
         try {
@@ -282,14 +283,17 @@ class CheckoutController extends Controller
     }
 
 
-    protected function suscripcionPorducto($carrera, $membresia_id)
+    protected function suscripcionPorducto($carrera, $membresia_id, $promocion)
     {
         try {
 
             //FECHA DE HOY
             $nameSub    = auth()->user()->nombre." ".auth()->user()->apaterno;
             $emailSub   = auth()->user()->email;
-            $parametros = $membresia_id == 2 ? "cr=".$carrera."&mm=".$membresia_id : "mm=".$membresia_id;
+            $parametros = $membresia_id == 2 ? "cr=".$carrera."&mm=".$membresia_id : 
+                                                $promocion != null ? "mm=".$membresia_id."&p=6" : 
+                                                "mm=".$membresia_id;
+
 
             $res = $this->client->post('/v1/billing/subscriptions', 
                         ['json' => ["plan_id" => $this->plan,
@@ -369,16 +373,40 @@ class CheckoutController extends Controller
                     $final  = Carbon::now()->addMonth()->format('Y-m-d');
 
                     DB::beginTransaction();
-                    $usuarioMembresia               = new UsuarioMembresia();
-                    $usuarioMembresia->user_id      = auth()->user()->id;
-                    $usuarioMembresia->membresia_id = $request->mm;
 
-                    if ($request->has("cr")) {
-                        $usuarioMembresia->carrera_id   = $request->cr;
+                    if ($request->has("prom")) {
+                        
+                        for ($i=1; $i <= $request->prom; $i++) { 
+                            $usuarioMembresia               = new UsuarioMembresia();
+                            $usuarioMembresia->user_id      = auth()->user()->id;
+                            $usuarioMembresia->membresia_id = $request->mm;
+                            $usuarioMembresia->fehca_inicio = $hoy;
+                            $usuarioMembresia->fecha_fin    = $final;
+
+
+                            $hoy = new Carbon($final);
+                            $hoy->addDay()->format('Y-m-d');
+                            $final = new Carbon($hoy);
+                            $final->addMonth()->format('Y-m-d');
+
+                        }
                     }
-                    
-                    $usuarioMembresia->fehca_inicio = $hoy;
-                    $usuarioMembresia->fecha_fin    = $final;
+                    else {
+
+                        $usuarioMembresia               = new UsuarioMembresia();
+                        $usuarioMembresia->user_id      = auth()->user()->id;
+                        $usuarioMembresia->membresia_id = $request->mm;
+
+                        if ($request->has("cr")) {
+                            $usuarioMembresia->carrera_id   = $request->cr;
+                        }
+                        
+                        $usuarioMembresia->fehca_inicio = $hoy;
+                        $usuarioMembresia->fecha_fin    = $final;
+                    }
+
+
+                   
 
                     if ($usuarioMembresia->save()) {
 
@@ -498,16 +526,18 @@ class CheckoutController extends Controller
     } 
 
 
-    protected function arrayMembresiaBasica($pagos, $precio, $countsPagos)
+    protected function arrayMembresiaBasica($precio, $countsPagos, $promocion)
     {
         if (!$countsPagos) {
+
+            $regalo = $promocion == null ? 1 : 6;
 
             return  [
                         [
                             "frequency" => ["interval_unit" => "MONTH", "interval_count" => 1],
                             "tenure_type" => "TRIAL",
                             "sequence" => 1,
-                            "total_cycles" => 1,
+                            "total_cycles" => $regalo,
                             "pricing_scheme" => [
                                 "fixed_price" => [
                                     "value" => 0, 
@@ -520,7 +550,7 @@ class CheckoutController extends Controller
                             "frequency" => ["interval_unit" => "MONTH", "interval_count" => 1],
                             "tenure_type" => "REGULAR",
                             "sequence" => 2,
-                            "total_cycles" => $pagos,
+                            "total_cycles" => 0,
                             "pricing_scheme" => [
                                 "fixed_price" => [
                                     "value" => $precio, 
@@ -530,6 +560,48 @@ class CheckoutController extends Controller
                         ], 
                     ];
         }
+        else if ($countsPagos && $promocion != null) {
+
+
+            if (auth()->user()->suscripcion_id != null) {
+                $this->ObtenerAccessToken(); //OBTENER TOKEN PARA CONSUMIR API PAYPAL
+
+                if ($this->isCancelSubscription(auth()->user()->suscripcion_id, "CANCELLED")) {
+                    //SI LA SUBSCRIPCION NO FUE CANCELADA ANTES, SE CANCELA Y SE MUESTRA LA VISTA DE CANCELACION.
+                    $this->ApiCancelSubs(auth()->user()->suscripcion_id);
+                }
+            }
+
+            $regalo = $promocion == null ? 1 : 6;
+
+            return  [
+                        [
+                            "frequency" => ["interval_unit" => "MONTH", "interval_count" => 1],
+                            "tenure_type" => "TRIAL",
+                            "sequence" => 1,
+                            "total_cycles" => $regalo,
+                            "pricing_scheme" => [
+                                "fixed_price" => [
+                                    "value" => 0, 
+                                    "currency_code" => "MXN"
+                                ],
+                            ],
+                        ],
+
+                        [
+                            "frequency" => ["interval_unit" => "MONTH", "interval_count" => 1],
+                            "tenure_type" => "REGULAR",
+                            "sequence" => 2,
+                            "total_cycles" => 0,
+                            "pricing_scheme" => [
+                                "fixed_price" => [
+                                    "value" => $precio, 
+                                    "currency_code" => "MXN"
+                                ],
+                            ],
+                        ], 
+                    ]; 
+        }
         else {
 
             return  [
@@ -537,7 +609,7 @@ class CheckoutController extends Controller
                             "frequency" => ["interval_unit" => "MONTH", "interval_count" => 1],
                             "tenure_type" => "REGULAR",
                             "sequence" => 1,
-                            "total_cycles" => $pagos,
+                            "total_cycles" => 0,
                             "pricing_scheme" => [
                                 "fixed_price" => [
                                     "value" => $precio, 

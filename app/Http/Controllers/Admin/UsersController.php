@@ -71,7 +71,7 @@ class UsersController extends Controller
         if ($user->save()) {
 
 
-            if ($request->has('meses_regalo')) {
+            /*if ($request->has('meses_regalo')) {
 
                 $promocion          = new Promocion();
                 $promocion->user_id = $user->id;
@@ -88,8 +88,8 @@ class UsersController extends Controller
 
                 //AGREGAR MESES A REGISTROS DE PAGO
                 $this->agregarMesesGratis($request->meses_regalo ,$user);
-            }
-            else if ($request->has('suscripcion')) {
+            }*/
+            if ($request->has('suscripcion')) {
 
                 //OBTENER MEMBRESIA A PAGAR
                 date_default_timezone_set('America/Mexico_City');

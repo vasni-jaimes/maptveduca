@@ -30,6 +30,11 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
+//LIGA PARA REGALAR 1 SEMESTRE
+Route::get('meses-regalo/{token}', 'Site\UsersController@promocionLink')->name('promocionLink');
+//Route::get('meses-regalo/1', 'Site\UsersController@mesesRegalo')->name('meses-regalo');
+
+
 //HOME
 Route::get('home', 'Site\HomeController@index')->name('home');
 
@@ -70,6 +75,7 @@ Route::get('checkout/{slug_membresia}', 'Site\CheckoutController@index')->name('
 Route::get('pago/{slug_membresia}', 'Site\CheckoutController@PayWithPaypal')->name('paago-membresia');
 Route::get('pago/{slug_membresia}/status', 'Site\CheckoutController@PaypalStatus')->name('pago-status');
 Route::get('gracias', 'Site\CheckoutController@getGracias')->name('gracias');
+
 
 Route::get('cancelar-subscripcion', 'Site\CheckoutController@cancelarSubscripcionView')->name('cancelar-subscripcionview');
 Route::get('cancelar-subscripcion/{id_subscripcion}', 'Site\CheckoutController@cancelarSubscripcion')->name('cancelar-subscripcion');

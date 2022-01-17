@@ -189,6 +189,12 @@ class UsersController extends Controller
     }
 
 
+    public function promocionLink()
+    {
+        return view('site.liga-descuento-semestre');
+    }
+
+
     protected function cursosPorTrimestre()
     {
         $trimestre = $this->helper->istrimestre(auth()->user()->grupo_id);
