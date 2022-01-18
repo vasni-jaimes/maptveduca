@@ -58,14 +58,7 @@ class RenovarSuscripcion extends Command
      */
     public function handle()
     {
-        $usuario = User::where('id', 51)->first();
-        $usuario->nombre = 'Baster';
-        $usuario->save();
-
-        exit;
-
         $usuarios = User::where('status', 1)->get();
-
         foreach ($usuarios as $usuario) {
             if (!$usuario->tieneSuscripcion()) {
                 if ($usuario->suscripcion_id != null) {
