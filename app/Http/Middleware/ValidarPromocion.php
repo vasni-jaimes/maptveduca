@@ -16,6 +16,8 @@ class ValidarPromocion
     public function handle($request, Closure $next)
     {
         $correos = [
+            'baster07mi@hotmail.com',
+            'jimenaoropeza.map@gmail.com',
             'esg_dickinson@hotmail.com',
             'boredinirak@gmail.com',
             'gab.zarate15@gmail.com',
