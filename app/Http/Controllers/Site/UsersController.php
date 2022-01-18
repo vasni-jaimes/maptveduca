@@ -59,6 +59,7 @@ class UsersController extends Controller
 
     public function index()
     {
+
     	/* FAVORITOS */
     	$favoritosCursos = Favorito::with(['cursos'])
     							->where('user_id', auth()->user()->id)

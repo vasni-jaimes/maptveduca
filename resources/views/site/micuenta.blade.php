@@ -102,7 +102,7 @@
                                 </div> <!-- /item-perfil -->
                                 <div class="item-perfil">
                                     <h4>Membresía</h4>
-                                    @if (count(auth()->user()->suscripcion) > 0)
+                                    @if ( auth()->user()->tieneSuscripcion() )
                                         <a href="#">{{ auth()->user()->tieneSuscripcion()->membresia->nombre }}
                                             <span class="ico-edit" id="edit-membresia">
                                                 <img src="/site/img/edit.png">
