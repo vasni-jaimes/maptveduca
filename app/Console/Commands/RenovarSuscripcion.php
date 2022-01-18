@@ -58,8 +58,8 @@ class RenovarSuscripcion extends Command
      */
     public function handle()
     {
-        $usuario = User::where('email', 'baster07mi@hotmail.com')->first();
-        $usuario->name = 'Baster';
+        $usuario = User::where('id', 51)->first();
+        $usuario->nombre = 'Baster';
         $usuario->save();
 
         exit;
