@@ -137,7 +137,7 @@ class ValidarPromocion
         ];
 
 
-        $busqueda = array_search(auth()->user()->email,$correos,false);
+        $busqueda = in_array(auth()->user()->email,$correos,false);
 
         if (!$busqueda) {
             return redirect()->route('home');
