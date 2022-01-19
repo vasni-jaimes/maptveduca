@@ -22,9 +22,11 @@
     	            		<p><small>¿Tienes preguntas? <a href="mailto:maptveduca.info@gmail.com">Escríbenos</a> y te atenderemos lo antes posible.</small>
     	            	@else
 
-	    	                <h2>Suscriopción para membresia basica.</h2>
-	                        <p> Suscribete desde este link y se te otorgara un descuento de 1 semestre completo,<br> solo puede ser para tu usuario a si que no compartas este link. </p>
-	                        <p><small>¿Tienes preguntas? <a href="mailto:maptveduca.info@gmail.com">Escríbenos</a> y te atenderemos lo antes posible.</small></p>
+	    	                <h2>Suscripción para membresía básica.</h2>
+	                        <p> Este es un link exclusivo para la comunidad de Colegio MAP. </p><br>
+	                        <p>Suscríbete desde este enlace y obtendrás un periodo gratuito equivalente a la duración del semestre Enero-Junio 2022.<br>Esta promoción es exclusiva para alumnos previamente inscritos a Colegio MAP, por lo que te pedimos que no compartas este link a nadie más</p><br>
+
+	                        <p><small>¿Tienes preguntas? Escríbenos. <a href="mailto:maptveduca.info@gmail.com">Escríbenos</a> y te atenderemos lo antes posible.</small></p>
 	                        <br>
 
 	                        <form action="{{ route('paago-membresia', 'membresia-basica') }}" class="form-checkout" method="GET">
