@@ -30,6 +30,7 @@ Route::post('agregar-administrador', 'Admin\AministardoresController@store')->na
 Route::get('listado-administradores', 'Admin\AministardoresController@index')->name('listado-administradores.index');
 Route::get('editar-administrador/{admin_id}', 'Admin\AministardoresController@edit')->name('editar-administradores.edit');
 Route::post('actualizar-administrador/{admin_id}', 'Admin\AministardoresController@update')->name('actualizar-administradores.update');
+Route::post('eliminar-administrador/{admin_id}', 'Admin\AministardoresController@destroy')->name('actualizar-administradores.delete');
 
 
 //USUARIOS

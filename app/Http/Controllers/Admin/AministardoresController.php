@@ -73,7 +73,7 @@ class AministardoresController extends Controller
 
         if ($admin->save()) {
 
-            $admin->roles()->attach($request->roles);
+            $admin->roles()->attach($request->select_roles);
             $admin->save();
 
             DB::commit();
@@ -155,6 +155,6 @@ class AministardoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
