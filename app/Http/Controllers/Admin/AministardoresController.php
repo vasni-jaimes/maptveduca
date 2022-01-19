@@ -74,6 +74,7 @@ class AministardoresController extends Controller
         if ($admin->save()) {
 
             $admin->roles()->attach($request->roles);
+            $admin->save();
 
             DB::commit();
             return back()->with("status.newAdmin", "success");

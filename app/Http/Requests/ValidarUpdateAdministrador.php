@@ -26,7 +26,7 @@ class ValidarUpdateAdministrador extends FormRequest
         return [
             "nombres"       => "required|string|min:4|max:255",
             "apellidos"     => "required|string|min:4|max:255",
-            "email"         => "required|string|min:4|max:255|email|unique:instructors",
+            "email"         => "required|string|min:4|max:255|email|unique:administrators,email,".request('admin_id').",id",
             "select_roles"  => "required|numeric",
             "password"      => "nullable|string|min:8|confirmed",
         ];

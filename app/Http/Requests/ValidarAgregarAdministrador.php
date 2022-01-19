@@ -26,7 +26,7 @@ class ValidarAgregarAdministrador extends FormRequest
         return [
             "nombres"       => "required|string|min:4|max:255",
             "apellidos"     => "required|string|min:4|max:255",
-            "email"         => "required|string|min:4|max:255|email|unique:instructors",
+            "email"         => "required|string|min:4|max:255|email|unique:administrators",
             "select_roles"  => "required|numeric",
             "password"      => "required|string|min:8|confirmed",
         ];
