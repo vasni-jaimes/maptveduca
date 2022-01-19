@@ -166,12 +166,14 @@
                                             </p>
                                             <div class="item-mensaje">
                                                 <div class="txt-mensaje">
-                                                    @if ($mensaje->admin->rol_id == 1)
+                                                    @if ($mensaje->admin == null)
+                                                         <p><strong>De:</strong> MAPtv Educa </p>
+                                                    @elseif (in_array(1,$mensaje->admin->roles->pluck('id')->toArray(),false))
                                                         <p><strong>De:</strong> MAPtv Educa </p>
                                                     @else
                                                         <p>
                                                             <strong>De:</strong> 
-                                                            {{ $mensaje->admin->nombre." ".$mensaje->admin->amaterno }} 
+                                                            {{ $mensaje->admin->nombres." ".$mensaje->admin->apellidos }} 
                                                         </p>
                                                     @endif
                                                     <p><strong>Mensaje:</strong></p>
