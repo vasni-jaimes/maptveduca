@@ -186,7 +186,7 @@ class MensajesController extends Controller
         $nuevoTablero = array();
         foreach($tablero as $tableros) {
             $alumno = User::find($tableros->user_id);
-            if ($alumno->tieneSuscripcion()->membresia_id == 2) {
+            if (@$alumno->tieneSuscripcion()->membresia_id == 2) {
                 $nuevoTablero[] = $tableros;
             }
         }
