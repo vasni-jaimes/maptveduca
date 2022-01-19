@@ -152,6 +152,9 @@ class AulasVirtualesController extends Controller
     {
         $helper        = $this->helper;
         $gruposMateria = $this->obtenerGruposForCurso($slug_materia);
+
+        return $gruposMateria;
+
         $materia       = Course::where('slug', $slug_materia)->first('nombre');
 
         return view('admin.listado-grupos-aulas', compact('gruposMateria', 'helper', 'slug_materia', 'materia'));
@@ -603,8 +606,9 @@ class AulasVirtualesController extends Controller
         //OBTENER GRUPOS QUE CORRESPONDEN AL CURSO
         $curso      = Course::where('slug', $slug_materia)->first(); // 1
         $trimestres = Recomendacion::where('curso_id', $curso->id)->whereIn('trimestre', $trimestreActual)->pluck('trimestre')->toArray(); // 1,2
-        $ciclos     = CiclosFechas::where('trimestre', $trimestres)->pluck('ciclo_id')->toArray(); // 1,2
-        $grupos     = Grupo::where('ciclo_id', $ciclos)->get(); // 2
+        $ciclos     = CiclosFechas::whereIn('trimestre', $trimestres)
+                                ->where('fecha_inicio', '<=',$hoy)->where('fecha_final', '>=', $hoy)->pluck('ciclo_id')->toArray(); // 1,2
+        $grupos     = Grupo::whereIn('ciclo_id', $ciclos)->get(); // 2
 
         return $grupos;
     }
