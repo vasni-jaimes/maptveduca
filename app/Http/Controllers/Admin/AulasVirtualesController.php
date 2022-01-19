@@ -152,9 +152,6 @@ class AulasVirtualesController extends Controller
     {
         $helper        = $this->helper;
         $gruposMateria = $this->obtenerGruposForCurso($slug_materia);
-
-        return $gruposMateria;
-
         $materia       = Course::where('slug', $slug_materia)->first('nombre');
 
         return view('admin.listado-grupos-aulas', compact('gruposMateria', 'helper', 'slug_materia', 'materia'));
