@@ -289,7 +289,7 @@ class CheckoutController extends Controller
             //FECHA DE HOY
             $nameSub    = auth()->user()->nombre." ".auth()->user()->apaterno;
             $emailSub   = auth()->user()->email;
-            $parametros = $membresia_id == 2 ? "cr=".$carrera."&mm=".$membresia_id : 
+            $parametros = $membresia_id == 1 ? "cr=".$carrera."&mm=".$membresia_id : 
                                                 $promocion != null ? "mm=".$membresia_id."&prom=6" : 
                                                 "mm=".$membresia_id;
 
