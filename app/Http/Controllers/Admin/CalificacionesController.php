@@ -56,18 +56,22 @@ class CalificacionesController extends Controller
         }
 
         $cursos = $this->cursosPorTrimestre($user);
-
         return view('admin.calificaciones-materias', compact('cursos', 'alumno_id', 'user'));
     }
 
     public function getCalificaciones($alumno_id, $slug_curso)
     {
+        $helper          = $this->helper;
         $califi          = array();
         $user            = User::where('id', $alumno_id)->first();
         $curso           = Course::where('slug', $slug_curso)->where('status', 1)->first();
         $trimestreAlumno = $this->helper->istrimestre($user->grupo_id);
         $calificaciones  = Calificacion::where('user_id', $user->id)
                                 ->where('curso_id', $curso->id)->get();
+        $trimestresCurso = Recomendacion::where('curso_id', $curso->id)
+                                        ->where('trimestre', '<=',$trimestreAlumno)->get()->pluck('trimestre')->toArray();
+
+        //return $trimestresCurso;
 
         foreach ($calificaciones as $calificacion) {
 
@@ -108,7 +112,7 @@ class CalificacionesController extends Controller
         //return $califi["tercero"];
 
 
-        return view('admin.calificaciones', compact("trimestreAlumno", "calificaciones", "curso", "user", "alumno_id", "slug_curso", "califi"));
+        return view('admin.calificaciones', compact("trimestreAlumno", "helper", "trimestresCurso", "calificaciones", "curso", "user", "alumno_id", "slug_curso", "califi"));
     }
 
 
@@ -302,6 +306,7 @@ class CalificacionesController extends Controller
 
     protected function cursosPorTrimestre($user)
     {
+        $trimestres      = [1,2,3,4,5,6,7,8];
         $trimestre       = $this->helper->istrimestre($user->grupo_id);
         $recomendaciones = Recomendacion::with(['cursos' => function($query){
                                     $query->where('status', 1);
@@ -310,7 +315,7 @@ class CalificacionesController extends Controller
                                     }
                                 }])
                                 ->where('carrera_id', $user->tieneSuscripcion()->carrera_id)
-                                ->where('trimestre', $trimestre)
+                                ->whereIn('trimestre', array_slice($trimestres, 0, $trimestre))
                                 ->get();
 
         return $recomendaciones->where('cursos', '!=', null);

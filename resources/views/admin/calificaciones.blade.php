@@ -93,7 +93,7 @@
 
                         <div class="hr-line-dashed"></div><br>
 
-                        @if ($trimestreAlumno == 1 || isset($califi["primero"]) )
+                        @if (isset($califi["primero"]) || in_array(1,$trimestresCurso,false) == true)
 
                             <h2> Primer Trimestre </h2><br>
                             
@@ -117,7 +117,7 @@
 
                         
 
-                        @if ($trimestreAlumno == 2 || isset($califi["segundo"]))
+                        @if (isset($califi["segundo"]) || in_array(2,$trimestresCurso,false) == true)
 
                             <div class="hr-line-dashed"></div>
 
@@ -142,7 +142,7 @@
 
 
 
-                        @if ($trimestreAlumno == 3 || isset($califi["tercero"]))
+                        @if (isset($califi["tercero"]) || in_array(3,$trimestresCurso,false) == true)
 
                             <div class="hr-line-dashed"></div>
 
@@ -167,7 +167,7 @@
 
 
 
-                        @if ($trimestreAlumno == 4 || isset($califi["cuarto"]))
+                        @if (isset($califi["cuarto"]) || in_array(4,$trimestresCurso,false) == true)
 
                             <div class="hr-line-dashed"></div>
 
@@ -192,7 +192,7 @@
 
 
 
-                        @if ($trimestreAlumno == 5 || isset($califi["quinto"]))
+                        @if (isset($califi["quinto"]) || in_array(5,$trimestresCurso,false) == true)
 
                             <div class="hr-line-dashed"></div>
 
@@ -217,7 +217,7 @@
 
 
 
-                        @if ($trimestreAlumno == 6 || isset($califi["sexto"]))
+                        @if (isset($califi["sexto"]) || in_array(6,$trimestresCurso,false) == true)
 
                             <div class="hr-line-dashed"></div>
 
@@ -242,7 +242,7 @@
 
                         
 
-                        @if ($trimestreAlumno == 7 || isset($califi["septimo"]))
+                        @if (isset($califi["septimo"]) || in_array(7,$trimestresCurso,false) == true)
 
                             <div class="hr-line-dashed"></div>
 
@@ -267,7 +267,7 @@
 
 
 
-                        @if ($trimestreAlumno == 8 || isset($califi["octavo"]))
+                        @if (isset($califi["octavo"]) || in_array(8,$trimestresCurso,false) == true)
 
                             <div class="hr-line-dashed"></div>
 
