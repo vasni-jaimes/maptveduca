@@ -46,19 +46,6 @@
                 <p style="margin: 0; padding-bottom: 15px; font-size: 15px; line-height: 130%;"><strong>¡Gracias! Nos vemos pronto.</strong></p>
             </td>
         </tr>
-
-        <tr>
-            <td colspan="2" style="padding: 20px; background-color: #000;">
-                <ul style="padding-left: 0; list-style: none; text-align: center;">
-                    <li style="display: inline-block; vertical-align: middle;"><img src="img/facebook.png"></li>
-                    <li style="display: inline-block; vertical-align: middle;"><img src="img/instagram.png"></li>
-                    <li style="display: inline-block; vertical-align: middle;"><img src="img/youtube.png"></li>
-                    <li style="display: inline-block; vertical-align: middle;"><img src="img/email.png"></li>
-                    <li style="display: inline-block; vertical-align: middle;"><img src="img/mundo.png"></li>
-                </ul>
-            </td>
-        </tr>
-        
     </table>
     
 </body>
