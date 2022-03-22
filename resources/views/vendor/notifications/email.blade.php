@@ -11,7 +11,7 @@
         
         <tr>    
             <td colspan="2">
-                <img style="display: block; width: 100%;" src="img/banner.png">
+                <img style="display: block; width: 100%;" src="/site/img/logo-amarillo.png">
             </td>
         </tr>
         
