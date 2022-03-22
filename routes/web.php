@@ -122,6 +122,9 @@ Route::get('faqs', 'Site\ContactoController@index')->name('faqs');
 Route::post('contacto', 'Site\ContactoController@store')->name('contacto.store');
 
 
+Route::get('bienvenida', function() {
+	return view('site.layouts.mails.bienvenida');
+});
 
 Route::get('password/email', function() {
 	return view('site.recover');

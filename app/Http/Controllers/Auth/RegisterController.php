@@ -87,7 +87,7 @@ class RegisterController extends Controller
                 ]);
 
         if ($usr) {
-            //$this->MandarEmail($usr);
+            $this->MandarEmail($usr);
             $this->sendMensajeBienvenida($usr);
             return $usr;
         }
