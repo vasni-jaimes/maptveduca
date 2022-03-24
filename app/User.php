@@ -38,6 +38,15 @@ class User extends Authenticatable
         return $this->suscripcion[count($this->suscripcion) - 1];
     }
 
+    public function miUltimaSuscripcion()
+    {
+        $suscripcion2 = UsuarioMembresia::with("membresia")
+                                        ->where('user_id', $this->id)
+                                        ->first();
+
+        return $suscripcion2;
+    }
+
 
     public function primeraSuscripcion()
     {

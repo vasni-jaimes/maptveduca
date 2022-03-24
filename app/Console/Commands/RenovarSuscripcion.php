@@ -123,8 +123,8 @@ class RenovarSuscripcion extends Command
                     DB::beginTransaction();
                     $usuarioMembresia               = new UsuarioMembresia();
                     $usuarioMembresia->user_id      = $usuario->id;
-                    $usuarioMembresia->membresia_id = $usuario->tieneSuscripcion()->membresia_id;
-                    $usuarioMembresia->carrera_id   = $usuario->tieneSuscripcion()->carrera_id;
+                    $usuarioMembresia->membresia_id = $usuario->miUltimaSuscripcion()->membresia_id;
+                    $usuarioMembresia->carrera_id   = $usuario->miUltimaSuscripcion()->carrera_id;
                     $usuarioMembresia->fehca_inicio = $hoy;
                     $usuarioMembresia->fecha_fin    = $final;
 
