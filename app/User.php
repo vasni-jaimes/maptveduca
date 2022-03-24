@@ -42,7 +42,7 @@ class User extends Authenticatable
     {
         $suscripcion2 = UsuarioMembresia::with("membresia")
                                         ->where('user_id', $this->id)
-                                        ->first();
+                                        ->get()->last();
 
         return $suscripcion2;
     }

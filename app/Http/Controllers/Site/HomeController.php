@@ -24,6 +24,7 @@ class HomeController extends Controller
 
     public function index()
     {
+        return auth()->user()->miUltimaSuscripcion();
         //FECHA ACTUAL
         $carbon         = new Carbon();
         $fechaActual    = $carbon->now();
