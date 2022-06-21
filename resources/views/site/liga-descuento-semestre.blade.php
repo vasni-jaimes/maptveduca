@@ -24,7 +24,7 @@
 
 	    	                <h2>Suscripción para membresía básica.</h2>
 	                        <p> Este es un link exclusivo para la comunidad de Colegio MAP. </p><br>
-	                        <p>Suscríbete desde este enlace y obtendrás un periodo gratuito equivalente a la duración del semestre Enero-Junio 2022.<br>Esta promoción es exclusiva para alumnos previamente inscritos a Colegio MAP, por lo que te pedimos que no compartas este link a nadie más</p><br>
+	                        <p>Suscríbete desde este enlace y obtendrás un periodo gratuito equivalente a 6 meses.<br>Esta promoción es exclusiva para alumnos previamente inscritos a Colegio MAP, por lo que te pedimos que no compartas este link a nadie más</p><br>
 
 	                        <p><small>¿Tienes preguntas? Escríbenos. <a href="mailto:maptveduca.info@gmail.com">Escríbenos</a> y te atenderemos lo antes posible.</small></p>
 	                        <br>
