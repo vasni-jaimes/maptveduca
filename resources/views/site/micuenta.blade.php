@@ -475,7 +475,7 @@
                                 <p>AQUÍ ENCONTRARÁS TODOS LOS CURSOS CORRESPONDIENTES A TU PROGRAMA ACADÉMICO, ORDENADOS POR TRIMESTRE EN PROGRESO</p>
                                 <div class="flex-cursos">
                                     @if ($materias->count() > 0)
-                                        <p>{{ $tituloTrimestre." Trimestre" }}</p>
+                                        <p>{{ $tituloTrimestre == null ? "No muestra trimestre" : $tituloTrimestre." Trimestre" }}</p>
                                         <ul class="flex flex-materias wrap">
                                             @foreach($materias as $materia)
                                                 <li class="col-2">

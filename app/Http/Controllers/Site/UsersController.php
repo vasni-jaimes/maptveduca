@@ -150,6 +150,10 @@ class UsersController extends Controller
         $trimestre = $this->helper->istrimestre( auth()->user()->grupo_id );
         $titulos = [null, "1er", "2do", "3er", "4to", "5to", "6to", "7mo", "8vo"];
 
+        if (!$trimestre) {
+            return false;
+        }
+
         return $titulos[$trimestre];
     }
 

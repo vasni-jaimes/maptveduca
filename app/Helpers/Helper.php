@@ -77,6 +77,20 @@ class Helper
                     ->where('fecha_inicio', '<=',$hoy)
                     ->where('fecha_final', '>=', $hoy)
                     ->first();
+        
+        if ($fechas  == null) {
+            $fechaParse = Carbon::parse($hoy);
+
+            $fechas = DB::table('ciclos_fechas')
+                    ->where('ciclo_id', $grupo->ciclo_id)
+                    ->whereMonth('fecha_final', $fechaParse->month)
+                    ->whereYear('fecha_final', $fechaParse->year)
+                    ->first();
+        }
+
+        if (!$fechas) {
+            return false;
+        }
 
         return $fechas->trimestre;
     }
