@@ -60,6 +60,21 @@ class User extends Authenticatable
         $hoy = Carbon::now()->format('Y-m-d');
 
         $suscripcion2 = UsuarioMembresia::with("membresia")
+                                        ->where('fecha_fin', '>=', $hoy)
+                                        ->where('fehca_inicio', '<=', $hoy)
+                                        ->where('user_id', $this->id)
+                                        ->first();
+
+        return $suscripcion2;
+    }
+
+    public function tieneSuscripcionRen()
+    {
+        //FECHA DE HOY
+        date_default_timezone_set('America/Mexico_City');
+        $hoy = Carbon::now()->format('Y-m-d');
+
+        $suscripcion2 = UsuarioMembresia::with("membresia")
                                         ->where('fecha_fin', '>', $hoy)
                                         ->where('fehca_inicio', '<=', $hoy)
                                         ->where('user_id', $this->id)

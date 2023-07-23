@@ -60,9 +60,9 @@ class RenovarSuscripcion extends Command
     {
         $usuarios = User::where('status', 1)->get();
         foreach ($usuarios as $usuario) {
-            if (!$usuario->tieneSuscripcion()) {
-                if ($usuario->suscripcion_id != null) {
-                    $this->ObtenerAccessToken();
+            if (!$usuario->tieneSuscripcionRen()) {
+                if ($usuario->suscripcion_id !== null) {
+                    $this->ObtenerAccessToken($usuario);
                     $this->obtenerStatus($usuario->suscripcion_id, $usuario);
                 }
                 else {
@@ -76,7 +76,7 @@ class RenovarSuscripcion extends Command
 
 
 
-    protected function ObtenerAccessToken()
+    protected function ObtenerAccessToken($usuario)
     {
         try {
             $res = $this->client->post('/v1/oauth2/token', 
@@ -95,8 +95,12 @@ class RenovarSuscripcion extends Command
         } catch (ClientException $e) {
             $responsError = $e->getResponse();
             $error        = json_decode($responsError->getBody()->getContents());
-            var_dump($error);
+            //var_dump($error);
             //\Log::error($error->message);
+            if ($usuario->renovar == 1) {
+                $this->insertarNuevaSub($usuario);
+            }
+
             return false;
         }
     }
@@ -132,10 +136,20 @@ class RenovarSuscripcion extends Command
                         DB::commit();
                         $status = true;
                     }
+                    else {
+                        DB::rollback();
+                    }
 
-                    DB::rollback();
+                    
                 }
                 else if ($usuario->renovar == 1) {
+                    $status = true;
+                    $this->insertarNuevaSub($usuario);
+                }
+            }
+            else {
+                if ($usuario->renovar == 1) {
+                    $status = true;
                     $this->insertarNuevaSub($usuario);
                 }
             }
@@ -146,7 +160,13 @@ class RenovarSuscripcion extends Command
             $responsError = $e->getResponse();
             $error        = json_decode($responsError->getBody()->getContents());
             \Log::error($error->message);
-            return false;
+
+            if ($usuario->renovar == 1) {
+                $status = true;
+                $this->insertarNuevaSub($usuario);
+            }
+
+            return $status;
         }
     }
 
@@ -154,7 +174,7 @@ class RenovarSuscripcion extends Command
     protected function insertarNuevaSub($usuario)
     {
         $status = false;
-        if ($usuario->tieneSuscripcion()) {
+        if (!$usuario->tieneSuscripcionRen()) {
             //FECHA DE HOY
             date_default_timezone_set('America/Mexico_City');
             $hoy    = Carbon::now()->format('Y-m-d');
@@ -163,8 +183,8 @@ class RenovarSuscripcion extends Command
             DB::beginTransaction();
             $usuarioMembresia               = new UsuarioMembresia();
             $usuarioMembresia->user_id      = $usuario->id;
-            $usuarioMembresia->membresia_id = $usuario->tieneSuscripcion()->membresia_id;
-            $usuarioMembresia->carrera_id   = $usuario->tieneSuscripcion()->carrera_id;
+            $usuarioMembresia->membresia_id = $usuario->miUltimaSuscripcion()->membresia_id;
+            $usuarioMembresia->carrera_id   = $usuario->miUltimaSuscripcion()->carrera_id;
             $usuarioMembresia->fehca_inicio = $hoy;
             $usuarioMembresia->fecha_fin    = $final;
 
@@ -172,8 +192,9 @@ class RenovarSuscripcion extends Command
                 DB::commit();
                 $status = true;
             }
-
-            DB::rollback();
+            else {
+                DB::rollback();
+            }
         }
 
         return $status; 
