@@ -1845,6 +1845,11 @@ video#myVideo {
     justify-content: space-between;
 }
 
+.form .re-captcha-content {
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
 .form .input {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -2957,8 +2962,6 @@ section.membresia {
     align-items: center;
 }
 
-
-}
 
 .wrapper-herramienta {
     margin: 50px 0;
@@ -4677,7 +4680,7 @@ small.notificacion {
 }
 
 .txt-mensaje p:last-of-type {
-    padding: 0:
+    padding: 0;
 }
 
 .s-tab {

@@ -138,10 +138,6 @@ Route::get('privacidad', function() {
 	return view('site.privacidad');
 })->name('privacidad');
 
-//Route::get('gracias', function() {
-//	return view('site.gracias');
-//})->name('gracias');
-
 
 //Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
