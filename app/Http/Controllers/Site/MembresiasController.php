@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Membresias;
+use App\Membresia;
 use App\AdministracionFecha;
 
 class MembresiasController extends Controller
@@ -22,14 +22,18 @@ class MembresiasController extends Controller
      */
     public function index()
     {
-        $adminFecha     = AdministracionFecha::first();
-        return view("site.membresia", compact("adminFecha"));
+        $adminFecha         = AdministracionFecha::first();
+        $membresiaAcademica = Membresia::where("slug", 'membresia-academica')->first();
+        $membresiaBasica    = Membresia::where("slug", 'membresia-basica')->first();
+        
+        return view("site.membresia", compact("adminFecha", "membresiaAcademica", "membresiaBasica"));
     }
 
 
     public function indexBasica()
     {
-        return view("site.membresia-basica");
+        $membresia = Membresia::where("slug", 'membresia-basica')->first();
+        return view("site.membresia-basica", compact("membresia"));
     }
 
     /**

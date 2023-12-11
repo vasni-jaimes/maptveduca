@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Mensaje;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailRegistro;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\JsonResponse;
 
 class RegisterController extends Controller
 {
@@ -68,6 +71,47 @@ class RegisterController extends Controller
         ]);
     }
 
+
+    public function register(Request $request)
+    {
+
+        $messages = [
+            'g-recaptcha-response.required' => 'Por favor, verifica que no eres un robot.'
+        ];
+
+        $this->validate($request, [
+            'g-recaptcha-response' => 'required',
+        ], $messages);
+
+
+        $recaptchaSecretKey = env('RECAPTCHA_SECRET_KEY');
+        $recaptchaResponse = $request->input('g-recaptcha-response');
+        
+        $recaptcha = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptchaSecretKey}&response={$recaptchaResponse}");
+        $recaptchaData = json_decode($recaptcha);
+
+        if (!$recaptchaData->success) {
+            // La validación de reCAPTCHA ha fallado
+            return redirect()->back()->withErrors(['g-recaptcha-response' => 'La validación de reCAPTCHA ha fallado.']);
+        }
+
+
+
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+                    ? new JsonResponse([], 201)
+                    : redirect($this->redirectPath());
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -111,8 +155,11 @@ class RegisterController extends Controller
 
     protected function MandarEmail($usr)
     {
-        //maptveduca.info@gmail.com
-        $email = $usr->email;
-        return Mail::to($email)->send(new MailRegistro());
+        try {
+             //maptveduca.info@gmail.com
+            $email = $usr->email;
+            return Mail::to($email)->send(new MailRegistro());
+        } catch (\Throwable $th) { return true; }
+       
     }
 }

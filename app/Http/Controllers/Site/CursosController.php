@@ -12,6 +12,7 @@ use App\Favorito;
 use App\Recomendacion;
 use App\TableroCursos;
 use App\Helpers\Helper;
+use App\Membresia;
 use DB;
 
 class CursosController extends Controller
@@ -55,10 +56,14 @@ class CursosController extends Controller
             }
         }
 
-        $validarSide = $this->validacionSidebar($curso->id);
-        $miTablero   = $this->estaEnMiTablero($curso->id);
-        $favorito    = Favorito::where('user_id', auth()->user()->id)->where('curso_id', $curso->id)->first();
-    	return view("site.single-cursos", compact("curso", "temario", "clase", "clase_id", "favorito", "validarSide", "miTablero", "subclase_id"));
+        $validarSide        = $this->validacionSidebar($curso->id);
+        $miTablero          = $this->estaEnMiTablero($curso->id);
+        $favorito           = Favorito::where('user_id', auth()->user()->id)->where('curso_id', $curso->id)->first();
+        $membresiaAcademica = Membresia::where("slug", 'membresia-academica')->first();
+        $membresiaBasica    = Membresia::where("slug", 'membresia-basica')->first();
+
+
+    	return view("site.single-cursos", compact("curso", "temario", "clase", "clase_id", "favorito", "validarSide", "miTablero", "subclase_id", "membresiaAcademica", "membresiaBasica"));
     }
 
     public function download($slug_curso, $slug_sesion)
