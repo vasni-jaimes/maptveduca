@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Config;
 
 class LoginController extends Controller
 {
@@ -58,7 +59,7 @@ class LoginController extends Controller
         ], $messages);
 
 
-        $recaptchaSecretKey = env('RECAPTCHA_SECRET_KEY');
+        $recaptchaSecretKey = Config::get('recaptcha')['recaptcha_secret_key'];
         $recaptchaResponse = $request->input('g-recaptcha-response');
         
         $recaptcha = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptchaSecretKey}&response={$recaptchaResponse}");
