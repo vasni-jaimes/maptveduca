@@ -13,9 +13,20 @@
         <link href="/admini/css/animate.css" rel="stylesheet">
         <link href="/admini/css/style.css" rel="stylesheet">
 
+        <script type="text/javascript">
+            var onloadCallback = function() {
+                grecaptcha.render('g-recaptcha', {
+                    'sitekey' : '6Ld54ywpAAAAAOLWVxqRwZJLNM_B4yJromReFWIG'
+                });
+            };
+        </script>
+
     </head>
 
     <body class="gray-bg">
+
+   
+
 
         <div class="middle-box text-center loginscreen animated fadeInDown">
             <div>
@@ -45,12 +56,39 @@
                             </span>
                         @enderror
                     </div>
+
+                    <div class="re-captcha-content mb-3">
+                        <div id="g-recaptcha"></div>
+                    </div>
+
+
+                    @if ($errors->has('g-recaptcha-response'))
+                        
+                        <span class="invalid-feedback error" role="alert">
+                                {{ $errors->first('g-recaptcha-response') }}
+                            </span>
+
+                        <div class="alert alert-danger">
+                            <strong> {{ $errors->first('g-recaptcha-response') }} </strong>
+                        </div>
+
+                    @endif
+
+                    @if ( $errors->has('g-recaptcha-response') )
+                        <span class="invalid-feedback error" role="alert">
+                            <strong>{{ $errors->has('g-recaptcha-response') }}</strong>
+                        </span>
+                    @enderror
+
                     <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
                     {{-- <a href="#"><small>Forgot password?</small></a> --}}
                 </form>
             </div>
         </div>
 
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+            async defer>
+        </script>
     </body>
 
 </html>

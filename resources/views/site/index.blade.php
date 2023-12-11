@@ -160,8 +160,8 @@
 	            </tr>
 	            <tr class="last-tr">
 	                <td class="last-td">&nbsp</td>
-	                <td class="last-td"><span>$250 MXN mensuales</span><a class="bg-amarillo">Prueba gratuita por 30 días</a></td>
-	                <td class="last-td"><span>$2,000 MXN mensuales<br>en modalidad trimestral</span></td>
+	                <td class="last-td"><span>${{ number_format($membresiaBasica->precio, 2) }} MXN mensuales</span><a class="bg-amarillo">Prueba gratuita por 30 días</a></td>
+	                <td class="last-td"><span>${{ number_format($membresiaAcademica->precio, 2) }} MXN mensuales<br>en modalidad trimestral</span></td>
 	            </tr>
 	        </table>
 	        

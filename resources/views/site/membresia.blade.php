@@ -61,7 +61,7 @@
                                 <li>Julio - Septiembre</li>
                                 <li>Octubre - Diciembre</li>
                             </ul>
-                            <p><strong>COSTO: </strong>$2,000.00 MXN mensuales</p>
+                            <p><strong>COSTO: </strong>${{ number_format($membresiaAcademica->precio, 2) }} MXN mensuales</p>
                             <p><strong>CERTIFICACIÓN: </strong></p>
                             <p>Certificado con validez oficial expedido por M.A.P. Colegio de Música, Audio y Producción <br>(Incorporado a SEP)</p>
                         </div> <!-- /txt-programa -->
@@ -313,8 +313,8 @@
                         </tr>
                         <tr class="last-tr">
                             <td class="last-td">&nbsp</td>
-                            <td class="last-td"><span>$250 MXN mensuales</span><a href="{{ route("checkout", "membresia-basica") }}" class="bg-amarillo">Prueba gratuita por 30 días</a></td>
-                            <td class="last-td"><span>$2,000 MXN mensuales<br>en modalidad trimestral</span><a href="{{ route("checkout", "membresia-academica") }}" class="bg-amarillo">OBTÉN TU MEMBRESÍA E INSCRÍBETE</a></td>
+                            <td class="last-td"><span>${{ number_format($membresiaBasica->precio, 2) }} MXN mensuales</span><a href="{{ route("checkout", "membresia-basica") }}" class="bg-amarillo">Prueba gratuita por 30 días</a></td>
+                            <td class="last-td"><span>${{ number_format($membresiaAcademica->precio, 2) }} MXN mensuales<br>en modalidad trimestral</span><a href="{{ route("checkout", "membresia-academica") }}" class="bg-amarillo">OBTÉN TU MEMBRESÍA E INSCRÍBETE</a></td>
                         </tr>
                     </table>
                     

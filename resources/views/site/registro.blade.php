@@ -7,6 +7,16 @@
     <link href="/admini/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
 @stop
 
+@section('scripts-header_content')
+	<script type="text/javascript">
+		var onloadCallback = function() {
+			grecaptcha.render('g-recaptcha', {
+				'sitekey' : '6Ld54ywpAAAAAOLWVxqRwZJLNM_B4yJromReFWIG'
+			});
+		};
+	</script>
+@endsection
+
 
 @section('contenido')
 
@@ -42,6 +52,11 @@
 	                        <input class="input" type="password" name="password" placeholder="Contraseña*">
 	                        <input class="input" type="password" name="password_confirmation" placeholder="Repetir contraseña">
 	                    </div>
+
+						<div class="re-captcha-content">
+						 	<div id="g-recaptcha"></div>
+						</div>
+
 	                    <input type="submit" class="button">
                         <p><em>*Campos requeridos</em></p>
 	                </form> <!-- /form -->
@@ -78,4 +93,7 @@
 
 	</script>
 	<script type="text/javascript" src="/site/js/app.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
 @stop

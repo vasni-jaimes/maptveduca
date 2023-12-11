@@ -98,7 +98,7 @@
     	                <p>Comienza hoy tu camino en la produccion musical.</p>
 
                         <p>EL costo de la membresia básica (suscripción) es de:</p>
-                        <h2>$250.00 MXM mensuales</h2>
+                        <h2>${{ number_format($membresia->precio, 2) }} MXM mensuales</h2>
                         <p>puedes cancelar tu membresia en cualquier momento</p>
 
                         <h3>Obtén tu prueba gratuita por 30 días</h3>

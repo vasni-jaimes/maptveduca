@@ -3,6 +3,15 @@
 <!-- /HEADER AND FOOTER -->
 
 
+@section('scripts-header_content')
+	<script type="text/javascript">
+		var onloadCallback = function() {
+			grecaptcha.render('g-recaptcha', {
+				'sitekey' : '6Ld54ywpAAAAAOLWVxqRwZJLNM_B4yJromReFWIG'
+			});
+		};
+	</script>
+@endsection
 
 @section('contenido')
 	
@@ -17,7 +26,11 @@
 	                    <input class="input" type="text" name="email" placeholder="Correo electrónico*" value="{{ old("email") }}">
 	                    <input class="input" type="password" name="password" placeholder="Contraseña*">
 
-	                    @foreach ($errors->all() as $error)
+						<div class="re-captcha-content">
+						 	<div id="g-recaptcha"></div>
+						</div>
+
+						@foreach ($errors->all() as $error)
 				            <p class="error_login"> {{ $error }} </p>
 				        @endforeach
 
@@ -38,4 +51,7 @@
 
 @section('js-content')
 	<script type="text/javascript" src="/site/js/app.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
 @stop

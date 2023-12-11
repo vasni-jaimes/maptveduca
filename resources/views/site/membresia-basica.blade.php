@@ -93,7 +93,7 @@
                             </tr>
                             <tr>
                                 <td>&nbsp</td>
-                                <td>$250 MXN mensuales</td>
+                                <td>${{ number_format($membresia->precio, 2) }} MXN mensuales</td>
                             </tr>
                         </table>
 

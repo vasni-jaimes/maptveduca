@@ -19,6 +19,8 @@
 
           gtag('config', 'UA-191438635-2');
         </script>
+		@yield('scripts-header_content')
+		
 	</head>
 
 	<body>
