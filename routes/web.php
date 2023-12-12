@@ -18,14 +18,6 @@ use Illuminate\Support\Facades\Route;
 // 	return config('mail.mailers.smtp');
 // });
 
-Route::group(['domain' => 'www.maptveduca.com'], function () {
-    Route::get('{any}', function ($any) {
-        $url = config('app.url') . '/' . ltrim($any, '/');
-        return redirect()->to($url, 301);
-    })->where('any', '.*');
-});
-
-
 //INDEX
 Route::get('/', 'Site\IndexController@showIndex')->name('show.index');
 
